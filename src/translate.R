@@ -2,7 +2,7 @@
     library(tidyverse)
     library(svDialogs)
     
-    translations <- read_delim("alienSpecies/inst/extdata/translations.csv", 
+    translations <- read_delim("../alien-species-portal/alienSpecies/inst/extdata/translations.csv", 
                                delim = ";", escape_double = FALSE, trim_ws = TRUE)
     
     missing_translations <- translations %>% 
@@ -78,6 +78,6 @@
                                   TRUE ~ NA_character_)) %>% 
       dplyr::select(-contains("title_fr."))
     
-    write_delim(translations, "alienSpecies/inst/extdata/translations.csv", 
-                delim = ";", escape_double = FALSE, trim_ws = TRUE)
+    write_delim(translations, "../alien-species-portal/alienSpecies/inst/extdata/translations.csv", 
+                delim = ";")
   }
