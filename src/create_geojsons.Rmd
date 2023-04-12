@@ -49,3 +49,37 @@ prov_recalc %>%
   addPolygons()
 ```
 
+```{r get communes}
+wfs_mun <- "https://eservices.minfin.fgov.be/arcgis/services/R2C/Municipalities/MapServer/WFSServer"
+
+mun_client <- WFSClient$new(wfs_mun, 
+                            serviceVersion = "2.0.0")
+mun_client$getFeatureTypes(pretty = TRUE)
+
+
+url <- parse_url(wfs_mun)
+url$query <- list(service = "wfs",
+                  #version = "2.0.0", # optional
+                  request = "GetFeature",
+                  typename = "Municipalities",
+                  srsName = "EPSG:4326"
+                  )
+request <- build_url(url)
+
+mun <- read_sf(request) 
+
+prov_recalc <- prov %>% 
+  mutate(GEWEST = case_when(AdReKey == 2000 ~ "flanders",
+                            AdReKey == 3000 ~ "wallonia",
+                            AdReKey == 4000 ~ "brussels"),
+         NAAM = substr(x = NameDUT, start = 10, stop = nchar(NameDUT))) %>% 
+  dplyr::select(NISCODE = AdPrKey,
+                NAAM,
+                GEWEST)
+
+
+  prov_recalc$NAAM <- str_replace_all(string = prov_recalc$NAAM, pattern = fixed(" "), replacement = "")
+  
+write_sf(prov_recalc, "./data/spatial/provinces.geojson")
+```
+
