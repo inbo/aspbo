@@ -39,3 +39,13 @@ prov_recalc <- prov %>%
 write_sf(prov_recalc, "./data/spatial/provinces.geojson")
 ```
 
+```{r test prov, eval = FALSE}
+library(leaflet)
+
+prov_recalc %>% 
+  filter(NISCODE == 20001) %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addPolygons()
+```
+
