@@ -31,12 +31,14 @@ prov_recalc <- prov %>%
          NAAM = substr(x = NameDUT, start = 10, stop = nchar(NameDUT))) %>% 
   dplyr::select(NISCODE = AdPrKey,
                 NAAM,
-                GEWEST)
+                GEWEST) %>% 
+  st_simplify(preserveTopology = FALSE, dTolerance = 10) %>% 
+  st_transform("EPSG:4326")
 
 
-  prov_recalc$NAAM <- str_replace_all(string = prov_recalc$NAAM, pattern = fixed(" "), replacement = "")
+prov_recalc$NAAM <- str_replace_all(string = prov_recalc$NAAM, pattern = fixed(" "), replacement = "")
   
-write_sf(prov_recalc, "./data/spatial/provinces.geojson")
+write_sf(prov_recalc, "./data/spatial/provinces.geojson", delete_dsn = TRUE)
 ```
 
 ```{r test prov, eval = FALSE}
@@ -73,7 +75,8 @@ mun_recalc <- mun %>%
 table(mun_recalc$GEWEST, useNA = "ifany")
 
 mun_redux <- mun_recalc %>% 
-  st_simplify()
+  st_simplify(preserveTopology = FALSE, dTolerance = 10) %>% 
+  st_transform("EPSG:4326")
 
 
 write_sf(mun_redux, "./data/spatial/communes.geojson", delete_dsn = TRUE)
