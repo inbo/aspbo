@@ -72,7 +72,10 @@ mun_recalc <- mun %>%
 
 table(mun_recalc$GEWEST, useNA = "ifany")
 
+mun_redux <- mun_recalc %>% 
+  st_simplify()
 
-write_sf(mun_recalc, "./data/spatial/communes.geojson")
+
+write_sf(mun_redux, "./data/spatial/communes.geojson", delete_dsn = TRUE)
 ```
 
