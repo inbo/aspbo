@@ -50,36 +50,29 @@ prov_recalc %>%
 ```
 
 ```{r get communes}
-wfs_mun <- "https://eservices.minfin.fgov.be/arcgis/services/R2C/Municipalities/MapServer/WFSServer"
+mun <- read_sf("Q://Gisdata/Belgie/Grenzen/Administratief/BEL_gemeenten.shp") 
 
-mun_client <- WFSClient$new(wfs_mun, 
-                            serviceVersion = "2.0.0")
-mun_client$getFeatureTypes(pretty = TRUE)
-
-
-url <- parse_url(wfs_mun)
-url$query <- list(service = "wfs",
-                  #version = "2.0.0", # optional
-                  request = "GetFeature",
-                  typename = "Municipalities",
-                  srsName = "EPSG:4326"
-                  )
-request <- build_url(url)
-
-mun <- read_sf(request) 
-
-prov_recalc <- prov %>% 
-  mutate(GEWEST = case_when(AdReKey == 2000 ~ "flanders",
-                            AdReKey == 3000 ~ "wallonia",
-                            AdReKey == 4000 ~ "brussels"),
-         NAAM = substr(x = NameDUT, start = 10, stop = nchar(NameDUT))) %>% 
-  dplyr::select(NISCODE = AdPrKey,
+mun_recalc <- mun %>% 
+  mutate(GEWEST = case_when(CODE_INS > 10000 &  CODE_INS < 20000 ~ "flanders",
+                            CODE_INS > 21000 &  CODE_INS < 22000 ~ "brussels",
+                            CODE_INS > 22000 &  CODE_INS < 25000 ~ "flanders",
+                            CODE_INS > 30000 &  CODE_INS < 40000 ~ "flanders",
+                            CODE_INS > 40000 &  CODE_INS < 50000 ~ "flanders",
+                            CODE_INS > 50000 &  CODE_INS < 60000 ~ "wallonia",
+                            CODE_INS > 25000 &  CODE_INS < 30000 ~ "wallonia",
+                            CODE_INS > 60000 &  CODE_INS < 70000 ~ "wallonia",
+                            CODE_INS > 70000 &  CODE_INS < 80000 ~ "flanders",
+                            CODE_INS > 80000 &  CODE_INS < 90000 ~ "wallonia",
+                            CODE_INS > 90000 ~ "wallonia",
+                            ),
+         NAAM = ADMUNADU) %>% 
+  dplyr::select(NISCODE = CODE_INS,
                 NAAM,
                 GEWEST)
 
+table(mun_recalc$GEWEST, useNA = "ifany")
 
-  prov_recalc$NAAM <- str_replace_all(string = prov_recalc$NAAM, pattern = fixed(" "), replacement = "")
-  
-write_sf(prov_recalc, "./data/spatial/provinces.geojson")
+
+write_sf(mun_recalc, "./data/spatial/communities.geojson")
 ```
 
