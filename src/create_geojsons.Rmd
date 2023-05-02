@@ -70,7 +70,8 @@ mun_recalc <- mun %>%
          NAAM = ADMUNADU) %>% 
   dplyr::select(NISCODE = CODE_INS,
                 NAAM,
-                GEWEST)
+                GEWEST) %>% 
+  mutate(NAAM = str_to_title(NAAM, locale = "nl"))
 
 table(mun_recalc$GEWEST, useNA = "ifany")
 
