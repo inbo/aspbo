@@ -1,0 +1,85 @@
+```{r libraries}
+library(sf) # simple features packages for handling vector GIS data
+library(httr) # generic webservice package
+library(tidyverse) # a suite of packages for data wrangling, transformation, plotting, ...
+library(ows4R) # interface for OGC webservices
+```
+
+```{r get provinces}
+wfs_prov <- "https://eservices.minfin.fgov.be/arcgis/services/R2C/Provinces/MapServer/WFSServer"
+
+regions_client <- WFSClient$new(wfs_prov, 
+                            serviceVersion = "2.0.0")
+regions_client$getFeatureTypes(pretty = TRUE)
+
+
+url <- parse_url(wfs_prov)
+url$query <- list(service = "wfs",
+                  #version = "2.0.0", # optional
+                  request = "GetFeature",
+                  typename = "Provinces",
+                  srsName = "EPSG:4326"
+                  )
+request <- build_url(url)
+
+prov <- read_sf(request) 
+
+prov_recalc <- prov %>% 
+  mutate(GEWEST = case_when(AdReKey == 2000 ~ "flanders",
+                            AdReKey == 3000 ~ "wallonia",
+                            AdReKey == 4000 ~ "brussels"),
+         NAAM = substr(x = NameDUT, start = 10, stop = nchar(NameDUT))) %>% 
+  dplyr::select(NISCODE = AdPrKey,
+                NAAM,
+                GEWEST) %>% 
+  st_simplify(preserveTopology = FALSE, dTolerance = 10) %>% 
+  st_transform("EPSG:4326")
+
+
+prov_recalc$NAAM <- str_replace_all(string = prov_recalc$NAAM, pattern = fixed(" "), replacement = "")
+  
+write_sf(prov_recalc, "./data/spatial/provinces.geojson", delete_dsn = TRUE)
+```
+
+```{r test prov, eval = FALSE}
+library(leaflet)
+
+prov_recalc %>% 
+  filter(NISCODE == 20001) %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addPolygons()
+```
+
+```{r get communes}
+mun <- read_sf("Q://Gisdata/Belgie/Grenzen/Administratief/BEL_gemeenten.shp") 
+
+mun_recalc <- mun %>% 
+  mutate(GEWEST = case_when(CODE_INS > 10000 &  CODE_INS < 20000 ~ "flanders",
+                            CODE_INS > 21000 &  CODE_INS < 22000 ~ "brussels",
+                            CODE_INS > 22000 &  CODE_INS < 25000 ~ "flanders",
+                            CODE_INS > 30000 &  CODE_INS < 40000 ~ "flanders",
+                            CODE_INS > 40000 &  CODE_INS < 50000 ~ "flanders",
+                            CODE_INS > 50000 &  CODE_INS < 60000 ~ "wallonia",
+                            CODE_INS > 25000 &  CODE_INS < 30000 ~ "wallonia",
+                            CODE_INS > 60000 &  CODE_INS < 70000 ~ "wallonia",
+                            CODE_INS > 70000 &  CODE_INS < 80000 ~ "flanders",
+                            CODE_INS > 80000 &  CODE_INS < 90000 ~ "wallonia",
+                            CODE_INS > 90000 ~ "wallonia",
+                            ),
+         NAAM = ADMUNADU) %>% 
+  dplyr::select(NISCODE = CODE_INS,
+                NAAM,
+                GEWEST) %>% 
+  mutate(NAAM = str_to_title(NAAM, locale = "nl"))
+
+table(mun_recalc$GEWEST, useNA = "ifany")
+
+mun_redux <- mun_recalc %>% 
+  st_simplify(preserveTopology = FALSE, dTolerance = 10) %>% 
+  st_transform("EPSG:4326")
+
+
+write_sf(mun_redux, "./data/spatial/communes.geojson", delete_dsn = TRUE)
+```
+
