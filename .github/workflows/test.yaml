@@ -54,4 +54,5 @@ jobs:
       - name: connect to bucket
         run: |
           source("src/connect_to_bucket.R")
+          connect_to_bucket()
         shell: Rscript {0}
