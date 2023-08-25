@@ -52,7 +52,7 @@ jobs:
           source("src/install_packages_test.R")
         shell: Rscript {0}
         
-        - name: move aws login
+      - name: move aws login
         run: |
           source("src/move_aws_login.R")
         shell: Rscript {0}
