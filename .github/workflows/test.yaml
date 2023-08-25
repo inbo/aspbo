@@ -52,7 +52,7 @@ jobs:
           source("src/install_packages_test.R")
         shell: Rscript {0}
         
-      - name: connect to bucket
+      - name: connect to uat
         run: |
           source("src/connect_to_UAT.R")
         shell: Rscript {0}
