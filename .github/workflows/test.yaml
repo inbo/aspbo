@@ -22,6 +22,7 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
       USERNAME: ${{ secrets.USERNAME }}
+      UAT_bucket: ${{ secrets.UAT_BUCKET}}
       
     steps:
       - name: Checkout repository
@@ -53,6 +54,5 @@ jobs:
         
       - name: connect to bucket
         run: |
-          source("src/connect_to_bucket.R")
-          connect_to_bucket()
+          source("src/connect_to_UAT.R")
         shell: Rscript {0}
