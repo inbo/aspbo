@@ -53,7 +53,7 @@ connect_to_bucket <- function(bucket_name,
                   ' -a ', bucket_type, ' -r ', role))
   }else{
     stop("Installeer aws-cli-mfa-login van inbo/devops-tools in je windows home
-         directory, zie wiki (WIP)")
+         directory, zie details")
   }
   
   # Set AWS profile name ####
