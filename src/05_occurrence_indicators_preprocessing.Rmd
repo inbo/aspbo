@@ -29,6 +29,7 @@ library(readr)
 library(magrittr)
 library(purrr)
 library(stringr)
+library(tidyr)
 library(tidylog) # To provide feedback on dplyr functions
 library(progress) # To add progress bars
 library(here) # To find files

@@ -9,7 +9,7 @@
 installed <- rownames(installed.packages())
 required <- c("knitr", "dplyr", "magrittr", "rgbif", "tidylog", 
               "progress", "here", "lubridate", "readr", "purrr",
-              "stringr")
+              "stringr", "tidyr")
 if (!all(required %in% installed)) {
   install.packages(required[!required %in% installed])
 }
