@@ -18,14 +18,13 @@ library(knitr)
 library(dplyr)
 library(magrittr)
 
-# Check latest status on Trias indicators repo
+# Check latest status on Trias indicators repo ####
+## Update 05_occurrence_indicators_preprocessing.Rmd ####
 download.file(url = "https://raw.githubusercontent.com/trias-project/indicators/main/src/05_occurrence_indicators_preprocessing.Rmd",
               destfile = "src/05_occurrence_indicators_preprocessing.Rmd",
               method = "curl")
 
-download.file(url = "https://raw.githubusercontent.com/trias-project/indicators/main/data/interim/data_input_checklist_indicators.tsv",
-              destfile = "data/interim/data_input_checklist_indicators.tsv")
-
+## Update intersect_EEA_ref_grid_protected_areas.tsv ####
 download.file(url = "https://raw.githubusercontent.com/trias-project/indicators/main/data/interim/intersect_EEA_ref_grid_protected_areas.tsv",
               destfile = "data/interim/intersect_EEA_ref_grid_protected_areas.tsv")
 
