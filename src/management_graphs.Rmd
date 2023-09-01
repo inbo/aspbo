@@ -1,0 +1,223 @@
+---
+title: "Management_graphs"
+author: "Sander Devisscher"
+date: '2022-08-17'
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+library(rgbif)
+library(geojsonsf)
+library(sf)
+library(tidyverse)
+```
+
+```{r, include=FALSE}
+cleanData <- read_csv("./interim/Lithobates_catesbeianus_management_data.csv")
+```
+
+# GRAPH: Total number of bullfrogs caught
+```{r total individual caught, include=FALSE}
+total_by_year <- cleanData %>% 
+  group_by(year) %>% 
+  summarise(n = sum(individualCount, na.rm = TRUE)) %>% 
+  ggplot(aes(x = year, y = n)) +
+  geom_bar(stat = "identity")
+```
+
+```{r echo=FALSE}
+plot(total_by_year)
+```
+
+# GRAPH: Absolute number of bullfrogs caught by lifestage
+```{r total individuals caught by lifestage, include=FALSE}
+total_by_year_by_lifestage <- cleanData %>% 
+  group_by(year, lifeStage) %>% 
+  summarise(n = sum(individualCount, na.rm = TRUE)) %>% 
+  filter(!is.na(lifeStage)) %>% 
+  ggplot(aes(x = year, y = n, fill = lifeStage)) +
+  geom_bar(stat = "identity",
+           position = "stack")
+```
+
+```{r echo=FALSE}
+total_by_year_by_lifestage
+```
+
+# GRAPH: Cumulative number of bullfrogs caught
+```{r include=FALSE}
+cum_by_year <- cleanData %>% 
+  arrange(year) %>% 
+  mutate(cum = cumsum(individualCount)) %>% 
+  group_by(year) %>% 
+  summarise(n = max(cum)) %>% 
+  ggplot(aes(x = year, y = n)) +
+  geom_bar(stat = "identity")
+```
+
+```{r echo=FALSE}
+plot(cum_by_year)
+```
+
+# **ENG: GRAPH: Catch per unit of effort (CPUE)**
+
+One unit of effort (UE) is one double fyke net which has been placed into a pond for
+24h. 
+
+```{r total individuals caught by unit of effort, include=FALSE}
+total_by_year_corrected <- cleanData %>% 
+  group_by(eventID, year) %>% 
+  summarise(effort = max(n_fuiken, na.rm = TRUE),
+            n = sum(individualCount, na.rm = TRUE)/effort) %>% 
+  group_by(year) %>% 
+  summarise(effort = sum(effort, na.rm = TRUE),
+            n = sum(n, na.rm = TRUE))
+
+plot_cpue <- total_by_year_corrected %>% 
+  ggplot(aes(x = year, y = n)) +
+  geom_bar(stat = "identity") + 
+  geom_line(aes(x = year, y = effort*45),
+            stat = "identity") +
+  scale_y_continuous(name = "Total catch per unit of effort",
+                     sec.axis = sec_axis(trans = ~./45, name = "effort"))
+```
+
+```{r echo=FALSE}
+plot(plot_cpue)
+```
+
+# GRAPH: Catch per unit of effort per lifestage
+
+```{r capture per unit of effort by lifestage, include=FALSE}
+total_by_year_corrected_lifestage <- cleanData %>% 
+  group_by(eventID, year, lifeStage) %>% 
+  summarise(effort = max(n_fuiken, na.rm = TRUE),
+            n = sum(individualCount, na.rm = TRUE)/effort) %>% 
+  group_by(year, lifeStage) %>% 
+  summarise(effort = sum(effort, na.rm = TRUE),
+            n = sum(n, na.rm = TRUE)) %>% 
+  ungroup()
+
+lifeStage_years_combo <- total_by_year_corrected_lifestage %>% 
+  expand(year, lifeStage) %>% 
+  left_join(total_by_year_corrected_lifestage %>% 
+              select(-effort), by = c("year", "lifeStage"))
+
+total_by_year_corrected_lifestage_2 <- total_by_year_corrected_lifestage %>% 
+  group_by(year) %>% 
+  summarise(effort = max(effort, na.rm = TRUE)) %>% 
+  left_join(lifeStage_years_combo, by = "year") %>% 
+  mutate(n = case_when(is.na(n) ~ 0,
+                       TRUE ~ n))
+
+plot_cpue_lifestage <- total_by_year_corrected_lifestage_2 %>% 
+  ggplot(aes(x = year, y = n, fill = lifeStage)) +
+  geom_bar(stat = "identity") + 
+  geom_line(aes(x = year, y = effort*45), stat = "unique") +
+  scale_y_continuous(name = "Total catch per unit of effort",
+                     sec.axis = sec_axis(trans = ~./45, name="effort"))
+```
+
+```{r echo=FALSE}
+plot(plot_cpue_lifestage)
+```
+
+# Management map
+
+```{r map management, echo=FALSE}
+gemeentes <- geojson_sf("../backoffice-wild-analyse/Data/Spatial/gemeentes.geojson")
+gemeentes <- st_transform(gemeentes, 4326)
+provincies <- geojson_sf("../backoffice-wild-analyse/Data/Spatial/provinces.geojson")
+st_crs(provincies) <- st_crs(31370)
+provincies <- st_transform(provincies, 4326)
+
+jaar <- 2018
+
+total_by_year_corrected_gem <- cleanData %>% 
+  group_by(eventID, year, NISCODE, NAAM) %>% 
+  summarise(effort = max(n_fuiken, na.rm = TRUE),
+            n = sum(individualCount, na.rm = TRUE)) %>% 
+  group_by(year, NISCODE, NAAM) %>% 
+  summarise(effort = sum(effort, na.rm = TRUE),
+            n = sum(n, na.rm = TRUE)) %>% 
+  mutate(cpue = n/effort) %>% 
+  filter(year == jaar,
+         !is.na(NISCODE),
+         !is.na(NAAM)) %>% 
+  mutate(NISCODE = as.character(NISCODE)) %>% 
+  left_join(gemeentes) %>% 
+  ungroup()  %>% 
+  st_as_sf() 
+
+grid <- read_sf("../alien-species-portal/alienSpecies/inst/extdata/grid/be_1km.shp") %>% 
+  st_as_sf() %>% 
+  st_transform(4326)
+
+spread <- read_sf("../alien-species-portal/alienSpecies/inst/extdata/be_alientaxa_cube.csv") %>% 
+  filter(taxonKey == "2427091") %>% 
+  filter(year == as.character(jaar)) %>% 
+  left_join(grid, by = c("eea_cell_code" = "CELLCODE")) %>% 
+  st_as_sf()
+
+
+library(leaflet)
+
+if(max(total_by_year_corrected_gem$cpue) > 500){
+  bins <-  c(0, 10, 100, 200, 300, 400, max(total_by_year_corrected_gem$n))
+  labels <- c("<10", "11-100", "101-200", "201-300", "300-400", paste0("401-",  max(total_by_year_corrected_gem$cpue)))
+}else{
+  bins <-  c(0, 10, 100, 200, 300, 400, 500)
+  labels <- c("<10", "11-100", "101-200", "201-300", "301-400", "401-500")
+}
+
+pal <- colorBin(palette = "RdYlGn",
+                domain = as.integer(total_by_year_corrected_gem$cpue),
+                bins = bins,
+                pretty = TRUE,
+                na.color = "#808080",
+                reverse = TRUE)
+```
+
+# MAP: Bullfrog management in `r jaar`
+
+Suggested filters:
+- year
+- region-scale (province/commune)
+- unit (absolute/cpue)
+
+```{r echo=FALSE}
+leaflet() %>%
+  addPolylines(data = gemeentes,
+               weight = 1,
+               color = "black") %>% 
+  addPolylines(data = provincies, 
+               weight = 2,
+               color = "black") %>% 
+  addPolylines(data = spread, 
+               color = "red",
+               weight = 1) %>% 
+  addPolygons(data = total_by_year_corrected_gem,
+              color = ~pal(n)) %>% 
+  addLegend(pal = pal,
+            values = total_by_year_corrected_gem$n,
+            title = "Catch per unit of effort",
+            na.label = 0,
+            labFormat = function(type, cuts, p) {  # Here's the trick
+              paste0(labels)
+            })
+```
+
+# Graph: Nr of locations managed
+```{r echo=FALSE}
+locations_managed <- cleanData %>% 
+  group_by(year) %>% 
+  summarise(n = n_distinct(locationID)) %>% 
+  ggplot(aes(x = year, y = n)) +
+  geom_bar(stat = "identity") + 
+  scale_y_continuous(name = "Number of sites managed")
+
+locations_managed
+```
+
