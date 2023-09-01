@@ -1,13 +1,8 @@
 on:
-  schedule:
-    - cron: "0 0 30 3-11 *"
-    
   push: 
    branches:
-     - main
-     - '26-automate-management-prep'
-   paths:
-     - darwincore/processed/**
+     - '2-write-first-batch-of-automation-scripts'
+
   
 name: management-prep
 
