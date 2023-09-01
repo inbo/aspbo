@@ -1,0 +1,74 @@
+on:
+  push:
+    branches:
+      - '10-create-flow-to-create-full_timeseriescsv'
+    
+name: fetch-data
+
+jobs:
+  fetch-data:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest,   r: 'release'}
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt install libsodium-dev
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libgdal-dev libproj-dev
+          sudo apt install libudunits2-dev
+
+      - name: occ_indic_preprocessing
+        run: |
+          source("src/run_occurrence_indicators_preprocessing.R")
+        shell: Rscript {0}
+
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "update occ_indic_preprocessing"
+          target_branch: automatic-update-occ_indic_preprocessing
+          add_timestamp: true
+
+      - name: Get branch name
+        run: |
+          git branch --show-current
+
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          target_branch: main
+          title: "[AUTO] update occ_indic_preprocessing"
+          template: .github/PR_occ_indic_preprocessing.md
+          reviewer: SanderDevisscher
+          label: automated workflow
+          get_diff: false
