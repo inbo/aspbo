@@ -50,12 +50,12 @@ jobs:
 
       - name: Install R packages
         run: |
-          source("script/install_packages_management.R")
+          source("src/install_packages_management.R")
         shell: Rscript {0}
         
       - name: Management prep
         run: |
-          source("script/run_management_prep.R")
+          source("src/run_management_prep.R")
         shell: Rscript {0}
 
       - name: Commit and push changes
