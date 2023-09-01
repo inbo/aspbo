@@ -7,10 +7,13 @@
 
 # load required packages (install them if needed)
 installed <- rownames(installed.packages())
-required <- c("knitr", "dplyr", "magrittr")
+required <- c("knitr", "dplyr", "magrittr", "tidyverse", "rgbif", "tidylog", 
+              "progress", "here", "lubridate")
 if (!all(required %in% installed)) {
   install.packages(required[!required %in% installed])
 }
+
+# Load script specific libraries
 library(knitr)
 library(dplyr)
 library(magrittr)
