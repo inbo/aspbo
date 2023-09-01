@@ -7,8 +7,8 @@
 
 # load required packages (install them if needed)
 installed <- rownames(installed.packages())
-required <- c("knitr", "dplyr", "magrittr", "tidyverse", "rgbif", "tidylog", 
-              "progress", "here", "lubridate")
+required <- c("knitr", "dplyr", "magrittr", "rgbif", "tidylog", 
+              "progress", "here", "lubridate", "readr")
 if (!all(required %in% installed)) {
   install.packages(required[!required %in% installed])
 }
@@ -19,11 +19,6 @@ library(dplyr)
 library(magrittr)
 
 # Check latest status on Trias indicators repo ####
-## Update 05_occurrence_indicators_preprocessing.Rmd ####
-download.file(url = "https://raw.githubusercontent.com/trias-project/indicators/main/src/05_occurrence_indicators_preprocessing.Rmd",
-              destfile = "src/05_occurrence_indicators_preprocessing.Rmd",
-              method = "curl")
-
 ## Update intersect_EEA_ref_grid_protected_areas.tsv ####
 download.file(url = "https://raw.githubusercontent.com/trias-project/indicators/main/data/interim/intersect_EEA_ref_grid_protected_areas.tsv",
               destfile = "data/interim/intersect_EEA_ref_grid_protected_areas.tsv")
