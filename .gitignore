@@ -38,3 +38,4 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 data/interim/df_timeseries.tsv
+data/output/full_timeseries.csv
