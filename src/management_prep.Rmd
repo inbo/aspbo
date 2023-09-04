@@ -302,5 +302,5 @@ cleanData <- cleanData %>%
 ```
 
 ```{r export cleanData}
-write_csv(cleanData, "./interim/Lithobates_catesbeianus_management_data.csv")
+write_csv(cleanData, "./data/interim/Lithobates_catesbeianus_management_data.csv")
 ```
