@@ -186,7 +186,7 @@ locations_missing_coords <- locations %>%
   left_join(cleanData, by = "locationID") %>% 
   dplyr::select(locationID, decimalLatitude.y, decimalLongitude.y)
 
-write_csv(locations_missing_coords, "./interim/locations_missing_coords.csv")
+write_csv(locations_missing_coords, "./data/interim/locations_missing_coords.csv")
 
 locations <- locations %>% 
   filter(!is.na(decimalLatitude))
@@ -197,9 +197,9 @@ locations <- st_as_sf(locations,
 
 locations <- st_transform(locations, 4326)
 
-gemeentes <- geojson_sf("./input/Gemeentes.geojson")
+gemeentes <- geojson_sf("./spatial/input/communes.geojson")
 gemeentes <- st_transform(gemeentes, 4326)
-provincies <- geojson_sf("./input/provinces.geojson")
+provincies <- geojson_sf("./spatial/input/provinces.geojson")
 st_crs(provincies) <- st_crs(31370)
 provincies <- st_transform(provincies, 4326)
 
