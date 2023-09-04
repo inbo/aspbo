@@ -10,6 +10,6 @@ library(knitr)
 
 # create temporary R file
 tempR <- tempfile(fileext = ".R")
-knitr::purl("./script/management_prep.Rmd", output=tempR)
+knitr::purl("./src/management_prep.Rmd", output=tempR)
 source(tempR)
 unlink(tempR)
