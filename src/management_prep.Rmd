@@ -197,9 +197,9 @@ locations <- st_as_sf(locations,
 
 locations <- st_transform(locations, 4326)
 
-gemeentes <- geojson_sf("./spatial/input/communes.geojson")
+gemeentes <- geojson_sf("./spatial/communes.geojson")
 gemeentes <- st_transform(gemeentes, 4326)
-provincies <- geojson_sf("./spatial/input/provinces.geojson")
+provincies <- geojson_sf("./spatial/provinces.geojson")
 st_crs(provincies) <- st_crs(31370)
 provincies <- st_transform(provincies, 4326)
 
