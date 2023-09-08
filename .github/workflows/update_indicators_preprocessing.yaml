@@ -57,11 +57,30 @@ jobs:
           commit_message: "update occ_indic_preprocessing"
           target_branch: automatic-update-occ_indic_preprocessing
           add_timestamp: true
+          
+      - name: install_alienSpecies
+        run: |
+          source("src/install_alienSpecies.R")
+        shell: Rscript {0}   
+        
+      - name: run_createTimeseries
+        run: |
+          source("src/run_createTimeseries.R")
+        shell: Rscript {0}  
+        
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "update createTimeseries"
+          target_branch: automatic-update-occ_indic_preprocessing
+          add_timestamp: true
 
       - name: Get branch name
         run: |
           git branch --show-current
-
+          
       - name: Create pull request
         uses: devops-infra/action-pull-request@v0.4.2
         with:
