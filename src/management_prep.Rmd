@@ -1,6 +1,5 @@
 ```{r setup, include=FALSE}
 library(rgbif)
-library(geojsonsf)
 library(sf)
 library(dplyr)
 library(readr)
@@ -197,9 +196,9 @@ locations <- st_as_sf(locations,
 
 locations <- st_transform(locations, 4326)
 
-gemeentes <- geojson_sf("./spatial/communes.geojson")
+gemeentes <- st_read("./data/spatial/communes.geojson")
 gemeentes <- st_transform(gemeentes, 4326)
-provincies <- geojson_sf("./spatial/provinces.geojson")
+provincies <- st_read("./data/spatial/provinces.geojson")
 st_crs(provincies) <- st_crs(31370)
 provincies <- st_transform(provincies, 4326)
 
