@@ -3,7 +3,7 @@ on:
     branches:
       - '10-create-flow-to-create-full_timeseriescsv'
     
-name: fetch-data
+name: create full_timeseries.csv
 
 jobs:
   fetch-data:
