@@ -1,7 +1,7 @@
 on:
   push: 
    branches:
-     - '2-write-first-batch-of-automation-scripts'
+    - "master"
 
   
 name: management-prep
