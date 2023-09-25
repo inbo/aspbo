@@ -5,15 +5,6 @@
 #' The final destination of the file is either the local alien-species-portal
 #' folder or the UAT s3 bucket (WIP)
 
-# load required packages (install them if needed)
-installed <- rownames(installed.packages())
-required <- c("knitr", "dplyr", "magrittr", "rgbif", "tidylog", 
-              "progress", "here", "lubridate", "readr", "purrr",
-              "stringr", "tidyr")
-if (!all(required %in% installed)) {
-  install.packages(required[!required %in% installed])
-}
-
 # Load script specific libraries
 library(knitr)
 library(dplyr)
