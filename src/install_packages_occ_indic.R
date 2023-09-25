@@ -7,4 +7,4 @@ if (!all(required %in% installed)) {
   install.packages(required[!required %in% installed])
 }
 
-install_github("inbo/INBOtheme@v0.5.8")
+devtools::install_github("inbo/INBOtheme@v0.5.8")
