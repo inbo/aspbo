@@ -1,6 +1,4 @@
 # Libraries
-library(magrittr)
-library(dplyr)
 library(devtools)
 
 install_github("inbo/alien-species-portal@sprint_v0.0.4", 

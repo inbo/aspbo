@@ -45,6 +45,8 @@ jobs:
           sudo apt install libudunits2-dev
           sudo apt install --yes libharfbuzz-dev libfribidi-dev
           R --no-save -e 'install.packages("devtools")'
+          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@sprint_v0.0.4", 
+                         subdir = "alienSpecies", force = TRUE)'
           
       - name: install packages
         run: |
@@ -65,11 +67,6 @@ jobs:
           target_branch: automatic-update-occ_indic_preprocessing
           add_timestamp: true
           
-      - name: install_alienSpecies
-        run: |
-          source("src/install_alienSpecies.R")
-        shell: Rscript {0}   
-        
       - name: run_createTimeseries
         run: |
           source("src/run_createTimeseries.R")
