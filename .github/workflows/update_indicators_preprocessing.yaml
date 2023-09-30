@@ -45,6 +45,7 @@ jobs:
           sudo apt install libudunits2-dev
           sudo apt install --yes libharfbuzz-dev libfribidi-dev
           R --no-save -e 'install.packages("devtools")'
+          R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
           R --no-save -e 'devtools::install_github("inbo/alien-species-portal@sprint_v0.0.4", 
                          subdir = "alienSpecies", force = TRUE)'
           

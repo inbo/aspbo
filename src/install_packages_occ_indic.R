@@ -6,5 +6,3 @@ required <- c("devtools", "knitr", "dplyr", "magrittr", "rgbif", "tidylog",
 if (!all(required %in% installed)) {
   install.packages(required[!required %in% installed])
 }
-
-devtools::install_github("inbo/INBOtheme@v0.5.9")
