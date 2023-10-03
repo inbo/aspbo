@@ -1,7 +1,9 @@
 on:
   push:
     branches:
-      - '10-create-flow-to-create-full_timeseriescsv'
+      - 'main'
+    paths:
+      - 'data/input/**'
     
 name: create full_timeseries.csv
 
