@@ -1,8 +1,11 @@
 on:
   workflow_run:
-    workflows: test_griis
+    workflows: 
+     - 'test_griis'
     types: 
-      - 'completed'
+     - 'completed'
+    branches:
+     - '2-write-first-batch-of-automation-scripts'
     
 name: get_griis
 
