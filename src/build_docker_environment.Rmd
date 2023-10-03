@@ -5,8 +5,7 @@ date: "2023-09-08"
 output: html_document
 ---
 
-Dit script bouwt nieuwe docker omgevingen op om de verschillende delen van de
-wildapp te testen.
+Dit script bouwt nieuwe docker omgevingen op om het *exotenportaal* te testen
 
 *Let op!!* Het runnen van dit script is enkel van toepassing als er 
 **wijzigingen aan de app** uitgevoerd werden.
@@ -16,122 +15,45 @@ container op te spinnen. In dit geval is het niet nodig de app opnieuw van nul
 terug op te bouwen.
 
 # Voorbereiding
-Doorloop onderstaande stappen steeds vooraleer je de dit script laat lopen:
-- start docker desktop
-- controleer of de volgende items aanwezig zijn in je `.renviron` bestand:
--> AWS_SECRET_ACCESS_KEY_DEV = "<je secret key>"
--> AWS_ACCESS_KEY_ID_DEV = "<je key>"
--> AWS_DEFAULT_REGION = "eu-west-1"
+*Start alvorens dit script te runnen DOCKER DESKTOP op !!*
+Dit script werkt enkel zolang er geen gebruik gemaakt wordt van de S3 Buckets.
+Hiervoor dient de logica herwerkt te worden.
 
 ```{r libraries}
 library(tidyverse)
 ```
 
-```{r build docker file}
-setwd(dir = "../reporting-rshiny-grofwildjacht/")
-
-devtools::build("reporting-grofwild")
-
-file.remove("./reporting-grofwild.tar.gz")
-
-newest <- menu(choices = c("ja", "nee"),
-               title = "newest docker?",
-               graphics = TRUE)
-
-if(newest == 1){
-  docker_version <- dir(path = "./",
-                      pattern = ".tar.gz")
-  
-  docker_version <- subset(docker_version, 
-                         docker_version != "reporting-grofwild.tar.gz")
-  
-  docker_version <- gsub(pattern = "reportingGrofwild_",
-                       replacement = "",
-                       docker_version)
-  
-  docker_version <- gsub(pattern = ".tar.gz",
-                       replacement = "",
-                       docker_version)
-  
-  
-  docker_version <- as.data.frame(docker_version) %>% 
-    separate(docker_version, into = c("x", "y", "z"),
-             sep = "\\.",
-             remove = FALSE) %>% 
-    mutate(x = as.integer(x),
-           y = as.integer(y),
-           z = as.integer(z)) %>% 
-    filter(x == max(x, na.rm = TRUE)) %>% 
-    filter(y == max(y, na.rm = TRUE)) %>% 
-    filter(z == max(z, na.rm = TRUE))
-  
-  file.copy(from = paste0("reportingGrofwild_",
-                          docker_version$docker_version,
-                          ".tar.gz"),
-            to = "reporting-grofwild.tar.gz",
-            overwrite = TRUE)
-  
-}else{
-  stop("add logic to select a file")
-}
-
-setwd("~/GitHub/backoffice-wild-analyse")
-```
-
 # Setup docker environment
 
 ```{r Remove old docker containers}
-system(command = 'docker container rm wildapp_public')
-system(command = 'docker container rm wildapp_private_default')
-system(command = 'docker container rm wildapp_private_admin')
+system(command = 'docker container rm exotenportaal')
 ```
 
 ```{r Remove old image}
-system(command = 'docker image rm inbo/grofwild:latest')
+system(command = 'docker image rm inbo/alienspecies:latest')
 ```
 
 ```{r change directory}
-system(command = 'cd ~/Documents/GitHub/reporting-rshiny-grofwildjacht')
+system(command = 'cd ~/Documents/GitHub/alien-species-portal')
 ```
 
 ```{r build new image}
 setwd(dir = "../reporting-rshiny-grofwildjacht/")
-system(command = 'docker build --build-arg "GIT_SHA=$(git rev-parse HEAD)" -t inbo/grofwild .')
-setwd("~/GitHub/backoffice-wild-analyse")
+system(command = 'docker build -t inbo/alienspecies .')
+setwd("~/GitHub/aspbo")
 ```
 
-```{r create base}
-base <- paste0("\"Sys.setenv('AWS_DEFAULT_REGION'='eu-west-1', 'AWS_ACCESS_KEY_ID'='",
-                      Sys.getenv("AWS_ACCESS_KEY_ID_DEV"),
-                      "', 'AWS_SECRET_ACCESS_KEY'='",
-                      Sys.getenv("AWS_SECRET_ACCESS_KEY_DEV"),
-               "')")
+```{r connect to s3 bucket}
+source("./src/connect_to_bucket.R")
+
+connect_to_bucket("inbo-exotenportaal-uat-eu-west-1-default")
 ```
 
-Deze stappen vergen een beetje manuele input. Na iedere container moet deze 
-gestopt worden in docker dekstop vooraleer de volgende gebouwd kan worden.
-Je kan de resp. pagina's, nadat ze gebouwd zijn, door te surfen naar:
- - publieke deel: localhost:3600
- - private deel als superuser: localhost:3700
- - private deel als admin: localhost:3800
-```{r create public container}
-command_pub <- paste0("docker run --name wildapp_public -p 3600:3838 inbo/grofwild R -e ", 
-                      base, ";reportingGrofwild::runWildApp(public=TRUE)")
+Onderstaande code runt het exotenportaal op localhost poort 3000 moest deze
+om de een of andere rede al bezet zijn kan je de poort hieronder wijzigingen.
 
-system(command = command_pub)
-```
-
-```{r create default private container}
-command_prv_def <- paste0("docker run --name wildapp_private_default -p 3700:3838 inbo/grofwild R -e ", 
-                      base, ";reportingGrofwild::runWildApp(public=FALSE)")
-
-system(command = command_prv_def)
-```
-
-```{r create admin private container}
-command_prv_adm <- paste0("docker run --name wildapp_private_admin -p 3800:3838 inbo/grofwild R -e ", 
-                      base, ";reportingGrofwild::runWildApp(public=FALSE, kbo='admin')")
-
-system(command = command_prv_adm)
+default = 3000:3838 (localhostpoort:luisterpoort)
+```{r create exotenportaal}
+system(command = 'docker run --name exotenportaal -p 3000:3838 inbo/alienspecies:latest')
 ```
 
