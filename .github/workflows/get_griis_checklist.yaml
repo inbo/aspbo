@@ -1,8 +1,6 @@
 on:
-  push: 
-   branches:
-    - "2-write-first-batch-of-automation-scripts"
-    - 'main'
+  shedule: 
+   - cron: '0 0 1 1-12 *'
 
   
 name: get_griis
@@ -58,7 +56,8 @@ jobs:
         run: |
           source("src/test_griis_status.R")
         shell: Rscript {0}
-  get-griis-success:
+        
+  get-griis:
     needs: 'test-griis-status'
     runs-on: ${{ matrix.config.os }}
 
