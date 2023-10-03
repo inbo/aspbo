@@ -25,6 +25,7 @@ while(GRIIS_raw$meta$endOfRecords == FALSE){
 GRIIS_base <- GRIIS_raw$data
 
 # update metadata ####
+new_metadata <- datasets(uuid = "6d9e952f-948c-4483-9807-575348147c7e")
 new_citation <- new_metadata$data$citation$identifier
 
 current_metadata <- current_metadata %>% 
