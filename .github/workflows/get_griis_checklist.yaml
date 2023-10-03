@@ -1,13 +1,13 @@
 on:
   workflow_run:
-  workflows: [test_griis]
+  workflows: ["test_griis"]
   types: 
     - completed
     
 name: get_griis
 
 jobs:
-  fetch-data:
+  on-success:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
