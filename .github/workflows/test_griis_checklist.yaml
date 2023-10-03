@@ -1,10 +1,10 @@
 on:
-  workflow_run:
-  workflows: [test_griis]
-  types: 
-    - completed
-    
-name: get_griis
+  push: 
+   branches:
+    - "2-write-first-batch-of-automation-scripts"
+
+  
+name: test_griis
 
 jobs:
   fetch-data:
@@ -52,31 +52,8 @@ jobs:
         run: |
           source("src/install_packages_get_griis.R")
         shell: Rscript {0}
-    
-      - name: download_griis_checklist
+        
+      - name: test_griis_status
         run: |
-          source("src/download_griis_checklist.R")
+          source("src/test_griis_status.R")
         shell: Rscript {0}
-    
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
-        with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          commit_prefix: "[AUTO]"
-          commit_message: "update griis checklist"
-          target_branch: automatic-management-prep
-          
-      - name: Get branch name
-        run: |
-          git branch --show-current
-
-      - name: Create pull request
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          target_branch: main
-          title: "[AUTO] download griis checklist"
-          template: .github/PR_download_griis_checklist.md
-          reviewer: SanderDevisscher
-          label: automated workflow
-          get_diff: false
