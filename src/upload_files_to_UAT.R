@@ -60,5 +60,7 @@ bucket_list_after <- get_bucket_df(Sys.getenv("UAT_bucket"),
          size_diff = case_when(is.na(Size_before) ~ Size_after,
                                TRUE ~ Size_after - Size_before))
 
+write_csv(bucket_list_after, "./data/ETL_files/UAT_upload_log.csv")
+
 # test uploaded files ####
 # A placeholder for a alienSpecies function to test the files on the bucket.
