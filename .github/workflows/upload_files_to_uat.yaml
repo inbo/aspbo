@@ -62,3 +62,27 @@ jobs:
         run: |
           source("src/upload_files_to_UAT.R")
         shell: Rscript {0}
+        
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "upload files to UAT"
+          target_branch: upload files to UAT
+          add_timestamp: true
+          
+      - name: Get branch name
+        run: |
+          git branch --show-current
+          
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          target_branch: main
+          title: "[AUTO] upload files to UAT"
+          template: .github/PR_upload_files_to_UAT.md
+          reviewer: SanderDevisscher
+          label: automated workflow
+          get_diff: false
