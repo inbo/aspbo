@@ -1,6 +1,9 @@
 on:
   push: 
-   - 'main'
+    branches:
+      - 'main'
+    paths:
+      - './data/output/**'
 
 name: upload_files_to_uat
 
