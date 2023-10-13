@@ -17,7 +17,7 @@ library(dplyr)
 library(stringr)
 
 # filelist - prep ####
-UAT_filelist <- read_csv("./data/filelists/UAT_filelist.csv", 
+UAT_filelist <- read_csv("./data/ETL_files/UAT_filelist.csv", 
                          col_types = cols(filepath_bucket = col_character()),
                          na = "") %>% 
   mutate(filepath_bucket = str_replace_na(filepath_bucket, ""))
@@ -25,11 +25,10 @@ UAT_filelist <- read_csv("./data/filelists/UAT_filelist.csv",
 # connect to bucket ####
 source("./src/connect_to_bucket.R")
 
-connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
-
-# get state of bucket before upload ####
-# To get feedback on upload succes/failure
-bucket_list_before <- get_bucket_df(Sys.getenv("UAT_bucket"))
+bucket_list_before <- connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket")) %>% 
+  select(Key, 
+         LastModified_before = LastModified, 
+         Size_before = Size)
 
 # upload files ####
 for(i in 1:nrow(UAT_filelist)){
@@ -39,9 +38,27 @@ for(i in 1:nrow(UAT_filelist)){
   file_bucket <- paste0(UAT_filelist$filepath_bucket[i],
                         UAT_filelist$filename_bucket[i])
   
-  put_object(file,é
-             object = filelist$uat_key[i],
-             bucket = bucket,
+  put_object(file_local,
+             object = file_bucket,
+             bucket = Sys.getenv("UAT_bucket"),
              multipart = TRUE,
-             show_progress = TRUE)
+             show_progress = TRUE,
+             region = "eu-west-1")
 }
+
+# get feedback ####
+bucket_list_after <- get_bucket_df(Sys.getenv("UAT_bucket"),
+                                   region = "eu-west-1") %>% 
+  select(Key, 
+         LastModified_after = LastModified, 
+         Size_after = Size) %>% 
+  full_join(bucket_list_before, by = "Key") %>% 
+  mutate(size_changed = case_when(Size_before == Size_after ~ FALSE,
+                                  TRUE ~ TRUE),
+         Size_before = as.numeric(Size_before),
+         Size_after = as.numeric(Size_after),
+         size_diff = case_when(is.na(Size_before) ~ Size_after,
+                               TRUE ~ Size_after - Size_before))
+
+# test uploaded files ####
+# A placeholder for a alienSpecies function to test the files on the bucket.
