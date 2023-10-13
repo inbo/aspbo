@@ -62,7 +62,7 @@ jobs:
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
-          commit_message: "run management prep"
+          commit_message: "get muskrat data"
           target_branch: automatic-management-prep
           
       - name: Get branch name
