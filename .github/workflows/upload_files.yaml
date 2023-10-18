@@ -1,15 +1,17 @@
 on:
-  push: 
+  push:
     branches:
-      - 'main'
+      - "main"
     paths:
-      - './data/output/**'
+      - "./data/output/**"
 
-name: upload_files_to_uat
+name: upload_files
 
 jobs:
-  upload_files_to_uat:
+  upload_files:
     runs-on: ${{ matrix.config.os }}
+    environment:
+      name: ${{ github.event_name == 'push' && 'UAT' || 'PROD' }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
@@ -17,12 +19,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-latest,   r: 'release'}
+          - { os: ubuntu-latest, r: "release" }
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
-      UAT_bucket: ${{ secrets.UAT_bucket }}
       USERNAME: ${{ secrets.USERNAME }}
 
     steps:
@@ -57,12 +58,35 @@ jobs:
         run: |
           source("src/install_packages_upload_files.R")
         shell: Rscript {0}
-        
+
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Assume Role
+        id: assume_role
+        run: |
+          ROLE_ARN="${{ secrets.AWS_ROLE_ARN }}"
+          TEMP_ROLE=$(aws sts assume-role \
+            --role-arn $ROLE_ARN \
+            --role-session-name inbo-deployment)
+          echo "::set-output name=AWS_ACCESS_KEY_ID::$(echo $TEMP_ROLE | jq -r .Credentials.AccessKeyId)"
+          echo "::set-output name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)"
+          echo "::set-output name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)"
+
       - name: upload files
         run: |
           source("src/upload_files_to_UAT.R")
         shell: Rscript {0}
-        
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.assume_role.outputs.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.assume_role.outputs.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ steps.assume_role.outputs.AWS_SESSION_TOKEN }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
         with:
@@ -71,11 +95,11 @@ jobs:
           commit_message: "upload files to UAT"
           target_branch: upload files to UAT
           add_timestamp: true
-          
+
       - name: Get branch name
         run: |
           git branch --show-current
-          
+
       - name: Create pull request
         uses: devops-infra/action-pull-request@v0.4.2
         with:
