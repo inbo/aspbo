@@ -15,7 +15,7 @@ down_musk <- occ_download(
                           "95b0e787-8508-4247-9e48-18b45fc7d12e",
                           "3634aee3-41d5-4aa2-8cb5-875859f62a3a",
                           "69351197-880d-4100-8e69-e80babf3fdd7")),
-  format = "SIMPLE_CSV",
+  format = "DWCA",
   user = Sys.getenv("gbif_user"), 
   pwd = Sys.getenv("gbif_pwd"), 
   email = Sys.getenv("email"))
@@ -28,6 +28,9 @@ occ_download_wait(down_musk,
 raw_muskrat_data <- occ_download_get(down_musk) %>%
   occ_download_import()
 
+muskrat_data_redux <- raw_muskrat_data %>% 
+  
+
 gem <- st_read("./data/spatial/communes.geojson") %>% 
   st_transform(4326) %>% 
   rename(Gemeente = NAAM)
@@ -35,7 +38,7 @@ gem <- st_read("./data/spatial/communes.geojson") %>%
 provincies <- st_read("./data/spatial/provinces.geojson") %>% 
   st_transform(4326)
 
-muskrat_data <- st_as_sf(raw_muskrat_data, 
+muskrat_data <- st_as_sf(muskrat_data_redux, 
                          coords = c("decimalLongitude", "decimalLatitude"), 
                          na.fail = FALSE,
                          remove = FALSE,
@@ -52,5 +55,8 @@ muskrat_data$gemeente <- NA
 for(i in 1:length(muskrat_data$Gemeente)){
   muskrat_data$gemeente[i] <- as.character(muskrat_data$Gemeente[[i]][1])
 }
+
+muskrat_data <- muskrat_data %>% 
+  filter()
 
 write_csv(muskrat_data, "./data/output/muskrat_data.csv")
