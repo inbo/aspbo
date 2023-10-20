@@ -1,6 +1,5 @@
 # Libraries ####
 library(readr)
-library(tidyr)
 library(magrittr)
 library(dplyr)
 library(aws.s3)
