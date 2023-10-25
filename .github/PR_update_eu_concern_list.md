@@ -19,7 +19,7 @@ automatically performed<sup>1</sup>:
 All the steps above are triggered by
 `./.github/workflows/update_eu_concern_list.yaml` and executed by
 `./script/update_eu_concern_list.R`. This script is assisted by
-`./script/install_eu_concern_list.R`.
+`./script/install_packages_eu_concern_list.R`.
 
 Changes to the PR description can be made at `./.github/PR_management_prep.md`
 
