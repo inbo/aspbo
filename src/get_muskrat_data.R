@@ -29,8 +29,16 @@ occ_download_wait(down_musk,
 
 raw_muskrat_data <- occ_download_get(down_musk) %>%
   occ_download_import()
+
 # Clean data ####
+table(raw_muskrat_data$datasetName, 
+      raw_muskrat_data$samplingProtocol, 
+      useNA = "ifany")
+
 muskrat_data_redux <- raw_muskrat_data %>% 
+  filter(samplingProtocol != "casual observation",
+         !grepl(pattern = "material lost/broken",
+                x = samplingProtocol))
   
 # Add spatial component ####
 gem <- st_read("./data/spatial/communes.geojson") %>% 
