@@ -25,6 +25,8 @@ eu_concern_list_new <- read_delim("https://raw.githubusercontent.com/trias-proje
 eu_concern_list_new <- eu_concern_list_new %>% 
   mutate(backbone_taxonKey = case_when(checklist_scientificName == "Vespa velutina nigrithorax" 
                                        & backbone_taxonKey == 6247411 ~ 1311477,
+                                       checklist_scientificName == "Salvinia molesta" 
+                                       & backbone_taxonKey == 5274863 ~ 5274861,
                                        TRUE ~ backbone_taxonKey))
 
 if(nrow(eu_concern_list_new) > nrow(eu_concern_list_old)){
