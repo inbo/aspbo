@@ -24,6 +24,8 @@ occ_download_wait(down_musk,
                   curlopts = list(verbose = TRUE,
                                   http_version = 2,
                                   forbid_reuse = TRUE))
+## Use manual download ####
+# down_musk <- "0026587-231002084531237"
 
 raw_muskrat_data <- occ_download_get(down_musk) %>%
   occ_download_import()
