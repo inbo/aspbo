@@ -1,13 +1,13 @@
 # Vangstoverzicht muskusrat op basis van GBIF
 
-# packages
+# Libraries ####
 library(sf)
 library(rgbif)
 library(dplyr)
 library(tidyr)
 library(readr)
 
-# load data
+# Download data ####
 down_musk <- occ_download(
   pred("taxonKey", 5219858),
   pred_in("datasetKey", c("ddd51fa5-97ce-48ff-9a58-a09d7e76b103",
@@ -27,10 +27,10 @@ occ_download_wait(down_musk,
 
 raw_muskrat_data <- occ_download_get(down_musk) %>%
   occ_download_import()
-
+# Clean data ####
 muskrat_data_redux <- raw_muskrat_data %>% 
   
-
+# Add spatial component ####
 gem <- st_read("./data/spatial/communes.geojson") %>% 
   st_transform(4326) %>% 
   rename(Gemeente = NAAM)
@@ -56,7 +56,5 @@ for(i in 1:length(muskrat_data$Gemeente)){
   muskrat_data$gemeente[i] <- as.character(muskrat_data$Gemeente[[i]][1])
 }
 
-muskrat_data <- muskrat_data %>% 
-  filter()
-
+# Export ####
 write_csv(muskrat_data, "./data/output/muskrat_data.csv")
