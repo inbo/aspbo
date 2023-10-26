@@ -52,8 +52,10 @@ connect_to_bucket("inbo-exotenportaal-uat-eu-west-1-default")
 Onderstaande code runt het exotenportaal op localhost poort 3000 moest deze
 om de een of andere rede al bezet zijn kan je de poort hieronder wijzigingen.
 
+
+
 default = 3000:3838 (localhostpoort:luisterpoort)
 ```{r create exotenportaal}
-system(command = 'docker run --name exotenportaal -p 3000:3838 inbo/alienspecies:latest')
+system(command = 'docker run -it -v ~/.aws:/root/.aws  3000:3838 inbo/alienspecies R -e "alienSpecies::setupS3();alienSpecies::runShiny()"')
 ```
 
