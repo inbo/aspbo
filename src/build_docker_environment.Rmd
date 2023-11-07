@@ -26,20 +26,20 @@ library(tidyverse)
 # Setup docker environment
 
 ```{r Remove old docker containers}
-system(command = 'docker container rm exotenportaal')
+system(command = 'powershell "docker container rm exotenportaal"')
 ```
 
 ```{r Remove old image}
-system(command = 'docker image rm inbo/alienspecies:latest')
+system(command = 'powershell "docker image rm inbo/alienspecies:latest"')
 ```
 
 ```{r change directory}
-system(command = 'cd ~/Documents/GitHub/alien-species-portal')
+system(command = 'powershell "cd ~/Documents/GitHub/alien-species-portal"')
 ```
 
 ```{r build new image}
 setwd(dir = "../reporting-rshiny-grofwildjacht/")
-system(command = 'docker build -t inbo/alienspecies .')
+system(command = 'powershell "docker build -t inbo/alienspecies ."')
 setwd("~/GitHub/aspbo")
 ```
 
