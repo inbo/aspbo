@@ -54,8 +54,9 @@ om de een of andere rede al bezet zijn kan je de poort hieronder wijzigingen.
 
 default = 3000:3838 (localhostpoort:luisterpoort)
 ```{r create exotenportaal}
-asp_cmd <- paste0("docker run -it -v C:/Users/", Sys.getenv("USERNAME"), "/.aws :/root/.aws -p 3000:3838 inbo/alienspecies R -e 'alienSpecies::setupS3(inboUser = '",Sys.getenv("USERNAME"), "');alienSpecies::runShiny'")
+asp_cmd <- paste0("docker run --name exotenportaal -i -v C:/users/", Sys.getenv("USERNAME"), "/.aws:/root/.aws -p 3000:3838 inbo/alienspecies:latest R -e \"alienSpecies::setupS3(inboUser = '",Sys.getenv("USERNAME"), "');alienSpecies::runShiny()")
 
-system(command = asp_cmd)
+system(command = asp_cmd,
+       invisible = FALSE)
 ```
 
