@@ -16,8 +16,7 @@ terug op te bouwen.
 
 # Voorbereiding
 *Start alvorens dit script te runnen DOCKER DESKTOP op !!*
-Dit script werkt enkel zolang er geen gebruik gemaakt wordt van de S3 Buckets.
-Hiervoor dient de logica herwerkt te worden.
+*Doorloop bij het eerste gebruik het voorbereidingen van de "connect_to_bucket"-functie*
 
 ```{r libraries}
 library(tidyverse)
