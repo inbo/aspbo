@@ -1,0 +1,68 @@
+---
+title: "build docker environment"
+author: "Sander Devisscher"
+date: "2023-09-08"
+output: html_document
+---
+
+Dit script bouwt nieuwe docker omgevingen op om het *exotenportaal* te testen
+
+*Let op!!* Het runnen van dit script is enkel van toepassing als er 
+**wijzigingen aan de app** uitgevoerd werden.
+
+In het geval van een **data update** kan je in docker zelf terecht door gewenste 
+container op te spinnen. In dit geval is het niet nodig de app opnieuw van nul
+terug op te bouwen.
+
+# Voorbereiding
+*Start alvorens dit script te runnen DOCKER DESKTOP op !!*
+*Doorloop bij het eerste gebruik het voorbereidingen van de "connect_to_bucket"-functie*
+
+```{r libraries}
+library(tidyverse)
+```
+
+# Setup docker environment
+
+```{r Remove old docker containers}
+system(command = 'powershell "docker container rm exotenportaal"')
+```
+
+```{r Remove old image}
+system(command = 'powershell "docker image rm inbo/alienspecies:latest"')
+```
+
+```{r change directory}
+system(command = 'powershell "cd ~/Documents/GitHub/alien-species-portal"')
+```
+
+```{r build new image}
+setwd(dir = "../alien-species-portal/")
+system(command = 'powershell "docker build -t inbo/alienspecies ."')
+setwd("~/GitHub/aspbo")
+```
+
+```{r connect to s3 bucket}
+source("./src/connect_to_bucket.R")
+
+connect_to_bucket("inbo-exotenportaal-uat-eu-west-1-default")
+```
+
+Onderstaande code runt het exotenportaal op localhost poort 3000 moest deze
+om de een of andere rede al bezet zijn kan je de poort hieronder wijzigingen.
+
+default = 3000:3838 (localhostpoort:luisterpoort)
+```{r create exotenportaal}
+asp_cmd <- paste0("docker run --name exotenportaal -i -v C:/users/", Sys.getenv("USERNAME"), "/.aws:/root/.aws -p 3000:3838 inbo/alienspecies:latest R -e \"alienSpecies::setupS3(inboUser = '",Sys.getenv("USERNAME"), "');alienSpecies::runShiny()")
+
+system(command = asp_cmd,
+       invisible = FALSE)
+```
+
+```{r test credentials, eval=FALSE}
+test_cmd <- paste0("docker run --name exotenportaal -i -v C:/users/", Sys.getenv("USERNAME"), "/.aws:/root/.aws -p 3000:3838 inbo/alienspecies:latest R -e \"alienSpecies::setupS3(inboUser = '", Sys.getenv("USERNAME"), "');list.files('/root/.aws'); Sys.getenv('AWS_DEFAULT_REGION'); Sys.getenv('AWS_ACCESS_KEY_ID'); Sys.getenv('AWS_SECRET_ACCESS_KEY'); Sys.getenv('AWS_SESSION_TOKEN')")
+  
+system(command = test_cmd,
+       invisible = FALSE)
+```
+
