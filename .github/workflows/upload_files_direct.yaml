@@ -5,7 +5,7 @@ on:
     paths:
       - "./data/output/UAT_direct/**"
 
-name: upload_files
+name: upload_files_direct
 
 jobs:
   upload_files:
