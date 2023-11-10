@@ -3,7 +3,7 @@ on:
     branches:
       - "main"
     paths:
-      - "./data/output/**"
+      - "./data/output/UAT_direct/**"
 
 name: upload_files
 
