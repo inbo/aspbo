@@ -15,7 +15,6 @@ directFilePath <- "./data/output/UAT_direct"
 # connect to bucket ####
 source("./src/connect_to_bucket.R")
 
-
 # get feedback ####
 
 bucket <-  Sys.getenv("UAT_bucket")
@@ -27,9 +26,9 @@ bucket_df <- get_bucket_df(bucket, region = "eu-west-1")
 
 
 # files that are currently in management needs to be uploaded to the bucket
+directFiles <- c("Oxyura_jamaicensis.csv",  "Lithobates_catesbeianus.csv", "Ondatra_zibethicus.csv", "translations.csv")
 
-
-lapply(c("Oxyura_jamaicensis.csv",  "Lithobates_catesbeianus.csv", "Ondatra_zibethicus.csv", "translations.csv"), function(fileName){
+lapply(directFiles, function(fileName){
   
   put_object(file.path(directFilePath, fileName),
              object = fileName,
@@ -44,6 +43,6 @@ lapply(c("Oxyura_jamaicensis.csv",  "Lithobates_catesbeianus.csv", "Ondatra_zibe
 
 test_that("management data", {
   
-  expect_in( c("Oxyura_jamaicensis.csv",  "Lithobates_catesbeianus.csv", "Ondatra_zibethicus.csv", "translations.csv"), bucket_df$Key)
+  expect_in( directFiles, bucket_df$Key)
   
 })
