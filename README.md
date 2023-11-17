@@ -6,3 +6,5 @@ The alien species portal backoffice contains automated data preparation scripts 
 [![get_griis](https://github.com/inbo/aspbo/actions/workflows/get_griis_checklist.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_griis_checklist.yaml)
 
 [![update eu concern list](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml)
+
+[![create full_timeseries.csv](https://github.com/inbo/aspbo/actions/workflows/update_indicators_preprocessing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_indicators_preprocessing.yaml)
