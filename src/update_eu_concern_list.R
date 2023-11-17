@@ -3,6 +3,7 @@ library(readr)
 library(magrittr)
 library(dplyr)
 library(aws.s3)
+library(rgbif)
 
 # connect to bucket ####
 source("./src/connect_to_bucket.R")
@@ -15,19 +16,29 @@ eu_concern_list_old <- read_delim(rawToChar(get_object(bucket = Sys.getenv("UAT_
                                   object = "eu_concern_species.tsv",
                                   as = "raw")), delim = "\t") 
 
-eu_concern_list_new <- read_delim("https://raw.githubusercontent.com/trias-project/indicators/main/data/input/eu_concern_species.tsv", 
-                                  delim = "\t", escape_double = FALSE, 
-                                  col_types = cols(entry_into_force = col_date(format = "%Y-%m-%d")), 
-                                  trim_ws = TRUE) 
+eu_concern_list_new <- name_usage(datasetKey = "79d65658-526c-4c78-9d24-1870d67f8439",
+                                  limit = 1000)
+
+eu_concern_list_new <- eu_concern_list_new$data
 
 # fix known issues ####
 ## Vespa velutina nigrithorax: subspp -> spp 
 eu_concern_list_new <- eu_concern_list_new %>% 
-  mutate(backbone_taxonKey = case_when(checklist_scientificName == "Vespa velutina nigrithorax" 
-                                       & backbone_taxonKey == 6247411 ~ 1311477,
-                                       checklist_scientificName == "Salvinia molesta" 
-                                       & backbone_taxonKey == 5274863 ~ 5274861,
-                                       TRUE ~ backbone_taxonKey))
+  filter(rank != "KINGDOM",
+         taxonomicStatus == "ACCEPTED") %>% 
+  mutate(backbone_taxonKey = case_when(canonicalName == "Vespa velutina nigrithorax" 
+                                       & nubKey == 6247411 ~ 1311477,
+                                       canonicalName == "Salvinia molesta" 
+                                       & nubKey == 5274863 ~ 5274861,
+                                       TRUE ~ nubKey),
+         checklist_scientificName = case_when(!is.na(species) ~ species,
+                                              TRUE ~ canonicalName)) %>% 
+  select(checklist_scientificName,
+         english_name = vernacularName,
+         checklist_kingdom = parent,
+         backbone_taxonKey,
+         backbone_taxonomicStatus = taxonomicStatus) %>% 
+  arrange(checklist_scientificName)
 
 if(nrow(eu_concern_list_new) > nrow(eu_concern_list_old)){
   ## list has expanded ####
