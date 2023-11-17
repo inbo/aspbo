@@ -2,7 +2,7 @@
 installed <- rownames(installed.packages())
 # specify packages we need
 required <- c("aws.s3", "magrittr", "readr",
-              "dplyr"
+              "dplyr", "rgbif"
 )
 # install packages if needed
 if (!all(required %in% installed)) {
