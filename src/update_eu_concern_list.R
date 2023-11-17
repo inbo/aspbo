@@ -37,7 +37,8 @@ eu_concern_list_new <- eu_concern_list_new %>%
          english_name = vernacularName,
          checklist_kingdom = parent,
          backbone_taxonKey,
-         backbone_taxonomicStatus = taxonomicStatus)
+         backbone_taxonomicStatus = taxonomicStatus) %>% 
+  arrange(checklist_scientificName)
 
 if(nrow(eu_concern_list_new) > nrow(eu_concern_list_old)){
   ## list has expanded ####
