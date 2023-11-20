@@ -1,27 +1,29 @@
 title_id;title_nl;description_nl;title_fr;description_fr;title_en;description_en
 apply_gam;Status van toename (GAM) - Waarnemingen;;Statut d'augmentation (GAM) - Observations;;Emergence status (GAM) - Observations;
 barplotLenteNesten;Voorjaarsnesten;Het aantal op vespawatch.be gemelde nesten tussen 1 januari en 19 mei;Nids de printemps;Le nombre de nids signalés sur vespawatch.be entre le 1er janvier et le 19 mai;Spring nests;The number of nests reported on vespawatch.be between January 1 and May 19
-countNesten;Aantal nesten per provincie (figuur);"Het aantal op vespawatch.be gemelde nesten per provincie.
-</br><em>Data beschikbaar tot {{maxDate}}<em>";TODO;TODO;TODO;TODO
+countNesten;Aantal nesten per provincie (figuur);"Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>";Nombre de nids par province (figure);"Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>";Number of nests per province (figure);"The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>"
 indicator_introduction_year;Aantal nieuw geïntroduceerde soorten per jaar;;Nombre d'espèces nouvellement introduites par an;;Number of newly introduced species per year;
 indicator_total_year;Cumulatief aantal geïntroduceerde soorten;;Nombre cumulé d'espèces introduites;;Cumulative number of introduced species;
 indicator_native_range_year;Aantal geïntroduceerde soorten per jaar en per continent van oorsprong;;Nombre d'espèces introduites par an et par continent d'origine;;Number of introduced species per year and per native continent;
 countOccupancy;Mate van verspreiding van de Unielijstsoorten;AANDACHT: Figuur onafhankelijk van geselecteerde filters bovenaan;Degré de répartition des espèces de la liste de l'Union;ATTENTION: Figure indépendante des filtres sélectionnés en haut;Trend in occupancy of Union list species;NOTE: Plot independent of the selected filters above
 get_table_pathways;Aantal geïntroduceerde soorten per introductieroute;;Nombre d'espèces introduites par voie d'introduction;;Number of introduced species per introduction pathways;
-management2_active-mapHeat;Actieve haarden;"Deze kaart illustreert waar in Vlaanderen waarnemingen zijn gemeld van de Aziatische hoornaar, maar waar nog geen nest succesvol beheerd werd. Op deze plaatsen vinden mogelijks opsporingsacties plaats door de Vespawatchers.
+management2_active-mapHeat;Actieve haarden;"Deze kaart illustreert waar Aziatische hoornaar is waargenomen, maar waar nog geen nest succesvol beheerd werd. Op deze plaatsen vinden mogelijks opsporingsacties plaats door de Vespawatchers.
 Waarnemingen worden weerhouden wanneer ze verder dan 2km van een succesvol beheerd nest bevinden en/of na een succesvolle beheeractie gemeld worden. Hoe intenser rood, hoe meer meldingen er in de buurt van elkaar zijn.
 Ontbrekende nesten kunnen steeds gemeld worden op <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
-</br><em>Data beschikbaar tot {{maxDate}}</em>";TODO;TODO;Active hotbeds;TODO
-management2_observed-mapHeat;Alle observaties;"Op deze kaart is de verspreiding afgebeeld van alle nesten en individuen van de Aziatische hoornaar die in {{maxYear}} zijn gemeld via verschillende kanalen. 
-Nog niet alle meldingen zijn op dit kaartje weergegeven. Binnenkort zullen wel alle meldingen zichtbaar zijn.
-</br><em>Data beschikbaar tot {{maxDate}}</em>";TODO;TODO;All observations;TODO
+</br><em>Data beschikbaar tot {{maxDate}}</em>";Points chauds actifs;"Cette carte illustre les endroits où des frelons asiatiques ont été signalées, mais où aucun nid n'a encore été géré avec succès. Les observateurs Vespa peuvent mener des enquêtes à ces endroits.
+Les observations sont conservées si elles sont situées à plus de 2 km d'un nid géré avec succès et/ou sont rapportées après une action de gestion réussie. Plus le rouge est intense, plus il y a de notifications à proximité les unes des autres.
+Les nids manquants peuvent toujours être signalés sur <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
+</br><em>Dates disponibles jusqu'au {{maxDate}}</em>";Active hotbeds;"This map illustrates where Asian hornet has been sighted, but where no nest has yet been successfully managed. Vespa watchers may conduct investigations at these locations.
+Observations are retained if they are located further than 2km from a successfully managed nest and/or are reported after a successful management action. The more intense red, the more notifications there are in close proximity to each other.
+Missing nests can always be reported at <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
+</br><em>Dates available until {{maxDate}}</em>"
+management2_observed-mapHeat;Alle observaties;"Op deze kaart worden alle nesten en individuen van Aziatische hoornaar getoond die in {{maxYear}} zijn gemeld via diverse kanalen. Nog niet alle meldingen zijn op dit kaartje weergegeven. Binnenkort zullen alle meldingen zichtbaar zijn. </br><em>Data beschikbaar tot {{maxDate}}</em>";Toutes les observations;"Cette carte montre tous les nids et individus de frelons asiatiques signalés en {{maxYear}} via divers canaux. Tous les rapports ne sont pas encore affichés sur cette carte. Bientôt, toutes les notifications seront visibles. </br><em>Dates disponibles jusqu'au {{maxDate}}</em>";All observations;"This map shows all Asian hornet nests and individuals reported in {{maxYear}} through various channels. Not all reports are yet shown on this map. Soon all notifications will be visible. </br><em>Dates available until {{maxDate}}</em>"
 observations-mapOccurrence;Waarnemingen van;;Observations de;;Observations of;
 reporting_t1-mapOccurrence;Rapportering van;;Rapportage de;;Reporting of;
 reporting_t01-mapOccurrence;Rapportering van;;Rapportage de;;Reporting of;
 management-mapOccurrence;Beheer van;;Gestion de;;Management of;
 tableIndicators;;Tijdelijke aanduiding voor disclaimer;;Espace réservé pour clause;;Placeholder for disclaimer
-tableNesten;Aantal nesten per provincie (tabel);"Het aantal op vespawatch.be gemelde nesten per provincie.
-</br><em>Data beschikbaar tot {{maxDate}}<em>";TODO;TODO;TODO;TODO
+tableNesten;Aantal nesten per provincie (tabel);"Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>";Nombre de nids par province (tableau);"Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>";Number of nests per province (table);"The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>"
 visualize_pathways_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1);;Espèces introduites par voie d'introduction (CBD, niveau 1);;Introduced species per pathway (CBD, level 1);
 visualize_pathways_year_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1) - trends;;Espèces introduites par voie d'introduction (CBD, niveau 1) - tendances;;Introduced species per pathway (CBD, level 1) - trends;
 visualize_pathways_level2;Geïntroduceerde soorten per introductieroute (CBD, niveau 2);;Espèces introduites par voie d'introduction (CBD, niveau 2);;Introduced species per pathway (CBD, level 2);
