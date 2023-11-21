@@ -1,0 +1,75 @@
+---
+title: "Untitled"
+output: github_document
+---
+
+```{r}
+library(foreign)
+library(tidyverse)
+```
+
+```{r}
+t0_raw1 <- read.dbf("./Data/Input/BE_BASELINE.dbf")
+t0_raw2 <- read.dbf("./Data/Input/BE_BATCH2.dbf")
+t1_raw <- read.dbf("./Data/Input/ias_belgium_t1_2019_raw3.dbf")
+Q_species <- read_delim("./Data/Lists/Q_SPECIE.csv", ";")
+GRIDCELLS <- read.dbf("./Data/Lists/GRID10k_BEL_ETRS_1989_LAEA.dbf")
+```
+
+```{r}
+t0_raw2_redux <- t0_raw2 %>%
+  select(CellCode, Species = SpeciesNam) %>%
+  mutate(t0 = 1)
+t0_raw1_redux <- t0_raw1 %>%
+  select(CellCode, Species) %>%
+  mutate(t0 = 1)
+t0 <- rbind(t0_raw1_redux, t0_raw2_redux)
+t0 <- t0 %>%
+  mutate(Species = case_when(Species == "Vespa velutina nigrithorax" ~ "Vespa velutina",
+                             TRUE ~ as.character(Species))) %>%
+  group_by(CellCode, Species) %>%
+  distinct()
+table(t0$Species)
+```
+
+
+```{r T1}
+Q_species2 <- Q_species %>%
+  add_row(SPEC = "Lysichiton_americanus_HultÃ©n___H_St_John", SPEC_EASIN = "Lysichiton americanus") %>%
+  add_row(SPEC = "Gunnera_tinctoria__Molina__Mirbel", SPEC_EASIN = "Gunnera tinctoria") %>% 
+  mutate(SPEC_EASIN = case_when(SPEC == "Nyctereutes_procyonoides__Gray__1834_" ~ "Nyctereutes procynoides",
+                                TRUE ~ SPEC_EASIN))
+t1 <- t1_raw %>%
+  left_join(Q_species2) %>%
+  select(CellCode, Species = SPEC_EASIN, SPEC) %>%
+  mutate(t1 = 1)
+table(t1$Species, useNA = "ifany")
+nospec <- t1 %>%
+  filter(is.na(Species))
+```
+
+```{r}
+T0vT1 <- full_join(t0, t1)
+T0vT1_final <- T0vT1 %>%
+  select(CellCode, Species, t0, t1)
+```
+
+```{r}
+write_delim(T0vT1_final, "./Data/Output/T0vT1.csv", delim = ";")
+```
+
+```{r}
+T0vT1_stats <- T0vT1_final %>%
+  group_by(Species) %>%
+  mutate(both = case_when(t0 == 1 & t1 == 1 ~ 1, 
+                          TRUE ~ 0)) %>%
+  mutate(uni_t0 = case_when(t0 == 1 & is.na(t1) ~ 1,
+                            TRUE ~ 0)) %>%
+  mutate(uni_t1 = case_when(t1 == 1 & is.na(t0) ~ 1,
+                            TRUE ~ 0)) %>%
+  summarise(t0_tot = sum(t0, na.rm = TRUE), t1_tot = sum(t1, na.rm = TRUE), both_tot = sum(both), t0 = sum(uni_t0), t1 = sum(uni_t1)) %>%
+  filter(!is.na(Species))
+write_delim(T0vT1_stats, "./Data/Checkup/T0vT1_stats.csv", delim = ";")
+```
+
+
