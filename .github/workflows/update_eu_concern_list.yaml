@@ -3,7 +3,7 @@ on:
   schedule: 
    - cron: '0 0 1 1-12 *'
 
-name: update eu concern list
+name: update_eu_concern_list
 
 jobs:
  update eu concern list:
