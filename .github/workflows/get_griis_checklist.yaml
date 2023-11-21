@@ -1,0 +1,133 @@
+on:
+  schedule: 
+   - cron: '0 0 1 1-12 *'
+
+  
+name: get_griis
+
+jobs:
+  test-griis-status:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest,   r: 'release'}
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      gbif_user: ${{ secrets.GBIF_USER }}
+      email: ${{ secrets.GBIF_EMAIL }}
+      gbif_pwd: ${{ secrets.GBIF_PWD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt install libsodium-dev
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libgdal-dev libproj-dev
+          sudo apt install libudunits2-dev
+
+      - name: Install R packages
+        run: |
+          source("src/install_packages_get_griis.R")
+        shell: Rscript {0}
+        
+      - name: test_griis_status
+        run: |
+          source("src/test_griis_status.R")
+        shell: Rscript {0}
+        
+  get-griis:
+    needs: 'test-griis-status'
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest,   r: 'release'}
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      gbif_user: ${{ secrets.GBIF_USER }}
+      email: ${{ secrets.GBIF_EMAIL }}
+      gbif_pwd: ${{ secrets.GBIF_PWD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt install libsodium-dev
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libgdal-dev libproj-dev
+          sudo apt install libudunits2-dev
+
+      - name: Install R packages
+        run: |
+          source("src/install_packages_get_griis.R")
+        shell: Rscript {0}
+    
+      - name: download_griis_checklist
+        run: |
+          source("src/download_griis_checklist.R")
+        shell: Rscript {0}
+    
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "update griis checklist"
+          target_branch: automatic-management-prep
+          
+      - name: Get branch name
+        run: |
+          git branch --show-current
+
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          target_branch: main
+          title: "[AUTO] download griis checklist"
+          template: .github/PR_download_griis_checklist.md
+          reviewer: SanderDevisscher
+          label: automated workflow
+          get_diff: false
