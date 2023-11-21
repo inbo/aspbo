@@ -41,11 +41,11 @@ muskrat_data_redux <- raw_muskrat_data %>%
                 x = samplingProtocol))
   
 # Add spatial component ####
-gem <- st_read("./data/spatial/communes.geojson") %>% 
+gem <- st_read("./data/output/UAT_processing/communes.geojson") %>% 
   st_transform(4326) %>% 
   rename(Gemeente = NAAM)
 
-provincies <- st_read("./data/spatial/provinces.geojson") %>% 
+provincies <- st_read("./data/output/UAT_processing/provinces.geojson") %>% 
   st_transform(4326)
 
 muskrat_data <- st_as_sf(muskrat_data_redux, 
@@ -67,4 +67,4 @@ for(i in 1:length(muskrat_data$Gemeente)){
 }
 
 # Export ####
-write_csv(muskrat_data, "./data/output/muskrat_data.csv")
+write_csv(muskrat_data, "./data/output/UAT_direct/Ondatra_zibethicus.csv")
