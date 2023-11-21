@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - "uat"
+      - "main"
     paths:
       - "./data/output/UAT_processing/**"
 
