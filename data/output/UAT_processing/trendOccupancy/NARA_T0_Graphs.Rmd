@@ -1,0 +1,194 @@
+---
+title: "NARA_T0_Graphs"
+author: "Sander Devisscher"
+date: "12 december 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width=7, fig.height=7)
+library(googlesheets)
+library(googlesheets4)
+library(INBOtheme)
+library(gridExtra)
+library(grid)
+library(tidyverse)
+```
+
+```{r read data}
+T0vT1 <- T0vT1 <- read_delim("./Data/Output/T0vT1.csv", 
+    ";", escape_double = FALSE, trim_ws = TRUE)
+cellcodes <- read_delim("./Data/Lists/vl_cellcodes.csv", delim = ";" )
+soortenlijst <- read_sheet("1m2azTLju-PNt59JQRbg-lA-3oCLSTsIL1AbkXCku1pI")
+```
+
+```{r data prep}
+cellcodes <- as.vector(cellcodes$CellCode)
+tot_cells <- length(cellcodes)
+soortenlijst <- soortenlijst 
+ 
+T0vT1_summarised <- T0vT1 %>%
+  filter(CellCode %in% cellcodes) %>% 
+  mutate(Only_t0 = case_when(t0 == 1 & is.na(t1) ~ 1,
+                             TRUE ~ as.numeric(NA)),
+         Only_t1= case_when(t1 == 1 & is.na(t0) ~ 1,
+                            TRUE ~ as.numeric(NA)),
+         Both = case_when(t1 == 1 & t0 == 1 ~ 1,
+                          TRUE ~ as.numeric(NA))) %>% 
+  group_by(Species) %>% 
+  summarise(t0 = sum(t0, na.rm = TRUE),
+            t1 = sum(t1, na.rm = TRUE),
+            Only_t0 = sum(Only_t0, na.rm = TRUE),
+            Only_t1 = sum(Only_t1, na.rm = TRUE),
+            Both = sum(Both, na.rm = TRUE)) %>% 
+  mutate(t0_perc = round((t0/tot_cells)*100, digits = 2),
+         t1_perc = round((t1/tot_cells)*100, digits = 2),
+         diff_perc = t1_perc - t0_perc) %>% 
+  left_join(soortenlijst) %>% 
+  filter(Include == "yes") %>% 
+  ungroup()
+```
+
+```{r barchart}
+n <- 0
+if(n > 0){
+  T0vT1_summarised2 <- 
+    T0vT1_summarised %>% 
+    arrange(desc(t0_perc), desc(t1_perc), desc(diff_perc)) %>% 
+    head(n)
+}else{
+  T0vT1_summarised2 <- 
+    T0vT1_summarised 
+}
+threshold <- 5
+T0vT1_summarised_Ts <- 
+  T0vT1_summarised2 %>% 
+  dplyr::select(t0_perc, t1_perc,diff_perc , Species_NL,Status_VLA) %>% 
+  gather(key = "timeframe", value = "Squares", -Species_NL, -diff_perc, -Status_VLA) %>% 
+  mutate(Squares = as.numeric(Squares),
+         increase = case_when(diff_perc > threshold ~ "toename",
+                              diff_perc <= threshold ~ "geen toename"),
+         increase = factor(increase, levels=c("toename", "geen toename"), 
+                           labels = c("toename", "geen toename")),
+         timeframe = factor(timeframe, levels=c("t1_perc", "t0_perc"), labels = c("rapportage", "baseline"))) 
+T0vT1_summarised_Ts_increase <- T0vT1_summarised_Ts %>% 
+  filter(grepl("toename", increase) & !grepl("geen", increase))
+T0vT1_summarised_Ts_decrease <- T0vT1_summarised_Ts %>% 
+ filter(grepl("geen", increase)| grepl("sporadisch", increase))
+# Plots
+## Plot 1 & 2 => Grid.arrange
+## Plot 3 => Facet_wrap
+## Plot 4 alles op 1 graph
+plot_1 <- 
+  T0vT1_summarised_Ts_increase %>% 
+  ggplot(aes(x = reorder(Species_NL, -Squares), y = Squares, fill = timeframe)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() +
+  ylab("percentage bezette hokken (10km2) in Vlaanderen") +
+  xlab("Soort") +
+  scale_y_continuous(expand = c(0,1), breaks = seq(0,100, 5)) +
+  theme(axis.line.x = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.line.y = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.text.y = element_text(vjust = 0.3)) 
+plot_2 <- 
+  T0vT1_summarised_Ts_decrease %>% 
+  ggplot(aes(x = reorder(Species_NL, -Squares), y = Squares, fill = timeframe)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() +
+  ylab("percentage bezette hokken (10km2) in Vlaanderen") +
+  xlab("Soort") +
+  scale_y_continuous(expand = c(0,1), breaks = seq(0,100, 5)) +
+  theme(axis.line.x = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.line.y = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.text.y = element_text(vjust = 0.3)) 
+plot_3a <- 
+  T0vT1_summarised_Ts %>% 
+  ggplot(aes(x = reorder(Species_NL, -Squares), y = Squares, fill = timeframe)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() +
+  facet_wrap(vars(increase), scales = "free_y", nrow = 3, switch = "y") +
+  ylab("percentage bezette hokken (10km2) in Vlaanderen") +
+  xlab("Soort") +
+  scale_y_continuous(expand = c(0,1), breaks = seq(0,100, 5)) +
+  theme(axis.line.x = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.line.y = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.text.y = element_text(vjust = 0.3)) +
+  ggsave("./Figuren/NARA_T0vT1_Bar_Relative_ToenameFacets.jpg")
+plot_3b <- 
+  T0vT1_summarised_Ts %>% 
+  ggplot(aes(x = reorder(Species_NL, -Squares), y = Squares, fill = timeframe)) + 
+  geom_col(position = position_dodge2(width = 1, padding = 0.1)) + 
+  coord_flip() +
+  facet_wrap(vars(Status_VLA), scales = "free_y", nrow = 3, switch = "y") +
+  ylab("percentage bezette hokken (10km2) in Vlaanderen") +
+  xlab("Soort") +
+  scale_y_continuous(expand = c(0,1), breaks = seq(0,100, 5)) +
+  theme(axis.line.x = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.line.y = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.text.y = element_text(vjust = 0.3, margin = margin(t = 0, r = 0.1, b = 0, l = 0, unit = "cm"))) +
+  ggsave("./Figuren/NARA_T0vT1_Bar_Relative_StatusFacets.jpg", width = 7, height = 9)
+library(grid)
+plot_3b_gt <-  ggplot_gtable(ggplot_build(plot_3b))
+plot_3b_gt$heights[2] = 2*plot_3b_gt$heights[4]
+grid.draw(plot_3b_gt)
+gtable::gtable_show_layout(plot_3b_gt)
+plot_3b_gt$layout$l[grep('panel-1-1', plot_3b_gt$layout$name)]
+plot_4 <- 
+  T0vT1_summarised_Ts %>% 
+  ggplot(aes(x = reorder(Species_NL, -Squares), y = Squares, fill = timeframe)) + 
+  geom_col(position = "dodge") + 
+  coord_flip() +
+  ylab("percentage bezette hokken (10km2) in Vlaanderen") +
+  xlab("Soort") +
+  scale_y_continuous(expand = c(0,1), breaks = seq(0,100, 5)) +
+  theme(axis.line.x = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.line.y = element_line(colour = "black", linetype = "solid", size = 0.5),
+        axis.text.y = element_text(vjust = 0.3)) +
+  ggsave("./Figuren/NARA_T0vT1_Bar_Relative.jpg")
+plot <- grid.arrange(plot_1, plot_2,  top = textGrob("test", gp = gpar(fontsize = 26)))
+  
+ggsave(plot, file = "./Figuren/NARA_T0vT1_Bar_Relative_Grid.jpg", width = 7, height = 7, dpi = 300)
+print(plot_3b)
+```
+
+```{r piechart, include=false, eval=false}
+n <- 9
+if(n > 0){
+  T0vT1_summarised2 <- 
+    T0vT1_summarised %>% 
+    arrange(desc(t0), desc(t1), desc(Both)) %>% 
+    head(n)
+  fn <- paste0("./Figuren/NARA_T0vT1_Pie_Top", n, ".jpg")
+}else{
+  T0vT1_summarised2 <- 
+    T0vT1_summarised 
+  fn <- "./Figuren/NARA_T0vT1_Pie.jpg"
+}
+T0vT1_summarised_pie <- 
+  T0vT1_summarised2 %>% 
+  filter(Status_VLA == "gevestigd") %>% 
+  dplyr::select(t0, t1, Species_NL) %>% 
+  gather(key = "timeframe", value = "Squares", -Species_NL) %>% 
+  mutate(Squares = as.numeric(Squares)) 
+totalen <- 
+  T0vT1_summarised_pie %>% 
+  group_by(timeframe) %>% 
+  summarise(totaal = sum(Squares))
+T0vT1_summarised_pie <- 
+  T0vT1_summarised_pie %>% 
+  left_join(totalen, by = c("timeframe" = "timeframe")) %>% 
+  mutate(aandeel = round(Squares/totaal, 2)) %>% 
+  group_by(timeframe) 
+bp<- ggplot(T0vT1_summarised_pie, aes(x="", y=aandeel, fill=reorder(Species_NL, -aandeel)))+
+  geom_bar(width = 1, stat = "identity")+
+  facet_wrap(~ timeframe) +
+  coord_polar("y", start=0) +
+  scale_fill_discrete(name = "Soort") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank()) +
+  xlab("") +
+  ylab("") +
+  ggsave(filename = fn)
+bp
+```
+
