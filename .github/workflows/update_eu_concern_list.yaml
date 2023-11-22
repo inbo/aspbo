@@ -86,7 +86,7 @@ jobs:
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
-          target_branch: main
+          target_branch: uat
           title: "[AUTO] update eu concern list"
           template: .github/PR_PR_update_eu_concern_list.md
           reviewer: SanderDevisscher
