@@ -11,7 +11,7 @@ gbif_user <- Sys.getenv("gbif_user")
 
 # test update status ####
 ## current version ####
-current_metadata <- read_csv("data/input/griis_checklist_version.txt", 
+current_metadata <- read_csv("data/output/UAT_processing/griis_checklist_version.txt", 
                              col_types = cols(modified = col_character())) %>% 
   mutate(modified = parse_datetime(modified))
 

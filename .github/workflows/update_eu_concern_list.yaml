@@ -1,11 +1,12 @@
 on:
+  workflow_dispatch:
   schedule: 
    - cron: '0 0 1 1-12 *'
 
 name: update eu concern list
 
 jobs:
- update eu concern list:
+ update_eu_concern_list:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     strategy:

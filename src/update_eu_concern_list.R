@@ -66,7 +66,7 @@ if(nrow(eu_concern_list_new) > nrow(eu_concern_list_old)){
      nrow(omited_taxonKeys) > 0){
     ### list has changed ####
     # write new list to output to trigger upload
-    write_tsv(eu_concern_list_new, "./data/output/eu_concern_species.tsv")
+    write_tsv(eu_concern_list_new, "./data/output/UAT_processing/eu_concern_species.tsv")
   }else{
     ### No changes ####
     warning("no changes detected! eu concern list not updated!")
