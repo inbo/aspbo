@@ -78,5 +78,21 @@ for(i in 1:length(muskrat_data$Gemeente)){
   muskrat_data$provincie[i] <- as.character(muskrat_data$Provincie[[i]][1])
 }
 
+
+# maintain needed columns ####
+muskrat_data <- muskrat_data %>% 
+  left_join(provincies %>% 
+              as.data.frame() %>% 
+              select(NAAM, GEWEST), 
+            by = c("provincie" = "NAAM")) %>% 
+  select(year,
+         individualCount,
+         NAAM = gemeente,
+         provincie,
+         GEWEST,
+         gbifID,
+         decimalLatitude,
+         decimalLongitude)
+
 # Export ####
 write_csv(muskrat_data, "./data/output/UAT_direct/Ondatra_zibethicus.csv")
