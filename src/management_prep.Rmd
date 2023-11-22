@@ -196,9 +196,9 @@ locations <- st_as_sf(locations,
 
 locations <- st_transform(locations, 4326)
 
-gemeentes <- st_read("./data/spatial/communes.geojson")
+gemeentes <- st_read("./data/output/UAT_processing/communes.geojson")
 gemeentes <- st_transform(gemeentes, 4326)
-provincies <- st_read("./data/spatial/provinces.geojson")
+provincies <- st_read("./data/output/UAT_processing/provinces.geojson")
 st_crs(provincies) <- st_crs(31370)
 provincies <- st_transform(provincies, 4326)
 
@@ -301,5 +301,5 @@ cleanData <- cleanData %>%
 ```
 
 ```{r export cleanData}
-write_csv(cleanData, "./data/interim/Lithobates_catesbeianus_management_data.csv")
+write_csv(cleanData, "./data/output/UAT_direct/Lithobates_catesbeianus.csv")
 ```

@@ -5,7 +5,7 @@ library(dplyr)
 library(magrittr)
 
 # download using previous limit ####
-current_metadata <- read_csv("data/input/griis_checklist_version.txt", 
+current_metadata <- read_csv("./data/output/UAT_processing/griis_checklist_version.txt", 
                              col_types = cols(modified = col_character())) %>% 
   mutate(modified = parse_datetime(modified))
 
@@ -35,5 +35,5 @@ current_metadata <- current_metadata %>%
           limit = limit)
 
 # export files ####
-write_csv(current_metadata, "./data/input/griis_checklist_version.txt")
-write_tsv(GRIIS_base, "./data/output/data_input_checklist_indicators.tsv")
+write_csv(current_metadata, "./data/output/UAT_processing/griis_checklist_version.txt")
+write_tsv(GRIIS_base, "./data/output/UAT_processing/data_input_checklist_indicators.tsv")
