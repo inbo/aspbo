@@ -37,6 +37,8 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
-data/interim/df_timeseries.tsv
+
+# too large files
+*.zip
 data/output/UAT_processing/full_timeseries.csv
 data/output/UAT_processing/df_timeseries.tsv
