@@ -66,5 +66,17 @@ for(i in 1:length(muskrat_data$Gemeente)){
   muskrat_data$gemeente[i] <- as.character(muskrat_data$Gemeente[[i]][1])
 }
 
+muskrat_data$Provincie <- apply(sf::st_intersects(provincies, 
+                                                 muskrat_data, 
+                                                 sparse = FALSE), 2, 
+                               function(col) {provincies[which(col),
+                               ]$NAAM})
+
+muskrat_data$provincie <- NA 
+
+for(i in 1:length(muskrat_data$Gemeente)){
+  muskrat_data$provincie[i] <- as.character(muskrat_data$Provincie[[i]][1])
+}
+
 # Export ####
 write_csv(muskrat_data, "./data/output/UAT_direct/Ondatra_zibethicus.csv")
