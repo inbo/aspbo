@@ -4,6 +4,7 @@ on:
       - 'uat'
     paths:
       - 'data/input/**'
+  workflow_dispatch:
     
 name: create full_timeseries.csv
 
@@ -92,7 +93,7 @@ jobs:
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
-          target_branch: main
+          target_branch: uat
           title: "[AUTO] update occ_indic_preprocessing"
           template: .github/PR_occ_indic_preprocessing.md
           reviewer: SanderDevisscher
