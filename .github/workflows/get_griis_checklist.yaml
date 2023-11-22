@@ -126,7 +126,7 @@ jobs:
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
-          target_branch: main
+          target_branch: uat
           title: "[AUTO] download griis checklist"
           template: .github/PR_download_griis_checklist.md
           reviewer: SanderDevisscher
