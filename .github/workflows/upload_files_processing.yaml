@@ -105,7 +105,7 @@ jobs:
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
-          target_branch: main
+          target_branch: uat
           title: "[AUTO] upload processed files to UAT"
           template: .github/PR_upload_files_to_UAT.md
           reviewer: SanderDevisscher
