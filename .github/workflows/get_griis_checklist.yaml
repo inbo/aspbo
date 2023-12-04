@@ -116,7 +116,7 @@ jobs:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
           commit_message: "update griis checklist"
-          target_branch: automatic-management-prep
+          target_branch: automatic-griis-checklist
           
       - name: Get branch name
         run: |
