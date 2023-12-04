@@ -62,7 +62,7 @@ jobs:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
           commit_message: "run management prep"
-          target_branch: automatic-management-prep
+          target_branch: automatic-sk-management-prep
           
       - name: Get branch name
         run: |
