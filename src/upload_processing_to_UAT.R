@@ -51,16 +51,6 @@ createShapeData(dataDir = file.path(processingFilePath,"communes.geojson"), buck
 # output: "keys.csv"
 createKeyData(dataDir = processingFilePath, bucket = bucket)
 
-# create time series data
-# input:  "df_timeseries.RData" and "grid.RData" from bucket
-# output: full_timeseries.RData
-
-createTimeseries(
-  # read grid.RData from bucket
-  shapeData = loadShapeData("grid.RData")$utm1_bel_with_regions, 
-  bucket = bucket
-)
-
 # create occupancy cube 
 
 # input: trendOccupancy folder containing T1* and ias_belgium_t0_2016/18/20 geojson data

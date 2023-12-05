@@ -660,6 +660,18 @@ aws.s3::s3save(df_ts,
               multipart = TRUE))
 ```
 
+Create time series data
+input:  "df_timeseries.RData" and "grid.RData" from bucket
+output: full_timeseries.RData
+
+```{r}
+alienSpecies::createTimeseries(
+  # read grid.RData from bucket
+  shapeData = loadShapeData("grid.RData")$utm1_bel_with_regions, 
+  bucket = bucket
+)
+```
+
 We save also the taxonomic information:
 
 ```{r save_spec_names, eval = FALSE}
