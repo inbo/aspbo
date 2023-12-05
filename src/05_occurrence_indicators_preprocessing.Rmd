@@ -650,9 +650,14 @@ Save `df_ts` as it will be used as start point of modelling pipelines:
 # connect to bucket
 source("./src/connect_to_bucket.R")
 connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
+
 # upload data to S3 bucket
-aws.s3::s3save(df_ts, object = "df_timeseries.Rdata", bucket = Sys.getenv("UAT_bucket"), 
-  opts = list(show_progress = TRUE))
+aws.s3::s3save(df_ts, 
+               object = "df_timeseries.Rdata", 
+               bucket = Sys.getenv("UAT_bucket"), 
+  opts = list(show_progress = TRUE,
+              region = "eu-west-1",
+              multipart = TRUE))
 ```
 
 We save also the taxonomic information:
