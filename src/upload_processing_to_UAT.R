@@ -22,6 +22,8 @@ source("./src/connect_to_bucket.R")
 
 bucket <- Sys.getenv("UAT_bucket")
 
+connect_to_bucket(bucket)
+
 ###############################################################
 ## The following create* function will take input data, 
 ## process it and put them on s3 bucket 

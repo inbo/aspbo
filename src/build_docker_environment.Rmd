@@ -37,7 +37,7 @@ system(command = 'powershell "cd ~/Documents/GitHub/alien-species-portal"')
 ```
 
 ```{r build new image}
-setwd(dir = "../alien-species-portal/")
+setwd(dir = "~/GitHub/alien-species-portal/")
 system(command = 'powershell "docker build -t inbo/alienspecies ."')
 setwd("~/GitHub/aspbo")
 ```
@@ -45,7 +45,7 @@ setwd("~/GitHub/aspbo")
 ```{r connect to s3 bucket}
 source("./src/connect_to_bucket.R")
 
-connect_to_bucket("inbo-exotenportaal-uat-eu-west-1-default")
+connect_to_bucket(Sys.getenv("UAT_bucket"))
 ```
 
 Onderstaande code runt het exotenportaal op localhost poort 3000 moest deze
