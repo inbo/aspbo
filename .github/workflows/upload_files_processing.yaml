@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - "uat"
-      - "main"
+      - uat
     paths:
-      - "./data/output/UAT_processing/**"
+      - data/output/UAT_processing/**
+  workflow_dispatch:
 
 name: upload_files_processing
 
