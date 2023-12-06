@@ -20,6 +20,9 @@
 # RStudio files
 .Rproj.user/
 
+# Architect project
+.project
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf

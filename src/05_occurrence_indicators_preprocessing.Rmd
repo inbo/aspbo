@@ -127,8 +127,8 @@ data_file <- here::here(
 )
 taxa_df <-
   read_tsv(data_file,
-    na = "",
-    guess_max = 5000
+           na = "",
+           guess_max = 5000
   )
 taxa_df <-
   taxa_df %>%
@@ -309,10 +309,10 @@ df_xy <-
   bind_cols(
     tibble(
       x = unlist(str_extract_all(unique(df$eea_cell_code),
-        pattern = "(?<=E)\\d+"
+                                 pattern = "(?<=E)\\d+"
       )),
       y = unlist(str_extract_all(unique(df$eea_cell_code),
-        pattern = "(?<=N)\\d+"
+                                 pattern = "(?<=N)\\d+"
       ))
     ) %>%
       mutate_all(as.integer)
@@ -327,6 +327,20 @@ df_xy %>% head()
 
 Do the same for baseline data:
 
+```{r remove corrupted eea_cell_code}
+df_bl <- df_bl %>% 
+  mutate(cellcode_length = nchar(eea_cell_code))
+
+table(df_bl$cellcode_length, useNA = "ifany")
+
+corrupt_bl_eea_cell_codes <- df_bl %>% 
+  filter(cellcode_length != 13) %>% 
+  write_csv("./data/interim/corrupt_bl_eea_cell_codes.csv")
+
+df_bl <- df_bl %>% 
+  filter(cellcode_length == 13)
+```
+
 ```{r extract_x_y_baseline}
 df_bl_xy <-
   df_bl %>%
@@ -334,10 +348,10 @@ df_bl_xy <-
   bind_cols(
     tibble(
       x = unlist(str_extract_all(unique(df_bl$eea_cell_code),
-        pattern = "(?<=E)\\d+"
+                                 pattern = "(?<=E)\\d+"
       )),
       y = unlist(str_extract_all(unique(df_bl$eea_cell_code),
-        pattern = "(?<=N)\\d+"
+                                 pattern = "(?<=N)\\d+"
       ))
     ) %>%
       mutate_all(as.integer)
@@ -363,10 +377,10 @@ recent_alien_species <-
   filter(first_observed >= year_of_introduction | is.na(first_observed)) %>%
   # remove duplicates due to other columns as pathways
   distinct(nubKey, first_observed, last_observed) %>%
-
+  
   # get classkey info and filter out taxa without data
   inner_join(spec_names, by = c("nubKey" = "taxonKey")) %>%
-
+  
   distinct(
     taxonKey = nubKey,
     .data$canonicalName,
@@ -392,8 +406,8 @@ old_introductions_taxa <-
   taxa_df %>%
   filter(first_observed < year_of_introduction) %>%
   anti_join(recent_alien_species %>%
-    select(taxonKey),
-  by = c("nubKey" = "taxonKey")
+              select(taxonKey),
+            by = c("nubKey" = "taxonKey")
   ) %>%
   distinct(
     nubKey,
@@ -418,16 +432,16 @@ We save them in file `taxa_introduced_in_BE_before_1950.tsv` in  `data/output`:
 
 ```{r save_old_introduced_taxa_as_tsv_file}
 write_tsv(old_introductions_taxa,
-  here::here(
-    "data",
-    "output",
-    paste0(
-      "taxa_introduced_in_BE_before_",
-      year_of_introduction,
-      ".tsv"
-    )
-  ),
-  na = ""
+          here::here(
+            "data",
+            "output",
+            paste0(
+              "taxa_introduced_in_BE_before_",
+              year_of_introduction,
+              ".tsv"
+            )
+          ),
+          na = ""
 )
 ```
 
@@ -477,7 +491,7 @@ We add whether the grid cell intersects any of the Natura2000 Belgian protected 
 df <-
   df %>%
   left_join(df_prot_areas,
-    by = c("eea_cell_code" = "CELLCODE")
+            by = c("eea_cell_code" = "CELLCODE")
   )
 ```
 
@@ -493,7 +507,7 @@ We do the same for baseline data:
 df_bl <-
   df_bl %>%
   left_join(df_prot_areas,
-    by = c("eea_cell_code" = "CELLCODE")
+            by = c("eea_cell_code" = "CELLCODE")
   )
 ```
 
@@ -546,7 +560,7 @@ make_time_series <- function(eea_cell_code, taxonKey, begin_year, last_year ) {
   expand_grid(eea_cell_code = eea_cell_code,
               taxonKey = taxonKey,
               year = seq(from = begin_year, to = last_year))
-
+  
 }
 
 # create timeseries slots
@@ -633,15 +647,34 @@ df_ts <-
 Save `df_ts` as it will be used as start point of modelling pipelines:
 
 ```{r save_data_as_tsv}
-write_tsv(df_ts, 
-          file = here::here("data", "interim", "df_timeseries.tsv"), 
-          na = ""
+# connect to bucket
+source("./src/connect_to_bucket.R")
+connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
+
+# upload data to S3 bucket
+aws.s3::s3save(df_ts, 
+               object = "df_timeseries.Rdata", 
+               bucket = Sys.getenv("UAT_bucket"), 
+  opts = list(show_progress = TRUE,
+              region = "eu-west-1",
+              multipart = TRUE))
+```
+
+Create time series data
+input:  "df_timeseries.RData" and "grid.RData" from bucket
+output: full_timeseries.RData
+
+```{r}
+alienSpecies::createTimeseries(
+  # read grid.RData from bucket
+  shapeData = loadShapeData("grid.RData")$utm1_bel_with_regions, 
+  bucket = bucket
 )
 ```
 
 We save also the taxonomic information:
 
-```{r save_spec_names}
+```{r save_spec_names, eval = FALSE}
 write_tsv(spec_names,
           path = here::here("data", 
                             "interim", 

@@ -1,9 +1,4 @@
 on:
-  push:
-    branches:
-      - 'uat'
-    paths:
-      - 'data/input/**'
   workflow_dispatch:
     
 name: create full_timeseries.csv
@@ -71,11 +66,6 @@ jobs:
           target_branch: automatic-update-occ_indic_preprocessing
           add_timestamp: true
           
-      - name: run_createTimeseries
-        run: |
-          source("src/run_createTimeseries.R")
-        shell: Rscript {0}  
-        
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
         with:
