@@ -646,11 +646,13 @@ df_ts <-
 
 Save `df_ts` as it will be used as start point of modelling pipelines:
 
-```{r save_data_as_tsv}
-# connect to bucket
+```{r connect to bucket, eval=FALSE}
 source("./src/connect_to_bucket.R")
 connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
+```
 
+
+```{r save_data_as_tsv}
 # upload data to S3 bucket
 aws.s3::s3save(df_ts, 
                object = "df_timeseries.Rdata", 
