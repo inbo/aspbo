@@ -23,37 +23,11 @@ iasset_raw <- get_records(inspection_name = "Vespa-Watch",
                           get_access_token(Sys.getenv("iasset_user")))
 ```
 
-```{r get select fieldoptions}
-fields <- get_fields(name = "Vespa-Watch", 
-                   get_access_token(Sys.getenv("iasset_user")))
-
-#select usable character columns
-class_info <- sapply(iasset_raw, class) %>% 
-  as.data.frame() 
-
-class_info$col <- row.names(class_info)
-names(class_info)[1] <- "class"
-  
-char_cols <- class_info %>% 
-  filter(class == "character")
-
-# select correct type columns
-select_fields <- fields$fields %>% 
-  filter(fieldtype %in% c("select", "radio")) %>% 
-  group_by(id) %>% 
-  mutate(answer_code = row_number(id),
-         fieldlabel_sc = make.names(fieldlabel),
-         fieldlabel_sc = gsub("\\.", "_", fieldlabel_sc),
-         fieldlabel_sc = gsub("ö", "o", fieldlabel_sc),
-         fieldlabel_sc = tolower(fieldlabel_sc)) %>% 
-  filter(fieldlabel_sc %in% char_cols$col)
-```
-
 ```{r drop columns}
 iasset_clean <- iasset_raw %>% 
-  mutate_at(vars(unique(select_fields$fieldlabel_sc)), as.numeric) %>% 
   select(-naam, 
          -telefoon,
-         -e_mailadres)
+         -e_mailadres) %>% 
+  write_csv2("./data/interim/Vespa-Watch_iasset.csv")
 ```
 
