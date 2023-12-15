@@ -1,10 +1,10 @@
 on:
-  workflow_dispatch:
   push: 
-   - branches:
+    branches:
      - uat
-   - paths: 
+    paths: 
      - data/input/GRIIS/**
+  workflow_dispatch:
   
 name: get_griis
 
