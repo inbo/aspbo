@@ -59,9 +59,40 @@ distribution <- distribution_raw %>%
 degree_of_establishment <- description_raw %>% 
   filter(type == "degree of establishment")
 
-native_range <- description_raw %>% 
-  filter(type == "native range")
+#### Native Range ####
+Africa <- c("Africa", "Eastern Africa", "Northern Africa", "Southern Africa",
+            "Western Africa", "Middle Africa")
 
+America <- c("Americas", "Caribbean", "Central America", "Northern America",
+             "South America")
+
+Asia <- c("Asia", "Central Asia", "Eastern Asia", "Southeastern Asia",
+          "Southern Asia", "Western Asia")
+
+Europe <- c("Eastern Europe", "Europe", "Southern Europe", "Western Europe")
+
+Oceania <- c("Australia and New Zealand", "Melanesia", "Micronesia")
+
+native_range <- description_raw %>% 
+  filter(type == "native range") %>% 
+  rename("native_range" = description) %>% 
+  mutate(native_continent = case_match(native_range,
+                                       Africa ~ "Africa",
+                                       America ~ "America",
+                                       Asia ~ "Asia",
+                                       Europe ~ "Europe",
+                                       Oceania ~ "Oceania",
+                                       .default = NA_character_)) %>% 
+  distinct(nubKey, native_range, native_continent)
+
+table(native_range$native_range, native_range$native_continent, useNA = "ifany")
+
+no_native_continent <- native_range %>% 
+  filter(is.na(native_continent),
+         !is.na(native_range)) %>% 
+  write_csv("./data/interim/no_native_continent.csv")
+
+#### Pathways ####
 pathways_1 <- description_raw %>% 
   filter(type == "pathway") %>% 
   separate(col = description,
@@ -91,6 +122,7 @@ old_checklist <- read_tsv("https://raw.githubusercontent.com/inbo/aspbo/f4ac68b4
 GRIIS_final <- GRIIS_base %>% 
   left_join(distribution, by = c("nubKey")) %>% 
   left_join(pathways, by = c("nubKey")) %>% 
+  left_join(native_range, by = c("nubKey")) %>% 
   select(colnames(old_checklist))
 
 # export files ####
