@@ -3,6 +3,7 @@ library(readr)
 library(dplyr)
 library(magrittr)
 library(stringr)
+library(tidyr)
 library(rgbif)
 
 # GRIIS taxon base ####
