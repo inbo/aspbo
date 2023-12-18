@@ -180,10 +180,13 @@ speciesprofile <- speciesprofile_raw %>%
 old_checklist <- read_tsv("https://raw.githubusercontent.com/inbo/aspbo/f4ac68b41a5e1f9f4c76d86b6ba7957e7975213a/data/output/UAT_processing/data_input_checklist_indicators.tsv")
 
 GRIIS_final <- GRIIS_base %>% 
-  left_join(distribution, by = c("nubKey")) %>% 
-  left_join(pathways, by = c("nubKey")) %>% 
-  left_join(native_range, by = c("nubKey")) %>% 
-  select(colnames(old_checklist))
+  left_join(speciesprofile, by = "nubKey") %>% 
+  left_join(distribution, by = "nubKey") %>% 
+  left_join(pathways, by = "nubKey") %>% 
+  left_join(native_range, by = "nubKey") %>% 
+  left_join(degree_of_establishment, by = "nubKey") %>% 
+  select(colnames(old_checklist)) %>% 
+  distinct()
 
 # export files ####
 write_csv(current_metadata, "./data/output/UAT_processing/griis_checklist_version.txt")
