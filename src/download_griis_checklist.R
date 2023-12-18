@@ -32,13 +32,13 @@ for(f in dir(path = "./data/input/GRIIS/dwca-unified-checklist/",
              pattern = ".txt")){
   
   df_name <- paste0(gsub(pattern = ".txt",
-                  replacement = "",
-                  f), "_raw")
+                         replacement = "",
+                         f), "_raw")
   
   df <- read_tsv(paste0("./data/input/GRIIS/dwca-unified-checklist/", f)) %>% 
     mutate(nubKey = as.integer(gsub(pattern = "https://www.gbif.org/species/",
-                         replacement = "",
-                         id))) %>% 
+                                    replacement = "",
+                                    id))) %>% 
     select(-id)
   
   assign(df_name, df)
@@ -56,8 +56,60 @@ distribution <- distribution_raw %>%
          source_distribution = source)
 
 ### description ####
+#### Degree of Establishment ####
+captive <- c("blackburn_et_al_2011:B1", "captive",
+             "captive (blackburn_2011:B1)")
+
+cultivated <- c("blackburn_et_al_2011:B2", "cultivated", 
+                "cultivated (blackburn_2011:B2)")
+
+released <- c("blackburn_et_al_2011:B3", "released",
+              "released (blackburn_2011:B3)")
+
+failing <- c("blackburn_et_al_2011:C0", "failing",
+             "failing (blackburn_2011:C0)")
+
+casual <- c("blackburn_et_al_2011:C1", "casual",
+            "casual (blackburn_2011:C1)")
+
+reproducing <- c("blackburn_et_al_2011:C2", "reproducing",
+                 "reproducing (blackburn_2011:C2)")
+
+established <- c("blackburn_et_al_2011:C3", "established",
+                 "established (blackburn_2011:C3)")
+
+colonising <- c("blackburn_et_al_2011:D1", "colonizing",
+                "colonizing (blackburn_2011:D1)")
+
+invasive <- c("blackburn_et_al_2011:D2", "invasive",
+              "invasive (blackburn_2011:D2)")
+
+widespreadInvasive <- c("blackburn_et_al_2011:E", "widespreadInvasive",
+                        "widespreadInvasive (blackburn_2011:E)")
+
 degree_of_establishment <- description_raw %>% 
-  filter(type == "degree of establishment")
+  filter(type == "degree of establishment") %>% 
+  mutate(degree_of_establishment = case_match(description,
+                                              captive ~ "captive",
+                                              cultivated ~ "cultivated",
+                                              released ~ "released",
+                                              failing ~ "failing",
+                                              casual ~ "casual",
+                                              reproducing ~ "reproducing",
+                                              established ~ "established",
+                                              colonising ~ "colonising",
+                                              invasive ~ "invasive",
+                                              widespreadInvasive ~ "widespreadInvasive",
+                                              "introduced" ~ "introduced",
+                                              "extinct" ~ "extinct",
+                                              .default = NA_character_)) 
+
+no_degree_of_establishment <- degree_of_establishment %>% 
+  filter(is.na(degree_of_establishment)) %>% 
+  write_csv("./data/interim/no_degree_of_establishment.csv") 
+
+degree_of_establishment <- degree_of_establishment %>% 
+  distinct(nubKey, degree_of_establishment)
 
 #### Native Range ####
 Africa <- c("Africa", "Eastern Africa", "Northern Africa", "Southern Africa",
