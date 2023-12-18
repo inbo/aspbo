@@ -151,7 +151,7 @@ pathways_1 <- description_raw %>%
            into = c("pathway_type", "description"),
            sep = ":") %>% 
   separate(col = "description",
-           into = c("pathways_level1", "pathways_level2"),
+           into = c("pathway_level1", "pathway_level2"),
            sep = "_",
            extra = "merge")
 
@@ -161,11 +161,19 @@ pathways_2 <- description_raw %>%
                      "pathway of introduction")) %>% 
   mutate(pathway_type = NA_character_) %>% 
   separate(col = "description",
-           into = c("pathways_level1", "pathways_level2"),
+           into = c("pathway_level1", "pathway_level2"),
            sep = "_",
            extra = "merge")
 
-pathways <- rbind(pathways_1, pathways_2)
+pathways <- rbind(pathways_1, pathways_2) %>% 
+  distinct(nubKey, pathway_level1, pathway_level2)
+
+#### Speciesprofiles ####
+speciesprofile <- speciesprofile_raw %>% 
+  rename(marine = isMarine,
+         freshwater = isFreshwater,
+         terrestrial = isTerrestrial) %>% 
+  distinct(nubKey, marine, freshwater, terrestrial, habitat, source)
 
 # Combine base with additional data ####
 ## read template ####
