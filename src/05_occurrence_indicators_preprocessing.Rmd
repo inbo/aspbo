@@ -649,6 +649,8 @@ Save `df_ts` as it will be used as start point of modelling pipelines:
 ```{r connect to bucket, eval=FALSE}
 source("./src/connect_to_bucket.R")
 connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
+
+Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
 ```
 
 
@@ -658,7 +660,6 @@ aws.s3::s3save(df_ts,
                object = "df_timeseries.Rdata", 
                bucket = Sys.getenv("UAT_bucket"), 
   opts = list(show_progress = TRUE,
-              region = "eu-west-1",
               multipart = TRUE))
 ```
 
@@ -670,7 +671,7 @@ output: full_timeseries.RData
 alienSpecies::createTimeseries(
   # read grid.RData from bucket
   shapeData = loadShapeData("grid.RData")$utm1_bel_with_regions, 
-  bucket = bucket
+  bucket = Sys.getenv("UAT_bucket")
 )
 ```
 
