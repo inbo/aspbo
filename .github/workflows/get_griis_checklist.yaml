@@ -46,6 +46,8 @@ jobs:
           sudo apt-get install libcurl4-openssl-dev
           sudo apt-get install libgdal-dev libproj-dev
           sudo apt install libudunits2-dev
+          sudo apt install libharfbuzz-dev
+          sudo apt install libfribidi-dev
 
       - name: Install R packages
         run: |
