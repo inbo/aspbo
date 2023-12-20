@@ -42,6 +42,6 @@ vignettes/*.pdf
 .Renviron
 
 # too large files
-*.zip
+/*.zip
 data/output/UAT_processing/full_timeseries.csv
 data/output/UAT_processing/df_timeseries.tsv
