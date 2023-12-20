@@ -123,7 +123,8 @@ We read input data based on [Global Register of Introduced and Invasive Species 
 ```{r unified_checklist_tidy_df}
 data_file <- here::here(
   "data",
-  "interim",
+  "output",
+  "UAT_processing",
   "data_input_checklist_indicators.tsv"
 )
 taxa_df <-
