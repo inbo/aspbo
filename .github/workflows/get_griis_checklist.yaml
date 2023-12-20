@@ -1,9 +1,6 @@
 on:
-  push: 
-    branches:
-     - uat
-    paths: 
-     - data/input/GRIIS/**
+  schedule: 
+   - cron: '0 0 1 1-12 *'
   workflow_dispatch:
   
 name: get_griis
