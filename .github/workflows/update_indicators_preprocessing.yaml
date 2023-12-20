@@ -1,5 +1,10 @@
 on:
   workflow_dispatch:
+  push:
+    branches:
+     - 'uat'
+    paths: 
+     - 'data/output/UAT_processing/data_input_checklist_indicators.tsv'
     
 name: create full_timeseries.csv
 
