@@ -58,7 +58,8 @@ df <- read_csv(
     min_coord_uncertainty = col_double()
   ),
   na = ""
-)
+) %>% 
+  write_csv("./data/output/UAT_processing/be_alientaxa_cube.csv")
 ```
 
 Nota: these data have been also published on [Zenodo](https://doi.org/10.5281/zenodo.3632749).
