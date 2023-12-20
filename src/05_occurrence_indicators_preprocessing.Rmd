@@ -670,7 +670,7 @@ output: full_timeseries.RData
 ```{r}
 alienSpecies::createTimeseries(
   # read grid.RData from bucket
-  shapeData = loadShapeData("grid.RData")$utm1_bel_with_regions, 
+  shapeData = alienSpecies::loadShapeData("grid.RData")$utm1_bel_with_regions, 
   bucket = Sys.getenv("UAT_bucket")
 )
 ```
