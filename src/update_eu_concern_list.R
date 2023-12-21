@@ -4,6 +4,7 @@ library(magrittr)
 library(dplyr)
 library(aws.s3)
 library(rgbif)
+library(alienSpecies)
 
 # connect to bucket ####
 source("./src/connect_to_bucket.R")
@@ -11,10 +12,9 @@ source("./src/connect_to_bucket.R")
 UAT_filelist <- connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
 
 # get files ####
-eu_concern_list_old <- read_delim(rawToChar(get_object(bucket = Sys.getenv("UAT_bucket"),
-                                  region = "eu-west-1",
-                                  object = "eu_concern_species.tsv",
-                                  as = "raw")), delim = "\t") 
+eu_concern_list_old <- loadTabularData(type = "unionlist") %>% 
+  rename(checklist_scientificName = scientificName,
+         backbone_taxonKey = taxonKey) 
 
 eu_concern_list_new <- name_usage(datasetKey = "79d65658-526c-4c78-9d24-1870d67f8439",
                                   limit = 1000)
