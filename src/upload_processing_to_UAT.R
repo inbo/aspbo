@@ -20,7 +20,7 @@ processingFilePath <- "./data/output/UAT_processing"
 # connect to bucket ####
 source("./src/connect_to_bucket.R")
 
-bucket <- Sys.getenv("UAT_bucket")
+bucket <- Sys.getenv("S3_BUCKET")
 Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
 
 connect_to_bucket(bucket)

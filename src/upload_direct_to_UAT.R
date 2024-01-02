@@ -22,11 +22,11 @@ directFilePath <- "./data/output/UAT_direct"
 
 # test S3_bucket ####
 print("test S3_bucket")
-if(Sys.getenv("S3_bucket") == ""){
+if(Sys.getenv("S3_BUCKET") == ""){
   stop("S3_bucket is not provided")
 }
 
-bucket <-  paste0("s3://",Sys.getenv("S3_bucket"))
+bucket <-  paste0("s3://",Sys.getenv("S3_BUCKET"))
 #  bucket <- config::get("bucket", file = system.file("config.yml", package = "alienSpecies"))
 
 print("get_bucket_df")
