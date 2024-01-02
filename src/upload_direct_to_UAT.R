@@ -17,8 +17,14 @@ directFilePath <- "./data/output/UAT_direct"
 # run this code when you run this script locally
 # print("source connect_to_bucket.R")
 # source("./src/connect_to_bucket.R")
-
+# connect_to_bucket(Sys.getenv("UAT_BUCKET"))
 # get feedback ####
+
+# test S3_bucket ####
+print("test S3_bucket")
+if(Sys.getenv("S3_bucket") == ""){
+  stop("S3_bucket is not provided")
+}
 
 bucket <-  paste0("s3://",Sys.getenv("S3_bucket"))
 #  bucket <- config::get("bucket", file = system.file("config.yml", package = "alienSpecies"))
