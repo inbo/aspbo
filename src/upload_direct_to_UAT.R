@@ -17,7 +17,7 @@ source("./src/connect_to_bucket.R")
 
 # get feedback ####
 
-bucket <-  Sys.getenv("UAT_bucket")
+bucket <-  Sys.getenv("S3_bucket")
 #  bucket <- config::get("bucket", file = system.file("config.yml", package = "alienSpecies"))
 
 bucket_df <- get_bucket_df(bucket, region = "eu-west-1") 
