@@ -20,7 +20,7 @@ directFilePath <- "./data/output/UAT_direct"
 
 # get feedback ####
 
-bucket <-  Sys.getenv("S3_bucket")
+bucket <-  paste0("s3://",Sys.getenv("S3_bucket"))
 #  bucket <- config::get("bucket", file = system.file("config.yml", package = "alienSpecies"))
 
 print("get_bucket_df")
