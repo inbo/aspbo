@@ -14,8 +14,9 @@ library(testthat)
 directFilePath <- "./data/output/UAT_direct"
 
 # connect to bucket ####
-print("source connect_to_bucket.R")
-source("./src/connect_to_bucket.R")
+# run this code when you run this script locally
+# print("source connect_to_bucket.R")
+# source("./src/connect_to_bucket.R")
 
 # get feedback ####
 
