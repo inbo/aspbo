@@ -11,8 +11,8 @@ name: upload_files_direct
 jobs:
   upload_files:
     runs-on: ${{ matrix.config.os }}
-    environment:
-      name: ${{ github.event_name == 'push' && 'UAT' || 'PROD' }}
+    # environment:
+    #   name: ${{ github.event_name == 'push' && 'UAT' || 'PROD' }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
@@ -69,6 +69,7 @@ jobs:
 
       - name: Assume Role
         id: assume_role
+        environment: UAT
         run: |
           ROLE_ARN="${{ secrets.AWS_ROLE_ARN }}"
           TEMP_ROLE=$(aws sts assume-role \
@@ -82,6 +83,7 @@ jobs:
         run: |
           source("src/upload_direct_to_UAT.R")
         shell: Rscript {0}
+        environment: UAT
         env:
           AWS_ACCESS_KEY_ID: ${{ steps.assume_role.outputs.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ steps.assume_role.outputs.AWS_SECRET_ACCESS_KEY }}
