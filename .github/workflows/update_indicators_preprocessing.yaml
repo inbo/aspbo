@@ -11,8 +11,7 @@ name: create full_timeseries.csv
 jobs:
   fetch-data:
     runs-on: ${{ matrix.config.os }}
-    environment:
-      name: ${{ github.event_name == 'push' && 'UAT' || 'PROD' }}
+    environment: ${{ github.ref == 'refs/heads/uat' && 'UAT' || 'PROD' }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 

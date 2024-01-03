@@ -11,9 +11,7 @@ name: upload_files_processing
 jobs:
   upload_files:
     runs-on: ${{ matrix.config.os }}
-    environment:
-      name: ${{ github.event_name == 'push' && 'UAT' || 'PROD' }}
-
+    environment: ${{ github.ref == 'refs/heads/uat' && 'UAT' || 'PROD' }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
