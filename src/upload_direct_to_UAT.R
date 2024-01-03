@@ -7,19 +7,29 @@
 #' needed to access the bucket. 
 
 # Libraries ####
+print("libraries")
 library(aws.s3)
 library(testthat)
 
 directFilePath <- "./data/output/UAT_direct"
 
 # connect to bucket ####
-source("./src/connect_to_bucket.R")
-
+# run this code when you run this script locally
+# print("source connect_to_bucket.R")
+# source("./src/connect_to_bucket.R")
+# connect_to_bucket(Sys.getenv("UAT_BUCKET"))
 # get feedback ####
 
-bucket <-  Sys.getenv("S3_bucket")
+# test S3_bucket ####
+print("test S3_bucket")
+if(Sys.getenv("S3_BUCKET") == ""){
+  stop("S3_bucket is not provided")
+}
+
+bucket <-  paste0("s3://",Sys.getenv("S3_BUCKET"))
 #  bucket <- config::get("bucket", file = system.file("config.yml", package = "alienSpecies"))
 
+print("get_bucket_df")
 bucket_df <- get_bucket_df(bucket, region = "eu-west-1") 
 # test uploaded files ####
 # A placeholder for a alienSpecies function to test the files on the bucket.
@@ -27,7 +37,7 @@ bucket_df <- get_bucket_df(bucket, region = "eu-west-1")
 
 # files that are currently in management needs to be uploaded to the bucket
 directFiles <- c("Oxyura_jamaicensis.csv",  "Lithobates_catesbeianus.csv", "Ondatra_zibethicus.csv", "translations.csv")
-
+print("lapply put_object")
 lapply(directFiles, function(fileName){
   
   put_object(file.path(directFilePath, fileName),
