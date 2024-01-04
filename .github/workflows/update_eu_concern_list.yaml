@@ -66,7 +66,7 @@ jobs:
           echo "::set-output name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)"
           echo "::set-output name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)"
 
-      - name: download_griis_checklist
+      - name: update_eu_concern_list
         run: |
           source("src/update_eu_concern_list.R")
         shell: Rscript {0}
