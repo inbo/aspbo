@@ -49,7 +49,7 @@ We load occurrence data related to alien species in Belgium:
 
 ```{r read_data_cube, message = FALSE, warning = FALSE}
 df <- read_csv(
-  file = "https://zenodo.org/records/10058400/files/be_alientaxa_cube.csv?download=1",
+  file = "https://zenodo.org/records/10527772/files/be_alientaxa_cube.csv?download=1",
   col_types = cols(
     year = col_double(),
     eea_cell_code = col_character(),
@@ -86,7 +86,7 @@ We get occurrence data of non alien species grouped at class level, which will b
 
 ```{r get_data_baseline}
 df_bl <- read_csv(
-  file = "https://zenodo.org/records/10058400/files/be_classes_cube.csv?download=1",
+  file = "https://zenodo.org/records/10527772/files/be_classes_cube.csv?download=1",
   col_types = cols(
     year = col_double(),
     eea_cell_code = col_character(),
