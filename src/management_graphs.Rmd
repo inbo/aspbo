@@ -15,7 +15,7 @@ library(tidyverse)
 ```
 
 ```{r, include=FALSE}
-cleanData <- read_csv("./interim/Lithobates_catesbeianus_management_data.csv")
+cleanData <- read_csv("./data/output/UAT_direct/Lithobates_catesbeianus.csv")
 ```
 
 # GRAPH: Total number of bullfrogs caught
@@ -151,11 +151,11 @@ total_by_year_corrected_gem <- cleanData %>%
   ungroup()  %>% 
   st_as_sf() 
 
-grid <- read_sf("../alien-species-portal/alienSpecies/inst/extdata/grid/be_1km.shp") %>% 
+grid <- st_read("./data/output/UAT_processing/grid/utm1_bel_with_regions.gpkg") %>% 
   st_as_sf() %>% 
   st_transform(4326)
 
-spread <- read_sf("../alien-species-portal/alienSpecies/inst/extdata/be_alientaxa_cube.csv") %>% 
+spread <- read_csv("./data/output/UAT_processing/be_alientaxa_cube.csv") %>% 
   filter(taxonKey == "2427091") %>% 
   filter(year == as.character(jaar)) %>% 
   left_join(grid, by = c("eea_cell_code" = "CELLCODE")) %>% 

@@ -20,6 +20,9 @@
 # RStudio files
 .Rproj.user/
 
+# Architect project
+.project
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
@@ -37,5 +40,8 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
-data/interim/df_timeseries.tsv
-data/output/full_timeseries.csv
+
+# too large files
+/*.zip
+data/output/UAT_processing/full_timeseries.csv
+data/output/UAT_processing/df_timeseries.tsv

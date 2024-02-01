@@ -49,7 +49,7 @@ We load occurrence data related to alien species in Belgium:
 
 ```{r read_data_cube, message = FALSE, warning = FALSE}
 df <- read_csv(
-  file = "https://raw.githubusercontent.com/trias-project/occ-cube-alien/master/data/processed/be_alientaxa_cube.csv",
+  file = "https://zenodo.org/records/10527772/files/be_alientaxa_cube.csv?download=1",
   col_types = cols(
     year = col_double(),
     eea_cell_code = col_character(),
@@ -58,7 +58,8 @@ df <- read_csv(
     min_coord_uncertainty = col_double()
   ),
   na = ""
-)
+) %>% 
+  write_csv("./data/output/UAT_processing/be_alientaxa_cube.csv")
 ```
 
 Nota: these data have been also published on [Zenodo](https://doi.org/10.5281/zenodo.3632749).
@@ -85,7 +86,7 @@ We get occurrence data of non alien species grouped at class level, which will b
 
 ```{r get_data_baseline}
 df_bl <- read_csv(
-  file = "https://raw.githubusercontent.com/trias-project/occ-cube-alien/master/data/processed/be_classes_cube.csv",
+  file = "https://zenodo.org/records/10527772/files/be_classes_cube.csv?download=1",
   col_types = cols(
     year = col_double(),
     eea_cell_code = col_character(),
@@ -122,13 +123,14 @@ We read input data based on [Global Register of Introduced and Invasive Species 
 ```{r unified_checklist_tidy_df}
 data_file <- here::here(
   "data",
-  "interim",
+  "output",
+  "UAT_processing",
   "data_input_checklist_indicators.tsv"
 )
 taxa_df <-
   read_tsv(data_file,
-    na = "",
-    guess_max = 5000
+           na = "",
+           guess_max = 5000
   )
 taxa_df <-
   taxa_df %>%
@@ -309,10 +311,10 @@ df_xy <-
   bind_cols(
     tibble(
       x = unlist(str_extract_all(unique(df$eea_cell_code),
-        pattern = "(?<=E)\\d+"
+                                 pattern = "(?<=E)\\d+"
       )),
       y = unlist(str_extract_all(unique(df$eea_cell_code),
-        pattern = "(?<=N)\\d+"
+                                 pattern = "(?<=N)\\d+"
       ))
     ) %>%
       mutate_all(as.integer)
@@ -327,6 +329,20 @@ df_xy %>% head()
 
 Do the same for baseline data:
 
+```{r remove corrupted eea_cell_code}
+df_bl <- df_bl %>% 
+  mutate(cellcode_length = nchar(eea_cell_code))
+
+table(df_bl$cellcode_length, useNA = "ifany")
+
+corrupt_bl_eea_cell_codes <- df_bl %>% 
+  filter(cellcode_length != 13) %>% 
+  write_csv("./data/interim/corrupt_bl_eea_cell_codes.csv")
+
+df_bl <- df_bl %>% 
+  filter(cellcode_length == 13)
+```
+
 ```{r extract_x_y_baseline}
 df_bl_xy <-
   df_bl %>%
@@ -334,10 +350,10 @@ df_bl_xy <-
   bind_cols(
     tibble(
       x = unlist(str_extract_all(unique(df_bl$eea_cell_code),
-        pattern = "(?<=E)\\d+"
+                                 pattern = "(?<=E)\\d+"
       )),
       y = unlist(str_extract_all(unique(df_bl$eea_cell_code),
-        pattern = "(?<=N)\\d+"
+                                 pattern = "(?<=N)\\d+"
       ))
     ) %>%
       mutate_all(as.integer)
@@ -363,10 +379,10 @@ recent_alien_species <-
   filter(first_observed >= year_of_introduction | is.na(first_observed)) %>%
   # remove duplicates due to other columns as pathways
   distinct(nubKey, first_observed, last_observed) %>%
-
+  
   # get classkey info and filter out taxa without data
   inner_join(spec_names, by = c("nubKey" = "taxonKey")) %>%
-
+  
   distinct(
     taxonKey = nubKey,
     .data$canonicalName,
@@ -392,8 +408,8 @@ old_introductions_taxa <-
   taxa_df %>%
   filter(first_observed < year_of_introduction) %>%
   anti_join(recent_alien_species %>%
-    select(taxonKey),
-  by = c("nubKey" = "taxonKey")
+              select(taxonKey),
+            by = c("nubKey" = "taxonKey")
   ) %>%
   distinct(
     nubKey,
@@ -418,16 +434,16 @@ We save them in file `taxa_introduced_in_BE_before_1950.tsv` in  `data/output`:
 
 ```{r save_old_introduced_taxa_as_tsv_file}
 write_tsv(old_introductions_taxa,
-  here::here(
-    "data",
-    "output",
-    paste0(
-      "taxa_introduced_in_BE_before_",
-      year_of_introduction,
-      ".tsv"
-    )
-  ),
-  na = ""
+          here::here(
+            "data",
+            "output",
+            paste0(
+              "taxa_introduced_in_BE_before_",
+              year_of_introduction,
+              ".tsv"
+            )
+          ),
+          na = ""
 )
 ```
 
@@ -477,7 +493,7 @@ We add whether the grid cell intersects any of the Natura2000 Belgian protected 
 df <-
   df %>%
   left_join(df_prot_areas,
-    by = c("eea_cell_code" = "CELLCODE")
+            by = c("eea_cell_code" = "CELLCODE")
   )
 ```
 
@@ -493,7 +509,7 @@ We do the same for baseline data:
 df_bl <-
   df_bl %>%
   left_join(df_prot_areas,
-    by = c("eea_cell_code" = "CELLCODE")
+            by = c("eea_cell_code" = "CELLCODE")
   )
 ```
 
@@ -546,7 +562,7 @@ make_time_series <- function(eea_cell_code, taxonKey, begin_year, last_year ) {
   expand_grid(eea_cell_code = eea_cell_code,
               taxonKey = taxonKey,
               year = seq(from = begin_year, to = last_year))
-
+  
 }
 
 # create timeseries slots
@@ -632,16 +648,45 @@ df_ts <-
 
 Save `df_ts` as it will be used as start point of modelling pipelines:
 
+```{r set creds}
+Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
+
+if(Sys.getenv("S3_BUCKET") != ""){
+  UAT_bucket <- Sys.getenv("S3_BUCKET")
+}else{
+  UAT_bucket <- Sys.getenv("UAT_bucket")
+}
+```
+
+```{r connect to bucket, eval=FALSE}
+source("./src/connect_to_bucket.R")
+connect_to_bucket(bucket_name = UAT_bucket)
+```
+
 ```{r save_data_as_tsv}
-write_tsv(df_ts, 
-          file = here::here("data", "interim", "df_timeseries.tsv"), 
-          na = ""
+# upload data to S3 bucket
+aws.s3::s3save(df_ts, 
+               object = "df_timeseries.Rdata", 
+               bucket = UAT_bucket, 
+  opts = list(show_progress = TRUE,
+              multipart = TRUE))
+```
+
+Create time series data
+input:  "df_timeseries.RData" and "grid.RData" from bucket
+output: full_timeseries.RData
+
+```{r}
+alienSpecies::createTimeseries(
+  # read grid.RData from bucket
+  shapeData = alienSpecies::loadShapeData("grid.RData")$utm1_bel_with_regions, 
+  bucket = UAT_bucket
 )
 ```
 
 We save also the taxonomic information:
 
-```{r save_spec_names}
+```{r save_spec_names, eval = FALSE}
 write_tsv(spec_names,
           path = here::here("data", 
                             "interim", 

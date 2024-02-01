@@ -1,0 +1,89 @@
+on:
+  push:
+    branches:
+      - uat
+    paths:
+      - data/output/UAT_direct/**
+  workflow_dispatch:
+
+name: upload_files_direct
+
+jobs:
+  upload_files:
+    runs-on: ${{ matrix.config.os }}
+    environment: ${{ github.ref == 'refs/heads/uat' && 'UAT' || 'PROD' }}
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      USERNAME: ${{ secrets.USERNAME }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt install libsodium-dev
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libgdal-dev libproj-dev
+          sudo apt install libudunits2-dev
+          sudo apt install --yes libharfbuzz-dev libfribidi-dev
+          R --no-save -e 'install.packages("devtools")'
+          R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
+          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
+                         subdir = "alienSpecies", force = TRUE)'
+
+      - name: Install R packages
+        run: |
+          source("src/install_packages_upload_files.R")
+        shell: Rscript {0}
+
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Assume Role
+        id: assume_role
+        run: |
+          ROLE_ARN="${{ secrets.AWS_ROLE_ARN }}"
+          TEMP_ROLE=$(aws sts assume-role \
+            --role-arn $ROLE_ARN \
+            --role-session-name inbo-deployment)
+          echo "::set-output name=AWS_ACCESS_KEY_ID::$(echo $TEMP_ROLE | jq -r .Credentials.AccessKeyId)"
+          echo "::set-output name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)"
+          echo "::set-output name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)"
+
+      - name: upload files
+        run: |
+          source("src/upload_direct_to_UAT.R")
+        shell: Rscript {0}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.assume_role.outputs.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.assume_role.outputs.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ steps.assume_role.outputs.AWS_SESSION_TOKEN }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          
