@@ -28,6 +28,6 @@ iasset_clean <- iasset_raw %>%
   select(-naam, 
          -telefoon,
          -e_mailadres) %>% 
-  write_csv2("./data/interim/Vespa-Watch_iasset.csv")
+  write_csv2("./data/input/Vespa-Watch_iasset.csv")
 ```
 
