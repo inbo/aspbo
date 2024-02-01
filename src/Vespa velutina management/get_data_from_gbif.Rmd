@@ -8,41 +8,16 @@ output: html_document
 ```{r libraries}
 library(rgbif)
 library(dplyr)
-library(httr)
-library(ows4R)
 library(sf)
 ```
 
-```{r get flanders wfs, eval=FALSE}
-wfs_regions <- "https://eservices.minfin.fgov.be/arcgis/services/R2C/Regions/MapServer/WFSServer"
-
-regions_client <- WFSClient$new(wfs_regions,
-                                serviceVersion = "2.0.0")
-
-regions_client$getFeatureTypes(pretty = TRUE)
-
-url <- parse_url(wfs_regions)
-url$query <- list(service = "wfs",
-                  request = "GetFeature",
-                  typename = "Regions",
-                  srsName = "EPSG:4326")
-
-request <- build_url(url)
-
-regions <- read_sf(request)
-
-vla <- regions %>% 
-  filter(AdReKey == 2000) %>% 
-  st_as_sfc() %>% 
-  st_make_valid() %>% 
-  st_simplify(dTolerance = 0.01) %>% 
-  st_as_text()
-```
+get the polygon of flanders and convert it into a wkt, this will be used to
+limit the rgbif query to flanders.
 
 ```{r get flanders geojson}
 sf_use_s2(TRUE)
 
-vla <- st_read("~/GitHub/vespaR/Input/Spatial/flanders_wgs84.geojson") %>% 
+vla <- st_read("./data/spatial/flanders_wgs84.geojson") %>% 
   st_transform(4326) %>% 
   st_simplify(dTolerance = 10) %>% 
   st_as_sfc() %>% 
@@ -59,7 +34,8 @@ Waarnemingen.be - Non-native animal occurrences in Flanders and the Brussels Cap
 iNaturalist Research-grade Observations: https://www.gbif.org/dataset/50c9509d-22c7-4a22-a47d-8c48425ef4a7
 
 ```{r download data from gbif}
-datasetkeys <- c("9a0b66df-7535-4f28-9f4e-5bc11b8b096c", "50c9509d-22c7-4a22-a47d-8c48425ef4a7")
+datasetkeys <- c("9a0b66df-7535-4f28-9f4e-5bc11b8b096c", 
+                 "50c9509d-22c7-4a22-a47d-8c48425ef4a7")
 
 taxonkeys <- c(1311477)
 
@@ -68,7 +44,7 @@ gbif_downloadKey <- occ_download(pred_in("datasetKey", datasetkeys),
                                  pred_within(vla),
                                  user = Sys.getenv("gbif_user"),
                                  pwd = Sys.getenv("gbif_pwd"),
-                                 email = Sys.getenv("gsheet_email"),
+                                 email = Sys.getenv("email"),
                                  curlopts = list(verbose = TRUE,
                                                  http_version = 2,
                                                  forbid_reuse = TRUE))
@@ -85,14 +61,8 @@ gbif_download <- occ_download_get(gbif_downloadKey,
                                                   http_version = 2,
                                                   forbid_reuse = TRUE))
 
-rawdata <- occ_download_import(x = gbif_download)
-```
-
-```{r}
-if(grepl(pattern = "/GitHub/vespaR/Scripts/VespaWatch_app", getwd())){
-  #working directory is in wrong folder
-  setwd("~/GitHub/vespaR/")
-}
+rawdata <- occ_download_import(x = gbif_download) %>% 
+  write_csv2("./data/input/Vespa-Watch_gbif.csv")
 ```
 
 ```{r data manipulation}
