@@ -294,35 +294,8 @@ aantal_nesten_tot_vandaag <- aantal_nesten_tot_vandaag_all %>%
 write_csv(aantal_nesten_tot_vandaag, "~/GitHub/VespaR/Scripts/VespaWatch_app/data/aantal_nesten_tot_vandaag.csv")
 ```
 
-```{r calculate actieve haarden}
-source("~/GitHub/VespaR/Scripts/VespaWatch_app/scripts/bereken_actieve_haarden.r")
-
+```{r data prep gbif}
 nesten <- data_nest_final %>% 
-  dplyr::filter(year == year(Sys.Date())) %>% 
-  mutate(type = "Nest",
-         popup = paste0("Vespawatch rij ", id),
-         institutionCode = "Vespawatch")
-
-ah_list <- bereken_actieve_haarden(gbif_data = points,
-                                   beheer_data = nesten)
-
-outputs <- c("actieve_haarden", "onbehandelde_nesten", "beheerde_nesten")
-
-for(o in outputs){
-  export_fn <- paste0("./Scripts/VespaWatch_app/data/", o, ".geojson")
-  
-  if(file.exists(export_fn)){
-    file.remove(export_fn)
-  }
-  
-  st_write(ah_list[[o]],
-           export_fn,
-           append = FALSE)
-}
-```
-
-```{r data manipulation}
-nesten <- st_read("./Scripts/VespaWatch_app/data/nesten.geojson") %>% 
   filter(!is.na(inaturalist_id))
 
 test <- n_distinct(nesten$inaturalist_id)
@@ -381,3 +354,31 @@ file.remove("./Scripts/VespaWatch_app/data/points.geojson")
 st_write(cleandata, "./Scripts/VespaWatch_app/data/points.geojson",
          append = FALSE)
 ```
+
+```{r calculate actieve haarden}
+source("~/GitHub/VespaR/Scripts/VespaWatch_app/scripts/bereken_actieve_haarden.r")
+
+nesten <- data_nest_final %>% 
+  dplyr::filter(year == year(Sys.Date())) %>% 
+  mutate(type = "Nest",
+         popup = paste0("Vespawatch rij ", id),
+         institutionCode = "Vespawatch")
+
+ah_list <- bereken_actieve_haarden(gbif_data = points,
+                                   beheer_data = nesten)
+
+outputs <- c("actieve_haarden", "onbehandelde_nesten", "beheerde_nesten")
+
+for(o in outputs){
+  export_fn <- paste0("./Scripts/VespaWatch_app/data/", o, ".geojson")
+  
+  if(file.exists(export_fn)){
+    file.remove(export_fn)
+  }
+  
+  st_write(ah_list[[o]],
+           export_fn,
+           append = FALSE)
+}
+```
+
