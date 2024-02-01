@@ -24,10 +24,6 @@ email <- Sys.getenv("gsheet_email")
 gs4_auth(email)
 ```
 
-```{r get data from gbif}
-source(file = "~/GitHub/vespaR/Scripts/preprocessing/run_get_data_from_gbif.r")
-```
-
 ```{r read data}
 # Vespawatch nesten van voor iasset
 data_nest_gs_raw <- read_sheet("1AGgMQvJUfQGaKP02jFo-MRP4SKWhq3Cbc2_nmZUcgnw",
@@ -35,14 +31,13 @@ data_nest_gs_raw <- read_sheet("1AGgMQvJUfQGaKP02jFo-MRP4SKWhq3Cbc2_nmZUcgnw",
                                col_types = "c")
 
 # Vespawatch nesten van iasset
-data_nest_iasset_raw <- read_excel("~/GitHub/VespaR/Input/Vespa-Watch_iasset.xlsx")
+data_nest_iasset_raw <- read_csv2("./data/input/Vespa-Watch_iasset.csv")
+
+# Gbif nesten en individuen data 
+data_gbif_raw <- read_csv2("./data/input/Vespa-Watch_gbif.csv")
 
 # Provincies
-prov <- st_read("~/GitHub/VespaR/Input/Spatial/Provincies.geojson")
-
-# Observaties van gbif van dit jaar
-points <- st_read("~/GitHub/vespaR/Scripts/VespaWatch_app/data/points.geojson") %>% 
-  dplyr::filter(year == year(Sys.Date()))
+prov <- st_read("./data/output/UAT_processing/provincies.geojson")
 ```
 
 ```{r data prep gs}
