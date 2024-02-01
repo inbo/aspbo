@@ -326,3 +326,63 @@ for(o in outputs){
 }
 ```
 
+```{r data manipulation}
+nesten <- st_read("./Scripts/VespaWatch_app/data/nesten.geojson") %>% 
+  filter(!is.na(inaturalist_id))
+
+test <- n_distinct(nesten$inaturalist_id)
+
+interimdata <- rawdata %>% 
+  filter(grepl("approved", identificationVerificationStatus) | identificationVerificationStatus == "" & institutionCode == "iNaturalist") %>% 
+  mutate(type = case_when(grepl(pattern = "found as nest", occurrenceRemarks) & collectionCode == "waarnemingen.be" ~ "Nest", #gevalideerde nesten in Waarnemingen.be
+                          institutionCode == "iNaturalist" & 
+                            catalogNumber %in% nesten$inaturalist_id ~ "Nest", # gevalideerde nesten in iNaturlist door Vespa-Watch
+                          grepl(pattern = "nest", occurrenceRemarks) ~ "Unc.Nest", #mogelijke nesten in Waarnemingen.be
+                          TRUE ~ "Individu"),
+         institutionCode2 = case_when(rightsHolder == "Vespa-Watch" ~ 
+                                        paste0("Vespa-Watch via ", institutionCode),
+                                      TRUE ~ institutionCode))
+
+table(interimdata$institutionCode, interimdata$institutionCode2)
+table(interimdata$type, useNA = "ifany")
+
+file.remove("./Output/nesten_to_check.geojson")
+
+interimdata %>% 
+  filter(type == "Unc.Nest") %>% 
+  st_as_sf(coords = c("decimalLatitude", "decimalLongitude")) %>% 
+  st_write("./Output/nesten_to_check.geojson",
+           append = FALSE)
+
+#ook handig om als csv te hebben om te laten checken
+interimdata %>% 
+  filter(type == "Unc.Nest") %>%
+  st_drop_geometry() %>% 
+  write_csv('onzekere_nesten_Waarnemingen.csv')
+
+interimdata %>%
+  filter(type == "Nest" & collectionCode == "waarnemingen.be") %>%
+  st_drop_geometry() %>% 
+  write_csv('zekere_nesten_Waarnemingen.csv')
+
+cleandata <- interimdata %>% 
+  mutate(type = case_when(type == "Unc.Nest" ~ "Individu",
+                          TRUE ~ type)) %>% # Een onzeker nest bestaat in de meeste gevallen uit minstens één individu!
+  group_by(eventDate, year, type, decimalLatitude, 
+           decimalLongitude, level1Name, level2Name, level3Name, institutionCode) %>% #reduce duplicates 
+  summarise(popup = paste0(paste("<a href=", references, ">", 
+                                 institutionCode2, "</a>", collapse = ",<br>")),
+            inaturalist_ids = case_when(institutionCode == "iNaturalist" ~ paste(catalogNumber, collapse = ","),
+                                        TRUE ~ NA),
+            gbif_ids = paste(gbifID, collapse = ",")) %>% 
+  select(eventDate, year, type, decimalLatitude, 
+         decimalLongitude, level1Name, level2Name, 
+         level3Name, popup, inaturalist_ids, gbif_ids, institutionCode) %>% 
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+```
+
+```{r export}
+file.remove("./Scripts/VespaWatch_app/data/points.geojson")
+st_write(cleandata, "./Scripts/VespaWatch_app/data/points.geojson",
+         append = FALSE)
+```
