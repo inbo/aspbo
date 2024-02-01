@@ -64,6 +64,3 @@ gbif_download <- occ_download_get(gbif_downloadKey,
 rawdata <- occ_download_import(x = gbif_download) %>% 
   write_csv2("./data/input/Vespa-Watch_gbif.csv")
 ```
-
-
-

@@ -10,6 +10,7 @@ library(knitr)
 
 # create temporary R file
 tempR <- tempfile(fileext = ".R")
-knitr::purl("~/GitHub/VespaR/Scripts/preprocessing/get_data_from_gbif.Rmd", output=tempR)
+knitr::purl("./src/Vespa velutina management/get_data_from_iAsset.Rmd", 
+            output = tempR)
 source(tempR)
 unlink(tempR)
