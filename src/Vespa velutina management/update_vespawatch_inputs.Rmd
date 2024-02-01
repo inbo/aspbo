@@ -1,0 +1,328 @@
+Om dit script te laten lopen moet je een .renviron bestand aanmaken met de 
+volgende regels:
+
+gsheet_email = "<je email adres>"
+gbif_user = "<je gbif username>"
+gbif_pwd = "<je gbif password>"
+
+Dit bestand deel je met niemand!
+
+```{r libraries}
+library(sf)
+library(googlesheets4)
+library(readxl)
+library(tidyverse)
+```
+
+```{r conflicted packages}
+conflicted::conflicts_prefer(dplyr::filter)
+```
+
+```{r auth}
+email <- Sys.getenv("gsheet_email")
+
+gs4_auth(email)
+```
+
+```{r get data from gbif}
+source(file = "~/GitHub/vespaR/Scripts/preprocessing/run_get_data_from_gbif.r")
+```
+
+```{r read data}
+# Vespawatch nesten van voor iasset
+data_nest_gs_raw <- read_sheet("1AGgMQvJUfQGaKP02jFo-MRP4SKWhq3Cbc2_nmZUcgnw",
+                               sheet = "curated: nests_20230116",
+                               col_types = "c")
+
+# Vespawatch nesten van iasset
+data_nest_iasset_raw <- read_excel("~/GitHub/VespaR/Input/Vespa-Watch_iasset.xlsx")
+
+# Provincies
+prov <- st_read("~/GitHub/VespaR/Input/Spatial/Provincies.geojson")
+
+# Observaties van gbif van dit jaar
+points <- st_read("~/GitHub/vespaR/Scripts/VespaWatch_app/data/points.geojson") %>% 
+  dplyr::filter(year == year(Sys.Date()))
+```
+
+```{r data prep gs}
+#prepare raw data DB dump nests
+dataset_1 <- data_nest_gs_raw %>% 
+  mutate(result = case_when(result == "ST" ~ "succesvol",
+                            result == "UT" ~ "niet succesvol",
+                            result == "UN" ~ "niet behandeld",
+                            result == "un" ~ "niet behandeld",
+                            TRUE ~ "onbekend"),
+         year = year(as.Date(observation_time)),
+         site = case_when(is.na(site) ~ "ongekend",
+            site == "I" ~ "binnen, in gebouw of constructie",
+            site == "O_NC_B" ~ "buiten, onbedekt op gebouw",
+            site == "O_NC_T" ~ "buiten, onbedekt op boom of struik",
+            site == "O_C_C" ~ "buiten, overdekt door constructie",
+            site == "O_N_C" ~ "buiten, natuurlijk overdekt",
+            site =="UK" ~ "ongekend",
+            site == "NA" ~ "ongekend",
+            site == "NULL" ~ "ongekend"))
+
+#alleen VV
+dataset_1_vv <- dataset_1 %>% filter(expert_vv_confirmed=="TRUE" |
+                                     expert_vv_confirmed=="True" |
+                                     inat_vv_confirmed=="TRUE"|
+                                     inat_vv_confirmed=="True"|
+                                     expert_vv_confirmed=="WAAR"|
+                                     expert_vv_confirmed=="waar")
+
+#geen duplicaten
+dataset_1_vv_u <- dataset_1_vv %>%filter(is.na(nest_reported_before)|
+                                         nest_reported_before=="NULL"|
+                                         nest_reported_before=="False"|
+                                         nest_reported_before=="FALSE")
+
+#remove rows with empty coordinates
+dataset_1_vv_u <- dataset_1_vv_u %>%
+  drop_na(all_of(c('longitude', 'latitude')))
+
+nesten <- st_as_sf(dataset_1_vv_u, coords=c('longitude', 'latitude'), crs=4326)
+
+data_nest_gs <- st_intersection(nesten, prov) %>% 
+  dplyr::select(-observer_phone,
+                -name,
+                -observer_name,
+                -observer_email,
+                -person_name,
+                -user_id)
+```
+
+```{r data prep iasset}
+# Map data content
+data_nest_iasset <- data_nest_iasset_raw %>% 
+  rename(geometry = contains("Coördinaten")) %>% 
+  mutate(datum = as.Date(`Datum observatie`)) %>% 
+  filter(Gevalideerd == "ja",
+         grepl(x = Nesttype, pattern = "AH"),
+         Duplicaat == "nee",
+         !is.na(geometry),
+         Nesttype != "AH - potentieel nest (meer info nodig)") %>% 
+  st_as_sf(wkt = "geometry",
+           crs = 4326) %>% 
+  mutate(result = case_when(Resultaat == "succesvol behandeld" ~ "succesvol",
+                            Resultaat == "niet succesvol behandeld" ~ "niet succesvol",
+                            Resultaat == "niet behandeld" ~ "niet behandeld",
+                            Beheerd == "ja" ~ "succesvol",
+                            (Beheerd == "nee") & (`Bestrijding gestart` == "nee") ~ "niet behandeld",
+                            (Beheerd == "onbekend") & (`Bestrijding gestart` == "nee") ~ "onbekend",
+                            Resultaat == "onbekend" ~ "onbekend",
+                            TRUE ~ NA_character_),
+         Nesttype = case_when(Nesttype == "AH - actief embryonaal nest" ~ "AE",
+                               Nesttype == "AH - actief primair nest" ~ "AP",
+                               Nesttype == "AH - actief secundair nest" ~ "AS",
+                               Nesttype == "AH - inactief/leeg nest" ~ "IE",
+                               Nesttype == "AH - potentieel nest (meer info nodig)" ~ "UK",
+                               TRUE ~ "UK"),
+         aftercare = Nazorg,
+         year = year(`Datum observatie`))%>%
+  mutate_at(c('Nestplaats'), ~replace_na(.,"ongekend"))
+
+#Intersect with province
+data_nest_iasset <- st_intersection(data_nest_iasset, prov)
+
+#vaak zijn coördinaten in iAsset fout, het veld 'provincie' in iAsset is toegewezen op basis van veld adres. Enkel indien 'provincie' leeg, wordt provincie best afgeleid uit coördinaten. Er zijn ook een aantal meldingen met provincie ('ongekend'), van deze weten we het juiste adres niet en zijn de coördinaten de default coördinaten (dus niet correct).
+if("provincie" %in% colnames(data_nest_iasset)){
+  data_nest_iasset <- data_nest_iasset %>% 
+    mutate(provincie = coalesce(provincie,NAAM))
+}else{
+  data_nest_iasset <- data_nest_iasset %>% 
+    mutate(provincie = NAAM)
+}
+
+
+class(data_nest_iasset)
+
+#Select needed columns
+data_nest_iasset <- data_nest_iasset %>% 
+  mutate(originates_in_vespawatch = "iAsset",
+         inaturalist_link = NA_character_,
+         inaturalist_id = NA_character_,
+         inaturalist_species = NA_character_,
+         expert_vv_confirmed = "True",
+         vv_confirmed = "True",
+         taxon_id = NA_character_,
+         inat_vv_confirmed = NA_character_,
+         municipality = NA_character_) %>% 
+  ungroup() %>% 
+  dplyr::select(id = ID,
+                image_1 = Foto.nest.1,
+                image_2 = Foto.nest.2,
+                image_3 = Foto.nest.3,
+                originates_in_vespawatch,
+                observation_time = Datum.observatie,
+                comments = Opmerkingen,
+                inaturalist_link,
+                inaturalist_id,
+                inaturalist_species,
+                size = Nestgrootte,
+                height = Nesthoogte,
+                duplicate_of_id = Duplicaat,
+                taxon_id,
+                created_at = Datum.tijd.registratie,
+                inat_vv_confirmed,
+                expert_vv_confirmed,
+                vv_confirmed,
+                municipality,
+                action_time = Datum.en.tijd.bestrijding,
+                duration = Tijd.ter.plaatse,
+                comments.2 = Bestrijding.opmerking,
+                site = Nestplaats,
+                nest_type = Nesttype,
+                aftercare,
+                product = Product,
+                method = Methode,
+                result,
+                nest_reported_before = Duplicaat,
+                file_number_nest_removal = Dossiernummer.verdelging,
+                year,
+                OIDN,
+                UIDN,
+                VERSDATUM,
+                TERRID,
+                NAAM,
+                NISCODE,
+                NUTS2,
+                LENGTE,
+                OPPERVL,
+                geometry
+                )
+
+st_write(data_nest_iasset, "./Interim/data_nest_iasset.geojson",
+         append = FALSE)
+```
+
+```{r test spatial, eval = FALSE}
+data_nest_iasset %>% 
+  leaflet::leaflet() %>% 
+  leaflet::addTiles() %>% 
+  leaflet::addCircles()
+```
+
+```{r combine nesten dfs}
+colnames_x <- data.frame(col = 1:ncol(data_nest_gs))
+colnames_x$col_x <- colnames(data_nest_gs)
+
+colnames_y <- data.frame(col = 1:ncol(data_nest_iasset))
+colnames_y$col_y <- colnames(data_nest_iasset)
+
+colnames_test <- colnames_x %>% 
+  full_join(colnames_y)
+
+data_nest_final <- rbind(data_nest_gs, data_nest_iasset) 
+```
+
+```{r add gemeente info to nesten}
+gemeentes <- st_read("https://raw.githubusercontent.com/inbo/aspbo/main/data/output/UAT_processing/communes.geojson")
+
+data_nest_final$NISCODE <- apply(st_intersects(gemeentes,
+                                               data_nest_final,
+                                               sparse = FALSE),
+                                 2, function(col) {
+                                   gemeentes[which(col),]$NISCODE
+                                 }
+)
+
+pb <- utils::txtProgressBar(min = 0, 
+                            max = length(data_nest_final$NISCODE), 
+                            style = 3)
+
+for(i in 1:length(data_nest_final$NISCODE)){
+  utils::setTxtProgressBar(pb, i)
+  data_nest_final$NISCODE[i] <- as.character(data_nest_final$NISCODE[[i]][1])
+}
+
+gem_df <- as.data.frame(gemeentes) %>% 
+  dplyr::select(-geometry) %>% 
+  rename(Gemeente = NAAM)
+
+data_nest_final <- data_nest_final %>% 
+  mutate(NISCODE = as.character(NISCODE)) %>% 
+  left_join(gem_df, 
+            by = "NISCODE")
+```
+
+```{r export nesten}
+if(file.exists("./Scripts/VespaWatch_app/data/nesten.geojson")){
+  file.remove("./Scripts/VespaWatch_app/data/nesten.geojson")
+}
+
+st_write(data_nest_final %>% filter(year >= 2017),
+         "~/GitHub/VespaR/Scripts/VespaWatch_app/data/nesten.geojson",
+         append = FALSE)
+
+test_jaar <- data_nest_final %>% 
+  filter(year < 2018)
+```
+
+```{r create seasonal datasets}
+jaren <- seq(from = 2017,
+             to = year(Sys.Date()))
+
+aantal_nesten_tot_vandaag_all <- data.frame()
+
+current_month <- month(Sys.Date())
+current_day <- day(Sys.Date())
+
+for(j in jaren){
+  min_date <- paste0(j-1, "-12-31")
+  max_date <- paste0(j, "-", current_month, "-", current_day)
+  
+  aantal_nesten_tot_vandaag_jaar <- data_nest_final %>%
+    mutate(observation_time = as.Date(observation_time)) %>%
+    filter(observation_time >= min_date,
+           observation_time < max_date) %>% 
+    mutate(observation_jaar = j,
+           observation_period = paste(min_date, 
+                                      max_date,
+                                      sep = " - "))
+  
+  if(nrow(aantal_nesten_tot_vandaag_all) == 0){
+    aantal_nesten_tot_vandaag_all <- aantal_nesten_tot_vandaag_jaar
+  }else{
+    aantal_nesten_tot_vandaag_all <- rbind(aantal_nesten_tot_vandaag_all, 
+                                     aantal_nesten_tot_vandaag_jaar)
+  }
+}
+
+aantal_nesten_tot_vandaag <- aantal_nesten_tot_vandaag_all %>%   
+  st_drop_geometry()%>%
+  group_by(observation_jaar, prov = NAAM) %>% 
+  summarise(aantal_gemelde_nesten = n())
+
+
+write_csv(aantal_nesten_tot_vandaag, "~/GitHub/VespaR/Scripts/VespaWatch_app/data/aantal_nesten_tot_vandaag.csv")
+```
+
+```{r calculate actieve haarden}
+source("~/GitHub/VespaR/Scripts/VespaWatch_app/scripts/bereken_actieve_haarden.r")
+
+nesten <- data_nest_final %>% 
+  dplyr::filter(year == year(Sys.Date())) %>% 
+  mutate(type = "Nest",
+         popup = paste0("Vespawatch rij ", id),
+         institutionCode = "Vespawatch")
+
+ah_list <- bereken_actieve_haarden(gbif_data = points,
+                                   beheer_data = nesten)
+
+outputs <- c("actieve_haarden", "onbehandelde_nesten", "beheerde_nesten")
+
+for(o in outputs){
+  export_fn <- paste0("./Scripts/VespaWatch_app/data/", o, ".geojson")
+  
+  if(file.exists(export_fn)){
+    file.remove(export_fn)
+  }
+  
+  st_write(ah_list[[o]],
+           export_fn,
+           append = FALSE)
+}
+```
+

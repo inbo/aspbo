@@ -1,0 +1,158 @@
+---
+title: "get_data_from_gbif"
+author: "Sander Devisscher"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r libraries}
+library(rgbif)
+library(dplyr)
+library(httr)
+library(ows4R)
+library(sf)
+```
+
+```{r get flanders wfs, eval=FALSE}
+wfs_regions <- "https://eservices.minfin.fgov.be/arcgis/services/R2C/Regions/MapServer/WFSServer"
+
+regions_client <- WFSClient$new(wfs_regions,
+                                serviceVersion = "2.0.0")
+
+regions_client$getFeatureTypes(pretty = TRUE)
+
+url <- parse_url(wfs_regions)
+url$query <- list(service = "wfs",
+                  request = "GetFeature",
+                  typename = "Regions",
+                  srsName = "EPSG:4326")
+
+request <- build_url(url)
+
+regions <- read_sf(request)
+
+vla <- regions %>% 
+  filter(AdReKey == 2000) %>% 
+  st_as_sfc() %>% 
+  st_make_valid() %>% 
+  st_simplify(dTolerance = 0.01) %>% 
+  st_as_text()
+```
+
+```{r get flanders geojson}
+sf_use_s2(TRUE)
+
+vla <- st_read("~/GitHub/vespaR/Input/Spatial/flanders_wgs84.geojson") %>% 
+  st_transform(4326) %>% 
+  st_simplify(dTolerance = 10) %>% 
+  st_as_sfc() %>% 
+  st_as_text() 
+
+vla <- gsub(pattern = ", NaN", 
+            replacement = "",
+            vla)
+```
+
+
+Waarnemingen.be - Non-native animal occurrences in Flanders and the Brussels Capital Region, Belgium: https://www.gbif.org/dataset/9a0b66df-7535-4f28-9f4e-5bc11b8b096c
+
+iNaturalist Research-grade Observations: https://www.gbif.org/dataset/50c9509d-22c7-4a22-a47d-8c48425ef4a7
+
+```{r download data from gbif}
+datasetkeys <- c("9a0b66df-7535-4f28-9f4e-5bc11b8b096c", "50c9509d-22c7-4a22-a47d-8c48425ef4a7")
+
+taxonkeys <- c(1311477)
+
+gbif_downloadKey <- occ_download(pred_in("datasetKey", datasetkeys),
+                                 pred_in("taxonKey", taxonkeys),
+                                 pred_within(vla),
+                                 user = Sys.getenv("gbif_user"),
+                                 pwd = Sys.getenv("gbif_pwd"),
+                                 email = Sys.getenv("gsheet_email"),
+                                 curlopts = list(verbose = TRUE,
+                                                 http_version = 2,
+                                                 forbid_reuse = TRUE))
+
+occ_download_wait(gbif_downloadKey, 
+                  curlopts = list(verbose = TRUE,
+                                  http_version = 2,
+                                  forbid_reuse = TRUE))
+
+gbif_download <- occ_download_get(gbif_downloadKey,
+                                  path = tempdir(),
+                                  overwrite = TRUE,
+                                  curlopts = list(verbose = TRUE,
+                                                  http_version = 2,
+                                                  forbid_reuse = TRUE))
+
+rawdata <- occ_download_import(x = gbif_download)
+```
+
+```{r}
+if(grepl(pattern = "/GitHub/vespaR/Scripts/VespaWatch_app", getwd())){
+  #working directory is in wrong folder
+  setwd("~/GitHub/vespaR/")
+}
+```
+
+```{r data manipulation}
+nesten <- st_read("./Scripts/VespaWatch_app/data/nesten.geojson") %>% 
+  filter(!is.na(inaturalist_id))
+
+test <- n_distinct(nesten$inaturalist_id)
+
+interimdata <- rawdata %>% 
+  filter(grepl("approved", identificationVerificationStatus) | identificationVerificationStatus == "" & institutionCode == "iNaturalist") %>% 
+  mutate(type = case_when(grepl(pattern = "found as nest", occurrenceRemarks) & collectionCode == "waarnemingen.be" ~ "Nest", #gevalideerde nesten in Waarnemingen.be
+                          institutionCode == "iNaturalist" & 
+                            catalogNumber %in% nesten$inaturalist_id ~ "Nest", # gevalideerde nesten in iNaturlist door Vespa-Watch
+                          grepl(pattern = "nest", occurrenceRemarks) ~ "Unc.Nest", #mogelijke nesten in Waarnemingen.be
+                          TRUE ~ "Individu"),
+         institutionCode2 = case_when(rightsHolder == "Vespa-Watch" ~ 
+                                        paste0("Vespa-Watch via ", institutionCode),
+                                      TRUE ~ institutionCode))
+
+table(interimdata$institutionCode, interimdata$institutionCode2)
+table(interimdata$type, useNA = "ifany")
+
+file.remove("./Output/nesten_to_check.geojson")
+
+interimdata %>% 
+  filter(type == "Unc.Nest") %>% 
+  st_as_sf(coords = c("decimalLatitude", "decimalLongitude")) %>% 
+  st_write("./Output/nesten_to_check.geojson",
+           append = FALSE)
+
+#ook handig om als csv te hebben om te laten checken
+interimdata %>% 
+  filter(type == "Unc.Nest") %>%
+  st_drop_geometry() %>% 
+  write_csv('onzekere_nesten_Waarnemingen.csv')
+
+interimdata %>%
+  filter(type == "Nest" & collectionCode == "waarnemingen.be") %>%
+  st_drop_geometry() %>% 
+  write_csv('zekere_nesten_Waarnemingen.csv')
+
+cleandata <- interimdata %>% 
+  mutate(type = case_when(type == "Unc.Nest" ~ "Individu",
+                          TRUE ~ type)) %>% # Een onzeker nest bestaat in de meeste gevallen uit minstens één individu!
+  group_by(eventDate, year, type, decimalLatitude, 
+           decimalLongitude, level1Name, level2Name, level3Name, institutionCode) %>% #reduce duplicates 
+  summarise(popup = paste0(paste("<a href=", references, ">", 
+                                 institutionCode2, "</a>", collapse = ",<br>")),
+            inaturalist_ids = case_when(institutionCode == "iNaturalist" ~ paste(catalogNumber, collapse = ","),
+                                        TRUE ~ NA),
+            gbif_ids = paste(gbifID, collapse = ",")) %>% 
+  select(eventDate, year, type, decimalLatitude, 
+         decimalLongitude, level1Name, level2Name, 
+         level3Name, popup, inaturalist_ids, gbif_ids, institutionCode) %>% 
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+```
+
+```{r export}
+file.remove("./Scripts/VespaWatch_app/data/points.geojson")
+st_write(cleandata, "./Scripts/VespaWatch_app/data/points.geojson",
+         append = FALSE)
+```
+
