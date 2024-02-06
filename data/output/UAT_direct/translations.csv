@@ -319,3 +319,4 @@ diffLow;laag risico verschil;;TODO;;low risk difference;
 diffHigh;hoog risico verschil;;TODO;;high risk difference;
 confLow;lage betrouwbaarheid;;TODO;;low confidence;
 confHigh;hoge betrouwbaarheid;;TODO;;high confidence;
+failing;falend;;TODO;;failing;
