@@ -18,12 +18,13 @@ Observations are retained if they are located further than 2km from a successful
 Missing nests can always be reported at <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
 </br><em>Dates available until {{maxDate}}</em>"
 management2_observed-mapHeat;Alle observaties huidig jaar;"Op deze kaart worden alle nesten en individuen van Aziatische hoornaar getoond die in {{maxYear}} zijn gemeld via diverse kanalen. Nog niet alle meldingen zijn op dit kaartje weergegeven. Binnenkort zullen alle meldingen zichtbaar zijn. </br><em>Data beschikbaar tot {{maxDate}}</em>";Toutes les observations de l'année actuelle;"Cette carte montre tous les nids et individus de frelons asiatiques signalés en {{maxYear}} via divers canaux. Tous les rapports ne sont pas encore affichés sur cette carte. Bientôt, toutes les notifications seront visibles. </br><em>Dates disponibles jusqu'au {{maxDate}}</em>";All observations current year;"This map shows all Asian hornet nests and individuals reported in {{maxYear}} through various channels. Not all reports are yet shown on this map. Soon all notifications will be visible. </br><em>Dates available until {{maxDate}}</em>"
-management2_countYearGroup;Management van nesten;;TODO;;TODO;;
-management3_countYearGroup;Aantal observaties per jaar;;TODO;;Number of observations per year;;
+management2_countYearGroup;Management van nesten;;TODO;;TODO;
+management3_countYearGroup;Aantal observaties per jaar;;TODO;;Number of observations per year;
 observations-mapOccurrence;Waarnemingen van;;Observations de;;Observations of;
 reporting_t1-mapOccurrence;Rapportering van;;Rapportage de;;Reporting of;
 reporting_t01-mapOccurrence;Rapportering van;;Rapportage de;;Reporting of;
 management-mapOccurrence;Beheer van;;Gestion de;;Management of;
+risk-mapRaster;TrIAS Risicokaarten;TODO;TrIAS Cartes des Risques;TODO;TrIAS Risk Maps;"Invasive alien species have the potential to damage ecosystems, reduce biodiversity and cause other problems for people and wildlife. In order to mitigate these problems research is needed into what the potential risks are and which species are most likely to be a problem. One of the techniques we use is species distribution modelling. These models aim to estimate the potential distribution of a species given the known environmental conditions where it is currently living. In such models we can also incorporate future scenarios into such models, so that we can account for climate change in our evaluation of risk. </br>These maps are unlikely to be precise predictions of current or future species distributions, but are nevertheless a guide to scientists conducting risk assessments. They help us by indicating which areas might be most vulnerable to invasion, and whether climate change is likely to cause greater or lesser establishment of the species."
 tableIndicators;;Tijdelijke aanduiding voor disclaimer;;Espace réservé pour clause;;Placeholder for disclaimer
 tableNesten;Aantal nesten per provincie (tabel);"Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>";Nombre de nids par province (tableau);"Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>";Number of nests per province (table);"The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>"
 visualize_pathways_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1);;Espèces introduites par voie d'introduction (CBD, niveau 1);;Introduced species per pathway (CBD, level 1);
@@ -302,3 +303,19 @@ behandeld;behandeld;;TODO;;TODO;
 niet behandeld;niet behandeld;;TODO;;TODO;
 onbekend;onbekend;;inconnu;;unknown;
 row;rij;;TODO;;row;
+;;;;;;
+modelScenario;Model scenario;;TODO;;Model scenario;
+hist;Model gebaseerd op historische klimaat data;;TODO;;model based on historical climate data;
+rcp26;TODO;;TODO;;model based on climate forecasts under RCP 2.6 for 2040-2070;
+rcp45;TODO;;TODO;;model based on climate forecasts under RCP 4.5 for 2040-2070;
+rcp85;TODO;;TODO;;model based on climate forecasts under RCP 8.5 for 2040-2070;
+modelType;Model type;;TODO;;Model type;
+riskMap;Risicokaart;;Carte des risques;;Risk map;
+diffMap;TODO;;TODO;;Map of difference in risk between the RCP climate scenario and the historical climate data;
+confMap;TODO;;TODO;;Map of confidence of predicted risk;
+riskLow;laag risico;;TODO;;low risk;
+riskHigh;hoog risico;;TODO;;high risk;
+diffLow;laag risico verschil;;TODO;;low risk difference;
+diffHigh;hoog risico verschil;;TODO;;high risk difference;
+confLow;lage betrouwbaarheid;;TODO;;low confidence;
+confHigh;hoge betrouwbaarheid;;TODO;;high confidence;
