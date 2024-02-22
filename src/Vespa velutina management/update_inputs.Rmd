@@ -246,12 +246,12 @@ data_nest_final <- data_nest_final %>%
 ```
 
 ```{r export nesten}
-if(file.exists("./data/output/UAT_processing/nesten.geojson")){
-  file.remove("./data/output/UAT_processing/nesten.geojson")
+if(file.exists("./data/output/UAT_processing/Vespa_velutina_shape/nesten.geojson")){
+  file.remove("./data/output/UAT_processing/Vespa_velutina_shape/nesten.geojson")
 }
 
 st_write(data_nest_final %>% filter(year >= 2017),
-         "./data/output/UAT_processing/nesten.geojson",
+         "./data/output/UAT_processing/Vespa_velutina_shape/nesten.geojson",
          append = FALSE)
 
 test_jaar <- data_nest_final %>% 
@@ -268,7 +268,7 @@ current_month <- month(Sys.Date())
 current_day <- day(Sys.Date())
 
 for(j in jaren){
-  min_date <- paste0(j-1, "-12-31")
+  min_date <- paste0(j - 1, "-12-31")
   max_date <- paste0(j, "-", current_month, "-", current_day)
   
   aantal_nesten_tot_vandaag_jaar <- data_nest_final %>%
