@@ -19,7 +19,7 @@ conflicted::conflicts_prefer(dplyr::filter)
 ```
 
 ```{r auth}
-email <- Sys.getenv("email")
+email <- paste0(Sys.getenv("email"), "@inbo.be")
 
 gs4_auth(email)
 ```
@@ -37,7 +37,7 @@ data_nest_iasset_raw <- read_csv2("./data/input/Vespa-Watch_iasset.csv")
 data_gbif_raw <- read_csv2("./data/input/Vespa-Watch_gbif.csv")
 
 # Provincies
-prov <- st_read("./data/output/UAT_processing/provincies.geojson")
+prov <- st_read("./data/output/UAT_processing/provinces.geojson")
 ```
 
 ```{r data prep gs}
@@ -50,28 +50,28 @@ dataset_1 <- data_nest_gs_raw %>%
                             TRUE ~ "onbekend"),
          year = year(as.Date(observation_time)),
          site = case_when(is.na(site) ~ "ongekend",
-            site == "I" ~ "binnen, in gebouw of constructie",
-            site == "O_NC_B" ~ "buiten, onbedekt op gebouw",
-            site == "O_NC_T" ~ "buiten, onbedekt op boom of struik",
-            site == "O_C_C" ~ "buiten, overdekt door constructie",
-            site == "O_N_C" ~ "buiten, natuurlijk overdekt",
-            site =="UK" ~ "ongekend",
-            site == "NA" ~ "ongekend",
-            site == "NULL" ~ "ongekend"))
+                          site == "I" ~ "binnen, in gebouw of constructie",
+                          site == "O_NC_B" ~ "buiten, onbedekt op gebouw",
+                          site == "O_NC_T" ~ "buiten, onbedekt op boom of struik",
+                          site == "O_C_C" ~ "buiten, overdekt door constructie",
+                          site == "O_N_C" ~ "buiten, natuurlijk overdekt",
+                          site =="UK" ~ "ongekend",
+                          site == "NA" ~ "ongekend",
+                          site == "NULL" ~ "ongekend"))
 
 #alleen VV
 dataset_1_vv <- dataset_1 %>% filter(expert_vv_confirmed=="TRUE" |
-                                     expert_vv_confirmed=="True" |
-                                     inat_vv_confirmed=="TRUE"|
-                                     inat_vv_confirmed=="True"|
-                                     expert_vv_confirmed=="WAAR"|
-                                     expert_vv_confirmed=="waar")
+                                       expert_vv_confirmed=="True" |
+                                       inat_vv_confirmed=="TRUE"|
+                                       inat_vv_confirmed=="True"|
+                                       expert_vv_confirmed=="WAAR"|
+                                       expert_vv_confirmed=="waar")
 
 #geen duplicaten
 dataset_1_vv_u <- dataset_1_vv %>%filter(is.na(nest_reported_before)|
-                                         nest_reported_before=="NULL"|
-                                         nest_reported_before=="False"|
-                                         nest_reported_before=="FALSE")
+                                           nest_reported_before=="NULL"|
+                                           nest_reported_before=="False"|
+                                           nest_reported_before=="FALSE")
 
 #remove rows with empty coordinates
 dataset_1_vv_u <- dataset_1_vv_u %>%
@@ -91,32 +91,31 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
 ```{r data prep iasset}
 # Map data content
 data_nest_iasset <- data_nest_iasset_raw %>% 
-  rename(geometry = contains("Coördinaten")) %>% 
-  mutate(datum = as.Date(`Datum observatie`)) %>% 
-  filter(Gevalideerd == "ja",
-         grepl(x = Nesttype, pattern = "AH"),
-         Duplicaat == "nee",
+  rename(geometry = coordinaten_van_het_nest) %>% 
+  filter(gevalideerd == "ja",
+         grepl(x = nesttype, pattern = "AH"),
+         duplicaat == "nee",
          !is.na(geometry),
-         Nesttype != "AH - potentieel nest (meer info nodig)") %>% 
+         nesttype != "AH - potentieel nest (meer info nodig)") %>% 
   st_as_sf(wkt = "geometry",
            crs = 4326) %>% 
-  mutate(result = case_when(Resultaat == "succesvol behandeld" ~ "succesvol",
-                            Resultaat == "niet succesvol behandeld" ~ "niet succesvol",
-                            Resultaat == "niet behandeld" ~ "niet behandeld",
-                            Beheerd == "ja" ~ "succesvol",
-                            (Beheerd == "nee") & (`Bestrijding gestart` == "nee") ~ "niet behandeld",
-                            (Beheerd == "onbekend") & (`Bestrijding gestart` == "nee") ~ "onbekend",
-                            Resultaat == "onbekend" ~ "onbekend",
-                            TRUE ~ NA_character_),
-         Nesttype = case_when(Nesttype == "AH - actief embryonaal nest" ~ "AE",
-                               Nesttype == "AH - actief primair nest" ~ "AP",
-                               Nesttype == "AH - actief secundair nest" ~ "AS",
-                               Nesttype == "AH - inactief/leeg nest" ~ "IE",
-                               Nesttype == "AH - potentieel nest (meer info nodig)" ~ "UK",
-                               TRUE ~ "UK"),
-         aftercare = Nazorg,
-         year = year(`Datum observatie`))%>%
-  mutate_at(c('Nestplaats'), ~replace_na(.,"ongekend"))
+  mutate(result = case_when(resultaat == "succesvol behandeld" ~ "succesvol",
+                             resultaat == "niet succesvol behandeld" ~ "niet succesvol",
+                             resultaat == "niet behandeld" ~ "niet behandeld",
+                             beheerd == "ja" ~ "succesvol",
+                             (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "niet behandeld",
+                             (beheerd == "onbekend") & (bestrijding_gestart == "nee") ~ "onbekend",
+                             resultaat == "onbekend" ~ "onbekend",
+                             TRUE ~ NA_character_),
+         nesttype_code = case_when(nesttype == "AH - actief embryonaal nest" ~ "AE",
+                                   nesttype == "AH - actief primair nest" ~ "AP",
+                                   nesttype == "AH - actief secundair nest" ~ "AS",
+                                   nesttype == "AH - inactief/leeg nest" ~ "IE",
+                                   nesttype == "AH - potentieel nest (meer info nodig)" ~ "UK",
+                                   TRUE ~ "UK"),
+         aftercare = nazorg,
+         year = year(datum_observatie))%>%
+  mutate_at(c('nestplaats'), ~replace_na(.,"ongekend"))
 
 #Intersect with province
 data_nest_iasset <- st_intersection(data_nest_iasset, prov)
@@ -130,6 +129,11 @@ if("provincie" %in% colnames(data_nest_iasset)){
     mutate(provincie = NAAM)
 }
 
+#temp fix lacking id column 
+if(!"id" %in% colnames(data_nest_iasset)){
+  data_nest_iasset <- data_nest_iasset %>% 
+    mutate(id = row_number())
+}
 
 class(data_nest_iasset)
 
@@ -143,52 +147,51 @@ data_nest_iasset <- data_nest_iasset %>%
          vv_confirmed = "True",
          taxon_id = NA_character_,
          inat_vv_confirmed = NA_character_,
-         municipality = NA_character_) %>% 
+         municipality = NA_character_,
+         file_number_nest_removal = NA_character_) %>% 
   ungroup() %>% 
-  dplyr::select(id = ID,
-                image_1 = Foto.nest.1,
-                image_2 = Foto.nest.2,
-                image_3 = Foto.nest.3,
+  dplyr::select(id,
+                image_1 = foto_nest_1,
+                image_2 = foto_nest_2,
+                image_3 = foto_nest_3,
                 originates_in_vespawatch,
-                observation_time = Datum.observatie,
-                comments = Opmerkingen,
+                observation_time = datum_observatie,
+                comments = opmerkingen,
                 inaturalist_link,
                 inaturalist_id,
                 inaturalist_species,
-                size = Nestgrootte,
-                height = Nesthoogte,
-                duplicate_of_id = Duplicaat,
+                size = nestgrootte,
+                height = nesthoogte,
+                duplicate_of_id = duplicaat,
                 taxon_id,
-                created_at = Datum.tijd.registratie,
+                created_at = datum_tijd_registratie,
                 inat_vv_confirmed,
                 expert_vv_confirmed,
                 vv_confirmed,
                 municipality,
-                action_time = Datum.en.tijd.bestrijding,
-                duration = Tijd.ter.plaatse,
-                comments.2 = Bestrijding.opmerking,
-                site = Nestplaats,
-                nest_type = Nesttype,
+                action_time = datum_en_tijd_bestrijding,
+                duration = tijd_ter_plaatse,
+                comments.2 = bestrijding_opmerking,
+                site = nestplaats,
+                nest_type = nesttype,
                 aftercare,
-                product = Product,
-                method = Methode,
+                product = product,
+                method = methode,
                 result,
-                nest_reported_before = Duplicaat,
-                file_number_nest_removal = Dossiernummer.verdelging,
+                nest_reported_before = duplicaat,
                 year,
-                OIDN,
-                UIDN,
-                VERSDATUM,
-                TERRID,
+                file_number_nest_removal,
                 NAAM,
                 NISCODE,
-                NUTS2,
-                LENGTE,
-                OPPERVL,
+                GEWEST,
                 geometry
-                )
+  )
 
-st_write(data_nest_iasset, "./Interim/data_nest_iasset.geojson",
+if(file.exists("./data/interim/data_nest_iasset.geojson")){
+  file.remove("./data/interim/data_nest_iasset.geojson")
+}
+
+st_write(data_nest_iasset, "./data/interim/data_nest_iasset.geojson",
          append = FALSE)
 ```
 
@@ -243,12 +246,12 @@ data_nest_final <- data_nest_final %>%
 ```
 
 ```{r export nesten}
-if(file.exists("./Scripts/VespaWatch_app/data/nesten.geojson")){
-  file.remove("./Scripts/VespaWatch_app/data/nesten.geojson")
+if(file.exists("./data/output/UAT_processing/nesten.geojson")){
+  file.remove("./data/output/UAT_processing/nesten.geojson")
 }
 
 st_write(data_nest_final %>% filter(year >= 2017),
-         "~/GitHub/VespaR/Scripts/VespaWatch_app/data/nesten.geojson",
+         "./data/output/UAT_processing/nesten.geojson",
          append = FALSE)
 
 test_jaar <- data_nest_final %>% 
@@ -281,7 +284,7 @@ for(j in jaren){
     aantal_nesten_tot_vandaag_all <- aantal_nesten_tot_vandaag_jaar
   }else{
     aantal_nesten_tot_vandaag_all <- rbind(aantal_nesten_tot_vandaag_all, 
-                                     aantal_nesten_tot_vandaag_jaar)
+                                           aantal_nesten_tot_vandaag_jaar)
   }
 }
 
