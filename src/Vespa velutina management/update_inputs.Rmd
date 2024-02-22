@@ -19,7 +19,7 @@ conflicted::conflicts_prefer(dplyr::filter)
 ```
 
 ```{r auth}
-email <- Sys.getenv("gsheet_email")
+email <- Sys.getenv("email")
 
 gs4_auth(email)
 ```
