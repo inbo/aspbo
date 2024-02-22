@@ -299,8 +299,9 @@ aantal_nesten_tot_vandaag <- aantal_nesten_tot_vandaag_all %>%
   group_by(observation_jaar, prov = NAAM) %>% 
   summarise(aantal_gemelde_nesten = n())
 
+aantal_nesten_tot_vandaag_path <- paste0(processing_exportpath, "aantal_lente_nesten.csv")
 
-write_csv(aantal_nesten_tot_vandaag, "aantal_nesten_tot_vandaag.csv")
+write_csv(aantal_nesten_tot_vandaag, aantal_nesten_tot_vandaag_path)
 ```
 
 ```{r data prep gbif}
