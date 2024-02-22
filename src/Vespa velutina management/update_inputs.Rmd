@@ -245,13 +245,19 @@ data_nest_final <- data_nest_final %>%
             by = "NISCODE")
 ```
 
+```{r export paths}
+processing_exportpath <- "./data/output/UAT_processing/Vespa_velutina_shape/"
+```
+
 ```{r export nesten}
-if(file.exists("./data/output/UAT_processing/Vespa_velutina_shape/nesten.geojson")){
-  file.remove("./data/output/UAT_processing/Vespa_velutina_shape/nesten.geojson")
+nesten_path <- paste0(processing_exportpath, "nesten.geojson")
+
+if(file.exists(nesten_path)){
+  file.remove(nesten_path)
 }
 
 st_write(data_nest_final %>% filter(year >= 2017),
-         "./data/output/UAT_processing/Vespa_velutina_shape/nesten.geojson",
+         nesten_path,
          append = FALSE)
 
 test_jaar <- data_nest_final %>% 
@@ -294,7 +300,7 @@ aantal_nesten_tot_vandaag <- aantal_nesten_tot_vandaag_all %>%
   summarise(aantal_gemelde_nesten = n())
 
 
-write_csv(aantal_nesten_tot_vandaag, "~/GitHub/VespaR/Scripts/VespaWatch_app/data/aantal_nesten_tot_vandaag.csv")
+write_csv(aantal_nesten_tot_vandaag, "aantal_nesten_tot_vandaag.csv")
 ```
 
 ```{r data prep gbif}
