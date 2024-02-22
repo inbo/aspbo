@@ -321,3 +321,7 @@ diffHigh;hoog risicoverschil;;différence de risque élevée;;high risk differen
 confLow;lage betrouwbaarheid;;faible confiance;;low confidence;
 confHigh;hoge betrouwbaarheid;;grande confiance;;high confidence;
 failing;falend;;échouant;;failing;
+;;;;;;
+contents;Inhoudsopgave;;TODO;;Contents;
+createReport;Maak rapport;;TODO;;Create report;
+
