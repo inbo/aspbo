@@ -12,10 +12,10 @@ library(sf)
 library(googlesheets4)
 library(readxl)
 library(tidyverse)
-library(tidylog)
 ```
 
-```{r conflicted packages}
+```{r conflicted packages, eval=FALSE}
+library(tidylog)
 conflicted::conflicts_prefer(tidylog::select)
 conflicted::conflicts_prefer(tidylog::filter)
 conflicted::conflicts_prefer(tidylog::left_join)
@@ -26,6 +26,8 @@ conflicted::conflicts_prefer(tidylog::rename)
 conflicted::conflicts_prefer(tidylog::replace_na)
 conflicted::conflicts_prefer(tidylog::ungroup)
 conflicted::conflicts_prefer(tidylog::group_by)
+conflicted::conflicts_prefer(tidylog::full_join)
+conflicted::conflicts_prefer(tidylog::summarise)
 ```
 
 ```{r auth}
@@ -241,7 +243,7 @@ dupli_missing_both <- dupli_nest_iasset %>%
   write_csv("./data/interim/Vespa_iAsset_dupli_missing_both.csv")
 
 dupli_nest_iasset <- dupli_nest_iasset %>% 
-  filter(!is.na(observation_time.x) & !is.na(observation_time.y)) 
+  filter(!is.na(observation_time.x) & !is.na(observation_time.y))
 
 # maken "missing_both" meldingen deel uit van een meerdere duplicaten sets ? 
 ## duplicaten die in meerdere sets zitten en waarvan minstens 1 set behouden 
@@ -277,7 +279,7 @@ table(test_mutiple_3$duplicaat, useNA = "ifany") #=> alle ids in deze set werden
 
 ```{r IASSET: remove duplicaten}
 data_nest_iasset <- data_nest_iasset %>% 
-  filter(!id %in% dupli_nest_iasset$ID1) 
+  filter(!id %in% dupli_nest_iasset$ID2) 
 ```
 
 ```{r IASSET: Export}
@@ -288,7 +290,6 @@ if(file.exists("./data/interim/data_nest_iasset.geojson")){
 st_write(data_nest_iasset, "./data/interim/data_nest_iasset.geojson",
          append = FALSE)
 ```
-
 
 ```{r combine nesten dfs}
 colnames_x <- data.frame(col = 1:ncol(data_nest_gs))
@@ -398,7 +399,7 @@ nesten <- data_nest_final %>%
 
 test <- n_distinct(nesten$inaturalist_id)
 
-interimdata <- rawdata %>% 
+interimdata <- data_gbif_raw %>% 
   filter(grepl("approved", identificationVerificationStatus) | identificationVerificationStatus == "" & institutionCode == "iNaturalist") %>% 
   mutate(type = case_when(grepl(pattern = "found as nest", occurrenceRemarks) & collectionCode == "waarnemingen.be" ~ "Nest", #gevalideerde nesten in Waarnemingen.be
                           institutionCode == "iNaturalist" & 
