@@ -393,7 +393,7 @@ aantal_nesten_tot_vandaag_path <- paste0(processing_exportpath, "aantal_lente_ne
 write_csv(aantal_nesten_tot_vandaag, aantal_nesten_tot_vandaag_path)
 ```
 
-```{r data prep gbif}
+```{r GBIF data prep}
 nesten <- data_nest_final %>% 
   filter(!is.na(inaturalist_id))
 
@@ -413,24 +413,24 @@ interimdata <- data_gbif_raw %>%
 table(interimdata$institutionCode, interimdata$institutionCode2)
 table(interimdata$type, useNA = "ifany")
 
-file.remove("./Output/nesten_to_check.geojson")
+file.remove("./data/interim/nesten_to_check.geojson")
 
 interimdata %>% 
   filter(type == "Unc.Nest") %>% 
   st_as_sf(coords = c("decimalLatitude", "decimalLongitude")) %>% 
-  st_write("./Output/nesten_to_check.geojson",
+  st_write("./data/interim/nesten_to_check.geojson",
            append = FALSE)
 
 #ook handig om als csv te hebben om te laten checken
 interimdata %>% 
   filter(type == "Unc.Nest") %>%
   st_drop_geometry() %>% 
-  write_csv('onzekere_nesten_Waarnemingen.csv')
+  write_csv('./data/interim/onzekere_nesten_Waarnemingen.csv')
 
 interimdata %>%
   filter(type == "Nest" & collectionCode == "waarnemingen.be") %>%
   st_drop_geometry() %>% 
-  write_csv('zekere_nesten_Waarnemingen.csv')
+  write_csv('./data/interim/zekere_nesten_Waarnemingen.csv')
 
 cleandata <- interimdata %>% 
   mutate(type = case_when(type == "Unc.Nest" ~ "Individu",
@@ -448,9 +448,10 @@ cleandata <- interimdata %>%
   st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
 ```
 
-```{r export}
-file.remove("./Scripts/VespaWatch_app/data/points.geojson")
-st_write(cleandata, "./Scripts/VespaWatch_app/data/points.geojson",
+```{r GBIF export}
+points_path <- paste0(processing_exportpath, "points.geojson")
+file.remove(points_path)
+st_write(cleandata, points_path,
          append = FALSE)
 ```
 
@@ -469,7 +470,7 @@ ah_list <- bereken_actieve_haarden(gbif_data = points,
 outputs <- c("actieve_haarden", "onbehandelde_nesten", "beheerde_nesten")
 
 for(o in outputs){
-  export_fn <- paste0("./Scripts/VespaWatch_app/data/", o, ".geojson")
+  export_fn <- paste0("processing_exportpath", o, ".geojson")
   
   if(file.exists(export_fn)){
     file.remove(export_fn)
