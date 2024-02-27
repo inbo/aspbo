@@ -12,6 +12,7 @@ library(sf)
 library(googlesheets4)
 library(readxl)
 library(tidyverse)
+library(testthat)
 ```
 
 ```{r conflicted packages, eval=FALSE}
@@ -194,7 +195,7 @@ data_nest_iasset <- data_nest_iasset %>%
                 duration = tijd_ter_plaatse,
                 comments.2 = bestrijding_opmerking,
                 site = nestplaats,
-                nest_type = nesttype,
+                nest_type = nesttype_code,
                 aftercare,
                 product = product,
                 method = methode,
@@ -325,7 +326,8 @@ for(i in 1:length(data_nest_final$NISCODE)){
 }
 
 gem_df <- as.data.frame(gemeentes) %>% 
-  dplyr::select(-geometry) %>% 
+  dplyr::select(-geometry,
+                -GEWEST) %>% 
   rename(Gemeente = NAAM)
 
 data_nest_final <- data_nest_final %>% 
