@@ -277,7 +277,7 @@ table(test_mutiple_3$duplicaat, useNA = "ifany") #=> alle ids in deze set werden
 
 ```{r IASSET: remove duplicaten}
 data_nest_iasset <- data_nest_iasset %>% 
-  
+  filter(!id %in% dupli_nest_iasset$ID1) 
 ```
 
 ```{r IASSET: Export}
