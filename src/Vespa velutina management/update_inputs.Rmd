@@ -19,6 +19,13 @@ library(tidylog)
 conflicted::conflicts_prefer(tidylog::select)
 conflicted::conflicts_prefer(tidylog::filter)
 conflicted::conflicts_prefer(tidylog::left_join)
+conflicted::conflicts_prefer(tidylog::mutate)
+conflicted::conflicts_prefer(tidylog::drop_na)
+conflicted::conflicts_prefer(tidylog::mutate_at)
+conflicted::conflicts_prefer(tidylog::rename)
+conflicted::conflicts_prefer(tidylog::replace_na)
+conflicted::conflicts_prefer(tidylog::ungroup)
+conflicted::conflicts_prefer(tidylog::group_by)
 ```
 
 ```{r auth}
