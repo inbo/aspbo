@@ -58,7 +58,7 @@ dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJW
                                     col_types = "nnn")
 ```
 
-```{r data prep gs}
+```{r OLD Vespawatch: data prep}
 #prepare raw data DB dump nests
 dataset_1 <- data_nest_gs_raw %>% 
   mutate(result = case_when(result == "ST" ~ "succesvol",
@@ -103,7 +103,13 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
                 -observer_name,
                 -observer_email,
                 -person_name,
-                -user_id)
+                -user_id) %>% 
+  mutate(observation_time = case_when(id == 65869 ~ as.Date("2022-11-06 10:05:00"),
+                                      id == 63711 ~ as.Date("2021-09-20 20:32:00"),
+                                      id == 63496 ~ as.Date("2020-11-03 10:00:00"),
+                                      id == 63247 ~ as.Date("2019-11-08 18:01:00"),
+                                      id == 63109 ~ as.Date("2019-05-26 13:15:00"),
+                                      TRUE ~ as.Date(observation_time)))
 ```
 
 ```{r IASSET: data prep}
@@ -343,6 +349,7 @@ test_that("Check for NA values in each column", {
   expect_true(sum(is.na(data_nest_final$Gemeente)) <= nrow(data_nest_final)*0.01, "Column Gemeente contains NA values")
   expect_true(sum(is.na(data_nest_final$NAAM)) <= nrow(data_nest_final)*0.01, "Column NAAM contains NA values")
   expect_true(sum(is.na(data_nest_final$nest_type)) <= nrow(data_nest_final)*0.01, "Column nest_type contains NA values")
+  expect_true(sum(is.na(data_nest_final$year)) <= nrow(data_nest_final)*0.01, "Column nest_type contains NA values")
 })
 ```
 
