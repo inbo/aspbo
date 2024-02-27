@@ -12,10 +12,13 @@ library(sf)
 library(googlesheets4)
 library(readxl)
 library(tidyverse)
+library(tidylog)
 ```
 
 ```{r conflicted packages}
-conflicted::conflicts_prefer(dplyr::filter)
+conflicted::conflicts_prefer(tidylog::select)
+conflicted::conflicts_prefer(tidylog::filter)
+conflicted::conflicts_prefer(tidylog::left_join)
 ```
 
 ```{r auth}
@@ -38,6 +41,11 @@ data_gbif_raw <- read_csv2("./data/input/Vespa-Watch_gbif.csv")
 
 # Provincies
 prov <- st_read("./data/output/UAT_processing/provinces.geojson")
+
+# Duplicated nests from iasset
+dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJWs",
+                                    sheet = "Checked",
+                                    col_types = "nnn")
 ```
 
 ```{r data prep gs}
@@ -88,7 +96,7 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
                 -user_id)
 ```
 
-```{r data prep iasset}
+```{r IASSET: data prep}
 # Map data content
 data_nest_iasset <- data_nest_iasset_raw %>% 
   rename(geometry = coordinaten_van_het_nest) %>% 
@@ -100,13 +108,13 @@ data_nest_iasset <- data_nest_iasset_raw %>%
   st_as_sf(wkt = "geometry",
            crs = 4326) %>% 
   mutate(result = case_when(resultaat == "succesvol behandeld" ~ "succesvol",
-                             resultaat == "niet succesvol behandeld" ~ "niet succesvol",
-                             resultaat == "niet behandeld" ~ "niet behandeld",
-                             beheerd == "ja" ~ "succesvol",
-                             (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "niet behandeld",
-                             (beheerd == "onbekend") & (bestrijding_gestart == "nee") ~ "onbekend",
-                             resultaat == "onbekend" ~ "onbekend",
-                             TRUE ~ NA_character_),
+                            resultaat == "niet succesvol behandeld" ~ "niet succesvol",
+                            resultaat == "niet behandeld" ~ "niet behandeld",
+                            beheerd == "ja" ~ "succesvol",
+                            (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "niet behandeld",
+                            (beheerd == "onbekend") & (bestrijding_gestart == "nee") ~ "onbekend",
+                            resultaat == "onbekend" ~ "onbekend",
+                            TRUE ~ NA_character_),
          nesttype_code = case_when(nesttype == "AH - actief embryonaal nest" ~ "AE",
                                    nesttype == "AH - actief primair nest" ~ "AP",
                                    nesttype == "AH - actief secundair nest" ~ "AS",
@@ -130,9 +138,13 @@ if("provincie" %in% colnames(data_nest_iasset)){
 }
 
 #temp fix lacking id column 
-if(!"id" %in% colnames(data_nest_iasset)){
+if(!"insp_order" %in% colnames(data_nest_iasset)){
   data_nest_iasset <- data_nest_iasset %>% 
     mutate(id = row_number())
+  warning("insp_order was missing from iasset data")
+}else{
+  data_nest_iasset <- data_nest_iasset %>% 
+    rename(id = insp_order)
 }
 
 class(data_nest_iasset)
@@ -195,11 +207,77 @@ st_write(data_nest_iasset, "./data/interim/data_nest_iasset.geojson",
          append = FALSE)
 ```
 
-```{r test spatial, eval = FALSE}
+```{r IASSET: test spatial, eval = FALSE}
 data_nest_iasset %>% 
   leaflet::leaflet() %>% 
   leaflet::addTiles() %>% 
   leaflet::addCircles()
+```
+
+Sommige duplicaten in de lijst werden reeds in iasset als duplicaat geflagged 
+hierdoor komt 1 van de 2 meldingen van de duplicaten check niet langer voor 
+in de gekuiste dataset (zie `dupli_missing_ID1` & `dupli_missing_ID2`). 
+In uitzonderlijke gevallen missen beide meldingen (zie `dupli_missing_both`). 
+```{r IASSET: duplicaten prep}
+dupli_nest_iasset <- dupli_nest_iasset_raw %>% 
+  filter(is_duplicate == 1) 
+
+dupli_nest_iasset <- dupli_nest_iasset %>% 
+  left_join(data_nest_iasset %>% 
+              select(id, observation_time) %>% 
+              st_drop_geometry(), by = c("ID1" = "id")) %>% 
+  left_join(data_nest_iasset %>% 
+              select(id, observation_time) %>% 
+              st_drop_geometry(), by = c("ID2" = "id")) 
+
+dupli_missing_ID1 <- dupli_nest_iasset %>% 
+  filter(is.na(observation_time.x))
+
+dupli_missing_ID2 <- dupli_nest_iasset %>% 
+  filter(is.na(observation_time.y))
+
+dupli_missing_both <- dupli_nest_iasset %>% 
+  filter(is.na(observation_time.x) & is.na(observation_time.y)) %>% 
+  write_csv("./data/interim/Vespa_iAsset_dupli_missing_both.csv")
+
+dupli_nest_iasset <- dupli_nest_iasset %>% 
+  filter(!is.na(observation_time.x) & !is.na(observation_time.y)) 
+
+# maken "missing_both" meldingen deel uit van een meerdere duplicaten sets ? 
+## duplicaten die in meerdere sets zitten en waarvan minstens 1 set behouden 
+# blijft
+test_mutiple_1 <- dupli_missing_both %>% 
+  filter(ID1 %in% dupli_nest_iasset$ID1 | ID2 %in% dupli_nest_iasset$ID1)
+
+## duplicaten waarvan 1 deel van de set reeds als duplicaat in iasset geflagged 
+# werdt 
+test_mutiple_2 <- dupli_missing_both %>% 
+  filter(!ID1 %in% dupli_nest_iasset$ID1 | !ID2 %in% dupli_nest_iasset$ID1) %>% 
+  filter(ID1 %in% data_nest_iasset$id | ID2 %in% data_nest_iasset$id)
+
+## duplicaten die enkel de ruwe ongefilterde data zitten
+test_mutiple_3 <- dupli_missing_both %>% 
+  filter(!ID1 %in% dupli_nest_iasset$ID1 | !ID2 %in% dupli_nest_iasset$ID1) %>% 
+  filter(!ID1 %in% data_nest_iasset$id | !ID2 %in% data_nest_iasset$id) %>% 
+  filter(ID1 %in% data_nest_iasset_raw$insp_order | ID2 %in% data_nest_iasset_raw$insp_order) %>% 
+  pivot_longer(cols = c("ID1", "ID2"), values_to = "id") %>% 
+  select(id) %>% 
+  left_join(data_nest_iasset_raw %>% 
+              select(insp_order,
+                     datum_observatie, 
+                     gevalideerd, 
+                     duplicaat, 
+                     nesttype,
+                     coordinaten_van_het_nest),
+            by = c("id" = "insp_order"))
+
+table(test_mutiple_3$duplicaat, useNA = "ifany") #=> alle ids in deze set werden 
+# als duplicaat geflagged 
+```
+
+```{r IASSET: remove duplicaten}
+data_nest_iasset <- data_nest_iasset %>% 
+  
 ```
 
 ```{r combine nesten dfs}
