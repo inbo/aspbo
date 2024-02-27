@@ -205,13 +205,6 @@ data_nest_iasset <- data_nest_iasset %>%
                 GEWEST,
                 geometry
   )
-
-if(file.exists("./data/interim/data_nest_iasset.geojson")){
-  file.remove("./data/interim/data_nest_iasset.geojson")
-}
-
-st_write(data_nest_iasset, "./data/interim/data_nest_iasset.geojson",
-         append = FALSE)
 ```
 
 ```{r IASSET: test spatial, eval = FALSE}
@@ -286,6 +279,16 @@ table(test_mutiple_3$duplicaat, useNA = "ifany") #=> alle ids in deze set werden
 data_nest_iasset <- data_nest_iasset %>% 
   
 ```
+
+```{r IASSET: Export}
+if(file.exists("./data/interim/data_nest_iasset.geojson")){
+  file.remove("./data/interim/data_nest_iasset.geojson")
+}
+
+st_write(data_nest_iasset, "./data/interim/data_nest_iasset.geojson",
+         append = FALSE)
+```
+
 
 ```{r combine nesten dfs}
 colnames_x <- data.frame(col = 1:ncol(data_nest_gs))
