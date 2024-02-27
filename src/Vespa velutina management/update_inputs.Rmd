@@ -468,7 +468,7 @@ st_write(cleandata, points_path,
 ```
 
 ```{r calculate actieve haarden}
-source("~/GitHub/VespaR/Scripts/VespaWatch_app/scripts/bereken_actieve_haarden.r")
+source("./src/Vespa velutina management/bereken_actieve_haarden.r")
 
 nesten <- data_nest_final %>% 
   dplyr::filter(year == year(Sys.Date())) %>% 
@@ -476,18 +476,17 @@ nesten <- data_nest_final %>%
          popup = paste0("Vespawatch rij ", id),
          institutionCode = "Vespawatch")
 
-ah_list <- bereken_actieve_haarden(gbif_data = points,
+ah_list <- bereken_actieve_haarden(gbif_data = cleandata,
                                    beheer_data = nesten)
 
 outputs <- c("actieve_haarden", "onbehandelde_nesten", "beheerde_nesten")
 
 for(o in outputs){
-  export_fn <- paste0("processing_exportpath", o, ".geojson")
+  export_fn <- paste0(processing_exportpath, o, ".geojson")
   
   if(file.exists(export_fn)){
     file.remove(export_fn)
   }
-  
   st_write(ah_list[[o]],
            export_fn,
            append = FALSE)
