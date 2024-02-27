@@ -336,6 +336,16 @@ data_nest_final <- data_nest_final %>%
             by = "NISCODE")
 ```
 
+```{r data checks}
+test_that("Check for NA values in each column", {
+  expect_true(sum(is.na(data_nest_final$NISCODE)) <= nrow(data_nest_final)*0.01, "Column NISCODE contains NA values")
+  expect_true(sum(is.na(data_nest_final$GEWEST)) <= nrow(data_nest_final)*0.01, "Column GEWEST contains NA values")
+  expect_true(sum(is.na(data_nest_final$Gemeente)) <= nrow(data_nest_final)*0.01, "Column Gemeente contains NA values")
+  expect_true(sum(is.na(data_nest_final$NAAM)) <= nrow(data_nest_final)*0.01, "Column NAAM contains NA values")
+  expect_true(sum(is.na(data_nest_final$nest_type)) <= nrow(data_nest_final)*0.01, "Column nest_type contains NA values")
+})
+```
+
 ```{r export paths}
 processing_exportpath <- "./data/output/UAT_processing/Vespa_velutina_shape/"
 ```
