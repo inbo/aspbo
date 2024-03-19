@@ -325,6 +325,7 @@ failing;falend;;échouant;;failing;
 contents;Inhoudsopgave;;TODO;;Contents;
 createReport;Maak rapport;;TODO;;Create report;
 parameters;Parameters;;TODO;;Parameters;
+noParameters;Geen parameters geselecteerd;;TODO;;No parameters selected;
 version;Versie;;Version;;Version;
 yes;ja;;oui;;yes;
 no;nee;;non;;no;
