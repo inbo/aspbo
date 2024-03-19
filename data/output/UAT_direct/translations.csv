@@ -143,7 +143,7 @@ provinces;provincies;;provinces;;provinces;
 cpue;vangst per eenheid inspanning;;prise par unité d'effort;;catch per unit effort;
 absolute;absoluut;;absolut;;absolute;
 group;groep;;groupe;;group;
-summary;samenvatting;;résumé;;summary;
+summarizeBy;samenvatting;;résumé;;summary;
 sum;aantal;;nombre;;number;
 cumsum;cumulatief aantal;;nombre cumulé;;cumulative number;
 count;aantal;;nombre;;count;
