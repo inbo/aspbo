@@ -1,7 +1,7 @@
 Om dit script te laten lopen moet je een .renviron bestand aanmaken met de 
 volgende regels:
 
-gsheet_email = "<je email adres>"
+email = "<je email adres>"
 gbif_user = "<je gbif username>"
 gbif_pwd = "<je gbif password>"
 
@@ -56,6 +56,11 @@ prov <- st_read("./data/output/UAT_processing/provinces.geojson")
 dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJWs",
                                     sheet = "Checked",
                                     col_types = "nnn")
+
+# iAsset province error correction
+iAsset_foutecoordinaten <- read_delim("data/interim/iAsset_foutecoördinaten.csv", 
+    delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% 
+  filter(!is.na(`ID nest`))
 ```
 
 ```{r OLD Vespawatch: data prep}
@@ -146,7 +151,10 @@ data_nest_iasset <- st_intersection(data_nest_iasset, prov)
 
 #vaak zijn coördinaten in iAsset fout, het veld 'provincie' in iAsset is toegewezen op basis van veld adres. Enkel indien 'provincie' leeg, wordt provincie best afgeleid uit coördinaten. Er zijn ook een aantal meldingen met provincie ('ongekend'), van deze weten we het juiste adres niet en zijn de coördinaten de default coördinaten (dus niet correct).
 data_nest_iasset <- data_nest_iasset %>% 
-    mutate(provincie = case_when(!is.na(provincie) ~ provincie,
+    left_join(iAsset_foutecoordinaten, 
+              by = c("insp_order" = "ID nest")) %>% 
+    mutate(provincie = case_when(!is.na(provincie_corrected) ~ provincie_corrected,
+                                 !is.na(provincie) ~ provincie,
                                  !is.na(NAAM) ~ NAAM, 
                                  TRUE ~ NA_character_))
 
