@@ -29,6 +29,7 @@ conflicted::conflicts_prefer(tidylog::ungroup)
 conflicted::conflicts_prefer(tidylog::group_by)
 conflicted::conflicts_prefer(tidylog::full_join)
 conflicted::conflicts_prefer(tidylog::summarise)
+conflicted::conflicts_prefer(tidylog::pivot_longer)
 ```
 
 ```{r auth}
@@ -114,7 +115,8 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
                                       id == 63496 ~ as.Date("2020-11-03 10:00:00"),
                                       id == 63247 ~ as.Date("2019-11-08 18:01:00"),
                                       id == 63109 ~ as.Date("2019-05-26 13:15:00"),
-                                      TRUE ~ as.Date(observation_time)))
+                                      TRUE ~ as.Date(observation_time))) %>% 
+  mutate(provincie = NAAM)
 ```
 
 ```{r IASSET: data prep}
@@ -132,6 +134,8 @@ data_nest_iasset <- data_nest_iasset_raw %>%
                             resultaat == "niet succesvol behandeld" ~ "niet succesvol",
                             resultaat == "niet behandeld" ~ "niet behandeld",
                             beheerd == "ja" ~ "succesvol",
+                            month(datum_observatie) == 12 ~ "niet behandeld",
+                            month(datum_observatie) <= 2 ~ "niet behandeld",
                             (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "onbekend",
                             (beheerd == "onbekend") & (bestrijding_gestart == "nee") ~ "onbekend",
                             resultaat == "onbekend" ~ "onbekend",
@@ -279,7 +283,7 @@ test_mutiple_3 <- dupli_missing_both %>%
   pivot_longer(cols = c("ID1", "ID2"), values_to = "id") %>% 
   select(id) %>% 
   left_join(data_nest_iasset_raw %>% 
-              select(insp_order,
+              select(insp_order = as.character(insp_order),
                      datum_observatie, 
                      gevalideerd, 
                      duplicaat, 
