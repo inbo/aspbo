@@ -145,13 +145,10 @@ data_nest_iasset <- data_nest_iasset_raw %>%
 data_nest_iasset <- st_intersection(data_nest_iasset, prov)
 
 #vaak zijn coördinaten in iAsset fout, het veld 'provincie' in iAsset is toegewezen op basis van veld adres. Enkel indien 'provincie' leeg, wordt provincie best afgeleid uit coördinaten. Er zijn ook een aantal meldingen met provincie ('ongekend'), van deze weten we het juiste adres niet en zijn de coördinaten de default coördinaten (dus niet correct).
-if("provincie" %in% colnames(data_nest_iasset)){
-  data_nest_iasset <- data_nest_iasset %>% 
-    mutate(provincie = coalesce(provincie,NAAM))
-}else{
-  data_nest_iasset <- data_nest_iasset %>% 
-    mutate(provincie = NAAM)
-}
+data_nest_iasset <- data_nest_iasset %>% 
+    mutate(provincie = case_when(!is.na(provincie) ~ provincie,
+                                 !is.na(NAAM) ~ NAAM, 
+                                 TRUE ~ NA_character_))
 
 #temp fix lacking id column 
 if(!"insp_order" %in% colnames(data_nest_iasset)){
