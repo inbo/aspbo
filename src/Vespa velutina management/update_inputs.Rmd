@@ -283,7 +283,8 @@ test_mutiple_3 <- dupli_missing_both %>%
   pivot_longer(cols = c("ID1", "ID2"), values_to = "id") %>% 
   select(id) %>% 
   left_join(data_nest_iasset_raw %>% 
-              select(insp_order = as.character(insp_order),
+              mutate(insp_order = as.character(insp_order)) %>% 
+              select(insp_order,
                      datum_observatie, 
                      gevalideerd, 
                      duplicaat, 
