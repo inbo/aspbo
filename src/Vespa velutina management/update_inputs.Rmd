@@ -161,11 +161,12 @@ data_nest_iasset <- data_nest_iasset %>%
 #temp fix lacking id column 
 if(!"insp_order" %in% colnames(data_nest_iasset)){
   data_nest_iasset <- data_nest_iasset %>% 
-    mutate(id = row_number())
+    mutate(id = as.character(row_number()))
   warning("insp_order was missing from iasset data")
 }else{
   data_nest_iasset <- data_nest_iasset %>% 
-    rename(id = insp_order)
+    mutate(id = as.character(insp_order)) %>% 
+    select(-insp_order)
 }
 
 class(data_nest_iasset)
