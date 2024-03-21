@@ -114,7 +114,8 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
                                       id == 63496 ~ as.Date("2020-11-03 10:00:00"),
                                       id == 63247 ~ as.Date("2019-11-08 18:01:00"),
                                       id == 63109 ~ as.Date("2019-05-26 13:15:00"),
-                                      TRUE ~ as.Date(observation_time)))
+                                      TRUE ~ as.Date(observation_time))) %>% 
+  mutate(provincie = NAAM)
 ```
 
 ```{r IASSET: data prep}
