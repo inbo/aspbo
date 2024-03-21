@@ -127,7 +127,7 @@ data_nest_iasset <- data_nest_iasset_raw %>%
                             resultaat == "niet succesvol behandeld" ~ "niet succesvol",
                             resultaat == "niet behandeld" ~ "niet behandeld",
                             beheerd == "ja" ~ "succesvol",
-                            (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "niet behandeld",
+                            (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "onbekend",
                             (beheerd == "onbekend") & (bestrijding_gestart == "nee") ~ "onbekend",
                             resultaat == "onbekend" ~ "onbekend",
                             TRUE ~ NA_character_),
