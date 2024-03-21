@@ -4,7 +4,7 @@ author: "Sander Devisscher"
 date: "2023-11-16"
 output: html_document
 ---
-Gebruik [inbo/vespawatchr](https://github.com/inbo/vespawatchr) to get nesten 
+Gebruik [inbo/vespawatchr](https://github.com/inbo/iassetR) to get nesten 
 from iasset API.
 
 ```{r install/update iassetR}
