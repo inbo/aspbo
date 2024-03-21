@@ -55,7 +55,7 @@ prov <- st_read("./data/output/UAT_processing/provinces.geojson")
 # Duplicated nests from iasset
 dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJWs",
                                     sheet = "Checked",
-                                    col_types = "nnn")
+                                    col_types = "c")
 
 # iAsset province error correction
 iAsset_foutecoordinaten <- read_delim("data/interim/iAsset_foutecoördinaten.csv", 
