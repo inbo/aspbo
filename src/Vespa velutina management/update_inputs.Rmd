@@ -182,6 +182,7 @@ data_nest_iasset <- data_nest_iasset %>%
                 image_1 = foto_nest_1,
                 image_2 = foto_nest_2,
                 image_3 = foto_nest_3,
+                provincie = provincie,
                 originates_in_vespawatch,
                 observation_time = datum_observatie,
                 comments = opmerkingen,
