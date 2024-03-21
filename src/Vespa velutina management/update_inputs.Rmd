@@ -29,6 +29,7 @@ conflicted::conflicts_prefer(tidylog::ungroup)
 conflicted::conflicts_prefer(tidylog::group_by)
 conflicted::conflicts_prefer(tidylog::full_join)
 conflicted::conflicts_prefer(tidylog::summarise)
+conflicted::conflicts_prefer(tidylog::pivot_longer)
 ```
 
 ```{r auth}
@@ -133,6 +134,8 @@ data_nest_iasset <- data_nest_iasset_raw %>%
                             resultaat == "niet succesvol behandeld" ~ "niet succesvol",
                             resultaat == "niet behandeld" ~ "niet behandeld",
                             beheerd == "ja" ~ "succesvol",
+                            month(datum_observatie) == 12 ~ "niet behandeld",
+                            month(datum_observatie) <= 2 ~ "niet behandeld",
                             (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "onbekend",
                             (beheerd == "onbekend") & (bestrijding_gestart == "nee") ~ "onbekend",
                             resultaat == "onbekend" ~ "onbekend",
