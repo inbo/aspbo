@@ -9,6 +9,8 @@ output: html_document
 library(rgbif)
 library(dplyr)
 library(sf)
+library(readr)
+library(magrittr)
 ```
 
 get the polygon of flanders and convert it into a wkt, this will be used to

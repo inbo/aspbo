@@ -10,9 +10,13 @@ Dit bestand deel je met niemand!
 ```{r libraries}
 library(sf)
 library(googlesheets4)
-library(readxl)
-library(tidyverse)
+library(dplyr)
+library(magrittr)
+library(tidyr)
+library(readr)
+library(lubridate)
 library(testthat)
+library(units)
 ```
 
 ```{r conflicted packages, eval=FALSE}

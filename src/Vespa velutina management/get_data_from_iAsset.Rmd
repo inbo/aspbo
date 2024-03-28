@@ -22,7 +22,9 @@ install_github("Turtle6665/iassetR@31-get_record()-doesn't-give-an-ID-for-each-o
 ```
 
 ```{r libraries}
-library(tidyverse)
+library(magrittr)
+library(readr)
+library(dplyr)
 library(iassetR)
 ```
 
