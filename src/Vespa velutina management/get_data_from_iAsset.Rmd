@@ -16,6 +16,8 @@ install_github("inbo/iassetR@main")
 Sometimes it can be neccesary to test new "developmental" iassetR features.
 This can be done using the chunck below. 
 ```{r install alternate version, eval = FALSE}
+library(devtools)
+
 remove.packages("iassetR")
 
 install_github("Turtle6665/iassetR@31-get_record()-doesn't-give-an-ID-for-each-observation")
