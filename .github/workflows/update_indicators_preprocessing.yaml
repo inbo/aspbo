@@ -2,17 +2,16 @@ on:
   workflow_dispatch:
   push:
     branches:
-     - 'uat'
-    paths: 
-     - 'data/output/UAT_processing/data_input_checklist_indicators.tsv'
-    
+      - "uat"
+    paths:
+      - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
+
 name: create full_timeseries.csv
 
 jobs:
   fetch-data:
     runs-on: ${{ matrix.config.os }}
-    environment:
-      name: ${{ github.event_name == 'push' && 'UAT' || 'PROD' }}
+    environment: ${{ github.ref == 'refs/heads/uat' && 'UAT' || 'PROD' }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
@@ -20,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-latest,   r: 'release'}
+          - { os: ubuntu-latest, r: "release" }
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -52,15 +51,15 @@ jobs:
           sudo apt install --yes libharfbuzz-dev libfribidi-dev
           R --no-save -e 'install.packages("devtools")'
           R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
-          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@main", 
+          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
                          subdir = "alienSpecies", force = TRUE)'
-          
+
       - name: install packages
         run: |
           source("src/install_packages_occ_indic.R")
         shell: Rscript {0}
-        
-         - name: Setup AWS credentials
+
+      - name: Setup AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -82,6 +81,12 @@ jobs:
         run: |
           source("src/run_occurrence_indicators_preprocessing.R")
         shell: Rscript {0}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.assume_role.outputs.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.assume_role.outputs.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ steps.assume_role.outputs.AWS_SESSION_TOKEN }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
 
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
@@ -91,7 +96,7 @@ jobs:
           commit_message: "update occ_indic_preprocessing"
           target_branch: automatic-update-occ_indic_preprocessing
           add_timestamp: true
-          
+
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
         with:
@@ -104,7 +109,7 @@ jobs:
       - name: Get branch name
         run: |
           git branch --show-current
-          
+
       - name: Create pull request
         uses: devops-infra/action-pull-request@v0.4.2
         with:

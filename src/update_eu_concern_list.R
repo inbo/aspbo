@@ -9,12 +9,13 @@ library(alienSpecies)
 # connect to bucket ####
 source("./src/connect_to_bucket.R")
 
-UAT_filelist <- connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
+#UAT_filelist <- connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
 
 # get files ####
 eu_concern_list_old <- loadTabularData(type = "unionlist") %>% 
   rename(checklist_scientificName = scientificName,
          backbone_taxonKey = taxonKey) 
+
 
 eu_concern_list_new <- name_usage(datasetKey = "79d65658-526c-4c78-9d24-1870d67f8439",
                                   limit = 1000)
