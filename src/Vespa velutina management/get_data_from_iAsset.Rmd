@@ -20,7 +20,7 @@ library(devtools)
 
 remove.packages("iassetR")
 
-install_github("Turtle6665/iassetR@31-get_record()-doesn't-give-an-ID-for-each-observation")
+install_github("inbo/iassetR@20-pass-credentials-via-sys-env")
 ```
 
 ```{r libraries}
@@ -32,7 +32,7 @@ library(iassetR)
 
 ```{r get records}
 iasset_raw <- get_records(inspection_name = "Vespa-Watch",
-                          get_access_token(Sys.getenv("iasset_user")))
+                          get_access_token())
 ```
 
 ```{r drop columns}
