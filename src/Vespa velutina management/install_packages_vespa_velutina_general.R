@@ -3,7 +3,7 @@ installed <- rownames(installed.packages())
 # specify packages we need
 required <- c("sf", "magrittr", "readr",
               "dplyr", "tidyr", "googlesheets4",
-              "testthat", "units", "lubridate"
+              "testthat", "units", "lubridate","ows4R"
 )
 # install packages if needed
 if (!all(required %in% installed)) {
