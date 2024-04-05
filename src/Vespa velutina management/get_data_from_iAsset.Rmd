@@ -13,8 +13,8 @@ library(devtools)
 install_github("inbo/iassetR@main")
 ```
 
-Sometimes it can be neccesary to test new "developmental" iassetR features.
-This can be done using the chunck below. 
+Sometimes it can be necessary to test new "developmental" iassetR features.
+This can be done using the chunk below. 
 ```{r install alternate version, eval = FALSE}
 library(devtools)
 
