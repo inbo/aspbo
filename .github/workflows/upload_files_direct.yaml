@@ -11,9 +11,7 @@ name: upload_files_direct
 jobs:
   upload_files:
     runs-on: ${{ matrix.config.os }}
-    environment:
-      name: ${{ github.event_name == 'push' && 'UAT' || 'PROD' }}
-
+    environment: ${{ github.ref == 'refs/heads/uat' && 'UAT' || 'PROD' }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
@@ -52,7 +50,7 @@ jobs:
           sudo apt install --yes libharfbuzz-dev libfribidi-dev
           R --no-save -e 'install.packages("devtools")'
           R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
-          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@main", 
+          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
                          subdir = "alienSpecies", force = TRUE)'
 
       - name: Install R packages
@@ -86,28 +84,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ steps.assume_role.outputs.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ steps.assume_role.outputs.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ steps.assume_role.outputs.AWS_SESSION_TOKEN }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
-
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
-        with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          commit_prefix: "[AUTO]"
-          commit_message: "upload files direct to UAT"
-          target_branch: upload files to UAT
-          add_timestamp: true
-
-      - name: Get branch name
-        run: |
-          git branch --show-current
-
-      - name: Create pull request
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          target_branch: uat
-          title: "[AUTO] upload files direct to UAT"
-          template: .github/PR_upload_files_to_UAT.md
-          reviewer: SanderDevisscher
-          label: automated workflow
-          get_diff: false
+          

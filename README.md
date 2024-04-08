@@ -12,7 +12,7 @@ The alien species portal backoffice contains automated data preparation scripts 
 [![update eu concern list](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml)
 
 ## Observations dataflows
-[![create full_timeseries.csv](https://github.com/inbo/aspbo/actions/workflows/update_indicators_preprocessing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_indicators_preprocessing.yaml)
+[![create full_timeseries.csv](https://github.com/inbo/aspbo/actions/workflows/update_indicators_preprocessing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_indicators_preprocessing.yaml) => manual workflow. RUN [05_occurrence_indicators_preprocessing.Rmd](https://github.com/inbo/aspbo/blob/uat/src/05_occurrence_indicators_preprocessing.Rmd) on a new branch
 
 ## Upload dataflows
 [![upload_files_direct](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml)

@@ -8,10 +8,10 @@ library(rgbif)
 # connect to bucket ####
 source("./src/connect_to_bucket.R")
 
-UAT_filelist <- connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
+#UAT_filelist <- connect_to_bucket(bucket_name = Sys.getenv("UAT_bucket"))
 
 # get files ####
-eu_concern_list_old <- read_delim(rawToChar(get_object(bucket = Sys.getenv("UAT_bucket"),
+eu_concern_list_old <- read_delim(rawToChar(get_object(bucket = Sys.getenv("S3_BUCKET"),
                                   region = "eu-west-1",
                                   object = "eu_concern_species.tsv",
                                   as = "raw")), delim = "\t") 

@@ -1,39 +1,63 @@
-# Libraries ####
-library(rgbif)
-library(readr)
-library(dplyr)
-library(magrittr)
+library(knitr)
 
-# download using previous limit ####
-current_metadata <- read_csv("./data/output/UAT_processing/griis_checklist_version.txt", 
-                             col_types = cols(modified = col_character())) %>% 
-  mutate(modified = parse_datetime(modified))
+# create temporary R file ####
+tempR <- tempfile(fileext = ".R")
+knitr::purl("https://raw.githubusercontent.com/trias-project/indicators/main/src/01_get_data_input_checklist_indicators.Rmd", output=tempR)
+source(tempR)
+unlink(tempR)
 
-limit <- max(current_metadata$limit, na.rm = TRUE)
-GRIIS_raw <- name_usage(datasetKey = "6d9e952f-948c-4483-9807-575348147c7e",
-                        limit = limit)
+# move file to UAT_processing ####
+file.copy(from = "./data/interim/data_input_checklist_indicators.tsv",
+          to = "./data/output/UAT_processing/data_input_checklist_indicators.tsv",
+          overwrite = TRUE)
 
-# increase download limit ####
-while(GRIIS_raw$meta$endOfRecords == FALSE){
-  limit <- limit + 1000
-  print(limit)
-  GRIIS_raw <- name_usage(datasetKey = "6d9e952f-948c-4483-9807-575348147c7e",
-                          limit = limit)
+file.remove("./data/interim/data_input_checklist_indicators.tsv")
+
+# add vernicular names
+checklist_raw <- read_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
+                            delim = "\t", escape_double = FALSE, 
+                            trim_ws = TRUE)
+
+taxon_keys <- unique(checklist_raw$nubKey)
+
+all_vernicular_names <- data.frame(
+  taxonKey = numeric(),
+  vernacular_name_nl = character(),
+  vernacular_name_fr = character(),
+  vernacular_name_en = character(),
+  stringsAsFactors = FALSE
+)
+
+for(t in taxon_keys){
+  temp_name_usage <- name_usage(key = t, data = "vernacularNames")
+  spec_vernicular_names <- temp_name_usage$data 
+  
+  if(nrow(spec_vernicular_names) > 0){
+    spec_vernicular_names <- spec_vernicular_names %>% 
+      filter(language %in% c("eng", "fra", "nld")) %>% 
+      mutate(vernacularName = str_to_sentence(vernacularName),
+             language = str_sub(language, 0, 2)) %>% 
+      distinct(taxonKey, language, vernacularName) %>% 
+      group_by(language, taxonKey) %>% 
+      summarise(vernacular_name = paste(vernacularName, collapse = ", ")) %>% 
+      ungroup() %>% 
+      pivot_wider(id_cols = taxonKey,
+                  names_from = language,
+                  names_prefix = "vernacular_name_",
+                  values_from = vernacular_name)
+    
+    if(nrow(all_vernicular_names) == 0){
+      all_vernicular_names <- spec_vernicular_names
+    }else{
+      all_vernicular_names <- bind_rows(all_vernicular_names, spec_vernicular_names)
+    }
+  }else{
+    warning(paste0("No vernicular names for ", t))
+  }
 }
 
-# get data ####
-GRIIS_base <- GRIIS_raw$data
+checklist <- checklist_raw %>% 
+  left_join(all_vernicular_names, by = c("nubKey" = "taxonKey")) %>% 
+  write_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
+              delim = "\t")
 
-# update metadata ####
-new_metadata <- datasets(uuid = "6d9e952f-948c-4483-9807-575348147c7e")
-new_citation <- new_metadata$data$citation$identifier
-new_update <- as.Date(new_metadata$data$modified)
-
-current_metadata <- current_metadata %>% 
-  add_row(modified = new_update,
-          citation = new_citation,
-          limit = limit)
-
-# export files ####
-write_csv(current_metadata, "./data/output/UAT_processing/griis_checklist_version.txt")
-write_tsv(GRIIS_base, "./data/output/UAT_processing/data_input_checklist_indicators.tsv")
