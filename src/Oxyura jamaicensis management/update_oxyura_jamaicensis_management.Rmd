@@ -1,0 +1,41 @@
+---
+title: "update_oxyura_jamaicensis_management"
+author: "Sander Devisscher"
+date: "2024-04-08"
+output: html_document
+---
+
+```{r libraries}
+library(rgbif)
+library(dplyr)
+library(readr)
+library(magrittr)
+```
+
+```{r initiate download}
+datasetKey <- c("7522721f-4d97-4984-8231-c9e061ef46df")
+
+down_rst <- occ_download(
+  pred("taxonKey", 2498305),
+  pred_in("datasetKey", datasetKey),
+  format = "DWCA",
+  user = Sys.getenv("gbif_user"), 
+  pwd = Sys.getenv("gbif_pwd"), 
+  email = Sys.getenv("email"))
+
+occ_download_wait(down_rst,
+                  curlopts = list(verbose = TRUE,
+                                  http_version = 2,
+                                  forbid_reuse = TRUE))
+## Use manual download ####
+# down_musk <- "0026587-231002084531237"
+
+raw_ruddy_data <- occ_download_get(down_rst) %>%
+  occ_download_import()
+```
+
+```{r}
+
+```
+
+
