@@ -31,6 +31,9 @@ library(iassetR)
 ```
 
 ```{r get records}
+username <- Sys.getenv("username")
+iasset_password <- Sys.getenv("iasset_password")
+
 iasset_raw <- get_records(inspection_name = "Vespa-Watch",
                           get_access_token())
 ```
