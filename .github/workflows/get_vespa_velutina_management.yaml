@@ -113,7 +113,7 @@ jobs:
         
       - name: Get data from gbif
         run: |
-          source("src/Vespa velutina management/run_get_data_from_iasset.R")
+          source("src/Vespa velutina management/run_get_data_from_iAsset.R")
         shell: Rscript {0}
 
       - name: Commit and push changes
