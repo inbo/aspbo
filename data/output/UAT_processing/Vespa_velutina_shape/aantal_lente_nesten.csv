@@ -1,21 +1,28 @@
 observation_jaar,prov,aantal_gemelde_nesten
-2018,West-Vlaanderen,1
-2019,Oost-Vlaanderen,1
-2019,Vlaams Brabant,1
-2019,West-Vlaanderen,1
-2020,Oost-Vlaanderen,5
-2020,West-Vlaanderen,4
+2017,West-Vlaanderen,1
+2020,Henegouwen,1
+2020,Oost-Vlaanderen,1
+2020,West-Vlaanderen,1
 2021,Antwerpen,1
+2021,Henegouwen,1
 2021,Limburg,1
-2021,Oost-Vlaanderen,2
-2021,Vlaams Brabant,2
-2022,Antwerpen,7
-2022,Limburg,2
-2022,Oost-Vlaanderen,27
-2022,Vlaams Brabant,24
-2022,West-Vlaanderen,27
-2023,Antwerpen,34
-2023,Limburg,3
-2023,Oost-Vlaanderen,92
-2023,Vlaams Brabant,44
-2023,West-Vlaanderen,87
+2021,Oost-Vlaanderen,1
+2021,Vlaams-Brabant,1
+2022,Oost-Vlaanderen,4
+2022,Vlaams-Brabant,2
+2022,West-Vlaanderen,2
+2023,Antwerpen,4
+2023,HoofdstedelijkGewest,2
+2023,Limburg,1
+2023,Oost-Vlaanderen,32
+2023,Vlaams-Brabant,11
+2023,West-Vlaanderen,41
+2024,Antwerpen,42
+2024,Henegouwen,4
+2024,HoofdstedelijkGewest,10
+2024,Limburg,7
+2024,Luik,1
+2024,Oost-Vlaanderen,105
+2024,Vlaams-Brabant,58
+2024,Waals-Brabant,1
+2024,West-Vlaanderen,77
