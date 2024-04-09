@@ -7,7 +7,7 @@ output: html_document
 Gebruik [inbo/vespawatchr](https://github.com/inbo/iassetR) to get nesten 
 from iasset API.
 
-```{r install/update iassetR}
+```{r install/update iassetR, eval=FALSE}
 library(devtools)
 
 install_github("inbo/iassetR@main")
