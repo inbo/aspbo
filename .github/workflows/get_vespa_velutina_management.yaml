@@ -10,7 +10,7 @@ jobs:
   get_data_from_gbif:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: get_data_from_gbif
 
     strategy:
       fail-fast: false
@@ -69,7 +69,7 @@ jobs:
   get_data_from_iasset:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: get_data_from_iasset
 
     strategy:
       fail-fast: false
