@@ -49,7 +49,7 @@ jobs:
           fi
 
   get_data_from_gbif:
-    needs: test_secrets
+    needs: test
     runs-on: ${{ matrix.config.os }}
 
     name: get_data_from_gbif
@@ -110,7 +110,7 @@ jobs:
           target_branch: automatic-vespa-velutina-data
           
   get_data_from_iasset:
-    needs: test_secrets
+    needs: test
     runs-on: ${{ matrix.config.os }}
 
     name: get_data_from_iasset
