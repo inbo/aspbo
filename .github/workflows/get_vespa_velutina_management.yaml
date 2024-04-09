@@ -7,23 +7,31 @@ on:
 name: get_vespa_velutina_management
 
 jobs:
-  name: check if MY_SECRET exists
-  run: |
-    if [ $(echo "${{secrets.iasset_user}}" | wc -c) -lt 2 ]; then
-       echo "The secret 'iasset_user' has not been set."
-       echo "Please go to 'Settings > Secrets > Actions' to create it."
-       exit 1
-    fi
-    if [ $(echo "${{secrets.iasset_password}}" | wc -c) -lt 2 ]; then
-       echo "The secret 'iasset_password' has not been set."
-       echo "Please go to 'Settings > Secrets > Actions' to create it."
-       exit 1
-    fi
-    if [ $(echo "${{secrets.service}}" | wc -c) -lt 2 ]; then
-       echo "The secret 'service' has not been set."
-       echo "Please go to 'Settings > Secrets > Actions' to create it."
-       exit 1
-    fi
+  test:
+    name: test_secrets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check if secrets exist
+        run: |
+          if [ $(echo "${{secrets.iasset_user}}" | wc -c) -lt 2 ]; then
+            echo "The secret 'iasset_user' has not been set."
+            echo "Please go to 'Settings > Secrets > Actions' to create it."
+            exit 1
+          fi
+          if [ $(echo "${{secrets.iasset_password}}" | wc -c) -lt 2 ]; then
+            echo "The secret 'iasset_password' has not been set."
+            echo "Please go to 'Settings > Secrets > Actions' to create it."
+            exit 1
+          fi
+          if [ $(echo "${{secrets.service}}" | wc -c) -lt 2 ]; then
+            echo "The secret 'service' has not been set."
+            echo "Please go to 'Settings > Secrets > Actions' to create it."
+            exit 1
+          fi
 
   get_data_from_gbif:
     runs-on: ${{ matrix.config.os }}
