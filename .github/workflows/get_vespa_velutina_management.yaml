@@ -125,7 +125,7 @@ jobs:
           target_branch: automatic-vespa-velutina-data
       
   update_inputs:
-    needs: get_data_from_gbif, get_data_from_iasset
+    needs: [get_data_from_gbif, get_data_from_iasset]
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
