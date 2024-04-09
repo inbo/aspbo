@@ -10,6 +10,8 @@ library(rgbif)
 library(dplyr)
 library(readr)
 library(magrittr)
+library(tidyr)
+library(testthat)
 ```
 
 ```{r initiate download}
@@ -27,15 +29,91 @@ occ_download_wait(down_rst,
                   curlopts = list(verbose = TRUE,
                                   http_version = 2,
                                   forbid_reuse = TRUE))
-## Use manual download ####
-# down_musk <- "0026587-231002084531237"
-
+# Read occurrence data ####
 raw_ruddy_data <- occ_download_get(down_rst) %>%
   occ_download_import()
+
+# Read verbatim data ####
+# Needed for lifestage information 
+ruddy_zipfile <- dir(path = "./",
+               pattern = ".zip")
+
+unzip(zipfile = ruddy_zipfile,
+      files = "verbatim.txt",
+      exdir = tempdir())
+
+ruddy_verbatim_raw <- read_tsv(paste0(tempdir(), "/verbatim.txt"))
 ```
 
-```{r}
+```{r cleanup}
 
+if(length(ruddy_zipfile) == 1) {
+  unlink(ruddy_zipfile)
+  unlink(paste0(tempdir(), "/verbatim.txt"))
+}else{
+  warning("More than 1 zipfile detected in the root folder, please cleanup!!")
+}
+```
+
+```{r read old data}
+ruddy_old <- read_csv(file = "https://raw.githubusercontent.com/inbo/aspbo/uat/data/output/UAT_direct/Oxyura_jamaicensis.csv")
+
+cols_ruddy_old <- colnames(ruddy_old)
+
+sampling_protocols <- unique(ruddy_old$samplingProtocol) 
+```
+
+```{r prep verbatim}
+ruddy_verbatim_sex <- ruddy_verbatim_raw %>% 
+  select(gbifID, sex) %>% 
+  mutate(sex = str_remove(sex, "[{]"),
+         sex = str_remove(sex, "[}]"),
+         sex = str_remove(sex, " "),
+         sex = str_replace_all(sex, "\"", "")) %>% 
+  separate(col = sex, 
+           sep = ",",
+           into = c("sex_1", "sex_2")) %>% 
+  pivot_longer(cols = c("sex_1", "sex_2"),
+               names_to = NULL) %>% 
+  separate(col = value,
+           sep = ":",
+           into = c("gender", "count")) %>% 
+  filter(!is.na(gender))
+
+ruddy_verbatim_age <- ruddy_verbatim_raw %>% 
+  select(gbifID, lifeStage) %>% 
+  mutate(lifeStage = str_remove(lifeStage, "[{]"),
+         lifeStage = str_remove(lifeStage, "[}]"),
+         lifeStage = str_remove(lifeStage, " "),
+         lifeStage = str_replace_all(lifeStage, "\"", "")) %>% 
+  separate(col = lifeStage, 
+           sep = ",",
+           into = c("age_1", "age_2")) %>% 
+  pivot_longer(cols = c("age_1", "age_2"),
+               names_to = NULL) %>% 
+  separate(col = value,
+           sep = ":",
+           into = c("age", "count")) %>% 
+  filter(!is.na(age)) %>% 
+  mutate(count = as.integer(count))
+
+ruddy_adult <- ruddy_verbatim_age %>% 
+  filter(age == "adult") %>% 
+  group_by(gbifID) %>% 
+  summarise(adult = sum(count, na.rm = TRUE))
+
+
+```
+
+```{r prep data}
+ruddy_data <- raw_ruddy_data %>% 
+  filter(samplingProtocol %in% sampling_protocols)
+```
+
+```{r tests}
+test_that("columns not present in download", {
+  testthat::expect_contains(colnames(raw_ruddy_data), cols_ruddy_old)
+})
 ```
 
 
