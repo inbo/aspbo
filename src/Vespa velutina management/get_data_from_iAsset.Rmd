@@ -28,14 +28,16 @@ library(magrittr)
 library(readr)
 library(dplyr)
 library(iassetR)
+library(keyring)
+```
+
+```{r create keyring}
+key_set_with_value(service = "iasset_password",
+                   username = Sys.getenv("username"),
+                   password = Sys.getenv("iasset_password"))
 ```
 
 ```{r get records}
-username <- Sys.getenv("username")
-iasset_password <- Sys.getenv("iasset_password")
-
-print(username)
-
 iasset_raw <- get_records(inspection_name = "Vespa-Watch",
                           get_access_token())
 ```
