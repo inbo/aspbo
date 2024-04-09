@@ -8,8 +8,8 @@ name: get_vespa_velutina_management
 
 jobs:
   test:
-    name: test_secrets
     runs-on: ubuntu-latest
+    name: test_secrets
 
     steps:
       - name: Checkout repository
