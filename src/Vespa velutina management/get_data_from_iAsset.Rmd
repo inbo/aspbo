@@ -31,15 +31,9 @@ library(iassetR)
 library(keyring)
 ```
 
-```{r create keyring}
-key_set_with_value(service = "system",
-                   username = Sys.getenv("username"),
-                   password = Sys.getenv("iasset_password"))
-```
-
 ```{r get records}
 iasset_raw <- get_records(inspection_name = "Vespa-Watch",
-                          get_access_token(username = get_username(service = "system")))
+                          get_access_token(username = Sys.getenv("username")))
 ```
 
 ```{r drop columns}
