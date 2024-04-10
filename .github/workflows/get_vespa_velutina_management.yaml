@@ -126,7 +126,6 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
       username: ${{ secrets.iasset_username }}
       iasset_password: ${{ secrets.iasset_password }}
-      service: ${{ secrets.service }}
       
     steps:
       - name: Checkout repository
