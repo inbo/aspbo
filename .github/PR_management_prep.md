@@ -5,8 +5,8 @@ The following steps are all automatically performed:
 
 - download bullfrog management scripts from gbif 
 - cleanup, map & combine both datasets
-- extract neccessary data from datasets
-- export neccessary files 
+- extract necessary data from datasets
+- export necessary files 
 
 All the steps above are triggered by `./.github/workflows/management-prep.yaml`<sup>1</sup>
 and executed by `./src/management_prep.rmd`. 

@@ -41,7 +41,7 @@ January through December.\"
 
 2.  Changed taxonKeys
 
-3.  Omited taxonKeys
+3.  Omitted taxonKeys
 
-If any changes have occured to `./data/output/` the upload to buckets flow will
+If any changes have occurred to `./data/output/` the upload to buckets flow will
 be triggered after merging this PR.
