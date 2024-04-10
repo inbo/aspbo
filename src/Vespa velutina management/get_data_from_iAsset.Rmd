@@ -20,7 +20,7 @@ library(devtools)
 
 remove.packages("iassetR")
 
-install_github("inbo/iassetR@20-pass-credentials-via-sys-env")
+install_github("inbo/iassetR@43-get-keyring-to-work-with-github-actions")
 ```
 
 ```{r libraries}
@@ -28,12 +28,15 @@ library(magrittr)
 library(readr)
 library(dplyr)
 library(iassetR)
-library(keyring)
+```
+
+```{r}
+print(Sys.getenv("iasset_username"))
 ```
 
 ```{r get records}
 iasset_raw <- get_records(inspection_name = "Vespa-Watch",
-                          get_access_token(username = Sys.getenv("username")))
+                          get_access_token(username = Sys.getenv("iasset_username")))
 ```
 
 ```{r drop columns}
