@@ -8,7 +8,7 @@ The following steps are all automatically performed:
 
 All the steps above are triggered by `./.github/workflows/get_griis_checklist.yaml`<sup>1</sup>
 and executed by `./src/download_griis_checklist.R`. 
-This script is assisted by `./script/install_packages_get_griis.R`. 
+This script is assisted by `./src/install_packages_get_griis.R`. 
 
 Changes to the PR description can be made at `./.github/PR_download_griis_checklist.md`
 

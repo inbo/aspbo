@@ -9,7 +9,7 @@ The following steps are all automatically performed:
 
 All the steps above are triggered by `./.github/workflows/get_muskrat_data.yaml`<sup>1</sup>
 and executed by `./src/get_muskrat_data.R` and assisted by 
-`./script/install_packages_muskrat.R`. 
+`./src/install_packages_muskrat.R`. 
 
 Changes to the PR description can be made at `./.github/PR_get_muskrat_data.md`
 
