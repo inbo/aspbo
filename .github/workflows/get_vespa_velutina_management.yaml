@@ -97,6 +97,16 @@ jobs:
         run: |
           source("src/Vespa velutina management/run_get_data_from_gbif.R")
         shell: Rscript {0}
+        
+      - name: check branch status
+        run: |
+          if is_in_remote automatic-vespa-velutina-data; then
+             git checkout -b automatic-vespa-velutina-data --track origin/automatic-vespa-velutina-data
+          else
+             git checkout -b automatic-vespa-velutina-data --track origin/automatic-vespa-velutina-data
+             git push -u origin/automatic-vespa-velutina-data
+          fi
+          
 
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
@@ -160,6 +170,15 @@ jobs:
         run: |
           source("src/Vespa velutina management/run_get_data_from_iAsset.R")
         shell: Rscript {0}
+        
+      - name: check branch status
+        run: |
+          if is_in_remote automatic-vespa-velutina-data; then
+             git checkout -b automatic-vespa-velutina-data --track origin/automatic-vespa-velutina-data
+          else
+             git checkout -b automatic-vespa-velutina-data --track origin/automatic-vespa-velutina-data
+             git push -u origin/automatic-vespa-velutina-data
+          fi
 
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
