@@ -97,6 +97,12 @@ jobs:
         run: |
           source("src/Vespa velutina management/run_get_data_from_gbif.R")
         shell: Rscript {0}
+        
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
 
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
@@ -160,6 +166,12 @@ jobs:
         run: |
           source("src/Vespa velutina management/run_get_data_from_iAsset.R")
         shell: Rscript {0}
+        
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
 
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
@@ -215,10 +227,16 @@ jobs:
           source("src/Vespa velutina management/install_packages_vespa_velutina_general.R")
         shell: Rscript {0}
         
-      - name: Get data from gbif
+      - name: update inputs
         run: |
           source("src/Vespa velutina management/run_update_inputs.R")
         shell: Rscript {0}
+        
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
 
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
