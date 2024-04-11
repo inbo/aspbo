@@ -1,12 +1,12 @@
 title_id;title_nl;description_nl;title_fr;description_fr;title_en;description_en
-apply_gam;Status van toename (GAM) - Waarnemingen;;Statut d'augmentation (GAM) - Observations;;Emergence status (GAM) - Observations;
+apply_gam;Status van toename (GAM) - Waarnemingen;NA;Statut d'augmentation (GAM) - Observations;NA;Emergence status (GAM) - Observations;NA
 barplotLenteNesten;Voorjaarsnesten;Het aantal op vespawatch.be gemelde nesten tussen 1 januari en 19 mei;Nids de printemps;Le nombre de nids signalés sur vespawatch.be entre le 1er janvier et le 19 mai;Spring nests;The number of nests reported on vespawatch.be between January 1 and May 19
-countNesten;Aantal nesten per provincie (figuur);"Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>";Nombre de nids par province (figure);"Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>";Number of nests per province (figure);"The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>"
-indicator_introduction_year;Aantal nieuw geïntroduceerde soorten per jaar;;Nombre d'espèces nouvellement introduites par an;;Number of newly introduced species per year;
-indicator_total_year;Cumulatief aantal geïntroduceerde soorten;;Nombre cumulé d'espèces introduites;;Cumulative number of introduced species;
-indicator_native_range_year;Aantal geïntroduceerde soorten per jaar en per continent van oorsprong;;Nombre d'espèces introduites par an et par continent d'origine;;Number of introduced species per year and per native continent;
+countNesten;Aantal nesten per provincie (figuur);Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>;Nombre de nids par province (figure);Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>;Number of nests per province (figure);The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
+indicator_introduction_year;Aantal nieuw geïntroduceerde soorten per jaar;NA;Nombre d'espèces nouvellement introduites par an;NA;Number of newly introduced species per year;NA
+indicator_total_year;Cumulatief aantal geïntroduceerde soorten;NA;Nombre cumulé d'espèces introduites;NA;Cumulative number of introduced species;NA
+indicator_native_range_year;Aantal geïntroduceerde soorten per jaar en per continent van oorsprong;NA;Nombre d'espèces introduites par an et par continent d'origine;NA;Number of introduced species per year and per native continent;NA
 countOccupancy;Mate van verspreiding van de Unielijstsoorten;AANDACHT: Figuur onafhankelijk van geselecteerde filters bovenaan;Degré de répartition des espèces de la liste de l'Union;ATTENTION: Figure indépendante des filtres sélectionnés en haut;Trend in occupancy of Union list species;NOTE: Plot independent of the selected filters above
-get_table_pathways;Aantal geïntroduceerde soorten per introductieroute;;Nombre d'espèces introduites par voie d'introduction;;Number of introduced species per introduction pathways;
+get_table_pathways;Aantal geïntroduceerde soorten per introductieroute;NA;Nombre d'espèces introduites par voie d'introduction;NA;Number of introduced species per introduction pathways;NA
 management2_active-mapHeat;Actieve haarden;"Deze kaart illustreert waar Aziatische hoornaar is waargenomen, maar waar nog geen nest succesvol beheerd werd. Op deze plaatsen vinden mogelijks opsporingsacties plaats door de Vespawatchers.
 Waarnemingen worden weerhouden wanneer ze verder dan 2km van een succesvol beheerd nest bevinden en/of na een succesvolle beheeractie gemeld worden. Hoe intenser rood, hoe meer meldingen er in de buurt van elkaar zijn.
 Ontbrekende nesten kunnen steeds gemeld worden op <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
@@ -17,307 +17,311 @@ Les nids manquants peuvent toujours être signalés sur <a href=""https://vespaw
 Observations are retained if they are located further than 2km from a successfully managed nest and/or are reported after a successful management action. The more intense red, the more notifications there are in close proximity to each other.
 Missing nests can always be reported at <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
 </br><em>Dates available until {{maxDate}}</em>"
-management2_observed-mapHeat;Alle observaties huidig jaar;"Op deze kaart worden alle nesten en individuen van Aziatische hoornaar getoond die in {{maxYear}} zijn gemeld via diverse kanalen. Nog niet alle meldingen zijn op dit kaartje weergegeven. Binnenkort zullen alle meldingen zichtbaar zijn. </br><em>Data beschikbaar tot {{maxDate}}</em>";Toutes les observations de l'année actuelle;"Cette carte montre tous les nids et individus de frelons asiatiques signalés en {{maxYear}} via divers canaux. Tous les rapports ne sont pas encore affichés sur cette carte. Bientôt, toutes les notifications seront visibles. </br><em>Dates disponibles jusqu'au {{maxDate}}</em>";All observations current year;"This map shows all Asian hornet nests and individuals reported in {{maxYear}} through various channels. Not all reports are yet shown on this map. Soon all notifications will be visible. </br><em>Dates available until {{maxDate}}</em>"
-management2_countYearGroup;Beheer van nesten;;Gestion des nids;;Management of nests;
-management3_countYearGroup;Aantal observaties per jaar;;Nombre d'observations par an;;Number of observations per year;
-observations-mapOccurrence;Waarnemingen van;;Observations de;;Observations of;
-reporting_t1-mapOccurrence;Rapportering van;;Rapportage de;;Reporting of;
-reporting_t01-mapOccurrence;Rapportering van;;Rapportage de;;Reporting of;
-management-mapOccurrence;Beheer van;;Gestion de;;Management of;
-management-mapInvasion;Invasie geschiedenis van;;Histoire des invasions de;;Invasion history of;
-risk-mapRaster;TrIAS Risicokaarten;"Invasieve uitheemse soorten hebben het potentieel om ecosystemen te beschadigen, de biodiversiteit te verminderen en andere problemen voor mensen en dieren in het wild te veroorzaken. Om deze problemen te mitigeren is onderzoek nodig naar wat de potentiële risico’s zijn en welke soorten het meest waarschijnlijk een probleem vormen. Eén van de technieken die we gebruiken is het modelleren van de verspreiding van soorten. Deze modellen zijn bedoeld om de potentiële verspreiding van een soort te schatten, gegeven de bekende omgevingsomstandigheden waarin hij momenteel leeft. In dergelijke modellen kunnen we ook toekomstscenario's in dergelijke modellen integreren, zodat we bij onze risicobeoordeling rekening kunnen houden met klimaatverandering. </br>Het is onwaarschijnlijk dat deze kaarten nauwkeurige voorspellingen zijn van de huidige of toekomstige verspreiding van soorten, maar ze zijn niettemin een leidraad voor wetenschappers die risicobeoordelingen uitvoeren. Ze helpen ons door aan te geven welke gebieden het meest kwetsbaar zijn voor invasie, en of de klimaatverandering waarschijnlijk een grotere of kleinere vestiging van de soort zal veroorzaken.";TrIAS Cartes des Risques;"Les espèces exotiques envahissantes peuvent potentiellement endommager les écosystèmes, réduire la biodiversité et causer d’autres problèmes aux humains et à la faune. Afin d'atténuer ces problèmes, des recherches sont nécessaires pour déterminer quels sont les risques potentiels et quelles espèces sont les plus susceptibles de poser problème. L'une des techniques que nous utilisons est la modélisation de la répartition des espèces. Ces modèles visent à estimer la répartition potentielle d'une espèce compte tenu des conditions environnementales connues dans lesquelles elle vit actuellement. Dans de tels modèles, nous pouvons également intégrer des scénarios futurs, afin de pouvoir tenir compte du changement climatique dans notre évaluation des risques. </br>Il est peu probable que ces cartes constituent des prédictions précises de la répartition actuelle ou future des espèces, mais elles constituent néanmoins un guide pour les scientifiques qui effectuent des évaluations des risques. Ils nous aident en indiquant quelles zones pourraient être les plus vulnérables à l’invasion et si le changement climatique est susceptible d’entraîner un plus ou moins grand établissement de l’espèce.";TrIAS Risk Maps;"Invasive alien species have the potential to damage ecosystems, reduce biodiversity and cause other problems for people and wildlife. In order to mitigate these problems research is needed into what the potential risks are and which species are most likely to be a problem. One of the techniques we use is species distribution modelling. These models aim to estimate the potential distribution of a species given the known environmental conditions where it is currently living. In such models we can also incorporate future scenarios into such models, so that we can account for climate change in our evaluation of risk. </br>These maps are unlikely to be precise predictions of current or future species distributions, but are nevertheless a guide to scientists conducting risk assessments. They help us by indicating which areas might be most vulnerable to invasion, and whether climate change is likely to cause greater or lesser establishment of the species."
-tableIndicators;;Tijdelijke aanduiding voor disclaimer;;Espace réservé pour clause;;Placeholder for disclaimer
-tableNesten;Aantal nesten per provincie (tabel);"Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>";Nombre de nids par province (tableau);"Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>";Number of nests per province (table);"The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>"
-visualize_pathways_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1);;Espèces introduites par voie d'introduction (CBD, niveau 1);;Introduced species per pathway (CBD, level 1);
-visualize_pathways_year_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1) - trends;;Espèces introduites par voie d'introduction (CBD, niveau 1) - tendances;;Introduced species per pathway (CBD, level 1) - trends;
-visualize_pathways_level2;Geïntroduceerde soorten per introductieroute (CBD, niveau 2);;Espèces introduites par voie d'introduction (CBD, niveau 2);;Introduced species per pathway (CBD, level 2);
-visualize_pathways_year_level2;Geïntroduceerde soorten per introductieroute (CBD, niveau 2) - trends;;Espèces introduites par voie d'introduction (CBD, niveau 2) - tendances;;Introduced species per pathway (CBD, level 2) - trends;
+management2_observed-mapHeat;Alle observaties huidig jaar;Op deze kaart worden alle nesten en individuen van Aziatische hoornaar getoond die in {{maxYear}} zijn gemeld via diverse kanalen. Nog niet alle meldingen zijn op dit kaartje weergegeven. Binnenkort zullen alle meldingen zichtbaar zijn. </br><em>Data beschikbaar tot {{maxDate}}</em>;Toutes les observations de l'année actuelle;Cette carte montre tous les nids et individus de frelons asiatiques signalés en {{maxYear}} via divers canaux. Tous les rapports ne sont pas encore affichés sur cette carte. Bientôt, toutes les notifications seront visibles. </br><em>Dates disponibles jusqu'au {{maxDate}}</em>;All observations current year;This map shows all Asian hornet nests and individuals reported in {{maxYear}} through various channels. Not all reports are yet shown on this map. Soon all notifications will be visible. </br><em>Dates available until {{maxDate}}</em>
+management2_countYearGroup;Beheer van nesten;NA;Gestion des nids;NA;Management of nests;NA
+management3_countYearGroup;Aantal observaties per jaar;NA;Nombre d'observations par an;NA;Number of observations per year;NA
+observations-mapOccurrence;Waarnemingen van;NA;Observations de;NA;Observations of;NA
+reporting_t1-mapOccurrence;Rapportering van;NA;Rapportage de;NA;Reporting of;NA
+reporting_t01-mapOccurrence;Rapportering van;NA;Rapportage de;NA;Reporting of;NA
+management-mapOccurrence;Beheer van;NA;Gestion de;NA;Management of;NA
+management-mapInvasion;Invasie geschiedenis van;NA;Histoire des invasions de;NA;Invasion history of;NA
+risk-mapRaster;TrIAS Risicokaarten;Invasieve uitheemse soorten hebben het potentieel om ecosystemen te beschadigen, de biodiversiteit te verminderen en andere problemen voor mensen en dieren in het wild te veroorzaken. Om deze problemen te mitigeren is onderzoek nodig naar wat de potentiële risico’s zijn en welke soorten het meest waarschijnlijk een probleem vormen. Eén van de technieken die we gebruiken is het modelleren van de verspreiding van soorten. Deze modellen zijn bedoeld om de potentiële verspreiding van een soort te schatten, gegeven de bekende omgevingsomstandigheden waarin hij momenteel leeft. In dergelijke modellen kunnen we ook toekomstscenario's in dergelijke modellen integreren, zodat we bij onze risicobeoordeling rekening kunnen houden met klimaatverandering. </br>Het is onwaarschijnlijk dat deze kaarten nauwkeurige voorspellingen zijn van de huidige of toekomstige verspreiding van soorten, maar ze zijn niettemin een leidraad voor wetenschappers die risicobeoordelingen uitvoeren. Ze helpen ons door aan te geven welke gebieden het meest kwetsbaar zijn voor invasie, en of de klimaatverandering waarschijnlijk een grotere of kleinere vestiging van de soort zal veroorzaken.;TrIAS Cartes des Risques;Les espèces exotiques envahissantes peuvent potentiellement endommager les écosystèmes, réduire la biodiversité et causer d’autres problèmes aux humains et à la faune. Afin d'atténuer ces problèmes, des recherches sont nécessaires pour déterminer quels sont les risques potentiels et quelles espèces sont les plus susceptibles de poser problème. L'une des techniques que nous utilisons est la modélisation de la répartition des espèces. Ces modèles visent à estimer la répartition potentielle d'une espèce compte tenu des conditions environnementales connues dans lesquelles elle vit actuellement. Dans de tels modèles, nous pouvons également intégrer des scénarios futurs, afin de pouvoir tenir compte du changement climatique dans notre évaluation des risques. </br>Il est peu probable que ces cartes constituent des prédictions précises de la répartition actuelle ou future des espèces, mais elles constituent néanmoins un guide pour les scientifiques qui effectuent des évaluations des risques. Ils nous aident en indiquant quelles zones pourraient être les plus vulnérables à l’invasion et si le changement climatique est susceptible d’entraîner un plus ou moins grand établissement de l’espèce.;TrIAS Risk Maps;Invasive alien species have the potential to damage ecosystems, reduce biodiversity and cause other problems for people and wildlife. In order to mitigate these problems research is needed into what the potential risks are and which species are most likely to be a problem. One of the techniques we use is species distribution modelling. These models aim to estimate the potential distribution of a species given the known environmental conditions where it is currently living. In such models we can also incorporate future scenarios into such models, so that we can account for climate change in our evaluation of risk. </br>These maps are unlikely to be precise predictions of current or future species distributions, but are nevertheless a guide to scientists conducting risk assessments. They help us by indicating which areas might be most vulnerable to invasion, and whether climate change is likely to cause greater or lesser establishment of the species.
+tableIndicators;NA;Tijdelijke aanduiding voor disclaimer;NA;Espace réservé pour clause;NA;Placeholder for disclaimer
+tableNesten;Aantal nesten per provincie (tabel);Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>;Nombre de nids par province (tableau);Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>;Number of nests per province (table);The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
+visualize_pathways_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1);NA;Espèces introduites par voie d'introduction (CBD, niveau 1);NA;Introduced species per pathway (CBD, level 1);NA
+visualize_pathways_year_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1) - trends;NA;Espèces introduites par voie d'introduction (CBD, niveau 1) - tendances;NA;Introduced species per pathway (CBD, level 1) - trends;NA
+visualize_pathways_level2;Geïntroduceerde soorten per introductieroute (CBD, niveau 2);NA;Espèces introduites par voie d'introduction (CBD, niveau 2);NA;Introduced species per pathway (CBD, level 2);NA
+visualize_pathways_year_level2;Geïntroduceerde soorten per introductieroute (CBD, niveau 2) - trends;NA;Espèces introduites par voie d'introduction (CBD, niveau 2) - tendances;NA;Introduced species per pathway (CBD, level 2) - trends;NA
 welcomeTitle;Welkom op het exotenportaal;Op deze pagina vind je alle cijfers en trends over uitheemse soorten in België.;Bienvenue sur la page des espèces exotiques;Sur cette page, vous trouverez tous les chiffres et tendances concernant les espèces exotiques en Belgique.;Welcome to the alien species dashboard;On this page you will find all figures and trends about alien species in Belgium.
-;;;;;;
-;;;;;;
-;;;;;;
-;;;;;;
-;;;;;;
-;;;;;;
-;;;;;;
-key;;;;;;
-first_observed;jaar van eerste waarneming;;année de première observation;;year of first observation;
-last_observed;jaar van laatste waarneming;;année de dernière observation;;year of last observation;
-kingdom;rijk;;règne;;kingdom;
-phylum;stam;;phylum;;phylum;
-class;klasse;;classe;;class;
-order;orde;;ordre;;order;
-family;familie;;famille;;family;
-locality;locatie;;localité;;locality;
-locationId;locatie-ID;;ID de la localité;;location ID;
-native_range;natuurlijk areaal;;aire d'origine;;native range;
-degree_of_establishment;mate van vestiging;;degré d'établissement;;degree of establishment;
-pathway;introductieroute;;voie d'introduction;;pathway;
-pathway_level1;niveau 1;;niveau 1;;level 1;
-pathway_level2;niveau 2;;niveau 2;;level 2;
-habitat;habitat;;habitat;;habitat;
-marine;marien;;marine;;marine;
-freshwater;zoetwater;;eau douce;;freshwater;
-terrestrial;terrestrisch;;terrestre;;terrestrial;
-source;Bron;;Source;;Source;
-species;Soort;;Espèce;;Species;
-native_continent;continent van oorsprong;;continent d'origine;;native continent;
-more;Meer;;Plus;;More;
-less;Minder;;Moins;;Less;
-gbifLink;GBIF-sleutel (taxonkey);;Clé GBIF (taxonkey);;GBIF taxonkey;
-sourceLink;Bron;;Source;;Source;
-examples;voorbeelden;;exemples;;examples;
-start;Start;;Démarrage;;Start;
-global_indicators;Globale indicatoren;;Indicateurs globaux;;Global indicators;
-species_information;Soortgegevens;;Données d'espèces;;Species information;
-early_warning;Vroege detectie;;Détection précoce;;Early warning;
-management;Beheer;;Gestion;;Management;
-taxa;Taxa;;Taxa;;Taxa;
-trend;Trend;;Tendance;;Trend;
-pathways;Introductieroutes;;Voies d'introduction;;Pathways;
-origin;Oorsprong;;Origine;;Origin;
-observations;Waarnemingen;;Observations;;Observations;
-indicators;Indicatoren;;Indicateurs;;Indicators;
-reporting;Rapportering;;Rapport;;Reporting;
-habitats;Habitats;;Habitats;;Habitats;
-risk_maps;Risicokaarten;;Cartes des risques;;Risk maps;
-links;Links;;Liens;;Links;
-risk_assessment;Risicoanalyse;;Analyse des risques;;Risk assessment;
-images;Beelden;;Images;;Images;
-gender;Geslacht;;Sexe;;Gender;
-samplingProtocol;Staalnameprotocol;;Protocole d'échantillonnage;;Sampling protocol;
-noData;Geen data beschikbaar;;Aucune donné disponible;;No data available;
-shareLink;Deel link;;Partager le lien;;Share link;
-allTaxa;Alle taxa;;Tous les taxons;;All taxa;
-allHabitats;Alle habitats;;Tous les habitats;;All habitats;
-allPathways;Alle routes;;Toutes les voies d'introduction;;All pathways;
-allDoe;Alle mate van vestiging;;Tous les degrés d'établissement;;All degree of establishment;
-allNative;Alle natuurlijk arealen;;Toutes les aires d'origine;;All native regions;
-allYears;Alle jaartallen;;Toutes les années;;All years;
-allRegions;Alle regio's;;Toutes les régions;;All regions;
-allSources;Alle bronnen;;Toutes sources;;All sources;
-allUnion;Unie- en niet-unielijstsoorten;;Espèces de la liste de l'Union et non;;Union and non-union list species;
-andMissing;en ontbrekend;;et manquant;;and missing;
-includeMissing;inclusief ontbrekend ;;y compris manquant;;include missing;
-totalSpecies;Totaal aantal soorten;;Nombre total d'espèces;;Total number of species;
-tableLegend;Legende Tabel;;Légende du tableau;;Table Legend;
-icons;Iconen;;Icônes;;Icons;
-colors;Kleuren;;Couleurs;;Colors;
-min_1_obs;Soort met tenminste één (historische) waarneming in België;;Espèce avec au moins 1 observation (historique) en Belgique;;Species has at least 1 (historical) observation in Belgium;
-is_union;Soort is opgenomen op de Unielijst;;L'espèce est incluse dans la liste de l'Union;;Species is on the list of Union concern;
-only_obs;Enkel waarnemingen;;Seules observations;;Only observations;
-incomplete_out;Onvolledige output;;Sortie incomplète;;Incomplete outputs;
-all_out;Alle output;;Toutes les sorties;;All outputs;
-year;Jaar;;Année;;Year;
-numberTaxa;Aantal geïntroduceerde taxa;;Nombre de taxons introduits;;Number of introduced taxa;
-period;Periode;;Période;;Time Period;
-singlePathway;Gelieve 1 route (niveau 1) te selecteren voor deze figuur;;Veuillez sélectionner 1 voie d'introduction (niveau 1) pour cette figure;;Please select single pathway level 1 for this plot;
-number;Aantal;;Nombre;;Number;
-legend;Legende;;Légende;;Legend;
-topright;Bovenaan rechts;;En haut à droite;;Top right;
-bottomright;Onderaan rechts;;En bas à droite;;Bottom right;
-topleft;Bovenaan links;;En haut à gauche;;Top left;
-bottomleft;Onderaan links;;En bas à gauche;;Bottom left;
-none;<geen>;;<non>;;<none>;
-hideGlobe;Verberg landkaart;;Masquer la carte;;Hide globe;
-showGlobe;Toon landkaart;;Afficher la carte;;Show globe;
-downloadMap;Download kaart;;Télécharger la carte;;Download map;
-correctBias;Gecorrigeerd voor waarnemer-bias;;Corrigé pour biais d'observateurs;;Corrected for observer bias;
-protectAreas;Beschermde gebieden;;Zones protégées;;Protected areas;
-percentCages;Percentage bezette hokken (10km2) in Vlaanderen;;Pourcentage des cellules occupés (10km2) en Flandre;;Percentage of occupied cells (10km2) in Flanders;
-baseline;Basis;;Base;;Baseline;
-all;Alle;;Tout;;All;
-male;mannelijk;;mâle;;male;
-female;vrouwelijk;;femelle;;female;
-juvenile;juveniel;;juvénile;;juvenile;
-pulli;pulli;;pulli;;pulli;
-missing;ontbrekend;;manquant;;missing;
-culling - shooting;afschot;;abbatage;;culling - shooting;
-Capture;vangst;;capture;;capture;
-region;Gewest;;Région;;Region;
-regions;Regio’s;;Régions;;Regions;
-regionLevel;Regio-schaal;;Région niveau;;Region level;
-unit;eenheid;;unité;;unit;
-communes;gemeentes;;communes;;municipalities;
-provinces;provincies;;provinces;;provinces;
-cpue;vangst per eenheid inspanning;;prise par unité d'effort;;catch per unit effort;
-absolute;absoluut;;absolut;;absolute;
-group;groep;;groupe;;group;
-summary;samenvatting;;résumé;;summary;
-sum;aantal;;nombre;;number;
-cumsum;cumulatief aantal;;nombre cumulé;;cumulative number;
-count;aantal;;nombre;;count;
-lifeStage;levensstadium;;étape de la vie;;life stage;
-combineRegions;Combineer alle geselecteerde regio’s in de trendgrafiek;;Combinez toutes les régions sélectionnées dans le graphique de tendance;;Combine all selected regions in the trend graph;
-;;;;;;
-;;;;;;
-;;;;;;
-;;;;;;
-release;UITZETTING IN DE NATUUR;;LIBÉRATION DANS LA NATURE;;RELEASE IN NATURE;
-escape;ONTSNAPPING uit gehouden omgeving;;FUITE d'une zone de confinement;;ESCAPE from confinement;
-contaminant;TRANSPORT - BESMETTING;;TRANSPORT - CONTAMINANT;;TRANSPORT - CONTAMINANT;
-stowaway;TRANSPORT - VERSTEKELING;;TRANSPORT - CLANDESTIN;;TRANSPORT - STOWAWAY;
-corridor;CORRIDOR;;COULOIR;;CORRIDOR;
-unaided;ZONDER HULP;;SANS AIDE;;UNAIDED;
-release_biological_control;Biologische bestrijding;;Lutte biologique;;Biological control;
-release_erosion_control;Erosiebestrijding / duinversteviging (windbrekers, heggen, ...);;Lutte contre l’érosion / stabilisation de dunes (brise-vent, haies, etc.);;Erosion control / dune stabilization (windbreaks, hedges, ...);
-release_fishery;Visvangst in het wild (incl. hengelsport);;Pêche dans le milieu naturel (y compris la pêche sportive);;Fishery in the wild (including game fishing);
-release_hunting;Jacht;;Chasse dans le milieu naturel;;Hunting;
-release_landscape_improvement;Landschaps-/flora-/faunaverbetering;;« Amélioration » du paysage, de la flore et de la faune dans le milieu naturel;;Landscape / flora / fauna improvement in the wild;
-release_conservation;Introductie voor het natuurbehoud of faunabeheer;;Introduction à des fins de conservation;;Introduction for conservation purposes or wildlife management;
-release_use;Uitzetting in de natuur voor gebruik (verschillend van bovenstaande, b.v., pelsdieren, transport, medisch gebruik);;Libération dans la nature pour utilisation (à des fins autres que celles stipulées ci-dessus, par exemple production de fourrure, transport, médecine);;Release in nature for use (other than above, e.g., fur, transport, medical use);
-release_other;Andere opzettelijke uitzetting;;Autre libération intentionnelle;;Other intentional release;
-escape_agriculture;Landbouw (incl. biobrandstoffen);;Agriculture (y compris les cultures énergétiques);;Agriculture (including Biofuel feedstocks);
-escape_aquaculture;Aquacultuur / maricultuur;;Aquaculture/mariculture;;Aquaculture / mariculture;
-escape_zoo;Planten-/dierentuinen of aquaria (excl. particuliere aquaria);;Jardins botaniques/zoologiques/aquariums (hors aquariums privés);;Botanical garden/zoo/aquaria (excluding domestic aquaria);
-escape_pet;Huis-/aquarium-/terrariumdieren (incl. hun levend voeder);;Animaux de compagnie/espèces d’aquarium/terrarium (y compris les aliments vivants issus de ces espèces);;Pet/aquarium/terrarium species (including live food for such species );
-escape_farm;Gekweekte dieren (incl. dieren onder beperkt toezicht);;Animaux d’élevage (y compris les animaux soumis à un contrôle limité);;Farmed animals (including animals left under limited control);
-escape_forestry;Bosbouw (incl. bebossing of herbebossing);;Sylviculture (y compris le reboisement);;Forestry (including afforestation or reforestation);
-escape_fur_farm;Pelsdierkwekerijen;;Exploitations de production de fourrure;;Fur farms;
-escape_horticulture;Tuinbouw;;Horticulture;;Horticulture;
-escape_ornamental;Andere sierdoeleinden dan tuinbouw;;Fins ornementales hors horticulture;;Ornamental purpose other than horticulture;
-escape_research;Onderzoek en ex-situ kweek (binnen faciliteiten);;Recherche et reproduction d’animaux ex-situ (dans des installations);;Research and ex-situ breeding (in facilities);
-escape_food_bait;Levend voeder en aas;;Aliments et appâts vivants;;Live food and live bait;
-escape_other;Andere ontsnapping uit gehouden omgeving;;Autres fuites de zones de confinement;;Other escape from confinement;
-contaminant_nursery;Besmetting van plantgoed;;Contaminant de matériel de pépinière;;Contaminant nursery material;
-contaminant_bait;Besmetting van aas;;Appâts contaminés;;Contaminated bait;
-contaminant_food;Besmetting van voedsel (incl. van levend voedsel);;Contaminant alimentaire (y compris d’aliments vivants);;Food contaminant (including of live food);
-contaminant_on_animals;Besmetting op dieren (excl. parasieten, soorten vervoerd door gastheer/vector);;Contaminants des animaux (hormis les parasites, espèces transportées par un hôte/vecteur);;Contaminant on animals (except parasites, species transported by host/vector);
-contaminant_animal_parasite;Parasieten van dieren (incl. soorten vervoerd door gastheer/vector);;Parasites des animaux (y compris les espèces transportées par un hôte/vecteur);;Parasites on animals (including species transported by host and vector);
-contaminant_on_plants;Besmetting op planten (excl. parasieten, soorten vervoerd door gastheer/vector);;Contaminants des végétaux (hormis les parasites, espèces transportées par un hôte/vecteur);;Contaminant on plants (except parasites, species transported by host/vector);
-contaminant_plant_parasite;Parasieten van planten (incl. soorten vervoerd door gastheer/vector);;Parasites des végétaux (y compris les espèces transportées par un hôte/vecteur);;Parasites on plants (including species transported by host and vector);
-contaminant_seed;Besmetting van zaadgoed;;Contaminants des graines;;Seed contaminant;
-contaminant_timber;Houthandel;;Commerce du bois;;Timber trade;
-contaminant_habitat_material;Vervoer van habitatmateriaal (bodem, vegetatie, ...);;Transport de matériel constituant un habitat (sol, végétation, etc.);;Transportation of habitat material (soil, vegetation, ...);
-stowaway_fishing_equipment;Visseij- en hengelmateriaal;;Matériel de pêche;;Angling / fishing equipment;
-stowaway_container;Container / vracht;;Conteneur / vrac;;Container / bulk;
-stowaway_airplane;Verstekeling in of op vliegtuigen;;Organismes clandestins dans ou sur les avions;;Hitchhikers in or on airplane;
-stowaway_ship;Verstekeling van schepen/boten (excl. ballastwater of rompvervuiling);;Organismes clandestins dans les navires/bateaux (hormis les eaux de ballast et la salissure des coques);;Hitchhikers on ship/boat (excluding ballast water and hull fouling);
-stowaway_machinery;Machines / uitrusting;;Machines/équipement;;Machinery / equipment;
-stowaway_people_luggage;Mensen en hun bagage/materiaal (in bijzonder toerisme);;Personnes et leurs bagages/matériel (tourisme en particulier);;People and their luggage/equipment (in particular tourism);
-stowaway_organic_packing;Organisch verpakkingsmateriaal, in bijzonder houten verpakkingen;;Matériaux d’emballage organiques, en particulier à base de bois;;Organic packing material, in particular wood packaging;
-stowaway_ballast_water;Ballastwater van schepen / boten;;Eaux de ballast des navires / bateaux;;Ship / boat ballast water;
-stowaway_hull_fouling;Scheeps-/bootrompvervuiling ;;Salissure des coques de navires / bateaux;;Ship / boat hull fouling;
-stowaway_vehicles;Voertuigen (auto's, treinen, ...);;Véhicules (voitures, trains, etc.);;Vehicles (car, train, ...);
-stowaway_other;Andere vervoerswijzen;;Autres moyens de transport;;Other means of transport;
-corridor_water;Verbonden waterwegen / -bekkens / zeeën;;Cours d’eau / bassins / mers reliés entre eux;;Interconnected waterways / basins / seas;
-corridor_land;Tunnels en landbruggen;;Tunnels et ponts;;Tunnels and land bridges;
-natural_dispersal;Natuurlijke verspreiding;;Dispersion naturelle à travers les frontières d’espèces exotiques envahissantes introduites par les voies 1 à 5;;Natural dispersal across borders of invasive alien species that have been introduced through pathways 1 to 5;
-unknown;Onbekend;;Inconnu;;Unknown;
-release_unknown;UITZETTING IN DE NATUUR (niet gespecificeerd);;LIBÉRATION DANS LA NATURE (non spécifié);;RELEASE IN NATURE (not specified);
-escape_unknown;ONTSNAPPING uit gehouden omgeving (niet gespecificeerd);;FUITE d'une zone de confinement (non spécifié);;ESCAPE from confinement (not specified);
-contaminant_unknown;TRANSPORT - BESMETTING (niet gespecificeerd);;TRANSPORT - CONTAMINANT (non spécifié);;TRANSPORT - CONTAMINANT (not specified);
-stowaway_unknown;TRANSPORT - VERSTEKELING (niet gespecificeerd);;TRANSPORT - CLANDESTIN (non spécifié);;TRANSPORT - STOWAWAY (not specified);
-corridor_unknown;CORRIDOR (niet gespecificeerd);;COULOIR (non spécifié);;CORRIDOR (not specified);
-unaided_unknown;ZONDER HULP (niet gespecificeerd);;SANS AIDE (non spécifié);;UNAIDED (not specified);
-unaided_natural_dispersal;ZONDER HULP (natuurlijke verspreiding);;SANS AIDE (dispersion naturelle);;UNAIDED (natural dispersal);
-unknown_unknown;Onbekend (niet gespecificeerd);;Inconnu (non spécifié);;Unknown (not specified);
-;;;;;;
-;;;;;;
-Africa;Afrika;;Afrique;;Africa;
-Americas;Amerika;;Amérique;;America;
-Asia;Azië;;Asie;;Asia;
-Europe;Europa;;Europe;;Europe;
-Oceania;Oceanië;;Océanie;;Oceania;
-Australia and New Zealand;Australië en Nieuw-Zeeland;;Australie et Nouvelle-Zélande;;Australia and New Zealand;
-Caribbean;Caraïben;;Caraïbes;;Caribbean;
-Central America;Centraal-Amerika;;Amérique centrale;;Central America;
-Central Asia;Centraal-Azië;;Asie centrale;;Central Asia;
-Eastern Africa;Oost-Afrika;;Afrique de l'Est;;East Africa;
-Eastern Asia;Oost-Azië;;Asie de l'Est;;East Asia;
-Eastern Europe;Oost-Europa;;Europe de l'Est;;Eastern Europe;
-Melanesia;Melanesië;;Mélanésie;;Melanesia;
-Micronesia;Micronesië;;Micronésie;;Micronesia;
-Middle Africa;Midden-Afrika;;Afrique centrale;;Central Africa;
-Northern Africa;Noord-Afrika;;Afrique du Nord;;North-Africa;
-Northern America;Noord-Amerika;;Amérique du Nord;;North America;
-South America;Zuid-Amerika;;Amérique du Sud;;South America;
-Southeastern Asia;Zuidoost-Azië;;Asie du sud est;;South East Asia;
-Southern Africa;Zuid-Afrika;;Afrique du Sud;;South Africa;
-Southern Asia;Zuid-Azië;;Asie du sud;;South Asia;
-Southern Europe;Zuid-Europa;;Europe du Sud;;South Europe;
-Western Africa;West-Afrika;;Afrique de l'Ouest;;West Africa;
-Western Asia;West-Azië;;Asie occidentale;;Western Asia;
-Western Europe;West-Europa;;Europe de l'Ouest;;Western Europe;
-;;;;;;
-captive;in gevangenschap;;en captivité;;captive;
-casual;sporadisch;;sporadique;;casual;
-colonizing;koloniserend;;coloniser;;colonizing;
-cultivated;geteeld/gekweekt;;cultivé;;cultivated;
-established;gevestigd;;établi;;established;
-extinct;uitgestorven;;éteint;;extinct;
-introduced;geïntroduceerd;;introduit;;introduced;
-invasive;invasief;;envahissant;;invasive;
-released;losgelaten;;libéré;;released;
-reproducing;zich voortplantend;;se propageant;;reproducing;
-widespreadInvasive;wijdverspreid en invasief;;répandue et envahissante;;widespread and invasive;
-;;;;;;
-Union list;Unielijst;;liste de l’Union;;Union list;
-Non-union list;niet-Unielijst;;pas listé (liste de l'Union);;non-Union list;
-;;;;;;
-België;België;;Belgique;;Belgium;
-Brussels Hoofdstedelijk Gewest;Brussels Hoofdstedelijk Gewest;;Région de Bruxelles-Capitale;;Brussels-Capital Region;
-Vlaanderen;Vlaanderen;;Flandre;;Flanders;
-Wallonië;Wallonië;;Wallonie;;Wallonia;
-brussels;Brussels Hoofdstedelijk Gewest;;Région de Bruxelles-Capitale;;Brussels-Capital Region;
-flanders;Vlaanderen;;Flandre;;Flanders;
-wallonia;Wallonië;;Wallonie;;Wallonia;
-gewest;gewest;;région;;region;
-multipleRegions;meer dan 1 gewest;;plusieurs régions;;multiple regions;
-not selected;niet geselecteerd;;non séléctionné;;not selected;
-selected;geselecteerd;;séléctionné;;selected;
-;;;;;;
-Ad hoc alien species checklist;Ad hoc alien species checklist;;Ad hoc alien species checklist;;Ad hoc alien species checklist;
-Alien Bird Checklist;Alien Bird Checklist;;Alien Bird Checklist;;Alien Bird Checklist;
-Alien Fish Flanders;Alien Fish Flanders;;Alien Fish Flanders;;Alien Fish Flanders;
-Alien Macroinverts;Alien Macroinverts;;Alien Macroinverts;;Alien Macroinverts;
-Alien Mollusc checklist;Alien Mollusc checklist;;Alien Mollusc checklist;;Alien Mollusc checklist;
-Belgian rust fungi;Belgian rust fungi;;Belgian rust fungi;;Belgian rust fungi;
-Manual of Alien Plants;Manual of Alien Plants;;Manual of Alien Plants;;Manual of Alien Plants;
-RINSE1;RINSE1;;RINSE1;;RINSE1;
-RINSE2;RINSE2;;RINSE2;;RINSE2;
-WRiMS;WRiMS;;WRiMS;;WRiMS;
-;;;;;;
-unionColor;Unie kleur;;Union couleur;;Union colour;
-occurColor;Waarneming kleur;;Observation couleur;;Observation colour;
-occurrence;Waarneming;;Observation;;Observation;
-graph;Figuur;;Figure;;Figure;
-;;;;;;
-managed nest;Behandeld nest;;Nid traité;;Managed nest;
-untreated nest;Onbehandeld nest;;Nid non traité;;Untreated nest;
-individual;Individu;;Individu;;Individual;
-nest;Nest;;Nid;;Nest;
-lenteNesten;Aantal gemelde nesten t.e.m. 19 mei;;Nombre de nids signalés jusqu'à 19 mai;;Number of reported nests up to May 19;
-total;Totaal;;Total;;Total;
-map;Kaart;;Carte;;Map;
-difference;Verschil;;Différence;;Difference;
-disclaimerVespa;De soort is momenteel niet actief. Wanneer u een individu observeert, kan dit een overwinterende koningin zijn, wat geen nestactiviteit aangeeft;;L'espèce n'est actuellement pas active. Lorsque vous observez un individu, il peut s'agir d'une reine hivernante, ce qui n'indique pas d'activité de nidification.;;The species is currently not active. When you observe an individual this might be a wintering queen which does not indicate nesting activity.;
-AE;AE;;AE;;AE;
-AP;AP;;AP;;AP;
-AS;AS;;AS;;AS;
-IE;IE;;IE;;IE;
-UK;UK;;UK;;UK;
-Behandeling;Behandeling;;Traitement;;Treatment;
-succesvol;succesvol;;réussi;;successful;
-niet succesvol;niet succesvol;;non réussi;;not successful;
-behandeld;behandeld;;traité;;treated;
-niet behandeld;niet behandeld;;non traité;;not treated;
-onbekend;onbekend;;inconnu;;unknown;
-row;rij;;ligne;;row;
-;;;;;;
-modelScenario;Model scenario;;Scénario modèle;;Model scenario;
-hist;Model gebaseerd op historische klimaatdata;;Modèle basé sur des données climatiques historiques;;model based on historical climate data;
-rcp26;model gebaseerd op klimaatvoorspellingen onder RCP 2.6 voor 2040-2070;;modèle basé sur les prévisions climatiques du RCP 2.6 pour 2040-2070;;model based on climate forecasts under RCP 2.6 for 2040-2070;
-rcp45;model gebaseerd op klimaatvoorspellingen onder RCP 4.5 voor 2040-2070;;modèle basé sur les prévisions climatiques du RCP 4.5 pour 2040-2070;;model based on climate forecasts under RCP 4.5 for 2040-2070;
-rcp85;model gebaseerd op klimaatvoorspellingen onder RCP 8.5 voor 2040-2070;;modèle basé sur les prévisions climatiques du RCP 8.5 pour 2040-2070;;model based on climate forecasts under RCP 8.5 for 2040-2070;
-modelType;Model type;;Type de modèle;;Model type;
-riskMap;Risicokaart;;Carte des risques;;Risk map;
-diffMap;Kaart met verschil in risico tussen het RCP-klimaatscenario en de historische klimaatgegevens;;Carte de différence de risque entre le scénario climatique RCP et les données climatiques historiques;;Map of difference in risk between the RCP climate scenario and the historical climate data;
-confMap;Kaart met confidentie in voorspeld risico;;Carte de confiance du risque prévu;;Map of confidence of predicted risk;
-riskLow;laag risico;;faible risque;;low risk;
-riskHigh;hoog risico;;risque élevé;;high risk;
-diffLow;laag risicoverschil;;faible différence de risque;;low risk difference;
-diffHigh;hoog risicoverschil;;différence de risque élevée;;high risk difference;
-confLow;lage betrouwbaarheid;;faible confiance;;low confidence;
-confHigh;hoge betrouwbaarheid;;grande confiance;;high confidence;
-failing;falend;;échouant;;failing;
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+key;NA;NA;NA;NA;NA;NA
+first_observed;jaar van eerste waarneming;NA;année de première observation;NA;year of first observation;NA
+last_observed;jaar van laatste waarneming;NA;année de dernière observation;NA;year of last observation;NA
+kingdom;rijk;NA;règne;NA;kingdom;NA
+phylum;stam;NA;phylum;NA;phylum;NA
+class;klasse;NA;classe;NA;class;NA
+order;orde;NA;ordre;NA;order;NA
+family;familie;NA;famille;NA;family;NA
+locality;locatie;NA;localité;NA;locality;NA
+locationId;locatie-ID;NA;ID de la localité;NA;location ID;NA
+native_range;natuurlijk areaal;NA;aire d'origine;NA;native range;NA
+degree_of_establishment;mate van vestiging;NA;degré d'établissement;NA;degree of establishment;NA
+pathway;introductieroute;NA;voie d'introduction;NA;pathway;NA
+pathway_level1;niveau 1;NA;niveau 1;NA;level 1;NA
+pathway_level2;niveau 2;NA;niveau 2;NA;level 2;NA
+habitat;habitat;NA;habitat;NA;habitat;NA
+marine;marien;NA;marine;NA;marine;NA
+freshwater;zoetwater;NA;eau douce;NA;freshwater;NA
+terrestrial;terrestrisch;NA;terrestre;NA;terrestrial;NA
+source;Bron;NA;Source;NA;Source;NA
+species;Soort;NA;Espèce;NA;Species;NA
+native_continent;continent van oorsprong;NA;continent d'origine;NA;native continent;NA
+more;Meer;NA;Plus;NA;More;NA
+less;Minder;NA;Moins;NA;Less;NA
+gbifLink;GBIF-sleutel (taxonkey);NA;Clé GBIF (taxonkey);NA;GBIF taxonkey;NA
+sourceLink;Bron;NA;Source;NA;Source;NA
+examples;voorbeelden;NA;exemples;NA;examples;NA
+start;Start;NA;Démarrage;NA;Start;NA
+global_indicators;Globale indicatoren;NA;Indicateurs globaux;NA;Global indicators;NA
+species_information;Soortgegevens;NA;Données d'espèces;NA;Species information;NA
+early_warning;Vroege detectie;NA;Détection précoce;NA;Early warning;NA
+management;Beheer;NA;Gestion;NA;Management;NA
+taxa;Taxa;NA;Taxa;NA;Taxa;NA
+trend;Trend;NA;Tendance;NA;Trend;NA
+pathways;Introductieroutes;NA;Voies d'introduction;NA;Pathways;NA
+origin;Oorsprong;NA;Origine;NA;Origin;NA
+observations;Waarnemingen;NA;Observations;NA;Observations;NA
+indicators;Indicatoren;NA;Indicateurs;NA;Indicators;NA
+reporting;Rapportering;NA;Rapport;NA;Reporting;NA
+habitats;Habitats;NA;Habitats;NA;Habitats;NA
+risk_maps;Risicokaarten;NA;Cartes des risques;NA;Risk maps;NA
+links;Links;NA;Liens;NA;Links;NA
+risk_assessment;Risicoanalyse;NA;Analyse des risques;NA;Risk assessment;NA
+images;Beelden;NA;Images;NA;Images;NA
+gender;Geslacht;NA;Sexe;NA;Gender;NA
+samplingProtocol;Staalnameprotocol;NA;Protocole d'échantillonnage;NA;Sampling protocol;NA
+noData;Geen data beschikbaar;NA;Aucune donné disponible;NA;No data available;NA
+shareLink;Deel link;NA;Partager le lien;NA;Share link;NA
+allTaxa;Alle taxa;NA;Tous les taxons;NA;All taxa;NA
+allHabitats;Alle habitats;NA;Tous les habitats;NA;All habitats;NA
+allPathways;Alle routes;NA;Toutes les voies d'introduction;NA;All pathways;NA
+allDoe;Alle mate van vestiging;NA;Tous les degrés d'établissement;NA;All degree of establishment;NA
+allNative;Alle natuurlijk arealen;NA;Toutes les aires d'origine;NA;All native regions;NA
+allYears;Alle jaartallen;NA;Toutes les années;NA;All years;NA
+allRegions;Alle regio's;NA;Toutes les régions;NA;All regions;NA
+allSources;Alle bronnen;NA;Toutes sources;NA;All sources;NA
+allUnion;Unie- en niet-unielijstsoorten;NA;Espèces de la liste de l'Union et non;NA;Union and non-union list species;NA
+andMissing;en ontbrekend;NA;et manquant;NA;and missing;NA
+includeMissing;inclusief ontbrekend;NA;y compris manquant;NA;include missing;NA
+totalSpecies;Totaal aantal soorten;NA;Nombre total d'espèces;NA;Total number of species;NA
+tableLegend;Legende Tabel;NA;Légende du tableau;NA;Table Legend;NA
+icons;Iconen;NA;Icônes;NA;Icons;NA
+colors;Kleuren;NA;Couleurs;NA;Colors;NA
+min_1_obs;Soort met tenminste één (historische) waarneming in België;NA;Espèce avec au moins 1 observation (historique) en Belgique;NA;Species has at least 1 (historical) observation in Belgium;NA
+is_union;Soort is opgenomen op de Unielijst;NA;L'espèce est incluse dans la liste de l'Union;NA;Species is on the list of Union concern;NA
+only_obs;Enkel waarnemingen;NA;Seules observations;NA;Only observations;NA
+incomplete_out;Onvolledige output;NA;Sortie incomplète;NA;Incomplete outputs;NA
+all_out;Alle output;NA;Toutes les sorties;NA;All outputs;NA
+year;Jaar;NA;Année;NA;Year;NA
+numberTaxa;Aantal geïntroduceerde taxa;NA;Nombre de taxons introduits;NA;Number of introduced taxa;NA
+period;Periode;NA;Période;NA;Time Period;NA
+singlePathway;Gelieve 1 route (niveau 1) te selecteren voor deze figuur;NA;Veuillez sélectionner 1 voie d'introduction (niveau 1) pour cette figure;NA;Please select single pathway level 1 for this plot;NA
+number;Aantal;NA;Nombre;NA;Number;NA
+legend;Legende;NA;Légende;NA;Legend;NA
+topright;Bovenaan rechts;NA;En haut à droite;NA;Top right;NA
+bottomright;Onderaan rechts;NA;En bas à droite;NA;Bottom right;NA
+topleft;Bovenaan links;NA;En haut à gauche;NA;Top left;NA
+bottomleft;Onderaan links;NA;En bas à gauche;NA;Bottom left;NA
+none;<geen>;NA;<non>;NA;<none>;NA
+hideGlobe;Verberg landkaart;NA;Masquer la carte;NA;Hide globe;NA
+showGlobe;Toon landkaart;NA;Afficher la carte;NA;Show globe;NA
+downloadMap;Download kaart;NA;Télécharger la carte;NA;Download map;NA
+correctBias;Gecorrigeerd voor waarnemer-bias;NA;Corrigé pour biais d'observateurs;NA;Corrected for observer bias;NA
+protectAreas;Beschermde gebieden;NA;Zones protégées;NA;Protected areas;NA
+percentCages;Percentage bezette hokken (10km2) in Vlaanderen;NA;Pourcentage des cellules occupés (10km2) en Flandre;NA;Percentage of occupied cells (10km2) in Flanders;NA
+baseline;Basis;NA;Base;NA;Baseline;NA
+all;Alle;NA;Tout;NA;All;NA
+male;mannelijk;NA;mâle;NA;male;NA
+female;vrouwelijk;NA;femelle;NA;female;NA
+juvenile;juveniel;NA;juvénile;NA;juvenile;NA
+pulli;pulli;NA;pulli;NA;pulli;NA
+missing;ontbrekend;NA;manquant;NA;missing;NA
+culling - shooting;afschot;NA;abbatage;NA;culling - shooting;NA
+Capture;vangst;NA;capture;NA;capture;NA
+region;Gewest;NA;Région;NA;Region;NA
+regions;Regio’s;NA;Régions;NA;Regions;NA
+regionLevel;Regio-schaal;NA;Région niveau;NA;Region level;NA
+unit;eenheid;NA;unité;NA;unit;NA
+communes;gemeentes;NA;communes;NA;municipalities;NA
+provinces;provincies;NA;provinces;NA;provinces;NA
+cpue;vangst per eenheid inspanning;NA;prise par unité d'effort;NA;catch per unit effort;NA
+absolute;absoluut;NA;absolut;NA;absolute;NA
+group;groep;NA;groupe;NA;group;NA
+summary;samenvatting;NA;résumé;NA;summary;NA
+sum;aantal;NA;nombre;NA;number;NA
+cumsum;cumulatief aantal;NA;nombre cumulé;NA;cumulative number;NA
+count;aantal;NA;nombre;NA;count;NA
+lifeStage;levensstadium;NA;étape de la vie;NA;life stage;NA
+combineRegions;Combineer alle geselecteerde regio’s in de trendgrafiek;NA;Combinez toutes les régions sélectionnées dans le graphique de tendance;NA;Combine all selected regions in the trend graph;NA
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+release;UITZETTING IN DE NATUUR;NA;LIBÉRATION DANS LA NATURE;NA;RELEASE IN NATURE;NA
+escape;ONTSNAPPING uit gehouden omgeving;NA;FUITE d'une zone de confinement;NA;ESCAPE from confinement;NA
+contaminant;TRANSPORT - BESMETTING;NA;TRANSPORT - CONTAMINANT;NA;TRANSPORT - CONTAMINANT;NA
+stowaway;TRANSPORT - VERSTEKELING;NA;TRANSPORT - CLANDESTIN;NA;TRANSPORT - STOWAWAY;NA
+corridor;CORRIDOR;NA;COULOIR;NA;CORRIDOR;NA
+unaided;ZONDER HULP;NA;SANS AIDE;NA;UNAIDED;NA
+release_biological_control;Biologische bestrijding;NA;Lutte biologique;NA;Biological control;NA
+release_erosion_control;Erosiebestrijding / duinversteviging (windbrekers, heggen, ...);NA;Lutte contre l’érosion / stabilisation de dunes (brise-vent, haies, etc.);NA;Erosion control / dune stabilization (windbreaks, hedges, ...);NA
+release_fishery;Visvangst in het wild (incl. hengelsport);NA;Pêche dans le milieu naturel (y compris la pêche sportive);NA;Fishery in the wild (including game fishing);NA
+release_hunting;Jacht;NA;Chasse dans le milieu naturel;NA;Hunting;NA
+release_landscape_improvement;Landschaps-/flora-/faunaverbetering;NA;« Amélioration » du paysage, de la flore et de la faune dans le milieu naturel;NA;Landscape / flora / fauna improvement in the wild;NA
+release_conservation;Introductie voor het natuurbehoud of faunabeheer;NA;Introduction à des fins de conservation;NA;Introduction for conservation purposes or wildlife management;NA
+release_use;Uitzetting in de natuur voor gebruik (verschillend van bovenstaande, b.v., pelsdieren, transport, medisch gebruik);NA;Libération dans la nature pour utilisation (à des fins autres que celles stipulées ci-dessus, par exemple production de fourrure, transport, médecine);NA;Release in nature for use (other than above, e.g., fur, transport, medical use);NA
+release_other;Andere opzettelijke uitzetting;NA;Autre libération intentionnelle;NA;Other intentional release;NA
+escape_agriculture;Landbouw (incl. biobrandstoffen);NA;Agriculture (y compris les cultures énergétiques);NA;Agriculture (including Biofuel feedstocks);NA
+escape_aquaculture;Aquacultuur / maricultuur;NA;Aquaculture/mariculture;NA;Aquaculture / mariculture;NA
+escape_zoo;Planten-/dierentuinen of aquaria (excl. particuliere aquaria);NA;Jardins botaniques/zoologiques/aquariums (hors aquariums privés);NA;Botanical garden/zoo/aquaria (excluding domestic aquaria);NA
+escape_pet;Huis-/aquarium-/terrariumdieren (incl. hun levend voeder);NA;Animaux de compagnie/espèces d’aquarium/terrarium (y compris les aliments vivants issus de ces espèces);NA;Pet/aquarium/terrarium species (including live food for such species );NA
+escape_farm;Gekweekte dieren (incl. dieren onder beperkt toezicht);NA;Animaux d’élevage (y compris les animaux soumis à un contrôle limité);NA;Farmed animals (including animals left under limited control);NA
+escape_forestry;Bosbouw (incl. bebossing of herbebossing);NA;Sylviculture (y compris le reboisement);NA;Forestry (including afforestation or reforestation);NA
+escape_fur_farm;Pelsdierkwekerijen;NA;Exploitations de production de fourrure;NA;Fur farms;NA
+escape_horticulture;Tuinbouw;NA;Horticulture;NA;Horticulture;NA
+escape_ornamental;Andere sierdoeleinden dan tuinbouw;NA;Fins ornementales hors horticulture;NA;Ornamental purpose other than horticulture;NA
+escape_research;Onderzoek en ex-situ kweek (binnen faciliteiten);NA;Recherche et reproduction d’animaux ex-situ (dans des installations);NA;Research and ex-situ breeding (in facilities);NA
+escape_food_bait;Levend voeder en aas;NA;Aliments et appâts vivants;NA;Live food and live bait;NA
+escape_other;Andere ontsnapping uit gehouden omgeving;NA;Autres fuites de zones de confinement;NA;Other escape from confinement;NA
+contaminant_nursery;Besmetting van plantgoed;NA;Contaminant de matériel de pépinière;NA;Contaminant nursery material;NA
+contaminant_bait;Besmetting van aas;NA;Appâts contaminés;NA;Contaminated bait;NA
+contaminant_food;Besmetting van voedsel (incl. van levend voedsel);NA;Contaminant alimentaire (y compris d’aliments vivants);NA;Food contaminant (including of live food);NA
+contaminant_on_animals;Besmetting op dieren (excl. parasieten, soorten vervoerd door gastheer/vector);NA;Contaminants des animaux (hormis les parasites, espèces transportées par un hôte/vecteur);NA;Contaminant on animals (except parasites, species transported by host/vector);NA
+contaminant_animal_parasite;Parasieten van dieren (incl. soorten vervoerd door gastheer/vector);NA;Parasites des animaux (y compris les espèces transportées par un hôte/vecteur);NA;Parasites on animals (including species transported by host and vector);NA
+contaminant_on_plants;Besmetting op planten (excl. parasieten, soorten vervoerd door gastheer/vector);NA;Contaminants des végétaux (hormis les parasites, espèces transportées par un hôte/vecteur);NA;Contaminant on plants (except parasites, species transported by host/vector);NA
+contaminant_plant_parasite;Parasieten van planten (incl. soorten vervoerd door gastheer/vector);NA;Parasites des végétaux (y compris les espèces transportées par un hôte/vecteur);NA;Parasites on plants (including species transported by host and vector);NA
+contaminant_seed;Besmetting van zaadgoed;NA;Contaminants des graines;NA;Seed contaminant;NA
+contaminant_timber;Houthandel;NA;Commerce du bois;NA;Timber trade;NA
+contaminant_habitat_material;Vervoer van habitatmateriaal (bodem, vegetatie, ...);NA;Transport de matériel constituant un habitat (sol, végétation, etc.);NA;Transportation of habitat material (soil, vegetation, ...);NA
+stowaway_fishing_equipment;Visseij- en hengelmateriaal;NA;Matériel de pêche;NA;Angling / fishing equipment;NA
+stowaway_container;Container / vracht;NA;Conteneur / vrac;NA;Container / bulk;NA
+stowaway_airplane;Verstekeling in of op vliegtuigen;NA;Organismes clandestins dans ou sur les avions;NA;Hitchhikers in or on airplane;NA
+stowaway_ship;Verstekeling van schepen/boten (excl. ballastwater of rompvervuiling);NA;Organismes clandestins dans les navires/bateaux (hormis les eaux de ballast et la salissure des coques);NA;Hitchhikers on ship/boat (excluding ballast water and hull fouling);NA
+stowaway_machinery;Machines / uitrusting;NA;Machines/équipement;NA;Machinery / equipment;NA
+stowaway_people_luggage;Mensen en hun bagage/materiaal (in bijzonder toerisme);NA;Personnes et leurs bagages/matériel (tourisme en particulier);NA;People and their luggage/equipment (in particular tourism);NA
+stowaway_organic_packing;Organisch verpakkingsmateriaal, in bijzonder houten verpakkingen;NA;Matériaux d’emballage organiques, en particulier à base de bois;NA;Organic packing material, in particular wood packaging;NA
+stowaway_ballast_water;Ballastwater van schepen / boten;NA;Eaux de ballast des navires / bateaux;NA;Ship / boat ballast water;NA
+stowaway_hull_fouling;Scheeps-/bootrompvervuiling;NA;Salissure des coques de navires / bateaux;NA;Ship / boat hull fouling;NA
+stowaway_vehicles;Voertuigen (auto's, treinen, ...);NA;Véhicules (voitures, trains, etc.);NA;Vehicles (car, train, ...);NA
+stowaway_other;Andere vervoerswijzen;NA;Autres moyens de transport;NA;Other means of transport;NA
+corridor_water;Verbonden waterwegen / -bekkens / zeeën;NA;Cours d’eau / bassins / mers reliés entre eux;NA;Interconnected waterways / basins / seas;NA
+corridor_land;Tunnels en landbruggen;NA;Tunnels et ponts;NA;Tunnels and land bridges;NA
+natural_dispersal;Natuurlijke verspreiding;NA;Dispersion naturelle à travers les frontières d’espèces exotiques envahissantes introduites par les voies 1 à 5;NA;Natural dispersal across borders of invasive alien species that have been introduced through pathways 1 to 5;NA
+unknown;Onbekend;NA;Inconnu;NA;Unknown;NA
+release_unknown;UITZETTING IN DE NATUUR (niet gespecificeerd);NA;LIBÉRATION DANS LA NATURE (non spécifié);NA;RELEASE IN NATURE (not specified);NA
+escape_unknown;ONTSNAPPING uit gehouden omgeving (niet gespecificeerd);NA;FUITE d'une zone de confinement (non spécifié);NA;ESCAPE from confinement (not specified);NA
+contaminant_unknown;TRANSPORT - BESMETTING (niet gespecificeerd);NA;TRANSPORT - CONTAMINANT (non spécifié);NA;TRANSPORT - CONTAMINANT (not specified);NA
+stowaway_unknown;TRANSPORT - VERSTEKELING (niet gespecificeerd);NA;TRANSPORT - CLANDESTIN (non spécifié);NA;TRANSPORT - STOWAWAY (not specified);NA
+corridor_unknown;CORRIDOR (niet gespecificeerd);NA;COULOIR (non spécifié);NA;CORRIDOR (not specified);NA
+unaided_unknown;ZONDER HULP (niet gespecificeerd);NA;SANS AIDE (non spécifié);NA;UNAIDED (not specified);NA
+unaided_natural_dispersal;ZONDER HULP (natuurlijke verspreiding);NA;SANS AIDE (dispersion naturelle);NA;UNAIDED (natural dispersal);NA
+unknown_unknown;Onbekend (niet gespecificeerd);NA;Inconnu (non spécifié);NA;Unknown (not specified);NA
+NA;NA;NA;NA;NA;NA;NA
+NA;NA;NA;NA;NA;NA;NA
+Africa;Afrika;NA;Afrique;NA;Africa;NA
+Americas;Amerika;NA;Amérique;NA;America;NA
+Asia;Azië;NA;Asie;NA;Asia;NA
+Europe;Europa;NA;Europe;NA;Europe;NA
+Oceania;Oceanië;NA;Océanie;NA;Oceania;NA
+Australia and New Zealand;Australië en Nieuw-Zeeland;NA;Australie et Nouvelle-Zélande;NA;Australia and New Zealand;NA
+Caribbean;Caraïben;NA;Caraïbes;NA;Caribbean;NA
+Central America;Centraal-Amerika;NA;Amérique centrale;NA;Central America;NA
+Central Asia;Centraal-Azië;NA;Asie centrale;NA;Central Asia;NA
+Eastern Africa;Oost-Afrika;NA;Afrique de l'Est;NA;East Africa;NA
+Eastern Asia;Oost-Azië;NA;Asie de l'Est;NA;East Asia;NA
+Eastern Europe;Oost-Europa;NA;Europe de l'Est;NA;Eastern Europe;NA
+Melanesia;Melanesië;NA;Mélanésie;NA;Melanesia;NA
+Micronesia;Micronesië;NA;Micronésie;NA;Micronesia;NA
+Middle Africa;Midden-Afrika;NA;Afrique centrale;NA;Central Africa;NA
+Northern Africa;Noord-Afrika;NA;Afrique du Nord;NA;North-Africa;NA
+Northern America;Noord-Amerika;NA;Amérique du Nord;NA;North America;NA
+South America;Zuid-Amerika;NA;Amérique du Sud;NA;South America;NA
+Southeastern Asia;Zuidoost-Azië;NA;Asie du sud est;NA;South East Asia;NA
+Southern Africa;Zuid-Afrika;NA;Afrique du Sud;NA;South Africa;NA
+Southern Asia;Zuid-Azië;NA;Asie du sud;NA;South Asia;NA
+Southern Europe;Zuid-Europa;NA;Europe du Sud;NA;South Europe;NA
+Western Africa;West-Afrika;NA;Afrique de l'Ouest;NA;West Africa;NA
+Western Asia;West-Azië;NA;Asie occidentale;NA;Western Asia;NA
+Western Europe;West-Europa;NA;Europe de l'Ouest;NA;Western Europe;NA
+NA;NA;NA;NA;NA;NA;NA
+captive;in gevangenschap;NA;en captivité;NA;captive;NA
+casual;sporadisch;NA;sporadique;NA;casual;NA
+colonizing;koloniserend;NA;coloniser;NA;colonizing;NA
+cultivated;geteeld/gekweekt;NA;cultivé;NA;cultivated;NA
+established;gevestigd;NA;établi;NA;established;NA
+extinct;uitgestorven;NA;éteint;NA;extinct;NA
+introduced;geïntroduceerd;NA;introduit;NA;introduced;NA
+invasive;invasief;NA;envahissant;NA;invasive;NA
+released;losgelaten;NA;libéré;NA;released;NA
+reproducing;zich voortplantend;NA;se propageant;NA;reproducing;NA
+widespreadInvasive;wijdverspreid en invasief;NA;répandue et envahissante;NA;widespread and invasive;NA
+NA;NA;NA;NA;NA;NA;NA
+Union list;Unielijst;NA;liste de l’Union;NA;Union list;NA
+Non-union list;niet-Unielijst;NA;pas listé (liste de l'Union);NA;non-Union list;NA
+NA;NA;NA;NA;NA;NA;NA
+België;België;NA;Belgique;NA;Belgium;NA
+Brussels Hoofdstedelijk Gewest;Brussels Hoofdstedelijk Gewest;NA;Région de Bruxelles-Capitale;NA;Brussels-Capital Region;NA
+Vlaanderen;Vlaanderen;NA;Flandre;NA;Flanders;NA
+Wallonië;Wallonië;NA;Wallonie;NA;Wallonia;NA
+brussels;Brussels Hoofdstedelijk Gewest;NA;Région de Bruxelles-Capitale;NA;Brussels-Capital Region;NA
+flanders;Vlaanderen;NA;Flandre;NA;Flanders;NA
+wallonia;Wallonië;NA;Wallonie;NA;Wallonia;NA
+gewest;gewest;NA;région;NA;region;NA
+multipleRegions;meer dan 1 gewest;NA;plusieurs régions;NA;multiple regions;NA
+not selected;niet geselecteerd;NA;non séléctionné;NA;not selected;NA
+selected;geselecteerd;NA;séléctionné;NA;selected;NA
+NA;NA;NA;NA;NA;NA;NA
+Ad hoc alien species checklist;Ad hoc alien species checklist;NA;Ad hoc alien species checklist;NA;Ad hoc alien species checklist;NA
+Alien Bird Checklist;Alien Bird Checklist;NA;Alien Bird Checklist;NA;Alien Bird Checklist;NA
+Alien Fish Flanders;Alien Fish Flanders;NA;Alien Fish Flanders;NA;Alien Fish Flanders;NA
+Alien Macroinverts;Alien Macroinverts;NA;Alien Macroinverts;NA;Alien Macroinverts;NA
+Alien Mollusc checklist;Alien Mollusc checklist;NA;Alien Mollusc checklist;NA;Alien Mollusc checklist;NA
+Belgian rust fungi;Belgian rust fungi;NA;Belgian rust fungi;NA;Belgian rust fungi;NA
+Manual of Alien Plants;Manual of Alien Plants;NA;Manual of Alien Plants;NA;Manual of Alien Plants;NA
+RINSE1;RINSE1;NA;RINSE1;NA;RINSE1;NA
+RINSE2;RINSE2;NA;RINSE2;NA;RINSE2;NA
+WRiMS;WRiMS;NA;WRiMS;NA;WRiMS;NA
+NA;NA;NA;NA;NA;NA;NA
+unionColor;Unie kleur;NA;Union couleur;NA;Union colour;NA
+occurColor;Waarneming kleur;NA;Observation couleur;NA;Observation colour;NA
+occurrence;Waarneming;NA;Observation;NA;Observation;NA
+graph;Figuur;NA;Figure;NA;Figure;NA
+NA;NA;NA;NA;NA;NA;NA
+managed nest;Behandeld nest;NA;Nid traité;NA;Managed nest;NA
+untreated nest;Onbehandeld nest;NA;Nid non traité;NA;Untreated nest;NA
+individual;Individu;NA;Individu;NA;Individual;NA
+nest;Nest;NA;Nid;NA;Nest;NA
+lenteNesten;Aantal gemelde nesten t.e.m. 19 mei;NA;Nombre de nids signalés jusqu'à 19 mai;NA;Number of reported nests up to May 19;NA
+total;Totaal;NA;Total;NA;Total;NA
+map;Kaart;NA;Carte;NA;Map;NA
+difference;Verschil;NA;Différence;NA;Difference;NA
+disclaimerVespa;De soort is momenteel niet actief. Wanneer u een individu observeert, kan dit een overwinterende koningin zijn, wat geen nestactiviteit aangeeft;NA;L'espèce n'est actuellement pas active. Lorsque vous observez un individu, il peut s'agir d'une reine hivernante, ce qui n'indique pas d'activité de nidification.;NA;The species is currently not active. When you observe an individual this might be a wintering queen which does not indicate nesting activity.;NA
+AE;AE;NA;AE;NA;AE;NA
+AP;AP;NA;AP;NA;AP;NA
+AS;AS;NA;AS;NA;AS;NA
+IE;IE;NA;IE;NA;IE;NA
+UK;UK;NA;UK;NA;UK;NA
+Behandeling;Behandeling;NA;Traitement;NA;Treatment;NA
+succesvol;succesvol;NA;réussi;NA;successful;NA
+niet succesvol;niet succesvol;NA;non réussi;NA;not successful;NA
+behandeld;behandeld;NA;traité;NA;treated;NA
+niet behandeld;niet behandeld;NA;non traité;NA;not treated;NA
+onbekend;onbekend;NA;inconnu;NA;unknown;NA
+row;rij;NA;ligne;NA;row;NA
+NA;NA;NA;NA;NA;NA;NA
+modelScenario;Model scenario;NA;Scénario modèle;NA;Model scenario;NA
+hist;Model gebaseerd op historische klimaatdata;NA;Modèle basé sur des données climatiques historiques;NA;model based on historical climate data;NA
+rcp26;model gebaseerd op klimaatvoorspellingen onder RCP 2.6 voor 2040-2070;NA;modèle basé sur les prévisions climatiques du RCP 2.6 pour 2040-2070;NA;model based on climate forecasts under RCP 2.6 for 2040-2070;NA
+rcp45;model gebaseerd op klimaatvoorspellingen onder RCP 4.5 voor 2040-2070;NA;modèle basé sur les prévisions climatiques du RCP 4.5 pour 2040-2070;NA;model based on climate forecasts under RCP 4.5 for 2040-2070;NA
+rcp85;model gebaseerd op klimaatvoorspellingen onder RCP 8.5 voor 2040-2070;NA;modèle basé sur les prévisions climatiques du RCP 8.5 pour 2040-2070;NA;model based on climate forecasts under RCP 8.5 for 2040-2070;NA
+modelType;Model type;NA;Type de modèle;NA;Model type;NA
+riskMap;Risicokaart;NA;Carte des risques;NA;Risk map;NA
+diffMap;Kaart met verschil in risico tussen het RCP-klimaatscenario en de historische klimaatgegevens;NA;Carte de différence de risque entre le scénario climatique RCP et les données climatiques historiques;NA;Map of difference in risk between the RCP climate scenario and the historical climate data;NA
+confMap;Kaart met confidentie in voorspeld risico;NA;Carte de confiance du risque prévu;NA;Map of confidence of predicted risk;NA
+riskLow;laag risico;NA;faible risque;NA;low risk;NA
+riskHigh;hoog risico;NA;risque élevé;NA;high risk;NA
+diffLow;laag risicoverschil;NA;faible différence de risque;NA;low risk difference;NA
+diffHigh;hoog risicoverschil;NA;différence de risque élevée;NA;high risk difference;NA
+confLow;lage betrouwbaarheid;NA;faible confiance;NA;low confidence;NA
+confHigh;hoge betrouwbaarheid;NA;grande confiance;NA;high confidence;NA
+failing;falend;NA;échouant;NA;failing;NA
+gam_0;niet opkomend;NA;ne émerge pas;NA;not emerging;NA
+gam_1;onduidelijk;NA;pas clair;NA;unclear;NA
+gam_2;mogelijk opkomend;NA;potentiellement émergent;NA;potentially emerging;NA
+gam_3;opkomend;NA;émergent;NA;emerging;NA

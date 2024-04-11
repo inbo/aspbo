@@ -1,0 +1,45 @@
+---
+title: "get_vespawatch_data_from_iAsset"
+author: "Sander Devisscher"
+date: "2023-11-16"
+output: html_document
+---
+Gebruik [inbo/vespawatchr](https://github.com/inbo/iassetR) to get nesten 
+from iasset API.
+
+```{r install/update iassetR}
+library(devtools)
+
+install_github("inbo/iassetR@main")
+```
+
+Sometimes it can be necessary to test new "developmental" iassetR features.
+This can be done using the chunk below. 
+```{r install alternate version, eval = FALSE}
+library(devtools)
+
+remove.packages("iassetR")
+
+install_github("inbo/iassetR@20-pass-credentials-via-sys-env")
+```
+
+```{r libraries}
+library(magrittr)
+library(readr)
+library(dplyr)
+library(iassetR)
+```
+
+```{r get records}
+iasset_raw <- get_records(inspection_name = "Vespa-Watch",
+                          get_access_token())
+```
+
+```{r drop columns}
+iasset_clean <- iasset_raw %>% 
+  select(-naam, 
+         -telefoon,
+         -e_mailadres) %>% 
+  write_csv2("./data/input/Vespa-Watch_iasset.csv")
+```
+
