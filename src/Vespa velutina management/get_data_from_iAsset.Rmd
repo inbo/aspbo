@@ -30,8 +30,11 @@ library(dplyr)
 library(iassetR)
 ```
 
-```{r}
+```{r test credentials}
 print(Sys.getenv("iasset_username"))
+print(Sys.getenv("iasset_password"))
+nchar(Sys.getenv("iasset_password"))
+is.character(Sys.getenv("iasset_password"))
 ```
 
 ```{r get records}
