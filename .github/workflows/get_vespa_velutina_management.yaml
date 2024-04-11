@@ -101,6 +101,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
+          ref: automatic-vespa-velutina-data
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
 
@@ -135,6 +136,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
+          ref: automatic-vespa-velutina-data
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
 
