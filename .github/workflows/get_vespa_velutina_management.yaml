@@ -27,11 +27,6 @@ jobs:
             echo "Please go to 'Settings > Secrets > Actions' to create it."
             exit 1
           fi
-          if [ $(echo "${{secrets.service}}" | wc -c) -lt 2 ]; then
-            echo "The secret 'service' has not been set."
-            echo "Please go to 'Settings > Secrets > Actions' to create it."
-            exit 1
-          fi
           if [ $(echo "${{secrets.GBIF_USER}}" | wc -c) -lt 2 ]; then
             echo "The secret 'iasset_user' has not been set."
             echo "Please go to 'Settings > Secrets > Actions' to create it."
