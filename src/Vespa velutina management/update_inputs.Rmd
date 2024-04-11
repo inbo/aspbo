@@ -37,9 +37,15 @@ conflicted::conflicts_prefer(tidylog::pivot_longer)
 ```
 
 ```{r auth}
-email <- paste0(Sys.getenv("email"), "@inbo.be")
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is not a bot")
+  email <- paste0(Sys.getenv("email"), "@inbo.be")
+  gs4_auth(email)
+}else{
+  print("Executor of the script is a bot")
+  gs4_deauth()
+}
 
-gs4_auth(email)
 ```
 
 ```{r read data}
@@ -64,7 +70,7 @@ dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJW
 
 # iAsset province error correction
 iAsset_foutecoordinaten <- read_delim("data/interim/iAsset_foutecoördinaten.csv", 
-    delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% 
+                                      delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% 
   filter(!is.na(`ID nest`))
 ```
 
@@ -159,12 +165,12 @@ data_nest_iasset <- st_intersection(data_nest_iasset, prov)
 
 #vaak zijn coördinaten in iAsset fout, het veld 'provincie' in iAsset is toegewezen op basis van veld adres. Enkel indien 'provincie' leeg, wordt provincie best afgeleid uit coördinaten. Er zijn ook een aantal meldingen met provincie ('ongekend'), van deze weten we het juiste adres niet en zijn de coördinaten de default coördinaten (dus niet correct).
 data_nest_iasset <- data_nest_iasset %>% 
-    left_join(iAsset_foutecoordinaten, 
-              by = c("insp_order" = "ID nest")) %>% 
-    mutate(provincie = case_when(!is.na(provincie_corrected) ~ provincie_corrected,
-                                 !is.na(provincie) ~ provincie,
-                                 !is.na(NAAM) ~ NAAM, 
-                                 TRUE ~ NA_character_))
+  left_join(iAsset_foutecoordinaten, 
+            by = c("insp_order" = "ID nest")) %>% 
+  mutate(provincie = case_when(!is.na(provincie_corrected) ~ provincie_corrected,
+                               !is.na(provincie) ~ provincie,
+                               !is.na(NAAM) ~ NAAM, 
+                               TRUE ~ NA_character_))
 
 #temp fix lacking id column 
 if(!"insp_order" %in% colnames(data_nest_iasset)){
