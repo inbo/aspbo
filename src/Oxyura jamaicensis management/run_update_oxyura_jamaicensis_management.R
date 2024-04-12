@@ -1,29 +1,15 @@
-#' @author Sander Devisscher
-#' 
-#' @description
-#' Script to download and map management data for Oxyura jamaicensis.
-#' 
-#' Datasources:
-#' - https://www.gbif.org/dataset/7522721f-4d97-4984-8231-c9e061ef46df
-#' 
-#' Output:
-#' - ./data/output/UAT_direct/Oxyura_jamaicensis.csv
+#' R code to automatically run all chunks of update_oxyura_jamaicensis_management.Rmd
 
-# Libraries ####
-library(alienSpecies)
-library(tidyr)
-library(magrittr)
-library(dplyr)
-library(sf)
+# load required packages (install them if needed)
+installed <- rownames(installed.packages())
+required <- c("knitr")
+if (!all(required %in% installed)) {
+  install.packages(required[!required %in% installed])
+}
+library(knitr)
 
-# download data from gbif ####
-# using alienSpecies::getGbifOccurrence()
-datasetKey <- c("7522721f-4d97-4984-8231-c9e061ef46df")
-
-getGbifOccurrence(datasetKey,
-                  bucket = Sys.getenv("UAT_bucket"),
-                  user = Sys.getenv("gbif_user"),
-                  pwd = Sys.getenv("gbif_pwd"),
-                  email = Sys.getenv("email"),
-                  outFile = "Oxyura_jamaicensis.csv")
-
+# create temporary R file
+tempR <- tempfile(fileext = ".R")
+knitr::purl("./src/Oxyura jamaicensis management/update_oxyura_jamaicensis_management.Rmd", output=tempR)
+source(tempR)
+unlink(tempR)
