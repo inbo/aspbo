@@ -95,7 +95,7 @@ jobs:
 
       - name: Install R packages
         run: |
-          source("src/Vespa velutina management/install_packages_vespa_velutina_gbif.R")
+          source("src/Vespa velutina management/install_packages_vespa_velutina_general.R")
         shell: Rscript {0}
         
       - name: Get data from gbif
@@ -109,14 +109,8 @@ jobs:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
           commit_message: "get data from gbif"
-          force: true
           target_branch: automatic-vespa-velutina-data
 
-      - name: Install R packages
-        run: |
-          source("src/Vespa velutina management/install_packages_vespa_velutina_iasset.R")
-        shell: Rscript {0}
-        
       - name: Get data from iAsset
         run: |
           source("src/Vespa velutina management/run_get_data_from_iAsset.R")
@@ -131,12 +125,7 @@ jobs:
           force: true
           target_branch: automatic-vespa-velutina-data
       
-      - name: Install R packages
-        run: |
-          source("src/Vespa velutina management/install_packages_vespa_velutina_general.R")
-        shell: Rscript {0}
-        
-      - name: Get data from gbif
+      - name: update inputs
         run: |
           source("src/Vespa velutina management/run_update_inputs.R")
         shell: Rscript {0}
