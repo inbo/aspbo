@@ -121,7 +121,8 @@ ruddy_data <- raw_ruddy_data %>%
          isBrussels = FALSE,
          isWallonia = FALSE) %>%
   left_join(ruddy_verbatim_rework, by = "gbifID") %>% 
-  select(any_of(cols_ruddy_old))
+  select(any_of(cols_ruddy_old)) %>% 
+  mutate(gbifID = as.character(gbifID))
 ```
 
 ```{r tests}
@@ -131,6 +132,6 @@ test_that("columns not present in download", {
 ```
 
 ```{r export}
-write_csv(ruddy_data, "./data/output/UAT_direct/Oxyura_jamaicensis.csv")
+write_csv(ruddy_data, "./data/output/UAT_direct/Oxyura_jamaicensis.csv", quote = "all")
 ```
 
