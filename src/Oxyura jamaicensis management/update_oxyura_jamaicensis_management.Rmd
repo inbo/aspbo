@@ -11,6 +11,7 @@ library(dplyr)
 library(readr)
 library(magrittr)
 library(tidyr)
+library(stringr)
 library(testthat)
 ```
 
@@ -46,12 +47,11 @@ ruddy_verbatim_raw <- read_tsv(paste0(tempdir(), "/verbatim.txt"))
 ```
 
 ```{r cleanup}
-
 if(length(ruddy_zipfile) == 1) {
   unlink(ruddy_zipfile)
   unlink(paste0(tempdir(), "/verbatim.txt"))
 }else{
-  warning("More than 1 zipfile detected in the root folder, please cleanup!!")
+  stop("More than 1 zipfile detected in the root folder, please cleanup!!")
 }
 ```
 
@@ -102,7 +102,10 @@ ruddy_adult <- ruddy_verbatim_age %>%
   group_by(gbifID) %>% 
   summarise(adult = sum(count, na.rm = TRUE))
 
-
+ruddy_juvenile <- ruddy_verbatim_age %>% 
+  filter(age != "adult") %>% 
+  group_by(gbifID) %>% 
+  summarise(adult = sum(count, na.rm = TRUE))
 ```
 
 ```{r prep data}
