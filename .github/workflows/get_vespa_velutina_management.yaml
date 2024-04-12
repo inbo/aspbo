@@ -103,28 +103,11 @@ jobs:
           source("src/Vespa velutina management/run_get_data_from_gbif.R")
         shell: Rscript {0}
 
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
-        with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          commit_prefix: "[AUTO]"
-          commit_message: "get data from gbif"
-          target_branch: automatic-vespa-velutina-data
-
       - name: Get data from iAsset
         run: |
           source("src/Vespa velutina management/run_get_data_from_iAsset.R")
         shell: Rscript {0}
 
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
-        with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          commit_prefix: "[AUTO]"
-          commit_message: "get data from iasset"
-          force: true
-          target_branch: automatic-vespa-velutina-data
-      
       - name: update inputs
         run: |
           source("src/Vespa velutina management/run_update_inputs.R")
