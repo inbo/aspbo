@@ -109,14 +109,19 @@ ruddy_juvenile <- ruddy_verbatim_age %>%
 ruddy_gender <- rbind(ruddy_verbatim_sex, ruddy_juvenile)
 
 ruddy_verbatim_rework <- ruddy_adult %>% 
-  full_join(ruddy_gender, by = "gbifID")
+  full_join(ruddy_gender, by = "gbifID") %>% 
+  mutate(count = as.integer(count))
 ```
 
 ```{r prep data}
 ruddy_data <- raw_ruddy_data %>% 
   filter(samplingProtocol %in% sampling_protocols) %>% 
-  mutate(gbifID = as.double(gbifID)) %>% 
-  left_join(ruddy_verbatim_rework, by = "gbifID")
+  mutate(gbifID = as.double(gbifID),
+         isFlanders = TRUE,
+         isBrussels = FALSE,
+         isWallonia = FALSE) %>%
+  left_join(ruddy_verbatim_rework, by = "gbifID") %>% 
+  select(any_of(cols_ruddy_old))
 ```
 
 ```{r tests}
@@ -125,4 +130,7 @@ test_that("columns not present in download", {
 })
 ```
 
+```{r export}
+write_csv(ruddy_data, "./data/output/UAT_direct/Oxyura_jamaicensis.csv")
+```
 
