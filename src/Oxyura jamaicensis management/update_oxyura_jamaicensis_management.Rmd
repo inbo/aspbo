@@ -104,18 +104,24 @@ ruddy_adult <- ruddy_verbatim_age %>%
 
 ruddy_juvenile <- ruddy_verbatim_age %>% 
   filter(age != "adult") %>% 
-  group_by(gbifID) %>% 
-  summarise(adult = sum(count, na.rm = TRUE))
+  rename(gender = age)
+
+ruddy_gender <- rbind(ruddy_verbatim_sex, ruddy_juvenile)
+
+ruddy_verbatim_rework <- ruddy_adult %>% 
+  full_join(ruddy_gender, by = "gbifID")
 ```
 
 ```{r prep data}
 ruddy_data <- raw_ruddy_data %>% 
-  filter(samplingProtocol %in% sampling_protocols)
+  filter(samplingProtocol %in% sampling_protocols) %>% 
+  mutate(gbifID = as.double(gbifID)) %>% 
+  left_join(ruddy_verbatim_rework, by = "gbifID")
 ```
 
 ```{r tests}
 test_that("columns not present in download", {
-  testthat::expect_contains(colnames(raw_ruddy_data), cols_ruddy_old)
+  testthat::expect_contains(colnames(ruddy_data), cols_ruddy_old)
 })
 ```
 
