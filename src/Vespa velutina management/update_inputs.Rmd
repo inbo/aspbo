@@ -43,7 +43,7 @@ if(Sys.getenv("amiabot") != "yes"){
   gs4_auth(email)
 }else{
   print("Executor of the script is a bot")
-  gs4_deauth()
+  gs4_auth(path = Sys.getenv("gsheet_token"))
 }
 
 ```
