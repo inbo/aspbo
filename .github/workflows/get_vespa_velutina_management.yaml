@@ -135,6 +135,6 @@ jobs:
           target_branch: uat
           title: "[AUTO] get vespa velutina management data"
           template: .github/PR_vespa_velutina_management.md
-          reviewer: SanderDevisscher
+          reviewer: SanderDevisscher, jrhilae, soriadelva
           label: automated workflow, 
           get_diff: false
