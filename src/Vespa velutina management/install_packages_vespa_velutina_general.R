@@ -1,10 +1,13 @@
 # get packages installed on machine
 installed <- rownames(installed.packages())
 # specify packages we need
-required <- c("sf", "magrittr", "readr",
-              "dplyr", "tidyr", "googlesheets4",
-              "testthat", "units", "lubridate","ows4R"
+required <- c(
+  "sf", "magrittr", "readr",
+  "dplyr", "tidyr", "googlesheets4",
+  "testthat", "units", "lubridate","ows4R",
+  "rgbif"
 )
+
 # install packages if needed
 if (!all(required %in% installed)) {
   pkgs_to_install <- required[!required %in% installed]
