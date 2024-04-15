@@ -93,7 +93,7 @@ jobs:
           sudo apt install libudunits2-dev
           sudo apt install --yes libharfbuzz-dev libfribidi-dev
           R --no-save -e 'install.packages("devtools")'
-          R --no-save -e 'devtools::install_github("inbo/iassetR@43-get-keyring-to-work-with-github-actions")'
+          R --no-save -e 'devtools::install_github("inbo/iassetR@main")'
 
       - name: Install R packages
         run: |
@@ -121,7 +121,6 @@ jobs:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
           commit_message: "update inputs"
-          force: true
           target_branch: automatic-vespa-velutina-data
       
       - name: Get branch name
