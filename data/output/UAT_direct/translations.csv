@@ -1,5 +1,6 @@
 title_id;title_nl;description_nl;title_fr;description_fr;title_en;description_en
-apply_gam;Status van toename (GAM) - Waarnemingen;;Statut d'augmentation (GAM) - Observations;;Emergence status (GAM) - Observations;
+apply_gamObservations;Status van toename (GAM) - Waarnemingen;;Statut d'augmentation (GAM) - Observations;;Emergence status (GAM) - Observations;
+apply_gamOccupancy;Status van toename (GAM) - Verspreiding;;Statut d'augmentation (GAM) - Répartition;;Emergence status (GAM) - Occupancy;
 barplotLenteNesten;Voorjaarsnesten;Het aantal op vespawatch.be gemelde nesten tussen 1 januari en 19 mei;Nids de printemps;Le nombre de nids signalés sur vespawatch.be entre le 1er janvier et le 19 mai;Spring nests;The number of nests reported on vespawatch.be between January 1 and May 19
 countNesten;Aantal nesten per regio (figuur);"Het aantal op vespawatch.be gemelde nesten per regio. </br><em>Data beschikbaar tot {{maxDate}}<em>";Nombre de nids par région (figure);"Le nombre de nids signalés sur vespawatch.be par région. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>";Number of nests per region (figure);"The number of nests reported on vespawatch.be per region. </br><em>Dates available until {{maxDate}}<em>"
 indicator_introduction_year;Aantal nieuw geïntroduceerde soorten per jaar;;Nombre d'espèces nouvellement introduites par an;;Number of newly introduced species per year;
@@ -281,6 +282,7 @@ WRiMS;WRiMS;;WRiMS;;WRiMS;
 unionColor;Unie kleur;;Union couleur;;Union colour;
 occurColor;Waarneming kleur;;Observation couleur;;Observation colour;
 occurrence;Waarneming;;Observation;;Observation;
+occupancy;Verspreiding;;Répartition;;Occupancy;
 graph;Figuur;;Figure;;Figure;
 ;;;;;;
 managed nest;Behandeld nest;;Nid traité;;Managed nest;
