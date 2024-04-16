@@ -18,8 +18,8 @@ automatically performed<sup>1</sup>:
 
 All the steps above are triggered by
 `./.github/workflows/update_eu_concern_list.yaml` and executed by
-`./script/update_eu_concern_list.R`. This script is assisted by
-`./script/install_packages_eu_concern_list.R`.
+`./src/update_eu_concern_list.R`. This script is assisted by
+`./src/install_packages_eu_concern_list.R`.
 
 Changes to the PR description can be made at `./.github/PR_management_prep.md`
 
@@ -41,7 +41,7 @@ January through December.\"
 
 2.  Changed taxonKeys
 
-3.  Omited taxonKeys
+3.  Omitted taxonKeys
 
-If any changes have occured to `./data/output/` the upload to buckets flow will
+If any changes have occurred to `./data/output/` the upload to buckets flow will
 be triggered after merging this PR.
