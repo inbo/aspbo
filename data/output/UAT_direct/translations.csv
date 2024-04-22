@@ -282,6 +282,7 @@ NA;NA;NA;NA;NA;NA;NA
 unionColor;Unie kleur;NA;Union couleur;NA;Union colour;NA
 occurColor;Waarneming kleur;NA;Observation couleur;NA;Observation colour;NA
 occurrence;Waarneming;NA;Observation;NA;Observation;NA
+occupancy;Verspreiding;NA;Répartition;NA;Occupancy;NA
 graph;Figuur;NA;Figure;NA;Figure;NA
 NA;NA;NA;NA;NA;NA;NA
 managed nest;Behandeld nest;NA;Nid traité;NA;Managed nest;NA
@@ -326,3 +327,10 @@ gam_0;niet opkomend;NA;ne émerge pas;NA;not emerging;NA
 gam_1;onduidelijk;NA;pas clair;NA;unclear;NA
 gam_2;mogelijk opkomend;NA;potentiellement émergent;NA;potentially emerging;NA
 gam_3;opkomend;NA;émergent;NA;emerging;NA
+contents;Inhoudsopgave;NA;TODO;NA;Contents;NA
+createReport;Maak rapport;NA;TODO;NA;Create report;NA
+parameters;Parameters;NA;TODO;NA;Parameters;NA
+noParameters;Geen parameters geselecteerd;NA;TODO;NA;No parameters selected;NA
+version;Versie;NA;Version;NA;Version;NA
+yes;ja;NA;oui;NA;yes;NA
+no;nee;NA;non;NA;no;NA
