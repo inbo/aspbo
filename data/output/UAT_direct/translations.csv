@@ -125,6 +125,7 @@ showGlobe;Toon landkaart;;Afficher la carte;;Show globe;
 downloadMap;Download kaart;;Télécharger la carte;;Download map;
 correctBias;Gecorrigeerd voor waarnemer-bias;;Corrigé pour biais d'observateurs;;Corrected for observer bias;
 protectAreas;Beschermde gebieden;;Zones protégées;;Protected areas;
+referencePeriod;Referentie periode;;Période de référence;;Reference period;
 percentCages;Percentage bezette hokken (10km2) in Vlaanderen;;Pourcentage des cellules occupés (10km2) en Flandre;;Percentage of occupied cells (10km2) in Flanders;
 baseline;Basis;;Base;;Baseline;
 all;Alle;;Tout;;All;
