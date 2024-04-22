@@ -43,7 +43,7 @@ eu_concern_list_new <- eu_concern_list_new %>%
 if(nrow(eu_concern_list_new) > nrow(eu_concern_list_old)){
   ## list has expanded ####
   # write new list to output to trigger upload
-  write_tsv(eu_concern_list_new, "./data/output/eu_concern_species.tsv")
+  write_tsv(eu_concern_list_new, "./data/output/UAT_processing/eu_concern_species.tsv")
 }else{
   ## list has not expanded ####
   new_taxonKeys <- subset(eu_concern_list_new$backbone_taxonKey,

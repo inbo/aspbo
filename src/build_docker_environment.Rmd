@@ -48,8 +48,8 @@ source("./src/connect_to_bucket.R")
 connect_to_bucket(Sys.getenv("UAT_bucket"))
 ```
 
-Onderstaande code runt het exotenportaal op localhost poort 3000 moest deze
-om de een of andere rede al bezet zijn kan je de poort hieronder wijzigingen.
+Onderstaande code runt het exotenportaal op localhost poort 3000, moest deze
+om de een of andere reden al bezet zijn kan je de poort hieronder wijzigingen.
 
 default = 3000:3838 (localhostpoort:luisterpoort)
 ```{r create exotenportaal}

@@ -2,7 +2,7 @@
 #' 
 #' @description
 #' This R-script uploads the necessary files to the UAT S3 bucket to test the 
-#' development evironment of the [alien species portal](*add url when UAT is live*)
+#' development environment of the [alien species portal](*add url when UAT is live*)
 #' 
 #' @details 
 #' This script uses `./src/connect_to_bucket.R` to generate a access token 
@@ -65,7 +65,7 @@ bucket_list_after <- get_bucket_df(Sys.getenv("UAT_bucket"),
 write_csv(bucket_list_after, "./data/ETL_files/UAT_upload_log.csv")
 
 # test uploaded files ####
-# A placeholder for a alienSpecies function to test the files on the bucket.
+# A placeholder for an alienSpecies function to test the files on the bucket.
 
 
 

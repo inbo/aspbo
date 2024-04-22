@@ -1,0 +1,68 @@
+---
+title: "get_data_from_gbif"
+author: "Sander Devisscher"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r libraries}
+library(rgbif)
+library(dplyr)
+library(sf)
+library(readr)
+library(magrittr)
+```
+
+get the polygon of flanders and convert it into a wkt, this will be used to
+limit the rgbif query to flanders.
+
+```{r get flanders geojson}
+sf_use_s2(TRUE)
+
+vla <- st_read("./data/spatial/flanders_wgs84.geojson") %>% 
+  st_transform(4326) %>% 
+  st_simplify(dTolerance = 10) %>% 
+  st_as_sfc() %>% 
+  st_as_text() 
+
+vla <- gsub(pattern = ", NaN", 
+            replacement = "",
+            vla)
+```
+
+
+Waarnemingen.be - Non-native animal occurrences in Flanders and the Brussels Capital Region, Belgium: https://www.gbif.org/dataset/9a0b66df-7535-4f28-9f4e-5bc11b8b096c
+
+iNaturalist Research-grade Observations: https://www.gbif.org/dataset/50c9509d-22c7-4a22-a47d-8c48425ef4a7
+
+```{r download data from gbif}
+datasetkeys <- c("9a0b66df-7535-4f28-9f4e-5bc11b8b096c", 
+                 "50c9509d-22c7-4a22-a47d-8c48425ef4a7")
+
+taxonkeys <- c(1311477)
+
+gbif_downloadKey <- occ_download(pred_in("datasetKey", datasetkeys),
+                                 pred_in("taxonKey", taxonkeys),
+                                 pred_within(vla),
+                                 user = Sys.getenv("gbif_user"),
+                                 pwd = Sys.getenv("gbif_pwd"),
+                                 email = Sys.getenv("email"),
+                                 curlopts = list(verbose = TRUE,
+                                                 http_version = 2,
+                                                 forbid_reuse = TRUE))
+
+occ_download_wait(gbif_downloadKey, 
+                  curlopts = list(verbose = TRUE,
+                                  http_version = 2,
+                                  forbid_reuse = TRUE))
+
+gbif_download <- occ_download_get(gbif_downloadKey,
+                                  path = tempdir(),
+                                  overwrite = TRUE,
+                                  curlopts = list(verbose = TRUE,
+                                                  http_version = 2,
+                                                  forbid_reuse = TRUE))
+
+rawdata <- occ_download_import(x = gbif_download) %>% 
+  write_csv2("./data/input/Vespa-Watch_gbif.csv")
+```
