@@ -1,6 +1,6 @@
 title_id;title_nl;description_nl;title_fr;description_fr;title_en;description_en
-apply_gamObservations;Status van toename (GAM) - Waarnemingen;NA;Statut d'augmentation (GAM) - Observations;NA;Emergence status (GAM) - Observations;NA
-apply_gamOccupancy;Status van toename (GAM) - Verspreiding;NA;Statut d'augmentation (GAM) - Répartition;NA;Emergence status (GAM) - Occupancy;NA
+apply_gamObservations;Status van opkomst (GAM) - Gemodelleerd aantal waarnemingen;NA;Statut d'émergence (GAM) - Nombre d'observations modélisées;NA;Emergence status (GAM) - Modelled number of observations;NA
+apply_gamOccupancy;Status van opkomst (GAM) - Gemodelleerd aantal bezette hokken;NA;Statut d'émergence (GAM) - Nombre de carrés occupés modélisés;NA;Emergence status (GAM) - Modelled number of occupied squares;NA
 barplotLenteNesten;Voorjaarsnesten;Het aantal op vespawatch.be gemelde nesten tussen 1 januari en 19 mei;Nids de printemps;Le nombre de nids signalés sur vespawatch.be entre le 1er janvier et le 19 mai;Spring nests;The number of nests reported on vespawatch.be between January 1 and May 19
 countNesten;Aantal nesten per provincie (figuur);Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>;Nombre de nids par province (figure);Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>;Number of nests per province (figure);The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
 indicator_introduction_year;Aantal nieuw geïntroduceerde soorten per jaar;NA;Nombre d'espèces nouvellement introduites par an;NA;Number of newly introduced species per year;NA
