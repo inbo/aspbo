@@ -327,10 +327,10 @@ gam_0;niet opkomend;NA;ne émerge pas;NA;not emerging;NA
 gam_1;onduidelijk;NA;pas clair;NA;unclear;NA
 gam_2;mogelijk opkomend;NA;potentiellement émergent;NA;potentially emerging;NA
 gam_3;opkomend;NA;émergent;NA;emerging;NA
-contents;Inhoudsopgave;NA;TODO;NA;Contents;NA
-createReport;Maak rapport;NA;TODO;NA;Create report;NA
-parameters;Parameters;NA;TODO;NA;Parameters;NA
-noParameters;Geen parameters geselecteerd;NA;TODO;NA;No parameters selected;NA
+contents;Inhoudsopgave;NA;Table des matières;NA;Table of contents;NA
+createReport;Maak rapport;NA;Créer un rapport;NA;Create report;NA
+parameters;Parameters;NA;Paramètres;NA;Parameters;NA
+noParameters;Geen parameters geselecteerd;NA;Aucun paramètre sélectionné;NA;No parameters selected;NA
 version;Versie;NA;Version;NA;Version;NA
 yes;ja;NA;oui;NA;yes;NA
 no;nee;NA;non;NA;no;NA
