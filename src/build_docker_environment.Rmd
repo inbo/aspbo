@@ -46,7 +46,7 @@ system(command = 'powershell "cd ~/Documents/GitHub/alien-species-portal"')
 
 ```{r build new image}
 setwd(dir = "~/GitHub/alien-species-portal/")
-system(command = 'powershell "docker build -t inbo/alienspecies ."')
+system(command = 'powershell "docker build  --build-arg GIT_SHA=$(git rev-parse HEAD) -t inbo/alienspecies ."')
 setwd("~/GitHub/aspbo")
 ```
 
