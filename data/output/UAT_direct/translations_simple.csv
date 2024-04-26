@@ -291,14 +291,14 @@ noParameters;Geen parameters geselecteerd;Aucun paramètre sélectionné;No para
 version;Versie;Version;Version
 yes;ja;oui;yes
 no;nee;non;no
-radius;radius;TODO;radius
-Natuurpunt;Natuurpunt;TODO;TODO
-Vespawatch;Vespawatch;TODO;TODO
-bottom;onderaan;TODO;bottom
-top;bovenaan;TODO;top
-right;rechts;TODO;right
-left;links;TODO;left
-summarizeBy;samenvatten per;TODO;summarize by
+radius;radius;rayon;radius
+Natuurpunt;Natuurpunt;Natuurpunt;Natuurpunt
+Vespawatch;Vespawatch;Vespawatch;Vespawatch
+bottom;onderaan;en bas;bottom
+top;bovenaan;en haut;top
+right;rechts;droite;right
+left;links;gauche;left
+summarizeBy;samenvatten per;résumer par;summarize by
 t0;t0;t0;t0
 t1;t1;t1;t1
 
