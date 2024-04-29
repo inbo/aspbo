@@ -26,7 +26,7 @@ gbifLink;GBIF-sleutel (taxonkey);Clé GBIF (taxonkey);GBIF taxonkey
 sourceLink;Bron;Source;Source
 examples;voorbeelden;exemples;examples
 start;Start;Démarrage;Start
-global_indicators;Globale indicatoren;Indicateurs globaux;Global indicators
+checklist_indicators;Checklist indicatoren;Indicateurs checklist;Checklist indicators
 species_information;Soortgegevens;Données d'espèces;Species information
 early_warning;Vroege detectie;Détection précoce;Early warning
 management;Beheer;Gestion;Management
