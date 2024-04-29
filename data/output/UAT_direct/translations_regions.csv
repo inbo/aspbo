@@ -1,18 +1,18 @@
 title_id;title_nl;title_fr;title_en
-Brussels;Brussels Hoofdstedelijk Gewest;Région de Bruxelles-Capitale;NA
-Vlaams;Vlaams Gewest;Région flamande;NA
-Waals;Waals Gewest;Région wallonne;NA
-Namen;Namen;Namur;NA
-Oost-Vlaanderen;Oost-Vlaanderen;Flandre-Orientale;NA
-Waals-Brabant;Waals-Brabant;Brabant wallon;NA
+Brussels;Brussels Hoofdstedelijk Gewest;Région de Bruxelles-Capitale;Brussels-Capital Region
+Vlaams;Vlaams Gewest;Région flamande;Flemish Region
+Waals;Waals Gewest;Région wallonne;Walloon Region
+Namen;Namen;Namur;Namur
+Oost-Vlaanderen;Oost-Vlaanderen;Flandre-Orientale;East Flanders
+Waals-Brabant;Waals-Brabant;Brabant wallon;Walloon Brabant
 Limburg;Limburg;Limbourg;NA
-Henegouwen;Henegouwen;Hainaut;NA
-Luxemburg;Luxemburg;Luxembourg;NA
-Antwerpen;Antwerpen;Anvers;NA
-Luik;Luik;Liège;NA
-HoofdstedelijkGewest;Hoofdstedelijk Gewest;Région de la capitale;NA
-Vlaams-Brabant;Vlaams-Brabant;Brabant flamand;NA
-West-Vlaanderen;West-Vlaanderen;Flandre-Occidentale;NA
+Henegouwen;Henegouwen;Hainaut;Hainaut
+Luxemburg;Luxemburg;Luxembourg;Luxembourg
+Antwerpen;Antwerpen;Anvers;Antwerp
+Luik;Luik;Liège;Liège
+HoofdstedelijkGewest;Hoofdstedelijk Gewest;Région de la capitale;Capital Region
+Vlaams-Brabant;Vlaams-Brabant;Brabant flamand;Flemish Brabant
+West-Vlaanderen;West-Vlaanderen;Flandre-Occidentale;West Flanders
 Aartselaar;Aartselaar;NA;NA
 Boechout;Boechout;NA;NA
 Boom;Boom;NA;NA
@@ -195,7 +195,7 @@ Rebecq;Rebecq;NA;NA
 Walhain;Walhain;NA;NA
 Beernem;Beernem;NA;NA
 Blankenberge;Blankenberge;NA;NA
-Brugge;Brugge;Bruges;NA
+Brugge;Brugge;Bruges;Bruges
 Damme;Damme;NA;NA
 Jabbeke;Jabbeke;NA;NA
 Oostkamp;Oostkamp;NA;NA
@@ -208,7 +208,7 @@ Houthulst;Houthulst;NA;NA
 Koekelare;Koekelare;NA;NA
 Kortemark;Kortemark;NA;NA
 Lo-Reninge;Lo-Reninge;NA;NA
-Ieper;Ieper;Ypres;NA
+Ieper;Ieper;Ypres;Ypres
 Mesen;Mesen;Messines;NA
 Poperinge;Poperinge;NA;NA
 Wervik;Wervik;NA;NA
@@ -350,7 +350,7 @@ Frameries;Frameries;NA;NA
 Hensies;Hensies;NA;NA
 Jurbeke;Jurbeke;Jurbise;NA
 Lens;Lens;NA;NA
-Bergen;Bergen;Mons;NA
+Bergen;Bergen;Mons;Mons
 Quaregnon;Quaregnon;NA;NA
 Quievrain;Quievrain;NA;NA
 Saint-Ghislain;Saint-Ghislain;NA;NA
