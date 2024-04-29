@@ -301,5 +301,5 @@ left;links;gauche;left
 summarizeBy;samenvatten per;résumer par;summarize by
 t0;t0;t0;t0
 t1;t1;t1;t1
-contactMissing;Rapporteer ontbrekende data;TODO;Report missing data
-contactApp;Rapporteer een probleem met de applicatie;TODO;Report issue with the application
+contactMissing;Rapporteer ontbrekende data;Signalez les données manquantes;Report missing data
+contactApp;Rapporteer een probleem met de applicatie;Signalez un problème avec l'application;Report an issue with the application
