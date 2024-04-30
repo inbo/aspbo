@@ -22,7 +22,7 @@ species;Soort;Espèce;Species
 native_continent;continent van oorsprong;continent d'origine;native continent
 more;Meer;Plus;More
 less;Minder;Moins;Less
-gbifLink;GBIF-sleutel (taxonkey);Clé GBIF (taxonkey);GBIF taxonkey
+gbifLink;GBIF taxonomisch ID (taxonkey);ID taxonomique GBIF (taxonkey);GBIF taxonomic ID (taxonkey)
 sourceLink;Bron;Source;Source
 examples;voorbeelden;exemples;examples
 start;Start;Démarrage;Start
