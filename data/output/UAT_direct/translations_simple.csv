@@ -250,11 +250,11 @@ total;Totaal;Total;Total
 map;Kaart;Carte;Map
 difference;Verschil;Différence;Difference
 disclaimerVespa;De soort is momenteel niet actief. Wanneer u een individu observeert, kan dit een overwinterende koningin zijn, wat geen nestactiviteit aangeeft;L'espèce n'est actuellement pas active. Lorsque vous observez un individu, il peut s'agir d'une reine hivernante, ce qui n'indique pas d'activité de nidification.;The species is currently not active. When you observe an individual this might be a wintering queen which does not indicate nesting activity.
-AE;AE;AE;AE
-AP;AP;AP;AP
-AS;AS;AS;AS
-IE;IE;IE;IE
-UK;UK;UK;UK
+AE;Actief embryonaal nest;Nid embryonnaire actif;Active embryonic nest
+AP;Actief primair nest;Nid primaire actif;Active primary nest
+AS;Actief secundair nest;Nid secondaire actif;Active secondary nest
+IE;Inactief/leeg nest;nid inactif/vide;Inactive/empty nest
+UK;Onbekend;Inconnu;Unknown
 Behandeling;Behandeling;Traitement;Treatment
 succesvol;succesvol;réussi;successful
 niet succesvol;niet succesvol;non réussi;not successful
