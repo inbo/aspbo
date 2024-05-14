@@ -430,8 +430,15 @@ aantal_nesten_tot_vandaag <- aantal_nesten_tot_vandaag_all %>%
   summarise(aantal_gemelde_nesten = n())
 
 aantal_nesten_tot_vandaag_path <- paste0(processing_exportpath, "aantal_lente_nesten.csv")
+aantal_nesten_tot_vandaag_meta_path <- paste0(processing_exportpath, "aantal_nesten_meta.csv")
 
 write_csv(aantal_nesten_tot_vandaag, aantal_nesten_tot_vandaag_path)
+
+aantal_nesten_tot_vandaag_meta <- aantal_nesten_tot_vandaag_all %>% 
+  filter(observation_time == max(observation_time, na.rm = TRUE)) %>% 
+  distinct(observation_time) %>% 
+  rename(max_observation_time = observation_time) %>% 
+  write_csv(aantal_nesten_tot_vandaag_meta_path)
 ```
 
 ```{r GBIF data prep}
