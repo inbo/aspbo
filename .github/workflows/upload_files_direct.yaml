@@ -50,7 +50,7 @@ jobs:
           sudo apt install --yes libharfbuzz-dev libfribidi-dev
           R --no-save -e 'install.packages("devtools")'
           R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
-          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
+          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@fix_v1.0.0", 
                          subdir = "alienSpecies", force = TRUE)'
 
       - name: Install R packages
