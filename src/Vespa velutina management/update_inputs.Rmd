@@ -145,7 +145,7 @@ data_nest_iasset <- data_nest_iasset_raw %>%
                             resultaat == "niet behandeld" ~ "niet behandeld",
                             beheerd == "ja" ~ "succesvol",
                             month(datum_observatie) == 12 ~ "niet behandeld",
-                            month(datum_observatie) <= 2 ~ "niet behandeld",
+                            month(datum_observatie) <= 3 ~ "niet behandeld",
                             (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "onbekend",
                             (beheerd == "onbekend") & (bestrijding_gestart == "nee") ~ "onbekend",
                             resultaat == "onbekend" ~ "onbekend",
@@ -249,29 +249,27 @@ hierdoor komt 1 van de 2 meldingen van de duplicaten check niet langer voor
 in de gekuiste dataset (zie `dupli_missing_ID1` & `dupli_missing_ID2`). 
 In uitzonderlijke gevallen missen beide meldingen (zie `dupli_missing_both`). 
 ```{r IASSET: duplicaten prep}
+#selecteer duplicaten paren op basis van script Diego
 dupli_nest_iasset <- dupli_nest_iasset_raw %>% 
   filter(is_duplicate == 1) 
 
-dupli_nest_iasset <- dupli_nest_iasset %>% 
-  left_join(data_nest_iasset %>% 
-              select(id, observation_time) %>% 
-              st_drop_geometry(), by = c("ID1" = "id")) %>% 
-  left_join(data_nest_iasset %>% 
-              select(id, observation_time) %>% 
-              st_drop_geometry(), by = c("ID2" = "id")) 
+#checken of alle paren nog volledig in opgekuiste databank (zonder duplicaten) zitten
+#duplicaatparen waarvan ID1 reeds als duplicaat was aangeduid in iasset databank
+dupli_missing_ID1_test <- dupli_nest_iasset %>% 
+  filter(!ID1 %in% data_nest_iasset$id)
 
-dupli_missing_ID1 <- dupli_nest_iasset %>% 
-  filter(is.na(observation_time.x))
-
+#duplicaatparen waarvan ID2 reeds als duplicaat was aangeduid in iasset databank
 dupli_missing_ID2 <- dupli_nest_iasset %>% 
-  filter(is.na(observation_time.y))
+  filter(!ID2 %in% data_nest_iasset$id)
 
+#duplicaatparen waarvan ID1 en ID2 ontbreken in opgekuiste iasset databank
 dupli_missing_both <- dupli_nest_iasset %>% 
-  filter(is.na(observation_time.x) & is.na(observation_time.y)) %>% 
+  filter(!(ID2 %in% data_nest_iasset$id) & !(ID1 %in% data_nest_iasset$id)) %>% 
   write_csv("./data/interim/Vespa_iAsset_dupli_missing_both.csv")
 
+#duplicaten waarvan beide ID's nog in opgekuiste dataset zitten
 dupli_nest_iasset <- dupli_nest_iasset %>% 
-  filter(!is.na(observation_time.x) & !is.na(observation_time.y))
+  filter((ID2 %in% data_nest_iasset$id) & (ID1 %in% data_nest_iasset$id))
 
 # maken "missing_both" meldingen deel uit van een meerdere duplicaten sets ? 
 ## duplicaten die in meerdere sets zitten en waarvan minstens 1 set behouden 
