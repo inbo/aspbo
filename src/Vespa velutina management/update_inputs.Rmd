@@ -255,7 +255,7 @@ dupli_nest_iasset <- dupli_nest_iasset_raw %>%
 
 ##checken of alle paren nog volledig in opgekuiste databank (zonder duplicaten) zitten
 ##duplicaatparen waarvan ID1 reeds als duplicaat was aangeduid in iasset databank
-dupli_missing_ID1_test <- dupli_nest_iasset %>% 
+dupli_missing_ID1 <- dupli_nest_iasset %>% 
   filter(!ID1 %in% data_nest_iasset$id)
 
 ##duplicaatparen waarvan ID2 reeds als duplicaat was aangeduid in iasset databank
@@ -310,9 +310,14 @@ managed_nests <- data_nest_iasset%>%
   filter(result=="succesvol")%>%
   select(id)
 
+#decide which of both duplicates should be removed
 #only remove duplicates which do not have information regarding management
 dupli_nest_iasset <- dupli_nest_iasset%>%
-  mutate(duplicate_to_remove=case_when(!(ID1 %in% managed_nests$id) & (ID2 %in% managed_nests$id) ~ ID1,
+  mutate(duplicate_to_remove = case_when(
+    ID1 %in% dupli_missing_ID1 ~ ID2,
+    ID2 %in% dupli_missing_ID2 ~ ID1,
+    (ID1 %in% managed_nests$id) & !(ID2 %in% managed_nests$id) ~ ID1,
+    (ID2 %in% managed_nests$id) & !(ID1 %in% managed_nests$id) ~ ID2,
                                        TRUE ~ ID2))
 data_nest_iasset <- data_nest_iasset %>% 
   filter(!id %in% dupli_nest_iasset$duplicate_to_remove) 
