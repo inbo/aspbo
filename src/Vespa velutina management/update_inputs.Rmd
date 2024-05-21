@@ -158,7 +158,7 @@ data_nest_iasset <- data_nest_iasset_raw %>%
                                    TRUE ~ "UK"),
          aftercare = nazorg,
          year = year(datum_observatie))%>%
-  mutate_at(c('nestplaats'), ~replace_na(.,"ongekend"))
+  mutate_at(c('nestplaats'), ~replace_na(.,"onbekend"))
 
 #Intersect with province
 data_nest_iasset <- st_intersection(data_nest_iasset, prov)
@@ -170,7 +170,10 @@ data_nest_iasset <- data_nest_iasset %>%
   mutate(provincie = case_when(!is.na(provincie_corrected) ~ provincie_corrected,
                                !is.na(provincie) ~ provincie,
                                !is.na(NAAM) ~ NAAM, 
-                               TRUE ~ NA_character_))
+                               TRUE ~ NA_character_))%>% 
+  mutate(provincie = case_when(provincie=="ongekend" ~ "onbekend", #alternatief "ongekend" overal in dataset naar onbekend
+                               TRUE ~ provincie))%>%
+  filter(!provincie%in%c("niet Vlaanderen", "HoofdstedelijkGewest"))
 
 #temp fix lacking id column 
 if(!"insp_order" %in% colnames(data_nest_iasset)){
@@ -311,15 +314,11 @@ managed_nests <- data_nest_iasset%>%
   select(id)
 
 #decide which of both duplicates should be removed
-#in case already one of both is missing, maintain the other observation
 #only remove duplicates which do not contain information regarding management
 #default remove most recent duplicates (ID1)
 dupli_nest_iasset <- dupli_nest_iasset%>%
   mutate(duplicate_to_remove = case_when(
-    ID1 %in% dupli_missing_ID1 ~ ID1,
-    ID2 %in% dupli_missing_ID2 ~ ID2,
     (ID1 %in% managed_nests$id) & !(ID2 %in% managed_nests$id) ~ ID2,
-    (ID2 %in% managed_nests$id) & !(ID1 %in% managed_nests$id) ~ ID1,
                                        TRUE ~ ID1))
 data_nest_iasset <- data_nest_iasset %>% 
   filter(!id %in% dupli_nest_iasset$duplicate_to_remove) 
@@ -375,7 +374,9 @@ gem_df <- as.data.frame(gemeentes) %>%
 data_nest_final <- data_nest_final %>% 
   mutate(NISCODE = as.character(NISCODE)) %>% 
   left_join(gem_df, 
-            by = "NISCODE")
+            by = "NISCODE")%>%
+  mutate(Gemeente = case_when(provincie=="onbekend" ~ "onbekend",
+                              TRUE ~ Gemeente))
 ```
 
 ```{r data checks}
