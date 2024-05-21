@@ -83,15 +83,15 @@ dataset_1 <- data_nest_gs_raw %>%
                             result == "un" ~ "niet behandeld",
                             TRUE ~ "onbekend"),
          year = year(as.Date(observation_time)),
-         site = case_when(is.na(site) ~ "ongekend",
+         site = case_when(is.na(site) ~ "onbekend",
                           site == "I" ~ "binnen, in gebouw of constructie",
                           site == "O_NC_B" ~ "buiten, onbedekt op gebouw",
                           site == "O_NC_T" ~ "buiten, onbedekt op boom of struik",
                           site == "O_C_C" ~ "buiten, overdekt door constructie",
                           site == "O_N_C" ~ "buiten, natuurlijk overdekt",
-                          site =="UK" ~ "ongekend",
-                          site == "NA" ~ "ongekend",
-                          site == "NULL" ~ "ongekend"))
+                          site =="UK" ~ "onbekend",
+                          site == "NA" ~ "onbekend",
+                          site == "NULL" ~ "onbekend"))
 
 #alleen VV
 dataset_1_vv <- dataset_1 %>% filter(expert_vv_confirmed=="TRUE" |
