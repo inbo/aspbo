@@ -456,6 +456,36 @@ table(interimdata$type, useNA = "ifany")
 
 file.remove("./data/interim/nesten_to_check.geojson")
 
+interimdata<- st_as_sf(interimdata, coords=c('decimalLongitude', 'decimalLatitude'), remove=FALSE, crs=4326)
+interimdata<- st_join(interimdata, gemeentes)
+
+#When municipality is known based on intersect with communes.geojson, overwrite level3Name with these municipality data (stored in column NAAM), if not, overwrite with municipalities from column municipality (from gbif)
+interimdata$level3Name <- ifelse(!is.na(interimdata$NAAM), interimdata$NAAM, interimdata$municipality)
+
+#Do the same for column level2Name (based on intersect with provinces.geojson). In this case, only replace level2Name with province from provinces when this is not NA, otherwise keep original 
+interimdata<- interimdata %>%
+  select(c(-NAAM,-NISCODE,-GEWEST))%>%
+  st_join(prov)%>%
+  mutate(level2Name=ifelse(!is.na(NAAM), NAAM, level2Name))%>%
+  mutate(level1Name=ifelse(!is.na(GEWEST),GEWEST,level1Name))%>%
+  mutate(level1Name= case_when(
+                    level1Name == "Vlaanderen" ~ "flanders",
+                    level1Name == "Wallonie" ~ "wallonia",
+                    level1Name == "Bruxelles" ~ "brussels",
+                    level3Name == "Wachtebeke" ~ "flanders",
+                    TRUE ~ level1Name ))%>%
+   mutate(level2Name= case_when(
+                    level3Name == "Wachtebeke" ~ "Oost-Vlaanderen",
+                    TRUE ~ level2Name ))%>%
+   mutate(level3Name= case_when(
+                    level3Name == "Halle" ~ "Hal",
+                    level3Name == "Kapelle-op-den-Bos" ~ "Kapelle-Op-Den-Bos",
+                    level3Name == "Heist-op-den-Berg" ~ "Heist-Op-Den-Berg",
+                    level3Name == "Herk-de-Stad" ~ "Herk-De-Stad",
+                    TRUE ~ level3Name ))%>%
+  select(c(-NAAM,-NISCODE,-GEWEST))%>%
+  st_drop_geometry()
+
 interimdata %>% 
   filter(type == "Unc.Nest") %>% 
   st_as_sf(coords = c("decimalLatitude", "decimalLongitude")) %>% 
