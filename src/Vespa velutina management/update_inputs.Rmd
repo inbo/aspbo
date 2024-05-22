@@ -34,6 +34,7 @@ conflicted::conflicts_prefer(tidylog::group_by)
 conflicted::conflicts_prefer(tidylog::full_join)
 conflicted::conflicts_prefer(tidylog::summarise)
 conflicted::conflicts_prefer(tidylog::pivot_longer)
+conflicted::conflicts_prefer(tidylog::distinct)
 ```
 
 ```{r auth}
@@ -315,10 +316,10 @@ managed_nests <- data_nest_iasset%>%
 
 #decide which of both duplicates should be removed
 #only remove duplicates which do not contain information regarding management
-#default remove most recent duplicates (ID1)
+#default remove most recent duplicate (ID1)
 dupli_nest_iasset <- dupli_nest_iasset%>%
   mutate(duplicate_to_remove = case_when(
-    (ID1 %in% managed_nests$id) & !(ID2 %in% managed_nests$id) ~ ID2,
+    (ID1 %in% managed_nests$id) & (!ID2 %in% managed_nests$id) ~ ID2,
                                        TRUE ~ ID1))
 data_nest_iasset <- data_nest_iasset %>% 
   filter(!id %in% dupli_nest_iasset$duplicate_to_remove) 
