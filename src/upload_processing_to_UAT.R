@@ -20,12 +20,16 @@ processingFilePath <- "./data/output/UAT_processing"
 # connect to bucket ####
 #source("./src/connect_to_bucket.R")
 
-print("test S3_bucket")
-if(Sys.getenv("S3_BUCKET") == ""){
-  stop("S3_bucket is not provided")
-}
+# test S3_bucket ####
+test_that("Check S3_BUCKET env variable", {
+    
+    expect_false(Sys.getenv("S3_BUCKET") == "", "env S3_BUCKET is not provided")
+    
+  })
 
-bucket <-  paste0("s3://",Sys.getenv("S3_BUCKET"))
+bucket <- paste0("s3://",Sys.getenv("S3_BUCKET"))
+print(bucket)
+
 #Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
 
 #connect_to_bucket(bucket) #=> run this before continuing locally
@@ -59,6 +63,11 @@ createShapeData(dataDir = file.path(processingFilePath,"provinces.geojson"), buc
 print("communes")
 createShapeData(dataDir = file.path(processingFilePath,"communes.geojson"), bucket = bucket)
 
+# input: data_input_checklist_indicators.tsv
+# output: "data_input_checklist_indicators_processed.parquet" 
+print("indicators")
+createTabularData(dataDir =  processingFilePath, type = "indicators", bucket = bucket)
+
 # create key data
 # input:  "be_alientaxa_info.csv"
 # output: "keys.csv"
@@ -66,18 +75,14 @@ print("key data")
 createKeyData(dataDir = processingFilePath, bucket = bucket)
 
 # create occupancy cube 
-
 # input: trendOccupancy folder containing T1* and ias_belgium_t0_2016/18/20 geojson data
 # output: dfCube.RData
 print("dfcube")
 createOccupancyCube(file.path(processingFilePath, "trendOccupancy"), bucket = bucket)
 
 # create tabular data
-# input: data_input_checklist_indicators.tsv/eu_concern_species.tsv/be_alientaxa_cube.csv
-# output: "eu_concern_species_processed.RData"/"data_input_checklist_indicators_processed.RData"/ "be_alientaxa_cube_processed.RData" 
-print("tabular data")
-print("indicators")
-createTabularData(dataDir =  processingFilePath, type = "indicators", bucket = bucket)
+# input: eu_concern_species.tsv/be_alientaxa_cube.csv
+# output: "eu_concern_species_processed.parquet"/ "be_alientaxa_cube_processed.parquet" 
 print("unionlist")
 createTabularData(dataDir =  processingFilePath, type = "unionlist", bucket = bucket)
 print("occurrence")
