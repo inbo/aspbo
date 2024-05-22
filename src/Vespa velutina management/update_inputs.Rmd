@@ -395,15 +395,6 @@ test_that("Check for NA values in each column", {
 processing_exportpath <- "./data/output/UAT_processing/Vespa_velutina_shape/"
 ```
 
-```{r rewrite region IDs in nesten so they correspond with IDs in translation files}
-data_nest_final <- data_nest_final %>%
-  mutate(Gemeente = case_when(
-    Gemeente == "Ouderghem" ~ "Oudergem",
-    TRUE ~ Gemeente
-  ))
-```
-
-
 ```{r export nesten}
 nesten_path <- paste0(processing_exportpath, "nesten.geojson")
 
