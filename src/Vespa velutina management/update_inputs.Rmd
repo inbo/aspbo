@@ -34,12 +34,19 @@ conflicted::conflicts_prefer(tidylog::group_by)
 conflicted::conflicts_prefer(tidylog::full_join)
 conflicted::conflicts_prefer(tidylog::summarise)
 conflicted::conflicts_prefer(tidylog::pivot_longer)
+conflicted::conflicts_prefer(tidylog::distinct)
 ```
 
 ```{r auth}
-email <- paste0(Sys.getenv("email"), "@inbo.be")
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is not a bot")
+  email <- paste0(Sys.getenv("email"), "@inbo.be")
+  gs4_auth(email)
+}else{
+  print("Executor of the script is a bot")
+  gs4_auth(path = Sys.getenv("gsheet_token"))
+}
 
-gs4_auth(email)
 ```
 
 ```{r read data}
@@ -64,7 +71,7 @@ dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJW
 
 # iAsset province error correction
 iAsset_foutecoordinaten <- read_delim("data/interim/iAsset_foutecoördinaten.csv", 
-    delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% 
+                                      delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% 
   filter(!is.na(`ID nest`))
 ```
 
@@ -77,15 +84,15 @@ dataset_1 <- data_nest_gs_raw %>%
                             result == "un" ~ "niet behandeld",
                             TRUE ~ "onbekend"),
          year = year(as.Date(observation_time)),
-         site = case_when(is.na(site) ~ "ongekend",
+         site = case_when(is.na(site) ~ "onbekend",
                           site == "I" ~ "binnen, in gebouw of constructie",
                           site == "O_NC_B" ~ "buiten, onbedekt op gebouw",
                           site == "O_NC_T" ~ "buiten, onbedekt op boom of struik",
                           site == "O_C_C" ~ "buiten, overdekt door constructie",
                           site == "O_N_C" ~ "buiten, natuurlijk overdekt",
-                          site =="UK" ~ "ongekend",
-                          site == "NA" ~ "ongekend",
-                          site == "NULL" ~ "ongekend"))
+                          site =="UK" ~ "onbekend",
+                          site == "NA" ~ "onbekend",
+                          site == "NULL" ~ "onbekend"))
 
 #alleen VV
 dataset_1_vv <- dataset_1 %>% filter(expert_vv_confirmed=="TRUE" |
@@ -139,7 +146,7 @@ data_nest_iasset <- data_nest_iasset_raw %>%
                             resultaat == "niet behandeld" ~ "niet behandeld",
                             beheerd == "ja" ~ "succesvol",
                             month(datum_observatie) == 12 ~ "niet behandeld",
-                            month(datum_observatie) <= 2 ~ "niet behandeld",
+                            month(datum_observatie) <= 3 ~ "niet behandeld",
                             (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "onbekend",
                             (beheerd == "onbekend") & (bestrijding_gestart == "nee") ~ "onbekend",
                             resultaat == "onbekend" ~ "onbekend",
@@ -152,19 +159,22 @@ data_nest_iasset <- data_nest_iasset_raw %>%
                                    TRUE ~ "UK"),
          aftercare = nazorg,
          year = year(datum_observatie))%>%
-  mutate_at(c('nestplaats'), ~replace_na(.,"ongekend"))
+  mutate_at(c('nestplaats'), ~replace_na(.,"onbekend"))
 
 #Intersect with province
 data_nest_iasset <- st_intersection(data_nest_iasset, prov)
 
 #vaak zijn coördinaten in iAsset fout, het veld 'provincie' in iAsset is toegewezen op basis van veld adres. Enkel indien 'provincie' leeg, wordt provincie best afgeleid uit coördinaten. Er zijn ook een aantal meldingen met provincie ('ongekend'), van deze weten we het juiste adres niet en zijn de coördinaten de default coördinaten (dus niet correct).
 data_nest_iasset <- data_nest_iasset %>% 
-    left_join(iAsset_foutecoordinaten, 
-              by = c("insp_order" = "ID nest")) %>% 
-    mutate(provincie = case_when(!is.na(provincie_corrected) ~ provincie_corrected,
-                                 !is.na(provincie) ~ provincie,
-                                 !is.na(NAAM) ~ NAAM, 
-                                 TRUE ~ NA_character_))
+  left_join(iAsset_foutecoordinaten, 
+            by = c("insp_order" = "ID nest")) %>% 
+  mutate(provincie = case_when(!is.na(provincie_corrected) ~ provincie_corrected,
+                               !is.na(provincie) ~ provincie,
+                               !is.na(NAAM) ~ NAAM, 
+                               TRUE ~ NA_character_))%>% 
+  mutate(provincie = case_when(provincie=="ongekend" ~ "onbekend", #alternatief "ongekend" overal in dataset naar onbekend
+                               TRUE ~ provincie))%>%
+  filter(!provincie%in%c("niet Vlaanderen", "HoofdstedelijkGewest"))
 
 #temp fix lacking id column 
 if(!"insp_order" %in% colnames(data_nest_iasset)){
@@ -243,29 +253,27 @@ hierdoor komt 1 van de 2 meldingen van de duplicaten check niet langer voor
 in de gekuiste dataset (zie `dupli_missing_ID1` & `dupli_missing_ID2`). 
 In uitzonderlijke gevallen missen beide meldingen (zie `dupli_missing_both`). 
 ```{r IASSET: duplicaten prep}
+##selecteer duplicaten paren op basis van script Diego
 dupli_nest_iasset <- dupli_nest_iasset_raw %>% 
   filter(is_duplicate == 1) 
 
-dupli_nest_iasset <- dupli_nest_iasset %>% 
-  left_join(data_nest_iasset %>% 
-              select(id, observation_time) %>% 
-              st_drop_geometry(), by = c("ID1" = "id")) %>% 
-  left_join(data_nest_iasset %>% 
-              select(id, observation_time) %>% 
-              st_drop_geometry(), by = c("ID2" = "id")) 
-
+##checken of alle paren nog volledig in opgekuiste databank (zonder duplicaten) zitten
+##duplicaatparen waarvan ID1 reeds als duplicaat was aangeduid in iasset databank
 dupli_missing_ID1 <- dupli_nest_iasset %>% 
-  filter(is.na(observation_time.x))
+  filter(!ID1 %in% data_nest_iasset$id)
 
+##duplicaatparen waarvan ID2 reeds als duplicaat was aangeduid in iasset databank
 dupli_missing_ID2 <- dupli_nest_iasset %>% 
-  filter(is.na(observation_time.y))
+  filter(!ID2 %in% data_nest_iasset$id)
 
+##duplicaatparen waarvan ID1 en ID2 ontbreken in opgekuiste iasset databank
 dupli_missing_both <- dupli_nest_iasset %>% 
-  filter(is.na(observation_time.x) & is.na(observation_time.y)) %>% 
+  filter(!(ID2 %in% data_nest_iasset$id) & !(ID1 %in% data_nest_iasset$id)) %>% 
   write_csv("./data/interim/Vespa_iAsset_dupli_missing_both.csv")
 
+##duplicaten waarvan beide ID's nog in opgekuiste dataset zitten
 dupli_nest_iasset <- dupli_nest_iasset %>% 
-  filter(!is.na(observation_time.x) & !is.na(observation_time.y))
+  filter((ID2 %in% data_nest_iasset$id) & (ID1 %in% data_nest_iasset$id))
 
 # maken "missing_both" meldingen deel uit van een meerdere duplicaten sets ? 
 ## duplicaten die in meerdere sets zitten en waarvan minstens 1 set behouden 
@@ -274,7 +282,7 @@ test_mutiple_1 <- dupli_missing_both %>%
   filter(ID1 %in% dupli_nest_iasset$ID1 | ID2 %in% dupli_nest_iasset$ID1)
 
 ## duplicaten waarvan 1 deel van de set reeds als duplicaat in iasset geflagged 
-# werdt 
+# werd
 test_mutiple_2 <- dupli_missing_both %>% 
   filter(!ID1 %in% dupli_nest_iasset$ID1 | !ID2 %in% dupli_nest_iasset$ID1) %>% 
   filter(ID1 %in% data_nest_iasset$id | ID2 %in% data_nest_iasset$id)
@@ -301,8 +309,20 @@ table(test_mutiple_3$duplicaat, useNA = "ifany") #=> alle ids in deze set werden
 ```
 
 ```{r IASSET: remove duplicaten}
+#obtain list of all managed nests
+managed_nests <- data_nest_iasset%>%
+  filter(result=="succesvol")%>%
+  select(id)
+
+#decide which of both duplicates should be removed
+#only remove duplicates which do not contain information regarding management
+#default remove most recent duplicate (ID1)
+dupli_nest_iasset <- dupli_nest_iasset%>%
+  mutate(duplicate_to_remove = case_when(
+    (ID1 %in% managed_nests$id) & (!ID2 %in% managed_nests$id) ~ ID2,
+                                       TRUE ~ ID1))
 data_nest_iasset <- data_nest_iasset %>% 
-  filter(!id %in% dupli_nest_iasset$ID2) 
+  filter(!id %in% dupli_nest_iasset$duplicate_to_remove) 
 ```
 
 ```{r IASSET: Export}
@@ -355,7 +375,9 @@ gem_df <- as.data.frame(gemeentes) %>%
 data_nest_final <- data_nest_final %>% 
   mutate(NISCODE = as.character(NISCODE)) %>% 
   left_join(gem_df, 
-            by = "NISCODE")
+            by = "NISCODE")%>%
+  mutate(Gemeente = case_when(provincie=="onbekend" ~ "onbekend",
+                              TRUE ~ Gemeente))
 ```
 
 ```{r data checks}
@@ -424,8 +446,15 @@ aantal_nesten_tot_vandaag <- aantal_nesten_tot_vandaag_all %>%
   summarise(aantal_gemelde_nesten = n())
 
 aantal_nesten_tot_vandaag_path <- paste0(processing_exportpath, "aantal_lente_nesten.csv")
+aantal_nesten_tot_vandaag_meta_path <- paste0(processing_exportpath, "aantal_nesten_meta.csv")
 
 write_csv(aantal_nesten_tot_vandaag, aantal_nesten_tot_vandaag_path)
+
+aantal_nesten_tot_vandaag_meta <- aantal_nesten_tot_vandaag_all %>% 
+  filter(observation_time == max(observation_time, na.rm = TRUE)) %>% 
+  distinct(observation_time) %>% 
+  rename(max_observation_time = observation_time) %>% 
+  write_csv(aantal_nesten_tot_vandaag_meta_path)
 ```
 
 ```{r GBIF data prep}
@@ -449,6 +478,36 @@ table(interimdata$institutionCode, interimdata$institutionCode2)
 table(interimdata$type, useNA = "ifany")
 
 file.remove("./data/interim/nesten_to_check.geojson")
+
+interimdata<- st_as_sf(interimdata, coords=c('decimalLongitude', 'decimalLatitude'), remove=FALSE, crs=4326)
+interimdata<- st_join(interimdata, gemeentes)
+
+#When municipality is known based on intersect with communes.geojson, overwrite level3Name with these municipality data (stored in column NAAM), if not, overwrite with municipalities from column municipality (from gbif)
+interimdata$level3Name <- ifelse(!is.na(interimdata$NAAM), interimdata$NAAM, interimdata$municipality)
+
+#Do the same for column level2Name (based on intersect with provinces.geojson). In this case, only replace level2Name with province from provinces when this is not NA, otherwise keep original 
+interimdata<- interimdata %>%
+  select(c(-NAAM,-NISCODE,-GEWEST))%>%
+  st_join(prov)%>%
+  mutate(level2Name=ifelse(!is.na(NAAM), NAAM, level2Name))%>%
+  mutate(level1Name=ifelse(!is.na(GEWEST),GEWEST,level1Name))%>%
+  mutate(level1Name= case_when(
+                    level1Name == "Vlaanderen" ~ "flanders",
+                    level1Name == "Wallonie" ~ "wallonia",
+                    level1Name == "Bruxelles" ~ "brussels",
+                    level3Name == "Wachtebeke" ~ "flanders",
+                    TRUE ~ level1Name ))%>%
+   mutate(level2Name= case_when(
+                    level3Name == "Wachtebeke" ~ "Oost-Vlaanderen",
+                    TRUE ~ level2Name ))%>%
+   mutate(level3Name= case_when(
+                    level3Name == "Halle" ~ "Hal",
+                    level3Name == "Kapelle-op-den-Bos" ~ "Kapelle-Op-Den-Bos",
+                    level3Name == "Heist-op-den-Berg" ~ "Heist-Op-Den-Berg",
+                    level3Name == "Herk-de-Stad" ~ "Herk-De-Stad",
+                    TRUE ~ level3Name ))%>%
+  select(c(-NAAM,-NISCODE,-GEWEST))%>%
+  st_drop_geometry()
 
 interimdata %>% 
   filter(type == "Unc.Nest") %>% 
