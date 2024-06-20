@@ -25,8 +25,7 @@ onbehandelde_nesten<- st_read("./data/output/UAT_processing/Vespa_velutina_shape
 #-------------------------------------------------------------------------
 #Load the translations file
 #-------------------------------------------------------------------------
-#translations_regions<-read.csv2("./data/output/UAT_direct/translations_regions.csv")
-translations_regions<-read_csv2("https://raw.githubusercontent.com/inbo/aspbo/121-update-translations-file/data/output/UAT_direct/translations_regions.csv")
+translations_regions<-read.csv2("./data/output/UAT_direct/translations_regions.csv")
 
 
 #-------------------------------------------------------------------------
