@@ -114,8 +114,14 @@ jobs:
         run: |
           source("src/Vespa velutina management/run_update_inputs.R")
         shell: Rscript {0}
+        
+      - name: Run tests
+        run: |
+          source("src/tests/test_regionIDs.R")
+        shell: Rscript {0}
 
       - name: Commit and push changes
+        if: success()
         uses: devops-infra/action-commit-push@master
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
@@ -128,6 +134,7 @@ jobs:
           git branch --show-current
 
       - name: Create pull request
+        if: success()
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
