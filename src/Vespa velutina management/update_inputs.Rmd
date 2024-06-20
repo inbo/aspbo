@@ -172,7 +172,8 @@ data_nest_iasset <- data_nest_iasset %>%
                                !is.na(provincie) ~ provincie,
                                !is.na(NAAM) ~ NAAM, 
                                TRUE ~ NA_character_))%>% 
-  mutate(provincie = case_when(provincie=="ongekend" ~ "onbekend", #alternatief "ongekend" overal in dataset naar onbekend
+  mutate(provincie = case_when(provincie=="ongekend"| provincie=="onbekend" | is.na(provincie) ~ "unknown", 
+#alternatief "ongekend", "onbekend", en NA overal in dataset naar unknown
                                TRUE ~ provincie))%>%
   filter(!provincie%in%c("niet Vlaanderen", "HoofdstedelijkGewest"))
 
