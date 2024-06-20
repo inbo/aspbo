@@ -382,7 +382,7 @@ data_nest_final <- data_nest_final %>%
   mutate(NISCODE = as.character(NISCODE)) %>% 
   left_join(gem_df, 
             by = "NISCODE")%>%
-  mutate(Gemeente = case_when(provincie=="onbekend" ~ "onbekend",
+  mutate(Gemeente = case_when(provincie=="unknown" | is.na(Gemeente)  ~ "unknown",
                               TRUE ~ Gemeente))
 ```
 
