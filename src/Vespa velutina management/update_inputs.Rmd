@@ -351,6 +351,11 @@ data_nest_final <- rbind(data_nest_gs, data_nest_iasset)
 ```{r add gemeente info to nesten}
 gemeentes <- st_read("https://raw.githubusercontent.com/inbo/aspbo/main/data/output/UAT_processing/communes.geojson")
 
+#Write Ouderghem as Oudergem to comply with the translations file of the exotenportaal
+gemeentes<-gemeentes %>%
+  mutate(NAAM = case_when(NAAM=="Ouderghem" ~ "Oudergem",
+                          TRUE ~ NAAM))
+
 data_nest_final$NISCODE <- apply(st_intersects(gemeentes,
                                                data_nest_final,
                                                sparse = FALSE),
