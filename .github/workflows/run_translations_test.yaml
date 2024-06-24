@@ -1,10 +1,11 @@
 on:
+  workflow_dispatch:
   push:
     branches:
       - uat
     paths:
       - data/output/UAT_processing/Vespa_velutina_shape/**
-  workflow_dispatch:
+  
 
 name: run_translations_test
 
