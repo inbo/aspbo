@@ -9,7 +9,7 @@ on:
 name: run_translations_test
 
 jobs:
-  test translations:
+  test_translations:
     runs-on: ${{ matrix.config.os }}
     environment: ${{ github.ref == 'refs/heads/uat' && 'UAT' || 'PROD' }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
