@@ -51,19 +51,19 @@ jobs:
                          subdir = "alienSpecies", force = TRUE)'
 
      
-    - name: Test translations
+      - name: Test translations
         run: |
           source("src/tests/test_regionIDs.R")
         shell: Rscript {0}
           
-    - name: Show testthat output
+      - name: Show testthat output
         if: always()
         run: |
           ## Show testthat output if the test fails
           find ${{ runner.temp }}/package -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
-    - name: Upload test results
+      - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v3
         with:
