@@ -7,7 +7,7 @@ name: update eu concern list
 
 jobs:
   update_eu_concern_list:
-    environment: ${{ github.ref == 'refs/heads/uat' && 'UAT' || 'PROD' }}
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     strategy:
@@ -42,6 +42,11 @@ jobs:
           sudo apt-get install libcurl4-openssl-dev
           sudo apt-get install libgdal-dev libproj-dev
           sudo apt install libudunits2-dev
+          sudo apt install --yes libharfbuzz-dev libfribidi-dev
+          R --no-save -e 'install.packages("devtools")'
+          R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
+          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
+                         subdir = "alienSpecies", force = TRUE)'
 
       - name: Install R packages
         run: |

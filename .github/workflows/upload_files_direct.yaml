@@ -11,7 +11,7 @@ name: upload_files_direct
 jobs:
   upload_files:
     runs-on: ${{ matrix.config.os }}
-    environment: ${{ github.ref == 'refs/heads/uat' && 'UAT' || 'PROD' }}
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
@@ -86,4 +86,3 @@ jobs:
           AWS_SESSION_TOKEN: ${{ steps.assume_role.outputs.AWS_SESSION_TOKEN }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
-          
