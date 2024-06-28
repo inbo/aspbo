@@ -17,19 +17,6 @@ jobs:
 
       - name: Check if secrets exist
         run: |
-          if [ $(echo "${{secrets.iasset_username}}" | wc -c) -lt 2 ]; then
-            echo "The secret 'iasset_user' has not been set."
-            echo "Please go to 'Settings > Secrets > Actions' to create it."
-            exit 1
-          fi
-          if [ $(echo "${{secrets.iasset_password}}" | wc -c) -lt 2 ]; then
-            echo "The secret 'iasset_password' has not been set."
-            echo "Please go to 'Settings > Secrets > Actions' to create it."
-            exit 1
-          fi
-          secret_length=$(echo -n "${{ secrets.iasset_password }}" | wc -c)
-          echo "Length of secret 'iasset_password': $secret_length"
-          
           if [ $(echo "${{secrets.GBIF_USER}}" | wc -c) -lt 2 ]; then
             echo "The secret 'iasset_user' has not been set."
             echo "Please go to 'Settings > Secrets > Actions' to create it."
