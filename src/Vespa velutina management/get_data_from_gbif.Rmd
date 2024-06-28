@@ -26,6 +26,10 @@ bel <- st_read("./data/output/UAT_processing/grid/gewestbel.shp") %>%
   st_as_sf() %>% 
   st_as_sfc() %>% 
   st_as_text() 
+
+bel <- gsub(pattern = ", NaN", 
+            replacement = "",
+            bel)
 ```
 
 ```{r test bel, eval=FALSE}
