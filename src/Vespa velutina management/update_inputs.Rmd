@@ -555,7 +555,7 @@ st_write(cleandata, points_path,
          append = FALSE)
 ```
 
-```{r calculate actieve haarden}
+```{r calculate actieve haarden, eval = FALSE}
 source("./src/Vespa velutina management/bereken_actieve_haarden.r")
 
 nesten <- data_nest_final %>% 
