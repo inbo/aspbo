@@ -2,7 +2,7 @@
 #--1.Load Packages-------
 #------------------------
 
-packages <- c("rmarkdown", "fs", "yaml","purrr")
+packages <- c("rmarkdown", "fs")
 
 for(i in packages) {
   print(i)
