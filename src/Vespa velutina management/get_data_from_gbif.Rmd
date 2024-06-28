@@ -19,15 +19,21 @@ limit the rgbif query to flanders.
 ```{r get flanders geojson}
 sf_use_s2(TRUE)
 
-vla <- st_read("./data/spatial/flanders_wgs84.geojson") %>% 
-  st_transform(4326) %>% 
+bel <- st_read("./data/output/UAT_processing/grid/gewestbel.shp") %>% 
   st_simplify(dTolerance = 10) %>% 
+  st_make_valid() %>% 
+  st_union() %>% 
+  st_as_sf() %>% 
   st_as_sfc() %>% 
   st_as_text() 
+```
 
-vla <- gsub(pattern = ", NaN", 
-            replacement = "",
-            vla)
+```{r test bel, eval=FALSE}
+library(leaflet)
+
+leaflet(bel) %>% 
+  addTiles() %>% 
+  addPolylines()
 ```
 
 
@@ -43,7 +49,7 @@ taxonkeys <- c(1311477)
 
 gbif_downloadKey <- occ_download(pred_in("datasetKey", datasetkeys),
                                  pred_in("taxonKey", taxonkeys),
-                                 pred_within(vla),
+                                 pred_within(bel),
                                  user = Sys.getenv("gbif_user"),
                                  pwd = Sys.getenv("gbif_pwd"),
                                  email = Sys.getenv("email"),
