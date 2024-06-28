@@ -90,11 +90,6 @@ jobs:
           source("src/Vespa velutina management/run_get_data_from_gbif.R")
         shell: Rscript {0}
 
-      - name: Get data from iAsset
-        run: |
-          source("src/Vespa velutina management/run_get_data_from_iAsset.R")
-        shell: Rscript {0}
-
       - name: update inputs
         run: |
           source("src/Vespa velutina management/run_update_inputs.R")
