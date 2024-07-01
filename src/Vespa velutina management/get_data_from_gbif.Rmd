@@ -49,13 +49,9 @@ Waarnemingen.be - Non-native animal occurrences in Flanders and the Brussels Cap
 iNaturalist Research-grade Observations: https://www.gbif.org/dataset/50c9509d-22c7-4a22-a47d-8c48425ef4a7
 
 ```{r download data from gbif}
-datasetkeys <- c("9a0b66df-7535-4f28-9f4e-5bc11b8b096c", 
-                 "50c9509d-22c7-4a22-a47d-8c48425ef4a7")
-
 taxonkeys <- c(1311477)
 
-gbif_downloadKey <- occ_download(pred_in("datasetKey", datasetkeys),
-                                 pred_in("taxonKey", taxonkeys),
+gbif_downloadKey <- occ_download(pred_in("taxonKey", taxonkeys),
                                  pred_within(bel),
                                  user = Sys.getenv("gbif_user"),
                                  pwd = Sys.getenv("gbif_pwd"),
