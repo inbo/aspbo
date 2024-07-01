@@ -38,7 +38,7 @@ cat(paste0("
 
 
 #### **Achtergrond** <br>
-De Amerikaanse stierkikker (*Lithobates catesbeianus*) is één van de grootste kikkers ter wereld, en is zeer competitief en vraatzuchtig. De soort kan drager zijn van verschillende ziektes en vormt een bedreiging voor inheemse amfibieënsoorten en de algemene biodiversiteit. In Vlaanderen zijn er momenteel een aantal populaties van de Amerikaanse stierkikker, waarvan de grootste zich in de vallei van de Grote Nete bevindt.
+De Amerikaanse stierkikker (*Lithobates catesbeianus*) is één van de grootste kikkers ter wereld, en is zeer competitief en vraatzuchtig. De soort kan drager zijn van verschillende ziektes en vormt een bedreiging voor inheemse amfibieënsoorten en de algemene biodiversiteit. In België zijn er momenteel een aantal populaties van de Amerikaanse stierkikker, waarvan de grootste zich in de vallei van de Grote Nete in Vlaanderen bevindt.
 <br>
 <br>
 
@@ -68,16 +68,16 @@ cat(paste0("
 
 
 #### **Background** <br>
-The American bullfrog (*Lithobates catesbeianus*) is one of the largest frogs in the world and is known to be very competitive and voracious. The species can carry various diseases and poses a threat to native amphibian species as well as biodiversity in general. Currently, there are several populations of the American bullfrog in Flandres, the largest of which can be found in the Grote Nete valley.
+The American bullfrog (*Lithobates catesbeianus*) is one of the largest frogs in the world and is known to be very competitive and voracious. The species can carry various diseases and poses a threat to native amphibian species as well as biodiversity in general. Currently, there are several populations of the American bullfrog in Belgium, the largest of which can be found in the Grote Nete valley in Flandres.
 <br>
 <br>
 
 #### **Useful links** <br>
-Sightings of the American bullfrog can be reported on the website www.waarnemingen.be. Your reports are valuable for monitoring and researching the species.<br>
-**Report a sighting: <a href=\"", link1, "\">www.waarnemingen.be</a>**<br>
+Sightings of the American bullfrog can be reported on the website www.observation.org. Your reports are valuable for monitoring and researching the species.<br>
+**Report a sighting: <a href=\"", link1, "\">www.observation.org</a>**<br>
 <br>
 You can find more information about this species on the ecopedia page of the American bullfrog (note that this information is currently only available in Dutch).<br>
-**Meer informatie: <a href=\"", link2, "\">ecopedia</a>**<br>
+**More information: <a href=\"", link2, "\">ecopedia</a>**<br>
 <br>
 The European project LIFE 3n-Stierkikker aims to find a sustainable way to stop the spread of the American bullfrog in Flanders. To this end, the project uses traditional control techniques in combination with the release of sterile frogs. <br>
 **More information about the LIFE 3n-Stierkikker project: <a href=\"", link3, "\">LIFE 3n-Stierkikker</a>**"
@@ -97,16 +97,16 @@ cat(paste0("
 
 
 #### **Contexte** <br>
-La grenouille taureau (*Lithobates catesbeianus*) est l'une des plus grandes grenouilles du monde, et elle est très compétitive et vorace. Cette espèce peut être porteuse de diverses maladies et constitue une menace pour les espèces indigènes d'amphibiens ainsi que pour la biodiversité en général. En Flandre, il existe actuellement plusieurs populations de grenouilles taureau, dont la plus grande se trouve dans la vallée de la Grande Nèthe.
+La grenouille taureau (*Lithobates catesbeianus*) est l'une des plus grandes grenouilles du monde, et elle est très compétitive et vorace. Cette espèce peut être porteuse de diverses maladies et constitue une menace pour les espèces indigènes d'amphibiens ainsi que pour la biodiversité en général. En Belgique, il existe actuellement plusieurs populations de grenouilles taureau, dont la plus grande se trouve dans la vallée de la Grande Nèthe en Flandre.
 <br>
 <br>
 
 #### **Liens utiles** <br>
-Pour signaler des observations de la grenouille taureau, vous pouvez vous rendre sur www.waarnemingen.be. Vos signalements sont utiles pour la surveillance et la recherche sur cette espèce.<br>
-**Signalez une observation: <a href=\"", link1, "\">www.waarnemingen.be</a>**<br>
+Pour signaler des observations de la grenouille taureau, vous pouvez vous rendre sur www.observation.org. Vos signalements sont utiles pour la surveillance et la recherche sur cette espèce.<br>
+**Signalez une observation: <a href=\"", link1, "\">www.observation.org</a>**<br>
 <br>
 Vous pouvez trouver plus d'informations sur cette espèce sur la page écopédia de la grenouille taureau (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
-**Meer informatie: <a href=\"", link2, "\">ecopedia</a>**<br>
+**Plus d'informations: <a href=\"", link2, "\">ecopedia</a>**<br>
 <br>
 Le projet européen LIFE 3n-Stierkikker tente de trouver une manière durable d'arrêter la progression de cette espèce en Flandre. Le projet utilise pour cela des techniques de lutte traditionnelles en combinaison avec l'introduction de grenouilles stériles.<br>
 **Plus d'informations sur le projet LIFE 3n-Stierkikker:  <a href=\"", link3, "\">LIFE 3n-Stierkikker</a>**"
