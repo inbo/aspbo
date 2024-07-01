@@ -2,7 +2,7 @@
 title: 1311477
 output: html_document
 params:
-  language: "fr"
+  language: "en"
 ---
 <style>
 h1.title {
@@ -41,7 +41,7 @@ De Aziatische hoornaar (*Vespa velutina*) is een wespensoort uit zuidoost China.
 <br>
 
 #### **Nuttige links** <br>
-Om nesten of individuen van de Aziatische hoornaar in Vlaanderen te melden kunt u terecht op het meldpunt Vespa-Watch. Uw meldingen zijn nuttig voor de monitoring en het onderzoek van de soort.<br>
+Om nesten of individuen van de Aziatische hoornaar **in Vlaanderen** te melden kunt u terecht op het meldpunt Vespa-Watch. Uw meldingen zijn nuttig voor de monitoring en het onderzoek van de soort.<br>
 **Meld hier een individu of nest: <a href=\"", link1, "\">Vespa-Watch</a>**
 <br>
 <br>
@@ -66,7 +66,7 @@ The Asian hornet (*Vespa velutina*) is a wasp species from Southeast China. The 
 <br>
 
 #### **Useful links** <br>
-Sightings of nests or individuals of the Asian hornet in Flanders can be reported on the Vespa-Watch portal. Your reports are valuable for monitoring and researching the species. <br>
+Sightings of nests or individuals of the Asian hornet **in Flanders** can be reported on the Vespa-Watch portal. Your reports are valuable for monitoring and researching the species. <br>
 **Report an individual or nest: <a href=\"", link1, "\">Vespa-Watch</a>**
 <br>
 <br>
@@ -91,7 +91,7 @@ Le frelon asiatique (*Vespa velutina*) est une espèce de guêpe originaire du s
 <br>
 
 #### **Liens utiles** <br>
-Les observations de nids ou d'individus de frelons asiatiques en Flandre peuvent être signalées sur le portail Vespa-Watch. Vos signalements sont précieux pour le suivi et la recherche sur cette espèce. <br>
+Les observations de nids ou d'individus de frelons asiatiques **en Flandre** peuvent être signalées sur le portail Vespa-Watch. Vos signalements sont précieux pour le suivi et la recherche sur cette espèce. <br>
 **Signaler un individu ou un nid :  <a href=\"", link1, "\">Vespa-Watch</a>**
 <br>
 <br>
