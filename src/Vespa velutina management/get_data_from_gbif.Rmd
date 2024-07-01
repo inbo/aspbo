@@ -23,9 +23,25 @@ bel <- st_read("./data/output/UAT_processing/grid/gewestbel.shp") %>%
   st_simplify(dTolerance = 10) %>% 
   st_make_valid() %>% 
   st_union() %>% 
+  st_make_valid() %>% 
   st_as_sf() %>% 
   st_as_sfc() %>% 
   st_as_text() 
+
+# Extract the coordinate data from the search results
+coords <- bel
+
+# Split the string by the opening parenthesis to get the coordinate pairs
+coord_pairs <- strsplit(gsub("MULTIPOLYGON \\(\\(\\(|\\)\\)\\)", "", coords), ",")[[1]]
+
+# Create a matrix of coordinates
+coord_matrix <- matrix(as.numeric(unlist(strsplit(coord_pairs, " "))), ncol = 2, byrow = TRUE)
+
+# Create the polygon
+polygon <- st_polygon(list(coord_matrix)) %>%
+           st_sfc() %>%
+           st_set_crs(4326)
+
 
 bel <- gsub(pattern = ", NaN", 
             replacement = "",
