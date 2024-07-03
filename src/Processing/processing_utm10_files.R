@@ -10,9 +10,9 @@ library(tidyverse)
 #---------------------------------------
 gemeentes <- st_read("https://raw.githubusercontent.com/inbo/aspbo/main/data/output/UAT_processing/communes.geojson")
 provincies <- st_read("https://raw.githubusercontent.com/inbo/aspbo/main/data/output/UAT_processing/provinces.geojson")
-utm1<-sf::st_read("./data/output/UAT_processing/grid/utm1_bel_with_regions.gpkg", 
+utm1<-sf::st_read("https://raw.githubusercontent.com/inbo/aspbo/main//data/output/UAT_processing/grid/utm1_bel_with_regions.gpkg", 
                   layer="utm1_bel_with_regions" )
-utm10<-sf::st_read("./data/output/UAT_processing/grid/utm10_bel_with_regions.gpkg", 
+utm10<-sf::st_read("https://raw.githubusercontent.com/inbo/aspbo/main/data/output/UAT_processing/grid/utm10_bel_with_regions.gpkg", 
                    layer="utm10_bel_with_regions" )
 
 
