@@ -60,13 +60,13 @@ utm10_gem%>%
   group_by(CELLCODE)%>%
   mutate(sumpercell= sum(overlap_percentage))%>%
   dplyr::filter(sumpercell<99.9)%>%
-  plot()#Looks ok
+  plot(max.plot=1)#Looks ok
 
 utm1_gem%>%
   group_by(CELLCODE)%>%
   mutate(sumpercell= sum(overlap_percentage))%>%
   dplyr::filter(sumpercell<99.3)%>%
-  plot() #Looks okish
+  plot(max.plot=1) #Looks okish
 
 utm10_prov%>%
   group_by(CELLCODE)%>%
