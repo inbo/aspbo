@@ -26,9 +26,9 @@ gemeentes <- st_transform(gemeentes, crs = st_crs(utm10))
 provincies <- st_transform(provincies, crs = st_crs(utm10))
 
 
-#------------------------------------------------------------
-#-------- Calculate the intersection of polygons-------------
-#------------------------------------------------------------
+#--------------------------------------------------------------------
+#----------------link CELLCODE to province and commune---------------
+#--------------------------------------------------------------------
 utm10_gem <- st_intersection(utm10, gemeentes)
 utm1_gem <- st_intersection(utm1, gemeentes)
 utm10_prov <- st_intersection(utm10, provincies)
@@ -102,13 +102,16 @@ utm10_prov<-utm10_prov%>%
 #utm1_prov<-dplyr::filter(utm1_prov, overlap_percentage>10)
 #utm10_prov<-dplyr::filter(utm10_prov, overlap_percentage>10)
 
-#Check where these would fall
+#Check which cells would be filtered out by this
 plot(dplyr::filter(utm1_gem, overlap_percentage<10), max.plot=1)
 plot(dplyr::filter(utm10_gem, overlap_percentage<10), max.plot=1)
 plot(dplyr::filter(utm1_prov, overlap_percentage<10), max.plot=1)
 plot(dplyr::filter(utm10_prov, overlap_percentage<10), max.plot=1)
 
-#Do a left join with the original gpkg file to add the commune and province data
+
+#---------------------------------------------------------------------------------
+#---------------- add the commune and province data to original file--------------
+#---------------------------------------------------------------------------------
 utm1_gemeentes<-dplyr::left_join(utm1, st_drop_geometry(utm1_gem), by = c("CELLCODE","isBrussels","isWallonia","isFlanders","EOFORIGIN","NOFORIGIN"))
 utm10_gemeentes<-dplyr::left_join(utm10, st_drop_geometry(utm10_gem), by = c("CELLCODE","isBrussels","isWallonia","isFlanders","EOFORIGIN","NOFORIGIN"))
 utm1_gemeentes_provincies<-dplyr::left_join(utm1_gemeentes, st_drop_geometry(utm1_prov), by = c("CELLCODE","isBrussels","isWallonia","isFlanders","EOFORIGIN","NOFORIGIN"))
