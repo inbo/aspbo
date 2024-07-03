@@ -529,7 +529,7 @@ old_introductions_taxa <-
 old_introductions_taxa
 ```
 
-We save them in file `taxa_observed_in_BE_before_1950.tsv` in  `data/output`:
+We save them in file `taxa_last_observed_in_BE_before_1950.tsv` in  `data/output`:
 
 ```{r save_old_introduced_taxa_as_tsv_file}
 write_tsv(old_introductions_taxa,
@@ -537,7 +537,7 @@ write_tsv(old_introductions_taxa,
             "data",
             "output",
             paste0(
-              "taxa_observed_in_BE_before_",
+              "taxa_last_observed_in_BE_before_",
               year_cutoff,
               ".tsv"
             )
