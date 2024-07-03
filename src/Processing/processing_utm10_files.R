@@ -117,15 +117,15 @@ utm10_gemeentes<-dplyr::left_join(utm10, st_drop_geometry(utm10_gem), by = c("CE
 utm1_gemeentes_provincies<-dplyr::left_join(utm1_gemeentes, st_drop_geometry(utm1_prov), by = c("CELLCODE","isBrussels","isWallonia","isFlanders","EOFORIGIN","NOFORIGIN"))
 utm10_gemeentes_provincies<-dplyr::left_join(utm10_gemeentes, st_drop_geometry(utm10_prov), by = c("CELLCODE","isBrussels","isWallonia","isFlanders","EOFORIGIN","NOFORIGIN"))
 
-#Check for congruence between province and commune data
+#Check for congruence between gewest assigned by province vs. commune data
 not_same_gewest1<-dplyr::filter(utm1_gemeentes_provincies, GEWEST.x!=GEWEST.y) #8 utm1 pixels have a different gewest
 not_same_gewest10<-dplyr::filter(utm10_gemeentes_provincies, GEWEST.x!=GEWEST.y)#2 utm10 pixels
 mapview::mapview(list(gemeentes, provincies, not_same_gewest1), col.regions = c("green","yellow", "darkblue"))
 mapview::mapview(list(gemeentes, provincies, not_same_gewest10), col.regions = c("green","yellow", "darkblue"))
 
-#Select columns of interest (column gewest is kept from gemeente left_join)
-utm1_gemeentes_provincies<-utm1_gemeentes_provincies[,c(1:6,17,7:8,12:13,9)]
-utm10_gemeentes_provincies<-utm10_gemeentes_provincies[,c(1:6,17,7:8,12:13,9)]
+#Select columns of interest (column gewest is kept from provincie left_join)
+utm1_gemeentes_provincies<-utm1_gemeentes_provincies[,c(1:6,17,7:8,12:14)]
+utm10_gemeentes_provincies<-utm10_gemeentes_provincies[,c(1:6,17,7:8,12:14)]
 
 names(utm1_gemeentes_provincies)[8]<-"NISCODE_gemeente"
 names(utm1_gemeentes_provincies)[9]<-"gemeente"
@@ -142,6 +142,7 @@ names(utm10_gemeentes_provincies)[12]<-"gewest"
 #check if extent makes sense
 plot(utm10_gemeentes, max.plot=1)
 plot(utm1_gemeentes, max.plot=1)
+
 
 #----------------------------------------
 #--- Save files again as geopackage------
