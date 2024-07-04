@@ -511,6 +511,8 @@ interimdata<- interimdata %>%
                     level3Name == "Kapelle-op-den-Bos" ~ "Kapelle-Op-Den-Bos",
                     level3Name == "Heist-op-den-Berg" ~ "Heist-Op-Den-Berg",
                     level3Name == "Herk-de-Stad" ~ "Herk-De-Stad",
+                    level3Name == "Brussel / Bruxelles" ~ "Brussel",
+                    level3Name == "Elsene / Ixelles" ~ "Elsene",
                     TRUE ~ level3Name ))%>%
   select(c(-NAAM,-NISCODE,-GEWEST))%>%
   st_drop_geometry()
