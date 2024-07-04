@@ -35,6 +35,12 @@ bel <- gsub(pattern = ", NaN",
             bel)
 ```
 
+The chunk below is not necessary for the script to run, 
+but it is useful to check if the polygon is correct.
+To run the chunk below you should **not** run `st_as_sfc() %>% st_as_text()` 
+while creating the `bel` object in the chunk above.
+
+
 ```{r test bel, eval=FALSE}
 library(leaflet)
 
