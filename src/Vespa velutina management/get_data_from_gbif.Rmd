@@ -19,15 +19,33 @@ limit the rgbif query to flanders.
 ```{r get flanders geojson}
 sf_use_s2(TRUE)
 
-vla <- st_read("./data/spatial/flanders_wgs84.geojson") %>% 
-  st_transform(4326) %>% 
+bel <- st_read("./data/output/UAT_processing/grid/gewestbel.shp") %>% 
   st_simplify(dTolerance = 10) %>% 
+  st_make_valid() %>% 
+  st_union() %>% 
+  st_as_sf() %>% 
+  st_simplify(dTolerance = 1500) %>%
+  st_cast(to = "POLYGON") %>% 
   st_as_sfc() %>% 
   st_as_text() 
 
-vla <- gsub(pattern = ", NaN", 
+
+bel <- gsub(pattern = ", NaN", 
             replacement = "",
-            vla)
+            bel)
+```
+
+The chunk below is not necessary for the script to run, 
+but it is useful to check if the polygon is correct.
+To run the chunk below you should **not** run `st_as_sfc() %>% st_as_text()` 
+while creating the `bel` object in the chunk above.
+
+```{r test bel, eval=FALSE}
+library(leaflet)
+
+leaflet(bel) %>% 
+  addTiles() %>% 
+  addPolylines()
 ```
 
 
@@ -36,14 +54,10 @@ Waarnemingen.be - Non-native animal occurrences in Flanders and the Brussels Cap
 iNaturalist Research-grade Observations: https://www.gbif.org/dataset/50c9509d-22c7-4a22-a47d-8c48425ef4a7
 
 ```{r download data from gbif}
-datasetkeys <- c("9a0b66df-7535-4f28-9f4e-5bc11b8b096c", 
-                 "50c9509d-22c7-4a22-a47d-8c48425ef4a7")
-
 taxonkeys <- c(1311477)
 
-gbif_downloadKey <- occ_download(pred_in("datasetKey", datasetkeys),
-                                 pred_in("taxonKey", taxonkeys),
-                                 pred_within(vla),
+gbif_downloadKey <- occ_download(pred_in("taxonKey", taxonkeys),
+                                 pred_within(bel),
                                  user = Sys.getenv("gbif_user"),
                                  pwd = Sys.getenv("gbif_pwd"),
                                  email = Sys.getenv("email"),
