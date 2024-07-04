@@ -1,6 +1,6 @@
 ---
 title: 2427091
-output: html_document
+output: html_fragment
 params:
   language: "fr"
 ---
