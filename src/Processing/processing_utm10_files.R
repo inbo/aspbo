@@ -156,3 +156,11 @@ st_write(obj = utm10_gemeentes_provincies,
          dsn = "./data/output/UAT_processing/grid/utm10_bel_with_regions.gpkg",
          layer = "utm10_bel_with_regions",
          delete_dsn=TRUE)
+
+
+#------------------------------------------------
+#--- Do a left join with be_alien_taxa_cube------
+#------------------------------------------------
+
+be_alientaxa_cube<-dplyr::left_join(df, utm1, by = join_by(eea_cell_code == CELLCODE))
+write_csv(be_alientaxa_cube, "./data/output/be_alientaxa_cube.csv")
