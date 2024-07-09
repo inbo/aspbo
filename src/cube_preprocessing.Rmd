@@ -63,7 +63,7 @@ df <- read_csv(
   ),
   na = ""
 ) %>% 
-dplyr::left_join(df, utm1_gemeentes_provincies, by = join_by(eea_cell_code == CELLCODE))
+dplyr::left_join(utm1_gemeentes_provincies, by = join_by(eea_cell_code == CELLCODE))
 ```
 
 ```{r save data_cube to S3 bucket}
