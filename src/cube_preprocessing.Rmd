@@ -38,7 +38,7 @@ library(rgbif) # To get taxa from publisehd unified checklist
 library(sf) # To work with spatial data
 ```
 
-```{r load correct version of INBOtheme}
+```{r load correct version of INBOtheme, eval=FALSE}
 if(Sys.getenv("amiabot") != "yes"){
   print("Executor of the script is a human >> checking INBOtheme version")
   # determine the loaded INBOtheme version
@@ -775,7 +775,7 @@ write_tsv(spec_names,
 ```
 
 reload previously loaded inbotheme version
-```{r}
+```{r reload_inbotheme_version, eval=FALSE}
 if(amia_bot != "yes"){
   unloadNamespace("alienSpecies")
   if(loaded_inbotheme_version != "0.5.8"){
