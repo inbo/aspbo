@@ -158,19 +158,4 @@ st_write(obj = utm10_gemeentes_provincies,
          delete_dsn=TRUE)
 
 
-#------------------------------------------------
-#--- Do a left join with be_alien_taxa_cube------
-#------------------------------------------------
-df <- read_csv(
-  file = "https://zenodo.org/records/10527772/files/be_alientaxa_cube.csv?download=1",
-  col_types = cols(
-    year = col_double(),
-    eea_cell_code = col_character(),
-    taxonKey = col_double(),
-    n = col_double(),
-    min_coord_uncertainty = col_double()
-  ),
-  na = ""
-)
-be_alientaxa_cube<-dplyr::left_join(df, utm1_gemeentes_provincies, by = join_by(eea_cell_code == CELLCODE))
-write_csv(be_alientaxa_cube, "./data/output/be_alientaxa_cube.csv")
+
