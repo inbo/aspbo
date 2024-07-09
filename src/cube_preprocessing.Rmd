@@ -780,7 +780,7 @@ write_tsv(spec_names,
 
 reload previously loaded inbotheme version
 ```{r reload_inbotheme_version, eval=TRUE}
-if(amiabot != "yes"){
+if(Sys.getenv("amiabot") != "yes"){
   unloadNamespace("alienSpecies")
   if(loaded_inbotheme_version != "0.5.8"){
     remove.packages("INBOtheme")
