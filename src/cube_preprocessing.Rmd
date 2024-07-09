@@ -38,6 +38,37 @@ library(rgbif) # To get taxa from publisehd unified checklist
 library(sf) # To work with spatial data
 ```
 
+```{r load correct version of INBOtheme}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> checking INBOtheme version")
+  # determine the loaded INBOtheme version
+  loaded_inbotheme <- installed.packages() %>% 
+    as_tibble() %>% 
+    filter(Package == "INBOtheme")
+  loaded_inbotheme_version <- loaded_inbotheme$Version
+  
+  if(is_empty(loaded_inbotheme_version)){
+    print("INBOtheme is not installed >> installing INBOtheme")
+    devtools::install_github("inbo/INBOtheme@v0.5.8")
+  }
+  
+  if(loaded_inbotheme_version != "0.5.8"){
+    print("INBOtheme version is not correct >> loading correct version")
+    # remove installed INBOtheme
+    remove.packages("INBOtheme")
+    
+    # load correct version of INBOtheme
+    devtools::install_github("inbo/INBOtheme@v0.5.8")
+  }else{
+    print("Correct INBOtheme version is loaded")
+  }
+}else{
+  print("Executor of the script is a bot >> correct INBOtheme version is loaded")
+}
+
+library(INBOtheme)
+```
+
 # Get data
 
 ## read utm1_bel_with_regions file
