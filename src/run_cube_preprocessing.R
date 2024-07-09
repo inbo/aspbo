@@ -17,7 +17,7 @@ download.file(url = "https://raw.githubusercontent.com/trias-project/indicators/
 
 # create temporary R file
 tempR <- tempfile(fileext = ".R")
-knitr::purl("src/05_occurrence_indicators_preprocessing.Rmd", output=tempR)
+knitr::purl("src/cube_preprocessing.Rmd", output=tempR)
 source(tempR)
 unlink(tempR)
 
