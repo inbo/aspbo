@@ -68,6 +68,13 @@ df <- read_csv(
 ) 
 ```
 
+To save the data cube to the S3 bucket, we use the following code:
+A temporary directory is created to store the data cube.
+```{r create_temp_dir}
+cube_path <- tempdir()
+dir.create(cube_path, showWarnings = FALSE)
+```
+
 For display on invasion history maps of the alienspecies portal we add the 
 gemeente and provincie to the data cube.
 This is done by joining the data cube with the `utm1_gemeentes_provincies` dataset.
@@ -81,11 +88,11 @@ be_alientaxa_cube <- df %>%
   write_csv(file.path(cube_path, "be_alientaxa_cube.csv"))
 ```
 
-To save the data cube to the S3 bucket, we use the following code:
-A temporary directory is created to store the data cube.
-```{r create_temp_dir}
-cube_path <- tempdir()
-dir.create(cube_path, showWarnings = FALSE)
+Free some ram. `be_alientaxa_cube` is no longer needed.
+```{r free_ram}
+rm(be_alientaxa_cube)
+rm(utm1_gemeentes_provincies)
+gc() #garbage collection
 ```
 
 The function `createTabularData()` from the alien species portal package is used 
@@ -95,6 +102,7 @@ to process & save the data cube to the S3 bucket for use in the alien species po
 createTabularData(dataDir = cube_path, type = "occurrence", bucket = bucket) 
 ```
 
+We test if the data have been correctly saved:
 ```{r test_load_occurrenceData}
 test_that("Load occurrenceData", { 
   occurrenceData <- loadTabularData(type = "occurrence") 
