@@ -1,5 +1,5 @@
 ---
-title: "Occurrence indicators: pre-processing"
+title: "Cube pre-processing"
 author:
 - Damiano Oldoni
 - Toon Van Daele
@@ -59,7 +59,16 @@ df <- read_csv(
   ),
   na = ""
 ) %>% 
-  write_csv("./data/output/UAT_processing/be_alientaxa_cube.csv")
+dplyr::left_join(df, utm1_gemeentes_provincies, by = join_by(eea_cell_code == CELLCODE))
+```
+
+```{r save data_cube to S3 bucket}
+createTabularData(dataDir = processingFilePath, type = "occurrence", bucket = bucket) 
+test_that("Load occurrenceData", { 
+   occurrenceData <- loadTabularData(type = "occurrence") 
+   expect_s3_class( occurrenceData, "data.table") 
+    
+ }) 
 ```
 
 Nota: these data have been also published on [Zenodo](https://doi.org/10.5281/zenodo.3632749).
