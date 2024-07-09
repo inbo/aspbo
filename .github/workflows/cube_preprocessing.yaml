@@ -27,6 +27,7 @@ jobs:
       USERNAME: ${{ secrets.USERNAME }}
       S3_BUCKET: ${{ secrets.S3_BUCKET }}
       amiabot: ${{ secrets.AMIABOT }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

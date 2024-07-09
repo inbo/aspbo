@@ -32,13 +32,21 @@ system(command = 'powershell "docker container rm exotenportaal"')
 system(command = 'powershell "docker image rm inbo/alienspecies:latest"')
 ```
 
+```{r prune builder history (cache)}
+prune_history <- askYesNo(msg = "Prune builder history?")
+
+if(prune_history == TRUE){
+  system(command = 'powershell "docker builder prune -f"')
+}
+```
+
 ```{r change directory}
 system(command = 'powershell "cd ~/Documents/GitHub/alien-species-portal"')
 ```
 
 ```{r build new image}
 setwd(dir = "~/GitHub/alien-species-portal/")
-system(command = 'powershell "docker build -t inbo/alienspecies ."')
+system(command = 'powershell "docker build  --build-arg GIT_SHA=$(git rev-parse HEAD) -t inbo/alienspecies ."')
 setwd("~/GitHub/aspbo")
 ```
 

@@ -172,7 +172,8 @@ data_nest_iasset <- data_nest_iasset %>%
                                !is.na(provincie) ~ provincie,
                                !is.na(NAAM) ~ NAAM, 
                                TRUE ~ NA_character_))%>% 
-  mutate(provincie = case_when(provincie=="ongekend" ~ "onbekend", #alternatief "ongekend" overal in dataset naar onbekend
+  mutate(provincie = case_when(provincie=="ongekend"| provincie=="onbekend" | is.na(provincie) ~ "unknown", 
+#alternatief "ongekend", "onbekend", en NA overal in dataset naar unknown
                                TRUE ~ provincie))%>%
   filter(!provincie%in%c("niet Vlaanderen", "HoofdstedelijkGewest"))
 
@@ -350,6 +351,11 @@ data_nest_final <- rbind(data_nest_gs, data_nest_iasset)
 ```{r add gemeente info to nesten}
 gemeentes <- st_read("https://raw.githubusercontent.com/inbo/aspbo/main/data/output/UAT_processing/communes.geojson")
 
+#Write Ouderghem as Oudergem to comply with the translations file of the exotenportaal
+gemeentes<-gemeentes %>%
+  mutate(NAAM = case_when(NAAM=="Ouderghem" ~ "Oudergem",
+                          TRUE ~ NAAM))
+
 data_nest_final$NISCODE <- apply(st_intersects(gemeentes,
                                                data_nest_final,
                                                sparse = FALSE),
@@ -376,7 +382,7 @@ data_nest_final <- data_nest_final %>%
   mutate(NISCODE = as.character(NISCODE)) %>% 
   left_join(gem_df, 
             by = "NISCODE")%>%
-  mutate(Gemeente = case_when(provincie=="onbekend" ~ "onbekend",
+  mutate(Gemeente = case_when(provincie=="unknown" | is.na(Gemeente)  ~ "unknown",
                               TRUE ~ Gemeente))
 ```
 
@@ -505,6 +511,8 @@ interimdata<- interimdata %>%
                     level3Name == "Kapelle-op-den-Bos" ~ "Kapelle-Op-Den-Bos",
                     level3Name == "Heist-op-den-Berg" ~ "Heist-Op-Den-Berg",
                     level3Name == "Herk-de-Stad" ~ "Herk-De-Stad",
+                    level3Name == "Brussel / Bruxelles" ~ "Brussel",
+                    level3Name == "Elsene / Ixelles" ~ "Elsene",
                     TRUE ~ level3Name ))%>%
   select(c(-NAAM,-NISCODE,-GEWEST))%>%
   st_drop_geometry()
@@ -549,7 +557,7 @@ st_write(cleandata, points_path,
          append = FALSE)
 ```
 
-```{r calculate actieve haarden}
+```{r calculate actieve haarden, eval = FALSE}
 source("./src/Vespa velutina management/bereken_actieve_haarden.r")
 
 nesten <- data_nest_final %>% 

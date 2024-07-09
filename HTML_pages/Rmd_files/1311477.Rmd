@@ -1,0 +1,101 @@
+---
+title: 1311477
+output: html_fragment
+params:
+  language: "en"
+---
+<style>
+h1.title {
+  display: none;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r sharedinfo, echo=FALSE}
+link1 <- "https://www.vespawatch.be/"
+link2 <- "https://www.ecopedia.be/dieren/aziatische-hoornaar"
+style_str<-"font-size: 1.5em; font-style: italic;"
+image_link<-"../Pictures/vespa_velutina.jpg"
+copyright_font<-"font-size: 0.8em;"
+width="400"
+height="267"
+```
+
+
+```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
+cat(paste0("
+## Aziatische hoornaar
+
+<span style=\"", style_str, "\">Vespa velutina</span>
+
+<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
+<span style=\"", copyright_font, "\">© Gilles San Martin</span><br>
+<br>
+
+#### **Achtergrond** <br>
+De Aziatische hoornaar (*Vespa velutina*) is een wespensoort uit zuidoost China. Deze soort werd voor het eerst waargenomen in België in 2011. Intussen is de Aziatische hoornaar wijdverspreid in zowel Vlaanderen als Wallonië. Deze soort jaagt op honingbijen en andere inheemse insecten en vormt ondermeer een bedreiging voor de imkerij.
+<br>
+<br>
+
+#### **Nuttige links** <br>
+Om nesten of individuen van de Aziatische hoornaar **in Vlaanderen** te melden kunt u terecht op het meldpunt Vespa-Watch. Uw meldingen zijn nuttig voor de monitoring en het onderzoek van de soort.<br>
+**Meld hier een individu of nest: <a href=\"", link1, "\">Vespa-Watch</a>**
+<br>
+<br>
+Meer informatie over de soort kunt u vinden op de ecopedia pagina van de Aziatische hoornaar.<br>
+**Meer informatie: <a href=\"", link2, "\">ecopedia</a>**
+"))
+```
+
+```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
+cat(paste0("
+## Asian hornet
+
+<span style=\"", style_str, "\">Vespa velutina</span>
+
+<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
+<span style=\"", copyright_font, "\">© Gilles San Martin</span><br>
+<br>
+
+#### **Background** <br>
+The Asian hornet (*Vespa velutina*) is a wasp species from Southeast China. The species was first observed in Belgium in 2011. Since then, the Asian hornet has become widespread in both Flanders and Wallonia. This species preys on honeybees and other native insects and poses a threat to beekeeping.
+<br>
+<br>
+
+#### **Useful links** <br>
+Sightings of nests or individuals of the Asian hornet **in Flanders** can be reported on the Vespa-Watch portal. Your reports are valuable for monitoring and researching the species. <br>
+**Report an individual or nest: <a href=\"", link1, "\">Vespa-Watch</a>**
+<br>
+<br>
+You can find more information about this species on the ecopedia page of the Asian hornet (note that this information is currently only invailable in Dutch).<br>
+**More information: <a href=\"", link2, "\">ecopedia</a>**
+"))
+```
+
+```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
+cat(paste0("
+## Frelon asiatique
+
+<span style=\"", style_str, "\">Vespa velutina</span>
+
+<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
+<span style=\"", copyright_font, "\">© Gilles San Martin</span><br>
+<br>
+
+#### **Contexte** <br>
+Le frelon asiatique (*Vespa velutina*) est une espèce de guêpe originaire du sud-est de la Chine. L'espèce a été observée pour la première fois en Belgique en 2011. Depuis lors, le frelon asiatique s'est répandu dans toute la Flandre et la Wallonie. Cette espèce chasse les abeilles domestiques et autres insectes indigènes, et constitue une menace pour l'apiculture.
+<br>
+<br>
+
+#### **Liens utiles** <br>
+Les observations de nids ou d'individus de frelons asiatiques **en Flandre** peuvent être signalées sur le portail Vespa-Watch. Vos signalements sont précieux pour le suivi et la recherche sur cette espèce. <br>
+**Signaler un individu ou un nid :  <a href=\"", link1, "\">Vespa-Watch</a>**
+<br>
+<br>
+Vous pouvez trouver plus d'informations sur cette espèce sur la page écopédia du frelon asiatique (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
+**Plus d'informations: <a href=\"", link2, "\">ecopedia</a>**
+"))
+```
