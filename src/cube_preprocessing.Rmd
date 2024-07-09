@@ -762,7 +762,6 @@ output: full_timeseries.RData
 
 ```{r}
 library(data.table)
-library(arrow)
 library(aws.s3)
 library(sf)
 simpleCap <- function(names, keepNames = TRUE) {
@@ -816,8 +815,13 @@ createTimeseries <- function(
   
   setkey(timeseries, taxonKey)
   
-  # Write the result to S3 using Parquet format
-  aws.s3::s3write_using(timeseries, 
+  # Write the result to S3 
+  if (!requireNamespace("arrow", quietly = TRUE)) {
+  install.packages("arrow")
+}
+library(arrow)
+  
+ aws.s3::s3write_using(timeseries, 
     FUN = arrow::write_parquet, 
     bucket = bucket, 
     object = "full_timeseries.parquet",
