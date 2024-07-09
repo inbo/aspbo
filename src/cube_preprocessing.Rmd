@@ -761,7 +761,75 @@ input:  "df_timeseries.RData" and "grid.RData" from bucket
 output: full_timeseries.RData
 
 ```{r}
-alienSpecies::createTimeseries(
+library(data.table)
+library(arrow)
+library(aws.s3)
+library(sf)
+simpleCap <- function(names, keepNames = TRUE) {
+  
+  sapply(names, function(x) {
+      
+      if (is.na(x))
+        return(x)
+      
+      s <- tolower(as.character(x))
+      paste0(toupper(substring(s, 1, 1)), substring(s, 2))
+      
+    }, USE.NAMES = keepNames)
+  
+}
+
+createTimeseries <- function(
+  bucket = config::get("bucket", file = system.file("config.yml", package = "alienSpecies")),
+  shapeData = loadShapeData("grid.RData")$utm1_bel_with_regions) {
+  
+  # For R CMD check
+  df_ts <- taxonKey <- NULL
+  
+  # Load the data in chunks
+  s3load("df_timeseries.Rdata", bucket = bucket)
+
+  # Convert to data.table for efficient processing
+  df_ts <- as.data.table(df_ts)
+  
+  # Merge with shapeData for region indicators
+  regions <- c("flanders", "wallonia", "brussels")
+  shapeData <- as.data.table(sf::st_drop_geometry(shapeData))
+  regionCols <- c("CELLCODE", paste0("is", simpleCap(regions)))
+  shapeData <- shapeData[, ..regionCols]
+  
+  # Chunk processing
+  chunk_size <- 1e6  # Adjust chunk size based on your memory capacity
+  num_chunks <- ceiling(nrow(df_ts) / chunk_size)
+  
+  timeseries_list <- lapply(1:num_chunks, function(i) {
+    start_row <- (i - 1) * chunk_size + 1
+    end_row <- min(i * chunk_size, nrow(df_ts))
+    chunk <- df_ts[start_row:end_row]
+    
+    # Merge each chunk with shapeData
+    merge(chunk, shapeData, by.x = "eea_cell_code", by.y = "CELLCODE", all.x = TRUE)
+  })
+  
+  # Combine all chunks into one data.table
+  timeseries <- rbindlist(timeseries_list)
+  
+  setkey(timeseries, taxonKey)
+  
+  # Write the result to S3 using Parquet format
+  aws.s3::s3write_using(timeseries, 
+    FUN = arrow::write_parquet, 
+    bucket = bucket, 
+    object = "full_timeseries.parquet",
+    opts = list(show_progress = TRUE, multipart = TRUE,
+      region = Sys.getenv("AWS_DEFAULT_REGION", unset = 'eu-west-1')))
+  
+  return(TRUE)
+}
+```
+
+```{r}
+createTimeseries(
   # read grid.RData from bucket
   shapeData = alienSpecies::loadShapeData("grid.RData")$utm1_bel_with_regions, 
   bucket = UAT_bucket
