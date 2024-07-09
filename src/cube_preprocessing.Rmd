@@ -773,3 +773,15 @@ write_tsv(spec_names,
           na = ""
 )
 ```
+
+reload previously loaded inbotheme version
+```{r}
+if(amia_bot != "yes"){
+  unloadNamespace("alienSpecies")
+  if(loaded_inbotheme_version != "0.5.8"){
+    remove.packages("INBOtheme")
+    devtools::install_github(paste0("inbo/INBOtheme@", loaded_inbotheme_version))
+  }
+}
+```
+
