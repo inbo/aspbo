@@ -36,9 +36,10 @@ library(here) # To find files
 library(lubridate) # To work with dates
 library(rgbif) # To get taxa from publisehd unified checklist
 library(sf) # To work with spatial data
+library(testthat) # To test functions
 ```
 
-```{r load correct version of INBOtheme, eval=FALSE}
+```{r load correct version of INBOtheme, eval=TRUE}
 if(Sys.getenv("amiabot") != "yes"){
   print("Executor of the script is a human >> checking INBOtheme version")
   # determine the loaded INBOtheme version
@@ -67,6 +68,24 @@ if(Sys.getenv("amiabot") != "yes"){
 }
 
 library(INBOtheme)
+```
+
+# Connect to bucket
+## set credentials
+```{r set creds}
+Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
+
+if(Sys.getenv("S3_BUCKET") != ""){
+  UAT_bucket <- Sys.getenv("S3_BUCKET")
+}else{
+  UAT_bucket <- Sys.getenv("UAT_bucket")
+}
+```
+
+## connect to bucket
+```{r connect to bucket, eval=FALSE}
+source("./src/connect_to_bucket.R")
+connect_to_bucket(bucket_name = UAT_bucket)
 ```
 
 # Get data
@@ -130,7 +149,7 @@ The function `createTabularData()` from the alien species portal package is used
 to process & save the data cube to the S3 bucket for use in the alien species portal.
 
 ```{r save data_cube to S3 bucket}
-alienSpecies::createTabularData(dataDir = cube_path, type = "occurrence", bucket = bucket) 
+alienSpecies::createTabularData(dataDir = cube_path, type = "occurrence", bucket = UAT_bucket) 
 ```
 
 We test if the data have been correctly saved:
@@ -727,21 +746,6 @@ df_ts <-
 
 Save `df_ts` as it will be used as start point of modelling pipelines:
 
-```{r set creds}
-Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
-
-if(Sys.getenv("S3_BUCKET") != ""){
-  UAT_bucket <- Sys.getenv("S3_BUCKET")
-}else{
-  UAT_bucket <- Sys.getenv("UAT_bucket")
-}
-```
-
-```{r connect to bucket, eval=FALSE}
-source("./src/connect_to_bucket.R")
-connect_to_bucket(bucket_name = UAT_bucket)
-```
-
 ```{r save_data_as_tsv}
 # upload data to S3 bucket
 aws.s3::s3save(df_ts, 
@@ -775,7 +779,7 @@ write_tsv(spec_names,
 ```
 
 reload previously loaded inbotheme version
-```{r reload_inbotheme_version, eval=FALSE}
+```{r reload_inbotheme_version, eval=TRUE}
 if(amia_bot != "yes"){
   unloadNamespace("alienSpecies")
   if(loaded_inbotheme_version != "0.5.8"){
