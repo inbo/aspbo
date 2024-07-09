@@ -99,13 +99,13 @@ The function `createTabularData()` from the alien species portal package is used
 to process & save the data cube to the S3 bucket for use in the alien species portal.
 
 ```{r save data_cube to S3 bucket}
-createTabularData(dataDir = cube_path, type = "occurrence", bucket = bucket) 
+alienSpecies::createTabularData(dataDir = cube_path, type = "occurrence", bucket = bucket) 
 ```
 
 We test if the data have been correctly saved:
 ```{r test_load_occurrenceData}
 test_that("Load occurrenceData", { 
-  occurrenceData <- loadTabularData(type = "occurrence") 
+  occurrenceData <- alienSpecies::loadTabularData(type = "occurrence") 
   expect_s3_class( occurrenceData, "data.table") 
 }) 
 ```
