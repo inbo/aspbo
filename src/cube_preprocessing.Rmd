@@ -39,7 +39,11 @@ library(rgbif) # To get taxa from publisehd unified checklist
 
 # Get data
 
+## read utm1_bel_with_regions file
 We get occurrence data as obtained in `trias-project/occ-processing` repository. 
+```{r read utm1_gemeentes_provincies}
+utm1_gemeentes_provincies<-sf::st_read("./data/output/UAT_processing/grid/utm1_bel_with_regions.gpkg", layer="utm1_bel_with_regions" )
+```
 
 ## Occurrence data
 
