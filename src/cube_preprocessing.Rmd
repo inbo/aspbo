@@ -35,15 +35,18 @@ library(progress) # To add progress bars
 library(here) # To find files
 library(lubridate) # To work with dates
 library(rgbif) # To get taxa from publisehd unified checklist
+library(sf) # To work with spatial data
 ```
 
 # Get data
 
 ## read utm1_bel_with_regions file
-We get occurrence data as obtained in `trias-project/occ-processing` repository. 
 ```{r read utm1_gemeentes_provincies}
-utm1_gemeentes_provincies<-sf::st_read("./data/output/UAT_processing/grid/utm1_bel_with_regions.gpkg", layer="utm1_bel_with_regions" )
+utm1_gemeentes_provincies <- sf::st_read("./data/output/UAT_processing/grid/utm1_bel_with_regions.gpkg", 
+                                         layer="utm1_bel_with_regions" )
 ```
+
+We get occurrence data as obtained in `trias-project/occ-processing` repository. 
 
 ## Occurrence data
 
@@ -62,17 +65,41 @@ df <- read_csv(
     min_coord_uncertainty = col_double()
   ),
   na = ""
-) %>% 
-dplyr::left_join(df, utm1_gemeentes_provincies, by = join_by(eea_cell_code == CELLCODE))
+) 
 ```
 
+For display on invasion history maps of the alienspecies portal we add the 
+gemeente and provincie to the data cube.
+This is done by joining the data cube with the `utm1_gemeentes_provincies` dataset.
+which is updated by the following code:
+[processing_utm10_files.R](./src/Processing/processing_utm10_files.R)
+
+```{r add gemeente and provincie to data_cube}
+be_alientaxa_cube <- df %>% 
+  left_join(utm1_gemeentes_provincies, by = c("eea_cell_code" = "CELLCODE")) %>% 
+  st_drop_geometry() %>%
+  write_csv(file.path(cube_path, "be_alientaxa_cube.csv"))
+```
+
+To save the data cube to the S3 bucket, we use the following code:
+A temporary directory is created to store the data cube.
+```{r create_temp_dir}
+cube_path <- tempdir()
+dir.create(cube_path, showWarnings = FALSE)
+```
+
+The function `createTabularData()` from the alien species portal package is used 
+to process & save the data cube to the S3 bucket for use in the alien species portal.
+
 ```{r save data_cube to S3 bucket}
-createTabularData(dataDir = processingFilePath, type = "occurrence", bucket = bucket) 
+createTabularData(dataDir = cube_path, type = "occurrence", bucket = bucket) 
+```
+
+```{r test_load_occurrenceData}
 test_that("Load occurrenceData", { 
-   occurrenceData <- loadTabularData(type = "occurrence") 
-   expect_s3_class( occurrenceData, "data.table") 
-    
- }) 
+  occurrenceData <- loadTabularData(type = "occurrence") 
+  expect_s3_class( occurrenceData, "data.table") 
+}) 
 ```
 
 Nota: these data have been also published on [Zenodo](https://doi.org/10.5281/zenodo.3632749).
@@ -681,8 +708,8 @@ connect_to_bucket(bucket_name = UAT_bucket)
 aws.s3::s3save(df_ts, 
                object = "df_timeseries.Rdata", 
                bucket = UAT_bucket, 
-  opts = list(show_progress = TRUE,
-              multipart = TRUE))
+               opts = list(show_progress = TRUE,
+                           multipart = TRUE))
 ```
 
 Create time series data
