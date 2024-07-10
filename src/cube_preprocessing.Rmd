@@ -759,7 +759,6 @@ aws.s3::s3save(df_ts,
 Create time series data
 input:  "df_timeseries.RData" and "grid.RData" from bucket
 output: full_timeseries.RData
-
 ```{r}
 library(data.table)
 library(aws.s3)
@@ -778,50 +777,44 @@ simpleCap <- function(names, keepNames = TRUE) {
   
 }
 
+```
+
+
+```{r}
 createTimeseries <- function(
   bucket = config::get("bucket", file = system.file("config.yml", package = "alienSpecies")),
   shapeData = loadShapeData("grid.RData")$utm1_bel_with_regions) {
   
+                             
   # For R CMD check
   df_ts <- taxonKey <- NULL
   
-  # Load the data in chunks
+  # created from https://github.com/inbo/aspbo/blob/uat/src/05_occurrence_indicators_preprocessing.Rmd
+  ## Data at 1km x 1km grid level
   s3load("df_timeseries.Rdata", bucket = bucket)
-
-  # Convert to data.table for efficient processing
-  df_ts <- as.data.table(df_ts)
+  
+  # obs: number of observations for species
+  # cobs: number of observations for class
+  # pa_obs: presence of species in protected areas (1 = yes, 0 = no)
+  # pa_cobs: presence of class in protected areas (1 = yes, 0 = no)
   
   # Merge with shapeData for region indicators
+  df_ts <- as.data.table(df_ts)
+  setkey(df_ts, eea_cell_code)
+  
   regions <- c("flanders", "wallonia", "brussels")
-  shapeData <- as.data.table(sf::st_drop_geometry(shapeData))
-  regionCols <- c("CELLCODE", paste0("is", simpleCap(regions)))
-  shapeData <- shapeData[, ..regionCols]
+  simpleShape <- as.data.table(sf::st_drop_geometry(shapeData)[, c("CELLCODE", paste0("is", simpleCap(regions)))])
+  setnames(simpleShape, "CELLCODE", "eea_cell_code")
+  setkey(simpleShape, eea_cell_code)
+  # Avoid extra rows when merging for cells without occupancy
+  simpleShape <- simpleShape[simpleShape$eea_cell_code %in% unique(df_ts$eea_cell_code), ]
   
-  # Chunk processing
-  chunk_size <- 1e6  # Adjust chunk size based on your memory capacity
-  num_chunks <- ceiling(nrow(df_ts) / chunk_size)
-  
-  timeseries_list <- lapply(1:num_chunks, function(i) {
-    start_row <- (i - 1) * chunk_size + 1
-    end_row <- min(i * chunk_size, nrow(df_ts))
-    chunk <- df_ts[start_row:end_row]
-    
-    # Merge each chunk with shapeData
-    merge(chunk, shapeData, by.x = "eea_cell_code", by.y = "CELLCODE", all.x = TRUE)
-  })
-  
-  # Combine all chunks into one data.table
-  timeseries <- rbindlist(timeseries_list)
-  
+  timeseries <- df_ts[simpleShape, on = "eea_cell_code"]
+  if (nrow(timeseries) != nrow(df_ts))
+    warning("Difference in number of rows after enriching data: ", nrow(timeseries) - nrow(df_ts))
   setkey(timeseries, taxonKey)
   
-  # Write the result to S3 
-  if (!requireNamespace("arrow", quietly = TRUE)) {
-  install.packages("arrow")
-}
-library(arrow)
-  
- aws.s3::s3write_using(timeseries, 
+  aws.s3::s3write_using(timeseries, 
     FUN = arrow::write_parquet, 
     bucket = bucket, 
     object = "full_timeseries.parquet",
@@ -829,8 +822,11 @@ library(arrow)
       region = Sys.getenv("AWS_DEFAULT_REGION", unset = 'eu-west-1')))
   
   return(TRUE)
+  
 }
+
 ```
+
 
 ```{r}
 createTimeseries(
