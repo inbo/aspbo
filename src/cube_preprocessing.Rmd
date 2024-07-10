@@ -1,5 +1,5 @@
 ---
-title: "Cube pre-processing"
+title: "Occurrence indicators: pre-processing"
 author:
 - Damiano Oldoni
 - Toon Van Daele
@@ -35,66 +35,9 @@ library(progress) # To add progress bars
 library(here) # To find files
 library(lubridate) # To work with dates
 library(rgbif) # To get taxa from publisehd unified checklist
-library(sf) # To work with spatial data
-library(testthat) # To test functions
-```
-
-```{r load correct version of INBOtheme, eval=TRUE}
-if(Sys.getenv("amiabot") != "yes"){
-  print("Executor of the script is a human >> checking INBOtheme version")
-  # determine the loaded INBOtheme version
-  loaded_inbotheme <- installed.packages() %>% 
-    as_tibble() %>% 
-    filter(Package == "INBOtheme")
-  loaded_inbotheme_version <- loaded_inbotheme$Version
-  
-  if(is_empty(loaded_inbotheme_version)){
-    print("INBOtheme is not installed >> installing INBOtheme")
-    devtools::install_github("inbo/INBOtheme@v0.5.8")
-  }
-  
-  if(loaded_inbotheme_version != "0.5.8"){
-    print("INBOtheme version is not correct >> loading correct version")
-    # remove installed INBOtheme
-    remove.packages("INBOtheme")
-    
-    # load correct version of INBOtheme
-    devtools::install_github("inbo/INBOtheme@v0.5.8")
-  }else{
-    print("Correct INBOtheme version is loaded")
-  }
-}else{
-  print("Executor of the script is a bot >> correct INBOtheme version is loaded")
-}
-
-library(INBOtheme)
-```
-
-# Connect to bucket
-## set credentials
-```{r set creds}
-Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
-
-if(Sys.getenv("S3_BUCKET") != ""){
-  UAT_bucket <- Sys.getenv("S3_BUCKET")
-}else{
-  UAT_bucket <- Sys.getenv("UAT_bucket")
-}
-```
-
-## connect to bucket
-```{r connect to bucket, eval=FALSE}
-source("./src/connect_to_bucket.R")
-connect_to_bucket(bucket_name = UAT_bucket)
 ```
 
 # Get data
-
-## read utm1_bel_with_regions file
-```{r read utm1_gemeentes_provincies}
-utm1_gemeentes_provincies <- sf::st_read("./data/output/UAT_processing/grid/utm1_bel_with_regions.gpkg", 
-                                         layer="utm1_bel_with_regions" )
-```
 
 We get occurrence data as obtained in `trias-project/occ-processing` repository. 
 
@@ -115,49 +58,8 @@ df <- read_csv(
     min_coord_uncertainty = col_double()
   ),
   na = ""
-) 
-```
-
-To save the data cube to the S3 bucket, we use the following code:
-A temporary directory is created to store the data cube.
-```{r create_temp_dir}
-cube_path <- tempdir()
-dir.create(cube_path, showWarnings = FALSE)
-```
-
-For display on invasion history maps of the alienspecies portal we add the 
-gemeente and provincie to the data cube.
-This is done by joining the data cube with the `utm1_gemeentes_provincies` dataset.
-which is updated by the following code:
-[processing_utm10_files.R](./src/Processing/processing_utm10_files.R)
-
-```{r add gemeente and provincie to data_cube}
-be_alientaxa_cube <- df %>% 
-  left_join(utm1_gemeentes_provincies, by = c("eea_cell_code" = "CELLCODE")) %>% 
-  st_drop_geometry() %>%
-  write_csv(file.path(cube_path, "be_alientaxa_cube.csv"))
-```
-
-Free some ram. `be_alientaxa_cube` is no longer needed.
-```{r free_ram}
-rm(be_alientaxa_cube)
-rm(utm1_gemeentes_provincies)
-gc() #garbage collection
-```
-
-The function `createTabularData()` from the alien species portal package is used 
-to process & save the data cube to the S3 bucket for use in the alien species portal.
-
-```{r save data_cube to S3 bucket}
-alienSpecies::createTabularData(dataDir = cube_path, type = "occurrence", bucket = UAT_bucket) 
-```
-
-We test if the data have been correctly saved:
-```{r test_load_occurrenceData}
-test_that("Load occurrenceData", { 
-  occurrenceData <- alienSpecies::loadTabularData(type = "occurrence") 
-  expect_s3_class( occurrenceData, "data.table") 
-}) 
+) %>% 
+  write_csv("./data/output/UAT_processing/be_alientaxa_cube.csv")
 ```
 
 Nota: these data have been also published on [Zenodo](https://doi.org/10.5281/zenodo.3632749).
@@ -466,15 +368,15 @@ df_bl_xy %>% head()
 
 ## Apply temporal and spatial restraints
 
-Select alien species introduced after 1950 (`year_of_introduction`: 1950) or whose date of introduction is not known:
+Select alien species that were observed after 1950 (`year_cutoff`: 1950) or whose date of introduction is not known:
 
 ```{r select_aliens_after_year_of_introduction}
-year_of_introduction <- 1950
+year_cutoff <- 1950
 
 recent_alien_species <-
   taxa_df %>%
   # lower limit on date of first introduction if present
-  filter(first_observed >= year_of_introduction | is.na(first_observed)) %>%
+  filter(last_observed >= year_cutoff | is.na(last_observed)) %>%
   # remove duplicates due to other columns as pathways
   distinct(nubKey, first_observed, last_observed) %>%
   
@@ -493,18 +395,18 @@ recent_alien_species <-
   )
 ```
 
-Number of taxa recently introduced or whose introduction year is not specified:
+Number of taxa last observed since 1950 or whose introduction year is not specified:
 
 ```{r n_recent_taxa}
 nrow(recent_alien_species)
 ```
 
-List of alien species excluded as first introduction date is earlier than 1950:
+List of alien species excluded as last observation date is earlier than 1950:
 
 ```{r recent_alien_species}
 old_introductions_taxa <-
   taxa_df %>%
-  filter(first_observed < year_of_introduction) %>%
+  filter(last_observed < year_cutoff) %>%
   anti_join(recent_alien_species %>%
               select(taxonKey),
             by = c("nubKey" = "taxonKey")
@@ -528,7 +430,7 @@ old_introductions_taxa <-
 old_introductions_taxa
 ```
 
-We save them in file `taxa_introduced_in_BE_before_1950.tsv` in  `data/output`:
+We save them in file `taxa_last_observed_in_BE_before_1950.tsv` in  `data/output`:
 
 ```{r save_old_introduced_taxa_as_tsv_file}
 write_tsv(old_introductions_taxa,
@@ -536,8 +438,8 @@ write_tsv(old_introductions_taxa,
             "data",
             "output",
             paste0(
-              "taxa_introduced_in_BE_before_",
-              year_of_introduction,
+              "taxa_last_observed_in_BE_before_",
+              year_cutoff,
               ".tsv"
             )
           ),
@@ -545,7 +447,7 @@ write_tsv(old_introductions_taxa,
 )
 ```
 
-We also limit the time series analysis on observations from 1950, start of state of invasion researches:
+We also limit the time series analysis to species which were last observed in 1950 or later, and limit their observations to after 1950, as this is the start of state of invasion researches
 
 ```{r define_year_range}
 first_year <- 1950
@@ -746,21 +648,104 @@ df_ts <-
 
 Save `df_ts` as it will be used as start point of modelling pipelines:
 
+```{r set creds}
+Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
+
+if(Sys.getenv("S3_BUCKET") != ""){
+  UAT_bucket <- Sys.getenv("S3_BUCKET")
+}else{
+  UAT_bucket <- Sys.getenv("UAT_bucket")
+}
+```
+
+```{r connect to bucket, eval=FALSE}
+source("./src/connect_to_bucket.R")
+connect_to_bucket(bucket_name = UAT_bucket)
+```
+
 ```{r save_data_as_tsv}
 # upload data to S3 bucket
 aws.s3::s3save(df_ts, 
                object = "df_timeseries.Rdata", 
                bucket = UAT_bucket, 
-               opts = list(show_progress = TRUE,
-                           multipart = TRUE))
+  opts = list(show_progress = TRUE,
+              multipart = TRUE))
 ```
 
 Create time series data
 input:  "df_timeseries.RData" and "grid.RData" from bucket
 output: full_timeseries.RData
+```{r}
+library(data.table)
+library(aws.s3)
+library(sf)
+simpleCap <- function(names, keepNames = TRUE) {
+  
+  sapply(names, function(x) {
+      
+      if (is.na(x))
+        return(x)
+      
+      s <- tolower(as.character(x))
+      paste0(toupper(substring(s, 1, 1)), substring(s, 2))
+      
+    }, USE.NAMES = keepNames)
+  
+}
+
+```
+
 
 ```{r}
-alienSpecies::createTimeseries(
+createTimeseries <- function(
+  bucket = config::get("bucket", file = system.file("config.yml", package = "alienSpecies")),
+  shapeData = loadShapeData("grid.RData")$utm1_bel_with_regions) {
+  
+                             
+  # For R CMD check
+  df_ts <- taxonKey <- NULL
+  
+  # created from https://github.com/inbo/aspbo/blob/uat/src/05_occurrence_indicators_preprocessing.Rmd
+  ## Data at 1km x 1km grid level
+  s3load("df_timeseries.Rdata", bucket = bucket)
+  
+  # obs: number of observations for species
+  # cobs: number of observations for class
+  # pa_obs: presence of species in protected areas (1 = yes, 0 = no)
+  # pa_cobs: presence of class in protected areas (1 = yes, 0 = no)
+  
+  # Merge with shapeData for region indicators
+  df_ts <- as.data.table(df_ts)
+  setkey(df_ts, eea_cell_code)
+  
+  regions <- c("flanders", "wallonia", "brussels")
+  simpleShape <- as.data.table(sf::st_drop_geometry(shapeData)[, c("CELLCODE", paste0("is", simpleCap(regions)))])
+  setnames(simpleShape, "CELLCODE", "eea_cell_code")
+  setkey(simpleShape, eea_cell_code)
+  # Avoid extra rows when merging for cells without occupancy
+  simpleShape <- simpleShape[simpleShape$eea_cell_code %in% unique(df_ts$eea_cell_code), ]
+  
+  timeseries <- df_ts[simpleShape, on = "eea_cell_code"]
+  if (nrow(timeseries) != nrow(df_ts))
+    warning("Difference in number of rows after enriching data: ", nrow(timeseries) - nrow(df_ts))
+  setkey(timeseries, taxonKey)
+  
+  aws.s3::s3write_using(timeseries, 
+    FUN = arrow::write_parquet, 
+    bucket = bucket, 
+    object = "full_timeseries.parquet",
+    opts = list(show_progress = TRUE, multipart = TRUE,
+      region = Sys.getenv("AWS_DEFAULT_REGION", unset = 'eu-west-1')))
+  
+  return(TRUE)
+  
+}
+
+```
+
+
+```{r}
+createTimeseries(
   # read grid.RData from bucket
   shapeData = alienSpecies::loadShapeData("grid.RData")$utm1_bel_with_regions, 
   bucket = UAT_bucket
@@ -777,15 +762,3 @@ write_tsv(spec_names,
           na = ""
 )
 ```
-
-reload previously loaded inbotheme version
-```{r reload_inbotheme_version, eval=TRUE}
-if(Sys.getenv("amiabot") != "yes"){
-  unloadNamespace("alienSpecies")
-  if(loaded_inbotheme_version != "0.5.8"){
-    remove.packages("INBOtheme")
-    devtools::install_github(paste0("inbo/INBOtheme@", loaded_inbotheme_version))
-  }
-}
-```
-
