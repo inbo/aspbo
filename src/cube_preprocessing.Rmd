@@ -135,6 +135,7 @@ which is updated by the following code:
 be_alientaxa_cube <- df %>% 
   left_join(utm1_gemeentes_provincies, by = c("eea_cell_code" = "CELLCODE")) %>% 
   st_drop_geometry() %>%
+  select(c(year,taxonKey,n,isFlanders,isWallonia,isBrussels,gemeente,provincie,gewest)) %>% 
   write_csv(file.path(cube_path, "be_alientaxa_cube.csv"))
 ```
 
