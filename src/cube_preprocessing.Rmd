@@ -730,6 +730,12 @@ createTimeseries <- function(
     warning("Difference in number of rows after enriching data: ", nrow(timeseries) - nrow(df_ts))
   setkey(timeseries, taxonKey)
   
+    # Write the result to S3 
+  if (!requireNamespace("arrow", quietly = TRUE)) {
+  install.packages("arrow")
+}
+library(arrow)
+  
   aws.s3::s3write_using(timeseries, 
     FUN = arrow::write_parquet, 
     bucket = bucket, 
