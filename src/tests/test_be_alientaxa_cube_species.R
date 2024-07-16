@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------
-#Load package testthat, and install it when this has not been done before
+#Load necessary packages and install them when this has not been done before
 #-------------------------------------------------------------------------
 
 packages <- c("testthat","utils","readr", "dplyr","sf", "rgbif", "wk")
@@ -58,9 +58,9 @@ belgium<- belgium %>%
 
 
 
-#-------------------------------------------------------------------------
-# Check for missing keys
-#-------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------
+# Check for keys that are present in the GRIIS checklist but not be_alientaxa_cube
+#---------------------------------------------------------------------------------------
 
 # Extract the nubKey from the griis checklist and the taxonkey from the cube
 taxonkeys_griis <- as.integer(GRIIS$nubKey)
@@ -77,8 +77,8 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
   #If all goes well, this should be 0
   all_species_present<-length(missing_species)==0
   
-  #in case this is not true, extract taxonkeys that are not present
-  
+  #in case this is not true, download data of taxonkeys that are not present in alientaxa cube but
+  #that do have occurrence data on gbif in Belgium
   if(length(missing_species)!=0) {
     
     gbif_download_key <- rgbif::occ_download(
@@ -94,13 +94,15 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
    species_records <- occ_download_get(gbif_download_key,overwrite = TRUE) %>%
       occ_download_import() 
    
+   #Only keep relevant columns
    species_records<-species_records %>%
      select(c("scientificName","taxonKey","decimalLongitude","decimalLatitude"))
     
 
-    # Filter out keys with no coordinates in Belgium
+    #Only keep taxonkeys in missing_species with coordinates in Belgium
     missing_species <- missing_species[missing_species %in% species_records$taxonKey]
     
+    #Filter the GRIIS checklist on these missing keys to paste the scientific name of these taxonkeys in the next step
     missing_details<-GRIIS %>%
       dplyr::filter(nubKey %in% missing_species)
 
