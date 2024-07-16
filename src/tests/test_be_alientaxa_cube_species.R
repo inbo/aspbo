@@ -2,7 +2,7 @@
 #Load package testthat, and install it when this has not been done before
 #-------------------------------------------------------------------------
 
-packages <- c("testthat","utils","readr", "dplyr","sf")
+packages <- c("testthat","utils","readr", "dplyr","sf", "rgbif", "wk")
 
 for(i in packages) {
   if( ! i %in% rownames(installed.packages()) ) { install.packages( i ) }
