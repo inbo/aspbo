@@ -2,7 +2,7 @@
 #Load package testthat, and install it when this has not been done before
 #-------------------------------------------------------------------------
 
-packages <- c("testthat","utils","readr", "dplyr")
+packages <- c("testthat","utils","readr", "dplyr","sf")
 
 for(i in packages) {
   if( ! i %in% rownames(installed.packages()) ) { install.packages( i ) }
@@ -10,8 +10,9 @@ for(i in packages) {
 }
 
 
+
 #-------------------------------------------------------------------------
-#Load the be_alientaxa_cube and GRIIS checklist
+#Load the be_alientaxa_cube, GRIIS checklist, and shapefile of Belgium
 #-------------------------------------------------------------------------
 be_alientaxa_cube <- read_csv(
   file = "https://zenodo.org/records/10527772/files/be_alientaxa_cube.csv?download=1",
@@ -35,8 +36,26 @@ GRIIS <-read_tsv(data_file,
                  na = "",
                  guess_max = 5000)
 
+#Filter GRIIS checklist, species needs to be last observed after 1950 and needs to belong to kingdom plantae or animalia
 GRIIS <-GRIIS %>%
-  filter(locationId == "ISO_3166:BE")
+  filter(locationId == "ISO_3166:BE")%>%
+  filter(last_observed>1950)%>%
+  filter(kingdom=="Animalia" | kingdom=="Plantae")
+
+#read in shapefile of belgium
+belgium<- sf::read_sf(dsn = "./data/output/UAT_processing/grid/", layer = "gewestbel")
+
+#Merge different multipolygons into one big multipolygon
+belgium$groep<-"belgium"
+belgium<- belgium %>% 
+  group_by(groep) %>% 
+  summarise()%>% #Merge multipolygons of Flanders, Brussels, and Wallonia into 1 big multipolygon for Belgium
+  sf::st_simplify(dTolerance=10) %>% #simpligy the polygon because there were too many points for rgbif
+  sf::st_geometry() %>% 
+  sf::st_as_text()%>%  
+  wk::wkt() %>% 
+  wk::wk_orient()#Due to changes in GBIF’s polygon interpretation, you might get an error when using polygons wound in the “wrong direction” (clockwise, i.e., default of sf). Reorient the polygon using the wk package
+
 
 
 #-------------------------------------------------------------------------
@@ -51,12 +70,10 @@ taxonkeys_cube<-as.integer(be_alientaxa_cube$taxonKey)
 missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
 
 
-#-------------------------------------------------------------------------
-# Define the test
-#-------------------------------------------------------------------------
 
-test_that("All species of the GRIIS checklist are included in be_alientaxa_cube", {
-  
+#-------------------------------------------------------------------------
+# ¨Prepare data for test
+#-------------------------------------------------------------------------
   #If all goes well, this should be 0
   all_species_present<-length(missing_species)==0
   
@@ -64,16 +81,44 @@ test_that("All species of the GRIIS checklist are included in be_alientaxa_cube"
   
   if(length(missing_species)!=0) {
     
+    gbif_download_key <- rgbif::occ_download(
+      pred_in("taxonKey", missing_species),
+      pred("hasCoordinate", TRUE),
+      pred_within(belgium)
+    )
+    
+    #Follow the status of the download    
+    occ_download_wait(gbif_download_key)
+    
+    #Retrieve downloaded records
+   species_records <- occ_download_get(gbif_download_key,overwrite = TRUE) %>%
+      occ_download_import() 
+   
+   species_records<-species_records %>%
+     select(c("scientificName","taxonKey","decimalLongitude","decimalLatitude"))
+    
+
+    # Filter out keys with no coordinates in Belgium
+    missing_species <- missing_species[missing_species %in% species_records$taxonKey]
+    
     missing_details<-GRIIS %>%
       dplyr::filter(nubKey %in% missing_species)
 
   }
-  
+
+
+
+#-------------------------------------------------------------------------
+# ¨Define test
+#-------------------------------------------------------------------------
+test_that("All species of the GRIIS checklist are included in be_alientaxa_cube", {
   # Expect that all values are present
-  expect_true(all_species_present, info = cat(paste0("There are ",length(missing_species)," species on the GRIIS checklist that are not present in be_alientaxa_cube. They have the following nubKeys: ", paste0(missing_species, collapse = ", "),
+  expect_true(all_species_present, info = cat(paste0("There are ",length(missing_species)," species on the GRIIS checklist that are not present in be_alientaxa_cube but DO have GBIF occurrence records located in Belgium. They have the following nubKeys: ", paste0(missing_species, collapse = ", "),
                                                      '\n',
                                                      '\n',
                                                      "These correspond to the following scientific names: ", paste0(missing_details$scientificName, collapse = ", "))))
 })
 
-rgbif::name_usage(5250090)$data$scientificName
+
+
+
