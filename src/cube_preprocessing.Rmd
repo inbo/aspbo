@@ -469,7 +469,7 @@ df_bl_xy %>% head()
 
 Select alien species that were observed after 1950 (`year_cutoff`: 1950) or whose date of introduction is not known:
 
-```{r select_aliens_after_year_of_introduction}
+```{r select_aliens_with_recent_observations}
 year_cutoff <- 1950
 
 recent_alien_species <-
@@ -502,7 +502,7 @@ nrow(recent_alien_species)
 
 List of alien species excluded as last observation date is earlier than 1950:
 
-```{r recent_alien_species}
+```{r extinct_alien_species}
 old_introductions_taxa <-
   taxa_df %>%
   filter(last_observed < year_cutoff) %>%
@@ -531,7 +531,7 @@ old_introductions_taxa
 
 We save them in file `taxa_last_observed_in_BE_before_1950.tsv` in  `data/output`:
 
-```{r save_old_introduced_taxa_as_tsv_file}
+```{r save_taxa_last_observed_before_1950_as_tsv_file}
 write_tsv(old_introductions_taxa,
           here::here(
             "data",
