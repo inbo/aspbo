@@ -109,7 +109,63 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
    
    #Only keep relevant columns
    species_records<-species_records %>%
-     select(c("scientificName","taxonKey","decimalLongitude","decimalLatitude"))
+     filter(!grepl("COORDINATE_OUT_OF_RANGE", issue) | 
+            !grepl("ZERO_COORDINATE", issue) |
+              !grepl("COORDINATE_INVALID", issue) | 
+              !grepl("COUNTRY_COORDINATE_MISMATCH", issue)) %>%
+     filter(!identificationVerificationStatus%in%c(
+       "unverified",
+       "unvalidated",
+       "not validated",
+       "under validation",
+       "not able to validate",
+       "control could not be conclusive due to insufficient knowledge",
+       "uncertain",
+       "unconfirmed",
+       "unconfirmed - not reviewed",
+       "validation requested",
+       "Non réalisable"))%>%
+   filter(!occurrenceStatus %in% c("ABSENT", "EXCLUDED"))%>%
+     select(c("scientificName","taxonKey", "speciesKey","genusKey","familyKey","taxonomicStatus","taxonRank","acceptedTaxonKey" ))
+   
+  species_records_species<-species_records%>%
+     select(-taxonKey)%>%
+     filter(taxonRank %in% c("SPECIES", "GENUS", "FAMILY"), 
+            taxonomicStatus %in% c("ACCEPTED", "DOUBTFUL"))%>%
+     mutate(speciesKey = as.integer(speciesKey),
+            genusKey = as.integer(genusKey),
+            familyKey = as.integer(familyKey)) %>%
+     filter(speciesKey %in% missing_species |
+            genusKey %in% missing_species |
+            familyKey %in% missing_species)%>%
+     filter(!is.na(speciesKey) & speciesKey != 0)%>%
+     rename(taxonKey = speciesKey)%>%
+    select(-acceptedTaxonKey)
+    
+   
+   species_records_subspecies <- species_records %>%
+     select(-c(taxonKey,speciesKey))%>%
+     filter(taxonRank %in% c("SUBSPECIFICAGGREGATE",
+                        "SUBSPECIES", 
+                        "VARIETY",
+                        "SUBVARIETY",
+                        "FORM",
+                        "SUBFORM"), 
+            taxonomicStatus %in% c("ACCEPTED", "DOUBTFUL")) %>%
+     rename(taxonKey = acceptedTaxonKey)
+   
+  species_records_subspecies<-species_records_subspecies[,c(1,6,2:5)]
+     
+    species_records_synonyms <-species_records %>%
+     filter(!taxonomicStatus %in% c("ACCEPTED", "DOUBTFUL"))%>%
+      select(-c(speciesKey,acceptedTaxonKey))
+     
+   species_records<-rbind (species_records_species,species_records_subspecies,species_records_synonyms)
+   
+   
+   species_records<-species_records %>%
+     group_by(taxonKey,scientificName,taxonRank, taxonomicStatus) %>%
+     count()
     
 
     #Only keep taxonkeys in missing_species that were present in downloaded species_records
