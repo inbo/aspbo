@@ -139,6 +139,14 @@ be_alientaxa_cube <- df %>%
   write_csv(file.path(cube_path, "be_alientaxa_cube.csv"))
 ```
 
+Recalculate last_observed column per taxonkey
+```{r recalculate_last_observed}
+last_observed_taxon <- be_alientaxa_cube %>% 
+  group_by(taxonKey) %>% 
+  summarise(last_observed = max(year, na.rm = TRUE)) %>% 
+  ungroup()
+```
+
 Free some ram. `be_alientaxa_cube` is no longer needed.
 ```{r free_ram}
 rm(be_alientaxa_cube)
@@ -466,6 +474,27 @@ df_bl_xy %>% head()
 ```
 
 ## Apply temporal and spatial restraints
+
+Recalculate last observed date for each taxon:
+using last observation date from the occurrence data, if available, or the last observation date from the unified checklist, if available.
+
+```{r recalculate_last_observed}
+taxa_df <- 
+  taxa_df %>% 
+  mutate(last_observed_old = as.integer(last_observed)) %>% 
+  select(-last_observed) %>% 
+  left_join(last_observed_taxon %>% 
+              mutate(last_observed_new = as.integer(last_observed)) %>% 
+              select(-last_observed), 
+            by = c("nubKey" = "taxonKey")) %>% 
+  mutate(last_observed = case_when(last_observed_old == last_observed_new ~ last_observed_old,
+                                   last_observed_old < last_observed_new ~ last_observed_new,
+                                   is.na(last_observed_old) ~ last_observed_new,
+                                   is.na(last_observed_new) ~ last_observed_old,
+                                   last_observed_new < last_observed_old ~ last_observed_old,
+                                   TRUE ~ NA_integer_)) %>% 
+  select(-last_observed_old, -last_observed_new)
+```
 
 Select alien species that were observed after 1950 (`year_cutoff`: 1950) or whose date of introduction is not known:
 
