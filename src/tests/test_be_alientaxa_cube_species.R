@@ -78,7 +78,7 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
   all_species_present<-length(missing_species)==0
   
   #in case this is not true, download data of taxonkeys that are not present in alientaxa cube but
-  #that do have occurrence data on gbif in Belgium
+  #that do have occurrence data on gbif in Belgium. The same download settings are used as for constructing be_alientaxa_cube
   if(length(missing_species)!=0) {
     
     gbif_download_key <- rgbif::occ_download(
@@ -99,10 +99,10 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
      select(c("scientificName","taxonKey","decimalLongitude","decimalLatitude"))
     
 
-    #Only keep taxonkeys in missing_species with coordinates in Belgium
+    #Only keep taxonkeys in missing_species that were present in downloaded species_records
     missing_species <- missing_species[missing_species %in% species_records$taxonKey]
     
-    #Filter the GRIIS checklist on these missing keys to paste the scientific name of these taxonkeys in the next step
+    #Filter the GRIIS checklist on these missing keys to paste the scientific name of these taxonkeys (as indicated in the GRIIS checklist) in the next step
     missing_details<-GRIIS %>%
       dplyr::filter(nubKey %in% missing_species)
 
