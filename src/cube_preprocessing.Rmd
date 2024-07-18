@@ -578,7 +578,7 @@ write_tsv(old_introductions_taxa,
 We also limit the time series analysis to species which were last observed in 1950 or later, and limit their observations to after 1950, as this is the start of state of invasion researches
 
 ```{r define_year_range}
-first_year <- 1950
+first_year <- year_cutoff
 ```
 
 Some observations can be published with erroneous coordinates (see [#trias-project/occ-processing#13](https://github.com/trias-project/occ-processing/issues/13)) or can be assigned to a grid cell out of Belgium and should therefore removed.
