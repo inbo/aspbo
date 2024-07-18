@@ -2,7 +2,7 @@
 #Load necessary packages and install them when this has not been done before
 #-------------------------------------------------------------------------
 
-packages <- c("testthat","utils","readr", "dplyr","sf", "rgbif", "wk")
+packages <- c("testthat","utils","readr", "dplyr","sf", "rgbif", "wk", "lubridate")
 
 for(i in packages) {
   if( ! i %in% rownames(installed.packages()) ) { install.packages( i ) }
