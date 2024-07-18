@@ -81,10 +81,23 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
   #that do have occurrence data on gbif in Belgium. The same download settings are used as for constructing be_alientaxa_cube
   if(length(missing_species)!=0) {
     
+    basis_of_record <- c(
+      "OBSERVATION", 
+      "HUMAN_OBSERVATION",
+      "MATERIAL_SAMPLE", 
+      "LITERATURE", 
+      "PRESERVED_SPECIMEN", 
+      "UNKNOWN", 
+      "MACHINE_OBSERVATION")
+    
     gbif_download_key <- rgbif::occ_download(
+      pred_in("country", "BE"),
       pred_in("taxonKey", missing_species),
       pred("hasCoordinate", TRUE),
-      pred_within(belgium)
+      #pred_within(belgium),
+      pred_in("basisOfRecord", basis_of_record),
+      pred_gte("year", 1000),
+      pred_lte("year", year(Sys.Date()))
     )
     
     #Follow the status of the download    
