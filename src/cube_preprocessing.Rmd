@@ -478,7 +478,7 @@ df_bl_xy %>% head()
 Recalculate last observed date for each taxon:
 using last observation date from the occurrence data, if available, or the last observation date from the unified checklist, if available.
 
-```{r recalculate_last_observed}
+```{r recalculate_last_observed_date}
 taxa_df <- 
   taxa_df %>% 
   mutate(last_observed_old = as.integer(last_observed)) %>% 
