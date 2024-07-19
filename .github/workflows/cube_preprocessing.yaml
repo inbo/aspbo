@@ -79,7 +79,7 @@ jobs:
           echo "::set-output name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)"
           echo "::set-output name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)"
 
-      - name: occ_indic_preprocessing
+      - name: cube_preprocessing
         run: |
           source("src/run_cube_preprocessing.R")
         shell: Rscript {0}

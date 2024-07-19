@@ -139,6 +139,14 @@ be_alientaxa_cube <- df %>%
   write_csv(file.path(cube_path, "be_alientaxa_cube.csv"))
 ```
 
+Recalculate last_observed column per taxonkey
+```{r recalculate_last_observed}
+last_observed_taxon <- be_alientaxa_cube %>% 
+  group_by(taxonKey) %>% 
+  summarise(last_observed = max(year, na.rm = TRUE)) %>% 
+  ungroup()
+```
+
 Free some ram. `be_alientaxa_cube` is no longer needed.
 ```{r free_ram}
 rm(be_alientaxa_cube)
@@ -467,15 +475,36 @@ df_bl_xy %>% head()
 
 ## Apply temporal and spatial restraints
 
-Select alien species introduced after 1950 (`year_of_introduction`: 1950) or whose date of introduction is not known:
+Recalculate last observed date for each taxon:
+using last observation date from the occurrence data, if available, or the last observation date from the unified checklist, if available.
 
-```{r select_aliens_after_year_of_introduction}
-year_of_introduction <- 1950
+```{r recalculate_last_observed_date}
+taxa_df <- 
+  taxa_df %>% 
+  mutate(last_observed_old = as.integer(last_observed)) %>% 
+  select(-last_observed) %>% 
+  left_join(last_observed_taxon %>% 
+              mutate(last_observed_new = as.integer(last_observed)) %>% 
+              select(-last_observed), 
+            by = c("nubKey" = "taxonKey")) %>% 
+  mutate(last_observed = case_when(last_observed_old == last_observed_new ~ last_observed_old,
+                                   last_observed_old < last_observed_new ~ last_observed_new,
+                                   is.na(last_observed_old) ~ last_observed_new,
+                                   is.na(last_observed_new) ~ last_observed_old,
+                                   last_observed_new < last_observed_old ~ last_observed_old,
+                                   TRUE ~ NA_integer_)) %>% 
+  select(-last_observed_old, -last_observed_new)
+```
+
+Select alien species that were observed after 1950 (`year_cutoff`: 1950) or whose date of introduction is not known:
+
+```{r select_aliens_with_recent_observations}
+year_cutoff <- 1950
 
 recent_alien_species <-
   taxa_df %>%
   # lower limit on date of first introduction if present
-  filter(first_observed >= year_of_introduction | is.na(first_observed)) %>%
+  filter(last_observed >= year_cutoff | is.na(last_observed)) %>%
   # remove duplicates due to other columns as pathways
   distinct(nubKey, first_observed, last_observed) %>%
   
@@ -494,18 +523,18 @@ recent_alien_species <-
   )
 ```
 
-Number of taxa recently introduced or whose introduction year is not specified:
+Number of taxa last observed since 1950 or whose introduction year is not specified:
 
 ```{r n_recent_taxa}
 nrow(recent_alien_species)
 ```
 
-List of alien species excluded as first introduction date is earlier than 1950:
+List of alien species excluded as last observation date is earlier than 1950:
 
-```{r recent_alien_species}
+```{r extinct_alien_species}
 old_introductions_taxa <-
   taxa_df %>%
-  filter(first_observed < year_of_introduction) %>%
+  filter(last_observed < year_cutoff) %>%
   anti_join(recent_alien_species %>%
               select(taxonKey),
             by = c("nubKey" = "taxonKey")
@@ -529,16 +558,16 @@ old_introductions_taxa <-
 old_introductions_taxa
 ```
 
-We save them in file `taxa_introduced_in_BE_before_1950.tsv` in  `data/output`:
+We save them in file `taxa_last_observed_in_BE_before_1950.tsv` in  `data/output`:
 
-```{r save_old_introduced_taxa_as_tsv_file}
+```{r save_taxa_last_observed_before_1950_as_tsv_file}
 write_tsv(old_introductions_taxa,
           here::here(
             "data",
             "output",
             paste0(
-              "taxa_introduced_in_BE_before_",
-              year_of_introduction,
+              "taxa_last_observed_in_BE_before_",
+              year_cutoff,
               ".tsv"
             )
           ),
@@ -546,10 +575,10 @@ write_tsv(old_introductions_taxa,
 )
 ```
 
-We also limit the time series analysis on observations from 1950, start of state of invasion researches:
+We also limit the time series analysis to species which were last observed in 1950 or later, and limit their observations to after 1950, as this is the start of state of invasion researches
 
 ```{r define_year_range}
-first_year <- 1950
+first_year <- year_cutoff
 ```
 
 Some observations can be published with erroneous coordinates (see [#trias-project/occ-processing#13](https://github.com/trias-project/occ-processing/issues/13)) or can be assigned to a grid cell out of Belgium and should therefore removed.
@@ -777,6 +806,7 @@ write_tsv(spec_names,
                             "timeseries_taxonomic_info.tsv"),
           na = ""
 )
+
 ```
 
 reload previously loaded inbotheme version
@@ -789,4 +819,3 @@ if(Sys.getenv("amiabot") != "yes"){
   }
 }
 ```
-
