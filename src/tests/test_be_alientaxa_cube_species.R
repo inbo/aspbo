@@ -55,7 +55,14 @@ belgium<- belgium %>%
   wk::wkt() %>% 
   wk::wk_orient()#Due to changes in GBIF’s polygon interpretation, you might get an error when using polygons wound in the “wrong direction” (clockwise, i.e., default of sf). Reorient the polygon using the wk package
 
+#Read taxonomic info of alien cube
+data_file <- here::here(
+  "data",
+  "output",
+  "UAT_processing",
+  "be_alientaxa_info.csv")
 
+cube_info<-read_csv(data_file)
 
 #---------------------------------------------------------------------------------------
 # Check for keys that are present in the GRIIS checklist but not be_alientaxa_cube
