@@ -184,6 +184,7 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
     missing_details<-GRIIS %>%
       dplyr::filter(nubKey %in% missing_species) %>%
       distinct(nubKey,scientificName)
+      distinct(nubKey, .keep_all=TRUE)
     
 
     # Check if each scientificName is present in any row of the includes column of cube info
@@ -203,6 +204,7 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
 test_that("All species of the GRIIS checklist are included in be_alientaxa_cube", {
   # Expect that all values are present
   expect_true(all_species_present, info = cat(paste0("There are ",length(missing_species)," species on the GRIIS checklist that are not present in be_alientaxa_cube but DO have GBIF occurrence records located in Belgium. They have the following nubKeys: ", paste0(missing_species, collapse = ", "),
+  expect_true(all_species_present, info = cat(paste0("There are ",nrow(missing_details)," species on the GRIIS checklist that are not present in be_alientaxa_cube but DO have GBIF occurrence records located in Belgium. They have the following nubKeys: ", paste0(missing_details$nubKey, collapse = ", "),
                                                      '\n',
                                                      '\n',
                                                      "These correspond to the following scientific names: ", paste0(missing_details$scientificName, collapse = ", "))))
