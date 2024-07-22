@@ -36,10 +36,13 @@ GRIIS <-read_tsv(data_file,
                  na = "",
                  guess_max = 5000)
 
-#Filter GRIIS checklist, species needs to be last observed after 1950 and needs to belong to kingdom plantae or animalia
+#Filter GRIIS checklist, species needs to belong to kingdom plantae or animalia
 GRIIS <-GRIIS %>%
   filter(locationId == "ISO_3166:BE")%>%
   filter(kingdom=="Animalia" | kingdom=="Plantae")
+
+
+
 
 #read in shapefile of belgium
 belgium<- sf::read_sf(dsn = "./data/output/UAT_processing/grid/", layer = "gewestbel")
