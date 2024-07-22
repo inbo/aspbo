@@ -179,7 +179,16 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
     
     #Filter the GRIIS checklist on these missing keys to paste the scientific name of these taxonkeys (as indicated in the GRIIS checklist) in the next step
     missing_details<-GRIIS %>%
-      dplyr::filter(nubKey %in% missing_species)
+      dplyr::filter(nubKey %in% missing_species) %>%
+      distinct(nubKey,scientificName)
+    
+
+    # Check if each scientificName is present in any row of the includes column of cube info
+    missing_details$present_in_includes <- sapply(missing_details$scientificName, function(name) {
+      any(grepl(name, cube_info$includes))
+    })
+      missing_details<-filter(missing_details, present_in_includes==FALSE)
+   
 
   }
 
