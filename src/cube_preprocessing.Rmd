@@ -564,7 +564,7 @@ We save them in file `taxa_last_observed_in_BE_before_1950.tsv` in  `data/output
 write_tsv(old_introductions_taxa,
           here::here(
             "data",
-            "output",
+            "interim",
             paste0(
               "taxa_last_observed_in_BE_before_",
               year_cutoff,
