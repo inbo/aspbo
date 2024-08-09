@@ -116,12 +116,11 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
    species_records <- occ_download_get(gbif_download_key,overwrite = TRUE, path=tempdir()) %>%
       occ_download_import() 
    
+   issues_to_exclude<-c("COORDINATE_OUT_OF_RANGE","ZERO_COORDINATE","COORDINATE_INVALID","COUNTRY_COORDINATE_MISMATCH")
+   
    #Only keep relevant columns
    species_records<-species_records %>%
-     filter(!grepl("COORDINATE_OUT_OF_RANGE", issue) | 
-            !grepl("ZERO_COORDINATE", issue) |
-              !grepl("COORDINATE_INVALID", issue) | 
-              !grepl("COUNTRY_COORDINATE_MISMATCH", issue)) %>%
+     filter(!grepl( paste(issues_to_exclude, collapse="|"), issue)) %>%
      filter(!identificationVerificationStatus%in%c(
        "unverified",
        "unvalidated",
