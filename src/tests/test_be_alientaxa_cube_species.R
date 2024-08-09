@@ -113,7 +113,7 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
     occ_download_wait(gbif_download_key)
     
     #Retrieve downloaded records
-   species_records <- occ_download_get(gbif_download_key,overwrite = TRUE) %>%
+   species_records <- occ_download_get(gbif_download_key,overwrite = TRUE, path=tempdir()) %>%
       occ_download_import() 
    
    #Only keep relevant columns
@@ -197,7 +197,8 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
 
   }
 
-
+log<-missing_details[,c(2:3, 21, 23, 25:27)]
+write_csv(log, paste("./logs/test_be_alientaxa_cube_species/log.csv"))
 
 #-------------------------------------------------------------------------
 # ¨Define test
