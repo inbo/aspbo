@@ -268,12 +268,12 @@ alien_taxa_without_occs
 ```
 
 where `key` is the unique GBIF identifier of the taxon as published in the unified checklist, while `nubKey` is the unique GBIF identifier of the taxon in the GBIF Backbone Taxonomy.
-We save this data.frame as `alien_taxa_without_occurrences.tsv` in `data/output`:
+We save this data.frame as `alien_taxa_without_occurrences.tsv` in `data/interim`:
 
 ```{r save_alien_taxa_without_occs}
 write_tsv(
   alien_taxa_without_occs,
-  here::here("data", "output", "alien_taxa_without_occs.tsv"),
+  here::here("data", "interim", "alien_taxa_without_occs.tsv"),
   na = ""
 )
 ```
@@ -564,7 +564,7 @@ We save them in file `taxa_last_observed_in_BE_before_1950.tsv` in  `data/output
 write_tsv(old_introductions_taxa,
           here::here(
             "data",
-            "output",
+            "interim",
             paste0(
               "taxa_last_observed_in_BE_before_",
               year_cutoff,
