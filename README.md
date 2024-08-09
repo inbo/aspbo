@@ -2,7 +2,7 @@
 The alien species portal backoffice contains automated data preparation scripts for the [alien species portal](https://github.com/inbo/alien-species-portal)
 
 ## Management dataflows
-[![management-prep](https://github.com/inbo/aspbo/actions/workflows/management-prep.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/management-prep.yaml)
+[![SK-management-prep](https://github.com/inbo/aspbo/actions/workflows/management-prep.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/management-prep.yaml)
 
 [![get_muskrat_data](https://github.com/inbo/aspbo/actions/workflows/get_muskrat_data.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_muskrat_data.yaml)
 
@@ -16,7 +16,7 @@ The alien species portal backoffice contains automated data preparation scripts 
 [![update eu concern list](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml)
 
 ## Observations dataflows
-[![create full_timeseries.csv](https://github.com/inbo/aspbo/actions/workflows/update_indicators_preprocessing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_indicators_preprocessing.yaml) => manual workflow. RUN [05_occurrence_indicators_preprocessing.Rmd](https://github.com/inbo/aspbo/blob/uat/src/05_occurrence_indicators_preprocessing.Rmd) on a new branch
+[![cube preprocessing](https://github.com/inbo/aspbo/actions/workflows/cube_preprocessing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/cube_preprocessing.yaml)
 
 ## Upload dataflows
 [![upload_files_direct](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml)
