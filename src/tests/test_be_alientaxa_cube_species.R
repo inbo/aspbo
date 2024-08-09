@@ -103,7 +103,7 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
       pred_in("country", "BE"),
       pred_in("taxonKey", missing_species),
       pred("hasCoordinate", TRUE),
-      #pred_within(belgium),
+      pred_within(belgium),
       pred_in("basisOfRecord", basis_of_record),
       pred_gte("year", 1000),
       pred_lte("year", year(Sys.Date()))
@@ -187,6 +187,8 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
     
 
     # Check if each scientificName is present in any row of the includes column of cube info
+    # This column indicates whether the taxonKey in the cube only includes records of that specific taxonkey or also includes records from other
+    # taxonkeys (e.g., keys representing synonyms or subspecies)
     missing_details$present_in_includes <- sapply(missing_details$scientificName, function(name) {
       any(grepl(name, cube_info$includes))
     })
@@ -202,7 +204,7 @@ missing_species<- setdiff(taxonkeys_griis, taxonkeys_cube)
 #-------------------------------------------------------------------------
 test_that("All species of the GRIIS checklist are included in be_alientaxa_cube", {
   # Expect that all values are present
-  expect_true(all_species_present, info = cat(paste0("There are ",nrow(missing_details)," species on the GRIIS checklist that are not present in be_alientaxa_cube but DO have GBIF occurrence records located in Belgium. They have the following nubKeys: ", paste0(missing_details$nubKey, collapse = ", "),
+  expect_true(all_species_present, info = cat(paste0("There are ",nrow(missing_details)," species on the GRIIS checklist that are not present in be_alientaxa_cube but (1) DO have GBIF occurrence records located in Belgium and (2) should have been included based on the rationale used to construct the be_alientaxa_cube. They have the following nubKeys: ", paste0(missing_details$nubKey, collapse = ", "),
                                                      '\n',
                                                      '\n',
                                                      "These correspond to the following scientific names: ", paste0(missing_details$scientificName, collapse = ", "))))
