@@ -55,8 +55,19 @@ data_nest_gs_raw <- read_sheet("1AGgMQvJUfQGaKP02jFo-MRP4SKWhq3Cbc2_nmZUcgnw",
                                sheet = "curated: nests_20230116",
                                col_types = "c")
 
-# Vespawatch nesten van iasset
-data_nest_iasset_raw <- read_csv2("./data/input/Vespa-Watch_iasset.csv")
+# Vespawatch nesten van iAsset
+data_nest_iasset_raw <- read_sheet("1dqSLTOF3GB1_gsth2jEIbXgaCC8KTAtTMuysk3zMdfk",
+                               sheet = "Sheet1",
+                               col_types = "c")
+
+# Vespa-Watch nesten van waarnemingenAPI
+data_nests_waarnemingen <- read_sheet("1gVrPeMj74pDkHd5oQJ8fmlMRAP5Dh85SManUzLI1eJQ",
+                               sheet = "Sheet2",
+                               col_types = "c")
+
+# combineer iAsset en Waarnemingen observaties in 1 dataframe
+data_nest_iasset_raw <- rbind(data_nest_iasset_raw,
+                              data_nests_waarnemingen)
 
 # Gbif nesten en individuen data 
 data_gbif_raw <- read_csv2("./data/input/Vespa-Watch_gbif.csv")
