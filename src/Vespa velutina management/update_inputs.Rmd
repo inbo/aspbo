@@ -80,10 +80,10 @@ dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJW
                                     sheet = "Checked",
                                     col_types = "c")
 
-# iAsset province error correction
-iAsset_foutecoordinaten <- read_delim("data/interim/iAsset_foutecoördinaten.csv", 
-                                      delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% 
-  filter(!is.na(`ID nest`))
+# iAsset corrected coordinates
+# indien NA -> provincie en gemeente onbekend, niet verwijderen uit dataset TODO
+iAsset_coordinaten_corrected <- read_delim("data/interim/Vv_corrected_coordinates.csv", 
+                                      delim = ";", escape_double = FALSE, trim_ws = TRUE)
 ```
 
 ```{r OLD Vespawatch: data prep}
@@ -142,9 +142,19 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
 ```
 
 ```{r IASSET: data prep}
+#correct coordinates
+#TODO: nesten met coordinaten NA : provincie en gemeente onbekend ipv verwijderen uit data!
+data_nest_iasset_raw <- data_nest_iasset_raw %>% 
+  left_join(iAsset_coordinaten_corrected, 
+            by = c("insp_order")) %>% 
+  mutate(coordinaten_van_het_nest = case_when(
+                               insp_order%in%iAsset_coordinaten_corrected ~ coordinates,
+                               TRUE ~ coordinaten_van_het_nest))
+
+
 # Map data content
 data_nest_iasset <- data_nest_iasset_raw %>% 
-  rename(geometry = coordinaten_van_het_nest) %>% 
+  rename(geometry = coordinaten_van_het_nest)%>% 
   filter(gevalideerd == "ja",
          grepl(x = nesttype, pattern = "AH"),
          duplicaat == "nee",
@@ -171,21 +181,13 @@ data_nest_iasset <- data_nest_iasset_raw %>%
          aftercare = nazorg,
          year = year(datum_observatie))%>%
   mutate_at(c('nestplaats'), ~replace_na(.,"onbekend"))
+  
+
 
 #Intersect with province
 data_nest_iasset <- st_intersection(data_nest_iasset, prov)
 
-#vaak zijn coördinaten in iAsset fout, het veld 'provincie' in iAsset is toegewezen op basis van veld adres. Enkel indien 'provincie' leeg, wordt provincie best afgeleid uit coördinaten. Er zijn ook een aantal meldingen met provincie ('ongekend'), van deze weten we het juiste adres niet en zijn de coördinaten de default coördinaten (dus niet correct).
-data_nest_iasset <- data_nest_iasset %>% 
-  left_join(iAsset_foutecoordinaten, 
-            by = c("insp_order" = "ID nest")) %>% 
-  mutate(provincie = case_when(!is.na(provincie_corrected) ~ provincie_corrected,
-                               !is.na(provincie) ~ provincie,
-                               !is.na(NAAM) ~ NAAM, 
-                               TRUE ~ NA_character_))%>% 
-  mutate(provincie = case_when(provincie=="ongekend"| provincie=="onbekend" | is.na(provincie) ~ "unknown", 
-#alternatief "ongekend", "onbekend", en NA overal in dataset naar unknown
-                               TRUE ~ provincie))%>%
+data_nest_iasset <- data_nest_iasset %>%
   filter(!provincie%in%c("niet Vlaanderen", "HoofdstedelijkGewest"))
 
 #temp fix lacking id column 
