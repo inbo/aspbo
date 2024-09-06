@@ -491,7 +491,9 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
                 geometry
   ) %>% 
   st_drop_geometry() %>% 
-  st_as_sf()
+  st_as_sf() %>% 
+  st_write("./data/interim/data_nests_waarnemingen.geojson",
+           append = FALSE)
 #TODO: waarnemingen mapping toevoegen na fixen van API
 ```
 
