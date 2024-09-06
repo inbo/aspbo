@@ -62,14 +62,17 @@ data_nest_iasset_raw <- read_sheet("1dqSLTOF3GB1_gsth2jEIbXgaCC8KTAtTMuysk3zMdfk
 
 # Vespa-Watch nesten van waarnemingenAPI
 data_nests_waarnemingen_raw <- read_sheet("1gVrPeMj74pDkHd5oQJ8fmlMRAP5Dh85SManUzLI1eJQ",
-                                      sheet = "Sheet2",
-                                      col_types = "c")
+                                          sheet = "Sheet2",
+                                          col_types = "c")
 
 # Vespa-Watch nesten van inaturalist# Gbif nesten en individuen data 
 data_gbif_raw <- read_csv2("./data/input/Vespa-Watch_gbif.csv")
 
 # Provincies
 prov <- st_read("./data/output/UAT_processing/provinces.geojson")
+
+# Gemeentes
+gemeentes <- st_read("./data/output/UAT_processing/communes.geojson")
 
 # Duplicated nests from iasset
 dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJWs",
@@ -83,8 +86,8 @@ iAsset_coordinaten_corrected <- read_delim("data/interim/Vv_corrected_coordinate
                                            col_types = cols(insp_order = col_character())) 
 #correct brandweer data 
 Managed_nests_fireman_in_database_raw <- read_delim("data/interim/Managed_nests_fireman_in_database.csv", 
-                                                delim = ";", escape_double = FALSE, trim_ws = TRUE,
-                                                col_types = cols(ID_IAsset = col_character()))
+                                                    delim = ";", escape_double = FALSE, trim_ws = TRUE,
+                                                    col_types = cols(ID_IAsset = col_character()))
 
 Managed_nests_fireman_not_in_database <- read_delim("data/interim/Managed_nests_fireman_not_in_database.csv", 
                                                     delim = ";", escape_double = FALSE, trim_ws = TRUE) #TODO: toevoegen aan databank (worden nu enkel hier ingelezen)
@@ -145,6 +148,9 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
   mutate(provincie = NAAM)
 ```
 
+In het geval van een dubbele melding van een nest in de dataset, 
+wordt de meest recente melding behouden. 
+
 ```{r Brandweer: data prep}
 Managed_nests_fireman_in_database <- Managed_nests_fireman_in_database_raw %>% 
   mutate(Date_fireman = as.Date(Date_fireman)) %>% 
@@ -152,9 +158,11 @@ Managed_nests_fireman_in_database <- Managed_nests_fireman_in_database_raw %>%
   summarise(Date_fireman = min(Date_fireman, na.rm = TRUE))
 ```
 
+Nesten met coordinaten NA : worden verwijderd uit de data
+
 ```{r IASSET: data prep}
 #correct coordinates
-#TODO: nesten met coordinaten NA : provincie en gemeente onbekend ipv verwijderen uit data!
+
 data_nest_iasset_coordfix <- data_nest_iasset_raw %>% 
   left_join(iAsset_coordinaten_corrected, 
             by = c("insp_order")) %>% 
@@ -181,12 +189,12 @@ data_nest_iasset_zndr_coords <- data_nest_iasset_managementfix %>%
 
 # Map data content to Vespa-Watch data structure
 data_nest_iasset <- data_nest_iasset_managementfix %>% 
-  rename(geometry = coordinaten_van_het_nest)%>% 
+  rename(geometry = coordinaten_van_het_nest) %>% 
   filter(gevalideerd == "ja",
          !is.na(geometry),
          grepl(x = nesttype, pattern = "AH"),
          duplicaat == "nee",
-         nesttype != "AH - potentieel nest (meer info nodig)") %>% 
+         nesttype != "AH - potentieel nest (meer info nodig)") %>% #TODO: check if this is correct
   st_as_sf(wkt = "geometry",
            crs = 4326) %>% 
   mutate(result = case_when(insp_order %in% Managed_nests_fireman_in_database$insp_order ~ "succesvol",
@@ -352,8 +360,8 @@ table(test_mutiple_3$duplicaat, useNA = "ifany") #=> alle ids in deze set werden
 
 ```{r IASSET: remove duplicaten}
 #obtain list of all managed nests
-managed_nests <- data_nest_iasset%>%
-  filter(result=="succesvol")%>%
+managed_nests <- data_nest_iasset %>%
+  filter(result == "succesvol") %>%
   select(id)
 
 #decide which of both duplicates should be removed
@@ -376,14 +384,99 @@ st_write(data_nest_iasset, "./data/interim/data_nest_iasset.geojson",
          append = FALSE)
 ```
 
-```{r Waarnemingen: data prep}
-data_nests_waarnemingen <- data_nests_waarnemingen_raw
+Nest AH verlaten. 2de nest is Duitse wesp. => IE ?
 
+```{r Waarnemingen: data prep}
+data_nests_waarnemingen <- data_nests_waarnemingen_raw %>% 
+  mutate(nest_type = case_when(grepl(x = nesttype, 
+                                     pattern = "secundair", 
+                                     ignore.case = TRUE) ~ "AS",
+                               grepl(x = nesttype,
+                                     pattern = "secundary", 
+                                     ignore.case = TRUE) ~ "AS",
+                               grepl(x = nesttype, 
+                                     pattern = "primair", 
+                                     ignore.case = TRUE) ~ "AP",
+                               grepl(x = nesttype,
+                                     pattern = "primary",
+                                     ignore.case = TRUE) ~ "AP",
+                               grepl(x = nesttype,
+                                     pattern = "embryonaal",
+                                     ignore.case = TRUE) ~ "AE",
+                               grepl(x = nesttype,
+                                     pattern = "embryonic",
+                                     ignore.case = TRUE) ~ "AE",
+                               grepl(x = nesttype,
+                                     pattern = "leeg",
+                                     ignore.case = TRUE) ~ "IE",
+                               grepl(x = nesttype,
+                                     pattern = "empty",
+                                     ignore.case = TRUE) ~ "IE",
+                               TRUE ~ "UK"),
+         year = year(datum_observatie)) %>% 
+  filter(!is.na(coordinaten_van_het_nest)) %>% 
+  st_as_sf(wkt = "coordinaten_van_het_nest",
+           crs = 4326) %>%
+  st_intersection(prov) %>%
+  st_intersection(gemeentes) %>%
+  mutate(originates_in_vespawatch = "Waarnemingen.be",
+         inaturalist_link = NA_character_,
+         inaturalist_id = NA_character_,
+         inaturalist_species = NA_character_,
+         expert_vv_confirmed = "True",
+         vv_confirmed = "True",
+         taxon_id = NA_character_,
+         inat_vv_confirmed = NA_character_,
+         municipality = NA_character_,
+         file_number_nest_removal = NA_character_,
+         geometry = coordinaten_van_het_nest) %>% 
+  dplyr::select(id = insp_order,
+                image_1 = foto_nest_1,
+                image_2 = foto_nest_2,
+                image_3 = foto_nest_3,
+                provincie = provincie,
+                originates_in_vespawatch,
+                observation_time = datum_observatie,
+                comments = opmerkingen,
+                inaturalist_link,
+                inaturalist_id,
+                inaturalist_species,
+                size = nestgrootte,
+                height = nesthoogte,
+                duplicate_of_id = duplicaat,
+                taxon_id,
+                created_at = datum_tijd_registratie,
+                inat_vv_confirmed,
+                expert_vv_confirmed,
+                vv_confirmed,
+                municipality,
+                action_time = datum_en_tijd_bestrijding,
+                duration = tijd_ter_plaatse,
+                comments.2 = bestrijding_opmerking,
+                site = nestplaats,
+                nest_type,
+                aftercare = nazorg,
+                product = product,
+                method = methode,
+                result = resultaat,
+                nest_reported_before = duplicaat,
+                year,
+                file_number_nest_removal,
+                NAAM,
+                NISCODE,
+                GEWEST,
+                geometry
+  )
+
+
+
+
+#TODO: waarnemingen mapping toevoegen na fixen van API
 ```
 
 # combineer iAsset en Waarnemingen observaties in 1 dataframe
 data_nest_iasset_raw <- rbind(data_nest_iasset_raw,
-                              data_nests_waarnemingen)
+data_nests_waarnemingen)
 
 ```{r combine nesten dfs}
 colnames_x <- data.frame(col = 1:ncol(data_nest_gs))
@@ -399,8 +492,6 @@ data_nest_final <- rbind(data_nest_gs, data_nest_iasset)
 ```
 
 ```{r add gemeente info to nesten}
-gemeentes <- st_read("https://raw.githubusercontent.com/inbo/aspbo/main/data/output/UAT_processing/communes.geojson")
-
 #Write Ouderghem as Oudergem to comply with the translations file of the exotenportaal
 gemeentes<-gemeentes %>%
   mutate(NAAM = case_when(NAAM=="Ouderghem" ~ "Oudergem",
