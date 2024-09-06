@@ -57,19 +57,15 @@ data_nest_gs_raw <- read_sheet("1AGgMQvJUfQGaKP02jFo-MRP4SKWhq3Cbc2_nmZUcgnw",
 
 # Vespawatch nesten van iAsset
 data_nest_iasset_raw <- read_sheet("1dqSLTOF3GB1_gsth2jEIbXgaCC8KTAtTMuysk3zMdfk",
-                               sheet = "Sheet1",
-                               col_types = "c")
+                                   sheet = "Sheet1",
+                                   col_types = "c")
 
 # Vespa-Watch nesten van waarnemingenAPI
-data_nests_waarnemingen <- read_sheet("1gVrPeMj74pDkHd5oQJ8fmlMRAP5Dh85SManUzLI1eJQ",
-                               sheet = "Sheet2",
-                               col_types = "c")
+data_nests_waarnemingen_raw <- read_sheet("1gVrPeMj74pDkHd5oQJ8fmlMRAP5Dh85SManUzLI1eJQ",
+                                      sheet = "Sheet2",
+                                      col_types = "c")
 
-# combineer iAsset en Waarnemingen observaties in 1 dataframe
-data_nest_iasset_raw <- rbind(data_nest_iasset_raw,
-                              data_nests_waarnemingen)
-
-# Gbif nesten en individuen data 
+# Vespa-Watch nesten van inaturalist# Gbif nesten en individuen data 
 data_gbif_raw <- read_csv2("./data/input/Vespa-Watch_gbif.csv")
 
 # Provincies
@@ -83,14 +79,15 @@ dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJW
 # iAsset corrected coordinates
 # indien NA -> provincie en gemeente onbekend, niet verwijderen uit dataset TODO
 iAsset_coordinaten_corrected <- read_delim("data/interim/Vv_corrected_coordinates.csv", 
-                                      delim = ";", escape_double = FALSE, trim_ws = TRUE)
-
+                                           delim = ";", escape_double = FALSE, trim_ws = TRUE,
+                                           col_types = cols(insp_order = col_character())) 
 #correct brandweer data 
-Managed_nests_fireman_in_database <- read_delim("data/interim/Managed_nests_fireman_in_database.csv", 
-                                      delim = ";", escape_double = FALSE, trim_ws = TRUE)
+Managed_nests_fireman_in_database_raw <- read_delim("data/interim/Managed_nests_fireman_in_database.csv", 
+                                                delim = ";", escape_double = FALSE, trim_ws = TRUE,
+                                                col_types = cols(ID_IAsset = col_character()))
 
 Managed_nests_fireman_not_in_database <- read_delim("data/interim/Managed_nests_fireman_not_in_database.csv", 
-                                      delim = ";", escape_double = FALSE, trim_ws = TRUE) #TODO: toevoegen aan databank (worden nu enkel hier ingelezen)
+                                                    delim = ";", escape_double = FALSE, trim_ws = TRUE) #TODO: toevoegen aan databank (worden nu enkel hier ingelezen)
 ```
 
 ```{r OLD Vespawatch: data prep}
@@ -148,31 +145,47 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
   mutate(provincie = NAAM)
 ```
 
+```{r Brandweer: data prep}
+Managed_nests_fireman_in_database <- Managed_nests_fireman_in_database_raw %>% 
+  mutate(Date_fireman = as.Date(Date_fireman)) %>% 
+  group_by(ID_IAsset) %>%
+  summarise(Date_fireman = min(Date_fireman, na.rm = TRUE))
+```
+
 ```{r IASSET: data prep}
 #correct coordinates
 #TODO: nesten met coordinaten NA : provincie en gemeente onbekend ipv verwijderen uit data!
-data_nest_iasset_raw <- data_nest_iasset_raw %>% 
+data_nest_iasset_coordfix <- data_nest_iasset_raw %>% 
   left_join(iAsset_coordinaten_corrected, 
             by = c("insp_order")) %>% 
   mutate(coordinaten_van_het_nest = case_when(
-                               insp_order%in%iAsset_coordinaten_corrected$insp_order ~ coordinates,
-                               TRUE ~ coordinaten_van_het_nest))
+    insp_order %in% iAsset_coordinaten_corrected$insp_order ~ coordinates,
+    TRUE ~ coordinaten_van_het_nest))
 
 #correct bestrijdingsdatum
-data_nest_iasset_raw <- data_nest_iasset_raw %>% 
+data_nest_iasset_managementfix <- data_nest_iasset_coordfix %>% 
   left_join(Managed_nests_fireman_in_database, 
-            by = c("insp_order","ID_IAsset")) %>% 
-  mutate(datum_bestrijding = as.Date(datum_en_tijd_bestrijding))%>%#TODO: verwijder je hierdoor de tijd? Ook nog aan te passen bij oorspronkelijke data
+            by = c("insp_order" = "ID_IAsset")) %>% 
+  mutate(datum_bestrijding = as.Date(datum_en_tijd_bestrijding)) %>% #TODO: verwijder je hierdoor de tijd? Ook nog aan te passen bij oorspronkelijke data
   mutate(datum_bestrijding = case_when(insp_order%in%Managed_nests_fireman_in_database$ID_IAsset ~ Date_fireman,
-                                      TRUE ~ datum_bestrijding))
+                                       TRUE ~ datum_bestrijding))
 
-# Map data content
-data_nest_iasset <- data_nest_iasset_raw %>% 
+# Check duplicates
+duplis <- data_nest_iasset_managementfix %>% 
+  group_by(insp_order) %>% 
+  summarise(n = n()) %>%
+  filter(n > 1)
+
+data_nest_iasset_zndr_coords <- data_nest_iasset_managementfix %>% 
+  filter(is.na(coordinaten_van_het_nest)) 
+
+# Map data content to Vespa-Watch data structure
+data_nest_iasset <- data_nest_iasset_managementfix %>% 
   rename(geometry = coordinaten_van_het_nest)%>% 
   filter(gevalideerd == "ja",
+         !is.na(geometry),
          grepl(x = nesttype, pattern = "AH"),
          duplicaat == "nee",
-         !is.na(geometry),
          nesttype != "AH - potentieel nest (meer info nodig)") %>% 
   st_as_sf(wkt = "geometry",
            crs = 4326) %>% 
@@ -196,14 +209,14 @@ data_nest_iasset <- data_nest_iasset_raw %>%
          aftercare = nazorg,
          year = year(datum_observatie))%>%
   mutate_at(c('nestplaats'), ~replace_na(.,"onbekend"))
-  
+
 
 
 #Intersect with province
 data_nest_iasset <- st_intersection(data_nest_iasset, prov)
 
 data_nest_iasset <- data_nest_iasset %>%
-  filter(!provincie%in%c("niet Vlaanderen", "HoofdstedelijkGewest"))
+  filter(!provincie %in% c("niet Vlaanderen", "HoofdstedelijkGewest"))
 
 #temp fix lacking id column 
 if(!"insp_order" %in% colnames(data_nest_iasset)){
@@ -349,7 +362,7 @@ managed_nests <- data_nest_iasset%>%
 dupli_nest_iasset <- dupli_nest_iasset%>%
   mutate(duplicate_to_remove = case_when(
     (ID1 %in% managed_nests$id) & (!ID2 %in% managed_nests$id) ~ ID2,
-                                       TRUE ~ ID1))
+    TRUE ~ ID1))
 data_nest_iasset <- data_nest_iasset %>% 
   filter(!id %in% dupli_nest_iasset$duplicate_to_remove) 
 ```
@@ -362,6 +375,15 @@ if(file.exists("./data/interim/data_nest_iasset.geojson")){
 st_write(data_nest_iasset, "./data/interim/data_nest_iasset.geojson",
          append = FALSE)
 ```
+
+```{r Waarnemingen: data prep}
+data_nests_waarnemingen <- data_nests_waarnemingen_raw
+
+```
+
+# combineer iAsset en Waarnemingen observaties in 1 dataframe
+data_nest_iasset_raw <- rbind(data_nest_iasset_raw,
+                              data_nests_waarnemingen)
 
 ```{r combine nesten dfs}
 colnames_x <- data.frame(col = 1:ncol(data_nest_gs))
@@ -526,22 +548,22 @@ interimdata<- interimdata %>%
   mutate(level2Name=ifelse(!is.na(NAAM), NAAM, level2Name))%>%
   mutate(level1Name=ifelse(!is.na(GEWEST),GEWEST,level1Name))%>%
   mutate(level1Name= case_when(
-                    level1Name == "Vlaanderen" ~ "flanders",
-                    level1Name == "Wallonie" ~ "wallonia",
-                    level1Name == "Bruxelles" ~ "brussels",
-                    level3Name == "Wachtebeke" ~ "flanders",
-                    TRUE ~ level1Name ))%>%
-   mutate(level2Name= case_when(
-                    level3Name == "Wachtebeke" ~ "Oost-Vlaanderen",
-                    TRUE ~ level2Name ))%>%
-   mutate(level3Name= case_when(
-                    level3Name == "Halle" ~ "Hal",
-                    level3Name == "Kapelle-op-den-Bos" ~ "Kapelle-Op-Den-Bos",
-                    level3Name == "Heist-op-den-Berg" ~ "Heist-Op-Den-Berg",
-                    level3Name == "Herk-de-Stad" ~ "Herk-De-Stad",
-                    level3Name == "Brussel / Bruxelles" ~ "Brussel",
-                    level3Name == "Elsene / Ixelles" ~ "Elsene",
-                    TRUE ~ level3Name ))%>%
+    level1Name == "Vlaanderen" ~ "flanders",
+    level1Name == "Wallonie" ~ "wallonia",
+    level1Name == "Bruxelles" ~ "brussels",
+    level3Name == "Wachtebeke" ~ "flanders",
+    TRUE ~ level1Name ))%>%
+  mutate(level2Name= case_when(
+    level3Name == "Wachtebeke" ~ "Oost-Vlaanderen",
+    TRUE ~ level2Name ))%>%
+  mutate(level3Name= case_when(
+    level3Name == "Halle" ~ "Hal",
+    level3Name == "Kapelle-op-den-Bos" ~ "Kapelle-Op-Den-Bos",
+    level3Name == "Heist-op-den-Berg" ~ "Heist-Op-Den-Berg",
+    level3Name == "Herk-de-Stad" ~ "Herk-De-Stad",
+    level3Name == "Brussel / Bruxelles" ~ "Brussel",
+    level3Name == "Elsene / Ixelles" ~ "Elsene",
+    TRUE ~ level3Name ))%>%
   select(c(-NAAM,-NISCODE,-GEWEST))%>%
   st_drop_geometry()
 
