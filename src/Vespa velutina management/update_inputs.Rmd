@@ -88,6 +88,9 @@ iAsset_coordinaten_corrected <- read_delim("data/interim/Vv_corrected_coordinate
 #correct brandweer data 
 Managed_nests_fireman_in_database <- read_delim("data/interim/Managed_nests_fireman_in_database.csv", 
                                       delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+Managed_nests_fireman_not_in_database <- read_delim("data/interim/Managed_nests_fireman_not_in_database.csv", 
+                                      delim = ";", escape_double = FALSE, trim_ws = TRUE) #TODO: toevoegen aan databank (worden nu enkel hier ingelezen)
 ```
 
 ```{r OLD Vespawatch: data prep}
