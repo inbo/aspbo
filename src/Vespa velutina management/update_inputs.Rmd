@@ -194,7 +194,7 @@ data_nest_iasset <- data_nest_iasset_managementfix %>%
          !is.na(geometry),
          grepl(x = nesttype, pattern = "AH"),
          duplicaat == "nee",
-         nesttype != "AH - potentieel nest (meer info nodig)") %>% #TODO: check if this is correct
+         nesttype != "AH - potentieel nest (meer info nodig)") %>% 
   st_as_sf(wkt = "geometry",
            crs = 4326) %>% 
   mutate(result = case_when(insp_order %in% Managed_nests_fireman_in_database$insp_order ~ "succesvol",
@@ -413,7 +413,30 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
                                      pattern = "empty",
                                      ignore.case = TRUE) ~ "IE",
                                TRUE ~ "UK"),
-         year = year(datum_observatie)) %>% 
+         year = year(datum_observatie),
+         size = case_match(nestgrootte,
+                           "Groter dan 25 cm" ~ "meer dan 25 cm",
+                           "Larger than 25cm" ~ "meer dan 25 cm",
+                           "Kleiner dan 25 cm" ~ "minder dan 25 cm",
+                           "Smaller than 25cm" ~ "minder dan 25 cm",
+                           .default = NA),
+         height = case_match(nesthoogte,
+                             "Lager dan 4 meter" ~ "lager dan 4 meter",
+                             "Lower than 4 meters" ~ "lager dan 4 meter", 
+                             "Hoger dan 4 meter" ~ "hoger dan 4 meter",
+                             "Higher than 4 meters" ~ "hoger dan 4 meter",
+                             .default = NA),
+         site = case_match(nestplaats,
+                           "Inside, in a building or construction" ~ "binnen, in gebouw of constructie",
+                           "Outside, uncovered on a building" ~ "buiten, onbedekt op gebouw",
+                           "Outside, natural cover" ~ "buiten, natuurlijk overdekt",
+                           "Outside, covered by construction" ~ "buiten, maar overdekt door constructie",
+                           "Outside, uncovered on a tree or bush" ~ "buiten, onbedekt in boom of struik",
+                           "Buiten, maar overdekt door constructie" ~ "buiten, maar overdekt door constructie",
+                           "Buiten, natuurlijk overdekt" ~ "buiten, natuurlijk overdekt",
+                           "Buiten, onbedekt in boom of struik" ~ "buiten, onbedekt in boom of struik",
+                           "Binnen, in gebouw of constructie" ~ "binnen, in gebouw of constructie",                                     "Buiten, onbedekt op gebouw" ~ "buiten, onbedekt op gebouw",
+                           .default = "onbekend")) %>% 
   filter(!is.na(coordinaten_van_het_nest)) %>% 
   st_as_sf(wkt = "coordinaten_van_het_nest",
            crs = 4326) %>%
@@ -441,8 +464,8 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
                 inaturalist_link,
                 inaturalist_id,
                 inaturalist_species,
-                size = nestgrootte,
-                height = nesthoogte,
+                height,
+                size,
                 duplicate_of_id = duplicaat,
                 taxon_id,
                 created_at = datum_tijd_registratie,
@@ -453,12 +476,12 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
                 action_time = datum_en_tijd_bestrijding,
                 duration = tijd_ter_plaatse,
                 comments.2 = bestrijding_opmerking,
-                site = nestplaats,
+                site,
                 nest_type,
-                aftercare = nazorg,
-                product = product,
-                method = methode,
-                result = resultaat,
+                aftercare = nazorg, #Niet aanwezig in waarnemingen.be data
+                product = product, #Niet aanwezig in waarnemingen.be data
+                method = methode, #Niet aanwezig in waarnemingen.be data
+                result = resultaat, #Niet aanwezig in waarnemingen.be data
                 nest_reported_before = duplicaat,
                 year,
                 file_number_nest_removal,
@@ -466,17 +489,26 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
                 NISCODE,
                 GEWEST,
                 geometry
-  )
-
-
-
-
+  ) %>% 
+  st_drop_geometry() %>% 
+  st_as_sf()
 #TODO: waarnemingen mapping toevoegen na fixen van API
 ```
 
-# combineer iAsset en Waarnemingen observaties in 1 dataframe
-data_nest_iasset_raw <- rbind(data_nest_iasset_raw,
-data_nests_waarnemingen)
+```{r test data_nests_waarnemingen, eval=FALSE}
+data_nests_waarnemingen %>% 
+  leaflet::leaflet() %>% 
+  leaflet::addTiles() %>% 
+  leaflet::addCircles()
+
+fistools::col_content_compare(data_nests_waarnemingen, "size", data_nest_iasset, "size")
+fistools::col_content_compare(data_nests_waarnemingen, "nest_type", data_nest_iasset, "nest_type")
+fistools::col_content_compare(data_nests_waarnemingen, "result", data_nest_iasset, "result")
+fistools::col_content_compare(data_nests_waarnemingen, "height", data_nest_iasset, "height")
+fistools::col_content_compare(data_nests_waarnemingen, "site", data_nest_iasset, "site")
+
+fistools::colcompare(data_nests_waarnemingen, data_nest_iasset)
+```
 
 ```{r combine nesten dfs}
 colnames_x <- data.frame(col = 1:ncol(data_nest_gs))
@@ -488,13 +520,13 @@ colnames_y$col_y <- colnames(data_nest_iasset)
 colnames_test <- colnames_x %>% 
   full_join(colnames_y)
 
-data_nest_final <- rbind(data_nest_gs, data_nest_iasset) 
+data_nest_final <- rbind(data_nest_gs, data_nest_iasset, data_nests_waarnemingen) 
 ```
 
 ```{r add gemeente info to nesten}
 #Write Ouderghem as Oudergem to comply with the translations file of the exotenportaal
-gemeentes<-gemeentes %>%
-  mutate(NAAM = case_when(NAAM=="Ouderghem" ~ "Oudergem",
+gemeentes <- gemeentes %>%
+  mutate(NAAM = case_when(NAAM == "Ouderghem" ~ "Oudergem",
                           TRUE ~ NAAM))
 
 data_nest_final$NISCODE <- apply(st_intersects(gemeentes,
