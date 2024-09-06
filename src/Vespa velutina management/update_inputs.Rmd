@@ -84,6 +84,10 @@ dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJW
 # indien NA -> provincie en gemeente onbekend, niet verwijderen uit dataset TODO
 iAsset_coordinaten_corrected <- read_delim("data/interim/Vv_corrected_coordinates.csv", 
                                       delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+#correct brandweer data 
+Managed_nests_fireman_in_database <- read_delim("data/interim/Managed_nests_fireman_in_database.csv", 
+                                      delim = ";", escape_double = FALSE, trim_ws = TRUE)
 ```
 
 ```{r OLD Vespawatch: data prep}
@@ -148,9 +152,16 @@ data_nest_iasset_raw <- data_nest_iasset_raw %>%
   left_join(iAsset_coordinaten_corrected, 
             by = c("insp_order")) %>% 
   mutate(coordinaten_van_het_nest = case_when(
-                               insp_order%in%iAsset_coordinaten_corrected ~ coordinates,
+                               insp_order%in%iAsset_coordinaten_corrected$insp_order ~ coordinates,
                                TRUE ~ coordinaten_van_het_nest))
 
+#correct bestrijdingsdatum
+data_nest_iasset_raw <- data_nest_iasset_raw %>% 
+  left_join(Managed_nests_fireman_in_database, 
+            by = c("insp_order","ID_IAsset")) %>% 
+  mutate(datum_bestrijding = as.Date(datum_en_tijd_bestrijding))%>%#TODO: verwijder je hierdoor de tijd? Ook nog aan te passen bij oorspronkelijke data
+  mutate(datum_bestrijding = case_when(insp_order%in%Managed_nests_fireman_in_database$ID_IAsset ~ Date_fireman,
+                                      TRUE ~ datum_bestrijding))
 
 # Map data content
 data_nest_iasset <- data_nest_iasset_raw %>% 
@@ -162,7 +173,8 @@ data_nest_iasset <- data_nest_iasset_raw %>%
          nesttype != "AH - potentieel nest (meer info nodig)") %>% 
   st_as_sf(wkt = "geometry",
            crs = 4326) %>% 
-  mutate(result = case_when(resultaat == "succesvol behandeld" ~ "succesvol",
+  mutate(result = case_when(insp_order %in% Managed_nests_fireman_in_database$insp_order ~ "succesvol",
+                            resultaat == "succesvol behandeld" ~ "succesvol",
                             resultaat == "niet succesvol behandeld" ~ "niet succesvol",
                             resultaat == "niet behandeld" ~ "niet behandeld",
                             beheerd == "ja" ~ "succesvol",
