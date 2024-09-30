@@ -88,9 +88,6 @@ iAsset_coordinaten_corrected <- read_delim("data/interim/Vv_corrected_coordinate
 Managed_nests_fireman_in_database_raw <- read_delim("data/interim/Managed_nests_fireman_in_database.csv", 
                                                     delim = ";", escape_double = FALSE, trim_ws = TRUE,
                                                     col_types = cols(ID_IAsset = col_character()))
-
-Managed_nests_fireman_not_in_database <- read_delim("data/interim/Managed_nests_fireman_not_in_database.csv", 
-                                                    delim = ";", escape_double = FALSE, trim_ws = TRUE) #TODO: toevoegen aan databank (worden nu enkel hier ingelezen)
 ```
 
 ```{r OLD Vespawatch: data prep}
@@ -108,9 +105,7 @@ dataset_1 <- data_nest_gs_raw %>%
                           site == "O_NC_T" ~ "buiten, onbedekt op boom of struik",
                           site == "O_C_C" ~ "buiten, overdekt door constructie",
                           site == "O_N_C" ~ "buiten, natuurlijk overdekt",
-                          site =="UK" ~ "onbekend",
-                          site == "NA" ~ "onbekend",
-                          site == "NULL" ~ "onbekend"))
+                          TRUE ~ "onbekend"))
 
 #alleen VV
 dataset_1_vv <- dataset_1 %>% filter(expert_vv_confirmed=="TRUE" |
@@ -139,21 +134,17 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
                 -observer_email,
                 -person_name,
                 -user_id) %>% 
-  mutate(observation_time = case_when(id == 65869 ~ as.Date("2022-11-06 10:05:00"),
-                                      id == 63711 ~ as.Date("2021-09-20 20:32:00"),
-                                      id == 63496 ~ as.Date("2020-11-03 10:00:00"),
-                                      id == 63247 ~ as.Date("2019-11-08 18:01:00"),
-                                      id == 63109 ~ as.Date("2019-05-26 13:15:00"),
-                                      TRUE ~ as.Date(observation_time))) %>% 
-  mutate(provincie = NAAM)
+  mutate(observation_time = as.Date(observation_time)) %>% 
+  rename(provincie = NAAM)
 ```
 
-In het geval van een dubbele melding van een nest in de dataset, 
+In het geval van een dubbele melding van een bestreden nest in de brandweerdataset, 
 wordt de meest recente melding behouden. 
 
 ```{r Brandweer: data prep}
 Managed_nests_fireman_in_database <- Managed_nests_fireman_in_database_raw %>% 
-  mutate(Date_fireman = as.Date(Date_fireman)) %>% 
+  mutate(Date_fireman = case_when(is.na(Date_fireman) ~ as.Date("2023-12-1"),
+                   TRUE ~ as.Date(Date_fireman)))%>% #we zijn niet op de hoogte van datum dus wijzen voor zekerheid laatse mogelijke bestrijdingsdatum binnen seizoen aan
   group_by(ID_IAsset) %>%
   summarise(Date_fireman = min(Date_fireman, na.rm = TRUE))
 ```
@@ -174,8 +165,8 @@ data_nest_iasset_coordfix <- data_nest_iasset_raw %>%
 data_nest_iasset_managementfix <- data_nest_iasset_coordfix %>% 
   left_join(Managed_nests_fireman_in_database, 
             by = c("insp_order" = "ID_IAsset")) %>% 
-  mutate(datum_bestrijding = as.Date(datum_en_tijd_bestrijding)) %>% #TODO: verwijder je hierdoor de tijd? Ook nog aan te passen bij oorspronkelijke data
-  mutate(datum_bestrijding = case_when(insp_order%in%Managed_nests_fireman_in_database$ID_IAsset ~ Date_fireman,
+  mutate(datum_bestrijding = as.Date(datum_en_tijd_bestrijding)) %>%
+  mutate(datum_bestrijding = case_when((insp_order%in%Managed_nests_fireman_in_database$ID_IAsset) & is.na(datum_en_tijd_bestrijding) ~ Date_fireman,
                                        TRUE ~ datum_bestrijding))
 
 # Check duplicates
@@ -227,15 +218,8 @@ data_nest_iasset <- data_nest_iasset %>%
   filter(!provincie %in% c("niet Vlaanderen", "HoofdstedelijkGewest"))
 
 #temp fix lacking id column 
-if(!"insp_order" %in% colnames(data_nest_iasset)){
-  data_nest_iasset <- data_nest_iasset %>% 
-    mutate(id = as.character(row_number()))
-  warning("insp_order was missing from iasset data")
-}else{
-  data_nest_iasset <- data_nest_iasset %>% 
-    mutate(id = as.character(insp_order)) %>% 
-    select(-insp_order)
-}
+data_nest_iasset <- data_nest_iasset %>%
+  rename(id= insp_order)
 
 class(data_nest_iasset)
 
@@ -438,6 +422,7 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
                            "Binnen, in gebouw of constructie" ~ "binnen, in gebouw of constructie",                                     "Buiten, onbedekt op gebouw" ~ "buiten, onbedekt op gebouw",
                            .default = "onbekend")) %>% 
   filter(!is.na(coordinaten_van_het_nest)) %>% 
+  filter(duplicaat!='ja')%>%
   st_as_sf(wkt = "coordinaten_van_het_nest",
            crs = 4326) %>%
   st_intersection(prov) %>%
@@ -494,7 +479,6 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
   st_as_sf() %>% 
   st_write("./data/interim/data_nests_waarnemingen.geojson",
            append = FALSE)
-#TODO: waarnemingen mapping toevoegen na fixen van API
 ```
 
 ```{r test data_nests_waarnemingen, eval=FALSE}
