@@ -103,12 +103,12 @@ La grenouille taureau (*Lithobates catesbeianus*) est l'une des plus grandes gre
 
 #### **Liens utiles** <br>
 Pour signaler des observations de la grenouille taureau, vous pouvez vous rendre sur www.observation.org. Vos signalements sont utiles pour la surveillance et la recherche sur cette espèce.<br>
-**Signalez une observation: <a href=\"", link1, "\">www.observation.org</a>**<br>
+**Signalez une observation: <a href=\"", link1, "\"target=\"_blank\">www.observation.org</a>**<br>
 <br>
 Vous pouvez trouver plus d'informations sur cette espèce sur la page écopédia de la grenouille taureau (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
-**Plus d'informations: <a href=\"", link2, "\">ecopedia</a>**<br>
+**Plus d'informations: <a href=\"", link2, "\"target=\"_blank\">ecopedia</a>**<br>
 <br>
 Le projet européen LIFE 3n-Stierkikker tente de trouver une manière durable d'arrêter la progression de cette espèce en Flandre. Le projet utilise pour cela des techniques de lutte traditionnelles en combinaison avec l'introduction de grenouilles stériles.<br>
-**Plus d'informations sur le projet LIFE 3n-Stierkikker:  <a href=\"", link3, "\">LIFE 3n-Stierkikker</a>**"
+**Plus d'informations sur le projet LIFE 3n-Stierkikker:  <a href=\"", link3, "\"target=\"_blank\">LIFE 3n-Stierkikker</a>**"
 ))
 ```
