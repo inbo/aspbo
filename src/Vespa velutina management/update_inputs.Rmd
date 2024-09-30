@@ -44,7 +44,8 @@ if(Sys.getenv("amiabot") != "yes"){
   gs4_auth(email)
 }else{
   print("Executor of the script is a bot")
-  gs4_auth(path = Sys.getenv("gsheet_token"))
+  gs4_auth(path = Sys.getenv("gsheet_token"),
+           scopes = c("https://www.googleapis.com/auth/spreadsheets"))
 }
 
 ```
@@ -542,7 +543,10 @@ data_nest_final <- data_nest_final %>%
   left_join(gem_df, 
             by = "NISCODE")%>%
   mutate(Gemeente = case_when(provincie=="unknown" | is.na(Gemeente)  ~ "unknown",
-                              TRUE ~ Gemeente))
+                              TRUE ~ Gemeente)) %>% 
+  mutate(provincie = case_when(is.na(provincie) ~ "unknown",
+                               provincie == "ongekend" ~ "unknown",
+                               TRUE ~ provincie))
 ```
 
 ```{r data checks}
