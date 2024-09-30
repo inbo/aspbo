@@ -44,13 +44,13 @@ De Amerikaanse stierkikker (*Lithobates catesbeianus*) is één van de grootste 
 
 #### **Nuttige links** <br>
 Om waarnemingen van de Amerikaanse stierkikker te melden kunt u terecht op  www.waarnemingen.be. Uw meldingen zijn nuttig voor de monitoring en het onderzoek van de soort.<br>
-**Meld hier een waarneming: <a href=\"", link1, "\">www.waarnemingen.be</a>**<br>
+**Meld hier een waarneming: <a href=\"", link1, "\"target=\"_blank\">www.waarnemingen.be</a>**<br>
 <br>
 Meer informatie over de soort kunt u vinden op de ecopedia pagina van de Amerikaanse stierkikker.<br>
-**Meer informatie: <a href=\"", link2, "\">ecopedia</a>**<br>
+**Meer informatie: <a href=\"", link2, "\"target=\"_blank\">ecopedia</a>**<br>
 <br>
 Het Europese project LIFE 3n-Stierkikker probeert een duurzame manier te vinden om de opmars van deze soort in Vlaanderen te stoppen. Het project gebruikt hiervoor traditionele bestrijdingstechnieken in combinatie met het uitzetten van steriele kikkers.<br>
-**Meer informatie over het LIFE 3n-Stierkikker project: <a href=\"", link3, "\">LIFE 3n-Stierkikker</a>**"
+**Meer informatie over het LIFE 3n-Stierkikker project: <a href=\"", link3, "\"target=\"_blank\">LIFE 3n-Stierkikker</a>**"
 ))
 ```
 
@@ -74,13 +74,13 @@ The American bullfrog (*Lithobates catesbeianus*) is one of the largest frogs in
 
 #### **Useful links** <br>
 Sightings of the American bullfrog can be reported on the website www.observation.org. Your reports are valuable for monitoring and researching the species.<br>
-**Report a sighting: <a href=\"", link1, "\">www.observation.org</a>**<br>
+**Report a sighting: <a href=\"", link1, "\"target=\"_blank\">www.observation.org</a>**<br>
 <br>
 You can find more information about this species on the ecopedia page of the American bullfrog (note that this information is currently only available in Dutch).<br>
-**More information: <a href=\"", link2, "\">ecopedia</a>**<br>
+**More information: <a href=\"", link2, "\"target=\"_blank\">ecopedia</a>**<br>
 <br>
 The European project LIFE 3n-Stierkikker aims to find a sustainable way to stop the spread of the American bullfrog in Flanders. To this end, the project uses traditional control techniques in combination with the release of sterile frogs. <br>
-**More information about the LIFE 3n-Stierkikker project: <a href=\"", link3, "\">LIFE 3n-Stierkikker</a>**"
+**More information about the LIFE 3n-Stierkikker project: <a href=\"", link3, "\"target=\"_blank\">LIFE 3n-Stierkikker</a>**"
 ))
 ```
 
