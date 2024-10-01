@@ -142,9 +142,10 @@ In het geval van een dubbele melding van een bestreden nest in de brandweerdatas
 wordt de meest recente melding behouden. 
 
 ```{r Brandweer: data prep}
-Managed_nests_fireman_in_database <- Managed_nests_fireman_in_database_raw %>% 
-  mutate(Date_fireman = case_when(is.na(Date_fireman) ~ as.Date("2023-12-1"),
-                   TRUE ~ as.Date(Date_fireman)))%>% #we zijn niet op de hoogte van datum dus wijzen voor zekerheid laatse mogelijke bestrijdingsdatum binnen seizoen aan
+Managed_nests_fireman_in_database <- Managed_nests_fireman_in_database_raw %>%
+  mutate(Date_fireman = as.Date(Date_fireman, format = "%d/%m/20%y"))%>%
+  mutate(Date_fireman = case_when(is.na(Date_fireman) ~ as.Date("2023-12-01"),
+                   TRUE ~ Date_fireman))%>% #we zijn niet op de hoogte van datum dus wijzen voor zekerheid laatse mogelijke bestrijdingsdatum binnen seizoen aan
   group_by(ID_IAsset) %>%
   summarise(Date_fireman = min(Date_fireman, na.rm = TRUE))
 ```
