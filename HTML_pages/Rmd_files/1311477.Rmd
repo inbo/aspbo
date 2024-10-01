@@ -42,11 +42,11 @@ De Aziatische hoornaar (*Vespa velutina*) is een wespensoort uit zuidoost China.
 
 #### **Nuttige links** <br>
 Om nesten of individuen van de Aziatische hoornaar **in Vlaanderen** te melden kunt u terecht op het meldpunt Vespa-Watch. Uw meldingen zijn nuttig voor de monitoring en het onderzoek van de soort.<br>
-**Meld hier een individu of nest: <a href=\"", link1, "\">Vespa-Watch</a>**
+**Meld hier een individu of nest: <a href=\"", link1, "\"target=\"_blank\">Vespa-Watch</a>**
 <br>
 <br>
 Meer informatie over de soort kunt u vinden op de ecopedia pagina van de Aziatische hoornaar.<br>
-**Meer informatie: <a href=\"", link2, "\">ecopedia</a>**
+**Meer informatie: <a href=\"", link2, "\"target=\"_blank\">ecopedia</a>**
 "))
 ```
 
@@ -67,11 +67,11 @@ The Asian hornet (*Vespa velutina*) is a wasp species from Southeast China. The 
 
 #### **Useful links** <br>
 Sightings of nests or individuals of the Asian hornet **in Flanders** can be reported on the Vespa-Watch portal. Your reports are valuable for monitoring and researching the species. <br>
-**Report an individual or nest: <a href=\"", link1, "\">Vespa-Watch</a>**
+**Report an individual or nest: <a href=\"", link1, "\"target=\"_blank\">Vespa-Watch</a>**
 <br>
 <br>
 You can find more information about this species on the ecopedia page of the Asian hornet (note that this information is currently only invailable in Dutch).<br>
-**More information: <a href=\"", link2, "\">ecopedia</a>**
+**More information: <a href=\"", link2, "\"target=\"_blank\">ecopedia</a>**
 "))
 ```
 
@@ -92,10 +92,10 @@ Le frelon asiatique (*Vespa velutina*) est une espèce de guêpe originaire du s
 
 #### **Liens utiles** <br>
 Les observations de nids ou d'individus de frelons asiatiques **en Flandre** peuvent être signalées sur le portail Vespa-Watch. Vos signalements sont précieux pour le suivi et la recherche sur cette espèce. <br>
-**Signaler un individu ou un nid :  <a href=\"", link1, "\">Vespa-Watch</a>**
+**Signaler un individu ou un nid :  <a href=\"", link1, "\"target=\"_blank\">Vespa-Watch</a>**
 <br>
 <br>
 Vous pouvez trouver plus d'informations sur cette espèce sur la page écopédia du frelon asiatique (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
-**Plus d'informations: <a href=\"", link2, "\">ecopedia</a>**
+**Plus d'informations: <a href=\"", link2, "\"target=\"_blank\">ecopedia</a>**
 "))
 ```
