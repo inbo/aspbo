@@ -127,15 +127,15 @@ dataset_1_vv_u <- dataset_1_vv_u %>%
 
 nesten <- st_as_sf(dataset_1_vv_u, coords=c('longitude', 'latitude'), crs=4326)
 
-data_nest_gs <- st_intersection(nesten, prov) %>% 
+data_nest_gs <- nesten %>% 
   dplyr::select(-observer_phone,
                 -name,
                 -observer_name,
                 -observer_email,
                 -person_name,
                 -user_id) %>% 
-  mutate(observation_time = as.Date(observation_time)) %>% 
-  mutate(provincie = NAAM)
+  mutate(observation_time = as.Date(observation_time))%>%
+  select(-c('municipality'))
 ```
 
 In het geval van een dubbele melding van een bestreden nest in de brandweerdataset, 
@@ -154,7 +154,6 @@ Nesten met coordinaten NA : worden verwijderd uit de data
 
 ```{r IASSET: data prep}
 #correct coordinates
-
 data_nest_iasset_coordfix <- data_nest_iasset_raw %>% 
   left_join(iAsset_coordinaten_corrected, 
             by = c("insp_order")) %>% 
@@ -211,11 +210,6 @@ data_nest_iasset <- data_nest_iasset_managementfix %>%
   mutate_at(c('nestplaats'), ~replace_na(.,"onbekend"))
 
 
-
-#Intersect with province
-data_nest_iasset <- st_intersection(data_nest_iasset, prov)
-
-
 #temp fix lacking id column 
 data_nest_iasset <- data_nest_iasset %>%
   rename(id= insp_order)
@@ -232,14 +226,13 @@ data_nest_iasset <- data_nest_iasset %>%
          vv_confirmed = "True",
          taxon_id = NA_character_,
          inat_vv_confirmed = NA_character_,
-         municipality = NA_character_,
-         file_number_nest_removal = NA_character_) %>% 
+         file_number_nest_removal = NA_character_,
+         comments_2 = NA_character_) %>% 
   ungroup() %>% 
   dplyr::select(id,
                 image_1 = foto_nest_1,
                 image_2 = foto_nest_2,
                 image_3 = foto_nest_3,
-                provincie = provincie,
                 originates_in_vespawatch,
                 observation_time = datum_observatie,
                 comments = opmerkingen,
@@ -254,10 +247,9 @@ data_nest_iasset <- data_nest_iasset %>%
                 inat_vv_confirmed,
                 expert_vv_confirmed,
                 vv_confirmed,
-                municipality,
                 action_time = datum_en_tijd_bestrijding,
                 duration = tijd_ter_plaatse,
-                comments.2 = bestrijding_opmerking,
+                comments_2= bestrijding_opmerking,
                 site = nestplaats,
                 nest_type = nesttype_code,
                 aftercare,
@@ -267,9 +259,6 @@ data_nest_iasset <- data_nest_iasset %>%
                 nest_reported_before = duplicaat,
                 year,
                 file_number_nest_removal,
-                NAAM,
-                NISCODE,
-                GEWEST,
                 geometry
   )
 ```
@@ -370,6 +359,10 @@ st_write(data_nest_iasset, "./data/interim/data_nest_iasset.geojson",
 Nest AH verlaten. 2de nest is Duitse wesp. => IE ?
 
 ```{r Waarnemingen: data prep}
+if(file.exists("./data/interim/data_nests_waarnemingen.geojson")){
+  file.remove("./data/interim/data_nests_waarnemingen.geojson")
+}
+
 data_nests_waarnemingen <- data_nests_waarnemingen_raw %>% 
   mutate(nest_type = case_when(grepl(x = nesttype, 
                                      pattern = "secundair", 
@@ -424,9 +417,9 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
   filter(datum_observatie >= as.Date("2024-06-13"))%>%
   filter(!is.na(coordinaten_van_het_nest)) %>% 
   filter(duplicaat!='ja')%>%
-  st_as_sf(wkt = "coordinaten_van_het_nest",
+  rename(geometry=coordinaten_van_het_nest)%>%
+  st_as_sf(wkt = "geometry",
            crs = 4326) %>%
-  st_intersection(prov) %>%
   mutate(originates_in_vespawatch = "Waarnemingen.be",
          inaturalist_link = NA_character_,
          inaturalist_id = NA_character_,
@@ -435,14 +428,12 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
          vv_confirmed = "True",
          taxon_id = NA_character_,
          inat_vv_confirmed = NA_character_,
-         municipality = NA_character_,
          file_number_nest_removal = NA_character_,
-         geometry = coordinaten_van_het_nest) %>% 
+         comments_2 = NA_character_) %>% 
   dplyr::select(id = insp_order,
                 image_1 = foto_nest_1,
                 image_2 = foto_nest_2,
                 image_3 = foto_nest_3,
-                provincie = provincie,
                 originates_in_vespawatch,
                 observation_time = datum_observatie,
                 comments = opmerkingen,
@@ -457,10 +448,9 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
                 inat_vv_confirmed,
                 expert_vv_confirmed,
                 vv_confirmed,
-                municipality,
                 action_time = datum_en_tijd_bestrijding,
                 duration = tijd_ter_plaatse,
-                comments.2 = bestrijding_opmerking,
+                comments_2 = bestrijding_opmerking,
                 site,
                 nest_type,
                 aftercare = nazorg, #Niet aanwezig in waarnemingen.be data
@@ -469,15 +459,10 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
                 result = resultaat, #Niet aanwezig in waarnemingen.be data
                 nest_reported_before = duplicaat,
                 year,
-                file_number_nest_removal,
-                NAAM,
-                NISCODE,
-                GEWEST,
-                geometry
-  ) %>% 
-  st_drop_geometry() %>% 
-  st_as_sf() %>% 
-  st_write("./data/interim/data_nests_waarnemingen.geojson",
+                file_number_nest_removal) 
+
+
+  st_write(data_nests_waarnemingen, "./data/interim/data_nests_waarnemingen.geojson",
            append = FALSE)
 ```
 
@@ -508,6 +493,16 @@ colnames_test <- colnames_x %>%
 
 data_nest_final <- rbind(data_nest_gs, data_nest_iasset, data_nests_waarnemingen) 
 ```
+
+```{r}
+#add province and municipality per record based on coordinates
+data_nest_final <- data_nest_final%>% 
+  st_intersection(gemeentes)%>%
+  rename(gemeente = NAAM, NISCODE_gemeente = NISCODE)%>%
+  st_intersection(prov)%>%
+  rename(provincie = NAAM, NISCODE_provincie = NISCODE)
+```
+
 
 ```{r add gemeente info to nesten}
 #Write Ouderghem as Oudergem to comply with the translations file of the exotenportaal
@@ -575,51 +570,33 @@ test_jaar <- data_nest_final %>%
   filter(year < 2018)
 ```
 
-```{r create seasonal datasets}
-jaren <- seq(from = 2017,
-             to = year(Sys.Date()))
+```{r create seasonal datasets, dataset per month}
+aantal_nesten_per_maand_per_jaar_meta_path <- paste0(processing_exportpath, "aantal_nesten_per_maand_per_jaar_meta.csv")
 
-aantal_nesten_tot_vandaag_all <- data.frame()
+Vlaanderen <- prov %>%
+  filter(NAAM %in% c('Oost-Vlaanderen', 
+                     'West-Vlaanderen',
+                     'Limburg',
+                     'Vlaams-Brabant',
+                     'Waals-Brabant'))
 
-current_month <- month(Sys.Date())
-current_day <- day(Sys.Date())
 
-for(j in jaren){
-  min_date <- paste0(j - 1, "-12-31")
-  max_date <- paste0(j, "-", current_month, "-", current_day)
-  
-  aantal_nesten_tot_vandaag_jaar <- data_nest_final %>%
-    mutate(observation_time = as.Date(observation_time)) %>%
-    filter(observation_time >= min_date,
-           observation_time < max_date) %>% 
-    mutate(observation_jaar = j,
-           observation_period = paste(min_date, 
-                                      max_date,
-                                      sep = " - "))
-  
-  if(nrow(aantal_nesten_tot_vandaag_all) == 0){
-    aantal_nesten_tot_vandaag_all <- aantal_nesten_tot_vandaag_jaar
-  }else{
-    aantal_nesten_tot_vandaag_all <- rbind(aantal_nesten_tot_vandaag_all, 
-                                           aantal_nesten_tot_vandaag_jaar)
-  }
-}
+data_nest_final_Vlaanderen <- st_intersection(data_nest_final, Vlaanderen)
 
-aantal_nesten_tot_vandaag <- aantal_nesten_tot_vandaag_all %>%   
+nests_per_month_per_year <- data_nest_final_Vlaanderen %>%
   st_drop_geometry()%>%
-  group_by(observation_jaar, prov = NAAM) %>% 
-  summarise(aantal_gemelde_nesten = n())
+  mutate(observation_month = month(observation_time),
+         observation_year = year(observation_time))%>%
+  group_by(observation_year, observation_month)%>%
+  summarise(count=n())%>%
+  pivot_wider(names_from = observation_month,
+              values_from = count)%>%
+  select(observation_year, '1','2','3','4','5','6','7','8','9','10','11','12')%>%
+  rename('januari'= '1', 'februari'= '2', 'maart'= '3', 'april'= '4', 'mei'= '5', 'juni'='6', 'juli'='7', 'augustus'='8', 'september'='9', 'oktober'='10', 'november'='11', 'december'='12')%>%
+  replace(is.na(.), 0)%>%
+  mutate(totaal= januari+februari+maart+april+mei+juni+juli+augustus+september+oktober+november+december)
 
-aantal_nesten_tot_vandaag_path <- paste0(processing_exportpath, "aantal_lente_nesten.csv")
-aantal_nesten_tot_vandaag_meta_path <- paste0(processing_exportpath, "aantal_nesten_meta.csv")
-
-write_csv(aantal_nesten_tot_vandaag, aantal_nesten_tot_vandaag_path)
-
-aantal_nesten_tot_vandaag_meta <- aantal_nesten_tot_vandaag_all %>% 
-  filter(observation_time == max(observation_time, na.rm = TRUE)) %>% 
-  distinct(observation_time) %>% 
-  rename(max_observation_time = observation_time) %>% 
-  write_csv(aantal_nesten_tot_vandaag_meta_path)
+ write.csv2(aantal_nesten_per_maand_per_jaar_meta_path, row.names=FALSE)
 ```
 
 ```{r GBIF data prep}
