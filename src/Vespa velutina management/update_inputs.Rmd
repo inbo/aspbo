@@ -419,6 +419,8 @@ data_nests_waarnemingen <- data_nests_waarnemingen_raw %>%
                            "Buiten, onbedekt in boom of struik" ~ "buiten, onbedekt in boom of struik",
                            "Binnen, in gebouw of constructie" ~ "binnen, in gebouw of constructie",                                     "Buiten, onbedekt op gebouw" ~ "buiten, onbedekt op gebouw",
                            .default = "onbekend")) %>% 
+  mutate(datum_observatie = as.Date(datum_observatie))%>%
+  filter(datum_observatie >= as.Date("2024-06-13"))%>%
   filter(!is.na(coordinaten_van_het_nest)) %>% 
   filter(duplicaat!='ja')%>%
   st_as_sf(wkt = "coordinaten_van_het_nest",
