@@ -135,7 +135,7 @@ data_nest_gs <- st_intersection(nesten, prov) %>%
                 -person_name,
                 -user_id) %>% 
   mutate(observation_time = as.Date(observation_time)) %>% 
-  rename(provincie = NAAM)
+  mutate(provincie = NAAM)
 ```
 
 In het geval van een dubbele melding van een bestreden nest in de brandweerdataset, 
