@@ -18,17 +18,27 @@ jobs:
       - name: Check if secrets exist
         run: |
           if [ $(echo "${{secrets.GBIF_USER}}" | wc -c) -lt 2 ]; then
-            echo "The secret 'iasset_user' has not been set."
+            echo "The secret 'GBIF_USER' has not been set."
             echo "Please go to 'Settings > Secrets > Actions' to create it."
             exit 1
           fi
           if [ $(echo "${{secrets.GBIF_EMAIL}}" | wc -c) -lt 2 ]; then
-            echo "The secret 'iasset_user' has not been set."
+            echo "The secret 'GBIF_EMAIL' has not been set."
             echo "Please go to 'Settings > Secrets > Actions' to create it."
             exit 1
           fi
           if [ $(echo "${{secrets.GBIF_PWD}}" | wc -c) -lt 2 ]; then
-            echo "The secret 'iasset_user' has not been set."
+            echo "The secret 'GBIF_PWD' has not been set."
+            echo "Please go to 'Settings > Secrets > Actions' to create it."
+            exit 1
+          fi
+          if [ $(echo "${{secrets.gsheet_token}}" | wc -c) -lt 2 ]; then
+            echo "The secret 'gsheet_token' has not been set."
+            echo "Please go to 'Settings > Secrets > Actions' to create it."
+            exit 1
+          fi
+          if [ $(echo "${{secrets.amiabot}}" | wc -c) -lt 2 ]; then
+            echo "The secret 'amiabot' has not been set."
             echo "Please go to 'Settings > Secrets > Actions' to create it."
             exit 1
           fi
