@@ -573,15 +573,12 @@ test_jaar <- data_nest_final %>%
 ```{r create seasonal datasets, dataset per month}
 aantal_nesten_per_maand_per_jaar_meta_path <- paste0(processing_exportpath, "aantal_nesten_per_maand_per_jaar_meta.csv")
 
-Vlaanderen <- prov %>%
-  filter(NAAM %in% c('Oost-Vlaanderen', 
+data_nest_final_Vlaanderen <- data_nest_final%>%
+  filter(provincie %in% c('Oost-Vlaanderen', 
                      'West-Vlaanderen',
                      'Limburg',
                      'Vlaams-Brabant',
-                     'Waals-Brabant'))
-
-
-data_nest_final_Vlaanderen <- st_intersection(data_nest_final, Vlaanderen)
+                     'Antwerpen'))
 
 nests_per_month_per_year <- data_nest_final_Vlaanderen %>%
   st_drop_geometry()%>%
@@ -594,9 +591,19 @@ nests_per_month_per_year <- data_nest_final_Vlaanderen %>%
   select(observation_year, '1','2','3','4','5','6','7','8','9','10','11','12')%>%
   rename('januari'= '1', 'februari'= '2', 'maart'= '3', 'april'= '4', 'mei'= '5', 'juni'='6', 'juli'='7', 'augustus'='8', 'september'='9', 'oktober'='10', 'november'='11', 'december'='12')%>%
   replace(is.na(.), 0)%>%
-  mutate(totaal= januari+februari+maart+april+mei+juni+juli+augustus+september+oktober+november+december)
+  mutate(totaal= januari+februari+maart+april+mei+juni+juli+augustus+september+oktober+november+december)%>%
+  filter(!observation_year == 0)%>%
+  rename(jaar = observation_year)
 
- write.csv2(aantal_nesten_per_maand_per_jaar_meta_path, row.names=FALSE)
+ write.csv2(nests_per_month_per_year, 'nests_per_month_per_year.csv', row.names=FALSE)
+ 
+ nests_per_province_per_year <- as.data.frame(table(data_nest_final_Vlaanderen$year, data_nest_final_Vlaanderen$provincie))%>%
+  pivot_wider(names_from = Var2,
+              values_from = Freq)%>%
+   rename(jaar=Var1)%>%
+   mutate(totaal= `Oost-Vlaanderen` +  `West-Vlaanderen` + Antwerpen + `Vlaams-Brabant` + Limburg)
+ 
+  write.csv2(nests_per_province_per_year, 'nests_per_province_per_year.csv', row.names=FALSE)
 ```
 
 ```{r GBIF data prep}
