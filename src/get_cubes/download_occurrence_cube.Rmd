@@ -1,5 +1,5 @@
 ---
-title: "download_occurrence_cube"
+title: "build_queries"
 author: "Sander Devisscher"
 date: "2024-10-17"
 output: html_document
@@ -21,7 +21,6 @@ if(current_rgbif_version[1] < 3 | current_rgbif_version[2] < 8 | current_rgbif_v
 ```
 
 ```{r libraries}
-library(rgbif)
 library(tidyverse)
 ```
 
@@ -50,7 +49,7 @@ for(rank in ranks){
   nubKey_list <- griis_checklist_split[[rank]]$nubKey
   
   # get query file
-  query_file <- paste0("data/input/griis_belgium_", tolower(rank), ".txt")
+  query_file <- paste0("data/input/griis_belgium_", tolower(rank), "_base.txt")
   if(file.exists(query_file)){
     query <- gsub(pattern = "  ", replacement = "", paste0(readLines(query_file), collapse = " "))
   }else{
@@ -61,14 +60,8 @@ for(rank in ranks){
   # add nubkeys to query
   query <- gsub(pattern = "<--nubkeys-->", replacement = paste0(nubKey_list, " ", collapse = ","), query)
   
-  # download occurrence cube
-  occ_downloadKey <- occ_download_sql(query,
-                                      user = Sys.getenv("gbif_user"),
-                                      pwd = Sys.getenv("gbif_pwd"),
-                                      email = Sys.getenv("email"),
-                                      curlopts = list(verbose = TRUE,
-                                                      http_version = 2,
-                                                      forbid_reuse = TRUE))
+  # export query
+  writeLines(query, paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt"))
 }
 ```
 
