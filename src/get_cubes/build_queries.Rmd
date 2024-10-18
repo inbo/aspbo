@@ -27,7 +27,7 @@ griis_checklist_split <- split(griis_checklist, griis_checklist$rank)
 ranks <- unique(griis_checklist$rank)
 
 # Combine form, subspecies en variety
-ranks <- ranks[!ranks %in% c("form", "subspecies", "variety")]
+ranks <- ranks[!ranks %in% c("FORM", "SUBSPECIES", "VARIETY")]
 ranks <- c(ranks, "SUBSPECIES_FORM_VARIETY")
 
 # loop over ranks
