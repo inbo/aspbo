@@ -56,6 +56,9 @@ for(rank in ranks){
   # add nubkeys to query
   query <- gsub(pattern = "<--nubkeys-->", replacement = paste0(nubKey_list, collapse = ", "), query)
   
+  # add quotes to year
+  query <- gsub(pattern = "year", replacement = "\"year\"", query)
+  
   # export query
   writeLines(query, paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt"))
 }
