@@ -38,7 +38,7 @@ SELECT
       'unconfirmed - not reviewed',
       'validation requested'
       )
-   AND familyKey = <--nubkeys-->
+   AND familyKey IN (<--nubkeys-->)
  GROUP BY
     year,
     eeaCellCode,
