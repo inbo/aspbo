@@ -2,7 +2,6 @@
 title: "build_queries"
 author: "Sander Devisscher"
 date: "2024-10-17"
-output: html_document
 ---
 
 A script to download the occurrence cube from the GBIF API.
