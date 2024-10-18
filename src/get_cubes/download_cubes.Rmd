@@ -1,0 +1,28 @@
+---
+title: "download_cubes"
+author: "Sander Devisscher"
+date: "2024-10-18"
+params:
+  rank: "FAMILY"
+---
+
+```{r libraries}
+library(rgbif)
+library(tidyverse)
+```
+
+```{r read query}
+rank <- params$rank
+
+query <- paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt") %>% 
+  readLines() 
+```
+
+```{r download cubes}
+cube <- occ_download_sql(q = query, 
+                         format = "SQL_TSV_ZIP",
+                         email = Sys.getenv("email"),
+                         user = Sys.getenv("gbif_user"),
+                         pwd = Sys.getenv("gbif_pwd"))
+```
+
