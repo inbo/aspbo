@@ -1,0 +1,195 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "uat"
+    paths:
+      - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
+  schedule: 
+   - cron: '0 0 * 1-12 1'
+
+name: download occurrence cube
+
+jobs:
+  build-queries:
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      amiabot: ${{ secrets.AMIABOT }}
+      
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt install libsodium-dev
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libgdal-dev libproj-dev
+          sudo apt install libudunits2-dev
+          sudo apt install --yes libharfbuzz-dev libfribidi-dev
+
+      - name: install packages
+        run: |
+          source("src/install_packages_cube.R")
+        shell: Rscript {0}
+
+      - name: create queries
+        run: |
+          source("src/get_cubes/run_build_queries.R")
+        shell: Rscript {0}
+
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "update queries"
+          target_branch: automatic-download-cubes
+          add_timestamp: true
+          
+  download-cubes:
+    runs-on: ${{ matrix.config.os }}
+    needs: build-queries
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+        param_value: ["FAMILY", "GENUS", "SPECIES", "SUBSPECIES_FORM_VARIETY"]
+        
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      amiabot: ${{ secrets.AMIABOT }}
+      gbif_user: ${{ secrets.GBIF_USER }}
+      email: ${{ secrets.GBIF_EMAIL }}
+      gbif_pwd: ${{ secrets.GBIF_PWD }}
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt install libsodium-dev
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libgdal-dev libproj-dev
+          sudo apt install libudunits2-dev
+          sudo apt install --yes libharfbuzz-dev libfribidi-dev
+      
+      - name: install packages
+        run: |
+          source("src/install_packages_cube.R")
+        shell: Rscript {0}
+          
+      - name: download cubes
+        run: |
+          Rscript -e 'rmarkdown::render("src/get_cubes/download_cubes.Rmd", params = list(rank = "${{ matrix.param_value }}"))'
+        
+      - name: upload rank cube artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: be_alientaxa_cube_${{ matrix.param_value }}.csv
+          path: path/to/your/output/files
+      
+  compile-cubes:
+    runs-on: ${{ matrix.config.os }}
+    needs: download-cubes
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      amiabot: ${{ secrets.AMIABOT }}
+      
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt install libsodium-dev
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libgdal-dev libproj-dev
+          sudo apt install libudunits2-dev
+          sudo apt install --yes libharfbuzz-dev libfribidi-dev
+
+      - name: install packages
+        run: |
+          source("src/get_cubes/install_packages_cube.R")
+        shell: Rscript {0}
+        
+      - name: download rank cubes artifacts 
+        uses: actions/download-artifact@v3 
+        with: 
+          name: be_alientaxa_cube_*
+        
+      - name: compile cubes
+        run: |
+          source("src/get_cubes/run_compile_cubes.R")
+        shell: Rscript {0}
+        
+      - name: upload occ cube
+        uses: actions/upload-artifact@v3
+        with:
+          name: be_alientaxa_cube.csv
+          path: path/to/your/output/files
+        
+
