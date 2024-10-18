@@ -37,7 +37,13 @@ for(rank in ranks){
   print(rank)
   
   # get nubKeys for the rank
-  nubKey_list <- griis_checklist_split[[rank]]$nubKey
+  if(rank == "SUBSPECIES_FORM_VARIETY"){
+    nubKey_list <- c(griis_checklist_split[["SUBSPECIES"]]$nubKey,
+                     griis_checklist_split[["FORM"]]$nubKey,
+                     griis_checklist_split[["VARIETY"]]$nubKey)
+  }else{
+    nubKey_list <- griis_checklist_split[[rank]]$nubKey
+  }
   
   # get query file
   query_file <- paste0("data/input/griis_belgium_", tolower(rank), "_base.txt")
@@ -49,7 +55,7 @@ for(rank in ranks){
   }
   
   # add nubkeys to query
-  query <- gsub(pattern = "<--nubkeys-->", replacement = paste0(nubKey_list, " ", collapse = ","), query)
+  query <- gsub(pattern = "<--nubkeys-->", replacement = paste0(nubKey_list, collapse = ", "), query)
   
   # export query
   writeLines(query, paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt"))
