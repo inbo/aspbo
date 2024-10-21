@@ -52,9 +52,39 @@ test_that("Region names and columns are indicated correctly in files", {
     #Select dataset
     filename<-datasets[[i]]
     
-    for (level in c("level1Name","level2Name","level3Name","NAAM","GEWEST","provincie","Gemeente","prov")){
-      
-      if (level %in% colnames(filename)) {
+    #Get datasetname
+    datasetname <- sub(".*/([^/]+)\\.[^.]+$", "\\1", filename)
+    
+    #Get Extension
+    extension <- sub(".*\\.", "", filename)
+    
+    #Read in the data
+    if(extension=="geojson"){
+      #Read in data
+      filename<-st_read(filename, quiet=TRUE)
+    }
+    
+    if(extension=="csv"){
+      #Read in data
+      filename<- suppressMessages(read.csv(filename))
+    }
+    
+    
+    #----------------Check that 'gemeente', 'provincie', and 'gewest', are present in colnames-------------
+    # Extract column names from the dataset
+    column_names <- colnames(filename)
+    
+    # Check if all values are present in the column names
+    all_columns_present<- all(c("gemeente", "provincie", "gewest") %in% column_names)
+    
+    #If not values are present, check which ones are missing
+    missing_columns<- setdiff( c("gemeente", "provincie", "gewest"), column_names)
+    
+    # Run test for column names
+    expect_true(all_columns_present, info = paste0("The following columns are not present in the file ", datasetname,".",extension, ": ", paste(missing_columns, collapse = ", ")))                      
+ 
+    for (level in c("gemeente","provincie","gewest")){
+      if (level %in% column_names) {
         regions_to_check<-filename[[level]]
         
         #Get translations that may not be present in translations_regions
