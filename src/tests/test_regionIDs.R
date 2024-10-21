@@ -47,18 +47,10 @@ region_values <- translations_regions$title_id
 
 test_that("Region names and columns are indicated correctly in files", { 
   
-  for(datasetname in names(datasets)){
-    filetype <- switch(datasetname,
-                       "nesten" = ".geojson",
-                       "points" = ".geojson",
-                       "aantal_gemelde_nesten" = ".geojson",
-                       "actieve_haarden" = ".geojson",
-                       "beheerde_nesten" = ".geojson",
-                       "onbehandelde_nesten" = ".geojson",
-                       "aantal_lente_nesten" = ".csv",
-                       "")
+  for(i in seq_along(datasets)){
     
-    filename<-datasets[[datasetname]]
+    #Select dataset
+    filename<-datasets[[i]]
     
     for (level in c("level1Name","level2Name","level3Name","NAAM","GEWEST","provincie","Gemeente","prov")){
       
