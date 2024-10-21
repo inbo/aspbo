@@ -92,10 +92,16 @@ test_that("Region names and columns are indicated correctly in files", {
         
         translation_IDs_okay<-length(wrong_translations)==0
         
+        
         # Expect that all values are present
-        expect_true(translation_IDs_okay, info = paste0("The following values in column ", level, " in the file ", datasetname,filetype, " are not present in translations_regions:", paste(wrong_translations, collapse = ", ")))
+        expect_true(translation_IDs_okay, info = paste0("The following values in column ", level, " in the file ", datasetname,".",extension, " are not present in translations_regions: ", paste(wrong_translations, collapse = ", ")))
+        
       }
     }
   }
 })
 
+
+
+
+    
