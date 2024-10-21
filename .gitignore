@@ -45,3 +45,4 @@ vignettes/*.pdf
 /*.zip
 data/output/UAT_processing/full_timeseries.csv
 data/output/UAT_processing/df_timeseries.tsv
+be_alientaxa_cube_*.csv
