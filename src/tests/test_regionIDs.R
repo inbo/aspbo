@@ -4,9 +4,9 @@
 
 packages <- c("testthat","sf","utils","readr","here")
 
-for(i in packages) {
-  if( ! i %in% rownames(installed.packages()) ) { install.packages( i ) }
-  library(i, character.only = TRUE)
+for(package in packages) {
+  if( ! package %in% rownames(installed.packages()) ) { install.packages( package ) }
+  library(package, character.only = TRUE)
 }
 
 
