@@ -41,13 +41,11 @@ region_values <- translations_regions$title_id
 
 
 #-------------------------------------------------------------------------
-# Define the test
+# Define the tests
 #-------------------------------------------------------------------------
 
-test_that("Region IDs in Vespa output files correspond to those in translations_regions file", {
-  
-  # Extract the reference column from translations_regions 
-  region_values <- translations_regions$title_id
+
+test_that("Region names and columns are indicated correctly in files", { 
   
   for(datasetname in names(datasets)){
     filetype <- switch(datasetname,
