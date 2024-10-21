@@ -32,10 +32,12 @@ datasets<-datasets[!datasets %in% c("./data/output/UAT_direct/translations_simpl
 
 
 #-------------------------------------------------------------------------
-# create list of datasets
+#Extract region translations
 #-------------------------------------------------------------------------
-datasets <- list(nesten=nesten, points=points, aantal_gemelde_nesten=aantal_gemelde_nesten,aantal_lente_nesten=aantal_lente_nesten,
-                 actieve_haarden=actieve_haarden,beheerde_nesten=beheerde_nesten,onbehandelde_nesten=onbehandelde_nesten)
+translations_regions<-read.csv2(here("data", "output", "UAT_direct", "translations_regions.csv"))
+
+# Extract the reference column from translations_regions 
+region_values <- translations_regions$title_id
 
 
 #-------------------------------------------------------------------------
