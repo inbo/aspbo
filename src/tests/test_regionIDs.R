@@ -11,21 +11,24 @@ for(package in packages) {
 
 
 #-------------------------------------------------------------------------
-#Load the data of the datasets that you want to test
+#List the datasets to test
 #-------------------------------------------------------------------------
-points <- st_read("./data/output/UAT_processing/Vespa_velutina_shape/points.geojson")
-nesten<- st_read("./data/output/UAT_processing/Vespa_velutina_shape/nesten.geojson")
-aantal_gemelde_nesten<- st_read("./data/output/UAT_processing/Vespa_velutina_shape/aantal_gemelde_nesten.geojson")
-aantal_lente_nesten<- read.csv("./data/output/UAT_processing/Vespa_velutina_shape/aantal_lente_nesten.csv")
-actieve_haarden<- st_read("./data/output/UAT_processing/Vespa_velutina_shape/actieve_haarden.geojson")
-beheerde_nesten<- st_read("./data/output/UAT_processing/Vespa_velutina_shape/beheerde_nesten.geojson")
-onbehandelde_nesten<- st_read("./data/output/UAT_processing/Vespa_velutina_shape/onbehandelde_nesten.geojson")
+#Specify folders holding the datasets to test
+folders<-c("./data/output/UAT_processing/Vespa_velutina_shape",
+           "./data/output/UAT_direct")
 
+#List files in those folders
+datasets <- unlist(lapply(folders, function(folder) {
+  list.files(folder, pattern = "\\.(geojson|csv)$", full.names = TRUE)
+}))
 
-#-------------------------------------------------------------------------
-#Load the translations file
-#-------------------------------------------------------------------------
-translations_regions<-read.csv2("./data/output/UAT_direct/translations_regions.csv")
+#Remove certain files that don't need to be checked
+datasets<-datasets[!datasets %in% c("./data/output/UAT_direct/translations_simple.csv",
+                                    "./data/output/UAT_direct/translations_regions.csv",
+                                    "./data/output/UAT_direct/translations.csv",
+                                    "./data/output/UAT_direct/harmonia_info.csv",
+                                    "./data/output/UAT_processing/Vespa_velutina_shape/aantal_nesten_meta.csv")
+]
 
 
 #-------------------------------------------------------------------------
