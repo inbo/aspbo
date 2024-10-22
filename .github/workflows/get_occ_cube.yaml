@@ -6,7 +6,7 @@ on:
     paths:
       - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
   schedule: 
-   - cron: '0 0 * 1-12 1'
+   - cron: '0 0 1 1-12 *'
 
 name: download occurrence cube
 
