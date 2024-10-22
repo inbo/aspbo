@@ -16,7 +16,7 @@ SELECT
     IF(ISNULL(classKey), NULL, SUM(COUNT(*)) OVER (PARTITION BY classKey)) AS classCount
   FROM
     occurrence
-  WHERE 
+  WHERE  
     occurrenceStatus = 'PRESENT'
     AND genusKey IN (<--nubkeys-->)
     AND continent = 'EUROPE'
