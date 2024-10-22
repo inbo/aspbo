@@ -128,7 +128,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: be_alientaxa_cube_${{ matrix.param_value }}.csv
-          path: path/to/your/output/files
+          path: ./cube_data/be_alientaxa_cube_${{ matrix.param_value }}.csv
       
   compile-cubes:
     runs-on: ${{ matrix.config.os }}
@@ -190,6 +190,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: be_alientaxa_cube.csv
-          path: path/to/your/output/files
+          path: ./cube_data/be_alientaxa_cube.csv
         
 

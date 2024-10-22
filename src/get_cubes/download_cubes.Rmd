@@ -31,6 +31,6 @@ occ_download_wait(cube)
 
 occ_download_get(cube) %>%
   occ_download_import() %>% 
-  write_csv(path = paste0("be_alientaxa_cube_", rank, ".csv"))
+  write_csv(path = paste0("./cube_data/be_alientaxa_cube_", rank, ".csv"))
 ```
 
