@@ -53,7 +53,7 @@ jobs:
 
       - name: install packages
         run: |
-          source("src/install_packages_cube.R")
+          source("src/get_cubes/install_packages_cube_base.R")
         shell: Rscript {0}
 
       - name: create queries
@@ -117,7 +117,8 @@ jobs:
       
       - name: install packages
         run: |
-          source("src/install_packages_cube.R")
+          source("src/get_cubes/install_packages_cube_base.R")
+          source("src/get_cubes/install_packages_cube_extra.R")
         shell: Rscript {0}
           
       - name: download cubes
@@ -173,7 +174,7 @@ jobs:
 
       - name: install packages
         run: |
-          source("src/get_cubes/install_packages_cube.R")
+          source("src/get_cubes/install_packages_cube_base.R")
         shell: Rscript {0}
         
       - name: download rank cubes artifacts 
