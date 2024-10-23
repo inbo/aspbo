@@ -164,6 +164,8 @@ test_that("Load occurrenceData", {
 
 We read input data based on [Global Register of Introduced and Invasive Species - Belgium](https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e), typically referred to as the _unified checklist_. These data contain taxonomic information as well distribution, description and species profiles. We limit to taxa introduced in Belgium (`locationId` : `ISO_3166:BE`)
 
+The input data is update monthly by the github action `get_griis_checklist.yaml`
+
 ```{r unified_checklist_tidy_df}
 data_file <- here::here(
   "data",
@@ -171,6 +173,7 @@ data_file <- here::here(
   "UAT_processing",
   "data_input_checklist_indicators.tsv"
 )
+
 taxa_df <-
   read_tsv(data_file,
            na = "",
@@ -371,45 +374,6 @@ Preview:
 df_xy %>% head()
 ```
 
-Do the same for baseline data:
-
-```{r remove corrupted eea_cell_code}
-df_bl <- df_bl %>% 
-  mutate(cellcode_length = nchar(eea_cell_code))
-
-table(df_bl$cellcode_length, useNA = "ifany")
-
-corrupt_bl_eea_cell_codes <- df_bl %>% 
-  filter(cellcode_length != 13) %>% 
-  write_csv("./data/interim/corrupt_bl_eea_cell_codes.csv")
-
-df_bl <- df_bl %>% 
-  filter(cellcode_length == 13)
-```
-
-```{r extract_x_y_baseline}
-df_bl_xy <-
-  df_bl %>%
-  distinct(eea_cell_code) %>%
-  bind_cols(
-    tibble(
-      x = unlist(str_extract_all(unique(df_bl$eea_cell_code),
-                                 pattern = "(?<=E)\\d+"
-      )),
-      y = unlist(str_extract_all(unique(df_bl$eea_cell_code),
-                                 pattern = "(?<=N)\\d+"
-      ))
-    ) %>%
-      mutate_all(as.integer)
-  )
-```
-
-Preview:
-
-```{r x_y_preview_baseline}
-df_bl_xy %>% head()
-```
-
 ## Apply temporal and spatial restraints
 
 Recalculate last observed date for each taxon:
@@ -538,52 +502,6 @@ df <-
   filter(eea_cell_code %in% be_cellcodes)
 ```
 
-and baseline data:
-
-```{r apply_restraints_time_space_baseline_data}
-df_bl <-
-  df_bl %>%
-  left_join(df_bl_xy, by = "eea_cell_code") %>%
-  # recent history
-  filter(year > first_year) %>%
-  # in Belgium
-  filter(eea_cell_code %in% be_cellcodes)
-```
-
-## Add information about presence in protected areas
-
-We add whether the grid cell intersects any of the Natura2000 Belgian protected areas.
-
-```{r add_natura2000_col}
-df <-
-  df %>%
-  left_join(df_prot_areas,
-            by = c("eea_cell_code" = "CELLCODE")
-  )
-```
-
-Preview:
-
-```{r preview_df_with_natura2000_col}
-df %>% head()
-```
-
-We do the same for baseline data:
-
-```{r add_natura2000_col_baseline}
-df_bl <-
-  df_bl %>%
-  left_join(df_prot_areas,
-            by = c("eea_cell_code" = "CELLCODE")
-  )
-```
-
-Preview:
-
-```{r preview_df_bl_with_natura2000_col}
-df_bl %>% head()
-```
-
 ## Create time series
 
 For each species, define cells with at least one observation:
@@ -665,9 +583,6 @@ To correct the effect of research effort of an alien speies, we calculate the nu
 # add baseline data (at class level) diminished by obs of specific alien taxon
 df_ts <- 
   df_ts %>%
-  left_join(df_bl %>%
-              select(year, eea_cell_code, classKey, cobs),
-            by = c("year", "eea_cell_code", "classKey")) %>%
   mutate(cobs = cobs - obs)
 
 # replace NAs with 0
