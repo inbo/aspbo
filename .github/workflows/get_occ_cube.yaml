@@ -1,12 +1,12 @@
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Manual
   push:
-    branches:
+    branches: # Changes to GRIIS Checklist
       - "uat"
     paths:
       - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
   schedule: 
-   - cron: '0 0 1 1-12 *'
+   - cron: '0 0 1 1-12 *' # 1st of the month 00:00 between january & december
 
 name: download occurrence cube
 
