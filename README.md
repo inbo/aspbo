@@ -6,7 +6,8 @@ The alien species portal backoffice contains automated data preparation scripts 
 
 [![get_muskrat_data](https://github.com/inbo/aspbo/actions/workflows/get_muskrat_data.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_muskrat_data.yaml)
 
-[![get_vespa_velutina_management](https://github.com/inbo/aspbo/actions/workflows/get_vespa_velutina_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_vespa_velutina_management.yaml) **DISABLED**
+[![get_vespa_velutina_management](https://github.com/inbo/aspbo/actions/workflows/get_vespa_velutina_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_vespa_velutina_management.yaml) 
+ ~**DISABLED**~
 
 [![get_oxyura_jamaicensis_management](https://github.com/inbo/aspbo/actions/workflows/get_oxyura_jamaicensis_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_oxyura_jamaicensis_management.yaml)
 
