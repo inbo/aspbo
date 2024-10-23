@@ -6,7 +6,6 @@ on:
     paths:
       - 'data/output/UAT_processing/**'
       - 'data/output/UAT_direct/**'
-  
 
 name: run_translations_test
 
@@ -38,7 +37,7 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
 
-  - name: Install linux libraries
+      - name: Install linux libraries
         run: |
           sudo apt-get update
           sudo apt-get install -y libsodium-dev libcurl4-openssl-dev libgdal-dev libproj-dev libudunits2-dev
@@ -47,5 +46,3 @@ jobs:
         run: |
           source("src/tests/test_regionIDs.R")
         shell: Rscript {0}
-          
-      
