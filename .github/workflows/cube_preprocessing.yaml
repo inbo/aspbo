@@ -1,12 +1,11 @@
+name: cube preprocessing
+
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "uat"
-    paths:
-      - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
-
-name: cube preprocessing
+  workflow_run:
+    workflows: ["download occurrence cube"]
+    types:
+      - completed
 
 jobs:
   fetch-data:
