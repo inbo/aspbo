@@ -7,7 +7,9 @@ date: "2024-10-17"
 A script to download the occurrence cube from the GBIF API.
 
 ```{r libraries}
-library(tidyverse)
+library(readr)
+library(magrittr)
+library(dplyr)
 ```
 
 ```{r get griis checklist}
