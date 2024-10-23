@@ -4,6 +4,8 @@ author:
 - Damiano Oldoni
 - Toon Van Daele
 - Tim Adriaens
+- Sander Devisscher
+- Soria Delva
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -13,7 +15,10 @@ output:
     number_sections: true
 ---
 
-This document describes the pre-processing of occurrence data of alien species. The outputs of this pipeline will be used as input for modelling.
+This script is based on [05_occurrence_indicators_preprocessing.Rmd](https://github.com/trias-project/indicators/blob/main/src/05_occurrence_indicators_preprocessing.Rmd) from the [trias-project/indicators](https://github.com/trias-project/indicators) repository.
+It has been adapted to the specific needs of the alien species portal.
+This document describes the pre-processing of occurrence data of alien species. 
+The outputs of this pipeline will be used as input for modelling.
 
 # Setup
 
@@ -559,7 +564,7 @@ df_ts <- pmap_dfr(df_cc,
 # add occurrence data
 df_ts <- 
   df_ts %>%
-  left_join(df %>% select(taxonKey, year, eea_cell_code, obs), 
+  left_join(df %>% select(taxonKey, year, eea_cell_code, obs, cobs), 
             by = c("taxonKey", "year", "eea_cell_code"))
 
 # add membership to protected areas
