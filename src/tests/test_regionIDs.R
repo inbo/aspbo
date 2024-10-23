@@ -14,8 +14,9 @@ for(package in packages) {
 #List the datasets to test
 #-------------------------------------------------------------------------
 #Specify folders holding the datasets to test
-folders<-c("./data/output/UAT_processing/Vespa_velutina_shape",
-           "./data/output/UAT_direct")
+folders<-c("./data/output/UAT_processing",
+           "./data/output/UAT_direct",
+           "./data/output/UAT_direct/Vespa_velutina_shape")
 
 #List files in those folders
 datasets <- unlist(lapply(folders, function(folder) {
