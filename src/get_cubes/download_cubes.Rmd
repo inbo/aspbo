@@ -9,7 +9,9 @@ params:
 
 ```{r libraries}
 library(rgbif)
-library(tidyverse)
+library(readr)
+library(magrittr)
+library(dplyr)
 ```
 
 ```{r read query}
