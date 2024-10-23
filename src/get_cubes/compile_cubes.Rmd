@@ -17,7 +17,7 @@ library(stringr)
 
 ```{r set ranks}
 #ranks <- c("SPECIES", "GENUS", "FAMILY", "SUBSPECIES_FORM_VARIETY")
-ranks <- c("GENUS", "FAMILY")
+ranks <- c("GENUS", "FAMILY", "SPECIES")
 ```
 
 ```{r read in the data}
@@ -44,7 +44,7 @@ expected_colnames <- c("year", "eea_cell_code", "taxonKey", "n", "min_coord_unce
 compiled_cube <- compiled_cube %>% 
   filter(!is.na(eeacellcode)) %>%
   mutate(taxonKey = case_when(
-    rank == "SPECIES" ~ NA,
+    rank == "SPECIES" ~ specieskey,
     rank == "GENUS" ~ genuskey,
     rank == "FAMILY" ~ familykey,
     rank == "SUBSPECIES_FORM_VARIETY" ~ NA,
