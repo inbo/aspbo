@@ -1,0 +1,64 @@
+---
+title: "compile_cubes"
+author: "Sander Devisscher"
+date: "2024-10-22"
+output: html_document
+---
+
+A script to compile the occurrence cubes from different ranks into a single cube.
+
+```{r libraries}
+library(readr)
+library(magrittr)
+library(dplyr)
+library(tidyr)
+library(stringr)
+```
+
+```{r set ranks}
+#ranks <- c("SPECIES", "GENUS", "FAMILY", "SUBSPECIES_FORM_VARIETY")
+ranks <- c("GENUS", "FAMILY")
+```
+
+```{r read in the data}
+# Create an empty data frame to store the compiled cube
+compiled_cube <- data.frame()
+
+# Define the path to the folder containing the occurrence cubes
+for(r in ranks){
+  path <- paste0("./cube_data/be_alientaxa_cube_", r, ".csv")
+  # Read in the cube
+  cube <- read_csv(path)
+  
+  # add rank info
+  cube$rank <- r
+  
+  # Combine the cube with the compiled cube
+  compiled_cube <- compiled_cube %>% bind_rows(cube)
+}
+```
+
+```{r map compiled cube to match occ cube format}
+expected_colnames <- c("year", "eea_cell_code", "taxonKey", "n", "min_coord_uncertainty")
+
+compiled_cube <- compiled_cube %>% 
+  filter(!is.na(eeacellcode)) %>%
+  mutate(taxonKey = case_when(
+    rank == "SPECIES" ~ NA,
+    rank == "GENUS" ~ genuskey,
+    rank == "FAMILY" ~ familykey,
+    rank == "SUBSPECIES_FORM_VARIETY" ~ NA,
+    TRUE ~ as.numeric(NA)
+  )) %>% 
+  select(year, 
+         "eea_cell_code" = "eeacellcode", 
+         taxonKey, 
+         obs = "occurrences", 
+         cobs = "classcount", 
+         min_coord_uncertainty = "mincoordinateuncertaintyinmeters")
+```
+
+```{r write compiled cube}
+# Write the compiled cube to a csv file
+write_csv(compiled_cube, "./cube_data/be_alientaxa_cube.csv")
+```
