@@ -16,8 +16,7 @@ library(stringr)
 ```
 
 ```{r set ranks}
-#ranks <- c("SPECIES", "GENUS", "FAMILY", "SUBSPECIES_FORM_VARIETY")
-ranks <- c("GENUS", "FAMILY", "SPECIES")
+ranks <- c("GENUS", "FAMILY", "SPECIES", "SUBSPECIES_FORM_VARIETY")
 ```
 
 ```{r read in the data}
