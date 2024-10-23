@@ -1,10 +1,10 @@
 on:
-  workflow_dispatch:
+  workflow_dispatch: 
   pull_request:
     branches:
       - 'uat'
     paths:
-      - 'data/output/UAT_processing/Vespa_velutina_shape/**'
+      - 'data/output/UAT_processing/**'
       - 'data/output/UAT_direct/**'
   
 
