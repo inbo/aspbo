@@ -3,7 +3,8 @@ title: "download_cubes"
 author: "Sander Devisscher"
 date: "2024-10-18"
 params:
-  rank: "FAMILY"
+  rank: 
+  - "SPECIES"
 ---
 
 ```{r libraries}
@@ -13,6 +14,8 @@ library(tidyverse)
 
 ```{r read query}
 rank <- params$rank
+
+print(rank)
 
 query <- paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt") %>% 
   readLines() 
@@ -26,11 +29,17 @@ cube <- occ_download_sql(q = query,
                          pwd = Sys.getenv("gbif_pwd"))
 ```
 
+```{r create cube_data folder}
+if(!dir.exists("./cube_data")){
+  dir.create("./cube_data")
+}
+```
+
 ```{r}
 occ_download_wait(cube)
 
 occ_download_get(cube) %>%
   occ_download_import() %>% 
-  write_csv(path = paste0("./cube_data/be_alientaxa_cube_", rank, ".csv"))
+  write_csv(file = paste0("./cube_data/be_alientaxa_cube_", rank, ".csv"))
 ```
 
