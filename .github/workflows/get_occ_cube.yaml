@@ -1,3 +1,5 @@
+name: download occurrence cube
+
 on:
   workflow_dispatch: # Manual
   push:
@@ -7,8 +9,6 @@ on:
       - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
   schedule: 
    - cron: '0 0 1 1-12 *' # 1st of the month 00:00 between january & december
-
-name: download occurrence cube
 
 jobs:
   build-queries:
