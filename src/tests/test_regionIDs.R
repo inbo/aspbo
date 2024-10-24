@@ -30,7 +30,9 @@ datasets<-datasets[!datasets %in% c("./data/output/UAT_direct/translations_simpl
                                     "./data/output/UAT_direct/harmonia_info.csv",
                                     "./data/output/UAT_processing/Vespa_velutina_shape/aantal_nesten_meta.csv",
                                     "./data/output/UAT_processing/be_alientaxa_cube.csv",
-                                    "./data/output/UAT_processing/be_alientaxa_info.csv")
+                                    "./data/output/UAT_processing/be_alientaxa_info.csv",
+                                    "./data/output/UAT_processing/communes.geojson",
+                                    "./data/output/UAT_processing/provinces.geojson")
 ]
 
 
