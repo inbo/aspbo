@@ -1,7 +1,7 @@
 # get packages installed on machine
 installed <- rownames(installed.packages())
 # specify packages we need
-required <- c("magrittr", "dplyr", "readr")
+required <- c("magrittr", "dplyr", "readr", "knitr")
 # install packages if needed
 if (!all(required %in% installed)) {
   pkgs_to_install <- required[!required %in% installed]
