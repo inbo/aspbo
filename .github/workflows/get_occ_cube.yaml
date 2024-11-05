@@ -62,7 +62,7 @@ jobs:
         shell: Rscript {0}
 
       - name: upload queries
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: ./data/interim/cube_queries/*
           
@@ -118,7 +118,7 @@ jobs:
         shell: Rscript {0}
         
       - name: download queries
-        uses: actions/download-artifact@v3 
+        uses: actions/download-artifact@v3
         with: 
           path: ./data/interim/cube_queries/*
           
@@ -194,7 +194,7 @@ jobs:
         shell: Rscript {0}
         
       - name: upload occ cube
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: be_alientaxa_cube.csv
           path: ./cube_data/be_alientaxa_cube.csv
