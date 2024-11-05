@@ -20,17 +20,23 @@ library(magrittr)
 library(dplyr)
 ```
 
-```{r read query}
+```{r build query path}
 rank <- params$rank
 
 print(rank)
 
-query <- paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt")
+query <- paste0("./data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt")
 
 print(query)
+```
 
-file.exists(query)
+```{r check query}
+if(!file.exists(query)){
+  stop(paste(getwd(), query, " does not exist"))
+}
+```
 
+```{r read query}
 query <- query %>% 
   readLines() 
 ```
