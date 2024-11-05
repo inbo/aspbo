@@ -3,8 +3,7 @@ title: "download_cubes"
 author: "Sander Devisscher"
 date: "2024-10-18"
 params:
-  rank: 
-  - "GENUS"
+  rank: "GENUS"
 ---
 
 ```{r error handling}
@@ -26,7 +25,11 @@ rank <- params$rank
 
 print(rank)
 
-query <- paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt") %>% 
+query <- paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt")
+
+print(query)
+
+query <- query %>% 
   readLines() 
 ```
 
