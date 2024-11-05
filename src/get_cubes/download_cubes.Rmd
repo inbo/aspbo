@@ -4,8 +4,15 @@ author: "Sander Devisscher"
 date: "2024-10-18"
 params:
   rank: 
-  - NULL
+  - "GENUS"
 ---
+
+```{r error handling}
+cat("Received rank parameter:", params$rank, "\n")
+if(is.null(params$rank) || params$rank == "") {
+  stop("Rank parameter is empty or not set")
+}
+```
 
 ```{r libraries}
 library(rgbif)
