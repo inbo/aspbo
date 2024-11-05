@@ -61,14 +61,10 @@ jobs:
           source("src/get_cubes/run_build_queries.R")
         shell: Rscript {0}
 
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
+      - name: upload queries
+        uses: actions/upload-artifact@v3
         with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          commit_prefix: "[AUTO]"
-          commit_message: "update queries"
-          target_branch: automatic-download-cubes
-          add_timestamp: true
+          path: ./data/interim/cube_queries/*
           
   download-cubes:
     runs-on: ${{ matrix.config.os }}
@@ -120,6 +116,11 @@ jobs:
           source("src/get_cubes/install_packages_cube_base.R")
           source("src/get_cubes/install_packages_cube_extra.R")
         shell: Rscript {0}
+        
+      - name: download queries
+        uses: actions/download-artifact@v3 
+        with: 
+          path: ./data/interim/cube_queries/*
           
       - name: download cubes
         run: |
