@@ -124,7 +124,7 @@ jobs:
           
       - name: download cubes
         run: |
-          Rscript -e "rmarkdown::render('src/get_cubes/download_cubes.Rmd', params = list(rank = '${{ matrix.param_value }}'))"
+          Rscript -e "rmarkdown::render('src/get_cubes/download_cubes.Rmd', params = list(rank = '${{ matrix.param_value }}'), knit_root_dir = '../../')"
         
       - name: upload rank cube artifact
         uses: actions/upload-artifact@v3
