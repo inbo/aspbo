@@ -29,6 +29,8 @@ query <- paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_que
 
 print(query)
 
+file.exists(query)
+
 query <- query %>% 
   readLines() 
 ```
