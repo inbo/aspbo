@@ -6,8 +6,8 @@ params:
   rank: "GENUS"
 ---
 
-```{r error handling}
-cat("Received rank parameter:", params$rank, "\n")
+```{r error handling, message=NA}
+message("Received rank parameter:", params$rank, "\n")
 if(is.null(params$rank) || params$rank == "") {
   stop("Rank parameter is empty or not set")
 }
@@ -20,14 +20,14 @@ library(magrittr)
 library(dplyr)
 ```
 
-```{r build query path}
+```{r build query path, message=NA}
 rank <- params$rank
 
-print(rank)
+cat(rank)
 
 query <- paste0("./data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt")
 
-print(query)
+message(query)
 ```
 
 ```{r check query}
@@ -41,8 +41,8 @@ query <- query %>%
   readLines() 
 ```
 
-```{r halt execution if too many active downloads}
-num_active_downloads <- 3
+```{r halt execution if too many active downloads, message=NA}
+num_active_downloads <- 4 # set to 4 to trigger the while loop
 
 while(num_active_downloads >= 3){
   
@@ -58,35 +58,36 @@ while(num_active_downloads >= 3){
   # Get the count of active downloads
   num_active_downloads <- nrow(active_downloads)
   
-  print(paste("Number of active downloads:", num_active_downloads))
+  message(paste("Number of active downloads:", num_active_downloads))
+  
+  if(rank == "SPECIES"){
+    sleep_time <- 20
+  }
+  
+  if(rank == "SUBSPECIES_FORM_VARIETY"){
+    sleep_time <- 45
+  }
+  
+  if(rank == "GENUS"){
+    sleep_time <- 70
+  }
+  
+  if(rank == "FAMILY"){
+    sleep_time <- 90
+  }
   
   if(num_active_downloads >= 3){
     # downloads are staggered to avoid overloading the GBIF API
     # longest lists are triggered first to avoid long waiting times
-    if(rank == "SPECIES"){
-      sleep_time <- 20
-    }
     
-    if(rank == "SUBSPECIES_FORM_VARIETY"){
-      sleep_time <- 45
-    }
-    
-    if(rank == "GENUS"){
-      sleep_time <- 70
-    }
-    
-    if(rank == "FAMILY"){
-      sleep_time <- 90
-    }
-    
-    print(paste("Sleeping for", sleep_time, "seconds"))
+    message(paste("Sleeping for", sleep_time, "seconds"))
     
     Sys.sleep(sleep_time)
   }
 }
 ```
 
-```{r download cubes}
+```{r initiate download}
 cube <- occ_download_sql(q = query, 
                          format = "SQL_TSV_ZIP",
                          email = Sys.getenv("email"),
@@ -100,7 +101,7 @@ if(!dir.exists("./cube_data")){
 }
 ```
 
-```{r}
+```{r download cube}
 occ_download_wait(cube)
 
 occ_download_get(cube, overwrite = TRUE) %>%
