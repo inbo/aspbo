@@ -44,7 +44,7 @@ query <- query %>%
 ```{r halt execution if too many active downloads}
 num_active_downloads <- 3
 
-while(num_active_downloads >=3){
+while(num_active_downloads >= 3){
   
   # Get list of all downloads
   downloads <- occ_download_list(user = Sys.getenv("gbif_user"),
@@ -53,7 +53,7 @@ while(num_active_downloads >=3){
   downloads <- as.data.frame(downloads)
   
   # Filter for active downloads (status is RUNNING or PREPARING)
-  active_downloads <- downloads[downloads$results$status %in% c("RUNNING", "PREPARING"), ]
+  active_downloads <- downloads[downloads$results.status %in% c("RUNNING", "PREPARING"), ]
   
   # Get the count of active downloads
   num_active_downloads <- nrow(active_downloads)
