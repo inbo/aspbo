@@ -41,22 +41,25 @@ query <- query %>%
   readLines() 
 ```
 
-```{r halt execution if too many active downloads, message=NA}
-num_active_downloads <- 4 # set to 4 to trigger the while loop
+```{r FUN: countdown_sleep}
+countdown_sleep <- function(sleep_time) {
+  message(paste("Sleeping for", sleep_time, "seconds"))
+  
+  for (i in sleep_time:1) {
+    cat("\rTime remaining:", i, " seconds")
+    Sys.sleep(1)
+  }
+  
+  message("\nDone sleeping => recalculating status\n")
+}
+```
 
-while(num_active_downloads >= 3){
-  
-  # Get list of all downloads
-  downloads <- occ_download_list(user = Sys.getenv("gbif_user"),
-                                 pwd = Sys.getenv("gbif_pwd"))
-  
-  downloads <- as.data.frame(downloads)
-  
-  # Filter for active downloads (status is RUNNING or PREPARING)
-  active_downloads <- downloads[downloads$results.status %in% c("RUNNING", "PREPARING"), ]
-  
-  # Get the count of active downloads
-  num_active_downloads <- nrow(active_downloads)
+```{r halt execution if too many active downloads, message=NA}
+num_active_downloads <- "--init--" 
+# set to --init-- to trigger the while loop
+# and to stagger the downloads
+
+while(num_active_downloads >= 3 | num_active_downloads == "--init--"){
   
   message(paste("Number of active downloads:", num_active_downloads))
   
@@ -76,14 +79,30 @@ while(num_active_downloads >= 3){
     sleep_time <- 90
   }
   
-  if(num_active_downloads >= 3){
+  if(num_active_downloads >= 3 | num_active_downloads == "--init--"){
     # downloads are staggered to avoid overloading the GBIF API
     # longest lists are triggered first to avoid long waiting times
+    countdown_sleep(sleep_time)
     
-    message(paste("Sleeping for", sleep_time, "seconds"))
+    # Get list of all downloads
+    downloads <- occ_download_list(user = Sys.getenv("gbif_user"),
+                                   pwd = Sys.getenv("gbif_pwd"))
     
-    Sys.sleep(sleep_time)
+    downloads <- as.data.frame(downloads)
+    
+    # Filter for active downloads (status is RUNNING or PREPARING)
+    active_downloads <- downloads[downloads$results.status %in% c("RUNNING", "PREPARING"), ]
+    
+    # Get the count of active downloads
+    num_active_downloads <- nrow(active_downloads)
+    
   }
+  
+}
+
+if(num_active_downloads < 3){
+  message(paste("Number of active downloads:", num_active_downloads))
+  message("initiating download")
 }
 ```
 
