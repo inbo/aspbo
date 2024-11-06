@@ -61,8 +61,27 @@ while(num_active_downloads >= 3){
   print(paste("Number of active downloads:", num_active_downloads))
   
   if(num_active_downloads >= 3){
-    print("Sleeping for 60 seconds")
-    Sys.sleep(60)
+    # downloads are staggered to avoid overloading the GBIF API
+    # longest lists are triggered first to avoid long waiting times
+    if(rank == "SPECIES"){
+      sleep_time <- 20
+    }
+    
+    if(rank == "SUBSPECIES_FORMA_VARIETY"){
+      sleep_time <- 45
+    }
+    
+    if(rank == "GENUS"){
+      sleep_time <- 70
+    }
+    
+    if(rank == "FAMILY"){
+      sleep_time <- 90
+    }
+    
+    print(paste("Sleeping for", sleep_time, "seconds"))
+    
+    Sys.sleep(sleep_time)
   }
 }
 ```
