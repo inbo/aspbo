@@ -45,20 +45,25 @@ query <- query %>%
 num_active_downloads <- 3
 
 while(num_active_downloads >=3){
-
-# Get list of all downloads
-downloads <- occ_download_list()
-
-# Filter for active downloads (status is RUNNING or PREPARING)
-active_downloads <- downloads[downloads$status %in% c("RUNNING", "PREPARING"), ]
-
-# Get the count of active downloads
-num_active_downloads <- nrow(active_downloads)
-
-print(paste("Number of active downloads:", num_active_downloads))
-
-Sys.sleep(60)
-
+  
+  # Get list of all downloads
+  downloads <- occ_download_list(user = Sys.getenv("gbif_user"),
+                                 pwd = Sys.getenv("gbif_pwd"))
+  
+  downloads <- as.data.frame(downloads)
+  
+  # Filter for active downloads (status is RUNNING or PREPARING)
+  active_downloads <- downloads[downloads$results$status %in% c("RUNNING", "PREPARING"), ]
+  
+  # Get the count of active downloads
+  num_active_downloads <- nrow(active_downloads)
+  
+  print(paste("Number of active downloads:", num_active_downloads))
+  
+  if(num_active_downloads >= 3){
+    print("Sleeping for 60 seconds")
+    Sys.sleep(60)
+  }
 }
 ```
 
