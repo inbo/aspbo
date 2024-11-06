@@ -67,7 +67,7 @@ while(num_active_downloads >= 3){
       sleep_time <- 20
     }
     
-    if(rank == "SUBSPECIES_FORMA_VARIETY"){
+    if(rank == "SUBSPECIES_FORM_VARIETY"){
       sleep_time <- 45
     }
     
