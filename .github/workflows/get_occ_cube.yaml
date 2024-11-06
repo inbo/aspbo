@@ -186,7 +186,7 @@ jobs:
       - name: download rank cubes artifacts 
         uses: actions/download-artifact@v3 
         with: 
-          name: be_alientaxa_cube_*
+          path: ./cube_data/*
         
       - name: compile cubes
         run: |
