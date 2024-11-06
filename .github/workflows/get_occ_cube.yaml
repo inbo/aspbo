@@ -130,7 +130,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: be_alientaxa_cube_${{ matrix.param_value }}.csv
-          path: ./cube_data/be_alientaxa_cube_${{ matrix.param_value }}.csv
+          path: ./cube_data/
           
       - name: Debug info
         run: |
@@ -193,7 +193,6 @@ jobs:
         
       - name: compile cubes
         run: |
-          echo "Current directory: $(pwd)"
           echo "Contents of cube_data directory:"
           ls -R ./cube_data/
           source("src/get_cubes/run_compile_cubes.R")
