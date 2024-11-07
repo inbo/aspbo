@@ -142,7 +142,7 @@ if(nrow(missing_provinces_gem) > 0){
 missing_provinces_geom <- missing_provinces %>% 
   filter(is.na(gemeente) & !is.na(geometry)) %>% 
   distinct(geometry) %>% 
-  st_buffer(100)
+  st_buffer(30)
 
 #### intersect again with gemeentes ####
 missing_provinces_geom$Gemeente <- apply(sf::st_intersects(gem, 
