@@ -193,8 +193,6 @@ jobs:
         
       - name: compile cubes
         run: |
-          echo "Contents of cube_data directory:"
-          ls -R ./cube_data/
           source("src/get_cubes/run_compile_cubes.R")
         shell: Rscript {0}
         
