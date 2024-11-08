@@ -118,7 +118,7 @@ jobs:
         shell: Rscript {0}
         
       - name: download queries
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with: 
           path: ./data/interim/cube_queries/*
           
@@ -184,7 +184,7 @@ jobs:
         shell: Rscript {0}
         
       - name: download rank cubes artifacts 
-        uses: actions/download-artifact@v3 
+        uses: actions/download-artifact@v4 
         with: 
           pattern: be_alientaxa_cube_*
           merge-multiple: true
