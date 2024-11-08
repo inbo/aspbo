@@ -186,6 +186,8 @@ jobs:
       - name: download rank cubes artifacts 
         uses: actions/download-artifact@v3 
         with: 
+          pattern: be_alientaxa_cube_*
+          merge-multiple: true
           path: ./cube_data/
           
       - name: List cube_data directory
