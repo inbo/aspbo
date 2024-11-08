@@ -38,7 +38,8 @@ table(raw_muskrat_data$datasetName,
 muskrat_data_redux <- raw_muskrat_data %>% 
   filter(samplingProtocol != "casual observation",
          !grepl(pattern = "material lost/broken",
-                x = samplingProtocol))
+                x = samplingProtocol)) %>% 
+  filter(!is.na(individualCount))
 
 # Add spatial component ####
 gem <- st_read("./data/output/UAT_processing/communes.geojson") %>% 
@@ -78,6 +79,7 @@ for(i in 1:length(muskrat_data$Gemeente)){
   muskrat_data$provincie[i] <- as.character(muskrat_data$Provincie[[i]][1])
 }
 
+testthat::expect_length(muskrat_data$provincie, nrow(muskrat_data))
 
 # maintain needed columns ####
 muskrat_data <- muskrat_data %>% 
@@ -141,7 +143,7 @@ if(nrow(missing_provinces_gem) > 0){
 ### Without gemeente but with geometry ####
 missing_provinces_geom <- missing_provinces %>% 
   filter(is.na(gemeente) & !is.na(geometry)) %>% 
-  distinct(geometry) %>% 
+  distinct(geometry, gbifID) %>% 
   st_buffer(30)
 
 #### intersect again with gemeentes ####
@@ -174,15 +176,21 @@ missing_provinces_geom <- missing_provinces_geom %>%
               as.data.frame() %>% 
               select(NAAM, GEWEST), 
             by = c("provincie" = "NAAM")) %>% 
+  st_drop_geometry() %>%
   select(gemeente_new = gemeente,
          provincie_new = provincie,
          gewest_new = GEWEST,
-         geometry) %>% 
-  filter(!is.na(gemeente_new))
+         gbifID) %>% 
+  filter(!is.na(gemeente_new)) 
+
+dupli_missing_provinces_geom <- missing_provinces_geom %>% 
+  group_by(gbifID) %>% 
+  summarise(n = n()) %>% 
+  filter(n > 1)
 
 #### readd information to muskrat_data ####
 muskrat_data <- muskrat_data %>% 
-  st_join(missing_provinces_geom) %>% 
+  left_join(missing_provinces_geom, by = "gbifID") %>% 
   mutate(gemeente = coalesce(gemeente, gemeente_new),
          provincie = coalesce(provincie, provincie_new),
          gewest = coalesce(gewest, gewest_new)) %>% 
