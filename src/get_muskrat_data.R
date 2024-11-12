@@ -211,7 +211,15 @@ if(nrow(missing_provinces_final) > 0){
 }
 
 muskrat_data <- muskrat_data %>% 
-  filter(!is.na(provincie))
+  mutate(provincie = case_match(provincie,
+                                is.na(provincie) ~ "unknown",
+                                .default = provincie),
+         gemeente = case_match(gemeente,
+                               is.na(gemeente) ~ "unknown",
+                               .default = gemeente),
+         gewest = case_match(gewest,
+                             is.na(gewest) ~ "unknown",
+                             .default = gewest))
 
 # Export ####
 write_csv(muskrat_data, "./data/output/UAT_direct/Ondatra_zibethicus.csv")
