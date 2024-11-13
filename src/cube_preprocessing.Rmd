@@ -142,6 +142,8 @@ last_observed_taxon <- be_alientaxa_cube %>%
   group_by(taxonKey) %>% 
   summarise(last_observed = max(year, na.rm = TRUE)) %>% 
   ungroup()
+
+df <- be_alientaxa_cube
 ```
 
 Free some ram. `be_alientaxa_cube` is no longer needed.
@@ -185,6 +187,7 @@ taxa_df <-
            na = "",
            guess_max = 5000
   )
+
 taxa_df <-
   taxa_df %>%
   filter(locationId == "ISO_3166:BE")
