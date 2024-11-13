@@ -44,7 +44,7 @@ for(r in cube_files){
 }
 ```
 
-```{r map compiled cube to match occ cube format}
+```{r map compiled cube to match occ cube format, message=NA}
 expected_colnames <- c("year", "eea_cell_code", "taxonKey", "n", "min_coord_uncertainty")
 
 compiled_cube <- compiled_cube %>% 
@@ -65,6 +65,8 @@ missing_taxonKeys <- compiled_cube %>%
 if(nrow(missing_taxonKeys) > 0){
   stop(paste0("Missing taxonKeys for ranks: ", paste(missing_taxonKeys$rank, collapse = ", ")))
 }
+
+cat("These ranks where included in the compiled cube: ", compiled_cube %>% select(rank) %>% distinct() %>% pull())
 
 compiled_cube <- compiled_cube %>% 
   select(year, 
