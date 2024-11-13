@@ -19,7 +19,7 @@
   WHERE  
     occurrenceStatus = 'PRESENT'
     AND taxonKey IN (<--nubkeys-->)
-AND continent = 'EUROPE'
+    AND (continent = 'EUROPE' OR countrycode = 'BE')
     AND year >= 1900
     AND hasCoordinate = TRUE
     AND NOT ARRAY_CONTAINS(issue, 'ZERO_COORDINATE')

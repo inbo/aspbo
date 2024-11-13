@@ -18,7 +18,7 @@ SELECT
     occurrence
   WHERE
     occurrenceStatus = 'PRESENT'
-    AND continent = 'EUROPE'
+    AND (continent = 'EUROPE' OR countrycode = 'BE')
     AND year >= 1900
     AND hasCoordinate = TRUE    
     AND familyKey IS NOT NULL
