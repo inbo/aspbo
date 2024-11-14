@@ -128,11 +128,12 @@ which is updated by the following code:
 
 ```{r add gemeente and provincie to data_cube}
 be_alientaxa_cube <- df %>% 
-  select(year,eea_cell_code,taxonKey = taxonKey, n = obs, min_coord_uncertainty, -cobs) %>%
   left_join(utm1_gemeentes_provincies, by = c("eea_cell_code" = "CELLCODE")) %>% 
-  st_drop_geometry() %>%
-  select(c(year,eea_cell_code,taxonKey,n,min_coord_uncertainty,isFlanders,isWallonia,isBrussels,gemeente,provincie,gewest)) %>% 
-  filter(!is.na(isFlanders)|!is.na(isWallonia)|!is.na(isBrussels)) %>% 
+  st_drop_geometry() %>% 
+filter(!is.na(isFlanders)|!is.na(isWallonia)|!is.na(isBrussels))
+
+be_alientaxa_cube %>%
+  select(c(year,eea_cell_code,taxonKey,n = obs,min_coord_uncertainty,isFlanders,isWallonia,isBrussels,gemeente,provincie,gewest)) %>% 
   write_csv(file.path(cube_path, "be_alientaxa_cube.csv"))
 ```
 
