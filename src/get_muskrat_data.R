@@ -199,10 +199,6 @@ muskrat_data <- muskrat_data %>%
 missing_provinces_final <- muskrat_data %>% 
   filter(is.na(provincie))
 
-leaflet::leaflet(missing_provinces_final) %>% 
-  leaflet::addTiles() %>% 
-  leaflet::addCircles()
-
 if(nrow(missing_provinces_final) > 0){
   write_csv(missing_provinces_final, "./data/interim/muskrat_missing_provinces_final.csv")
 }else{
