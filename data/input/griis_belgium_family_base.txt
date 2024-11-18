@@ -26,7 +26,7 @@ SELECT
     AND NOT ARRAY_CONTAINS(issue, 'COORDINATE_OUT_OF_RANGE')
     AND NOT ARRAY_CONTAINS(issue, 'COORDINATE_INVALID')
     AND NOT ARRAY_CONTAINS(issue, 'COUNTRY_COORDINATE_MISMATCH')
-    AND LOWER(identificationVerificationStatus) NOT IN (
+    AND (LOWER(identificationVerificationStatus) NOT IN (
       'unverified',
       'unvalidated',
       'not validated',
@@ -37,7 +37,7 @@ SELECT
       'unconfirmed',
       'unconfirmed - not reviewed',
       'validation requested'
-      )
+      ) OR identificationVerificationStatus IS NULL)
    AND familyKey IN (<--nubkeys-->)
  GROUP BY
     year,
