@@ -39,6 +39,7 @@ SELECT
       'validation requested'
       ) OR identificationVerificationStatus IS NULL)
    AND familyKey IN (<--nubkeys-->)
+   AND coordinateUncertaintyInMeters <= 10000
  GROUP BY
     year,
     eeaCellCode,

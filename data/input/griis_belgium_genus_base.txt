@@ -39,6 +39,7 @@ SELECT
       'unconfirmed - not reviewed',
       'validation requested'
       ) OR identificationVerificationStatus IS NULL)
+    AND coordinateUncertaintyInMeters <= 10000
   GROUP BY
     year,
     eeaCellCode,
