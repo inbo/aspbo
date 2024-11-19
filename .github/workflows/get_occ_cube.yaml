@@ -76,7 +76,7 @@ jobs:
       matrix:
         config:
           - { os: ubuntu-latest, r: "release" }
-        param_value: ["FAMILY", "GENUS", "SPECIES", "SUBSPECIES_FORM_VARIETY"]
+        param_value: ["FAMILY", "GENUS", "SPECIES", "SUBSPECIES_FORM_VARIETY", "NO_FILTER"]
         
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
