@@ -63,6 +63,10 @@ while(num_active_downloads >= 3 | num_active_downloads == "--init--"){
   
   message(paste("Number of active downloads:", num_active_downloads))
   
+  if(num_active_downloads == "--init--"){
+    sleep_time <- 165 # initial sleep time if rank is not one of the options
+  }
+  
   if(rank == "SPECIES"){
     sleep_time <- 20
   }
@@ -71,12 +75,16 @@ while(num_active_downloads >= 3 | num_active_downloads == "--init--"){
     sleep_time <- 45
   }
   
+  if(rank == "NO_FILTER"){
+    sleep_time <- 65
+  }
+  
   if(rank == "GENUS"){
-    sleep_time <- 70
+    sleep_time <- 95
   }
   
   if(rank == "FAMILY"){
-    sleep_time <- 90
+    sleep_time <- 145
   }
   
   if(num_active_downloads >= 3 | num_active_downloads == "--init--"){
@@ -97,7 +105,6 @@ while(num_active_downloads >= 3 | num_active_downloads == "--init--"){
     num_active_downloads <- nrow(active_downloads)
     
   }
-  
 }
 
 if(num_active_downloads < 3){
