@@ -15,7 +15,7 @@ library(stringr)
 ```
 
 ```{r set ranks}
-ranks <- c("GENUS", "FAMILY", "SPECIES", "SUBSPECIES_FORM_VARIETY")
+ranks <- c("GENUS", "FAMILY", "SPECIES", "SUBSPECIES_FORM_VARIETY", "NO_FILTER")
 ```
 
 ```{r read in the data, message=NA}
@@ -54,6 +54,7 @@ compiled_cube <- compiled_cube %>%
     rank == "GENUS" ~ genuskey,
     rank == "FAMILY" ~ familykey,
     rank == "SUBSPECIES_FORM_VARIETY" ~ taxonkey,
+    rank == "NO_FILTER" ~ taxonkey,
     TRUE ~ as.numeric(NA)
   )) 
 
