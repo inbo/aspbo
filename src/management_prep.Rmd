@@ -168,7 +168,6 @@ cleanData <- cleanData %>%
          !grepl("13373", verbatimLocality),
          !is.na(lifeStage))
 
-
 table(cleanData$verbatimLocality, cleanData$year)
 ```
 
@@ -210,13 +209,27 @@ locations <- locations_intersect %>%
                                NISCODE > 30000 ~ "West-Vlaanderen",
                                NISCODE > 20000 ~ "Vlaams-Brabant",
                                NISCODE > 10000 ~ "Antwerpen",
-                               TRUE ~ NA_character_)) %>% 
-  dplyr::select(locationID, NISCODE, NAAM, provincie)
+                               TRUE ~ "unknown")) %>% 
+  dplyr::select(locationID, NISCODE, gemeente = NAAM, provincie) %>% 
+  mutate(gemeente = case_when(is.na(gemeente) ~ "unknown",
+                              TRUE ~ gemeente))
 
 locations <- st_set_geometry(locations, NULL)
 
 cleanData <- cleanData %>% 
-  left_join(locations)
+  left_join(locations, by = "locationID") %>% 
+  mutate(gewest = case_when(level1Name == "Vlaanderen" ~ "flanders",
+                            level1Name == "Wallonie" ~ "wallonia",
+                            level1Name == "Brussels" ~ "brussels",
+                            TRUE ~ "unknown"))
+
+missing_locations <- cleanData %>% 
+  filter(is.na(provincie) | is.na(gemeente)) %>% 
+  dplyr::select(gbifID, locationID, decimalLatitude, decimalLongitude) %>% 
+  write_csv("./data/interim/sk_missing_locations.csv")
+
+cleanData <- cleanData %>%
+  filter(!gbifID %in% missing_locations$gbifID)
 ```
 
 Om de CPUE te kunnen berekenen hebben we het aantal fuiken nodig. 
@@ -229,10 +242,13 @@ table(cleanData$sampleSizeUnit, useNA = "ifany")
 
 met_fuiknr_1 <- cleanData %>% 
   filter(verbatimLocality != "", 
-         sampleSizeUnit == "") %>%
-  mutate(fuiknr = as.numeric(gsub(pattern = "Fuik ",
-                                  replacement = "",
-                                  verbatimLocality)),
+         sampleSizeUnit == "",
+         grepl(pattern = "fuik", verbatimLocality, ignore.case = TRUE)) %>%
+  mutate(fuiknr = as.numeric(gsub(pattern = "fuik", 
+                       replacement = "",
+                       x = str_extract(verbatimLocality,
+                                         pattern = "Fuik [0-9]"),
+                       ignore.case = TRUE)),
          fuiknr = case_when(gbifID == 1135634678 ~ 3, # fuiknr zonder spatie
                             TRUE ~ fuiknr)) 
 
@@ -293,11 +309,12 @@ cleanData <- cleanData %>%
                 eventID,
                 locationID,
                 NISCODE, 
-                NAAM,
+                gemeente,
                 provincie, 
                 verbatimLocality,
                 locality,
-                n_fuiken)
+                n_fuiken,
+                gewest)
 ```
 
 ```{r export cleanData}
