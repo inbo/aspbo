@@ -73,6 +73,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182134007	2223840	Penaeus aztecus	2018	2018	Malacostraca	Animalia
 152543820	2284443	Mastophorus	2004	2011	Chromadorea	Animalia
 152543744	2286079	Crassostrea virginica	1960	2017	Bivalvia	Animalia
+152543805	2287249	Ensis directus	1987	2016	Bivalvia	Animalia
 152543766	2288859	Psiloteredo megotara	1600	2016	Bivalvia	Animalia
 156872873	2292567	Cipangopaludina chinensis	2016	2021	Gastropoda	Animalia
 157092291	2294131	Allopeas clavulinum	2003	2003	Gastropoda	Animalia
@@ -291,6 +292,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544073	3125765	Stuartina muelleri	1906	1914	Magnoliopsida	Plantae
 152544065	3125944	Santolina rosmarinifolia	1912	1912	Magnoliopsida	Plantae
 152544062	3126046	Erigeron pampeanus	1911	1911	Magnoliopsida	Plantae
+152543976	3127613	Centaurea paniculata	1895	1895	Magnoliopsida	Plantae
 152543970	3128007	Centaurea orientalis	1893	1894	Magnoliopsida	Plantae
 152543969	3128437	Centaurea glaberrima	1850	1850	Magnoliopsida	Plantae
 213215214	3132567	Galinsoga quadriradiata	1981	2022	Magnoliopsida	Plantae
@@ -406,6 +408,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152547148	4148721	Hordeum euclaston	1906	1907	Liliopsida	Plantae
 152547149	4149167	Hordeum comosum	1891	1902	Liliopsida	Plantae
 213213143	4149175	Eragrostis brownii	1920	1920	Liliopsida	Plantae
+152546900	4152037	Helictotrichon sempervirens	1981	1981	Liliopsida	Plantae
 152547043	4154800	Avena brevis	1885	1909	Liliopsida	Plantae
 213212997	4155246	Moorochloa eruciformis	1947	1949	Liliopsida	Plantae
 213213619	4194303	Ribes aureum villosum	1897	2020	Magnoliopsida	Plantae
@@ -452,7 +455,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182133085	5185859	Lovenella assimilis	2009	2009	Hydrozoa	Animalia
 159746857	5188774	Barentsia ramosa	1962	1962	NA	Animalia
 213213493	5190912	Testacella haliotidea	1860	1860	Gastropoda	Animalia
-152543507	5204034	Oncorhynchus kisutch	NA	NA	NA	Animalia
 152543377	5216933	Rhinella marina	2010	2019	Amphibia	Animalia
 182133860	5220394	Sternotherus carinatus	2020	2020	Testudines	Animalia
 182133704	5221810	Basiliscus plumifrons	2017	2017	Squamata	Animalia
@@ -489,7 +491,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545131	5345430	Astragalus oxyglottis	1955	1955	Magnoliopsida	Plantae
 213213860	5349991	Coronilla securidaca	1909	1909	Magnoliopsida	Plantae
 213213877	5354675	Chamaecytisus elongatus	2016	2021	Magnoliopsida	Plantae
-182134200	5354799	Lotus hirsutus	2004	2004	Magnoliopsida	Plantae
 152545028	5356429	Lathyrus angulatus	1850	1850	Magnoliopsida	Plantae
 152545049	5356971	Lotus conimbricensis	1809	1850	Magnoliopsida	Plantae
 152545083	5358301	Scorpiurus vermiculatus	1957	1957	Magnoliopsida	Plantae
@@ -720,6 +721,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213511	8791507	Physalis philadelphica	2008	2017	Magnoliopsida	Plantae
 213213618	8864505	Macomopsis melo	2021	2021	Bivalvia	Animalia
 213214887	8909872	Rumex hypogaeus	1900	1992	Magnoliopsida	Plantae
+213213012	8918909	Bromus hordeaceus divaricatus	1857	1870	Liliopsida	Plantae
 182133699	8953936	Caiman crocodilus	2017	2017	Crocodylia	Animalia
 213212580	8991514	Caracara plancus cheriway	NA	NA	Aves	Animalia
 182133741	9022569	Chrysopelea ornata	2014	2014	Squamata	Animalia
