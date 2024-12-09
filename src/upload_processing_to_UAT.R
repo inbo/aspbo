@@ -80,8 +80,6 @@ print("indicators")
 createTabularData(dataDir =  processingFilePath, type = "indicators", bucket = bucket)
 print("unionlist")
 createTabularData(dataDir =  processingFilePath, type = "unionlist", bucket = bucket)
-print("occurrence")
-createTabularData(dataDir = processingFilePath, type = "occurrence", bucket = bucket)
 
 ###################################################
 # test if all the data files needed are on bucket #
@@ -124,14 +122,6 @@ test_that("Load unionlistData", {
   expect_s3_class( unionlistData, "data.table")
   
 })
-
-test_that("Load occurrenceData", {
-  occurrenceData <- loadTabularData(type = "occurrence")
-  expect_s3_class( occurrenceData, "data.table")
-  
-})
-
-
 
 test_that("Load full_timeseries", {
   readS3(file = "full_timeseries.RData")
