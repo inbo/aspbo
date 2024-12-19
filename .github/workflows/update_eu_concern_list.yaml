@@ -101,7 +101,7 @@ jobs:
           github_token: ${{ secrets.AUTOMATISATION }}
           target_branch: uat
           title: "[AUTO] update eu concern list"
-          template: .github/PR_PR_update_eu_concern_list.md
+          template: .github/PR_update_eu_concern_list.md
           reviewer: SanderDevisscher
           label: automated workflow
           get_diff: false
