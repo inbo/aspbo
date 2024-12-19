@@ -145,6 +145,22 @@ plot(utm1_gemeentes, max.plot=1)
 
 
 #----------------------------------------
+#---ISSUE 253: Correct gemeente names----
+#----------------------------------------
+
+utm1_gemeentes_provincies <- utm1_gemeentes_provincies %>% 
+  mutate(gemeente = case_match(gemeente,
+                               "Buetgenbach" ~ "Bütgenbach",
+                               "Ouderghem" ~ "Oudergem",
+                               .default = gemeente))
+
+utm10_gemeentes_provincies <- utm10_gemeentes_provincies %>%
+  mutate(gemeente = case_match(gemeente,
+                               "Buetgenbach" ~ "Bütgenbach",
+                               "Ouderghem" ~ "Oudergem",
+                               .default = gemeente))
+
+#----------------------------------------
 #--- Save files again as geopackage------
 #----------------------------------------
 st_write(obj = utm1_gemeentes_provincies,

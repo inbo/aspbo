@@ -6,7 +6,8 @@ The alien species portal backoffice contains automated data preparation scripts 
 
 [![get_muskrat_data](https://github.com/inbo/aspbo/actions/workflows/get_muskrat_data.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_muskrat_data.yaml)
 
-[![get_vespa_velutina_management](https://github.com/inbo/aspbo/actions/workflows/get_vespa_velutina_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_vespa_velutina_management.yaml)
+[![get_vespa_velutina_management](https://github.com/inbo/aspbo/actions/workflows/get_vespa_velutina_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_vespa_velutina_management.yaml) 
+ -**DISABLED**-
 
 [![get_oxyura_jamaicensis_management](https://github.com/inbo/aspbo/actions/workflows/get_oxyura_jamaicensis_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_oxyura_jamaicensis_management.yaml)
 
@@ -16,6 +17,8 @@ The alien species portal backoffice contains automated data preparation scripts 
 [![update eu concern list](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml)
 
 ## Observations dataflows
+[![download occurrence cube](https://github.com/inbo/aspbo/actions/workflows/get_occ_cube.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_occ_cube.yaml)
+
 [![cube preprocessing](https://github.com/inbo/aspbo/actions/workflows/cube_preprocessing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/cube_preprocessing.yaml)
 
 ## Upload dataflows
