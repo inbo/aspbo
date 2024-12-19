@@ -12,7 +12,7 @@ get_current_branch <- function() {
 # Load the data
 current_branch <- get_current_branch()
 data_url <- paste0("https://raw.githubusercontent.com/inbo/aspbo/", current_branch, "/data/output/UAT_direct/translations.csv")
-translations <- read.csv2(data_url)
+translations <- read_csv2(data_url)
 
 # Check column names and print them
 print(colnames(translations))
@@ -85,7 +85,7 @@ server <- function(input, output, session) {
     translations[translations$title_id == input$title_id, lang_col_description] <<- input$description_unformatted
     
     # Save to CSV (this will overwrite the existing file; adjust as needed)
-    write_csv2(translations, "translations.csv")
+    write_csv2(translations, "../data/output/UAT_direct/translations.csv")
     
     showModal(modalDialog(
       title = "Success",
