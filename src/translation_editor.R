@@ -3,19 +3,14 @@ library(dplyr)
 library(readr)
 library(htmltools)
 
-# Function to get the current branch
-get_current_branch <- function() {
-  branch <- system("git rev-parse --abbrev-ref HEAD", intern = TRUE)  # Default to "uat" if not set
-  return(branch)
+# Function to load data
+load_data <- function() {
+  translations <- read_csv2("../data/output/UAT_direct/translations.csv")
+  return(translations)
 }
 
-# Load the data
-current_branch <- get_current_branch()
-data_url <- paste0("https://raw.githubusercontent.com/inbo/aspbo/", current_branch, "/data/output/UAT_direct/translations.csv")
-translations <- read_csv2(data_url)
-
-# Check column names and print them
-print(colnames(translations))
+# Initial data load
+translations <- load_data()
 
 # Define UI
 ui <- fluidPage(
@@ -40,16 +35,18 @@ ui <- fluidPage(
 # Define server logic
 server <- function(input, output, session) {
   
+  # Reactive value to store translations
+  translations_rv <- reactiveVal(translations)
+  
   # Update title_id choices after data is loaded
   observe({
-    req(translations)
-    updateSelectInput(session, "title_id", choices = unique(translations$title_id))
+    updateSelectInput(session, "title_id", choices = unique(translations_rv()$title_id))
   })
   
   # Reactive expression to filter data based on selected title_id
   filtered_data <- reactive({
     req(input$title_id)
-    translations %>% filter(title_id == input$title_id)
+    translations_rv() %>% filter(title_id == input$title_id)
   })
   
   # Update text inputs when title_id or language changes
@@ -73,7 +70,7 @@ server <- function(input, output, session) {
     HTML(input$description_unformatted)
   })
   
-  # Save changes back to the CSV file (placeholder functionality)
+  # Save changes and reload data
   observeEvent(input$save, {
     req(filtered_data())
     
@@ -81,15 +78,20 @@ server <- function(input, output, session) {
     lang_col_title <- paste0("title_", input$language)
     lang_col_description <- paste0("description_", input$language)
     
-    translations[translations$title_id == input$title_id, lang_col_title] <<- input$title_unformatted
-    translations[translations$title_id == input$title_id, lang_col_description] <<- input$description_unformatted
+    updated_translations <- translations_rv()
+    updated_translations[updated_translations$title_id == input$title_id, lang_col_title] <- input$title_unformatted
+    updated_translations[updated_translations$title_id == input$title_id, lang_col_description] <- input$description_unformatted
     
-    # Save to CSV (this will overwrite the existing file; adjust as needed)
-    write_csv2(translations, "../data/output/UAT_direct/translations.csv")
+    # Save to CSV
+    write_csv2(updated_translations, "../data/output/UAT_direct/translations.csv")
+    
+    # Reload data
+    new_translations <- load_data()
+    translations_rv(new_translations)
     
     showModal(modalDialog(
       title = "Success",
-      "Changes have been saved successfully!",
+      "Changes have been saved successfully and data has been reloaded!",
       easyClose = TRUE,
       footer = NULL
     ))
