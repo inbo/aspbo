@@ -43,6 +43,7 @@ jobs:
           sudo apt-get install libgdal-dev libproj-dev
           sudo apt install libudunits2-dev
           sudo apt install --yes libharfbuzz-dev libfribidi-dev
+          sudo apt-get install -y libfontconfig1-dev
           R --no-save -e 'install.packages("devtools")'
           R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
           R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
@@ -100,7 +101,7 @@ jobs:
           github_token: ${{ secrets.AUTOMATISATION }}
           target_branch: uat
           title: "[AUTO] update eu concern list"
-          template: .github/PR_PR_update_eu_concern_list.md
+          template: .github/PR_update_eu_concern_list.md
           reviewer: SanderDevisscher
           label: automated workflow
           get_diff: false
