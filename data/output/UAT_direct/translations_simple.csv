@@ -10,7 +10,7 @@
 "locationId";"locatie-ID";"ID de la localité";"location ID"
 "native_range";"natuurlijke verspreiding";"aire d'origine";"native range"
 "degree_of_establishment";"mate van vestiging";"degré d'établissement";"degree of establishment"
-"pathway";"introductieroute";"voie d'introduction";"pathway"
+"pathway";"introductieroutes";"voies d'introduction";"pathways"
 "pathway_level1";"niveau 1";"niveau 1";"level 1"
 "pathway_level2";"niveau 2";"niveau 2";"level 2"
 "habitat";"habitat";"habitat";"habitat"
