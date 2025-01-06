@@ -20,20 +20,6 @@ griis_checklist <- read_delim("data/output/UAT_processing/data_input_checklist_i
   distinct(nubKey, rank)
 ```
 
-In some cases the verification status filter is to strict thus excluding species from the cube.
-These species get assigned a different rank and they are handled seperately.
-If the case arises that is species is included into the cube incorrectly we should omit it from this list.
-```{r get species without filter}
-species_without_filter <- read_delim("data/input/alien_taxa_without_filter.tsv", 
-    delim = "\t", escape_double = FALSE, 
-    trim_ws = TRUE)
-```
-
-```{r flag no filter species in griis_checklist}
-griis_checklist <- griis_checklist %>% 
-  mutate(rank = ifelse(nubKey %in% species_without_filter$nubKey, "NO_FILTER", rank))
-```
-
 ```{r split griis_checklist}
 # Split into dataframes based on rank
 griis_checklist_split <- split(griis_checklist, griis_checklist$rank)
