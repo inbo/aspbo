@@ -149,41 +149,7 @@ La couleur de ces icônes indique les données disponibles pour l'espèce respec
   <li><b>Noir</b> : le portail contient des données sur les observations, les indicateurs et (pour les espèces de la liste de l'Union) les rapports.<br>
  <li><b style=""color: #DAA520;"">Jaune</b> : le portail contient des données sur les observations, les indicateurs, la gestion, et (pour les espèces de la liste de l'Union) les rapports.
 </div>
-</details>";;"<!DOCTYPE html>
-<html lang=""en"">
-<head>
-  <meta charset=""UTF-8"">
-  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-  <title>Table Overview</title>
-  <link href=""https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"" rel=""stylesheet""> <!-- Font Awesome link -->
-  <style>
-    .indented {
-      margin-left: 20px;
-    }
-
-    /* Remove default arrow */
-    details summary {
-      list-style: none;
-      color: #c1c443; /* Match the icon color */
-      text-decoration: underline; /* Underline the text */
-    }
-
-    /* Green Icon Style */
-    .green-icon {
-      color:#c1c443 ;
-      font-size: 18px; /* Adjust size as needed */
-      margin-right: 10px; /* Space between the icon and the text */
-    }
-  </style>
-</head>
-<body>
-
-<details>
-  <summary>
-    <i class=""fas fa-angle-double-down green-icon""></i> Table overview
-  </summary>
-
-  <p>This table offers an overview of all species that are included on the alien species portal (= all species on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>). For each species, the table includes information regarding its invasion status in Belgium as documented in the GRIIS checklist. The columns are described below: </p>
+</details>";;"  <p>This table offers an overview of all species that are included on the alien species portal (= all species on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>). For each species, the table includes information regarding its invasion status in Belgium as documented in the GRIIS checklist. The columns are described below: </p>
 
 - <b>Species</b> displays the scientific name of the alien species.<br>
 - <b>GBIF taxonomic ID (taxonkey)</b> shows the taxonkey of the species on <a href= ""https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"" target=""_blank""> GBIF </a>(the Global Biodiversity Information Facility). Learn more about GBIF taxonomic keys on <a href= ""https://discourse.gbif.org/t/understanding-gbif-taxonomic-keys-usagekey-taxonkey-specieskey/3045"" target=""_blank""> this page. </a><br>
@@ -204,7 +170,7 @@ The color of these icons signifies the available data of the respective species 
   <li><b>Black</b> the portal contains data on observations, indicators, and (for Union list species) reporting. <br>
  <li><b style=""color: #DAA520;"">Yellow</b> the portal contains data on observations, indicators, management, and (for Union list species) reporting.
 </div>
-</details>"
+"
 tableNesten;Aantal nesten per provincie (tabel);Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>;Nombre de nids par province (tableau);Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>;Number of nests per province (table);The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
 visualize_pathways_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1);NA;Espèces introduites par voie d'introduction (CBD, niveau 1);NA;Introduced species per pathway (CBD, level 1);NA
 visualize_pathways_year_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1) - trends;NA;Espèces introduites par voie d'introduction (CBD, niveau 1) - tendances;NA;Introduced species per pathway (CBD, level 1) - trends;NA
