@@ -15,7 +15,7 @@ library(stringr)
 ```
 
 ```{r set ranks}
-ranks <- c("GENUS", "FAMILY", "SPECIES", "SUBSPECIES_FORM_VARIETY", "NO_FILTER")
+ranks <- c("GENUS", "FAMILY", "SPECIES", "SUBSPECIES_FORM_VARIETY")
 ```
 
 ```{r read in the data, message=NA}
@@ -60,8 +60,7 @@ compiled_cube <- compiled_cube %>%
 
 missing_taxonKeys <- compiled_cube %>% 
   filter(is.na(taxonKey)) %>% 
-  select(rank) %>% 
-  distinct()
+  distinct(rank) 
 
 if(nrow(missing_taxonKeys) > 0){
   stop(paste0("Missing taxonKeys for ranks: ", paste(missing_taxonKeys$rank, collapse = ", ")))
