@@ -8,7 +8,27 @@ indicator_introduction_year;Aantal nieuw geïntroduceerde soorten per jaar;"Deze
 
 ";Nombre d'espèces nouvellement introduites par an;"Ce graphique présente une série chronologique du nombre d'espèces exotiques nouvellement introduites en Belgique. Les points indiquent le nombre d'espèces introduites pour une année donnée (si des données sont disponibles), basé sur la date de la première observation de l'espèce, comme indiqué dans la <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e\"" target=""_blank"">liste de contrôle GRIIS</a>. La tendance générale, ajustée à l'aide d'un modèle LOESS, est représentée en <b style=""color:#356196ff;"">bleu</b>, tandis que la zone <b style=""color:#94a7baff;"">ombrée en bleu</b> indique l'intervalle de confiance à 95%.";Number of newly introduced species per year;"This graph displays a timeseries of the number of newly introduced alien species in Belgium. Dots represent the number of introduced alien species in a given year (if data are available) based on the date of first observation of the species indicated on the <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist</a>. The overall trend, fitted using a LOESS model, is highlighted in  <b style=""color:#356196ff;"">blue</b>, while the <b style=""color:#94a7baff;"">blue shaded area</b> represents the 95% confidence interval.
 "
-indicator_total_year;Cumulatief aantal geïntroduceerde soorten;NA;Nombre cumulé d'espèces introduites;NA;Cumulative number of introduced species;NA
+indicator_total_year;Cumulatief aantal geïntroduceerde soorten;"Deze grafiek toont het cumulatieve aantal geïntroduceerde uitheemse soorten in België, gebaseerd op hun jaar van eerste observatie zoals gedocumenteerd in de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">GRIIS-checklist</a>.
+
+<br> <span style=""color: red; font-size: 2em; font-weight: bold; animation: pulse 1s infinite;"">!</span> <style> @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } } </style>
+<i>Op dit moment zorgt een bug ervoor dat dezelfde uitheemse soort meerdere keren wordt geteld wanneer deze is waargenomen in Vlaanderen, Brussel en Wallonië. We werken actief aan een snelle oplossing voor dit probleem en bieden onze excuses aan voor het ongemak dat dit kan veroorzaken.</i>";Nombre cumulé d'espèces introduites;"Ce graphique illustre le nombre cumulatif d'espèces exotiques introduites en Belgique, basé sur leur année de première observation, telle que documentée dans la <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">liste GRIIS</a>.
+
+<br> <span style=""color: red; font-size: 2em; font-weight: bold; animation: pulse 1s infinite;"">!</span> <style> @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } } </style>
+<i>Actuellement, un bug entraîne un double comptage des mêmes espèces exotiques lorsqu'elles sont observées en Flandre, à Bruxelles et en Wallonie. Nous travaillons activement à résoudre ce problème dans les plus brefs délais et nous excusons pour tout désagrément que cela pourrait causer.</i>";Cumulative number of introduced species;"This graph illustrates the cumulative number of alien species introduced in Belgium, based on their year of first observation as documented in the <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist </a>.
+
+<br>
+<span style=""color: red; font-size: 2em; font-weight: bold; animation: pulse 1s infinite;"">!</span>
+
+<style>
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+</style>
+
+<i>At present, a bug causes the same alien species to be counted multiple times if observed in Flanders, Brussels, and Wallonia. We are actively working to resolve this issue as quickly as possible and apologize for any inconvenience it may cause.</i>
+"
 indicator_native_range_year;Aantal geïntroduceerde soorten per jaar en per continent van oorsprong;"Verdere opdeling van continenten naar subregios is mogelijk door de optie ""natuurlijke verspreiding"" te selecteren in de dropdown regio-schaal";Nombre d'espèces introduites par an et par continent d'origine;"La subdivision supplémentaire des continents en sous-régions est possible en sélectionnant l'option ""aire d'origine"" dans le menu Région niveau";Number of introduced species per year and per native continent;"Further subdivision of continents into subregions is possible by selecting the ""native range"" option in the region level dropdown menu."
 countOccupancy;Mate van verspreiding van de Unielijstsoorten;"<img src=""https://cdn-icons-png.flaticon.com/512/7801/7801791.png"" alt=""attention"" style=""width:15px;height:15px;""> AANDACHT: Deze figuur is onafhankelijk van geselecteerde filters bovenaan";Degré de répartition des espèces de la liste de l'Union;ATTENTION: Figure indépendante des filtres sélectionnés en haut;Trend in occupancy of Union list species;NOTE: Plot independent of the selected filters above
 get_table_pathways;Aantal geïntroduceerde soorten per introductieroute;"Deze tabel toont het aantal geïntroduceerde soorten en (maximaal) vijf voorbeelden per introductieroute-categorie en bijbehorende subcategorieën, zoals gespecificeerd in
@@ -149,7 +169,7 @@ La couleur de ces icônes indique les données disponibles pour l'espèce respec
   <li><b>Noir</b> : le portail contient des données sur les observations, les indicateurs et (pour les espèces de la liste de l'Union) les rapports.<br>
  <li><b style=""color: #DAA520;"">Jaune</b> : le portail contient des données sur les observations, les indicateurs, la gestion, et (pour les espèces de la liste de l'Union) les rapports.
 </div>
-</details>";;"  <p>This table offers an overview of all species that are included on the alien species portal (= all species on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>). For each species, the table includes information regarding its invasion status in Belgium as documented in the GRIIS checklist. The columns are described below: </p>
+</details>";NA;"<p>This table offers an overview of all species that are included on the alien species portal (= all species on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>). For each species, the table includes information regarding its invasion status in Belgium as documented in the GRIIS checklist. The columns are described below: </p>
 
 - <b>Species</b> displays the scientific name of the alien species.<br>
 - <b>GBIF taxonomic ID (taxonkey)</b> shows the taxonkey of the species on <a href= ""https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"" target=""_blank""> GBIF </a>(the Global Biodiversity Information Facility). Learn more about GBIF taxonomic keys on <a href= ""https://discourse.gbif.org/t/understanding-gbif-taxonomic-keys-usagekey-taxonkey-specieskey/3045"" target=""_blank""> this page. </a><br>
