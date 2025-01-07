@@ -65,7 +65,7 @@ reporting_t01-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{spec
 management-mapOccurrence;Beheer van {{species}};NA;Gestion de {{species}};NA;Management of {{species}};NA
 management-mapInvasion;Invasie geschiedenis van {{species}};NA;Histoire des invasions de {{species}};NA;Invasion history of {{species}};NA
 risk-mapRaster;TrIAS Risicokaarten;Invasieve uitheemse soorten hebben het potentieel om ecosystemen te beschadigen, de biodiversiteit te verminderen en andere problemen voor mensen en dieren in het wild te veroorzaken. Om deze problemen te mitigeren is onderzoek nodig naar wat de potentiële risico’s zijn en welke soorten het meest waarschijnlijk een probleem vormen. Eén van de technieken die we gebruiken is het modelleren van de verspreiding van soorten. Deze modellen zijn bedoeld om de potentiële verspreiding van een soort te schatten, gegeven de bekende omgevingsomstandigheden waarin hij momenteel leeft. In dergelijke modellen kunnen we ook toekomstscenario's in dergelijke modellen integreren, zodat we bij onze risicobeoordeling rekening kunnen houden met klimaatverandering. </br>Het is onwaarschijnlijk dat deze kaarten nauwkeurige voorspellingen zijn van de huidige of toekomstige verspreiding van soorten, maar ze zijn niettemin een leidraad voor wetenschappers die risicobeoordelingen uitvoeren. Ze helpen ons door aan te geven welke gebieden het meest kwetsbaar zijn voor invasie, en of de klimaatverandering waarschijnlijk een grotere of kleinere vestiging van de soort zal veroorzaken.;TrIAS Cartes des Risques;Les espèces exotiques envahissantes peuvent potentiellement endommager les écosystèmes, réduire la biodiversité et causer d’autres problèmes aux humains et à la faune. Afin d'atténuer ces problèmes, des recherches sont nécessaires pour déterminer quels sont les risques potentiels et quelles espèces sont les plus susceptibles de poser problème. L'une des techniques que nous utilisons est la modélisation de la répartition des espèces. Ces modèles visent à estimer la répartition potentielle d'une espèce compte tenu des conditions environnementales connues dans lesquelles elle vit actuellement. Dans de tels modèles, nous pouvons également intégrer des scénarios futurs, afin de pouvoir tenir compte du changement climatique dans notre évaluation des risques. </br>Il est peu probable que ces cartes constituent des prédictions précises de la répartition actuelle ou future des espèces, mais elles constituent néanmoins un guide pour les scientifiques qui effectuent des évaluations des risques. Ils nous aident en indiquant quelles zones pourraient être les plus vulnérables à l’invasion et si le changement climatique est susceptible d’entraîner un plus ou moins grand établissement de l’espèce.;TrIAS Risk Maps;Invasive alien species have the potential to damage ecosystems, reduce biodiversity and cause other problems for people and wildlife. In order to mitigate these problems research is needed into what the potential risks are and which species are most likely to be a problem. One of the techniques we use is species distribution modelling. These models aim to estimate the potential distribution of a species given the known environmental conditions where it is currently living. In such models we can also incorporate future scenarios into such models, so that we can account for climate change in our evaluation of risk. </br>These maps are unlikely to be precise predictions of current or future species distributions, but are nevertheless a guide to scientists conducting risk assessments. They help us by indicating which areas might be most vulnerable to invasion, and whether climate change is likely to cause greater or lesser establishment of the species.
-tableIndicators;NA;"<!DOCTYPE html>
+tableIndicators;;"<!DOCTYPE html>
 <html lang=""en"">
 <head>
   <meta charset=""UTF-8"">
@@ -80,7 +80,7 @@ tableIndicators;NA;"<!DOCTYPE html>
     /* Remove default arrow */
     details summary {
       list-style: none;
-      font-size: 18px; /* Optional: You can adjust the font size */
+      font-size: 14px; /* Optional: You can adjust the font size */
       color: #c1c443; /* Match the icon color */
       text-decoration: underline; /* Underline the text */
     }
@@ -139,7 +139,7 @@ De kleur van deze iconen geeft de beschikbare gegevens van de respectieve soort 
     /* Remove default arrow */
     details summary {
       list-style: none;
-      font-size: 18px; /* Optional: You can adjust the font size */
+      font-size: 14px; /* Optional: You can adjust the font size */
       color: #c1c443; /* Match the icon color */
       text-decoration: underline; /* Underline the text */
     }
@@ -181,7 +181,41 @@ La couleur de ces icônes indique les données disponibles pour l'espèce respec
   <li><b>Noir</b> : le portail contient des données sur les observations, les indicateurs et (pour les espèces de la liste de l'Union) les rapports.<br>
  <li><b style=""color: #DAA520;"">Jaune</b> : le portail contient des données sur les observations, les indicateurs, la gestion, et (pour les espèces de la liste de l'Union) les rapports.
 </div>
-</details>";NA;"<p>This table offers an overview of all species that are included on the alien species portal (= all species on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>). For each species, the table includes information regarding its invasion status in Belgium as documented in the GRIIS checklist. The columns are described below: </p>
+</details>";NA;"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Aperçu du tableau</title>
+  <link href=""https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"" rel=""stylesheet""> <!-- Font Awesome link -->
+  <style>
+    .indented {
+      margin-left: 20px;
+    }
+
+    /* Remove default arrow */
+    details summary {
+      list-style: none;
+      font-size: 14px; /* Optional: You can adjust the font size */
+      color: #c1c443; /* Match the icon color */
+      text-decoration: underline; /* Underline the text */
+    }
+
+    /* Green Icon Style */
+    .green-icon {
+      color:#c1c443 ;
+      font-size: 18px; /* Adjust size as needed */
+      margin-right: 10px; /* Space between the icon and the text */
+    }
+  </style>
+</head>
+<body>
+
+<details>
+  <summary>
+    <i class=""fas fa-angle-double-down green-icon""></i> Aperçu du tableau
+  </summary>
+<p>This table offers an overview of all species that are included on the alien species portal (= all species on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>). For each species, the table includes information regarding its invasion status in Belgium as documented in the GRIIS checklist. The columns are described below: </p>
 
 - <b>Species</b> displays the scientific name of the alien species.<br>
 - <b>GBIF taxonomic ID (taxonkey)</b> shows the taxonkey of the species on <a href= ""https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"" target=""_blank""> GBIF </a>(the Global Biodiversity Information Facility). Learn more about GBIF taxonomic keys on <a href= ""https://discourse.gbif.org/t/understanding-gbif-taxonomic-keys-usagekey-taxonkey-specieskey/3045"" target=""_blank""> this page. </a><br>
@@ -202,7 +236,7 @@ The color of these icons signifies the available data of the respective species 
   <li><b>Black</b> the portal contains data on observations, indicators, and (for Union list species) reporting. <br>
  <li><b style=""color: #DAA520;"">Yellow</b> the portal contains data on observations, indicators, management, and (for Union list species) reporting.
 </div>
-"
+</details>"
 tableNesten;Aantal nesten per provincie (tabel);Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>;Nombre de nids par province (tableau);Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>;Number of nests per province (table);The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
 visualize_pathways_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1);NA;Espèces introduites par voie d'introduction (CBD, niveau 1);NA;Introduced species per pathway (CBD, level 1);NA
 visualize_pathways_year_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1) - trends;NA;Espèces introduites par voie d'introduction (CBD, niveau 1) - tendances;NA;Introduced species per pathway (CBD, level 1) - trends;NA
