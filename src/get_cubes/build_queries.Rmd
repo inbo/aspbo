@@ -10,6 +10,7 @@ A script to download the occurrence cube from the GBIF API.
 library(readr)
 library(magrittr)
 library(dplyr)
+library(rgbif)
 ```
 
 ```{r get griis checklist}
@@ -68,9 +69,34 @@ for(rank in ranks){
 }
 ```
 
-```{r create class query}
+```{r create class query, message=NA}
+griis_class_keys <- griis_checklist %>% 
+  group_by(classKey) %>%
+  summarise(nubKey = first(nubKey))
+
+classless <- griis_checklist %>% 
+  filter(is.na(classKey)) %>% 
+  select(nubKey) %>% 
+  message(paste(" There are", nrow(.), "species without class"))
+
+class_keys <- c()
+
 # get class keys
-class_keys <- unique(griis_checklist$classKey)
+## Initiate progress bar
+pb <- txtProgressBar(min = 0,
+                     max = length(griis_class_keys$nubKey),
+                     initial = 0,
+                     style = 3)
+
+for(i in 1:length(griis_class_keys$nubKey)){
+  setTxtProgressBar(pb, i)
+  class_key <- name_usage(griis_class_keys$nubKey[i], data = "parents")$data %>% 
+  filter(rank == "CLASS") %>%
+  pull(nubKey)
+  
+  class_keys <- sort(c(class_keys, class_key))
+}
+
 
 # get class base query
 class_query <- readLines("data/input/belgium_class_base.txt")
