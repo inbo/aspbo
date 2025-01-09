@@ -35,21 +35,35 @@ ui <- fluidPage(
 # Define server logic
 server <- function(input, output, session) {
   
-  # Reactive value to store translations
   translations_rv <- reactiveVal(translations)
+  current_title_id <- reactiveVal(NULL)
+  current_language <- reactiveVal(NULL)
   
-  # Update title_id choices after data is loaded
   observe({
-    updateSelectInput(session, "title_id", choices = unique(translations_rv()$title_id))
+    updateSelectInput(session, "title_id", 
+                      choices = unique(translations_rv()$title_id),
+                      selected = current_title_id())
   })
   
-  # Reactive expression to filter data based on selected title_id
+  observe({
+    updateSelectInput(session, "language", 
+                      choices = c("en", "fr", "nl"),
+                      selected = current_language())
+  })
+  
+  observeEvent(input$title_id, {
+    current_title_id(input$title_id)
+  })
+  
+  observeEvent(input$language, {
+    current_language(input$language)
+  })
+  
   filtered_data <- reactive({
     req(input$title_id)
     translations_rv() %>% filter(title_id == input$title_id)
   })
   
-  # Update text inputs when title_id or language changes
   observe({
     req(filtered_data())
     lang_col_title <- paste0("title_", input$language)
@@ -59,7 +73,6 @@ server <- function(input, output, session) {
     updateTextAreaInput(session, "description_unformatted", value = filtered_data()[[lang_col_description]])
   })
   
-  # Render HTML for title and description
   output$title_rendered <- renderUI({
     req(input$title_unformatted)
     HTML(input$title_unformatted)
@@ -70,11 +83,9 @@ server <- function(input, output, session) {
     HTML(input$description_unformatted)
   })
   
-  # Save changes and reload data
   observeEvent(input$save, {
     req(filtered_data())
     
-    # Update the translations data frame with the new values
     lang_col_title <- paste0("title_", input$language)
     lang_col_description <- paste0("description_", input$language)
     
@@ -82,10 +93,11 @@ server <- function(input, output, session) {
     updated_translations[updated_translations$title_id == input$title_id, lang_col_title] <- input$title_unformatted
     updated_translations[updated_translations$title_id == input$title_id, lang_col_description] <- input$description_unformatted
     
-    # Save to CSV
     write_csv2(updated_translations, "../data/output/UAT_direct/translations.csv")
     
-    # Reload data
+    current_title_id(input$title_id)
+    current_language(input$language)
+    
     new_translations <- load_data()
     translations_rv(new_translations)
     
@@ -97,6 +109,7 @@ server <- function(input, output, session) {
     ))
   })
 }
+
 
 # Run the application 
 shinyApp(ui = ui, server = server)
