@@ -35,72 +35,90 @@ ui <- fluidPage(
 # Define server logic
 server <- function(input, output, session) {
   
+  # Reactive value to store translations data
   translations_rv <- reactiveVal(translations)
+  
+  # Reactive values to store the current selections of title_id and language
   current_title_id <- reactiveVal(NULL)
   current_language <- reactiveVal(NULL)
   
+  # Update the dropdown choices for Title ID whenever data is reloaded
   observe({
     updateSelectInput(session, "title_id", 
                       choices = unique(translations_rv()$title_id),
-                      selected = current_title_id())
+                      selected = current_title_id()) # Retain current selection
   })
   
+  # Update the dropdown choices for Language and retain the current selection
   observe({
     updateSelectInput(session, "language", 
                       choices = c("en", "fr", "nl"),
-                      selected = current_language())
+                      selected = current_language()) # Retain current selection
   })
   
+  # Update reactive values when user selects a Title ID or Language
   observeEvent(input$title_id, {
-    current_title_id(input$title_id)
+    current_title_id(input$title_id) # Store selected Title ID
   })
   
   observeEvent(input$language, {
-    current_language(input$language)
+    current_language(input$language) # Store selected Language
   })
   
+  # Reactive expression to filter translations data based on selected Title ID
   filtered_data <- reactive({
-    req(input$title_id)
+    req(input$title_id) # Ensure Title ID is selected before proceeding
     translations_rv() %>% filter(title_id == input$title_id)
   })
   
+  # Update text areas when Title ID or Language changes
   observe({
-    req(filtered_data())
-    lang_col_title <- paste0("title_", input$language)
-    lang_col_description <- paste0("description_", input$language)
+    req(filtered_data()) # Ensure filtered data is available
+    
+    lang_col_title <- paste0("title_", input$language)       # Column name for title in selected language
+    lang_col_description <- paste0("description_", input$language) # Column name for description in selected language
     
     updateTextAreaInput(session, "title_unformatted", value = filtered_data()[[lang_col_title]])
     updateTextAreaInput(session, "description_unformatted", value = filtered_data()[[lang_col_description]])
   })
   
+  # Render HTML content for the title in real-time as user types in the text area
   output$title_rendered <- renderUI({
-    req(input$title_unformatted)
+    req(input$title_unformatted) # Ensure input is not NULL before rendering HTML
     HTML(input$title_unformatted)
   })
   
+  # Render HTML content for the description in real-time as user types in the text area
   output$description_rendered <- renderUI({
-    req(input$description_unformatted)
+    req(input$description_unformatted) # Ensure input is not NULL before rendering HTML
     HTML(input$description_unformatted)
   })
   
+  # Save changes made by the user and reload data from CSV file
   observeEvent(input$save, {
-    req(filtered_data())
+    req(filtered_data()) # Ensure filtered data is available
     
-    lang_col_title <- paste0("title_", input$language)
-    lang_col_description <- paste0("description_", input$language)
+    lang_col_title <- paste0("title_", input$language)       # Column name for title in selected language
+    lang_col_description <- paste0("description_", input$language) # Column name for description in selected language
     
     updated_translations <- translations_rv()
+    
+    # Update the relevant row and column with user-provided values
     updated_translations[updated_translations$title_id == input$title_id, lang_col_title] <- input$title_unformatted
     updated_translations[updated_translations$title_id == input$title_id, lang_col_description] <- input$description_unformatted
     
+    # Save updated data back to CSV file
     write_csv2(updated_translations, "../data/output/UAT_direct/translations.csv")
     
+    # Store current selections to preserve them after reload
     current_title_id(input$title_id)
     current_language(input$language)
     
+    # Reload data from CSV file and update reactive value
     new_translations <- load_data()
     translations_rv(new_translations)
     
+    # Show a success message to confirm changes were saved successfully
     showModal(modalDialog(
       title = "Success",
       "Changes have been saved successfully and data has been reloaded!",
