@@ -1,0 +1,53 @@
+SELECT
+    "year",
+    GBIF_EEARGCode(
+      1000,
+      decimalLatitude,
+      decimalLongitude,
+      COALESCE(coordinateUncertaintyInMeters, 1000)
+    ) AS eeaCellCode,
+    classKey,
+    class,
+    familyKey,
+    family,
+    COUNT(*) AS occurrences,
+    MIN(COALESCE(coordinateUncertaintyInMeters, 1000)) AS minCoordinateUncertaintyInMeters,
+    MIN(GBIF_TemporalUncertainty(eventDate)) AS minTemporalUncertainty,
+    IF(ISNULL(classKey), NULL, SUM(COUNT(*)) OVER (PARTITION BY classKey)) AS classCount
+  FROM
+    occurrence
+  WHERE
+    occurrenceStatus = 'PRESENT'
+    AND (continent = 'EUROPE' OR countrycode = 'BE')
+    AND "year" >= 1900
+    AND hasCoordinate = TRUE    
+    AND familyKey IS NOT NULL
+    AND NOT ARRAY_CONTAINS(issue, 'ZERO_COORDINATE')
+    AND NOT ARRAY_CONTAINS(issue, 'COORDINATE_OUT_OF_RANGE')
+    AND NOT ARRAY_CONTAINS(issue, 'COORDINATE_INVALID')
+    AND NOT ARRAY_CONTAINS(issue, 'COUNTRY_COORDINATE_MISMATCH')
+    AND (LOWER(identificationVerificationStatus) NOT IN (
+      'unverified',
+      'unvalidated',
+      'not validated',
+      'under validation',
+      'not able to validate',
+      'control could not be conclusive due to insufficient knowledge',
+      'uncertain',
+      'unconfirmed',
+      'unconfirmed - not reviewed',
+      'validation requested'
+      ) OR identificationVerificationStatus IS NULL)
+   AND classKey IN (213213327, 213212185, 213214633, 213212218, 213214864, 213213120, 213212303, 213212400, 213212239, NA, 213212293, 213212559, 213212334, 213212362, 213213370, 213212203, 213213194, 213213411, 213213283, 213213257, 213213579, 213213688, 213214457, 213214839, 213214648, 213213707, 213214595, 213214858, 213213345, 213212371, 213213280, 213213356, 213212394, 213213364, 213213207, 213212193, 213213700, 213212448, 213212345, 213213401, 213213373, 213214835, 213214613, 213214896, 213212343, 213212386, 213213249, 213214853, 213212199, 213212350, 213213663, 213214639, 213214888)
+   AND coordinateUncertaintyInMeters <= 10000
+ GROUP BY
+    "year",
+    eeaCellCode,
+    classKey,
+    class,
+    familyKey,
+    family
+  ORDER BY
+    "year" DESC,
+    eeaCellCode ASC,
+    familyKey ASC;
