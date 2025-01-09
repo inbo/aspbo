@@ -99,7 +99,7 @@ for(i in 1:length(griis_class_keys$nubKey)){
 
 
 # get class base query
-class_query <- readLines("data/input/belgium_class_base.txt")
+class_query <- gsub(pattern = "  ", replacement = "", paste0(readLines("data/input/belgium_class_base.txt"), collapse = " "))
 
 # add class keys to query
 class_query <- gsub(pattern = "<--nubkeys-->", replacement = paste0(class_keys, collapse = ", "), class_query)
