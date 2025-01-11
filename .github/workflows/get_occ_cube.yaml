@@ -17,44 +17,53 @@ env:
 
 jobs:
   setup-environment:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.AUTOMATISATION }}
-          
-      - name: Set R library path
-        run: echo "R_LIBS_USER=$HOME/.local/share/R" >> $GITHUB_ENV
+  runs-on: ubuntu-latest
+  
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.AUTOMATISATION }}
+        
+    - name: Set up environment
+      run: |
+        echo "R_LIBS_USER=$HOME/.local/share/R" >> $GITHUB_ENV
+        echo "GITHUB_TOKEN=${{ secrets.AUTOMATISATION }}" >> $GITHUB_ENV
+        echo "amiabot=${{ secrets.AMIABOT }}" >> $GITHUB_ENV
 
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: 'release'
+    - name: Setup R
+      uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: 'release'
 
-      - name: Setup pandoc
-        uses: r-lib/actions/setup-pandoc@v2
+    - name: Setup pandoc
+      uses: r-lib/actions/setup-pandoc@v2
 
-      - name: Install linux libraries
-        run: |
-          sudo apt install libsodium-dev libcurl4-openssl-dev libgdal-dev libproj-dev libudunits2-dev libharfbuzz-dev libfribidi-dev
+    - name: Install linux libraries
+      run: |
+        sudo apt update
+        sudo apt install -y libsodium-dev libcurl4-openssl-dev libgdal-dev libproj-dev libudunits2-dev libharfbuzz-dev libfribidi-dev
 
-      - name: Cache R packages
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
-          restore-keys: |
-               ${{ runner.os }}-r-
+    - name: Install R packages
+      run: |
+        source("src/get_cubes/install_packages_cube_base.R")
+        source("src/get_cubes/install_packages_cube_extra.R")
+      shell: Rscript {0}
 
-      - name: Install R packages
-        run: |
-          source("src/get_cubes/install_packages_cube_base.R")
-          source("src/get_cubes/install_packages_cube_extra.R")
-        shell: Rscript {0}
+    - name: Save environment
+      run: |
+        mkdir -p $HOME/environment
+        env > $HOME/environment/env_vars.txt
+        dpkg -l > $HOME/environment/installed_packages.txt
+        R -e "installed.packages()" > $HOME/environment/r_packages.txt
 
+    - name: Upload environment
+      uses: actions/upload-artifact@v4
+      with:
+        name: environment
+        path: $HOME/environment
+        
   build-queries:
     needs: setup-environment
     runs-on: ubuntu-latest
@@ -65,18 +74,17 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
           
-      - name: Set R library path
-        run: echo "R_LIBS_USER=$HOME/.local/share/R" >> $GITHUB_ENV
-        
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
+     - name: Download environment
+        uses: actions/download-artifact@v4
         with:
-          r-version: 'release'
-      
-      - uses: actions/cache@v3
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
+          name: environment
+          path: $HOME/environment
+          
+      - name: Restore environment
+        run: |
+          set -a
+          source $HOME/environment/env_vars.txt
+          set +a
           
       - name: create queries
         run: source("src/get_cubes/run_build_queries.R")
@@ -104,18 +112,17 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
           
-      - name: Set R library path
-        run: echo "R_LIBS_USER=$HOME/.local/share/R" >> $GITHUB_ENV
-        
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
+      - name: Download environment
+        uses: actions/download-artifact@v4
         with:
-          r-version: 'release'
-      
-      - uses: actions/cache@v3
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
+          name: environment
+          path: $HOME/environment
+          
+      - name: Restore environment
+        run: |
+          set -a
+          source $HOME/environment/env_vars.txt
+          set +a
           
       - name: download queries
         uses: actions/download-artifact@v4
@@ -141,18 +148,17 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
           
-      - name: Set R library path
-        run: echo "R_LIBS_USER=$HOME/.local/share/R" >> $GITHUB_ENV
-        
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
+      - name: Download environment
+        uses: actions/download-artifact@v4
         with:
-          r-version: 'release'
-      
-      - uses: actions/cache@v3
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
+          name: environment
+          path: $HOME/environment
+          
+      - name: Restore environment
+        run: |
+          set -a
+          source $HOME/environment/env_vars.txt
+          set +a
           
       - name: download rank cubes artifacts 
         uses: actions/download-artifact@v4 
@@ -180,18 +186,17 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
           
-      - name: Set R library path
-        run: echo "R_LIBS_USER=$HOME/.local/share/R" >> $GITHUB_ENV
-        
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
+      - name: Download environment
+        uses: actions/download-artifact@v4
         with:
-          r-version: 'release'
-      
-      - uses: actions/cache@v3
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
+          name: environment
+          path: $HOME/environment
+          
+      - name: Restore environment
+        run: |
+          set -a
+          source $HOME/environment/env_vars.txt
+          set +a
           
       - name: download class cube artifact 
         uses: actions/download-artifact@v4 
