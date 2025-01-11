@@ -42,7 +42,7 @@ jobs:
       - name: Cache R packages
         uses: actions/cache@v3
         with:
-          path: ${{ env.R_LIBS_USER }}
+          path: ~/.local/share/R
           key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
 
       - name: Install R packages
@@ -63,7 +63,7 @@ jobs:
       
       - uses: actions/cache@v3
         with:
-          path: ${{ env.R_LIBS_USER }}
+          path: ~/.local/share/R
           key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
           
       - name: create queries
@@ -94,7 +94,7 @@ jobs:
       
       - uses: actions/cache@v3
         with:
-          path: ${{ env.R_LIBS_USER }}
+          path: ~/.local/share/R
           key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
           
       - name: download queries
@@ -123,7 +123,7 @@ jobs:
       
       - uses: actions/cache@v3
         with:
-          path: ${{ env.R_LIBS_USER }}
+          path: ~/.local/share/R
           key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
           
       - name: download rank cubes artifacts 
@@ -154,7 +154,7 @@ jobs:
       
       - uses: actions/cache@v3
         with:
-          path: ${{ env.R_LIBS_USER }}
+          path: ~/.local/share/R
           key: ${{ runner.os }}-r-${{ hashFiles('**/install_packages_cube*.R') }}
           
       - name: download class cube artifact 
