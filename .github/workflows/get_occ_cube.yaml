@@ -121,7 +121,8 @@ jobs:
       - name: download queries
         uses: actions/download-artifact@v4
         with: 
-          path: ./data/interim/cube_queries/*
+          path: ./data/interim/cube_queries/
+          merge-multiple: true #to make sure artifacts are downloaded into correct folder and not /artifact-name
           
       - name: download cubes
         run: |
