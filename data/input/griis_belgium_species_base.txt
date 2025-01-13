@@ -19,7 +19,7 @@ SELECT
   WHERE  
     occurrenceStatus = 'PRESENT'
     AND speciesKey IN (<--nubkeys-->)
-    AND (continent = 'EUROPE' OR countrycode = 'BE')
+    AND countrycode = 'BE'
     AND year >= 1900
     AND hasCoordinate = TRUE    
     AND speciesKey IS NOT NULL
