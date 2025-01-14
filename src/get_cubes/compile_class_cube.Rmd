@@ -25,12 +25,12 @@ class_cube <- class_cube_raw %>%
 class_cube <- class_cube %>% 
   select(year, 
          "eea_cell_code" = "eeacellcode", 
-         classKey,
-         cobs = "classcount", 
+         classkey,
+         cobs = "occurrences", 
          min_coord_uncertainty = "mincoordinateuncertaintyinmeters")
 ```
 
 ```{r write compiled cube}
 # Write the compiled cube to a csv file
-write_csv(class_cube, "./cube_data/be_class_cube.csv")
+write_csv(class_cube, "./cube_data/be_classes_cube.csv")
 ```
