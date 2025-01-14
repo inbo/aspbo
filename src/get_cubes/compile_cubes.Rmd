@@ -70,7 +70,7 @@ compiled_cube <- compiled_cube %>%
   select(year, 
          "eea_cell_code" = "eeacellcode", 
          taxonKey, 
-         classKey,
+         classKey = "classkey",
          obs = "occurrences", 
          min_coord_uncertainty = "mincoordinateuncertaintyinmeters")
 ```
