@@ -629,7 +629,7 @@ df_ts <- pmap_dfr(df_cc,
 # add occurrence data
 df_ts <- 
   df_ts %>%
-  left_join(df %>% select(taxonKey, year, eea_cell_code, obs, cobs), 
+  left_join(df %>% select(taxonKey, year, eea_cell_code, obs), 
             by = c("taxonKey", "year", "eea_cell_code"))
 
 # add membership to protected areas
@@ -724,7 +724,7 @@ Create time series data
 input:  "df_timeseries.RData" and "grid.RData" from bucket
 output: full_timeseries.RData
 
-```{r}
+```{r create timeseries}
 alienSpecies::createTimeseries(
   # read grid.RData from bucket
   shapeData = alienSpecies::loadShapeData("grid.RData")$utm1_bel_with_regions, 
