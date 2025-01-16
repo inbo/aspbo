@@ -256,7 +256,7 @@ jobs:
       - name: download class cube artifact 
         uses: actions/download-artifact@v4 
         with: 
-          pattern: be_classes_cube_raw
+          pattern: be_classes_cube_raw.csv
           merge-multiple: true
           path: ./cube_data/
           
