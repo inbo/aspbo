@@ -610,40 +610,73 @@ df_cc %>% head()
 
 For each cell (`eea_cell_code`) and species (`taxonKey`) we can now create a time series:
 
-```{r make_ts, cache=TRUE}
+```{r fun: make_ts, cache=TRUE}
 make_time_series <- function(eea_cell_code, taxonKey, begin_year, last_year ) {
   expand_grid(eea_cell_code = eea_cell_code,
               taxonKey = taxonKey,
               year = seq(from = begin_year, to = last_year))
   
 }
+```
 
+```{r create_timeseries}
 # create timeseries slots
 df_ts <- pmap_dfr(df_cc, 
                   .f = make_time_series, 
                   last_year = year(Sys.Date())
 )
+```
+
+```{r cleanup df_cc}
+remove(df_cc)
+gc()
+```  
 
 ## Add data
 
 # add occurrence data
+
+```{r add_occurrence_data}
 df_ts <- 
   df_ts %>%
   left_join(df %>% select(taxonKey, year, eea_cell_code, obs), 
             by = c("taxonKey", "year", "eea_cell_code"))
+```
+
+# remove df to free up some memory
+
+```{r remove_df}
+remove(df)
+gc()
+```
 
 # add membership to protected areas
+
+```{r add_protected_areas}
 df_ts <- 
   df_ts %>%
   left_join(df_prot_areas %>% select(CELLCODE, natura2000),
             by = c("eea_cell_code" = "CELLCODE"))
+```
+
+```{r remove_prot_areas}
+remove(df_prot_areas)
+gc()
+```  
 
 # add classKey
+
+```{r add_classKey}
 df_ts <- 
   df_ts %>%
   left_join(spec_names %>% 
               select(taxonKey, classKey), 
             by = "taxonKey")
+```
+
+```{r remove_spec_names}
+remove(spec_names)
+gc()
 ```
 
 ## Research effort correction
@@ -659,6 +692,10 @@ df_ts <-
   )
 ```
 
+```{r remove_df_bl}
+remove(df_bl)
+gc()
+```
 
 To correct the effect of research effort of an alien speies, we calculate the number of observations at class level excluding the observations of the alien species itself:
 
