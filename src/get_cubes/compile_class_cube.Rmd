@@ -27,7 +27,10 @@ class_cube <- class_cube %>%
          "eea_cell_code" = "eeacellcode", 
          classKey = "classkey",
          cobs = "occurrences", 
-         min_coord_uncertainty = "mincoordinateuncertaintyinmeters")
+         min_coord_uncertainty = "mincoordinateuncertaintyinmeters") %>% 
+  group_by(year, eea_cell_code, classKey) %>% 
+  summarise(cobs = sum(cobs, na.rm = TRUE),
+            min_coord_uncertainty = min(min_coord_uncertainty, na.rm = TRUE))
 ```
 
 ```{r write compiled cube}
