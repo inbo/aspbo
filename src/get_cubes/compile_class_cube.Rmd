@@ -1,0 +1,39 @@
+---
+title: "compile_cubes"
+author: "Sander Devisscher"
+date: "2024-10-22"
+output: html_document
+---
+
+A script to compile the occurrence cubes from different ranks into a single cube.
+
+```{r libraries}
+library(readr)
+library(magrittr)
+library(dplyr)
+library(stringr)
+```
+
+```{r read in the data, message=NA}
+class_cube_raw <- read_csv("./cube_data/be_classes_cube_raw.csv")
+```
+
+```{r map compiled cube to match occ cube format, message=NA}
+class_cube <- class_cube_raw %>% 
+  filter(!is.na(eeacellcode))
+
+class_cube <- class_cube %>% 
+  select(year, 
+         "eea_cell_code" = "eeacellcode", 
+         classKey = "classkey",
+         cobs = "occurrences", 
+         min_coord_uncertainty = "mincoordinateuncertaintyinmeters") %>% 
+  group_by(year, eea_cell_code, classKey) %>% 
+  summarise(cobs = sum(cobs, na.rm = TRUE),
+            min_coord_uncertainty = min(min_coord_uncertainty, na.rm = TRUE))
+```
+
+```{r write compiled cube}
+# Write the compiled cube to a csv file
+write_csv(class_cube, "./cube_data/be_classes_cube.csv")
+```

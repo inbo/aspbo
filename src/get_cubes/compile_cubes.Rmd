@@ -45,8 +45,6 @@ for(r in cube_files){
 ```
 
 ```{r map compiled cube to match occ cube format, message=NA}
-expected_colnames <- c("year", "eea_cell_code", "taxonKey", "n", "min_coord_uncertainty")
-
 compiled_cube <- compiled_cube %>% 
   filter(!is.na(eeacellcode)) %>%
   mutate(taxonKey = case_when(
@@ -54,7 +52,6 @@ compiled_cube <- compiled_cube %>%
     rank == "GENUS" ~ genuskey,
     rank == "FAMILY" ~ familykey,
     rank == "SUBSPECIES_FORM_VARIETY" ~ taxonkey,
-    rank == "NO_FILTER" ~ taxonkey,
     TRUE ~ as.numeric(NA)
   )) 
 
@@ -66,14 +63,14 @@ if(nrow(missing_taxonKeys) > 0){
   stop(paste0("Missing taxonKeys for ranks: ", paste(missing_taxonKeys$rank, collapse = ", ")))
 }
 
-cat("These ranks where included in the compiled cube: ", compiled_cube %>% select(rank) %>% distinct() %>% pull())
+cat("These ranks where included in the compiled cube: ", paste(unique(compiled_cube$rank), collapse = ", "))
 
 compiled_cube <- compiled_cube %>% 
   select(year, 
          "eea_cell_code" = "eeacellcode", 
          taxonKey, 
+         classKey = "classkey",
          obs = "occurrences", 
-         cobs = "classcount", 
          min_coord_uncertainty = "mincoordinateuncertaintyinmeters")
 ```
 

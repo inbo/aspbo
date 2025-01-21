@@ -10,6 +10,7 @@ A script to download the occurrence cube from the GBIF API.
 library(readr)
 library(magrittr)
 library(dplyr)
+library(rgbif)
 ```
 
 ```{r get griis checklist}
@@ -17,7 +18,7 @@ library(dplyr)
 griis_checklist <- read_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
                               delim = "\t", escape_double = FALSE, 
                               trim_ws = TRUE) %>% 
-  distinct(nubKey, rank)
+  distinct(nubKey, rank, classKey)
 ```
 
 ```{r split griis_checklist}
@@ -66,5 +67,47 @@ for(rank in ranks){
   # export query
   writeLines(query, paste0("data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt"))
 }
+```
+
+```{r create class query, message=NA}
+griis_class_keys <- griis_checklist %>% 
+  group_by(classKey) %>%
+  summarise(nubKey = first(nubKey))
+
+classless <- griis_checklist %>% 
+  filter(is.na(classKey)) %>% 
+  select(nubKey) %>% 
+  message(paste(" There are", nrow(.), "species without class"))
+
+class_keys <- c()
+
+# get class keys
+## Initiate progress bar
+pb <- txtProgressBar(min = 0,
+                     max = length(griis_class_keys$nubKey),
+                     initial = 0,
+                     style = 3)
+
+for(i in 1:length(griis_class_keys$nubKey)){
+  setTxtProgressBar(pb, i)
+  class_key <- name_usage(griis_class_keys$nubKey[i], data = "parents")$data %>% 
+  filter(rank == "CLASS") %>%
+  pull(nubKey)
+  
+  class_keys <- sort(c(class_keys, class_key))
+}
+
+
+# get class base query
+class_query <- gsub(pattern = "  ", replacement = "", paste0(readLines("data/input/belgium_class_base.txt"), collapse = " "))
+
+# add class keys to query
+class_query <- gsub(pattern = "<--nubkeys-->", replacement = paste0(class_keys, collapse = ", "), class_query)
+
+# add quotes to year
+class_query <- gsub(pattern = "year", replacement = "\"year\"", class_query)
+
+# export query
+writeLines(class_query, "data/interim/cube_queries/belgium_class_query.txt")
 ```
 

@@ -58,7 +58,7 @@ if(Sys.getenv("amiabot") != "yes"){
     devtools::install_github("inbo/INBOtheme@v0.5.8")
   }
   
-  if(loaded_inbotheme_version != "0.5.8"){
+  if(length(loaded_inbotheme_version) > 1 || loaded_inbotheme_version != "0.5.8"){
     print("INBOtheme version is not correct >> loading correct version")
     # remove installed INBOtheme
     remove.packages("INBOtheme")
@@ -150,7 +150,6 @@ df <- be_alientaxa_cube
 Free some ram. `be_alientaxa_cube` is no longer needed.
 ```{r free_ram}
 rm(be_alientaxa_cube)
-rm(utm1_gemeentes_provincies)
 gc() #garbage collection
 ```
 
@@ -167,6 +166,39 @@ test_that("Load occurrenceData", {
   occurrenceData <- alienSpecies::loadTabularData(type = "occurrence") 
   expect_s3_class( occurrenceData, "data.table") 
 }) 
+```
+
+### Baseline
+
+We get occurrence data of non alien species grouped at class level, which will be used for correcting the research bias effort:
+
+```{r get_data_baseline}
+df_bl <- read_csv("./cube_data/be_classes_cube.csv")
+```
+
+We add gemeente and provincie to the baseline data cube:
+
+```{r}
+df_bl <- df_bl %>% 
+  left_join(utm1_gemeentes_provincies, by = c("eea_cell_code" = "CELLCODE")) %>% 
+  st_drop_geometry() %>% 
+  filter(!is.na(isFlanders)|!is.na(isWallonia)|!is.na(isBrussels))
+```
+
+```{r free up some ram 2}
+rm(utm1_gemeentes_provincies)
+gc() #garbage collection
+```
+
+Nota: these data have been also published on [Zenodo](https://doi.org/10.5281/zenodo.3632749).
+
+We remove columns we will never use:
+
+```{r remove_coords_uncertainty_baseline}
+df_bl <-
+  df_bl %>%
+  select(-min_coord_uncertainty) %>% 
+  filter(!is.na(classKey))
 ```
 
 ## Checklist data
@@ -307,7 +339,7 @@ spec_names <-
 
 We also retrieve kingdom and class:
 
-```{r get_kingodm_class}
+```{r get_kingdom_class}
 class_key <-
   spec_names %>%
   distinct(classKey) %>%
@@ -378,10 +410,28 @@ df_xy <-
   )
 ```
 
+```{r extract_x_y - baseline}
+df_bl_xy <-
+  df_bl %>%
+  tidylog::distinct(eea_cell_code) %>%
+  bind_cols(
+    tibble(
+      x = unlist(str_extract_all(unique(df_bl$eea_cell_code),
+        pattern = "(?<=E)[0-9\\-]+"
+      )),
+      y = unlist(str_extract_all(unique(df_bl$eea_cell_code),
+        pattern = "(?<=N)[0-9\\-]+"
+      ))
+    ) %>%
+      mutate_all(as.integer)
+  )
+```
+
 Preview:
 
-```{r x_y_preview}
+```{r x_y_preview, eval=FALSE}
 df_xy %>% head()
+df_bl_xy %>% head()
 ```
 
 ## Apply temporal and spatial restraints
@@ -512,6 +562,16 @@ df <-
   filter(eea_cell_code %in% be_cellcodes)
 ```
 
+```{r add restraints to baseline data}
+df_bl <-
+  df_bl %>%
+  tidylog::left_join(df_bl_xy, by = "eea_cell_code") %>%
+  # Recent history
+  tidylog::filter(year > first_year) %>% 
+  # in Belgium
+  tidylog::filter(eea_cell_code %in% be_cellcodes)
+```
+
 ## Create time series
 
 For each species, define cells with at least one observation:
@@ -550,34 +610,63 @@ df_cc %>% head()
 
 For each cell (`eea_cell_code`) and species (`taxonKey`) we can now create a time series:
 
-```{r make_ts, cache=TRUE}
+```{r fun: make_ts, cache=TRUE}
 make_time_series <- function(eea_cell_code, taxonKey, begin_year, last_year ) {
   expand_grid(eea_cell_code = eea_cell_code,
               taxonKey = taxonKey,
               year = seq(from = begin_year, to = last_year))
   
 }
+```
 
+```{r create_timeseries}
 # create timeseries slots
 df_ts <- pmap_dfr(df_cc, 
                   .f = make_time_series, 
                   last_year = year(Sys.Date())
 )
+```
+
+```{r cleanup df_cc}
+remove(df_cc)
+gc()
+```  
 
 ## Add data
 
 # add occurrence data
+
+```{r add_occurrence_data}
 df_ts <- 
   df_ts %>%
-  left_join(df %>% select(taxonKey, year, eea_cell_code, obs, cobs), 
+  left_join(df %>% select(taxonKey, year, eea_cell_code, obs), 
             by = c("taxonKey", "year", "eea_cell_code"))
+```
+
+# remove df to free up some memory
+
+```{r remove_df}
+remove(df)
+gc()
+```
 
 # add membership to protected areas
+
+```{r add_protected_areas}
 df_ts <- 
   df_ts %>%
   left_join(df_prot_areas %>% select(CELLCODE, natura2000),
             by = c("eea_cell_code" = "CELLCODE"))
+```
+
+```{r remove_prot_areas}
+remove(df_prot_areas)
+gc()
+```  
+
 # add classKey
+
+```{r add_classKey}
 df_ts <- 
   df_ts %>%
   left_join(spec_names %>% 
@@ -585,7 +674,28 @@ df_ts <-
             by = "taxonKey")
 ```
 
+```{r remove_spec_names}
+remove(spec_names)
+gc()
+```
+
 ## Research effort correction
+
+```{r Add baseline data}
+# at class level diminished by obs of specific alien taxon
+df_ts <-
+  df_ts %>%
+  left_join(
+    df_bl %>%
+      select(year, eea_cell_code, classKey, cobs),
+    by = c("year", "eea_cell_code", "classKey")
+  )
+```
+
+```{r remove_df_bl}
+remove(df_bl)
+gc()
+```
 
 To correct the effect of research effort of an alien speies, we calculate the number of observations at class level excluding the observations of the alien species itself:
 
@@ -651,7 +761,7 @@ Create time series data
 input:  "df_timeseries.RData" and "grid.RData" from bucket
 output: full_timeseries.RData
 
-```{r}
+```{r create timeseries}
 alienSpecies::createTimeseries(
   # read grid.RData from bucket
   shapeData = alienSpecies::loadShapeData("grid.RData")$utm1_bel_with_regions, 
