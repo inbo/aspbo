@@ -747,7 +747,12 @@ df_ts <-
 df_ts_below_zero <- df_ts %>% filter(cobs < 0)
 
 if(nrow(df_ts_below_zero) > 0){
-  stop("Negative values in cobs column")
+  warning("Negative values in cobs column")
+  
+  # replace negative values with 0
+  df_ts <- 
+    df_ts %>%
+    mutate(cobs = if_else(cobs < 0, 0, cobs))
 }
 
 # replace NAs with 0
