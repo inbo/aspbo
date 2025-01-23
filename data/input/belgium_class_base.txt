@@ -8,8 +8,6 @@ SELECT
     ) AS eeaCellCode,
     classKey,
     class,
-    familyKey,
-    family,
     COUNT(*) AS occurrences,
     MIN(COALESCE(coordinateUncertaintyInMeters, 1000)) AS minCoordinateUncertaintyInMeters,
     MIN(GBIF_TemporalUncertainty(eventDate)) AS minTemporalUncertainty
@@ -43,9 +41,7 @@ SELECT
     year,
     eeaCellCode,
     classKey,
-    class,
-    familyKey,
-    family
+    class
   ORDER BY
     year DESC,
     eeaCellCode ASC,
