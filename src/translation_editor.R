@@ -35,7 +35,14 @@ load_data <- function() {
 
 
 # Initial data load
-translations <- load_data_initiate()
+load_csv <- askYesNo("Do you want to load the data from the CSV to the googlesheet?", title = "Data Load", yes = load_data_initiate, no = NULL)
+
+if(load_csv){
+  translations <- load_data_initiate()
+} else {
+  translations <- load_data()
+}
+
 
 # Define UI
 ui <- fluidPage(
@@ -66,9 +73,7 @@ server <- function(input, output, session) {
     intervalMillis = 5000,  # Check for updates every 5 seconds
     session = session,
     checkFunc = function() {
-      sheet_info <- read_sheet(sheet_id,
-                               sheet = "translations")
-      sheet_info$modified
+      load_data()
     },
     valueFunc = function() {
       load_data()
@@ -102,9 +107,29 @@ server <- function(input, output, session) {
     current_language(input$language) # Store selected Language
   })
   
+  observe({
+    updated_data <- translations_rv()
+    
+    if (!identical(updated_data, translations)) {
+      translations <<- updated_data
+      
+      # Update UI elements if the current selection has changed
+      if (input$title_id %in% updated_data$title_id) {
+        current_row <- updated_data[updated_data$title_id == input$title_id, ]
+        
+        updateTextAreaInput(session, "title_unformatted", 
+                            value = current_row[[paste0("title_", input$language)]])
+        updateTextAreaInput(session, "description_unformatted", 
+                            value = current_row[[paste0("description_", input$language)]])
+      }
+      
+      showNotification("Data updated from Google Sheet", type = "message", duration = 3)
+    }
+  })
+  
   # Reactive expression to filter translations data based on selected Title ID
   filtered_data <- reactive({
-    req(input$title_id) # Ensure Title ID is selected before proceeding
+    req(input$title_id)
     translations_rv() %>% filter(title_id == input$title_id)
   })
   
@@ -182,6 +207,12 @@ server <- function(input, output, session) {
   observe({
     invalidateLater(30000) # 30000 milliseconds = 30 seconds
     autoSave()
+  })
+  
+  # Trigger reload every 5 seconds
+  observe({
+    invalidateLater(5000) # 5000 milliseconds = 5 seconds
+    load_data()
   })
   
   # Save changes made by the user and reload data from CSV file
