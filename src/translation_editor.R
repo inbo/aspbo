@@ -29,8 +29,10 @@ load_data_initiate <- function() {
 load_data <- function() {
   
    # Replace with your actual Google Sheet ID
-  read_sheet(sheet_id,
+  translations <- read_sheet(sheet_id,
              sheet = "translations")
+  
+  return(translations)
 }
 
 
