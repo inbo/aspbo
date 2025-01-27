@@ -2,15 +2,40 @@ library(shiny)
 library(dplyr)
 library(readr)
 library(htmltools)
+library(googlesheets4)
+
+email <- Sys.getenv("email")
+
+# append @inbo.be if missing
+if(!grepl("@", email)) {
+  email <- paste0(email, "@inbo.be")
+}
+
+gs4_auth(email)
+sheet_id <- "1Rgkn1qEFpk7zAc_8QgL_bbXghlD09UzEMSGAIevq2rI" 
 
 # Function to load data
-load_data <- function() {
+load_data_initiate <- function() {
   translations <- read_csv2("../data/output/UAT_direct/translations.csv")
+  
+  write_sheet(translations, 
+              sheet_id,
+              sheet = "translations")
+  
   return(translations)
 }
 
+# Reload data from googlesheet
+load_data <- function() {
+  
+   # Replace with your actual Google Sheet ID
+  read_sheet(sheet_id,
+             sheet = "translations")
+}
+
+
 # Initial data load
-translations <- load_data()
+translations <- load_data_initiate()
 
 # Define UI
 ui <- fluidPage(
@@ -20,7 +45,8 @@ ui <- fluidPage(
     sidebarPanel(
       selectInput("title_id", "Select Title ID:", choices = unique(translations$title_id)),
       selectInput("language", "Select Language:", choices = c("en", "fr", "nl")),
-      actionButton("save", "Save Changes")
+      actionButton("save", "Save to Google Sheet"),
+      actionButton("save_csv", "Save to CSV")  # New button to save data to CSV
     ),
     
     mainPanel(
@@ -36,7 +62,18 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   
   # Reactive value to store translations data
-  translations_rv <- reactiveVal(translations)
+  translations_rv <- reactivePoll(
+    intervalMillis = 5000,  # Check for updates every 5 seconds
+    session = session,
+    checkFunc = function() {
+      sheet_info <- read_sheet(sheet_id,
+                               sheet = "translations")
+      sheet_info$modified
+    },
+    valueFunc = function() {
+      load_data()
+    }
+  )
   
   # Reactive values to store the current selections of title_id and language
   current_title_id <- reactiveVal(NULL)
@@ -94,34 +131,108 @@ server <- function(input, output, session) {
     HTML(input$description_unformatted)
   })
   
+  # Reactive values to track changes
+  title_changed <- reactiveVal(FALSE)
+  description_changed <- reactiveVal(FALSE)
+  
+  # Observe changes in title and description
+  observeEvent(input$title_unformatted, {
+    title_changed(TRUE)
+  })
+  
+  observeEvent(input$description_unformatted, {
+    description_changed(TRUE)
+  })
+  
+  # Auto-save function
+  autoSave <- reactive({
+    req(filtered_data(), input$language, input$title_id)
+    
+    # Check if either title or description has changed
+    if (title_changed() || description_changed()) {
+      lang_col_title <- paste0("title_", input$language)
+      lang_col_description <- paste0("description_", input$language)
+      
+      updated_translations <- translations_rv()
+      
+      if (title_changed()) {
+        updated_translations[updated_translations$title_id == input$title_id, lang_col_title] <- input$title_unformatted
+        title_changed(FALSE)
+      }
+      
+      if (description_changed()) {
+        updated_translations[updated_translations$title_id == input$title_id, lang_col_description] <- input$description_unformatted
+        description_changed(FALSE)
+      }
+      
+      # Update Google Sheet
+      tryCatch({
+        sheet_write(updated_translations, sheet_id, sheet = "translations")
+        showNotification("Changes auto-saved to Google Sheet", type = "message", duration = 3)
+      }, error = function(e) {
+        showNotification(paste("Auto-save failed:", e$message), type = "error", duration = 5)
+      })
+      
+      current_title_id(input$title_id)
+      current_language(input$language)
+    }
+  })
+  
+  # Trigger auto-save every 30 seconds
+  observe({
+    invalidateLater(30000) # 30000 milliseconds = 30 seconds
+    autoSave()
+  })
+  
   # Save changes made by the user and reload data from CSV file
   observeEvent(input$save, {
-    req(filtered_data()) # Ensure filtered data is available
+    req(filtered_data())
     
-    lang_col_title <- paste0("title_", input$language)       # Column name for title in selected language
-    lang_col_description <- paste0("description_", input$language) # Column name for description in selected language
+    lang_col_title <- paste0("title_", input$language)
+    lang_col_description <- paste0("description_", input$language)
     
     updated_translations <- translations_rv()
     
-    # Update the relevant row and column with user-provided values
     updated_translations[updated_translations$title_id == input$title_id, lang_col_title] <- input$title_unformatted
     updated_translations[updated_translations$title_id == input$title_id, lang_col_description] <- input$description_unformatted
     
-    # Save updated data back to CSV file
-    write_csv2(updated_translations, "../data/output/UAT_direct/translations.csv")
+    # Update Google Sheet
+    sheet_write(updated_translations, sheet_id, 
+                sheet = "translations")
     
-    # Store current selections to preserve them after reload
     current_title_id(input$title_id)
     current_language(input$language)
     
-    # Reload data from CSV file and update reactive value
-    new_translations <- load_data()
-    translations_rv(new_translations)
-    
-    # Show a success message to confirm changes were saved successfully
     showModal(modalDialog(
       title = "Success",
-      "Changes have been saved successfully and data has been reloaded!",
+      "Changes have been saved successfully to Google Sheet!",
+      easyClose = TRUE,
+      footer = NULL
+    ))
+  })
+  
+  # Add this new observer for the CSV save button
+  observeEvent(input$save_csv, {
+    req(filtered_data())
+    
+    lang_col_title <- paste0("title_", input$language)
+    lang_col_description <- paste0("description_", input$language)
+    
+    updated_translations <- translations_rv()
+    
+    updated_translations[updated_translations$title_id == input$title_id, lang_col_title] <- input$title_unformatted
+    updated_translations[updated_translations$title_id == input$title_id, lang_col_description] <- input$description_unformatted
+    
+    # Create a file name with current date and time
+    file_name <- "../data/output/UAT_direct/translations.csv"
+    
+    # Save the data to CSV
+    write_csv2(updated_translations, file_name)
+    
+    # Show a success message
+    showModal(modalDialog(
+      title = "CSV Saved",
+      paste("Translations have been saved to", file_name),
       easyClose = TRUE,
       footer = NULL
     ))
