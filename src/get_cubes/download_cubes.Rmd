@@ -158,7 +158,8 @@ metadata_list <- occ_download_meta(cube)
 
 metadata <- data.frame(
   rank = rank,
-  doi = metadata_list$doi
+  doi = metadata_list$doi,
+  created = metadata_list$created
 ) 
 
 metadata <- metadata %>% 
