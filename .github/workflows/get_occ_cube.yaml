@@ -276,7 +276,7 @@ jobs:
         with:
           name: be_classes_cube.csv
           path: ./cube_data/be_classes_cube.csv
-          
+
  compile-cube-metadata:
     runs-on: ${{ matrix.config.os }}
     needs: download-cubes
