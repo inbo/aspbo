@@ -131,11 +131,14 @@ jobs:
       - name: Upload cube artifact
         uses: actions/upload-artifact@v4
         with:
-         name: |
-          ${{ matrix.param_value == 'CLASS' && 'be_classes_cube_raw' || 
-          format('be_alientaxa_cube_{0}', matrix.param_value) }}.csv
-          be_cube_metadata_${{ matrix.param_value }}.csv
-         path: ./cube_data/
+          name: ${{ matrix.param_value == 'CLASS' && 'be_classes_cube_raw' || format('be_alientaxa_cube_{0}', matrix.param_value) }}
+          path: ./cube_data/${{ matrix.param_value == 'CLASS' && 'be_classes_cube_raw' || format('be_alientaxa_cube_{0}', matrix.param_value) }}.csv
+
+      - name: Upload cube metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: be_cube_metadata_${{ matrix.param_value }}
+          path: ./cube_data/be_cube_metadata_${{ matrix.param_value }}.csv
           
           
       - name: Debug info
