@@ -276,3 +276,70 @@ jobs:
         with:
           name: be_classes_cube.csv
           path: ./cube_data/be_classes_cube.csv
+          
+compile-cube-metadata:
+    runs-on: ${{ matrix.config.os }}
+    needs: download-cubes
+    name: compile cube metadata
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      amiabot: ${{ secrets.AMIABOT }}
+      
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt install libsodium-dev
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libgdal-dev libproj-dev
+          sudo apt install libudunits2-dev
+          sudo apt install --yes libharfbuzz-dev libfribidi-dev
+
+      - name: install packages
+        run: |
+          source("src/get_cubes/install_packages_cube_base.R")
+        shell: Rscript {0}
+        
+      - name: download cube metadata artifact 
+        uses: actions/download-artifact@v4 
+        with: 
+          pattern: be_cube_metadata_*
+          merge-multiple: true
+          path: ./cube_data/
+          
+      - name: List cube_data directory
+        run: ls -R ./cube_data/
+        
+      - name: compile cube metadata
+        run: |
+          source("src/get_cubes/run_compile_metadata.R")
+        shell: Rscript {0}
+        
+      - name: upload cube metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: be_cube_metadata.csv
+          path: ./cube_data/be_cube_metadata.csv
