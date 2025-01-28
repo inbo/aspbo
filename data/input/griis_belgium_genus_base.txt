@@ -12,14 +12,13 @@ SELECT
     genus,
     COUNT(*) AS occurrences,
     MIN(COALESCE(coordinateUncertaintyInMeters, 1000)) AS minCoordinateUncertaintyInMeters,
-    MIN(GBIF_TemporalUncertainty(eventDate)) AS minTemporalUncertainty,
-    IF(ISNULL(classKey), NULL, SUM(COUNT(*)) OVER (PARTITION BY classKey)) AS classCount
+    MIN(GBIF_TemporalUncertainty(eventDate)) AS minTemporalUncertainty
   FROM
     occurrence
   WHERE  
     occurrenceStatus = 'PRESENT'
     AND genusKey IN (<--nubkeys-->)
-    AND (continent = 'EUROPE' OR countrycode = 'BE')
+    AND countrycode = 'BE'
     AND year >= 1900
     AND hasCoordinate = TRUE    
     AND genusKey IS NOT NULL

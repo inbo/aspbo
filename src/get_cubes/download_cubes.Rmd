@@ -3,7 +3,7 @@ title: "download_cubes"
 author: "Sander Devisscher"
 date: "2024-10-18"
 params:
-  rank: "GENUS"
+  rank: "CLASS"
 ---
 
 ```{r error handling, message=NA}
@@ -25,7 +25,14 @@ rank <- params$rank
 
 cat(rank)
 
-query <- paste0("./data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt")
+# determine which query to use based on rank
+# CLASS is a special case because it will be used to correct for observation bias.
+# it is exported as the be_classes_cube.csv
+if(rank == "CLASS"){
+  query <- "./data/interim/cube_queries/belgium_class_query.txt"
+} else {
+  query <- paste0("./data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt")
+}
 
 message(query)
 ```
@@ -65,6 +72,10 @@ while(num_active_downloads >= 3 | num_active_downloads == "--init--"){
   
   if(num_active_downloads == "--init--"){
     sleep_time <- 165 # initial sleep time if rank is not one of the options
+  }
+  
+  if(rank == "CLASS"){
+    sleep_time <- 5
   }
   
   if(rank == "SPECIES"){
@@ -130,8 +141,15 @@ if(!dir.exists("./cube_data")){
 ```{r download cube}
 occ_download_wait(cube)
 
-occ_download_get(cube, overwrite = TRUE) %>%
-  occ_download_import() %>% 
-  write_csv(file = paste0("./cube_data/be_alientaxa_cube_", rank, ".csv"))
+data <- occ_download_get(cube, overwrite = TRUE) %>%
+  occ_download_import() 
+
+if(rank == "CLASS"){
+  data <- data %>% 
+    write_csv(file = "./cube_data/be_classes_cube_raw.csv")
+} else {
+  data <- data %>% 
+    write_csv(file = paste0("./cube_data/be_alientaxa_cube_", rank, ".csv"))
+}
 ```
 

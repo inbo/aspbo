@@ -10,6 +10,7 @@ on:
 jobs:
   fetch-data:
     runs-on: ${{ matrix.config.os }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -87,13 +88,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: Download artifact
+      - name: Download be_alientaxa_cube artifact
         uses: actions/download-artifact@v4
         with:
           name: be_alientaxa_cube.csv
           path: ./cube_data/
           run-id: ${{ steps.get-latest-run.outputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          merge-multiple: true
+          
+      - name: Download be_classes_cube artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: be_classes_cube.csv
+          path: ./cube_data/
+          run-id: ${{ steps.get-latest-run.outputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          merge-multiple: true
 
       - name: cube_preprocessing
         run: |
