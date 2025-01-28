@@ -88,9 +88,12 @@ if(Sys.getenv("S3_BUCKET") != ""){
 ```
 
 ## connect to bucket
-```{r connect to bucket, eval=FALSE}
-source("./src/connect_to_bucket.R")
-connect_to_bucket(bucket_name = UAT_bucket)
+```{r connect to bucket}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket")
+  source("./src/connect_to_bucket.R")
+  connect_to_bucket(bucket_name = UAT_bucket)
+}
 ```
 
 # Get data
@@ -130,7 +133,7 @@ which is updated by the following code:
 be_alientaxa_cube <- df %>% 
   left_join(utm1_gemeentes_provincies, by = c("eea_cell_code" = "CELLCODE")) %>% 
   st_drop_geometry() %>% 
-filter(!is.na(isFlanders)|!is.na(isWallonia)|!is.na(isBrussels))
+  filter(!is.na(isFlanders)|!is.na(isWallonia)|!is.na(isBrussels))
 
 be_alientaxa_cube %>%
   select(c(year,eea_cell_code,taxonKey,n = obs,min_coord_uncertainty,isFlanders,isWallonia,isBrussels,gemeente,provincie,gewest)) %>% 
@@ -417,10 +420,10 @@ df_bl_xy <-
   bind_cols(
     tibble(
       x = unlist(str_extract_all(unique(df_bl$eea_cell_code),
-        pattern = "(?<=E)[0-9\\-]+"
+                                 pattern = "(?<=E)[0-9\\-]+"
       )),
       y = unlist(str_extract_all(unique(df_bl$eea_cell_code),
-        pattern = "(?<=N)[0-9\\-]+"
+                                 pattern = "(?<=N)[0-9\\-]+"
       ))
     ) %>%
       mutate_all(as.integer)
@@ -627,9 +630,12 @@ df_ts <- pmap_dfr(df_cc,
 )
 ```
 
-```{r cleanup df_cc}
-remove(df_cc)
-gc()
+```{r cleanup df_cc, message=NA}
+if(Sys.getenv("amiabot") == "yes"){
+  cat("Removing df_cc to free up some memory")
+  remove(df_cc)
+  gc()
+}
 ```  
 
 ## Add data
@@ -637,31 +643,47 @@ gc()
 # add occurrence data
 
 ```{r add_occurrence_data}
+df <- df %>% 
+  select(taxonKey, year, eea_cell_code, obs)
+
+gc()
+
 df_ts <- 
   df_ts %>%
-  left_join(df %>% select(taxonKey, year, eea_cell_code, obs), 
+  left_join(df, 
             by = c("taxonKey", "year", "eea_cell_code"))
 ```
 
 # remove df to free up some memory
 
 ```{r remove_df}
-remove(df)
-gc()
+if(Sys.getenv("amiabot") == "yes"){
+  cat("Removing df to free up some memory")
+  remove(df)
+  gc()
+}
 ```
 
 # add membership to protected areas
 
 ```{r add_protected_areas}
+df_prot_areas <- df_prot_areas %>% 
+  select(CELLCODE, natura2000)
+
+gc()
+
 df_ts <- 
   df_ts %>%
-  left_join(df_prot_areas %>% select(CELLCODE, natura2000),
+  left_join(df_prot_areas,
             by = c("eea_cell_code" = "CELLCODE"))
 ```
 
 ```{r remove_prot_areas}
-remove(df_prot_areas)
-gc()
+if(Sys.getenv("amiabot") == "yes"){
+  cat("Removing df_prot_areas to free up some memory")
+  remove(df_prot_areas)
+  gc()
+}
 ```  
 
 # add classKey
@@ -675,26 +697,43 @@ df_ts <-
 ```
 
 ```{r remove_spec_names}
-remove(spec_names)
-gc()
+if(Sys.getenv("amiabot") == "yes"){
+  cat("Removing spec_names to free up some memory")
+  remove(spec_names)
+  gc()
+}
 ```
 
 ## Research effort correction
 
 ```{r Add baseline data}
 # at class level diminished by obs of specific alien taxon
+df_bl <- df_bl %>% 
+  select(year, eea_cell_code, classKey, cobs) %>% 
+  distinct()
+
+gc()
+
+nrow_prior <- nrow(df_ts)
+
 df_ts <-
   df_ts %>%
   left_join(
-    df_bl %>%
-      select(year, eea_cell_code, classKey, cobs),
+    df_bl,
     by = c("year", "eea_cell_code", "classKey")
   )
+
+if(nrow_prior != nrow(df_ts)){
+  stop("Number of rows changed after join")
+}
 ```
 
 ```{r remove_df_bl}
-remove(df_bl)
-gc()
+if(Sys.getenv("amiabot") == "yes"){
+  cat("Removing df_bl to free up some memory")
+  remove(df_bl)
+  gc()
+}
 ```
 
 To correct the effect of research effort of an alien speies, we calculate the number of observations at class level excluding the observations of the alien species itself:
@@ -704,6 +743,17 @@ To correct the effect of research effort of an alien speies, we calculate the nu
 df_ts <- 
   df_ts %>%
   mutate(cobs = cobs - obs)
+
+df_ts_below_zero <- df_ts %>% filter(cobs < 0)
+
+if(nrow(df_ts_below_zero) > 0){
+  warning("Negative values in cobs column")
+  
+  # replace negative values with 0
+  df_ts <- 
+    df_ts %>%
+    mutate(cobs = if_else(cobs < 0, 0, cobs))
+}
 
 # replace NAs with 0
 df_ts <-
@@ -778,7 +828,6 @@ write_tsv(spec_names,
                             "timeseries_taxonomic_info.tsv"),
           na = ""
 )
-
 ```
 
 reload previously loaded inbotheme version
