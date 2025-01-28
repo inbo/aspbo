@@ -153,3 +153,15 @@ if(rank == "CLASS"){
 }
 ```
 
+```{r get metadata}
+metadata_list <- occ_download_meta(cube)
+
+metadata <- data.frame(
+  rank = rank,
+  doi = metadata_list$doi
+) 
+
+metadata <- metadata %>% 
+  write_csv(file = paste0("./cube_data/be_cube_metadata_", rank, ".csv"))
+```
+
