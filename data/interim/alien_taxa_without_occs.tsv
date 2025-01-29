@@ -21,6 +21,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182134454	1195013	Otiorhynchus aurifer	1999	2018	Insecta	Animalia
 152544520	1319260	Tetraponera allaborans	1980	2018	Insecta	Animalia
 152544508	1321805	Pheidole bilimeki	1911	2018	Insecta	Animalia
+152544494	1325561	Paratrechina longicornis	1980	2018	Insecta	Animalia
 213213874	1349836	Hylaeus absolutus	2021	2021	Insecta	Animalia
 152544459	1419894	Euborellia annulipes	2016	2018	Insecta	Animalia
 152544422	1420197	Aleurodothrips fasciapennis	2018	2018	Insecta	Animalia
@@ -86,8 +87,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152543699	2308541	Limnodrilus cervix	2009	2016	Clitellata	Animalia
 182133944	2308549	Limnodrilus maumeensis	2014	2014	Clitellata	Animalia
 152543695	2308605	Potamothrix vejdovskyi	2009	2016	Clitellata	Animalia
-159747758	2320810	Boccardia proboscidea	2000	2000	Polychaeta	Animalia
-159747756	2320998	Boccardiella hamata	2011	2011	Polychaeta	Animalia
 182133960	2321001	Boccardiella ligerica	NA	NA	Polychaeta	Animalia
 152543727	2321012	Marenzelleria viridis	1995	2016	Polychaeta	Animalia
 152543510	2351064	Coregonus nasus	NA	NA	NA	Animalia
