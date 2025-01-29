@@ -28,9 +28,9 @@ load_data_initiate <- function() {
 # Reload data from googlesheet
 load_data <- function() {
   
-   # Replace with your actual Google Sheet ID
+  # Replace with your actual Google Sheet ID
   translations <- read_sheet(sheet_id,
-             sheet = "translations")
+                             sheet = "translations")
   
   return(translations)
 }
@@ -72,12 +72,19 @@ server <- function(input, output, session) {
   
   # Reactive value to store translations data
   translations_rv <- reactivePoll(
-    intervalMillis = 5000,  # Check for updates every 5 seconds
+    intervalMillis = 10000,  # Check for updates every 5 seconds
     session = session,
     checkFunc = function() {
-      load_data()
+      showNotification("Checking for updates...", type = "message", duration = 3)
+      if (nrow(updated_translations) > 0) {
+        showNotification("Data has been updated", type = "message", duration = 3)
+        load_data()
+      } else {
+        return(FALSE)
+      }
     },
     valueFunc = function() {
+      showNotification("Data has been updated", type = "message", duration = 3)
       load_data()
     }
   )
@@ -205,17 +212,17 @@ server <- function(input, output, session) {
     }
   })
   
-  # Trigger auto-save every 30 seconds
-  observe({
-    invalidateLater(30000) # 30000 milliseconds = 30 seconds
-    autoSave()
-  })
+  # # Trigger auto-save every 30 seconds
+  # observe({
+  #   invalidateLater(30000) # 30000 milliseconds = 30 seconds
+  #   autoSave()
+  # })
   
-  # Trigger reload every 5 seconds
-  observe({
-    invalidateLater(5000) # 5000 milliseconds = 5 seconds
-    load_data()
-  })
+  # # Trigger reload every 5 seconds
+  # observe({
+  #   invalidateLater(5000) # 5000 milliseconds = 5 seconds
+  #   load_data()
+  # })
   
   # Save changes made by the user and reload data from CSV file
   observeEvent(input$save, {
