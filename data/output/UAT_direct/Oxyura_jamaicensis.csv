@@ -1,4 +1,7 @@
 "gbifID","kingdom","phylum","class","order","family","species","scientificName","year","samplingProtocol","decimalLatitude","decimalLongitude","isFlanders","isBrussels","isWallonia","adult","gender","count"
+"4999639306","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2024,"culling - shooting",50.83938,4.65817,TRUE,FALSE,FALSE,1,"female",1
+"4999639304","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2024,"culling - shooting",51.27113,4.19518,TRUE,FALSE,FALSE,1,"female",1
+"4999639302","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2024,"culling - shooting",51.23307,4.34748,TRUE,FALSE,FALSE,1,"female",1
 "4454445304","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2023,"culling - shooting",51.14681,5.6226,TRUE,FALSE,FALSE,1,"male",1
 "4454445302","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2021,"culling - shooting",50.89538,4.70677,TRUE,FALSE,FALSE,1,"female",1
 "4454445301","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2022,"culling - shooting",50.83132,3.17401,TRUE,FALSE,FALSE,2,"female",1
@@ -23,8 +26,8 @@
 "2012823686","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2016,"culling - shooting",51.17638,2.92896,TRUE,FALSE,FALSE,2,"male",1
 "2012823686","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2016,"culling - shooting",51.17638,2.92896,TRUE,FALSE,FALSE,2,"female",1
 "2012823685","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2017,"culling - shooting",50.98584,4.50913,TRUE,FALSE,FALSE,1,"female",1
-"2012823681","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2016,"culling - shooting",51.32873,3.23106,TRUE,FALSE,FALSE,2,"female",1
 "2012823681","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2016,"culling - shooting",51.32873,3.23106,TRUE,FALSE,FALSE,2,"male",1
+"2012823681","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2016,"culling - shooting",51.32873,3.23106,TRUE,FALSE,FALSE,2,"female",1
 "2012823676","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2016,"culling - shooting",51.23307,4.34748,TRUE,FALSE,FALSE,1,"female",1
 "2012823673","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2009,"culling - shooting",51.24842,4.29638,TRUE,FALSE,FALSE,3,"male",2
 "2012823673","Animalia","Chordata","Aves","Anseriformes","Anatidae","Oxyura jamaicensis","Oxyura jamaicensis (J.F.Gmelin, 1789)",2009,"culling - shooting",51.24842,4.29638,TRUE,FALSE,FALSE,3,"female",1
