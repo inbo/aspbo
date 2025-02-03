@@ -8,7 +8,10 @@ on:
     paths:
       - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
   schedule: 
-   - cron: '0 0 1 1-12 *' # 1st of the month 00:00 between january & december
+   - cron: '0 0 15 1-12 *' # 15th of the month 00:00 between january & december 
+   
+# This job runs when the GRIIS checklist is changed (this is checked every 1st of the month)
+# and every 15th of the month independant of changes to the GRIIS checklist.
 
 jobs:
   build-queries:
