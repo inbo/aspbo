@@ -45,7 +45,6 @@ if(load_csv){
   translations <- load_data()
 }
 
-
 # Define UI
 ui <- fluidPage(
   titlePanel("Translation Editor"),
@@ -69,6 +68,7 @@ ui <- fluidPage(
 
 # Define server logic
 server <- function(input, output, session) {
+  updated_data <- load_data()
   
   # Reactive value to store translations data
   translations_rv <- reactivePoll(
@@ -76,7 +76,8 @@ server <- function(input, output, session) {
     session = session,
     checkFunc = function() {
       showNotification("Checking for updates...", type = "message", duration = 3)
-      if (nrow(updated_translations) > 0) {
+      
+      if (nrow(updated_data) > 0) {
         showNotification("Data has been updated", type = "message", duration = 3)
         load_data()
       } else {
