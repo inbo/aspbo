@@ -1,13 +1,78 @@
 title_id;title_nl;description_nl;title_fr;description_fr;title_en;description_en
-apply_gamObservations;Status van opkomst (GAM) - Gemodelleerd aantal waarnemingen;Gegeneraliseerd Additief Model (GAM) gebaseerd op het aantal waarnemingen van een soort;Statut d'émergence (MAG) - Nombre d'observations modélisées;Modèle Additif Généralisé (MAG) basé sur le nombre d'observations d'une espèce;Emergence status (GAM) - Modelled number of observations;Generalised Additive Model (GAM) based on the number of observations of a species
-apply_gamOccupancy;Status van opkomst (GAM) - Gemodelleerde bezette oppervlakte;Gegeneraliseerd Additief Model (GAM) gebaseerd op de oppervlakte die bezet wordt door een soort;Statut d'émergence (MAG) - Surface occupée modélisée;Modèle Additif Généralisé (MAG) basé sur la surface occupée par une espèce;Emergence status (GAM) - Modelled occupied area;Generalised Additive Model (GAM) based on the area occupied by a species
+apply_gamObservations;Status van opkomst (GAM) - Gemodelleerd aantal waarnemingen;"<p>Gegeneraliseerd Additief Model (GAM) gebaseerd op het aantal waarnemingen van een soort.</p> 
+<p>Dit model is gebaseerd op de <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes voor niet-inheemse taxa in België en Europa.</a>
+<p>De zwarte punten geven het aantal observaties van de soort weer per jaar. De trendlijn geeft de GAM gebaseerd op de observaties weer. De kleuren geven de status van opkomst voor een bepaald jaar weer. <b style=""color: green;"">Groene</b> bollen geven aan dat de soort niet opkomend is, <b style=""color: orange;"">oranje</b> dat de soort mogelijk opkomend is, <b style=""color: red;"">rode</b> dat de soort opkomend is en <b style=""color: grey;"">grijze</b> dat het model geen uitsluitsel kan geven.</p>
+<p>Dit model kan gecorrigeerd worden op basis van waarnemers bias<sup>1</sup> en voorkomen in beschermde Natura2000 gebieden<sup>2</sup>.</p>
+<p><i><sup>1</sup>Het aantal waarnemingen wordt gecorrigeerd ten opzichte van het aantal waarnemingen van de klasse van de soort, bvb in het geval van Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>) worden waarnemingen van andere Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) in rekening gebracht.</i></br><i><sup>2</sup>Enkel waarnemingen wiens 1x1km hok overlap heeft met een Natura2000 gebied worden in rekening gebracht. Iedere observatie krijgt een willekeurig hok toegewezen gebaseerd op de nauwkeurigheid van de melding. Hierdoor kan het voorkomen dat het resultaat van de GAM voor Natura2000 na een update licht andere resultaten geeft</i>
+</p>Voor meer informatie in verband met de gebruikte methode kan u steeds terecht bij de <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">TrIAS indicatoren</a>";Statut d'émergence (MAG) - Nombre d'observations modélisées;"<p>Modèle Additif Généralisé (GAM) basé sur le nombre d'observations d'une espèce.</p> <p>Les points noirs représentent le nombre d'observations de l'espèce par année. La ligne de tendance montre le GAM basé sur les observations. Les couleurs indiquent le statut d'émergence pour une année donnée. Les pointes <b style=""color: green;"">verts</b> indiquent que l'espèce n'est pas émergente, <b style=""color: orange;"">orange</b> que l'espèce est potentiellement émergente, <b style=""color: red;"">rouge</b> que l'espèce est émergente, et <b style=""color: grey;"">gris</b> que le modèle est non concluant.</p> <p>Ce modèle peut être corrigé en fonction du biais d'observateur<sup>1</sup> et de la présence dans les zones Natura2000<sup>2</sup>.</p> <p><i><sup>1</sup>Le nombre d'observations est corrigé par rapport au nombre d'observations de la classe de l'espèce, par exemple dans le cas de Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>), les observations d'autres Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) sont prises en compte.</i></br><i><sup>2</sup>Seules les observations dont la cellule de grille de 1x1km chevauche une zone Natura2000 sont prises en compte. Chaque observation se voit attribuer une cellule de grille aléatoire basée sur la précision du observation. Par conséquent, le résultat du GAM pour Natura2000 peut donner des résultats légèrement différents après une mise à jour.</i> </p>Pour plus d'informations concernant la méthode utilisée, veuillez consulter les <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">indicateurs TrIAS</a>";Emergence status (GAM) - Modelled number of observations;"<p>Generalized Additive Model (GAM) based on the number of observations of a species.</p>
+
+<p>This model is based on the <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes for non-native taxa in Belgium and Europe.</a></p>
+
+<p>The black dots represent the number of observations of the species per year. The trend line shows the GAM based on the observations. The colors indicate the emergence status for a given year. <b style=""color: green;"">Green</b> dots indicate that the species is not emerging, <b style=""color: orange;"">orange</b> that the species is possibly emerging, <b style=""color: red;"">red</b> that the species is emerging, and <b style=""color: grey;"">grey</b> that the model is inconclusive.<p>
+
+<p>This model can be corrected based on observer bias<sup>1</sup> and occurrence in protected Natura2000 areas<sup>2</sup>.</p>
+
+<p><i><sup>1</sup>The number of observations is corrected relative to the number of observations of the species' class, e.g., in the case of Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>), observations of other Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) are taken into account.</i></br><i><sup>2</sup>Only observations whose 1x1km grid cell overlaps with a Natura2000 area are taken into account. Each observation is assigned a random grid cell based on the accuracy of the report. As a result, the GAM outcome for Natura2000 may give slightly different results after an update.</i>
+</p>For more information regarding the method used, please refer to the <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">TrIAS indicators</a>
+
+"
+apply_gamOccupancy;Status van opkomst (GAM) - Gemodelleerde bezette oppervlakte;"<p>Gegeneraliseerd Additief Model (GAM) gebaseerd op de oppervlakte die bezet wordt door een soort.</p> 
+<p>Dit model is gebaseerd op de <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes voor niet-inheemse taxa in België en Europa.</a>
+<p>De zwarte punten geven het aantal bezette hokken van de soort weer per jaar. De trendlijn geeft de GAM gebaseerd op de graad van bezetting weer. De kleuren geven de status van opkomst voor een bepaald jaar weer. <b style=""color: green;"">Groene</b> bollen geven aan dat de soort niet opkomend is, <b style=""color: orange;"">oranje</b> dat de soort mogelijk opkomend is, <b style=""color: red;"">rode</b> dat de soort opkomend is en <b style=""color: grey;"">grijze</b> dat het model geen uitsluitsel kan geven.</p>
+<p>Dit model kan gecorrigeerd worden op basis van waarnemers bias<sup>1</sup> en voorkomen in beschermde Natura2000 gebieden<sup>2</sup>.</p>
+<p><i><sup>1</sup>Het aantal waarnemingen wordt gecorrigeerd ten opzichte van het aantal waarnemingen van de klasse van de soort, bvb in het geval van Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>) worden waarnemingen van andere Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) in rekening gebracht.</i></br>
+<i><sup>2</sup>Enkel waarnemingen wiens 1x1km hok overlap heeft met een Natura2000 gebied worden in rekening gebracht. Iedere observatie krijgt een willekeurig hok toegewezen gebaseerd op de nauwkeurigheid van de melding. Hierdoor kan het voorkomen dat het resultaat van de GAM voor Natura2000 na een update licht andere resultaten geeft</i></p>
+<p>Voor meer informatie in verband met de gebruikte methode kan u steeds terecht bij de <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">TrIAS indicatoren</a></p>";Statut d'émergence (MAG) - Surface occupée modélisée;Modèle Additif Généralisé (MAG) basé sur la surface occupée par une espèce;Emergence status (GAM) - Modelled occupied area;"<p>Generalized Additive Model (GAM) based on the area occupied by a species.</p>
+<p>This model is based on the <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes for non-native taxa in Belgium and Europe.</a></p>
+<p>The black dots represent the number of occupied grid cells of the species per year. The trend line shows the GAM based on the degree of occupation. The colors indicate the emergence status for a specific year. <b style=""color: green;"">Green</b> dots indicate that the species is not emerging, <b style=""color: orange;"">orange</b> that the species is possibly emerging, <b style=""color: red;"">red</b> that the species is emerging, and <b style=""color: grey;"">grey</b> that the model is inconclusive.</p>
+<p>This model can be corrected based on observer bias<sup>1</sup> and occurrence in protected Natura2000 areas<sup>2</sup>.</p>
+<p><i><sup>1</sup>The number of observations is corrected relative to the number of observations of the species' class, e.g., in the case of Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>), observations of other Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) are taken into account.</i></br>
+<i><sup>2</sup>Only observations whose 1x1km grid cell overlaps with a Natura2000 area are taken into account. Each observation is assigned a random grid cell based on the accuracy of the report. As a result, the GAM output for Natura2000 may show slightly different results after an update.</i></p>
+<p>For more information regarding the method used, please refer to the <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">TrIAS indicators</a></p>"
 barplotLenteNesten;Voorjaarsnesten;Het aantal op vespawatch.be gemelde nesten tussen 1 januari en 19 mei;Nids de printemps;Le nombre de nids signalés sur vespawatch.be entre le 1er janvier et le 19 mai;Spring nests;The number of nests reported on vespawatch.be between January 1 and May 19
 countNesten;Aantal nesten per provincie (figuur);Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>;Nombre de nids par province (figure);Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>;Number of nests per province (figure);The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
-indicator_introduction_year;Aantal nieuw geïntroduceerde soorten per jaar;NA;Nombre d'espèces nouvellement introduites par an;NA;Number of newly introduced species per year;NA
-indicator_total_year;Cumulatief aantal geïntroduceerde soorten;NA;Nombre cumulé d'espèces introduites;NA;Cumulative number of introduced species;NA
-indicator_native_range_year;Aantal geïntroduceerde soorten per jaar en per continent van oorsprong;NA;Nombre d'espèces introduites par an et par continent d'origine;NA;Number of introduced species per year and per native continent;NA
-countOccupancy;Mate van verspreiding van de Unielijstsoorten;AANDACHT: Figuur onafhankelijk van geselecteerde filters bovenaan;Degré de répartition des espèces de la liste de l'Union;ATTENTION: Figure indépendante des filtres sélectionnés en haut;Trend in occupancy of Union list species;NOTE: Plot independent of the selected filters above
-get_table_pathways;Aantal geïntroduceerde soorten per introductieroute;NA;Nombre d'espèces introduites par voie d'introduction;NA;Number of introduced species per introduction pathways;NA
+indicator_introduction_year;Aantal nieuw geïntroduceerde soorten per jaar;"Deze grafiek geeft een tijdsreeks weer van het aantal nieuw geïntroduceerde uitheemse soorten in België. De punten geven het aantal geïntroduceerde soorten weer voor een specifiek jaar (indien gegevens beschikbaar zijn), gebaseerd op de datum van de eerste waarneming van de soort zoals aangeven in de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e\"" target=""_blank""> GRIIS-checklist </a>. De algemene trend, gefit met behulp van een LOESS-model, wordt weergegeven in <b style=""color:#356196ff;"">blauw</b>, terwijl het <b style=""color:#94a7baff;"">blauw gearceerde gebied</b> het 95% betrouwbaarheidsinterval aangeeft.
+
+";Nombre d'espèces nouvellement introduites par an;"Ce graphique présente une série chronologique du nombre d'espèces exotiques nouvellement introduites en Belgique. Les points indiquent le nombre d'espèces introduites pour une année donnée (si des données sont disponibles), basé sur la date de la première observation de l'espèce, comme indiqué dans la <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e\"" target=""_blank"">liste de contrôle GRIIS</a>. La tendance générale, ajustée à l'aide d'un modèle LOESS, est représentée en <b style=""color:#356196ff;"">bleu</b>, tandis que la zone <b style=""color:#94a7baff;"">ombrée en bleu</b> indique l'intervalle de confiance à 95%.";Number of newly introduced species per year;"This graph displays a timeseries of the number of newly introduced alien species in Belgium. Dots represent the number of introduced alien species in a given year (if data are available) based on the date of first observation of the species indicated on the <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist</a>. The overall trend, fitted using a LOESS model, is highlighted in  <b style=""color:#356196ff;"">blue</b>, while the <b style=""color:#94a7baff;"">blue shaded area</b> represents the 95% confidence interval.
+"
+indicator_total_year;Cumulatief aantal geïntroduceerde soorten;"Deze grafiek toont het cumulatieve aantal geïntroduceerde uitheemse soorten in België, gebaseerd op hun jaar van eerste observatie zoals gedocumenteerd in de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">GRIIS-checklist</a>.
+
+<br> <span style=""color: red; font-size: 2em; font-weight: bold; animation: pulse 1s infinite;"">!</span> <style> @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } } </style>
+<i>Op dit moment zorgt een bug ervoor dat dezelfde uitheemse soort meerdere keren wordt geteld wanneer deze is waargenomen in Vlaanderen, Brussel en Wallonië. We werken actief aan een snelle oplossing voor dit probleem en bieden onze excuses aan voor het ongemak dat dit kan veroorzaken.</i>";Nombre cumulé d'espèces introduites;"Ce graphique illustre le nombre cumulatif d'espèces exotiques introduites en Belgique, basé sur leur année de première observation, telle que documentée dans la <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">liste GRIIS</a>.
+
+<br> <span style=""color: red; font-size: 2em; font-weight: bold; animation: pulse 1s infinite;"">!</span> <style> @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } } </style>
+<i>Actuellement, un bug entraîne un double comptage des mêmes espèces exotiques lorsqu'elles sont observées en Flandre, à Bruxelles et en Wallonie. Nous travaillons activement à résoudre ce problème dans les plus brefs délais et nous excusons pour tout désagrément que cela pourrait causer.</i>";Cumulative number of introduced species;"This graph illustrates the cumulative number of alien species introduced in Belgium, based on their year of first observation as documented in the <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist </a>.
+
+<br>
+<span style=""color: red; font-size: 2em; font-weight: bold; animation: pulse 1s infinite;"">!</span>
+
+<style>
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+</style>
+
+<i>At present, a bug causes the same alien species to be counted multiple times if observed in Flanders, Brussels, and Wallonia. We are actively working to resolve this issue as quickly as possible and apologize for any inconvenience it may cause.</i>
+"
+indicator_native_range_year;Aantal geïntroduceerde soorten per jaar en per continent van oorsprong;"Verdere opdeling van continenten naar subregios is mogelijk door de optie ""natuurlijke verspreiding"" te selecteren in de dropdown regio-schaal";Nombre d'espèces introduites par an et par continent d'origine;"La subdivision supplémentaire des continents en sous-régions est possible en sélectionnant l'option ""aire d'origine"" dans le menu Région niveau";Number of introduced species per year and per native continent;"Further subdivision of continents into subregions is possible by selecting the ""native range"" option in the region level dropdown menu."
+countOccupancy;Trend in de bezetting van Unielijstsoorten in Vlaanderen;"<img src=""https://cdn-icons-png.flaticon.com/512/7801/7801791.png"" alt=""attention"" style=""width:15px;height:15px;""> <i>AANDACHT: Deze figuur is onafhankelijk van geselecteerde filters bovenaan.</i>
+<br>
+<br>
+Deze grafiek toont de trend in bezetting (d.w.z. het percentage bezette 10 km<sup>2</sup> hokken) in Vlaanderen voor alle soorten die op <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> de lijst van soorten van Uniebelang</a> staan. Voor elke soort wordt de bezetting op het moment van opname in de Unie-lijst aangegeven in <span style=""color: #4f7c9bff;"">blauw</span> (Basis), terwijl de bezetting tijdens de meest recente driejaarlijkse rapporteringsperiode wordt weergegeven in <span style=""color: #e87837ff;"">oranje</span> (Rapportering).";Tendance d'occupation des espèces de la liste de l'Union en Flandre;"<I>ATTENTION : Graphique indépendant des filtres sélectionnés ci-dessus.</I>
+<br><br>
+Ce graphique affiche le tendance d'occupation (c.-à-d. le pourcentage de cellules de 10 km<sup>2</sup> occupées) en Flandre pour toutes les espèces incluses dans 
+<a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> la liste des espèces d'intérêt de l'Union</a>. 
+Pour chaque espèce, l'occupation au moment de son inclusion dans la liste de l'Union est indiquée en 
+<span style=""color: #4f7c9bff;"">bleu</span> (Base), tandis que l'occupation pendant la période de rapport triennal la plus récente est représentée en 
+<span style=""color: #e87837ff;"">orange</span> (Rapport).";Trend in occupancy of Union list species in Flanders;"<I>NOTE: Plot independent of the selected filters above.</I>
+<br>
+<br>
+This graph displays the trend in occupancy (i.e., the percentage of occupied 10 km<sup>2</sup> cells) in Flanders for all species that are included in <a href= ""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> the list of species of Union concern</a>. For each species, the occupancy at the time of  its inclusion on the Union list is indicated in <span style=""color: #4f7c9bff;"">blue</span> (baseline), while the occupancy during the most recent three-year reporting period is represented in <span style=""color: #e87837ff;"">orange</span> (reporting)."
+get_table_pathways;Aantal geïntroduceerde soorten per introductieroute;"Deze tabel toont het aantal geïntroduceerde soorten en (maximaal) vijf voorbeelden per introductieroute-categorie en bijbehorende subcategorieën, zoals gespecificeerd in
+ <a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf"" target = ""_blank"">de CBD categorieën</a>.";Nombre d'espèces introduites par voie d'introduction;Ce tableau montre le nombre d'espèces introduites et (au maximum) cinq exemples par catégorie de voie d'introduction et ses sous-catégories correspondantes, comme spécifié dans <a href='https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf' target='_blank'>les catégories CBD</a>.;Number of introduced species per introduction pathway;"This table displays the number of introduced species and (maximum) five species examples for each introduction pathway category and its corresponding subcategories, as specified in the
+ <a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf"" target = ""_blank"">CBD categories</a>."
 management2_active-mapHeat;Actieve haarden;"Deze kaart illustreert waar Aziatische hoornaar is waargenomen, maar waar nog geen nest succesvol beheerd werd. Op deze plaatsen vinden mogelijks opsporingsacties plaats door de Vespawatchers.
 Waarnemingen worden weerhouden wanneer ze verder dan 2km van een succesvol beheerd nest bevinden en/of na een succesvolle beheeractie gemeld worden. Hoe intenser rood, hoe meer meldingen er in de buurt van elkaar zijn.
 Ontbrekende nesten kunnen steeds gemeld worden op <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
@@ -24,14 +89,123 @@ management3-countYearGroup;Aantal observaties per jaar;NA;Nombre d'observations 
 observations-mapOccurrence;Waarnemingen van {{species}};NA;Observations de {{species}};NA;Observations of {{species}};NA
 reporting_t1-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
 reporting_t01-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
-management-mapOccurrence;Beheer van {{species}};NA;Gestion de {{species}};NA;Management of {{species}};NA
+management-mapOccurrence;Beheer van <i>{{species}}</i>;"<p>Kaart en bijbehorende grafieken van de ruimtelijke verdeling van het gerealiseerd beheer van <i>{{species}}</i>
+<li>Op de kaart ziet u de resultaten van het gekozen jaar per regio 
+<li>Op de grafiek linksonder de kaart vindt u de trend per gewest.
+<li>Op de grafiek rechtsonder de kaart wordt de trend in de geselecteerde regio(s).</p>
+
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Aperçu du tableau</title>
+  <link href=""https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"" rel=""stylesheet""> <!-- Font Awesome link -->
+  <style>
+    .indented {
+      margin-left: 20px;
+    }
+
+    /* Remove default arrow */
+    details summary {
+      list-style: none;
+      font-size: 14px; /* Optional: You can adjust the font size */
+      color: #c1c443; /* Match the icon color */
+      text-decoration: underline; /* Underline the text */
+    }
+
+    /* Green Icon Style */
+    .green-icon {
+      color:#c1c443 ;
+      font-size: 18px; /* Adjust size as needed */
+      margin-right: 10px; /* Space between the icon and the text */
+    }
+  </style>
+</head>
+<body>
+
+<details>
+  <summary>
+    <i class=""fas fa-angle-double-down green-icon""></i> Meer informatie
+  </summary>
+<br>
+<p>De <b>eenheid</b> bepaald hoe de resultaten worden weergegeven:
+<ul>
+<li> <b>absoluut:</b> Het absoluut aantal beheerde individuen
+<li> <b>verschil:</b> Het verschil in het absoluut aantal beheerde individuen van een jaar ten opzichte van het absoluut aantal beheerde individuen van het voorgaande jaar. Deze waarde wordt berekend door de absolute waarde van het jaar af te trekken van die van het voorgaande jaar. Deze waarde kan dus negatief zijn. Een positieve waarde geeft weer dat er in een bepaald jaar meer individuen beheerd werden ten opzichte van het voorgaande jaar, een negatieve waarde duidt op een afname in het aantal beheerde individuen terwijl een nul wijst op een zelfde aantal beheerde individuen. Het verschil van het eerste jaar van de tijdreeks is steeds nul.
+<li> <b>eenheid van inspanning:</b> Het absoluut aantal beheerde individuen gedeeld door de geleverde inspanningen. Hierdoor wordt het beheer gecorrigeerd voor veranderingen in de inspanning. De eenheid van inspanning is afhankelijk van de gebruikte methode, maar komt meestal overeen met 1 vangtuig of 1 schot per 24u.  
+</ul>
+</p>
+Voor meer informatie over het aanpassen van classes zie de <a href="""" target=""_blank"">veel gestelde vragen</a>
+</details>";Gestion de {{species}};NA;Management of {{species}};NA
 management-mapInvasion;Invasie geschiedenis van {{species}};NA;Histoire des invasions de {{species}};NA;Invasion history of {{species}};NA
 risk-mapRaster;TrIAS Risicokaarten;Invasieve uitheemse soorten hebben het potentieel om ecosystemen te beschadigen, de biodiversiteit te verminderen en andere problemen voor mensen en dieren in het wild te veroorzaken. Om deze problemen te mitigeren is onderzoek nodig naar wat de potentiële risico’s zijn en welke soorten het meest waarschijnlijk een probleem vormen. Eén van de technieken die we gebruiken is het modelleren van de verspreiding van soorten. Deze modellen zijn bedoeld om de potentiële verspreiding van een soort te schatten, gegeven de bekende omgevingsomstandigheden waarin hij momenteel leeft. In dergelijke modellen kunnen we ook toekomstscenario's in dergelijke modellen integreren, zodat we bij onze risicobeoordeling rekening kunnen houden met klimaatverandering. </br>Het is onwaarschijnlijk dat deze kaarten nauwkeurige voorspellingen zijn van de huidige of toekomstige verspreiding van soorten, maar ze zijn niettemin een leidraad voor wetenschappers die risicobeoordelingen uitvoeren. Ze helpen ons door aan te geven welke gebieden het meest kwetsbaar zijn voor invasie, en of de klimaatverandering waarschijnlijk een grotere of kleinere vestiging van de soort zal veroorzaken.;TrIAS Cartes des Risques;Les espèces exotiques envahissantes peuvent potentiellement endommager les écosystèmes, réduire la biodiversité et causer d’autres problèmes aux humains et à la faune. Afin d'atténuer ces problèmes, des recherches sont nécessaires pour déterminer quels sont les risques potentiels et quelles espèces sont les plus susceptibles de poser problème. L'une des techniques que nous utilisons est la modélisation de la répartition des espèces. Ces modèles visent à estimer la répartition potentielle d'une espèce compte tenu des conditions environnementales connues dans lesquelles elle vit actuellement. Dans de tels modèles, nous pouvons également intégrer des scénarios futurs, afin de pouvoir tenir compte du changement climatique dans notre évaluation des risques. </br>Il est peu probable que ces cartes constituent des prédictions précises de la répartition actuelle ou future des espèces, mais elles constituent néanmoins un guide pour les scientifiques qui effectuent des évaluations des risques. Ils nous aident en indiquant quelles zones pourraient être les plus vulnérables à l’invasion et si le changement climatique est susceptible d’entraîner un plus ou moins grand établissement de l’espèce.;TrIAS Risk Maps;Invasive alien species have the potential to damage ecosystems, reduce biodiversity and cause other problems for people and wildlife. In order to mitigate these problems research is needed into what the potential risks are and which species are most likely to be a problem. One of the techniques we use is species distribution modelling. These models aim to estimate the potential distribution of a species given the known environmental conditions where it is currently living. In such models we can also incorporate future scenarios into such models, so that we can account for climate change in our evaluation of risk. </br>These maps are unlikely to be precise predictions of current or future species distributions, but are nevertheless a guide to scientists conducting risk assessments. They help us by indicating which areas might be most vulnerable to invasion, and whether climate change is likely to cause greater or lesser establishment of the species.
-tableIndicators;NA;Tijdelijke aanduiding voor disclaimer;NA;Espace réservé pour clause;NA;Placeholder for disclaimer
+tableIndicators;;"<p>Deze tabel biedt een overzicht van alle soorten waarvoor informatie beschikbaar is op het exotenportaal (= alle soorten op de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS-checklijst van België</a>). Voor elke soort bevat de tabel informatie over de invasiestatus in België zoals gedocumenteerd in de GRIIS-checklijst. De kolommen worden hieronder beschreven: </p>
+
+- <b>Soort</b> toont de wetenschappelijke naam van de exoot.<br>
+- <b>GBIF taxonomisch ID (taxonkey)</b> geeft de taxonkey van de soort weer op <a href=""https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"" target=""_blank""> GBIF </a>(de Global Biodiversity Information Facility). Meer informatie over GBIF-taxonomische sleutels vindt u op <a href=""https://discourse.gbif.org/t/understanding-gbif-taxonomic-keys-usagekey-taxonkey-specieskey/3045"" target=""_blank""> deze pagina. </a><br>
+- <b>Jaar van laatste waarneming</b> geeft het meest recente jaar weer waarin de soort werd waargenomen in België. Dit is gebaseerd op het laatste jaar van waarneming in de GRIIS-checklijst of (indien beschikbaar) op een recentere, gegeorefereerde waarneming van de soort op GBIF.<br>
+- <b>Habitat</b> vermeldt de habitattypes waarin de soort voorkomt, zoals aangegeven in de GRIIS-checklijst.<br>
+- <b>Bron</b> geeft de oorspronkelijke checklist aan die als basis diende om de soort op te nemen in de GRIIS-checklijst.<br>
+- <b>Jaar van eerste waarneming</b> geeft het eerste jaar aan waarin de soort werd waargenomen in België (per regio), zoals gedocumenteerd in de GRIIS-checklijst.<br>
+- <b>Mate van vestiging</b> geeft de mate van vestiging van de soort in België weer, zoals aangegeven in de GRIIS-checklijst. ""NA"" betekent dat deze informatie niet beschikbaar was in de GRIIS-checklijst voor de betreffende soort.<br>
+- <b>Introductieroutes</b> toont de introductieroute(s) van de soort in België zoals gespecificeerd in de GRIIS-checklijst.<br>
+- <b>Meer</b> Geeft aan of er meer informatie beschikbaar is over de soort (aan de hand van iconen): <br> 
+<div class=""indented"">
+<div class=""indented"">
+ <li><b>Een ster</b>: de soort is opgenomen in <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> de lijst van soorten van Uniebelang</a>. <br>
+ <li><b>Een driehoek</b>: geeft aan dat er minstens één gegeorefereerde waarneming is van de soort in België na 1950, zoals gerapporteerd op GBIF.<br>
+</div>
+De kleur van deze iconen geeft de beschikbare gegevens van de respectieve soort op het exotenportaal aan: <br>
+<div class=""indented"">
+  <li><b>Zwart</b> het portaal bevat gegevens over waarnemingen, indicatoren en (voor Unielijstsoorten) rapportage.<br>
+ <li><b style=""color: #c1c443;"">Geel</b> het portaal bevat gegevens over waarnemingen, indicatoren, beheer en (voor Unielijstsoorten) rapportage.
+</div>
+";NA;"<p>Ce tableau présente un aperçu de toutes les espèces répertoriées sur le portail des espèces exotiques (= toutes les espèces de la <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">liste de contrôle GRIIS de Belgique</a>). Pour chaque espèce, le tableau comprend des informations sur son statut d'invasion en Belgique tel que documenté dans la liste de contrôle GRIIS. Les colonnes sont décrites ci-dessous : </p>
+
+- <b>Espèce</b> affiche le nom scientifique de l'espèce exotique.<br>
+- <b>ID taxonomique GBIF (taxonkey)</b> affiche le taxonkey de l'espèce sur <a href=""https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"" target=""_blank""> GBIF </a> (le Global Biodiversity Information Facility). Pour en savoir plus sur les clés taxonomiques GBIF, consultez <a href=""https://discourse.gbif.org/t/understanding-gbif-taxonomic-keys-usagekey-taxonkey-specieskey/3045"" target=""_blank""> cette page. </a><br>
+- <b>Année de dernière observation</b> indique l'année la plus récente où l'espèce a été observée en Belgique. Cela est basé soit sur la dernière année d'observation indiquée dans la liste de contrôle GRIIS, soit (lorsqu'elle est disponible) sur une observation géoréférencée plus récente de l'espèce rapportée sur GBIF.<br>
+- <b>Habitat</b> répertorie les types d'habitats dans lesquels l'espèce se trouve typiquement, comme indiqué dans la liste de contrôle GRIIS.<br>
+- <b>Source</b> indique la liste de contrôle initiale qui a servi de base pour inclure l'espèce dans la liste de contrôle GRIIS.<br>
+- <b>Année de première observation</b> indique la première année où l'espèce a été observée en Belgique (par région), comme documenté dans la liste de contrôle GRIIS.<br>
+- <b>Degré d'établissement</b> indique le degré d'établissement de l'espèce en Belgique, tel qu'indiqué dans la liste de contrôle GRIIS. ""NA"" signifie que cette information n'était pas disponible dans la liste de contrôle GRIIS pour l'espèce respective.<br>
+- <b>Voies d'introduction</b> affiche les voies d'introduction de l'espèce en Belgique, comme spécifié dans la liste de contrôle GRIIS.<br>
+- <b>Plus</b> Indique si des informations supplémentaires sont disponibles sur l'espèce (à l'aide d'icônes) : <br> 
+<div class=""indented"">
+<div class=""indented"">
+ <li><b>Une étoile</b> : l'espèce est incluse dans <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> la liste des espèces d'intérêt de l'Union</a>. <br>
+ <li><b>Un triangle</b> : indique qu'il y a au moins une observation géoréférencée de l'espèce en Belgique après 1950, comme rapporté sur GBIF.<br>
+</div>
+La couleur de ces icônes indique les données disponibles pour l'espèce respective sur le portail des espèces exotiques : <br>
+<div class=""indented"">
+  <li><b>Noir</b> : le portail contient des données sur les observations, les indicateurs et (pour les espèces de la liste de l'Union) les rapports.<br>
+ <li><b style=""color: #c1c443;"">Jaune</b> : le portail contient des données sur les observations, les indicateurs, la gestion, et (pour les espèces de la liste de l'Union) les rapports.
+</div>";NA;"<p>This table offers an overview of all species included on the alien species portal (= all species on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>). For each species, the table includes information regarding its invasion status in Belgium as documented in the GRIIS checklist. The columns are described below: </p>
+
+- <b>Species</b> displays the scientific name of the alien species.<br>
+- <b>GBIF taxonomic ID (taxonkey)</b> shows the taxonkey of the species on <a href= ""https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"" target=""_blank""> GBIF </a>(the Global Biodiversity Information Facility). Learn more about GBIF taxonomic keys on <a href= ""https://discourse.gbif.org/t/understanding-gbif-taxonomic-keys-usagekey-taxonkey-specieskey/3045"" target=""_blank""> this page. </a><br>
+- <b>Year of last observation </b>indicates the most recent year the species was observed in Belgium. This is either based on the last year of observation indicated in the GRIIS checklist or (when available) on a more recent georeferenced observation of the species reported on GBIF.<br>
+- <b>Habitat</b> lists the habitat type(s) in which the species is typically found, as indicated in the GRIIS checklist.<br>
+- <b>Source</b> indicates the initial checklist that served as the basis to include the species in the GRIIS checklist. <br>
+- <b>Year of first observation</b> signifies the first year the species was observed in Belgium (per region), as documented in the GRIIS checklist.<br>
+- <b>Degree of establishment</b> indicates the degree of establishment of the species in Belgium, as indicated in the GRIIS checklist. ""NA"" signifies that this information was not available on the GRIIS checklist for the respective species.<br>
+- <b>Pathway</b> Displays the introduction pathway(s) of the species in Belgium as specified in the GRIIS checklist. <br>
+- <b>More</b> Indicates whether there is more information available on the species (using icons): <br> 
+<div class=""indented"">
+<div class=""indented"">
+ <li><b>A star</b>: the species is included in <a href= ""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> the list of species of Union concern </a>. <br>
+ <li><b>A triangle </b>: indicates there is at least one georeferenced observation of the species in Belgium after 1950, as reported on GBIF. <br>
+</div>
+The color of these icons signifies the available data of the respective species on the alien species portal: <br>
+<div class=""indented"">
+  <li><b>Black</b> the portal contains data on observations, indicators, and (for Union list species) reporting. <br>
+ <li><b style=""color: #c1c443;"">Yellow</b> the portal contains data on observations, indicators, management, and (for Union list species) reporting.
+</div>"
 tableNesten;Aantal nesten per provincie (tabel);Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>;Nombre de nids par province (tableau);Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>;Number of nests per province (table);The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
 visualize_pathways_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1);NA;Espèces introduites par voie d'introduction (CBD, niveau 1);NA;Introduced species per pathway (CBD, level 1);NA
 visualize_pathways_year_level1;Geïntroduceerde soorten per introductieroute (CBD, niveau 1) - trends;NA;Espèces introduites par voie d'introduction (CBD, niveau 1) - tendances;NA;Introduced species per pathway (CBD, level 1) - trends;NA
 visualize_pathways_level2;Geïntroduceerde soorten per introductieroute (CBD, niveau 2);NA;Espèces introduites par voie d'introduction (CBD, niveau 2);NA;Introduced species per pathway (CBD, level 2);NA
 visualize_pathways_year_level2;Geïntroduceerde soorten per introductieroute (CBD, niveau 2) - trends;NA;Espèces introduites par voie d'introduction (CBD, niveau 2) - tendances;NA;Introduced species per pathway (CBD, level 2) - trends;NA
 welcomeTitle;Welkom op het exotenportaal;Op deze pagina vind je alle cijfers en trends over uitheemse soorten in België.;Bienvenue sur la page des espèces exotiques;Sur cette page, vous trouverez tous les chiffres et tendances concernant les espèces exotiques en Belgique.;Welcome to the alien species dashboard;On this page you will find all figures and trends about alien species in Belgium.
-occupancy;Verspreiding;Oppervlakte bezet door een soort; Répartition;Surface occupée par une espèce;Occupancy;Area occupied by a species
+occupancy;Verspreiding;Oppervlakte bezet door een soort;Répartition;Surface occupée par une espèce;Occupancy;Area occupied by a species
