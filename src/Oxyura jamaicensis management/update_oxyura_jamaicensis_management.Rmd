@@ -13,6 +13,7 @@ library(magrittr)
 library(tidyr)
 library(stringr)
 library(testthat)
+library(sf)
 ```
 
 ```{r initiate download}
@@ -113,6 +114,20 @@ ruddy_verbatim_rework <- ruddy_adult %>%
   mutate(count = as.integer(count))
 ```
 
+```{r add gemeente, provincie en gewest}
+utm10 <- st_read("./data/output/UAT_processing/grid/utm10_bel_with_regions.gpkg", 
+                  layer="utm10_bel_with_regions" )
+
+ruddy_sf <- raw_ruddy_data %>% 
+  select(gbifID, decimalLatitude, decimalLongitude) %>% 
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326) %>% 
+  st_transform(crs = st_crs(utm10)) %>% 
+  st_join(utm10) %>% 
+  mutate(gbifID = as.double(gbifID)) %>%
+  select(gbifID, gemeente, provincie, gewest) %>% 
+  st_drop_geometry()
+```
+
 ```{r prep data}
 ruddy_data <- raw_ruddy_data %>% 
   filter(samplingProtocol %in% sampling_protocols) %>% 
@@ -121,7 +136,8 @@ ruddy_data <- raw_ruddy_data %>%
          isBrussels = FALSE,
          isWallonia = FALSE) %>%
   left_join(ruddy_verbatim_rework, by = "gbifID") %>% 
-  select(any_of(cols_ruddy_old)) %>% 
+  left_join(ruddy_sf, by = "gbifID") %>% 
+  select(any_of(cols_ruddy_old), gemeente, provincie, gewest) %>% 
   mutate(gbifID = as.character(gbifID))
 ```
 
