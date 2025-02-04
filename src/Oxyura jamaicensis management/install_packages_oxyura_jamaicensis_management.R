@@ -8,7 +8,8 @@ required <- c(
   "magrittr",
   "tidyr",
   "stringr",
-  "testthat"
+  "testthat",
+  "sf"
 )
 # install packages if needed
 if (!all(required %in% installed)) {
