@@ -3,7 +3,7 @@ library(magrittr)
 
 # create temporary R file ####
 tempR <- tempfile(fileext = ".R")
-knitr::purl("https://raw.githubusercontent.com/trias-project/indicators/137-addupdate-rationale-to-calculate-the-ermerging-status-for-natura2000-sites-for-each-region-separately/src/01_get_data_input_checklist_indicators.Rmd", output=tempR)
+knitr::purl("https://raw.githubusercontent.com/trias-project/indicators/main/src/01_get_data_input_checklist_indicators.Rmd", output=tempR)
 source(tempR)
 unlink(tempR)
 
