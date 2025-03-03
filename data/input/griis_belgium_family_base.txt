@@ -12,7 +12,7 @@ SELECT
     family,
     COUNT(*) AS occurrences,
     MIN(COALESCE(coordinateUncertaintyInMeters, 1000)) AS minCoordinateUncertaintyInMeters,
-    MIN(GBIF_TemporalUncertainty(eventDate)) AS minTemporalUncertainty
+    MIN(GBIF_TemporalUncertainty(eventDate, null)) AS minTemporalUncertainty
   FROM
     occurrence
   WHERE
