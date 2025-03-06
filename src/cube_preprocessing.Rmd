@@ -177,6 +177,8 @@ cube_post_update <- as.data.frame(aws.s3::get_bucket(bucket = UAT_bucket)) %>%
 
 cube_post_update_lastmod <- cube_post_update$LastModified
 cube_post_update_size <- cube_post_update$Size
+
+cube_post_update_nrow <- nrow(alienSpecies::loadTabularData(type = "occurrence"))
 ```
 
 We test if the data have been correctly saved:
@@ -187,19 +189,26 @@ test_that("Load occurrenceData", {
 }) 
 
 # we expect the post update size to be larger than the pre update size
-test_that("Cube size decreased after update",
+test_that("UPLOAD FAILED: size decreased",
           {
-            expect_true(cube_post_update_size < cube_pre_update_size)
+            expect_true(cube_post_update_size > cube_pre_update_size)
           })
 
-if(cube_post_update_size == cube_pre_update_size){
-  warning("Cube size did not change after update")
-}
+test_that("UPLOAD FAILED: size unchanged",
+          {
+            expect_true(cube_post_update_size == cube_pre_update_size)
+          })
 
 # we expect the post update last modified date to be later than the pre update last modified date
-test_that("Cube last modified remains unchnaged after update",
+test_that("UPLOAD FAILED: last modified date not updated",
           {
             expect_true(cube_post_update_lastmod > cube_pre_update_lastmod)
+          })
+
+# we expect the post update number of rows to be equal to the new number of rows
+test_that("UPLOAD FAILED: number of rows not equal",
+          {
+            expect_equal(cube_post_update_nrow, nrow(df))
           })
 ```
 
