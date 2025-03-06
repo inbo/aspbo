@@ -199,7 +199,7 @@ print("size post update")
 print(cube_post_update_size)
 
 print("nrow update")
-print(nrow(df))
+print(nrow(df %>% filter(year > 1950 & !is.na(year))))
 print("nrow post update")
 print(cube_post_update_nrow)
 
@@ -212,7 +212,7 @@ test_that("UPLOAD FAILED: last modified date not updated",
 # we expect the post update number of rows to be equal to the new number of rows
 test_that("UPLOAD FAILED: number of rows not equal",
           {
-            expect_equal(cube_post_update_nrow, nrow(df))
+            expect_equal(cube_post_update_nrow, nrow(df %>% filter(year > 1950 & !is.na(year))))
           })
 
 # we expect the post update size to be larger than the pre update size
