@@ -35,7 +35,7 @@ SELECT
       'validation requested'
       ) OR identificationVerificationStatus IS NULL)
    AND classKey IN (<--nubkeys-->)
-   AND coordinateUncertaintyInMeters <= 10000
+   AND COALESCE(coordinateUncertaintyInMeters, 1000) <= 10000
  GROUP BY
     year,
     eeaCellCode,
