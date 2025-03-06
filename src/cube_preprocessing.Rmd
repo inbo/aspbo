@@ -159,8 +159,24 @@ gc() #garbage collection
 The function `createTabularData()` from the alien species portal package is used 
 to process & save the data cube to the S3 bucket for use in the alien species portal.
 
+```{r get pre update values}
+cube_pre_update <- as.data.frame(aws.s3::get_bucket(bucket = UAT_bucket)) %>% 
+  filter(grepl("be_alientaxa_cube_processed.parquet", Key))
+
+cube_pre_update_lastmod <- cube_pre_update$LastModified
+cube_pre_update_size <- cube_pre_update$Size
+```
+
 ```{r save data_cube to S3 bucket}
 alienSpecies::createTabularData(dataDir = cube_path, type = "occurrence", bucket = UAT_bucket) 
+```
+
+```{r get post update values}
+cube_post_update <- as.data.frame(aws.s3::get_bucket(bucket = UAT_bucket)) %>% 
+  filter(grepl("be_alientaxa_cube_processed.parquet", Key))
+
+cube_post_update_lastmod <- cube_post_update$LastModified
+cube_post_update_size <- cube_post_update$Size
 ```
 
 We test if the data have been correctly saved:
@@ -169,6 +185,22 @@ test_that("Load occurrenceData", {
   occurrenceData <- alienSpecies::loadTabularData(type = "occurrence") 
   expect_s3_class( occurrenceData, "data.table") 
 }) 
+
+# we expect the post update size to be larger than the pre update size
+test_that("Cube size decreased after update",
+          {
+            expect_true(cube_post_update_size < cube_pre_update_size)
+          })
+
+if(cube_post_update_size == cube_pre_update_size){
+  warning("Cube size did not change after update")
+}
+
+# we expect the post update last modified date to be later than the pre update last modified date
+test_that("Cube last modified remains unchnaged after update",
+          {
+            expect_true(cube_post_update_lastmod > cube_pre_update_lastmod)
+          })
 ```
 
 ### Baseline
