@@ -225,17 +225,19 @@ if(cube_post_update_size == cube_pre_update_size){
             })
 }
 
+df_species <- df %>% 
+  filter(year >= 1950 & !is.na(year)) %>% 
+  distinct(taxonKey) %>% 
+  pull()
+
+post_update_species <- alienSpecies::loadTabularData(type = "occurrence") %>%
+  distinct(taxonKey) %>%
+  pull()
+
 # we expect all species included in dataset provided to be included in the uploaded data
 test_that("UPLOAD FAILED: not all species included",
           {
-            df_species <- df %>% 
-              filter(year >= 1950 & !is.na(year)) %>% 
-              distinct(taxonKey) %>% 
-              pull()
             
-            post_update_species <- alienSpecies::loadTabularData(type = "occurrence") %>%
-              distinct(taxonKey) %>%
-              pull()
             
             expect_in(df_species, post_update_species)
           })
