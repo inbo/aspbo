@@ -218,5 +218,5 @@ visualize_pathways_level2;Geïntroduceerde soorten per introductieroute (CBD, ni
 visualize_pathways_year_level2;Geïntroduceerde soorten per introductieroute (CBD, niveau 2) - trends;NA;Espèces introduites par voie d'introduction (CBD, niveau 2) - tendances;NA;Introduced species per pathway (CBD, level 2) - trends;NA
 welcomeTitle;Welkom op het exotenportaal;Op deze pagina vind je alle cijfers en trends over uitheemse soorten in België.;Bienvenue sur la page des espèces exotiques;Sur cette page, vous trouverez tous les chiffres et tendances concernant les espèces exotiques en Belgique.;Welcome to the alien species dashboard;On this page you will find all figures and trends about alien species in Belgium.
 occupancy;Verspreiding;Oppervlakte bezet door een soort;Répartition;Surface occupée par une espèce;Occupancy;Area occupied by a species
-checklist-welcome;;;;;
-species-welcome;;;;;
+checklist-welcome;Checklist indicators;"On this page you can find tables and graphs based on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>.";NA;NA;Checklist indicators;"On this page you can find tables and graphs based on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>."
+species-welcome;NA;NA;NA;NA;NA;NA
