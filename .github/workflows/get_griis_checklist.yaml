@@ -8,8 +8,7 @@ on:
 jobs:
   get-griis:
     runs-on: ${{ matrix.config.os }}
-
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
 
     strategy:
       fail-fast: false
@@ -26,7 +25,6 @@ jobs:
       USERNAME: ${{ secrets.USERNAME }}
       S3_BUCKET: ${{ secrets.S3_BUCKET }}
       amiabot: ${{ secrets.AMIABOT }}
-
 
     steps:
       - name: Checkout repository
