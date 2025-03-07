@@ -23,6 +23,10 @@ jobs:
       gbif_user: ${{ secrets.GBIF_USER }}
       email: ${{ secrets.GBIF_EMAIL }}
       gbif_pwd: ${{ secrets.GBIF_PWD }}
+      USERNAME: ${{ secrets.USERNAME }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      amiabot: ${{ secrets.AMIABOT }}
+
 
     steps:
       - name: Checkout repository
