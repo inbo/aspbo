@@ -154,14 +154,12 @@ last_observed_taxon <- be_alientaxa_cube %>%
   filter(isRegion) %>% 
   select(-isRegion) %>% 
   mutate(region = case_match(region,
-                             "isFlanders" ~ "Vlaanderen",
-                             "isWallonia" ~ "Wallonië",
-                             "isBrussels" ~ "Brussels Hoofdstedelijk Gewest",
-                             "isBelgium" ~ "België")) %>% 
-  mutate(taxonKey = as.integer(taxonKey),
-         last_observed_recalc = as.character(last_observed_recalc))
+                             "isFlanders" ~ "Flemish Region",
+                             "isWallonia" ~ "Walloon Region",
+                             "isBrussels" ~ "Brussels-Capital Region",
+                             "isBelgium" ~ "Belgium")) 
 
-data_input_checklist_indicators <- alienSpecies::loadTabularData(type = "indicators") %>% 
+data_input_checklist_indicators <- read_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv") %>% 
   left_join(last_observed_taxon, by = c("nubKey" = "taxonKey", "locality" = "region")) %>% 
   mutate(last_observed = case_when(is.na(last_observed) ~ last_observed_recalc,
                                    last_observed < last_observed_recalc ~ last_observed_recalc,
