@@ -1,10 +1,10 @@
+name: get_griis
+
 on:
   schedule: 
    - cron: '0 0 1 1-12 *'
   workflow_dispatch:
   
-name: get_griis
-
 jobs:
   get-griis:
     runs-on: ${{ matrix.config.os }}
@@ -49,11 +49,33 @@ jobs:
           sudo apt install libharfbuzz-dev
           sudo apt install libfribidi-dev
           sudo apt-get install -y libfontconfig1-dev
-
+          R --no-save -e 'install.packages("devtools")'
+          R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
+          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
+                         subdir = "alienSpecies", force = TRUE)'
+          
       - name: Install R packages
         run: |
           source("src/install_packages_get_griis.R")
         shell: Rscript {0}
+        
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Assume Role
+        id: assume_role
+        run: |
+          ROLE_ARN="${{ secrets.AWS_ROLE_ARN }}"
+          TEMP_ROLE=$(aws sts assume-role \
+            --role-arn $ROLE_ARN \
+            --role-session-name inbo-deployment)
+          echo "::set-output name=AWS_ACCESS_KEY_ID::$(echo $TEMP_ROLE | jq -r .Credentials.AccessKeyId)"
+          echo "::set-output name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)"
+          echo "::set-output name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)"
     
       - name: download_griis_checklist
         run: |
