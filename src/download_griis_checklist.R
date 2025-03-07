@@ -121,6 +121,7 @@ checklist <- checklist_raw %>%
   dplyr::mutate(last_observed = dplyr::case_when(is.na(last_observed) ~ last_observed_recalc,
                                                  last_observed_recalc > last_observed ~ last_observed_recalc,
                                                  TRUE ~ last_observed)) %>%
+  dplyr::select(-last_observed_recalc) %>%
   readr::write_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
                      delim = "\t")
 
