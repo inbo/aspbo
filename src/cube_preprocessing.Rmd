@@ -144,14 +144,36 @@ Recalculate last_observed column per taxonkey
 ```{r recalculate_last_observed}
 last_observed_taxon <- be_alientaxa_cube %>% 
   group_by(taxonKey) %>% 
-  summarise(last_observed = max(year, na.rm = TRUE)) %>% 
-  ungroup()
+  summarise(last_observed_recalc = max(year, na.rm = TRUE),
+            isFlanders = any(isFlanders),
+            isWallonia = any(isWallonia),
+            isBrussels = any(isBrussels),
+            isBelgium = TRUE) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = c(isFlanders, isWallonia, isBrussels, isBelgium), names_to = "region", values_to = "isRegion") %>% 
+  filter(isRegion) %>% 
+  select(-isRegion) %>% 
+  mutate(region = case_match(region,
+                             "isFlanders" ~ "Vlaanderen",
+                             "isWallonia" ~ "Wallonië",
+                             "isBrussels" ~ "Brussels Hoofdstedelijk Gewest",
+                             "isBelgium" ~ "België")) %>% 
+  mutate(taxonKey = as.integer(taxonKey),
+         last_observed_recalc = as.character(last_observed_recalc))
 
-df <- be_alientaxa_cube
+data_input_checklist_indicators <- alienSpecies::loadTabularData(type = "indicators") %>% 
+  left_join(last_observed_taxon, by = c("nubKey" = "taxonKey", "locality" = "region")) %>% 
+  mutate(last_observed = case_when(is.na(last_observed) ~ last_observed_recalc,
+                                   last_observed < last_observed_recalc ~ last_observed_recalc,
+                                   TRUE ~ last_observed)) %>% 
+  select(-last_observed_recalc) %>% 
+  write_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv")
 ```
 
 Free some ram. `be_alientaxa_cube` is no longer needed.
 ```{r free_ram}
+df <- be_alientaxa_cube
+
 rm(be_alientaxa_cube)
 gc() #garbage collection
 ```
