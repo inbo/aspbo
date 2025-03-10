@@ -89,16 +89,19 @@ last observation year based on the occurrence data.
 Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
 
 if(Sys.getenv("S3_BUCKET") != ""){
+  print("Using github secrets for bucket name")
   UAT_bucket <- Sys.getenv("S3_BUCKET")
 }else{
+  print("Using local environment for bucket name")
   UAT_bucket <- Sys.getenv("UAT_bucket")
 }
 
 if(Sys.getenv("amiabot") != "yes"){
-  print("Executor of the script is a human >> connecting to bucket")
+  print("Executor of the script is a human >> connecting to bucket via rScript")
   source("./src/connect_to_bucket.R")
   connection_test <- connect_to_bucket(bucket_name = UAT_bucket)
 }else{
+  print("Executor of the script is a bot >> connecting to bucket via github action")
   connection_test <- get_bucket(bucket = UAT_bucket)
 }
 
