@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
@@ -83,6 +83,12 @@ jobs:
         run: |
           source("src/download_griis_checklist.R")
         shell: Rscript {0}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.assume_role.outputs.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.assume_role.outputs.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ steps.assume_role.outputs.AWS_SESSION_TOKEN }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
     
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
