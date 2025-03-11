@@ -144,14 +144,34 @@ Recalculate last_observed column per taxonkey
 ```{r recalculate_last_observed}
 last_observed_taxon <- be_alientaxa_cube %>% 
   group_by(taxonKey) %>% 
-  summarise(last_observed = max(year, na.rm = TRUE)) %>% 
-  ungroup()
+  summarise(last_observed_recalc = max(year, na.rm = TRUE),
+            isFlanders = any(isFlanders),
+            isWallonia = any(isWallonia),
+            isBrussels = any(isBrussels),
+            isBelgium = TRUE) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = c(isFlanders, isWallonia, isBrussels, isBelgium), names_to = "region", values_to = "isRegion") %>% 
+  filter(isRegion) %>% 
+  select(-isRegion) %>% 
+  mutate(region = case_match(region,
+                             "isFlanders" ~ "Flemish Region",
+                             "isWallonia" ~ "Walloon Region",
+                             "isBrussels" ~ "Brussels-Capital Region",
+                             "isBelgium" ~ "Belgium")) 
 
-df <- be_alientaxa_cube
+data_input_checklist_indicators <- read_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv") %>% 
+  left_join(last_observed_taxon, by = c("nubKey" = "taxonKey", "locality" = "region")) %>% 
+  mutate(last_observed = case_when(is.na(last_observed) ~ last_observed_recalc,
+                                   last_observed < last_observed_recalc ~ last_observed_recalc,
+                                   TRUE ~ last_observed)) %>% 
+  select(-last_observed_recalc) %>% 
+  write_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv")
 ```
 
 Free some ram. `be_alientaxa_cube` is no longer needed.
 ```{r free_ram}
+df <- be_alientaxa_cube
+
 rm(be_alientaxa_cube)
 gc() #garbage collection
 ```
@@ -159,8 +179,26 @@ gc() #garbage collection
 The function `createTabularData()` from the alien species portal package is used 
 to process & save the data cube to the S3 bucket for use in the alien species portal.
 
+```{r get pre update values}
+cube_pre_update <- as.data.frame(aws.s3::get_bucket(bucket = UAT_bucket)) %>% 
+  filter(grepl("be_alientaxa_cube_processed.parquet", Key))
+
+cube_pre_update_lastmod <- cube_pre_update$LastModified
+cube_pre_update_size <- cube_pre_update$Size
+```
+
 ```{r save data_cube to S3 bucket}
 alienSpecies::createTabularData(dataDir = cube_path, type = "occurrence", bucket = UAT_bucket) 
+```
+
+```{r get post update values}
+cube_post_update <- as.data.frame(aws.s3::get_bucket(bucket = UAT_bucket)) %>% 
+  filter(grepl("be_alientaxa_cube_processed.parquet", Key))
+
+cube_post_update_lastmod <- cube_post_update$LastModified
+cube_post_update_size <- cube_post_update$Size
+
+cube_post_update_nrow <- nrow(alienSpecies::loadTabularData(type = "occurrence"))
 ```
 
 We test if the data have been correctly saved:
@@ -169,6 +207,67 @@ test_that("Load occurrenceData", {
   occurrenceData <- alienSpecies::loadTabularData(type = "occurrence") 
   expect_s3_class( occurrenceData, "data.table") 
 }) 
+
+print("lastmod pre update")
+print(cube_pre_update_lastmod)
+print("lastmod post update")
+print(cube_post_update_lastmod)
+
+print("size pre update")
+print(cube_pre_update_size)
+print("size post update")
+print(cube_post_update_size)
+
+print("nrow update")
+print(nrow(df %>% filter(year >= 1950 & !is.na(year))))
+print("nrow post update")
+print(cube_post_update_nrow)
+
+# we expect the post update last modified date to be later than the pre update last modified date
+test_that("UPLOAD FAILED: last modified date not updated",
+          {
+            expect_true(cube_post_update_lastmod > cube_pre_update_lastmod)
+          })
+
+# we expect the post update number of rows to be equal to the new number of rows
+test_that("UPLOAD FAILED: number of rows not equal",
+          {
+            expect_equal(cube_post_update_nrow, nrow(df %>% filter(year >= 1950 & !is.na(year))))
+          })
+
+# we expect the post update size to be larger than the pre update size
+if(cube_post_update_size == cube_pre_update_size){
+  warning("size unchanged")
+}else{
+  test_that("UPLOAD FAILED: size decreased",
+            {
+              expect_true(cube_post_update_size > cube_pre_update_size)
+            })
+}
+
+df_species <- df %>% 
+  filter(year >= 1950 & !is.na(year)) %>% 
+  distinct(taxonKey) %>% 
+  pull()
+
+post_update_species <- alienSpecies::loadTabularData(type = "occurrence") %>%
+  distinct(taxonKey) %>%
+  pull()
+
+# we expect all species included in dataset provided to be included in the uploaded data
+test_that("UPLOAD FAILED: not all species included",
+          {
+            
+            
+            expect_in(df_species, post_update_species)
+          })
+
+# we expect 6709291 to be included in both species lists
+test_that("UPLOAD FAILED: 6709291 not included",
+          {
+            expect_true(6709291 %in% df_species)
+            expect_true(6709291 %in% post_update_species)
+          })
 ```
 
 ### Baseline
