@@ -112,7 +112,7 @@ We get occurrence data as obtained in `trias-project/occ-processing` repository.
 
 We load occurrence data related to alien species in Belgium:
 
-```{r read_data_cube, message = FALSE, warning = FALSE}
+```{r read_data_cube}
 df <- read_csv("./cube_data/be_alientaxa_cube.csv") 
 ```
 
@@ -531,7 +531,7 @@ df_bl_xy %>% head()
 Recalculate last observed date for each taxon:
 using last observation date from the occurrence data, if available, or the last observation date from the unified checklist, if available.
 
-```{r recalculate_last_observed_date}
+```{r recalculate_last_observed_date, eval=FALSE}
 taxa_df <- 
   taxa_df %>% 
   mutate(last_observed_old = as.integer(last_observed)) %>% 
