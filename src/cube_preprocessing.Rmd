@@ -114,6 +114,8 @@ We load occurrence data related to alien species in Belgium:
 
 ```{r read_data_cube}
 df <- read_csv("./cube_data/be_alientaxa_cube.csv") 
+
+print(file.info("./cube_data/be_alientaxa_cube.csv"))
 ```
 
 To save the data cube to the S3 bucket, we use the following code:
