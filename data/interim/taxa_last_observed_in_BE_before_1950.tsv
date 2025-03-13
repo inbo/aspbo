@@ -22,11 +22,11 @@ taxonKey	canonicalName	first_observed	last_observed	class	kingdom	kingdomKey	cla
 6366597	Gentiana acaulis	1844	1911	Magnoliopsida	Plantae	6	220
 5374998	Arabis collina	1850	1949	Magnoliopsida	Plantae	6	220
 5376785	Lepidium fasciculatum	1889	1901	Magnoliopsida	Plantae	6	220
+3042399	Camelina alyssum	1813	1946	Magnoliopsida	Plantae	6	220
 3042439	Camelina rumelica	1893	1912	Magnoliopsida	Plantae	6	220
 3045042	Alyssum simplex	1850	1924	Magnoliopsida	Plantae	6	220
 2925879	Amsinckia eastwoodiae	1924	1924	Magnoliopsida	Plantae	6	220
 3741432	Verbascum banaticum	1908	1908	Magnoliopsida	Plantae	6	220
-5415013	Linaria genistifolia	1891	1947	Magnoliopsida	Plantae	6	220
 7303024	Plantago myosuros	1895	1948	Magnoliopsida	Plantae	6	220
 7308043	Lamium garganicum garganicum	1906	1920	Magnoliopsida	Plantae	6	220
 3885185	Stachys atherocalyx	1922	1922	Magnoliopsida	Plantae	6	220
@@ -100,5 +100,6 @@ taxonKey	canonicalName	first_observed	last_observed	class	kingdom	kingdomKey	cla
 5349991	Coronilla securidaca	1909	1909	Magnoliopsida	Plantae	6	220
 2965250	Medicago tornata	1949	1949	Magnoliopsida	Plantae	6	220
 7711892	Isatis quadrialata	1909	1932	Magnoliopsida	Plantae	6	220
+3137579	Galactites tomentosa	1912	1923	Magnoliopsida	Plantae	6	220
 3089549	Centaurea depressa	1909	1922	Magnoliopsida	Plantae	6	220
 3026426	Spiraea brachybotrys	1947	1947	Magnoliopsida	Plantae	6	220

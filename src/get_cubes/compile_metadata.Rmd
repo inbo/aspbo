@@ -1,0 +1,44 @@
+---
+title: "compile_metadata"
+author: "Sander Devisscher"
+date: "2024-10-22"
+output: html_document
+---
+
+A script to compile the occurrence cubes from different ranks into a single cube.
+
+```{r libraries}
+library(readr)
+library(magrittr)
+library(dplyr)
+library(stringr)
+```
+
+```{r set ranks}
+ranks <- c("GENUS", "FAMILY", "SPECIES", "SUBSPECIES_FORM_VARIETY", "CLASS")
+```
+
+```{r read in the data, message=NA}
+# get a list of all the files in the cube_data folder
+metadata_files <- list.files(path = "./cube_data/", 
+                         pattern = "be_cube_metadata_.+\\.csv$", 
+                         recursive = TRUE, 
+                         full.names = TRUE)
+
+# Create an empty data frame to store the compiled cube
+compiled_metadata <- data.frame()
+
+# Define the path to the folder containing the occurrence cubes
+for(r in metadata_files){
+  # Read in the cube
+  metadata <- read_csv(r)
+  
+  # Combine the cube with the compiled cube
+  compiled_metadata <- compiled_metadata %>% bind_rows(metadata)
+}
+```
+
+```{r write compiled cube}
+# Write the compiled cube to a csv file
+write_csv(compiled_metadata, "./cube_data/be_cube_metadata.csv")
+```

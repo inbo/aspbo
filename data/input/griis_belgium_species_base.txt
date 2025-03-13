@@ -12,7 +12,7 @@ SELECT
     species,
     COUNT(*) AS occurrences,
     MIN(COALESCE(coordinateUncertaintyInMeters, 1000)) AS minCoordinateUncertaintyInMeters,
-    MIN(GBIF_TemporalUncertainty(eventDate)) AS minTemporalUncertainty
+    MIN(GBIF_TemporalUncertainty(eventDate, null)) AS minTemporalUncertainty
   FROM
     occurrence
   WHERE  
@@ -38,7 +38,7 @@ SELECT
       'unconfirmed - not reviewed',
       'validation requested'
       ) OR identificationVerificationStatus IS NULL)
-    AND coordinateUncertaintyInMeters <= 10000
+    AND COALESCE(coordinateUncertaintyInMeters, 1000) <= 10000
   GROUP BY
     year,
     eeaCellCode,

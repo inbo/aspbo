@@ -1,0 +1,143 @@
+---
+title: "GRIIS_processing"
+author: "Sander Devisscher"
+date: "2025-03-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(progress)
+library(aws.s3)
+library(alienSpecies)
+```
+
+```{r read data}
+checklist_raw <- read_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
+                                   delim = "\t", escape_double = FALSE, 
+                                   trim_ws = TRUE)
+```
+
+```{r add vernicular names}
+taxon_keys <- unique(checklist_raw$nubKey)
+
+all_vernicular_names <- data.frame(
+  taxonKey = numeric(),
+  vernacular_name_nl = character(),
+  vernacular_name_fr = character(),
+  vernacular_name_en = character(),
+  stringsAsFactors = FALSE
+)
+
+# initiate progress bar 
+pb <- progress_bar$new(total = length(taxon_keys))
+
+
+for(t in taxon_keys){
+  pb$tick()
+  temp_name_usage <- rgbif::name_usage(key = t, data = "vernacularNames")
+  spec_vernicular_names <- temp_name_usage$data 
+  
+  if(nrow(spec_vernicular_names) > 0){
+    spec_vernicular_names <- spec_vernicular_names %>% 
+      filter(language %in% c("eng", "fra", "nld")) %>% 
+      mutate(vernacularName = str_to_sentence(vernacularName),
+                    language = str_sub(language, 0, 2)) %>% 
+      distinct(taxonKey, language, vernacularName) %>% 
+      group_by(language, taxonKey) %>% 
+      summarise(vernacular_name = paste(vernacularName, collapse = ", "), .groups = "drop") %>% 
+      ungroup() %>% 
+      pivot_wider(id_cols = taxonKey,
+                         names_from = language,
+                         names_prefix = "vernacular_name_",
+                         values_from = vernacular_name)
+    
+    if(nrow(all_vernicular_names) == 0){
+      all_vernicular_names <- spec_vernicular_names
+    }else{
+      all_vernicular_names <- bind_rows(all_vernicular_names, spec_vernicular_names)
+    }
+  }else{
+    warning(paste0("No vernicular names for ", t))
+  }
+}
+
+missing_scientific_names <- checklist_raw %>% 
+  filter(is.na(species)) 
+
+if(nrow(missing_scientific_names) > 0){
+  checklist_raw <- checklist_raw %>% 
+    mutate(species = case_when(is.na(species) ~ canonicalName,
+                                             TRUE ~ species))
+  
+  missing_scientific_names_recheck <- checklist_raw %>% 
+    filter(is.na(species)) 
+  
+  if(nrow(missing_scientific_names_recheck) > 0){
+    stop(paste0("After the fix these taxa are still missing their scientific names: ", paste(missing_scientific_names_recheck$nubKey, collapse = ", ")))
+  }
+}
+```
+
+# Recalculate the last observation year
+Sometimes the last observation year on the GRIIS checklist is not the same as 
+the last observation year in the occurrence data. This is because the GRIIS
+checklist is not updated in real-time. Therefore, we need to recalculate the
+last observation year based on the occurrence data.
+
+```{r connect to bucket}
+Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
+
+if(Sys.getenv("S3_BUCKET") != ""){
+  print("Using github secrets for bucket name")
+  UAT_bucket <- Sys.getenv("S3_BUCKET")
+}else{
+  print("Using local environment for bucket name")
+  UAT_bucket <- Sys.getenv("UAT_bucket")
+}
+
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket via rScript")
+  source("./src/connect_to_bucket.R")
+  connection_test <- connect_to_bucket(bucket_name = UAT_bucket)
+}else{
+  print("Executor of the script is a bot >> connecting to bucket via github action")
+  connection_test <- get_bucket(bucket = UAT_bucket)
+}
+
+head(connection_test)
+```
+
+```{r get occurrence data from bucket}
+occurrence_data <- alienSpecies::loadTabularData(type = "occurrence")
+
+occurrence_data <- occurrence_data %>% 
+  group_by(taxonKey) %>%
+  summarise(last_observed_recalc = max(year, na.rm = TRUE),
+                   isFlanders = any(isFlanders),
+                   isWallonia = any(isWallonia),
+                   isBrussels = any(isBrussels),
+                   isBelgium = TRUE) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = c(isFlanders, isWallonia, isBrussels, isBelgium), names_to = "region", values_to = "isRegion") %>% 
+  filter(isRegion) %>% 
+  select(-isRegion) %>% 
+  mutate(region = case_match(region,
+                                           "isFlanders" ~ "Flemish Region",
+                                           "isWallonia" ~ "Walloon Region",
+                                           "isBrussels" ~ "Brussels-Capital Region",
+                                           "isBelgium" ~ "Belgium"))
+```
+
+```{r join data & export}
+checklist <- checklist_raw %>% 
+  left_join(all_vernicular_names, by = c("nubKey" = "taxonKey")) %>% 
+  left_join(occurrence_data, by = c("nubKey" = "taxonKey", "locality" = "region")) %>%
+  mutate(last_observed = case_when(is.na(last_observed) ~ last_observed_recalc,
+                                                 last_observed_recalc > last_observed ~ last_observed_recalc,
+                                                 TRUE ~ last_observed)) %>%
+  select(-last_observed_recalc) %>%
+  write_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
+                     delim = "\t")
+```
+
