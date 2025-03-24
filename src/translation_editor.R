@@ -51,7 +51,7 @@ ui <- fluidPage(
   
   sidebarLayout(
     sidebarPanel(
-      selectInput("title_id", "Select Title ID:", choices = unique(translations$title_id)),
+      selectInput("title_id", "Select Title ID:", choices = c("", unique(translations$title_id)), selected = ""),
       selectInput("language", "Select Language:", choices = c("en", "fr", "nl")),
       actionButton("save", "Save to Google Sheet"),
       actionButton("save_csv", "Save to CSV")  # New button to save data to CSV
@@ -101,8 +101,8 @@ server <- function(input, output, session) {
   # Update the dropdown choices for Title ID whenever data is reloaded
   observe({
     updateSelectInput(session, "title_id", 
-                      choices = unique(translations_rv()$title_id),
-                      selected = current_title_id()) # Retain current selection
+                      choices = c("", unique(translations_rv()$title_id)),
+                      selected = current_title_id() %||% "") # Use empty string if current_title_id is NULL
   })
   
   # Update the dropdown choices for Language and retain the current selection
@@ -149,16 +149,17 @@ server <- function(input, output, session) {
   
   # Reactive expression to filter translations data based on selected Title ID
   filtered_data <- reactive({
-    req(input$title_id)
+    req(input$title_id != "")
     translations_rv() %>% filter(title_id == input$title_id)
   })
   
   # Update text areas when Title ID or Language changes
   observe({
+    req(input$title_id != "") # Only proceed if a title_id is selected
     req(filtered_data()) # Ensure filtered data is available
     
-    lang_col_title <- paste0("title_", input$language)       # Column name for title in selected language
-    lang_col_description <- paste0("description_", input$language) # Column name for description in selected language
+    lang_col_title <- paste0("title_", input$language)
+    lang_col_description <- paste0("description_", input$language)
     
     updateTextAreaInput(session, "title_unformatted", value = filtered_data()[[lang_col_title]])
     updateTextAreaInput(session, "description_unformatted", value = filtered_data()[[lang_col_description]])
@@ -168,6 +169,13 @@ server <- function(input, output, session) {
   output$title_rendered <- renderUI({
     req(input$title_unformatted) # Ensure input is not NULL before rendering HTML
     HTML(input$title_unformatted)
+  })
+  
+  observe({
+    if (input$title_id == "") {
+      updateTextAreaInput(session, "title_unformatted", value = "")
+      updateTextAreaInput(session, "description_unformatted", value = "")
+    }
   })
   
   # Render HTML content for the description in real-time as user types in the text area
