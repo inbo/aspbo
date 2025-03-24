@@ -6,7 +6,7 @@ library(googlesheets4)
 
 email <- Sys.getenv("email")
 
-# append @inbo.be if missing
+# append @inbo.be if missing ####
 if(!grepl("@", email)) {
   email <- paste0(email, "@inbo.be")
 }
@@ -14,7 +14,7 @@ if(!grepl("@", email)) {
 gs4_auth(email)
 sheet_id <- "1Rgkn1qEFpk7zAc_8QgL_bbXghlD09UzEMSGAIevq2rI" 
 
-# Function to load data
+# Function to load data ####
 load_data_initiate <- function() {
   translations <- read_csv2("../data/output/UAT_direct/translations.csv")
   
@@ -25,10 +25,10 @@ load_data_initiate <- function() {
   return(translations)
 }
 
-# Reload data from googlesheet
+# Reload data from googlesheet ####
 load_data <- function() {
   
-  # Replace with your actual Google Sheet ID
+  # Replace with your actual Google Sheet ID ####
   translations <- read_sheet(sheet_id,
                              sheet = "translations")
   
@@ -36,7 +36,7 @@ load_data <- function() {
 }
 
 
-# Initial data load
+# Initial data load ####
 load_csv <- askYesNo("Do you want to load the data from the CSV to the googlesheet?", title = "Data Load", yes = load_data_initiate, no = NULL)
 
 if(load_csv){
@@ -45,7 +45,7 @@ if(load_csv){
   translations <- load_data()
 }
 
-# Define UI
+# Define UI ####
 ui <- fluidPage(
   titlePanel("Translation Editor"),
   
@@ -66,11 +66,11 @@ ui <- fluidPage(
   )
 )
 
-# Define server logic
+# Define server logic ####
 server <- function(input, output, session) {
   updated_data <- load_data()
   
-  # Reactive value to store translations data
+  # Reactive value to store translations data ####
   translations_rv <- reactivePoll(
     intervalMillis = 10000,  # Check for updates every 5 seconds
     session = session,
@@ -90,9 +90,13 @@ server <- function(input, output, session) {
     }
   )
   
-  # Reactive values to store the current selections of title_id and language
+  # Reactive values ####
+  # to store the current selections of title_id and language
   current_title_id <- reactiveVal(NULL)
   current_language <- reactiveVal(NULL)
+  
+  # to store the local changes made by the user
+  local_changes <- reactiveVal(list())
   
   # Update the dropdown choices for Title ID whenever data is reloaded
   observe({
@@ -123,9 +127,14 @@ server <- function(input, output, session) {
     if (!identical(updated_data, translations)) {
       translations <<- updated_data
       
+      # Apply local changes
+      for (change in local_changes()) {
+        translations[translations$title_id == change$title_id, change$column] <- change$value
+      }
+      
       # Update UI elements if the current selection has changed
-      if (input$title_id %in% updated_data$title_id) {
-        current_row <- updated_data[updated_data$title_id == input$title_id, ]
+      if (input$title_id %in% translations$title_id) {
+        current_row <- translations[translations$title_id == input$title_id, ]
         
         updateTextAreaInput(session, "title_unformatted", 
                             value = current_row[[paste0("title_", input$language)]])
@@ -136,6 +145,7 @@ server <- function(input, output, session) {
       showNotification("Data updated from Google Sheet", type = "message", duration = 3)
     }
   })
+  
   
   # Reactive expression to filter translations data based on selected Title ID
   filtered_data <- reactive({
@@ -170,44 +180,46 @@ server <- function(input, output, session) {
   title_changed <- reactiveVal(FALSE)
   description_changed <- reactiveVal(FALSE)
   
-  # Observe changes in title and description
+  # Observe changes in title and description ####
   observeEvent(input$title_unformatted, {
     title_changed(TRUE)
+    local_changes(c(local_changes(), list(list(
+      title_id = input$title_id,
+      column = paste0("title_", input$language),
+      value = input$title_unformatted
+    ))))
   })
   
   observeEvent(input$description_unformatted, {
     description_changed(TRUE)
+    local_changes(c(local_changes(), list(list(
+      title_id = input$title_id,
+      column = paste0("description_", input$language),
+      value = input$description_unformatted
+    ))))
   })
   
   # Auto-save function
   autoSave <- reactive({
     req(filtered_data(), input$language, input$title_id)
     
-    # Check if either title or description has changed
     if (title_changed() || description_changed()) {
-      lang_col_title <- paste0("title_", input$language)
-      lang_col_description <- paste0("description_", input$language)
-      
       updated_translations <- translations_rv()
       
-      if (title_changed()) {
-        updated_translations[updated_translations$title_id == input$title_id, lang_col_title] <- input$title_unformatted
-        title_changed(FALSE)
+      for (change in local_changes()) {
+        updated_translations[updated_translations$title_id == change$title_id, change$column] <- change$value
       }
       
-      if (description_changed()) {
-        updated_translations[updated_translations$title_id == input$title_id, lang_col_description] <- input$description_unformatted
-        description_changed(FALSE)
-      }
-      
-      # Update Google Sheet
       tryCatch({
         sheet_write(updated_translations, sheet_id, sheet = "translations")
         showNotification("Changes auto-saved to Google Sheet", type = "message", duration = 3)
+        local_changes(list())  # Clear local changes after successful save
       }, error = function(e) {
         showNotification(paste("Auto-save failed:", e$message), type = "error", duration = 5)
       })
       
+      title_changed(FALSE)
+      description_changed(FALSE)
       current_title_id(input$title_id)
       current_language(input$language)
     }
