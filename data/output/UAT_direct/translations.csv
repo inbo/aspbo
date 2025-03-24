@@ -89,20 +89,20 @@ management3-countYearGroup;Het aantal beheerde {{species}} individuen;"<p>Deze g
 <p><i>Het aantal individuen kan worden onderverdeeld per levensfase indien beschikbaar</i></p>";Le nombre d'individus de {{species}} gérés;"<p>Ce graphique montre l'évolution du nombre absolu ou cumulé d'individus gérés.</p> 
 <p><i>Le nombre d'individus peut être subdivisé par stade de vie si disponible</i></p>";The number of {{species}} individuals managed;"<p>This graph shows the evolution in the absolute or cumulative number of individuals managed.</p>
 <p><i>The number of individuals can be subdivided by lifestage if available</i></p>"
-observations-mapOccurrence;Waarnemingen van {{species}};"Kaart met waarnemingen van {{species}} in België.
-Zwarte vierkanten geven gebieden van 10 km x 10 km aan waarin de soort is waargenomen.
-Rode vierkanten markeren specifieke locaties van 1 km x 1 km binnen deze gebieden waar waarnemingen zijn gemeld.
-Het bijgevoegde staafdiagram toont een tijdreeks met het aantal waarnemingen per jaar in elke regio sinds 1950.";Observations de {{species}};"Carte des observations de {{species}} en Belgique.
-Les carrés noirs indiquent des zones de 10 km x 10 km où l’espèce a été observée.
-Les carrés rouges marquent des emplacements plus précis de 1 km x 1 km à l’intérieur de ces zones où des observations ont été signalées.
-Le graphique en barres joint présente une série chronologique montrant le nombre d’observations par an dans chaque région depuis 1950.";Observations of {{species}};"Map showing observations of {{species}} in Belgium.
-Black squares represent 10 km x 10 km areas where the species has been recorded.
-Red squares highlight more precise 1 km x 1 km locations within these areas where sightings have been reported.
+observations-mapOccurrence;Waarnemingen van {{species}};"Kaart met waarnemingen van {{species}} in België. <br>
+<b style=""color: black;"">Zwarte</b> vierkanten geven gebieden van 10km x 10km aan waarin de soort is waargenomen.<br>
+<b style=""color: red;"">Rode</b> vierkanten markeren specifieke locaties van 1km x 1km binnen deze gebieden waar waarnemingen zijn gemeld.<br>
+Het bijgevoegde staafdiagram toont een tijdreeks met het aantal waarnemingen per jaar in elke regio sinds 1950.";Observations de {{species}};"Carte des observations de {{species}} en Belgique.<br>
+Les carrés <b style=""color: black;"">noirs </b> indiquent des zones de 10 km x 10 km où l’espèce a été observée.<br>
+Les carrés <b style=""color: red;"">rouges</b> rouges marquent des emplacements plus précis de 1 km x 1 km à l’intérieur de ces zones où des observations ont été signalées.<br>
+Le graphique en barres joint présente une série chronologique montrant le nombre d’observations par an dans chaque région depuis 1950.";Observations of {{species}};"Map showing observations of {{species}} in Belgium.<br>
+<b style=""color: black;"">Black</b> squares represent 10 km x 10 km areas where the species has been recorded.<br>
+<b style=""color: red;"">Red </b> squares highlight more precise 1 km x 1 km locations within these areas where sightings have been reported.<br>
 The accompanying bar graph presents a time series showing the number of observations per year in each region since 1950."
 reporting_t1-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
 reporting_t01-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
-management-mapOccurrence;Beheer van <i>{{species}}</i>;"<p>Kaart en bijbehorende grafieken van de ruimtelijke verdeling van het gerealiseerd beheer van <i>{{species}}</i>
-<li>Op de kaart ziet u de resultaten van het gekozen regio per jaar
+management-mapOccurrence;Beheer van {{species}};"<p>Kaart en bijbehorende grafieken van de ruimtelijke verdeling van het gerealiseerd beheer.
+<li>Op de kaart ziet u de ruimtelijke verdeling voor het gekozen jaar.
 <li>Op de grafiek linksonder de kaart vindt u de trend per gewest (Vlaanderen, Wallonië en/of Brussel).
 <li>Op de grafiek rechtsonder de kaart wordt de trend in de geselecteerde regio(s).</p>
 
@@ -149,8 +149,30 @@ management-mapOccurrence;Beheer van <i>{{species}}</i>;"<p>Kaart en bijbehorende
 </ul>
 </p>
 Voor meer informatie over het aanpassen van classes zie de <a href="""" target=""_blank"">veel gestelde vragen</a>
-</details>";Gestion de {{species}};NA;Management of <i>{{species}}</i>;"<p>Map and associated graphs of the spatial distribution of realized management of <i>{{species}}</i> 
-<li>On the map, you can see the results of the chosen region per year.
+</details>";Gestion de {{species}};"<p>Carte et graphiques associés de la distribution spatiale de la gestion réalisée de.
+<li>Sur la carte, vous pouvez voir la distribution spatiale pour l'année choisie. 
+<li>Sur le graphique en dessous de la carte à gauche, vous pouvez trouver la tendance par région (Flandre, Wallonie et/ou Bruxelles). <li>Sur le graphique en dessous de la carte à droite, la tendance dans la ou les régions sélectionnées est affichée.</p> 
+
+<!DOCTYPE html> <html lang=""fr""> <head> <meta charset=""UTF-8""> <meta name=""viewport"" content=""width=device-width, initial-scale=1.0""> <title>Aperçu du tableau</title> <link href=""https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"" rel=""stylesheet""> <style> .indented { margin-left: 20px; }
+details summary {
+  list-style: none;
+  font-size: 14px;
+  color: #c1c443;
+  text-decoration: underline;
+}
+
+.green-icon {
+  color:#c1c443 ;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+</style> </head> <body> <details> <summary> <i class=""fas fa-angle-double-down green-icon""></i> Plus d'informations </summary> <br> <p>L'<b>unité</b> détermine comment les résultats sont affichés : <ul> 
+<li> <b>absolu :</b> Le nombre absolu d'individus gérés 
+<li> <b>différence :</b> La différence dans le nombre absolu d'individus gérés d'une année par rapport au nombre absolu d'individus gérés de l'année précédente. Cette valeur est calculée en soustrayant la valeur absolue de l'année de celle de l'année précédente. Cette valeur peut donc être négative. Une valeur positive indique que plus d'individus ont été gérés dans une certaine année par rapport à l'année précédente, une valeur négative indique une diminution du nombre d'individus gérés, tandis qu'un zéro indique le même nombre d'individus gérés. La différence pour la première année de la série temporelle est toujours zéro. 
+<li> <b>unité d'effort :</b> Le nombre absolu d'individus gérés divisé par les efforts réalisés. Cela corrige la gestion pour les changements d'effort. L'unité d'effort dépend de la méthode utilisée, mais correspond généralement à 1 piège ou 1 tir par 24 heures. </ul> 
+</p> Pour plus d'informations sur l'ajustement des classes, consultez la <a href="""" target=""_blank"">foire aux questions</a> </details> </body> </html>";Management of {{species}};"<p>Map and associated graphs of the spatial distribution of realized management 
+<li>On the map, you can see the spatial distribution for the chosen year.
 <li>On the graph below the map on the left, you can find the trend per region (Flanders, Wallonia and/or Brussels). 
 <li>On the graph below the map on the right, the trend in the selected region(s) is shown.</p>
 
@@ -201,11 +223,28 @@ For more information on adjusting classes, see the <a href="""" target=""_blank"
 
 </body>
 </html>"
-management-mapInvasion;Invasie geschiedenis van <i>{{species}}</i>;"<p>Vergelijking tussen de verspreiding van <i>{{species}}</i> in het referentie jaar en de verspreiding in de 2 voorgaande periodes van 3 jaar.</p>
-<p>Deze kaarten geven een indicatie over de evolutie van de verspreiding van de soort. </p>
-<p>Als gebruiker kan u de weergegeven klasses naar wens aanpassen door op de knop 'Edit classes' te klikken. <br>
-Eerst selecteert u het aantal klasses ('nBins'). Afhankelijk van de keuze van verdeling<sup>1</sup> kan je een verdeling instellen, dit is enkel het geval bij een zelf gekozen verdeling. Vervolgens kan je de verschillende klasses van een naam voorzien door de 'Naam' aan te passen. Ten slotte druk je op 'Confirm groups' om de kaart aan te passen. </p>
-<p><i><sup>1</sup>Een aangepaste verdeling ('Aangepast door gebruiker'), een 'Uniforme verdeling' of een verdeling volgens 'Kwantielen'. </i></p>";Histoire des invasions de {{species}};"<p>Comparaison entre la distribution de <i>{{species}}</i> dans l'année de référence et la distribution dans les 2 périodes précédentes de 3 ans.</p> 
+management-mapInvasion;Invasie geschiedenis van <i>{{species}}</i>;"<div>
+  <p>
+    Deze kaarten tonen de verspreiding van {{species}} in het gekozen referentiejaar en vergelijken deze met de verspreiding in de twee voorgaande periodes van drie jaar.
+  </p>
+
+  <p>Als gebruiker kunt u zelf kiezen hoe de observatiegegevens worden ingedeeld. Dit gaat als volgt:</p>
+
+  <ol>
+    <li>Selecteer de knop <strong>'Edit classes'</strong>.</li>
+    <li>Stel het aantal categorieën in waarin u de waarnemingen wilt onderverdelen met de optie <strong>nBins</strong>.</li>
+    <li>
+      Bepaal hoe de gegevens worden verdeeld. U kunt kiezen tussen:
+      <ul>
+        <li><strong>Aangepaste indeling:</strong> u bepaalt zelf de grenzen.</li>
+        <li><strong>Uniforme verdeling:</strong> alle categorieën hebben een gelijke spreiding.</li>
+        <li><strong>Verdeling op basis van kwantielen:</strong> elke categorie bevat ongeveer evenveel waarnemingen.</li>
+      </ul>
+    </li>
+    <li>Geef de categorieën een naam: maak de weergave duidelijker door elke groep een passende naam te geven.</li>
+    <li>Bevestig uw instellingen: klik op <strong>'Confirm groups'</strong> om de kaart met uw indeling te vernieuwen.</li>
+  </ol>
+</div>";Histoire des invasions de {{species}};"<p>Comparaison entre la distribution de <i>{{species}}</i> dans l'année de référence et la distribution dans les 2 périodes précédentes de 3 ans.</p> 
 <p>Ces cartes donnent une indication sur l'évolution de la distribution de l'espèce.</p> 
 <p>En tant qu'utilisateur, vous pouvez ajuster les classes affichées à votre convenance en cliquant sur le bouton 'Modifier les classes'. <br> Tout d'abord, vous sélectionnez le nombre de classes ('nBins'). Selon le choix de distribution<sup>1</sup>, vous pouvez définir une répartition, ce qui n'est le cas que pour une distribution choisie par l'utilisateur. Ensuite, vous pouvez nommer les différentes classes en modifiant le 'Nom'. Enfin, appuyez sur 'Confirmer les groupes' pour mettre à jour la carte.</p> 
 <p><i><sup>1</sup>Une distribution définie par l'utilisateur ('User-defined'), une distribution uniforme ('Uniform') ou une distribution par quantiles ('Quantiles').</i></p>";Invasion history of {{species}};"<p>Comparison between the distribution of <i>{{species}}</i> in the reference year and the distribution in the 2 previous 3-year periods.</p>
