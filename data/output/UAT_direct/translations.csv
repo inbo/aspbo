@@ -4,16 +4,7 @@ apply_gamObservations;Status van opkomst (GAM) - Gemodelleerd aantal waarneminge
 <p>De zwarte punten geven het aantal observaties van de soort weer per jaar. De trendlijn geeft de GAM gebaseerd op de observaties weer. De kleuren geven de status van opkomst voor een bepaald jaar weer. <b style=""color: green;"">Groene</b> bollen geven aan dat de soort niet opkomend is, <b style=""color: orange;"">oranje</b> dat de soort mogelijk opkomend is, <b style=""color: red;"">rode</b> dat de soort opkomend is en <b style=""color: grey;"">grijze</b> dat het model geen uitsluitsel kan geven.</p>
 <p>Dit model kan gecorrigeerd worden op basis van waarnemers bias<sup>1</sup> en voorkomen in beschermde Natura2000 gebieden<sup>2</sup>.</p>
 <p><i><sup>1</sup>Het aantal waarnemingen wordt gecorrigeerd ten opzichte van het aantal waarnemingen van de klasse van de soort, bvb in het geval van Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>) worden waarnemingen van andere Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) in rekening gebracht.</i></br><i><sup>2</sup>Enkel waarnemingen wiens 1x1km hok overlap heeft met een Natura2000 gebied worden in rekening gebracht. Iedere observatie krijgt een willekeurig hok toegewezen gebaseerd op de nauwkeurigheid van de melding. Hierdoor kan het voorkomen dat het resultaat van de GAM voor Natura2000 na een update licht andere resultaten geeft</i>
-</p>Voor meer informatie in verband met de gebruikte methode kan u steeds terecht bij de <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">TrIAS indicatoren</a>";Statut d'émergence (MAG) - Nombre d'observations modélisées;"<p>Modèle Additif Généralisé (GAM) basé sur le nombre d'observations d'une espèce.</p> <p>Les points noirs représentent le nombre d'observations de l'espèce par année. La ligne de tendance montre le GAM basé sur les observations. Les couleurs indiquent le statut d'émergence pour une année donnée. Les pointes <b style=""color: green;"">verts</b> indiquent que l'espèce n'est pas émergente, <b style=""color: orange;"">orange</b> que l'espèce est potentiellement émergente, <b style=""color: red;"">rouge</b> que l'espèce est émergente, et <b style=""color: grey;"">gris</b> que le modèle est non concluant.</p> <p>Ce modèle peut être corrigé en fonction du biais d'observateur<sup>1</sup> et de la présence dans les zones Natura2000<sup>2</sup>.</p> <p><i><sup>1</sup>Le nombre d'observations est corrigé par rapport au nombre d'observations de la classe de l'espèce, par exemple dans le cas de Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>), les observations d'autres Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) sont prises en compte.</i></br><i><sup>2</sup>Seules les observations dont la cellule de grille de 1x1km chevauche une zone Natura2000 sont prises en compte. Chaque observation se voit attribuer une cellule de grille aléatoire basée sur la précision du observation. Par conséquent, le résultat du GAM pour Natura2000 peut donner des résultats légèrement différents après une mise à jour.</i> </p>Pour plus d'informations concernant la méthode utilisée, veuillez consulter les <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">indicateurs TrIAS</a>";Emergence status (GAM) - Modelled number of observations;"<p>Generalized Additive Model (GAM) based on the number of observations of a species.</p>
-
-<p>This model is based on the <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes for non-native taxa in Belgium and Europe.</a></p>
-
-<p>The black dots represent the number of observations of the species per year. The trend line shows the GAM based on the observations. The colors indicate the emergence status for a given year. <b style=""color: green;"">Green</b> dots indicate that the species is not emerging, <b style=""color: orange;"">orange</b> that the species is possibly emerging, <b style=""color: red;"">red</b> that the species is emerging, and <b style=""color: grey;"">grey</b> that the model is inconclusive.<p>
-
-<p>This model can be corrected based on observer bias<sup>1</sup> and occurrence in protected Natura2000 areas<sup>2</sup>.</p>
-
-<p><i><sup>1</sup>The number of observations is corrected relative to the number of observations of the species' class, e.g., in the case of Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>), observations of other Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) are taken into account.</i></br><i><sup>2</sup>Only observations whose 1x1km grid cell overlaps with a Natura2000 area are taken into account. Each observation is assigned a random grid cell based on the accuracy of the report. As a result, the GAM outcome for Natura2000 may give slightly different results after an update.</i>
-</p>For more information regarding the method used, please refer to the <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">TrIAS indicators</a>"
+</p>Voor meer informatie in verband met de gebruikte methode kan u steeds terecht bij de <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">TrIAS indicatoren</a>";Statut d'émergence (MAG) - Nombre d'observations modélisées;"<p>Modèle Additif Généralisé (GAM) basé sur le nombre d'observations d'une espèce.</p> <p>Les points noirs représentent le nombre d'observations de l'espèce par année. La ligne de tendance montre le GAM basé sur les observations. Les couleurs indiquent le statut d'émergence pour une année donnée. Les pointes <b style=""color: green;"">verts</b> indiquent que l'espèce n'est pas émergente, <b style=""color: orange;"">orange</b> que l'espèce est potentiellement émergente, <b style=""color: red;"">rouge</b> que l'espèce est émergente, et <b style=""color: grey;"">gris</b> que le modèle est non concluant.</p> <p>Ce modèle peut être corrigé en fonction du biais d'observateur<sup>1</sup> et de la présence dans les zones Natura2000<sup>2</sup>.</p> <p><i><sup>1</sup>Le nombre d'observations est corrigé par rapport au nombre d'observations de la classe de l'espèce, par exemple dans le cas de Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>), les observations d'autres Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) sont prises en compte.</i></br><i><sup>2</sup>Seules les observations dont la cellule de grille de 1x1km chevauche une zone Natura2000 sont prises en compte. Chaque observation se voit attribuer une cellule de grille aléatoire basée sur la précision du observation. Par conséquent, le résultat du GAM pour Natura2000 peut donner des résultats légèrement différents après une mise à jour.</i> </p>Pour plus d'informations concernant la méthode utilisée, veuillez consulter les <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">indicateurs TrIAS</a>";;
 apply_gamOccupancy;Status van opkomst (GAM) - Gemodelleerde bezette oppervlakte;"<p>Gegeneraliseerd Additief Model (GAM) gebaseerd op de oppervlakte die bezet wordt door een soort.</p> 
 <p>Dit model is gebaseerd op de <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes voor niet-inheemse taxa in België en Europa.</a>
 <p>De zwarte punten geven het aantal bezette hokken van de soort weer per jaar. De trendlijn geeft de GAM gebaseerd op de graad van bezetting weer. De kleuren geven de status van opkomst voor een bepaald jaar weer. <b style=""color: green;"">Groene</b> bollen geven aan dat de soort niet opkomend is, <b style=""color: orange;"">oranje</b> dat de soort mogelijk opkomend is, <b style=""color: red;"">rode</b> dat de soort opkomend is en <b style=""color: grey;"">grijze</b> dat het model geen uitsluitsel kan geven.</p>
@@ -89,12 +80,21 @@ management3-countYearGroup;Het aantal beheerde {{species}} individuen;"<p>Deze g
 <p><i>Het aantal individuen kan worden onderverdeeld per levensfase indien beschikbaar</i></p>";Le nombre d'individus de {{species}} gérés;"<p>Ce graphique montre l'évolution du nombre absolu ou cumulé d'individus gérés.</p> 
 <p><i>Le nombre d'individus peut être subdivisé par stade de vie si disponible</i></p>";The number of {{species}} individuals managed;"<p>This graph shows the evolution in the absolute or cumulative number of individuals managed.</p>
 <p><i>The number of individuals can be subdivided by lifestage if available</i></p>"
-observations-mapOccurrence;Waarnemingen van {{species}};NA;Observations de {{species}};NA;Observations of {{species}};NA
+observations-mapOccurrence;Waarnemingen van {{species}};"Kaart met waarnemingen van {{species}} in België.
+Zwarte vierkanten geven gebieden van 10 km x 10 km aan waarin de soort is waargenomen.
+Rode vierkanten markeren specifieke locaties van 1 km x 1 km binnen deze gebieden waar waarnemingen zijn gemeld.
+Het bijgevoegde staafdiagram toont een tijdreeks met het aantal waarnemingen per jaar in elke regio sinds 1950.";Observations de {{species}};"Carte des observations de {{species}} en Belgique.
+Les carrés noirs indiquent des zones de 10 km x 10 km où l’espèce a été observée.
+Les carrés rouges marquent des emplacements plus précis de 1 km x 1 km à l’intérieur de ces zones où des observations ont été signalées.
+Le graphique en barres joint présente une série chronologique montrant le nombre d’observations par an dans chaque région depuis 1950.";Observations of {{species}};"Map showing observations of {{species}} in Belgium.
+Black squares represent 10 km x 10 km areas where the species has been recorded.
+Red squares highlight more precise 1 km x 1 km locations within these areas where sightings have been reported.
+The accompanying bar graph presents a time series showing the number of observations per year in each region since 1950."
 reporting_t1-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
 reporting_t01-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
 management-mapOccurrence;Beheer van <i>{{species}}</i>;"<p>Kaart en bijbehorende grafieken van de ruimtelijke verdeling van het gerealiseerd beheer van <i>{{species}}</i>
-<li>Op de kaart ziet u de resultaten van het gekozen jaar per regio 
-<li>Op de grafiek linksonder de kaart vindt u de trend per gewest.
+<li>Op de kaart ziet u de resultaten van het gekozen regio per jaar
+<li>Op de grafiek linksonder de kaart vindt u de trend per gewest (Vlaanderen, Wallonië en/of Brussel).
 <li>Op de grafiek rechtsonder de kaart wordt de trend in de geselecteerde regio(s).</p>
 
 <!DOCTYPE html>
@@ -140,7 +140,58 @@ management-mapOccurrence;Beheer van <i>{{species}}</i>;"<p>Kaart en bijbehorende
 </ul>
 </p>
 Voor meer informatie over het aanpassen van classes zie de <a href="""" target=""_blank"">veel gestelde vragen</a>
-</details>";Gestion de {{species}};NA;Management of {{species}};NA
+</details>";Gestion de {{species}};NA;Management of <i>{{species}}</i>;"<p>Map and associated graphs of the spatial distribution of realized management of <i>{{species}}</i> 
+<li>On the map, you can see the results of the chosen region per year.
+<li>On the graph below the map on the left, you can find the trend per region (Flanders, Wallonia and/or Brussels). 
+<li>On the graph below the map on the right, the trend in the selected region(s) is shown.</p>
+
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <title>Table Overview</title>
+  <link href=""https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"" rel=""stylesheet""> <!-- Font Awesome link -->
+  <style>
+    .indented {
+      margin-left: 20px;
+    }
+
+    /* Remove default arrow */
+    details summary {
+      list-style: none;
+      font-size: 14px; /* Optional: You can adjust the font size */
+      color: #c1c443; /* Match the icon color */
+      text-decoration: underline; /* Underline the text */
+    }
+
+    /* Green Icon Style */
+    .green-icon {
+      color:#c1c443 ;
+      font-size: 18px; /* Adjust size as needed */
+      margin-right: 10px; /* Space between the icon and the text */
+    }
+  </style>
+</head>
+<body>
+
+<details>
+  <summary>
+    <i class=""fas fa-angle-double-down green-icon""></i> More information
+  </summary>
+<br>
+<p>The <b>unit</b> determines how the results are displayed:
+<ul>
+<li> <b>absolute:</b> The absolute number of managed individuals
+<li> <b>difference:</b> The difference in the absolute number of managed individuals of a year compared to the absolute number of managed individuals of the previous year. This value is calculated by subtracting the absolute value of the year from that of the previous year. This value can therefore be negative. A positive value indicates that more individuals were managed in a certain year compared to the previous year, a negative value indicates a decrease in the number of managed individuals, while a zero indicates the same number of managed individuals. The difference for the first year of the time series is always zero.
+<li> <b>unit of effort:</b> The absolute number of managed individuals divided by the efforts made. This corrects the management for changes in effort. The unit of effort depends on the method used, but usually corresponds to 1 trap or 1 shot per 24 hours.  
+</ul>
+</p>
+For more information on adjusting classes, see the <a href="""" target=""_blank"">frequently asked questions</a>
+</details>
+
+</body>
+</html>"
 management-mapInvasion;Invasie geschiedenis van <i>{{species}}</i>;"<p>Vergelijking tussen de verspreiding van <i>{{species}}</i> in het referentie jaar en de verspreiding in de 2 voorgaande periodes van 3 jaar.</p>
 <p>Deze kaarten geven een indicatie over de evolutie van de verspreiding van de soort. </p>
 <p>Als gebruiker kan u de weergegeven klasses naar wens aanpassen door op de knop 'Edit classes' te klikken. <br>
