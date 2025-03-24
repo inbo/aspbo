@@ -85,7 +85,10 @@ Missing nests can always be reported at <a href=""https://vespawatch.be"" target
 </br><em>Dates available until {{maxDate}}</em>"
 management2_observed-mapHeat;Alle observaties huidig jaar;Op deze kaart worden alle nesten en individuen van Aziatische hoornaar getoond die in {{maxYear}} zijn gemeld via diverse kanalen. Nog niet alle meldingen zijn op dit kaartje weergegeven. Binnenkort zullen alle meldingen zichtbaar zijn. </br><em>Data beschikbaar tot {{maxDate}}</em>;Toutes les observations de l'année actuelle;Cette carte montre tous les nids et individus de frelons asiatiques signalés en {{maxYear}} via divers canaux. Tous les rapports ne sont pas encore affichés sur cette carte. Bientôt, toutes les notifications seront visibles. </br><em>Dates disponibles jusqu'au {{maxDate}}</em>;All observations current year;This map shows all Asian hornet nests and individuals reported in {{maxYear}} through various channels. Not all reports are yet shown on this map. Soon all notifications will be visible. </br><em>Dates available until {{maxDate}}</em>
 management2-countYearGroup;Beheer van nesten;NA;Gestion des nids;NA;Management of nests;NA
-management3-countYearGroup;Aantal observaties per jaar;NA;Nombre d'observations par an;NA;Number of observations per year;NA
+management3-countYearGroup;Het aantal beheerde {{species}} individuen;"<p>Deze grafiek toont de evolutie in het absolute of cumulatieve aantal beheerde individuen.</p>
+<p><i>Het aantal individuen kan worden onderverdeeld per levensfase indien beschikbaar</i></p>";Le nombre d'individus de {{species}} gérés;"<p>Ce graphique montre l'évolution du nombre absolu ou cumulé d'individus gérés.</p> 
+<p><i>Le nombre d'individus peut être subdivisé par stade de vie si disponible</i></p>";The number of {{species}} individuals managed;"<p>This graph shows the evolution in the absolute or cumulative number of individuals managed.</p>
+<p><i>The number of individuals can be subdivided by lifestage if available</i></p>"
 observations-mapOccurrence;Waarnemingen van {{species}};NA;Observations de {{species}};NA;Observations of {{species}};NA
 reporting_t1-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
 reporting_t01-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
