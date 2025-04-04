@@ -69,7 +69,7 @@ It is possible to download the data behind each table and graph via the 'downloa
 It is possible to export graphs and maps as images. This can be done by hovering over the graph and clicking on the 'camera' icon. This button can be found in the top right corner of the graph.
            
 ### Export maps
-It is possible to export maps as an image. This can be done by clicking on the 'download map' button. This button can be found in the bottom left corner of the map.
+It is possible to export maps as images. This can be done by clicking on the 'download map' button. This button can be found in the bottom left corner of the map.
            
 ### Share link
 It is possible to share a link to the species information of the chosen species (including filters). This can be done by clicking on the 'share link' button. This button can be found in the top right corner of the page.
