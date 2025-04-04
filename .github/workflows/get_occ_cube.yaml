@@ -8,7 +8,10 @@ on:
     paths:
       - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
   schedule: 
-   - cron: '0 0 1 1-12 *' # 1st of the month 00:00 between january & december
+   - cron: '0 0 15 1-12 *' # 15th of the month 00:00 between january & december 
+   
+# This job runs when the GRIIS checklist is changed (this is checked every 1st of the month)
+# and every 15th of the month independant of changes to the GRIIS checklist.
 
 jobs:
   build-queries:
@@ -131,8 +134,14 @@ jobs:
       - name: Upload cube artifact
         uses: actions/upload-artifact@v4
         with:
-         name: ${{ matrix.param_value == 'CLASS' && 'be_classes_cube_raw' || format('be_alientaxa_cube_{0}', matrix.param_value) }}.csv
-         path: ./cube_data/
+          name: ${{ matrix.param_value == 'CLASS' && 'be_classes_cube_raw' || format('be_alientaxa_cube_{0}', matrix.param_value) }}
+          path: ./cube_data/${{ matrix.param_value == 'CLASS' && 'be_classes_cube_raw' || format('be_alientaxa_cube_{0}', matrix.param_value) }}.csv
+
+      - name: Upload cube metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: be_cube_metadata_${{ matrix.param_value }}
+          path: ./cube_data/be_cube_metadata_${{ matrix.param_value }}.csv
           
           
       - name: Debug info
@@ -256,7 +265,7 @@ jobs:
       - name: download class cube artifact 
         uses: actions/download-artifact@v4 
         with: 
-          pattern: be_classes_cube_raw.csv
+          pattern: be_classes_cube_raw
           merge-multiple: true
           path: ./cube_data/
           
@@ -273,3 +282,70 @@ jobs:
         with:
           name: be_classes_cube.csv
           path: ./cube_data/be_classes_cube.csv
+
+  compile-cube-metadata:
+    runs-on: ${{ matrix.config.os }}
+    needs: download-cubes
+    name: compile cube metadata
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      amiabot: ${{ secrets.AMIABOT }}
+      
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt install libsodium-dev
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libgdal-dev libproj-dev
+          sudo apt install libudunits2-dev
+          sudo apt install --yes libharfbuzz-dev libfribidi-dev
+
+      - name: install packages
+        run: |
+          source("src/get_cubes/install_packages_cube_base.R")
+        shell: Rscript {0}
+        
+      - name: download cube metadata artifact 
+        uses: actions/download-artifact@v4 
+        with: 
+          pattern: be_cube_metadata_*
+          merge-multiple: true
+          path: ./cube_data/
+          
+      - name: List cube_data directory
+        run: ls -R ./cube_data/
+        
+      - name: compile cube metadata
+        run: |
+          source("src/get_cubes/run_compile_metadata.R")
+        shell: Rscript {0}
+        
+      - name: upload cube metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: be_cube_metadata.csv
+          path: ./cube_data/be_cube_metadata.csv

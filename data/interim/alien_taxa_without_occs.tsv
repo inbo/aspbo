@@ -33,7 +33,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544412	1422818	Pseudagrion microcephalum	2011	2012	Insecta	Animalia
 182134330	1548900	Dohrniphora cornuta	2005	2005	Insecta	Animalia
 213214411	1623077	Tephritis carmen	1979	1979	Insecta	Animalia
-152544359	1722140	Eumodicogryllus bordigalensis	2018	2018	Insecta	Animalia
 213214010	1835422	Schiffermuelleria bruandella	2016	2016	Insecta	Animalia
 213214212	2012520	Agonoscena succincta	2021	2021	Insecta	Animalia
 159748106	2114326	Eurytemora americana	NA	NA	Copepoda	Animalia
@@ -455,7 +454,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152543646	4564944	Xerosecta cespitum	1941	1983	Gastropoda	Animalia
 213213455	4567449	Gittenbergia sororcula	2002	2002	Gastropoda	Animalia
 152543639	4598226	Tandonia sowerbyi	2014	2014	Gastropoda	Animalia
-152544017	4805564	Amphibalanus amphitrite	1952	2016	Maxillopoda	Animalia
 159748086	4805565	Amphibalanus variegatus	1997	1997	Maxillopoda	Animalia
 152543686	4812260	Branchiodrilus hortensis	2010	2016	Clitellata	Animalia
 213212759	4845821	Aidemosyne modesta	2021	2021	Aves	Animalia
@@ -466,6 +464,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544582	4987920	Trichopsocus clarus	2018	2018	Insecta	Animalia
 152544554	4989894	Hippodamia convergens	2018	2018	Insecta	Animalia
 213213827	5041423	Sceliphron spirifex	2021	2021	Insecta	Animalia
+213213981	5130444	Junonia iphita	2018	2018	Insecta	Animalia
 152544023	5166489	Megabalanus coccopoma	1997	2016	Maxillopoda	Animalia
 152544234	5168461	Erigone dentosa	2012	2012	Arachnida	Animalia
 152544220	5170395	Phoneutria boliviensis	2015	2015	Arachnida	Animalia
