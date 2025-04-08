@@ -1,0 +1,116 @@
+---
+title: FAQ
+output: html_fragment
+params:
+  language: "en"
+---
+<style>
+h1.title {
+display: none;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r sharedinfo, echo=FALSE}
+style_str<-"font-size: 1.5em; font-style: italic;"
+copyright_font<-"font-size: 0.8em;"
+width="400"
+height="267"
+```
+
+
+```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
+cat(paste0("
+# Veelgestelde Vragen
+           
+## Functionaliteiten
+           
+### Ontbrekende gegevens melden
+Het is mogelijk om ontbrekende gegevens te melden via de 'contact'-knop. Deze knop is te vinden in de linkeronderhoek van de pagina.
+           
+### Gegevens downloaden
+Het is mogelijk om de gegevens achter iedere tabel en grafiek te downloaden via de 'download data'-knop. Deze knop is te vinden in de links onder de meeste grafieken, tabellen of kaarten.
+           
+### Grafieken exporteren
+Het is mogelijk om grafieken en kaarten te exporteren als afbeeldingen. Dit kan door met de muis over de grafiek te bewegen en op het 'fototoestel'-icoon te klikken. Dit icoon vindt u rechtsboven de grafiek.
+           
+### Kaarten exporteren 
+Het is mogelijk om kaarten te exporteren als afbeeldingen. Dit kan door op de 'download kaart'-knop te klikken. Deze knop vindt u links onder de kaart.
+           
+### Link delen
+Het is mogelijk om een link naar de soortinformatie van de gekozen soort (inclusief filters) te delen. Dit kan door op de 'deel link'-knop te klikken. Deze knop vindt u rechtsboven de pagina.
+           
+### PDF rapport downloaden
+Het is mogelijk om een PDF-rapport te downloaden met informatie over van de gekozen soort. Dit rapport omvat alle soortspecifieke grafieken, tabellen en kaarten en de bijhorende instellingen. Dit rapport kan aangemaakt worden door op de 'create report'-knop te klikken. Deze knop vindt u linksonder de pagina.
+           
+## Extra informatie
+           
+### Wat is TrIAS?
+TrIAS brengt de expertise en kennis van negen lopende en voorbije BELSPO projecten samen: Alien Alert, Invaxen, Diars, INPLANBEL, Alien Impact, Ensis, CORDEX.be, Speedy en het Belgisch Biodiversiteitsplatform. Het project steunt op twee componenten: 1) het opbouwen van een gegevensnetwerk rond invasieve soorten en 2) het ontwikkelen van datagestuurde procedures voor risicoanalyse gebaseerd op modellering, mapping en risico-inschatting. Een cruciale doelstelling van TrIAS is via geautomatiseerde procedures het invasierisico van uitheemse soorten in respons op klimaatverandering te voorspellen. Correlatieve soortverspreidingsmodellen (SDM's) worden gebruikt om risicokaarten te maken onder huidig klimaat en verschillende toekomstige emissiescenario's.
+"))
+```
+
+```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
+cat(paste0("
+# Frequently Asked Questions
+           
+## Functionalities
+           
+### Report missing data
+It is possible to report missing data via the 'contact' button. This button can be found in the bottom left corner of the page.
+           
+### Download data
+It is possible to download the data behind each table and graph via the 'download data' button. This button can be found in the links below most graphs, tables or maps.
+           
+### Export graphs
+It is possible to export graphs and maps as images. This can be done by hovering over the graph and clicking on the 'camera' icon. This button can be found in the top right corner of the graph.
+           
+### Export maps
+It is possible to export maps as images. This can be done by clicking on the 'download map' button. This button can be found in the bottom left corner of the map.
+           
+### Share link
+It is possible to share a link to the species information of the chosen species (including filters). This can be done by clicking on the 'share link' button. This button can be found in the top right corner of the page.
+           
+### Download PDF report
+It is possible to download a PDF report of the species information of the selected species. This report includes all species-specific graphs, tables and maps and their associated settings. This report can be created by clicking on the 'create report' button. This button can be found in the bottom left corner of the page.
+           
+## Additional information
+           
+### What is TrIAS?
+TrIAS brings together the expertise and knowledge of nine ongoing and past BELSPO projects: Alien Alert, Invaxen, Diars, INPLANBEL, Alien Impact, Ensis, CORDEX.be, Speedy and the Belgian Biodiversity Platform. The project is based on two components: 1) building a data network around invasive species and 2) developing data-driven procedures for risk analysis based on modeling, mapping and risk assessment. A crucial objective of TrIAS is to predict the invasion risk of alien species in response to climate change through automated procedures. Correlative species distribution models (SDMs) are used to create risk maps under current climate and different future emission scenarios.
+"))
+```
+
+```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
+cat(paste0("
+# Questions fréquemment posées
+
+## Fonctionnalités
+
+### Signaler des données manquantes
+Il est possible de signaler des données manquantes via le bouton 'contact'. Ce bouton se trouve dans le coin inférieur gauche de la page.
+
+### Télécharger des données
+Il est possible de télécharger les données derrière chaque tableau et graphique via le bouton 'télécharger les données'. Ce bouton se trouve dans les liens sous la plupart des graphiques, tableaux ou cartes.
+
+### Exporter des graphiques
+Il est possible d'exporter des graphiques et des cartes sous forme d'image. Cela peut être fait en survolant le graphique et en cliquant sur l'icône 'appareil photo'. Cela se trouve en haut à droite du graphique.
+
+### Exporter des cartes
+Il est possible d'exporter des cartes sous forme d'image. Cela peut être fait en cliquant sur le bouton 'télécharger la carte'. Cela se trouve en bas à gauche de la carte.
+
+### Partager un lien
+Il est possible de partager un lien vers les informations sur l'espèce de l'espèce choisie (y compris les filtres). Cela peut être fait en cliquant sur le bouton 'partager le lien'. Cela se trouve en haut à droite de la page.
+
+### Télécharger un rapport PDF
+Il est possible de télécharger un rapport PDF des informations sur l'espèce de l'espèce choisie. Ce rapport comprend tous les graphiques, tableaux et cartes spécifiques à l'espèce et leurs paramètres associés. Ce rapport peut être créé en cliquant sur le bouton 'créer un rapport'. Cela se trouve en bas à gauche de la page.
+
+## Informations supplémentaires
+
+### Qu'est-ce que TrIAS ?
+TrIAS réunit l'expertise et les connaissances de neuf projets BELSPO en cours et passés : Alien Alert, Invaxen, Diars, INPLANBEL, Alien Impact, Ensis, CORDEX.be, Speedy et la Plateforme belge de la biodiversité. Le projet repose sur deux composantes : 1) la construction d'un réseau de données autour des espèces invasives et 2) le développement de procédures basées sur les données pour l'analyse des risques basée sur la modélisation, la cartographie et l'évaluation des risques. Un objectif crucial de TrIAS est de pouvoir prédire le risque d'invasion des espèces exotiques en réponse au changement climatique grâce à des procédures automatisées. Des modèles de distribution des espèces corrélatifs (SDM) seront utilisés pour créer des cartes de risque sous le climat actuel et différents scénarios d'émissions futurs.
+"))
+```
