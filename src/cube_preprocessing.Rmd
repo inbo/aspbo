@@ -443,7 +443,7 @@ spec_names <-
   mutate(canonicalName = if_else(n > 1,
                                  scientificName,
                                  canonicalName)) %>%
-  select(-c(n, scientificName))
+  select(-c(n))
 ```
 
 We also retrieve kingdom and class:
