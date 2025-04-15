@@ -417,6 +417,21 @@ spec_names <- map_df(
   ))
 ```
 
+Test whether all taxa are included in either spec_names or alien_taxa_without_occs:
+```{r}
+taxa_list <- c(unique(spec_names$taxonKey), unique(alien_taxa_without_occs$nubKey))
+
+test_that("not all species included",
+          {
+            expect_in(unique(df$taxonKey), taxa_list)
+          })
+
+test_that("duplicate species",
+          {
+            expect_equal(length(unique(taxa_list)), length(taxa_list))
+          })
+```
+
 In the rare case multiple taxa share the same scientific name, authorship is added:
 
 ```{r add_authorship_if_needed}
