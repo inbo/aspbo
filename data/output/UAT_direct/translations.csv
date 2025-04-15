@@ -90,14 +90,14 @@ management3-countYearGroup;Het aantal beheerde {{species}} individuen;"<p>Deze g
 <p><i>Le nombre d'individus peut être subdivisé par stade de vie si disponible</i></p>";The number of {{species}} individuals managed;"<p>This graph shows the evolution in the absolute or cumulative number of individuals managed.</p>
 <p><i>The number of individuals can be subdivided by lifestage if available</i></p>"
 observations-mapOccurrence;Waarnemingen van {{species}};"<p>Kaart met waarnemingen. </p>
-<p><b style=""color: black;"">Zwarte</b> vierkanten geven gebieden van 10km x 10km aan waarin de soort is waargenomen.<br>
-<p><b style=""color: red;"">Rode</b> vierkanten markeren specifieke locaties van 1km x 1km binnen deze gebieden waar waarnemingen zijn gemeld.</p>
+<p><b style=""color: #000000;"">Zwarte</b> vierkanten geven gebieden van 10km x 10km aan waarin de soort is waargenomen.<br>
+<p><b style=""color: #FF0000;"">Rode</b> vierkanten markeren specifieke locaties van 1km x 1km binnen deze gebieden waar waarnemingen zijn gemeld.</p>
 <p>Het bijgevoegde staafdiagram toont een tijdreeks met het aantal waarnemingen per jaar in elke regio sinds 1950.</p>";Observations de {{species}};"<p>Carte des observations de {{species}} en Belgique.</p>
-<p>Les carrés <b style=""color: black;"">noirs</b> indiquent des zones de 10 km x 10 km où l’espèce a été observée.<br>
-Les carrés <b style=""color: red;"">rouges</b> rouges marquent des emplacements plus précis de 1 km x 1 km à l’intérieur de ces zones où des observations ont été signalées.</p>
+<p>Les carrés <b style=""color: #000000;"">noirs</b> indiquent des zones de 10 km x 10 km où l’espèce a été observée.<br>
+Les carrés <b style=""color: #FF0000;"">rouges</b> rouges marquent des emplacements plus précis de 1 km x 1 km à l’intérieur de ces zones où des observations ont été signalées.</p>
 <p>Le graphique en barres joint présente une série chronologique montrant le nombre d’observations par an dans chaque région depuis 1950.</p>";Observations of {{species}};"<p>Map showing observations in the selected region.</p>
-<p><b style=""color: black;"">Black</b> squares represent 10 km x 10 km areas where the species has been recorded.<br>
-<b style=""color: red;"">Red </b> squares highlight more precise 1 km x 1 km locations within these areas where sightings have been </p><p>reported.The accompanying bar graph presents a time series showing the number of observations per year in each region since 1950.</p>"
+<p><b style=""color: #000000;"">Black</b> squares represent 10 km x 10 km areas where the species has been recorded.<br>
+<b style=""color: #FF0000;"">Red </b> squares highlight more precise 1 km x 1 km locations within these areas where sightings have been </p><p>reported.The accompanying bar graph presents a time series showing the number of observations per year in each region since 1950.</p>"
 reporting_t1-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
 reporting_t01-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
 management-mapOccurrence;Beheer van {{species}};"<p>Kaart en bijbehorende grafieken van de ruimtelijke verdeling van het gerealiseerd beheer.
