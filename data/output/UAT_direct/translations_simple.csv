@@ -62,7 +62,7 @@
 "tableTitle";"Overzicht Tabel";"Aperçu du tableau";"Table Overview"
 "icons";"Iconen";"Icônes";"Icons"
 "colors";"Kleur van het icoon";"Couleur de l'icône";"Icon colour"
-"min_1_obs";"Soort met tenminste één (historische) waarneming in België";"Espèce avec au moins 1 observation (historique) en Belgique";"Species has at least 1 (historical) observation in Belgium"
+"min_1_obs";"De soort werd waargenomen in België sinds 1950 (gegevens van GBIF)";"L'espèce a été observée en Belgique depuis 1950 (données de GBIF)";"The species has been observed in Belgium since 1950 (data from GBIF)"
 "is_union";"De soort is opgenomen in <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> de lijst van soorten van Uniebelang</a>.";"L'espèce ce est incluse dans <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> la liste des espèces d'intérêt de l'Union</a>.";"The species is included in <a href= ""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> the list of species of Union concern </a>."
 "only_obs";"Enkel waarnemingen";"Seules observations";"Only observations"
 "incomplete_out";"Onvolledige output";"Sortie incomplète";"Incomplete outputs"
