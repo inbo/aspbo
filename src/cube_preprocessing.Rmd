@@ -398,37 +398,55 @@ taxon_key <-
   df %>%
   distinct(taxonKey) %>%
   pull()
+# get basic species information
 pb <- progress_bar$new(total = length(taxon_key))
-spec_names <- map_df(
+spec_names_raw <- map_df(
   taxon_key,
   function(k) {
     pb$tick()
     name_usage(key = k)$data
   }
-) %>%
+) 
+
+spec_names <- spec_names_raw %>%
+  mutate(scientificName = coalesce(species, genus, family)) %>% 
   select(
     taxonKey = key,
     canonicalName,
     scientificName,
-    kingdomKey, classKey
+    kingdomKey, 
+    classKey
   ) %>%
   mutate(canonicalName = ifelse(
     is.na(canonicalName), scientificName, canonicalName
   ))
 ```
 
-Test whether all taxa are included in either spec_names or alien_taxa_without_occs:
-```{r}
+```{r test spec_names}
 taxa_list <- c(unique(spec_names$taxonKey), unique(alien_taxa_without_occs$nubKey))
 
+# Test whether all taxa of the GRIIS checklist are included either in de occurrences cube or the list of species without occurrences
 test_that("not all species included",
           {
-            expect_in(unique(df$taxonKey), taxa_list)
+            expect_in(unique(data_input_checklist_indicators$nubKey), taxa_list)
           })
 
+# Test whether all taxa are unique
 test_that("duplicate species",
           {
             expect_equal(length(unique(taxa_list)), length(taxa_list))
+          })
+
+# test whether all taxa have a scientific name
+test_that("missing scientific names",
+          {
+            expect_false(any(is.na(spec_names$scientificName)))
+          })
+
+# test whether all taxa have a taxonKey
+test_that("missing taxonKey",
+          {
+            expect_false(any(is.na(spec_names$taxonKey)))
           })
 ```
 
