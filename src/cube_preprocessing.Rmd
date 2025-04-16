@@ -535,8 +535,9 @@ keys_old <- keys_old %>%
          taxonomicStatus = coalesce(taxonomicStatus, taxonomicStatus_new),
          classKey = coalesce(classKey, classKey_new),
          kingdom = coalesce(kingdom, kingdom_new)) %>% 
-  select(-contains("new")) %>% 
-  write.csv(here("data", "output", "UAT_direct", "keys.csv"), row.names = FALSE)
+  select(-contains("new")) 
+
+  write.csv(keys_old, here("data", "output", "UAT_direct", "keys.csv"), row.names = FALSE)
   
 
 # Complete unknowns, info not on cube or checklist
