@@ -522,13 +522,19 @@ spec_names %>%
 ```{r complete keys}
 keys_old <- alienSpecies::loadMetaData(type = "keys")
 
+# backup current keys.csv file
+keys_old %>%
+  write_csv(here("data", "interim", "keys_old.csv"))
+
+# remove columns we will not use
 keys_new <- spec_names %>%
   select(-canonicalName, -authorship)
 
+# rename columns to avoid confusion
 colnames(keys_new) <- paste0(colnames(keys_new), "_new")
 
 # Complete knowns, info in cube on checklist
-keys_old <- keys_old %>%
+keys_completed <- keys_old %>%
   full_join(keys_new, by = c("scientificName" = "scientificName_new")) %>% 
   mutate(taxonKey = coalesce(taxonKey, taxonKey_new),
          rank = coalesce(rank, rank_new),
@@ -537,8 +543,18 @@ keys_old <- keys_old %>%
          kingdom = coalesce(kingdom, kingdom_new)) %>% 
   select(-contains("new")) 
 
-  write.csv(keys_old, here("data", "output", "UAT_direct", "keys.csv"), row.names = FALSE)
-  
+keys_path <- here("data", "output", "UAT_direct", "keys.csv")
+
+write.csv(keys_completed, keys_path, row.names = FALSE)
+
+# Upload to S3 bucket
+put_object(file = keys_path,
+           object = "keys.csv",
+           bucket = UAT_bucket,
+           multipart = TRUE,
+           show_progress = TRUE,
+           region = "eu-west-1") 
+
 
 # Complete unknowns, info not on cube or checklist
 ## Missing taxonkeys 
