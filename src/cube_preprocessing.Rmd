@@ -978,17 +978,6 @@ alienSpecies::createTimeseries(
 )
 ```
 
-We save also the taxonomic information:
-
-```{r save_spec_names, eval = FALSE}
-write_tsv(spec_names,
-          path = here::here("data", 
-                            "interim", 
-                            "timeseries_taxonomic_info.tsv"),
-          na = ""
-)
-```
-
 reload previously loaded inbotheme version
 ```{r reload_inbotheme_version, eval=TRUE}
 if(Sys.getenv("amiabot") != "yes"){
