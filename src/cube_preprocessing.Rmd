@@ -414,8 +414,11 @@ spec_names <- spec_names_raw %>%
     taxonKey = key,
     canonicalName,
     scientificName,
+    rank,
+    taxonomicStatus,
     kingdomKey, 
-    classKey
+    classKey,
+    authorship
   ) %>%
   mutate(canonicalName = ifelse(
     is.na(canonicalName), scientificName, canonicalName
@@ -434,7 +437,7 @@ test_that("not all species included",
 # Test whether all taxa are unique
 test_that("duplicate species",
           {
-            expect_equal(length(unique(taxa_list)), length(taxa_list))
+            expect_equal(length(unique(spec_names$taxonKey)), length(spec_names$taxonKey))
           })
 
 # test whether all taxa have a scientific name
@@ -514,6 +517,46 @@ Taxa not assigned to any class:
 ```{r taxa_no_class}
 spec_names %>%
   filter(is.na(classKey))
+```
+
+```{r complete keys}
+keys_old <- alienSpecies::loadMetaData(type = "keys")
+
+keys_new <- spec_names %>%
+  select(-canonicalName, -authorship)
+
+colnames(keys_new) <- paste0(colnames(keys_new), "_new")
+
+# Complete knowns, info in cube on checklist
+keys_old <- keys_old %>%
+  full_join(keys_new, by = c("scientificName" = "scientificName_new")) %>% 
+  mutate(taxonKey = coalesce(taxonKey, taxonKey_new),
+         rank = coalesce(rank, rank_new),
+         taxonomicStatus = coalesce(taxonomicStatus, taxonomicStatus_new),
+         classKey = coalesce(classKey, classKey_new),
+         kingdom = coalesce(kingdom, kingdom_new)) %>% 
+  select(-contains("new")) %>% 
+  write.csv(here("data", "output", "UAT_direct", "keys.csv"), row.names = FALSE)
+  
+
+# Complete unknowns, info not on cube or checklist
+## Missing taxonkeys 
+# => might not be an issue? => monitoring for now
+# Fixing this will be a pain in the ass since `name_usage` returns every use of the scientific name in the gbif backbone as well as on very checklist worldwide
+keys_old_missing_taxonkey <- keys_old %>% 
+  filter(is.na(taxonKey)) %>% 
+  write_csv(here("data", "interim", "keys_missing_taxonkey.csv"))
+
+## Missing scientific names => cause of https://github.com/inbo/alien-species-portal/issues/140
+keys_old_missing_name <- keys_old %>% 
+  filter(is.na(scientificName)) %>% 
+  write_csv(here("data", "interim", "keys_missing_name.csv"))
+
+# test whether any missing scientificnames remain
+test_that("missing scientificNames",
+          {
+            expect_false(nrow(keys_old_missing_name) > 0)
+          })
 ```
 
 ## Extract x-y coordinates from cellcodes
@@ -818,14 +861,6 @@ df_ts <-
   left_join(spec_names %>% 
               select(taxonKey, classKey), 
             by = "taxonKey")
-```
-
-```{r remove_spec_names}
-if(Sys.getenv("amiabot") == "yes"){
-  cat("Removing spec_names to free up some memory")
-  remove(spec_names)
-  gc()
-}
 ```
 
 ## Research effort correction
