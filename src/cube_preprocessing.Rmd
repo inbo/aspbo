@@ -398,23 +398,59 @@ taxon_key <-
   df %>%
   distinct(taxonKey) %>%
   pull()
+# get basic species information
 pb <- progress_bar$new(total = length(taxon_key))
-spec_names <- map_df(
+spec_names_raw <- map_df(
   taxon_key,
   function(k) {
     pb$tick()
     name_usage(key = k)$data
   }
-) %>%
+) 
+
+spec_names <- spec_names_raw %>%
+  mutate(scientificName = coalesce(species, genus, family)) %>% 
   select(
     taxonKey = key,
     canonicalName,
     scientificName,
-    kingdomKey, classKey
+    rank,
+    taxonomicStatus,
+    kingdomKey, 
+    classKey,
+    authorship
   ) %>%
   mutate(canonicalName = ifelse(
     is.na(canonicalName), scientificName, canonicalName
   ))
+```
+
+```{r test spec_names}
+taxa_list <- c(unique(spec_names$taxonKey), unique(alien_taxa_without_occs$nubKey))
+
+# Test whether all taxa of the GRIIS checklist are included either in de occurrences cube or the list of species without occurrences
+test_that("not all species included",
+          {
+            expect_in(unique(data_input_checklist_indicators$nubKey), taxa_list)
+          })
+
+# Test whether all taxa are unique
+test_that("duplicate species",
+          {
+            expect_equal(length(unique(spec_names$taxonKey)), length(spec_names$taxonKey))
+          })
+
+# test whether all taxa have a scientific name
+test_that("missing scientific names",
+          {
+            expect_false(any(is.na(spec_names$scientificName)))
+          })
+
+# test whether all taxa have a taxonKey
+test_that("missing taxonKey",
+          {
+            expect_false(any(is.na(spec_names$taxonKey)))
+          })
 ```
 
 In the rare case multiple taxa share the same scientific name, authorship is added:
@@ -428,7 +464,7 @@ spec_names <-
   mutate(canonicalName = if_else(n > 1,
                                  scientificName,
                                  canonicalName)) %>%
-  select(-c(n, scientificName))
+  select(-c(n))
 ```
 
 We also retrieve kingdom and class:
@@ -481,6 +517,63 @@ Taxa not assigned to any class:
 ```{r taxa_no_class}
 spec_names %>%
   filter(is.na(classKey))
+```
+
+```{r complete keys}
+keys_old <- alienSpecies::loadMetaData(type = "keys")
+
+# backup current keys.csv file
+keys_old %>%
+  write_csv(here("data", "interim", "keys_old.csv"))
+
+# remove columns we will not use
+keys_new <- spec_names %>%
+  select(-canonicalName, -authorship)
+
+# rename columns to avoid confusion
+colnames(keys_new) <- paste0(colnames(keys_new), "_new")
+
+# Complete knowns, info in cube on checklist
+keys_completed <- keys_old %>%
+  full_join(keys_new, by = c("scientificName" = "scientificName_new")) %>% 
+  mutate(taxonKey = coalesce(taxonKey, taxonKey_new),
+         rank = coalesce(rank, rank_new),
+         taxonomicStatus = coalesce(taxonomicStatus, taxonomicStatus_new),
+         classKey = coalesce(classKey, classKey_new),
+         kingdom = coalesce(kingdom, kingdom_new)) %>% 
+  select(-contains("new")) 
+
+keys_path <- here("data", "output", "UAT_direct", "keys.csv")
+
+write.csv(keys_completed, keys_path, row.names = FALSE)
+
+# Upload to S3 bucket
+aws.s3::put_object(file = keys_path,
+           object = "keys.csv",
+           bucket = UAT_bucket,
+           multipart = TRUE,
+           show_progress = TRUE,
+           region = "eu-west-1") 
+
+
+# Complete unknowns, info not on cube or checklist
+## Missing taxonkeys 
+# => might not be an issue? => monitoring for now
+# Fixing this will be a pain in the ass since `name_usage` returns every use of the scientific name in the gbif backbone as well as on very checklist worldwide
+keys_old_missing_taxonkey <- keys_old %>% 
+  filter(is.na(taxonKey)) %>% 
+  write_csv(here("data", "interim", "keys_missing_taxonkey.csv"))
+
+## Missing scientific names => cause of https://github.com/inbo/alien-species-portal/issues/140
+keys_old_missing_name <- keys_old %>% 
+  filter(is.na(scientificName)) %>% 
+  write_csv(here("data", "interim", "keys_missing_name.csv"))
+
+# test whether any missing scientificnames remain
+test_that("missing scientificNames",
+          {
+            expect_false(nrow(keys_old_missing_name) > 0)
+          })
 ```
 
 ## Extract x-y coordinates from cellcodes
@@ -787,14 +880,6 @@ df_ts <-
             by = "taxonKey")
 ```
 
-```{r remove_spec_names}
-if(Sys.getenv("amiabot") == "yes"){
-  cat("Removing spec_names to free up some memory")
-  remove(spec_names)
-  gc()
-}
-```
-
 ## Research effort correction
 
 ```{r Add baseline data}
@@ -907,17 +992,6 @@ alienSpecies::createTimeseries(
   # read grid.RData from bucket
   shapeData = alienSpecies::loadShapeData("grid.RData")$utm1_bel_with_regions, 
   bucket = UAT_bucket
-)
-```
-
-We save also the taxonomic information:
-
-```{r save_spec_names, eval = FALSE}
-write_tsv(spec_names,
-          path = here::here("data", 
-                            "interim", 
-                            "timeseries_taxonomic_info.tsv"),
-          na = ""
 )
 ```
 
