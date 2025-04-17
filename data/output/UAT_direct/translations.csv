@@ -102,7 +102,21 @@ reporting_t1-mapOccurrence;Rapportering van {{species}};"Kaart waarop het volgen
 <li><b>only t<sub>0</sub>:</b> 10 km x 10 km gridcells containing only observations of the species from 2000 up to the year of its inclusion on the <a href= ""https://environment.ec.europa.eu/topics/nature-and-biodiversity/invasive-alien-species_en"" target = ""_blank"">list of species of Union concern</a>, with no subsequent reports.
 <li><b>only t<sub>1</sub>:</b> 10 km  x 10 km gridcells where the species has first appeared during the first 3-yearly reporting cycle.
 <li><b>t<sub>0</sub> & t<sub>1</sub>:</b> 10 km x 10 km gridcells where the species is still present.</b>"
-reporting_t01-mapOccurrence;Rapportering van {{species}};NA;Rapportage de {{species}};NA;Reporting of {{species}};NA
+reporting_t01-mapOccurrence;Rapportering van {{species}};"Kaart waarop het volgende weergegeven wordt:
+<ul>
+  <li><b>alleen t<sub>0</sub>:</b> 10 km x 10 km gridcellen met alleen waarnemingen van de soort van 2000 tot het jaar van opname op de <a href=""https://environment.ec.europa.eu/topics/nature-and-biodiversity/invasive-alien-species_en"" target=""_blank"">lijst van soorten van Uniebezorgdheid</a>, zonder latere meldingen.</li>
+  <li><b>alleen t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort voor het eerst verscheen tijdens de eerste driejaarlijkse rapportagecyclus.</li>
+  <li><b>t<sub>0</sub> & t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort nog steeds aanwezig is.</li>
+</ul>";Rapportage de {{species}};"Carte avec:
+<ul>
+  <li><b>uniquement t<sub>0</sub>:</b> Grilles de 10 km x 10 km contenant uniquement des observations de l'espèce entre 2000 et l'année de son inscription sur la <a href=""https://environment.ec.europa.eu/topics/nature-and-biodiversity/invasive-alien-species_en"" target=""_blank"">liste des espèces préoccupantes pour l’Union</a>, sans signalements ultérieurs.</li>
+  <li><b>uniquement t<sub>1</sub>:</b> Grilles de 10 km x 10 km où l'espèce est apparue pour la première fois au cours du premier cycle de rapport triennal.</li>
+  <li><b>t<sub>0</sub> & t<sub>1</sub>:</b> Grilles de 10 km x 10 km où l'espèce est toujours présente.</li>
+</ul>";Reporting of {{species}};"A map displaying:
+<ul>
+<li><b>only t<sub>0</sub>:</b> 10 km x 10 km gridcells containing only observations of the species from 2000 up to the year of its inclusion on the <a href= ""https://environment.ec.europa.eu/topics/nature-and-biodiversity/invasive-alien-species_en"" target = ""_blank"">list of species of Union concern</a>, with no subsequent reports.
+<li><b>only t<sub>1</sub>:</b> 10 km  x 10 km gridcells where the species has first appeared during the first 3-yearly reporting cycle.
+<li><b>t<sub>0</sub> & t<sub>1</sub>:</b> 10 km x 10 km gridcells where the species is still present.</b>"
 management-mapOccurrence;Beheer van {{species}};"<p>Kaart en bijbehorende grafieken van de ruimtelijke verdeling van het gerealiseerd beheer.
 <li>Op de kaart ziet u de ruimtelijke verdeling voor het gekozen jaar.
 <li>Op de grafiek linksonder de kaart vindt u de trend per gewest (Vlaanderen, Wallonië en/of Brussel).
@@ -279,8 +293,18 @@ tableIndicators;NA;"<p>Deze tabel biedt een overzicht van alle soorten waarvoor 
 - <b>Jaar van eerste waarneming</b> geeft het eerste jaar aan waarin de soort werd waargenomen in België (per regio), zoals gedocumenteerd in de GRIIS-checklijst.<br>
 - <b>Mate van vestiging</b> geeft de mate van vestiging van de soort in België weer, zoals aangegeven in de GRIIS-checklijst. ""NA"" betekent dat deze informatie niet beschikbaar was in de GRIIS-checklijst voor de betreffende soort.<br>
 - <b>Introductieroutes</b> toont de introductieroute(s) van de soort in België zoals gespecificeerd in de GRIIS-checklijst.<br>
-- <b>Meer</b> Geeft aan of er meer informatie beschikbaar is over de soort (aan de hand van iconen): 
-";NA;"<p>Ce tableau présente un aperçu de toutes les espèces répertoriées sur le portail des espèces exotiques (= toutes les espèces de la <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">liste de contrôle GRIIS de Belgique</a>). Pour chaque espèce, le tableau comprend des informations sur son statut d'invasion en Belgique tel que documenté dans la liste de contrôle GRIIS. Les colonnes sont décrites ci-dessous : </p>
+- <b>Meer</b> Geeft aan of er meer informatie beschikbaar is over de soort (aan de hand van iconen): <br> 
+<div class=""indented"">
+<div class=""indented"">
+ <li><b>Een ster</b>: de soort is opgenomen in <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> de lijst van soorten van Uniebelang</a>. <br>
+ <li><b>Een driehoek</b>: geeft aan dat er minstens één gegeorefereerde waarneming is van de soort in België na 1950, zoals gerapporteerd op GBIF.<br>
+</div>
+De kleur van deze iconen geeft de beschikbare gegevens van de respectieve soort op het exotenportaal aan: <br>
+<div class=""indented"">
+  <li><b>Zwart</b> het portaal bevat gegevens over waarnemingen, indicatoren en (voor Unielijstsoorten) rapportage.<br>
+ <li><b style=""color: #c1c443;"">Geel</b> het portaal bevat gegevens over waarnemingen, indicatoren, beheer en (voor Unielijstsoorten) rapportage.
+</div>";NA;"<p>Ce tableau présente un aperçu de toutes les espèces répertoriées sur le portail des espèces exotiques (= toutes les espèces de la <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">liste de contrôle GRIIS de Belgique</a>). Pour chaque espèce, le tableau comprend des informations sur son statut d'invasion en Belgique tel que documenté dans la liste de contrôle GRIIS. Les colonnes sont décrites ci-dessous : </p>
+
 - <b>Espèce</b> affiche le nom scientifique de l'espèce exotique.<br>
 - <b>ID taxonomique GBIF (taxonkey)</b> affiche le taxonkey de l'espèce sur <a href=""https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"" target=""_blank""> GBIF </a> (le Global Biodiversity Information Facility). Pour en savoir plus sur les clés taxonomiques GBIF, consultez <a href=""https://discourse.gbif.org/t/understanding-gbif-taxonomic-keys-usagekey-taxonkey-specieskey/3045"" target=""_blank""> cette page. </a><br>
 - <b>Année de dernière observation</b> indique l'année la plus récente où l'espèce a été observée en Belgique. Cela est basé soit sur la dernière année d'observation indiquée dans la liste de contrôle GRIIS, soit (lorsqu'elle est disponible) sur une observation géoréférencée plus récente de l'espèce rapportée sur GBIF.<br>
@@ -289,7 +313,17 @@ tableIndicators;NA;"<p>Deze tabel biedt een overzicht van alle soorten waarvoor 
 - <b>Année de première observation</b> indique la première année où l'espèce a été observée en Belgique (par région), comme documenté dans la liste de contrôle GRIIS.<br>
 - <b>Degré d'établissement</b> indique le degré d'établissement de l'espèce en Belgique, tel qu'indiqué dans la liste de contrôle GRIIS. ""NA"" signifie que cette information n'était pas disponible dans la liste de contrôle GRIIS pour l'espèce respective.<br>
 - <b>Voies d'introduction</b> affiche les voies d'introduction de l'espèce en Belgique, comme spécifié dans la liste de contrôle GRIIS.<br>
-- <b>Plus</b> Indique si des informations supplémentaires sont disponibles sur l'espèce (à l'aide d'icônes) :";NA;"<p>This table offers an overview of all species included on the alien species portal (= all species on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>). For each species, the table includes information regarding its invasion status in Belgium as documented in the GRIIS checklist. The columns are described below: </p>
+- <b>Plus</b> Indique si des informations supplémentaires sont disponibles sur l'espèce (à l'aide d'icônes) : <br> 
+<div class=""indented"">
+<div class=""indented"">
+ <li><b>Une étoile</b> : l'espèce est incluse dans <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> la liste des espèces d'intérêt de l'Union</a>. <br>
+ <li><b>Un triangle</b> : indique qu'il y a au moins une observation géoréférencée de l'espèce en Belgique après 1950, comme rapporté sur GBIF.<br>
+</div>
+La couleur de ces icônes indique les données disponibles pour l'espèce respective sur le portail des espèces exotiques : <br>
+<div class=""indented"">
+  <li><b>Noir</b> : le portail contient des données sur les observations, les indicateurs et (pour les espèces de la liste de l'Union) les rapports.<br>
+ <li><b style=""color: #c1c443;"">Jaune</b> : le portail contient des données sur les observations, les indicateurs, la gestion, et (pour les espèces de la liste de l'Union) les rapports.
+</div>";NA;"<p>This table offers an overview of all species included on the alien species portal (= all species on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>). For each species, the table includes information regarding its invasion status in Belgium as documented in the GRIIS checklist. The columns are described below: </p>
 
 - <b>Species</b> displays the scientific name of the alien species.<br>
 - <b>GBIF taxonomic ID (taxonkey)</b> shows the taxonkey of the species on <a href= ""https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"" target=""_blank""> GBIF </a>(the Global Biodiversity Information Facility). Learn more about GBIF taxonomic keys on <a href= ""https://discourse.gbif.org/t/understanding-gbif-taxonomic-keys-usagekey-taxonkey-specieskey/3045"" target=""_blank""> this page. </a><br>
@@ -299,7 +333,17 @@ tableIndicators;NA;"<p>Deze tabel biedt een overzicht van alle soorten waarvoor 
 - <b>Year of first observation</b> signifies the first year the species was observed in Belgium (per region), as documented in the GRIIS checklist.<br>
 - <b>Degree of establishment</b> indicates the degree of establishment of the species in Belgium, as indicated in the GRIIS checklist. ""NA"" signifies that this information was not available on the GRIIS checklist for the respective species.<br>
 - <b>Pathway</b> Displays the introduction pathway(s) of the species in Belgium as specified in the GRIIS checklist. <br>
-- <b>More</b> Indicates whether there is more information available on the species (using icons):"
+- <b>More</b> Indicates whether there is more information available on the species (using icons): <br> 
+<div class=""indented"">
+<div class=""indented"">
+ <li><b>A star</b>: the species is included in <a href= ""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> the list of species of Union concern </a>. <br>
+ <li><b>A triangle </b>: indicates there is at least one georeferenced observation of the species in Belgium after 1950, as reported on GBIF. <br>
+</div>
+The color of these icons signifies the available data of the respective species on the alien species portal: <br>
+<div class=""indented"">
+  <li><b>Black</b> the portal contains data on observations, indicators, and (for Union list species) reporting. <br>
+ <li><b style=""color: #c1c443;"">Yellow</b> the portal contains data on observations, indicators, management, and (for Union list species) reporting.
+</div>"
 tableNesten;Aantal nesten per provincie (tabel);Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>;Nombre de nids par province (tableau);Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>;Number of nests per province (table);The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
 visualize_pathways_level1;Aantal geïntroduceerde taxa per introductieroutecategorie;"Deze grafiek toont het aantal geïntroduceerde taxa per introductieroutecategorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau1</a>)</i>.";Nombre de taxons introduits par catégorie de voie d'introduction;"Ce graphique montre le nombre de taxons introduits par catégorie de voie d'introduction <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 1</a>)</i>.";Number of introduced taxa per introduction pathway category;"This graph shows the number of introduced taxa per introduction pathway category <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, level1</a>)</i>."
 visualize_pathways_year_level1;Trends in het aantal geïntroduceerde taxa per introductie route categorie;"<p>Deze grafiek toont de trends in het aantal geïntroduceerde taxa per introductie route categorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 1</a>)</i>.
