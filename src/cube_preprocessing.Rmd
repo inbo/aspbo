@@ -548,7 +548,7 @@ keys_path <- here("data", "output", "UAT_direct", "keys.csv")
 write.csv(keys_completed, keys_path, row.names = FALSE)
 
 # Upload to S3 bucket
-put_object(file = keys_path,
+aws.s3::put_object(file = keys_path,
            object = "keys.csv",
            bucket = UAT_bucket,
            multipart = TRUE,
