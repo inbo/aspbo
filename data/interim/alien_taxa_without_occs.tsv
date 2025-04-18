@@ -256,7 +256,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544851	3028431	Alchemilla conjuncta	1830	1884	Magnoliopsida	Plantae
 152546350	3033584	Clematis jackmanii	2009	2013	Magnoliopsida	Plantae
 213214364	3033868	Berberis aquifolium	1906	2020	Magnoliopsida	Plantae
-182134023	3036157	Hedera hibernica	2008	2021	Magnoliopsida	Plantae
 152545410	3040923	Conringia austriaca	1893	1893	Magnoliopsida	Plantae
 152545404	3041109	Cordylocarpus muricatus	1950	1950	Magnoliopsida	Plantae
 152545393	3042889	Brassica elongata integrifolia	1886	1912	Magnoliopsida	Plantae
@@ -289,7 +288,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152546087	3085435	Cerastium dichotomum	1954	1955	Magnoliopsida	Plantae
 152544404	3088652	Guizotia schimperi	2015	2015	Magnoliopsida	Plantae
 213215227	3089142	Xanthium albinum	2020	2020	Magnoliopsida	Plantae
-213215103	3092083	Coleostephus myconis	2014	2014	Magnoliopsida	Plantae
 152544419	3092125	Acmella	1955	1955	Magnoliopsida	Plantae
 152544368	3092604	Leysera tenella	1911	1911	Magnoliopsida	Plantae
 152544355	3093891	Hypochaeris microcephala	1895	1895	Magnoliopsida	Plantae
@@ -505,6 +503,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545138	5342618	Astragalus onobrychis	1893	1934	Magnoliopsida	Plantae
 152545137	5342681	Astragalus hamosus	2001	2001	Magnoliopsida	Plantae
 152545134	5344424	Astragalus cymbicarpos	1906	1906	Magnoliopsida	Plantae
+152545133	5344663	Astragalus boeticus	1906	2022	Magnoliopsida	Plantae
 152545132	5345210	Astragalus stella	1892	1892	Magnoliopsida	Plantae
 152545131	5345430	Astragalus oxyglottis	1955	1955	Magnoliopsida	Plantae
 213213877	5354675	Chamaecytisus elongatus	2016	2021	Magnoliopsida	Plantae
@@ -547,6 +546,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545242	5414545	Periploca graeca	1918	1918	Magnoliopsida	Plantae
 152545244	5414550	Vincetoxicum rossicum	1965	1965	Magnoliopsida	Plantae
 213215540	5414989	Digitalis lanata	2020	2020	Magnoliopsida	Plantae
+152545655	5415014	Linaria angustissima	1835	2019	Magnoliopsida	Plantae
 159746847	5421557	Coscinodiscus wailesii	1997	1997	Bacillariophyceae	Chromista
 213215309	5539680	Pimpinella aromatica	2004	2011	Magnoliopsida	Plantae
 152543418	5544928	Clarkia purpurea quadrivulnera	1894	1894	Magnoliopsida	Plantae
