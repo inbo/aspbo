@@ -420,7 +420,7 @@
 418,"Aster amellus",8133114,"SPECIES","ACCEPTED","Plantae","8133114: Aster amellus L.",220,152543762
 419,"Aster indamellus",NA,NA,NA,NA,NA,NA,213215159
 420,"Asteriscus aquaticus",5393689,"SPECIES","ACCEPTED","Plantae","5393689: Asteriscus aquaticus (L.) Less.",220,152543803
-421,"Astragalus boeticus",5344663,"SPECIES","ACCEPTED","Plantae",NA,220,152545133
+421,"Astragalus boeticus",NA,NA,NA,NA,NA,NA,152545133
 422,"Astragalus cicer",5343253,"SPECIES","ACCEPTED","Plantae","5343253: Astragalus cicer L.",220,152545135
 423,"Astragalus cymbicarpos",NA,NA,NA,NA,NA,NA,152545134
 424,"Astragalus hamosus",NA,NA,NA,NA,NA,NA,152545137
@@ -2150,7 +2150,7 @@
 2141,"Limnomysis benedeni",2220347,"SPECIES","ACCEPTED","Animalia","2220347: Limnomysis benedeni Czerniavsky, 1882",229,152543842
 2142,"Limonium platyphyllum",4088624,"SPECIES","ACCEPTED","Plantae",NA,220,213214922
 2143,"Limonium sinuatum",3082297,"SPECIES","ACCEPTED","Plantae","3082297: Limonium sinuatum (L.) Mill.",220,152545893
-2144,"Linaria angustissima",5415014,"SPECIES","ACCEPTED","Plantae",NA,220,152545655
+2144,"Linaria angustissima",NA,NA,NA,NA,NA,NA,152545655
 2145,"Linaria bipartita",5415006,"SPECIES","ACCEPTED","Plantae",NA,220,213215544
 2146,"Linaria chalepensis",7963687,"SPECIES","ACCEPTED","Plantae","7963687: Linaria chalepensis (L.) Mill.",220,152545649
 2147,"Linaria genistifolia",5415013,"SPECIES","ACCEPTED","Plantae","5415013: Linaria genistifolia (L.) Mill.",220,152545654
@@ -3837,10 +3837,10 @@
 3825,"Trifolium stellatum",5359037,"SPECIES","ACCEPTED","Plantae",NA,220,152545056
 3826,"Trifolium strictum",5359475,"SPECIES","ACCEPTED","Plantae","5359475: Trifolium strictum L.",220,152545076
 3827,"Trifolium suffocatum",5359099,"SPECIES","ACCEPTED","Plantae","5359099: Trifolium suffocatum L.",220,152545062
-3828,"Trifolium sylvaticum",5359068,"SPECIES","ACCEPTED","Plantae",NA,220,213213812
 3828,"Trifolium sylvaticum",7600608,"SPECIES","DOUBTFUL","Plantae",NA,220,213213812
-3829,"Trifolium sylvaticum",5359068,"SPECIES","ACCEPTED","Plantae",NA,220,152545051
+3828,"Trifolium sylvaticum",5359068,"SPECIES","ACCEPTED","Plantae",NA,220,213213812
 3829,"Trifolium sylvaticum",7600608,"SPECIES","DOUBTFUL","Plantae",NA,220,152545051
+3829,"Trifolium sylvaticum",5359068,"SPECIES","ACCEPTED","Plantae",NA,220,152545051
 3830,"Trifolium tomentosum",5359510,"SPECIES","ACCEPTED","Plantae","5359510: Trifolium tomentosum L.",220,152545080
 3831,"Trifolium vesiculosum",5359334,"SPECIES","ACCEPTED","Plantae","5359334: Trifolium vesiculosum Savi",220,152545069
 3832,"Trigonella arabica",NA,NA,NA,NA,NA,NA,152545123
