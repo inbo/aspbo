@@ -283,5 +283,7 @@
 "undefined";;;"Undefined"
 "cumulative";"cumulatief aantal";"nombre cumulé";"cumulative number"
 "vernacular_name";"zoeken op gangbare namen";"recherche par noms communs";"search by common names"
+"vernacular_name_col";"gangbare namen";"noms communs";"common names"
+"other_db";"Andere dashboards";"Autres tableaux de bord";"Other dashboards"
 "mica_db";"MICA dashboard";"MICA dashboard";"MICA dashboard"
 "radius_db";"RadIUS dashboard";"RadIUS dashboard";"RadIUS dashboard"
