@@ -664,7 +664,7 @@
 662,"Callosciurus erythraeus",2437394,"SPECIES","ACCEPTED","Animalia","2437394: Callosciurus erythraeus (Pallas, 1779)",359,152543314
 663,"Callosciurus finlaysonii",2437399,"SPECIES","ACCEPTED","Animalia",NA,359,213212296
 664,"Callosciurus prevostii",2437397,"SPECIES","ACCEPTED","Animalia","2437397: Callosciurus prevostii (Desmarest, 1822)",359,152543313
-665,"Calluna vulgaris",2882482,"SPECIES","ACCEPTED","Plantae",NA,220,213215601
+665,"Calluna vulgaris",NA,NA,NA,NA,NA,NA,213215601
 666,"Calocephalus brownii",5406261,"SPECIES","ACCEPTED","Plantae",NA,220,213215080
 667,"Calotes",2466496,"GENUS","ACCEPTED","Animalia",NA,11592253,182133806
 668,"Calotis cuneifolia",3098186,"SPECIES","ACCEPTED","Plantae","3098186: Calotis cuneifolia R.Br.",220,152544339
@@ -2589,7 +2589,7 @@
 2579,"Oenothera villosa",3188896,"SPECIES","ACCEPTED","Plantae",NA,220,213213446
 2580,"Oenothera villosa villosa",NA,NA,NA,NA,NA,NA,213213461
 2581,"Oenothera wratislaviensis",3667721,"SPECIES","ACCEPTED","Plantae",NA,220,152543462
-2582,"Olios",2162003,"GENUS","ACCEPTED","Animalia",NA,367,152544081
+2582,"Olios",NA,NA,NA,NA,NA,NA,152544081
 2583,"Olios argelasius",2162049,"SPECIES","ACCEPTED","Animalia",NA,367,152544083
 2584,"Oloptum miliaceum",8335191,"SPECIES","ACCEPTED","Plantae",NA,196,213213109
 2585,"Oloptum thomasii",9317568,"SPECIES","ACCEPTED","Plantae",NA,196,213213107
@@ -2824,7 +2824,7 @@
 2814,"Phoenicopterus roseus",4352332,"SPECIES","ACCEPTED","Animalia","4352332: Phoenicopterus roseus Pallas, 1811",212,159747159
 2815,"Phoenicopterus ruber",9691034,"SPECIES","ACCEPTED","Animalia","9691034: Phoenicopterus ruber Linnaeus, 1758",212,159747158
 2816,"Phoenix dactylifera",6109699,"SPECIES","ACCEPTED","Plantae","6109699: Phoenix dactylifera L.",196,152546596
-2817,"Pholcus",2149911,"GENUS","ACCEPTED","Animalia",NA,367,152544210
+2817,"Pholcus",NA,NA,NA,NA,NA,NA,152544210
 2818,"Pholcus opilionoides",NA,NA,NA,NA,NA,NA,152544212
 2819,"Pholcus phalangioides",2149937,"SPECIES","ACCEPTED","Animalia","2149937: Pholcus phalangioides (Fuesslin, 1775)",367,NA
 2820,"Pholiurus pannonicus",4138669,"SPECIES","ACCEPTED","Plantae",NA,196,152546913
@@ -3362,7 +3362,7 @@
 3350,"Saxifraga geum",8223023,"SPECIES","ACCEPTED","Plantae",NA,220,152544689
 3351,"Saxifraga rotundifolia",7339396,"SPECIES","ACCEPTED","Plantae","7339396: Saxifraga rotundifolia L.",220,152544690
 3352,"Saxifraga stolonifera",3032762,"SPECIES","ACCEPTED","Plantae",NA,220,213213689
-3353,"Saxifraga urbium",NA,NA,NA,NA,NA,NA,152544691
+3353,"Saxifraga urbium",3754353,"SPECIES","ACCEPTED","Plantae",NA,220,152544691
 3354,"Saxifraga ×arendsii",7544073,"SPECIES","ACCEPTED","Plantae","7544073: Saxifraga ×arendsii Engl.",220,NA
 3355,"Saxifraga ×geum",8223023,"SPECIES","ACCEPTED","Plantae","8223023: Saxifraga ×geum L.",220,NA
 3356,"Scabiosa atropurpurea",NA,NA,NA,NA,NA,NA,213215392
@@ -3837,10 +3837,10 @@
 3825,"Trifolium stellatum",5359037,"SPECIES","ACCEPTED","Plantae",NA,220,152545056
 3826,"Trifolium strictum",5359475,"SPECIES","ACCEPTED","Plantae","5359475: Trifolium strictum L.",220,152545076
 3827,"Trifolium suffocatum",5359099,"SPECIES","ACCEPTED","Plantae","5359099: Trifolium suffocatum L.",220,152545062
-3828,"Trifolium sylvaticum",7600608,"SPECIES","DOUBTFUL","Plantae",NA,220,213213812
 3828,"Trifolium sylvaticum",5359068,"SPECIES","ACCEPTED","Plantae",NA,220,213213812
-3829,"Trifolium sylvaticum",7600608,"SPECIES","DOUBTFUL","Plantae",NA,220,152545051
+3828,"Trifolium sylvaticum",7600608,"SPECIES","DOUBTFUL","Plantae",NA,220,213213812
 3829,"Trifolium sylvaticum",5359068,"SPECIES","ACCEPTED","Plantae",NA,220,152545051
+3829,"Trifolium sylvaticum",7600608,"SPECIES","DOUBTFUL","Plantae",NA,220,152545051
 3830,"Trifolium tomentosum",5359510,"SPECIES","ACCEPTED","Plantae","5359510: Trifolium tomentosum L.",220,152545080
 3831,"Trifolium vesiculosum",5359334,"SPECIES","ACCEPTED","Plantae","5359334: Trifolium vesiculosum Savi",220,152545069
 3832,"Trigonella arabica",NA,NA,NA,NA,NA,NA,152545123

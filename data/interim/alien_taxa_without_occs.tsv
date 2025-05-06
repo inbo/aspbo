@@ -21,7 +21,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182134454	1195013	Otiorhynchus aurifer	1999	2018	Insecta	Animalia
 152544520	1319260	Tetraponera allaborans	1980	2018	Insecta	Animalia
 152544508	1321805	Pheidole bilimeki	1911	2018	Insecta	Animalia
-152544494	1325561	Paratrechina longicornis	1980	2018	Insecta	Animalia
 213213874	1349836	Hylaeus absolutus	2021	2021	Insecta	Animalia
 152544459	1419894	Euborellia annulipes	2016	2018	Insecta	Animalia
 152544422	1420197	Aleurodothrips fasciapennis	2018	2018	Insecta	Animalia
@@ -350,7 +349,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545678	3732995	Veronica ceratocarpa	1854	1874	Magnoliopsida	Plantae
 213215497	3736228	Scrophularia pyrenaica	1985	2021	Magnoliopsida	Plantae
 213213226	3746867	Cheilanthes viridis macrophylla	2005	2005	Polypodiopsida	Plantae
-152544691	3754353	Saxifraga urbium	1908	2014	Magnoliopsida	Plantae
 213214932	3755928	Chenopodium album missouriense	2003	2003	Magnoliopsida	Plantae
 213214934	3757050	Chenopodium berlandieri bushianum	1952	1952	Magnoliopsida	Plantae
 152545981	3757189	Chenopodium auricomiforme	1911	1911	Magnoliopsida	Plantae
@@ -504,7 +502,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545138	5342618	Astragalus onobrychis	1893	1934	Magnoliopsida	Plantae
 152545137	5342681	Astragalus hamosus	2001	2001	Magnoliopsida	Plantae
 152545134	5344424	Astragalus cymbicarpos	1906	1906	Magnoliopsida	Plantae
-152545133	5344663	Astragalus boeticus	1906	2022	Magnoliopsida	Plantae
+152545133	5344663	Astragalus boeticus	1906	1906	Magnoliopsida	Plantae
 152545132	5345210	Astragalus stella	1892	1892	Magnoliopsida	Plantae
 152545131	5345430	Astragalus oxyglottis	1955	1955	Magnoliopsida	Plantae
 213213877	5354675	Chamaecytisus elongatus	2016	2021	Magnoliopsida	Plantae
@@ -547,7 +545,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545242	5414545	Periploca graeca	1918	1918	Magnoliopsida	Plantae
 152545244	5414550	Vincetoxicum rossicum	1965	1965	Magnoliopsida	Plantae
 213215540	5414989	Digitalis lanata	2020	2020	Magnoliopsida	Plantae
-152545655	5415014	Linaria angustissima	1835	2019	Magnoliopsida	Plantae
+152545655	5415014	Linaria angustissima	1835	1835	Magnoliopsida	Plantae
 159746847	5421557	Coscinodiscus wailesii	1997	1997	Bacillariophyceae	Chromista
 213215309	5539680	Pimpinella aromatica	2004	2011	Magnoliopsida	Plantae
 152543418	5544928	Clarkia purpurea quadrivulnera	1894	1894	Magnoliopsida	Plantae
