@@ -1,0 +1,80 @@
+---
+title: <--TAXONKEY-->
+output: html_fragment
+params:
+  language: "en"
+---
+<style>
+h1.title {
+  display: none;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r sharedinfo, echo=FALSE}
+VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/<--TAXONKEY-->"
+style_str<-"font-size: 1.5em; font-style: italic;"
+image_link<-""
+copyright_font<-"font-size: 0.8em;"
+width="400"
+height="267"
+```
+
+
+```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
+cat(paste0("
+## <--VERNACULAR_NAME_NL-->
+
+<span style=\"", style_str, "\"><--SCIENTIFICNAME--></span>
+<br>
+
+<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
+<span style=\"", copyright_font, "\">© ...</span><br>
+<br>
+
+#### **Nuttige links** <br>
+Meer informatie over de soort kunt u vinden op de Vlaams biodiversiteits portaal pagina van <--VERNACULAR_NAME_NL-->.<br>
+**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams biodiversiteit portaal</a>**
+<br>
+<br>
+"))
+```
+
+```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
+cat(paste0("
+## <--VERNACULAR_NAME_EN-->
+
+<span style=\"", style_str, "\"><--SCIENTIFICNAME--></span>
+
+<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
+<span style=\"", copyright_font, "\">© ...</span><br>
+<br>
+
+#### **Useful links** <br>
+You can find more information about this species on the ecopedia page of the <--VERNACULAR_NAME_NL--> (note that this information is currently only invailable in Dutch).<br>
+**More information: <a href=\"", VBP_link, "\"target=\"_blank\">Flemish biodiversity portal</a>**
+<br>
+<br>
+"))
+```
+
+```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
+cat(paste0("
+## <--VERNACULAR_NAME_FR-->
+
+<span style=\"", style_str, "\"><--SCIENTIFICNAME--></span>
+
+<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
+<span style=\"", copyright_font, "\">© ...</span><br>
+<br>
+
+#### **Liens utiles** <br>
+Vous pouvez trouver plus d'informations sur cette espèce sur la page écopédia du <--VERNACULAR_NAME_FR--> (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
+**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">Portal biodiversité Flamande</a>**
+<br>
+<br>
+"))
+```
