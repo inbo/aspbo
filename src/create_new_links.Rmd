@@ -1,0 +1,19 @@
+---
+title: "create_new_links"
+author: "Sander Devisscher"
+date: "2025-05-12"
+output: html_document
+---
+
+```{r libraries}
+library(tidyverse)
+```
+
+```{r read template}
+links_template <- paste(readLines("./data/input/links_template.txt"), collapse = "\n")
+```
+
+```{r read GRIIS checklist}
+griis_checklist <- read_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv")
+```
+
