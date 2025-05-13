@@ -14,6 +14,56 @@ links_template <- paste(readLines("./data/input/links_template.txt"), collapse =
 ```
 
 ```{r read GRIIS checklist}
-griis_checklist <- read_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv")
+griis_checklist_raw <- read_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv")
+```
+
+```{r prep griis checklist}
+griis_checklist <- griis_checklist_raw %>% 
+  filter(!is.na(nubKey)) %>% 
+  select(nubKey, scientificName = canonicalName, vernacular_name_nl, vernacular_name_en, vernacular_name_fr) %>% 
+  distinct() %>% 
+  separate(vernacular_name_nl, sep = ", ", into = "vernacular_name_nl", extra = "drop") %>% 
+  separate(vernacular_name_en, sep = ", ", into = "vernacular_name_en", extra = "drop") %>%
+  separate(vernacular_name_fr, sep = ", ", into = "vernacular_name_fr", extra = "drop") %>% 
+  mutate(vernacular_name_nl = str_replace_na(vernacular_name_nl, ""),
+         vernacular_name_en = str_replace_na(vernacular_name_en, ""),
+         vernacular_name_fr = str_replace_na(vernacular_name_fr, ""))
+```
+
+```{r create link files}
+for(i in 1:nrow(griis_checklist)){
+  
+  # get the current row
+  current_row <- griis_checklist[i, ]
+  
+  # create filename
+  filename <- paste0("./HTML_pages/Rmd_files/", current_row$nubKey, ".Rmd")
+  
+  # check if the file for the current row already exists
+  if(file.exists(filename)){
+    next
+  }
+  
+  # replace the placeholders in the template with actual values
+  new_link <- links_template %>% 
+    gsub(pattern = "<--TAXONKEY-->", 
+         replacement = as.character(current_row$nubKey), 
+         x = .) %>% 
+    gsub(pattern = "<--SCIENTIFICNAME-->",
+         replacement = current_row$scientificName, 
+         x = .) %>% 
+    gsub(pattern = "<--VERNACULAR_NAME_NL-->",
+         replacement = current_row$vernacular_name_nl, 
+         x = .) %>%
+    gsub(pattern = "<--VERNACULAR_NAME_EN-->",
+         replacement = current_row$vernacular_name_en, 
+         x = .) %>%
+    gsub(pattern = "<--VERNACULAR_NAME_FR-->",
+         replacement = current_row$vernacular_name_fr, 
+         x = .) 
+
+  # write the new link to a file
+  writeLines(new_link, filename)
+}
 ```
 
