@@ -170,7 +170,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213212282	2514345	Puccinia helianthi-mollis	NA	NA	Pucciniomycetes	Fungi
 213212278	2514415	Puccinia umbilici	NA	NA	Pucciniomycetes	Fungi
 213212286	2514484	Puccinia soldanellae	NA	NA	Pucciniomycetes	Fungi
-213212273	2514552	Puccinia smyrnii	NA	NA	Pucciniomycetes	Fungi
 213212284	2514574	Puccinia subnitens	NA	NA	Pucciniomycetes	Fungi
 152543187	2514966	Puccinia sorghi	1997	1997	Pucciniomycetes	Fungi
 213212264	2515591	Uromyces dianthi	NA	NA	Pucciniomycetes	Fungi
@@ -276,7 +275,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545960	3083603	Polycnemum arvense	1835	1903	Magnoliopsida	Plantae
 152545964	3083657	Atriplex oblongifolia	1850	1850	Magnoliopsida	Plantae
 213214957	3083659	Atriplex eardleyae	1906	1906	Magnoliopsida	Plantae
-213214947	3083888	Teloxys aristata	2016	2016	Magnoliopsida	Plantae
 152545985	3083921	Chenopodium pratericola	1893	1953	Magnoliopsida	Plantae
 152546002	3084616	Glinus lotoides	1911	1911	Magnoliopsida	Plantae
 213214852	3084748	Claytonia perfoliata	1859	2020	Magnoliopsida	Plantae
@@ -339,7 +337,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182133994	3266899	Lampropeltis	2011	2014	Trilobita	Animalia
 152543176	3376286	Puccinia pazschkei	1895	1895	Pucciniomycetes	Fungi
 213212271	3377362	Puccinia porphyrogenita	NA	NA	Pucciniomycetes	Fungi
-182134719	3596131	Halimium lasianthum alyssoides	2012	2012	Magnoliopsida	Plantae
 152544942	3645346	Philadelphus virginalis	2008	2008	Magnoliopsida	Plantae
 213213452	3666059	Oenothera glazioviana rubricalyx	2014	2016	Magnoliopsida	Plantae
 152543458	3667406	Oenothera curtiflora	1958	1958	Magnoliopsida	Plantae
@@ -387,7 +384,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213060	4121049	Secale strictum	1908	1908	Liliopsida	Plantae
 152546936	4121201	Rytidosperma thomsonii	1911	1911	Liliopsida	Plantae
 152546950	4122609	Bromus pectinatus	1881	1909	Liliopsida	Plantae
-213212768	4123394	Festuca guestfalica hirtula	2020	2020	Liliopsida	Plantae
 152547104	4123970	Festuca gautieri	1991	1991	Liliopsida	Plantae
 152547113	4126800	Aristida hordeacea	1884	1884	Liliopsida	Plantae
 152546921	4127831	Stipa pennata	1824	1892	Liliopsida	Plantae
@@ -428,7 +424,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213215179	4248063	Hieracium pulmonarioides spelaeum	1873	2020	Magnoliopsida	Plantae
 152543957	4250826	Centaurea nemenyiana	1840	1840	Magnoliopsida	Plantae
 152544178	4255472	Rudbeckia amplexicaulis	1950	1950	Magnoliopsida	Plantae
-152544576	4271356	Heracleum sphondylium sibiricum	2017	2017	Magnoliopsida	Plantae
 213214087	4273336	Amsinckia menziesii intermedia	2019	2021	Magnoliopsida	Plantae
 152543417	4285694	Oreochromis niloticus	1990	1990	NA	Animalia
 182133728	4287413	Anolis sagrei	2018	2018	Squamata	Animalia
@@ -595,7 +590,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213461	6427623	Oenothera villosa villosa	1828	2017	Magnoliopsida	Plantae
 152547112	6431764	Aristida longespica	1891	1891	Liliopsida	Plantae
 213213344	6476579	Dolichoplana signata	2018	2018	NA	Animalia
-213215299	6550056	Daucus carota sativus	2018	2018	Magnoliopsida	Plantae
 159747368	6559940	Helictochloa bromoides	1950	1950	Liliopsida	Plantae
 152546942	6710856	Austrostipa scabra scabra	1897	1939	Liliopsida	Plantae
 213214813	6913023	Aceria brachytarsus	2014	2021	Arachnida	Animalia
