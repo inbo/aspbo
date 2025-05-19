@@ -54,7 +54,7 @@ cat(paste0("
 <br>
 
 #### **Useful links** <br>
-You can find more information about this species on the ecopedia page of the <--VERNACULAR_NAME_NL--> (note that this information is currently only invailable in Dutch).<br>
+You can find more information about this species on the ecopedia page of the <--VERNACULAR_NAME_EN--> (note that this information is currently only invailable in Dutch).<br>
 **More information: <a href=\"", VBP_link, "\"target=\"_blank\">Flemish biodiversity portal</a>**
 <br>
 <br>
