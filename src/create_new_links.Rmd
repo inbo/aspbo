@@ -17,6 +17,14 @@ links_template <- paste(readLines("./data/input/links_template.txt"), collapse =
 griis_checklist_raw <- read_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv")
 ```
 
+```{r read faunabeheer species}
+if(url("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/a8cafd49f2644c079533711afeb1e712693acb6c/reporting-grofwild/inst/extdata/species-info.csv")){
+  faunabeheer_species <- read_csv("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/a8cafd49f2644c079533711afeb1e712693acb6c/reporting-grofwild/inst/extdata/species-info.csv")
+}else{
+  faunabeheer_species <- read_csv("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/uat/reporting-grofwild/inst/extdata/species-info.csv")
+}
+```
+
 ```{r prep griis checklist}
 griis_checklist <- griis_checklist_raw %>% 
   filter(!is.na(nubKey)) %>% 
@@ -25,22 +33,41 @@ griis_checklist <- griis_checklist_raw %>%
   separate(vernacular_name_nl, sep = ", ", into = "vernacular_name_nl", extra = "drop") %>% 
   separate(vernacular_name_en, sep = ", ", into = "vernacular_name_en", extra = "drop") %>%
   separate(vernacular_name_fr, sep = ", ", into = "vernacular_name_fr", extra = "drop") %>% 
-  mutate(vernacular_name_nl = str_replace_na(vernacular_name_nl, ""),
-         vernacular_name_en = str_replace_na(vernacular_name_en, ""),
-         vernacular_name_fr = str_replace_na(vernacular_name_fr, ""))
+  mutate(vernacular_name_nl = coalesce(vernacular_name_nl, paste0("<i>", scientificName, "</i>")),
+         vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
+         vernacular_name_fr = coalesce(vernacular_name_fr, paste0("<i>", scientificName, "</i>"))) %>% 
+  mutate(faunabeheer_link_nl = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
+                                           paste0('<--VERNACULAR_NAME_NL--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade vindt u terug op de <a href=\\\\"https://faunabeheer.inbo.be/', 
+                                                  nubKey, 
+                                                  '/\\" \\"target=\\"_blank\\">faunabeheer pagina</a>.'
+                                           ),
+                                         TRUE ~ ""),
+         faunabeheer_link_en = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
+                                           paste0('<--VERNACULAR_NAME_EN--> is classified as a game species in Flanders, more information concerning management and damages can be found on the <a href=\\\\"https://faunabeheer.inbo.be/', nubKey, '/\\" \\"target=\\"_blank\\">wildlife management page</a> (note that this information is currently only invailable in Dutch)'),
+                                         TRUE ~ ""),
+         faunabeheer_link_fr = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
+                                           paste0('<--VERNACULAR_NAME_FR--> est classé comme espèce gibier en Flandre. Vous trouverez plus d`informations sur la gestion et les dommages sur la page <a href=\\\\"https://faunabeheer.inbo.be/', nubKey, '/\\" \\"target=\\\\"_blank\\\\">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu` en néerlandais)'),
+                                         TRUE ~ ""))
+```
+
+```{r redo all?}
+redo_all <- FALSE
 ```
 
 ```{r create link files}
-for(i in 1:nrow(griis_checklist)){
+for(n in 1:nrow(griis_checklist)){
   
   # get the current row
-  current_row <- griis_checklist[i, ]
+  current_row <- griis_checklist[n, ]
   
   # create filename
   filename <- paste0("./HTML_pages/Rmd_files/", current_row$nubKey, ".Rmd")
   
   # check if the file for the current row already exists
-  if(file.exists(filename)){
+  if(file.exists(filename) & !redo_all){
+    
+    print(paste0("File already exists for ", current_row$scientificName, ", skipping..."))
+    
     next
   }
   
@@ -52,6 +79,15 @@ for(i in 1:nrow(griis_checklist)){
     gsub(pattern = "<--SCIENTIFICNAME-->",
          replacement = current_row$scientificName, 
          x = .) %>% 
+    gsub(pattern = "<--FAUNABEHEER_LINK_NL-->",
+         replacement = current_row$faunabeheer_link_nl, 
+         x = .) %>%
+    gsub(pattern = "<--FAUNABEHEER_LINK_EN-->",
+         replacement = current_row$faunabeheer_link_en, 
+         x = .) %>%
+    gsub(pattern = "<--FAUNABEHEER_LINK_FR-->",
+         replacement = current_row$faunabeheer_link_fr, 
+         x = .) %>%
     gsub(pattern = "<--VERNACULAR_NAME_NL-->",
          replacement = current_row$vernacular_name_nl, 
          x = .) %>%
@@ -61,7 +97,7 @@ for(i in 1:nrow(griis_checklist)){
     gsub(pattern = "<--VERNACULAR_NAME_FR-->",
          replacement = current_row$vernacular_name_fr, 
          x = .) 
-
+  
   # write the new link to a file
   writeLines(new_link, filename)
 }
