@@ -7,14 +7,16 @@ library(dplyr)
 library(tidyr)
 library(readr)
 
+datasets <- c("ddd51fa5-97ce-48ff-9a58-a09d7e76b103",
+              "b7ee2a4d-8e10-410f-a951-a7f032678ffe",
+              "95b0e787-8508-4247-9e48-18b45fc7d12e",
+              "3634aee3-41d5-4aa2-8cb5-875859f62a3a",
+              "69351197-880d-4100-8e69-e80babf3fdd7")
+
 # Download data ####
 down_musk <- occ_download(
   pred("taxonKey", 5219858),
-  pred_in("datasetKey", c("ddd51fa5-97ce-48ff-9a58-a09d7e76b103",
-                          "b7ee2a4d-8e10-410f-a951-a7f032678ffe",
-                          "95b0e787-8508-4247-9e48-18b45fc7d12e",
-                          "3634aee3-41d5-4aa2-8cb5-875859f62a3a",
-                          "69351197-880d-4100-8e69-e80babf3fdd7")),
+  pred_in("datasetKey", datasets),
   format = "DWCA",
   user = Sys.getenv("gbif_user"), 
   pwd = Sys.getenv("gbif_pwd"), 
@@ -29,6 +31,9 @@ occ_download_wait(down_musk,
 
 raw_muskrat_data <- occ_download_get(down_musk) %>%
   occ_download_import()
+
+# test if all datasets are present in the donwload
+testthat::expect_in(datasets, unique(raw_muskrat_data$datasetKey))
 
 # Clean data ####
 table(raw_muskrat_data$datasetName, 
