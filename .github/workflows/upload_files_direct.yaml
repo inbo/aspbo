@@ -8,6 +8,10 @@ on:
 
 name: upload_files_direct
 
+concurrency:
+  group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}  # Use the event name, branch reference, and workflow name as the concurrency group
+  cancel-in-progress: true    # Cancel any in-progress runs in the same group
+
 jobs:
   upload_files:
     runs-on: ${{ matrix.config.os }}
@@ -48,6 +52,7 @@ jobs:
           sudo apt-get install libgdal-dev libproj-dev
           sudo apt install libudunits2-dev
           sudo apt install --yes libharfbuzz-dev libfribidi-dev
+          sudo apt-get install -y libfontconfig1-dev
           R --no-save -e 'install.packages("devtools")'
           R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
           R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 

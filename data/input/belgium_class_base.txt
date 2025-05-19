@@ -8,8 +8,6 @@ SELECT
     ) AS eeaCellCode,
     classKey,
     class,
-    familyKey,
-    family,
     COUNT(*) AS occurrences,
     MIN(COALESCE(coordinateUncertaintyInMeters, 1000)) AS minCoordinateUncertaintyInMeters,
     MIN(GBIF_TemporalUncertainty(eventDate, null)) AS minTemporalUncertainty
@@ -19,8 +17,7 @@ SELECT
     occurrenceStatus = 'PRESENT'
     AND countrycode = 'BE'
     AND year >= 1900
-    AND hasCoordinate = TRUE    
-    AND familyKey IS NOT NULL
+    AND hasCoordinate = TRUE
     AND NOT ARRAY_CONTAINS(issue, 'ZERO_COORDINATE')
     AND NOT ARRAY_CONTAINS(issue, 'COORDINATE_OUT_OF_RANGE')
     AND NOT ARRAY_CONTAINS(issue, 'COORDINATE_INVALID')
@@ -37,16 +34,14 @@ SELECT
       'unconfirmed - not reviewed',
       'validation requested'
       ) OR identificationVerificationStatus IS NULL)
-   AND familyKey IN (<--nubkeys-->)
+   AND classKey IN (<--nubkeys-->)
    AND COALESCE(coordinateUncertaintyInMeters, 1000) <= 10000
  GROUP BY
     year,
     eeaCellCode,
     classKey,
-    class,
-    familyKey,
-    family
+    class
   ORDER BY
     year DESC,
     eeaCellCode ASC,
-    familyKey ASC;
+    classKey ASC;

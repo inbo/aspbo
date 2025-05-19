@@ -1,7 +1,7 @@
 # get packages installed on machine
 installed <- rownames(installed.packages())
 # specify packages we need
-required <- c("tidyverse", "rgbif", "tidylog", "janitor", "here", "devtools"
+required <- c("tidyverse", "rgbif", "tidylog", "janitor", "here", "devtools", "progress"
 )
 # install packages if needed
 if (!all(required %in% installed)) {
