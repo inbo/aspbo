@@ -10,7 +10,7 @@ library(uuid)
 ```{r download data, include=FALSE}
 rawData <- read_csv("https://raw.githubusercontent.com/inbo/sk-analyse/refs/heads/main/interim/afvangsten_per_fuik_combined.csv")
 
-export_template <- read_csv("./data/output/UAT_direct/Lithobates_catesbeianus.csv")
+export_template <- read_csv("https://raw.githubusercontent.com/inbo/aspbo/refs/heads/uat/data/output/UAT_direct/Lithobates_catesbeianus.csv")
 ```
 
 ```{r select necessary columns}
@@ -26,7 +26,7 @@ cleanData <- rawData %>%
                                 .default = NA_character_)) %>% 
   filter(!is.na(n), 
          !is.na(long_vijver)) %>% 
-  mutate(gbifID = Tijdstempel, row_number())
+  mutate(gbifID = row_number())
 
 localities <- cleanData %>% 
   distinct(locationID, Locatie, long_vijver, lat_vijver) %>% 
@@ -53,8 +53,10 @@ fistools::col_content_compare(cleanData, "provincie", export_template, "provinci
 fistools::col_content_compare(cleanData, "gewest", export_template, "gewest")
 
 cleanData <- cleanData %>%
-  dplyr::select(gbifID ,
-                year = as.integer(Jaar),
+  mutate(year = Jaar) %>% 
+  mutate(NISCODE = as.integer(NISCODE) %>% 
+  dplyr::select(gbifID,
+                year,
                 individualCount = n,
                 lifeStage,
                 eventID,
