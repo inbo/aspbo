@@ -26,7 +26,7 @@ cleanData <- rawData %>%
                                 .default = NA_character_)) %>% 
   filter(!is.na(n), 
          !is.na(long_vijver)) %>% 
-  mutate(gbifID = paste0(Tijdstempel, row_number()))
+  mutate(gbifID = Tijdstempel, row_number())
 
 localities <- cleanData %>% 
   distinct(locationID, Locatie, long_vijver, lat_vijver) %>% 
@@ -54,7 +54,7 @@ fistools::col_content_compare(cleanData, "gewest", export_template, "gewest")
 
 cleanData <- cleanData %>%
   dplyr::select(gbifID ,
-                year = Jaar,
+                year = as.integer(Jaar),
                 individualCount = n,
                 lifeStage,
                 eventID,
