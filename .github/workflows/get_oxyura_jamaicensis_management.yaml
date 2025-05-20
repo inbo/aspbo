@@ -54,7 +54,7 @@ jobs:
           source("src/Oxyura jamaicensis management/install_packages_oxyura_jamaicensis_management.R")
         shell: Rscript {0}
     
-      - name: download_griis_checklist
+      - name: update_oxyura_jamaicensis_management
         run: |
           source("src/Oxyura jamaicensis management/run_update_oxyura_jamaicensis_management.R")
         shell: Rscript {0}
