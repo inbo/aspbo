@@ -78,7 +78,8 @@ jaar_missing <- cleanData %>%
   write_csv("./data/interim/Lithobates_catesbeianus_jaar_missing.csv")
   
 cleanData <- cleanData %>% 
-  filter(!is.na(year))
+  filter(!is.na(year)) %>% 
+  arrange(gbifID)
 
 table(cleanData$year, useNA = "ifany")
 table(cleanData$eventID, useNA = "ifany")
