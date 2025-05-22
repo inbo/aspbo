@@ -29,6 +29,28 @@ if(url("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/a8
 }
 ```
 
+```{r detect images}
+pngs <- list.files(path = "./HTML_pages/Pictures/", 
+                   pattern = ".png", 
+                   full.names = FALSE)
+jpgs <- list.files(path = "./HTML_pages/Pictures/", 
+                     pattern = ".jpg", 
+                     full.names = FALSE)
+jpegs <- list.files(path = "./HTML_pages/Pictures/", 
+                     pattern = ".jpeg", 
+                     full.names = FALSE)
+
+image_files <- c(pngs, jpgs, jpegs)
+
+image_files <- image_files %>% 
+  as.data.frame() %>% 
+  rename(image_file = ".") %>% 
+  separate(image_file, sep = "_", into = c("taxonKey", "copyright"), extra = "drop") %>% 
+  separate(copyright, sep = "\\.", into = c("copyright", "ext"), extra = "drop") %>%
+  mutate(taxonKey = as.numeric(taxonKey)) %>%
+  filter(!is.na(taxonKey))
+```
+
 ```{r prep griis checklist}
 custom_links_pages <- c(1311477, 2427091)
 
@@ -50,7 +72,14 @@ griis_checklist <- griis_checklist_raw %>%
                                          TRUE ~ ""),
          faunabeheer_link_fr = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
                                            paste0('<--VERNACULAR_NAME_FR--> est classé comme espèce gibier en Flandre. Vous trouverez plus d`informations sur la gestion et les dommages en Flandre sur la page <a href=\\\\"", faunabeheer_link, \\"\\\\"target=\\\\"_blank\\\\">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu` en néerlandais)'),
-                                         TRUE ~ ""))
+                                         TRUE ~ "")) %>% 
+  left_join(image_files, by = c("nubKey" = "taxonKey")) %>% 
+  mutate(image_copyright = case_when(!is.na(copyright) ~ 
+                                       paste0(nubKey, "_", copyright, ".", ext),
+                                     TRUE ~ ""),
+         image_link = case_when(!is.na(copyright) ~ paste0('<img src=\\\\"", image_link, "\\\\" width=\\\\"", width, "\\\\" height=\\\\"", height, "\\\\"><br>
+<span style=\\\\"", copyright_font, "\\\\">© <--COPYRIGHT--></span><br>'),
+TRUE ~ ""))
 ```
 
 ```{r redo all?}
@@ -99,7 +128,17 @@ for(n in 1:nrow(griis_checklist)){
          x = .) %>%
     gsub(pattern = "<--VERNACULAR_NAME_FR-->",
          replacement = current_row$vernacular_name_fr, 
-         x = .) 
+         x = .) %>%
+    gsub(pattern = "<--IMAGE-COPYRIGHT-->",
+         replacement = current_row$image_copyright, 
+         x = .) %>%
+    gsub(pattern = "<--IMAGE_LINK-->",
+         replacement = current_row$image_link, 
+         x = .) %>% 
+    gsub(pattern = "<--COPYRIGHT-->",
+         replacement = current_row$copyright, 
+         x = .)
+    
   
   # write the new link to a file
   writeLines(new_link, filename)
