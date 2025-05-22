@@ -82,6 +82,12 @@ cleanData <- cleanData %>%
 
 table(cleanData$year, useNA = "ifany")
 table(cleanData$eventID, useNA = "ifany")
+
+vangst_per_year <- cleanData %>% 
+  group_by(year) %>% 
+  summarise(n = sum(individualCount, na.rm = TRUE))
+
+vangst_per_year
 ```
 
 ```{r export cleanData}
