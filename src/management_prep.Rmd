@@ -26,6 +26,10 @@ cleanData <- rawData %>%
                                 .default = NA_character_)) %>% 
   filter(!is.na(n), 
          !is.na(long_vijver)) %>% 
+  group_by(eventID, locationID, Locatie, long_vijver, lat_vijver, lifeStage, Jaar) %>% 
+  summarise(n = sum(n, na.rm = TRUE),
+            no_fuiken = max(no_fuiken, na.rm = TRUE)) %>% 
+  ungroup() %>% 
   mutate(gbifID = row_number())
 
 localities <- cleanData %>% 
@@ -54,7 +58,7 @@ fistools::col_content_compare(cleanData, "gewest", export_template, "gewest")
 
 cleanData <- cleanData %>%
   mutate(year = Jaar) %>% 
-  mutate(NISCODE = as.integer(NISCODE) %>% 
+  mutate(NISCODE = as.integer(NISCODE)) %>% 
   dplyr::select(gbifID,
                 year,
                 individualCount = n,
@@ -68,6 +72,16 @@ cleanData <- cleanData %>%
                 locality = Locatie,
                 n_fuiken = no_fuiken,
                 gewest)
+
+jaar_missing <- cleanData %>% 
+  filter(is.na(year)) %>% 
+  write_csv("./data/interim/Lithobates_catesbeianus_jaar_missing.csv")
+  
+cleanData <- cleanData %>% 
+  filter(!is.na(year))
+
+table(cleanData$year, useNA = "ifany")
+table(cleanData$eventID, useNA = "ifany")
 ```
 
 ```{r export cleanData}
