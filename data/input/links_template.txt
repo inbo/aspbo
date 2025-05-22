@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/<--TAXONKEY-->"
 faunabeheer_link <- "https://faunabeheer.inbo.be/<--TAXONKEY-->"
 style_str<-"font-size: 1.5em; font-style: italic;"
-image_link<-"../Pictures/<--TAXONKEY-->.jpg"
+image_link<-"../Pictures/<--IMAGE-COPYRIGHT-->"
 copyright_font<-"font-size: 0.8em;"
 width="400"
 height="267"
@@ -32,8 +32,7 @@ cat(paste0("
 <span style=\"", style_str, "\"><--SCIENTIFICNAME--></span>
 <br>
 
-<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
-<span style=\"", copyright_font, "\">© ...</span><br>
+<--IMAGE_LINK-->
 <br>
 
 #### **Nuttige links** <br>
@@ -52,8 +51,7 @@ cat(paste0("
 
 <span style=\"", style_str, "\"><--SCIENTIFICNAME--></span>
 
-<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
-<span style=\"", copyright_font, "\">© ...</span><br>
+<--IMAGE_LINK-->
 <br>
 
 #### **Useful links** <br>
@@ -72,8 +70,7 @@ cat(paste0("
 
 <span style=\"", style_str, "\"><--SCIENTIFICNAME--></span>
 
-<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
-<span style=\"", copyright_font, "\">© ...</span><br>
+<--IMAGE_LINK-->
 <br>
 
 #### **Liens utiles** <br>
