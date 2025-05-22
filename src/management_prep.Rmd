@@ -49,12 +49,14 @@ cleanData <- cleanData %>%
                                "Heist-op-den-Berg" ~ "Heist-Op-Den-Berg",
                                .default = gemeente)) %>% 
   mutate(gewest = "flanders")
-  
-  
-fistools::col_content_compare(cleanData, "lifeStage", export_template, "lifeStage")
-fistools::col_content_compare(cleanData, "gemeente", export_template, "gemeente")
-fistools::col_content_compare(cleanData, "provincie", export_template, "provincie")
-fistools::col_content_compare(cleanData, "gewest", export_template, "gewest")
+
+if(interactive() == TRUE){
+  fistools::col_content_compare(cleanData, "lifeStage", export_template, "lifeStage")
+  fistools::col_content_compare(cleanData, "gemeente", export_template, "gemeente")
+  fistools::col_content_compare(cleanData, "provincie", export_template, "provincie")
+  fistools::col_content_compare(cleanData, "gewest", export_template, "gewest")
+}
+
 
 cleanData <- cleanData %>%
   mutate(year = Jaar) %>% 
@@ -76,7 +78,7 @@ cleanData <- cleanData %>%
 jaar_missing <- cleanData %>% 
   filter(is.na(year)) %>% 
   write_csv("./data/interim/Lithobates_catesbeianus_jaar_missing.csv")
-  
+
 cleanData <- cleanData %>% 
   filter(!is.na(year)) %>% 
   arrange(gbifID)
