@@ -2264,9 +2264,9 @@ gbifID,year,individualCount,lifeStage,eventID,locationID,NISCODE,gemeente,provin
 2263,2025,2,adult,13-05-2025_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,arendonk 2,arendonk 2,10,flanders
 2264,2025,2,juvenile,13-05-2025_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,arendonk 2,arendonk 2,10,flanders
 2265,2025,0,larvae,13-05-2025_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,arendonk 2,arendonk 2,10,flanders
-2266,2025,0,adult,13-05-2025_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
-2267,2025,0,juvenile,13-05-2025_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
-2268,2025,0,larvae,13-05-2025_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
+2266,2025,0,adult,13-05-2025_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
+2267,2025,0,juvenile,13-05-2025_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
+2268,2025,0,larvae,13-05-2025_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
 2269,2025,9,adult,13-05-2025_griesbroek 6,03dc3f07-506f-4c71-bbcd-ad24c177cab5,13003,Balen,Antwerpen,griesbroek 6,griesbroek 6,14,flanders
 2270,2025,1,juvenile,13-05-2025_griesbroek 6,03dc3f07-506f-4c71-bbcd-ad24c177cab5,13003,Balen,Antwerpen,griesbroek 6,griesbroek 6,14,flanders
 2271,2025,131,larvae,13-05-2025_griesbroek 6,03dc3f07-506f-4c71-bbcd-ad24c177cab5,13003,Balen,Antwerpen,griesbroek 6,griesbroek 6,14,flanders
@@ -2537,9 +2537,9 @@ gbifID,year,individualCount,lifeStage,eventID,locationID,NISCODE,gemeente,provin
 2536,2020,0,adult,14-07-2020_arendonk 2b,6512a7da-95ea-46ef-a040-cc6b08da02be,13001,Arendonk,Antwerpen,arendonk 2b,arendonk 2b,1,flanders
 2537,2020,0,juvenile,14-07-2020_arendonk 2b,6512a7da-95ea-46ef-a040-cc6b08da02be,13001,Arendonk,Antwerpen,arendonk 2b,arendonk 2b,1,flanders
 2538,2020,0,larvae,14-07-2020_arendonk 2b,6512a7da-95ea-46ef-a040-cc6b08da02be,13001,Arendonk,Antwerpen,arendonk 2b,arendonk 2b,1,flanders
-2539,2020,0,adult,14-07-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
-2540,2020,0,juvenile,14-07-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
-2541,2020,0,larvae,14-07-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
+2539,2020,0,adult,14-07-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
+2540,2020,0,juvenile,14-07-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
+2541,2020,0,larvae,14-07-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
 2542,2020,0,adult,14-07-2020_arendonk 4,a7a15699-ae79-44ec-9f82-08ee0158e31d,13001,Arendonk,Antwerpen,arendonk 4,arendonk 4,1,flanders
 2543,2020,0,juvenile,14-07-2020_arendonk 4,a7a15699-ae79-44ec-9f82-08ee0158e31d,13001,Arendonk,Antwerpen,arendonk 4,arendonk 4,1,flanders
 2544,2020,0,larvae,14-07-2020_arendonk 4,a7a15699-ae79-44ec-9f82-08ee0158e31d,13001,Arendonk,Antwerpen,arendonk 4,arendonk 4,1,flanders
@@ -4604,9 +4604,9 @@ gbifID,year,individualCount,lifeStage,eventID,locationID,NISCODE,gemeente,provin
 4603,2020,0,adult,23-06-2020_arendonk 2b,6512a7da-95ea-46ef-a040-cc6b08da02be,13001,Arendonk,Antwerpen,arendonk 2b,arendonk 2b,1,flanders
 4604,2020,0,juvenile,23-06-2020_arendonk 2b,6512a7da-95ea-46ef-a040-cc6b08da02be,13001,Arendonk,Antwerpen,arendonk 2b,arendonk 2b,1,flanders
 4605,2020,0,larvae,23-06-2020_arendonk 2b,6512a7da-95ea-46ef-a040-cc6b08da02be,13001,Arendonk,Antwerpen,arendonk 2b,arendonk 2b,1,flanders
-4606,2020,1,adult,23-06-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
-4607,2020,0,juvenile,23-06-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
-4608,2020,0,larvae,23-06-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
+4606,2020,1,adult,23-06-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
+4607,2020,0,juvenile,23-06-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
+4608,2020,0,larvae,23-06-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
 4609,2020,2,adult,23-06-2020_arendonk 4,a7a15699-ae79-44ec-9f82-08ee0158e31d,13001,Arendonk,Antwerpen,arendonk 4,arendonk 4,2,flanders
 4610,2020,0,juvenile,23-06-2020_arendonk 4,a7a15699-ae79-44ec-9f82-08ee0158e31d,13001,Arendonk,Antwerpen,arendonk 4,arendonk 4,2,flanders
 4611,2020,0,larvae,23-06-2020_arendonk 4,a7a15699-ae79-44ec-9f82-08ee0158e31d,13001,Arendonk,Antwerpen,arendonk 4,arendonk 4,2,flanders
@@ -4802,9 +4802,9 @@ gbifID,year,individualCount,lifeStage,eventID,locationID,NISCODE,gemeente,provin
 4801,2020,0,adult,24-04-2020_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,arendonk 2,arendonk 2,6,flanders
 4802,2020,0,juvenile,24-04-2020_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,arendonk 2,arendonk 2,6,flanders
 4803,2020,0,larvae,24-04-2020_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,arendonk 2,arendonk 2,6,flanders
-4804,2020,0,adult,24-04-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
-4805,2020,0,juvenile,24-04-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
-4806,2020,0,larvae,24-04-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,2,flanders
+4804,2020,0,adult,24-04-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
+4805,2020,0,juvenile,24-04-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
+4806,2020,0,larvae,24-04-2020_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,2,flanders
 4807,2012,2,adult,24-05-2012_arendonk 1,91a8e2bb-b682-4c53-b213-7494198b12ce,13001,Arendonk,Antwerpen,NA,NA,5,flanders
 4808,2012,0,juvenile,24-05-2012_arendonk 1,91a8e2bb-b682-4c53-b213-7494198b12ce,13001,Arendonk,Antwerpen,NA,NA,5,flanders
 4809,2012,2,larvae,24-05-2012_arendonk 1,91a8e2bb-b682-4c53-b213-7494198b12ce,13001,Arendonk,Antwerpen,NA,NA,5,flanders
@@ -5393,9 +5393,9 @@ gbifID,year,individualCount,lifeStage,eventID,locationID,NISCODE,gemeente,provin
 5392,2020,0,adult,27-05-2020_nijlen d2,cd389f4a-ecc8-4265-aded-b22e467d8ace,12021,Lier,Antwerpen,nijlen d2,nijlen d2,1,flanders
 5393,2020,0,juvenile,27-05-2020_nijlen d2,cd389f4a-ecc8-4265-aded-b22e467d8ace,12021,Lier,Antwerpen,nijlen d2,nijlen d2,1,flanders
 5394,2020,0,larvae,27-05-2020_nijlen d2,cd389f4a-ecc8-4265-aded-b22e467d8ace,12021,Lier,Antwerpen,nijlen d2,nijlen d2,1,flanders
-5395,2021,0,adult,27-05-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,5,flanders
-5396,2021,0,juvenile,27-05-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,5,flanders
-5397,2021,1,larvae,27-05-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,5,flanders
+5395,2021,0,adult,27-05-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,5,flanders
+5396,2021,0,juvenile,27-05-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,5,flanders
+5397,2021,1,larvae,27-05-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,5,flanders
 5398,2021,0,adult,27-05-2021_arendonk 4,a7a15699-ae79-44ec-9f82-08ee0158e31d,13001,Arendonk,Antwerpen,arendonk 4,arendonk 4,5,flanders
 5399,2021,0,juvenile,27-05-2021_arendonk 4,a7a15699-ae79-44ec-9f82-08ee0158e31d,13001,Arendonk,Antwerpen,arendonk 4,arendonk 4,5,flanders
 5400,2021,0,larvae,27-05-2021_arendonk 4,a7a15699-ae79-44ec-9f82-08ee0158e31d,13001,Arendonk,Antwerpen,arendonk 4,arendonk 4,5,flanders
@@ -5603,9 +5603,9 @@ gbifID,year,individualCount,lifeStage,eventID,locationID,NISCODE,gemeente,provin
 5602,2019,0,adult,28-05-2019_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,arendonk 2,arendonk 2,5,flanders
 5603,2019,0,juvenile,28-05-2019_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,arendonk 2,arendonk 2,5,flanders
 5604,2019,173,larvae,28-05-2019_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,arendonk 2,arendonk 2,5,flanders
-5605,2019,0,adult,28-05-2019_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,3,flanders
-5606,2019,0,juvenile,28-05-2019_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,3,flanders
-5607,2019,0,larvae,28-05-2019_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,3,flanders
+5605,2019,0,adult,28-05-2019_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,3,flanders
+5606,2019,0,juvenile,28-05-2019_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,3,flanders
+5607,2019,0,larvae,28-05-2019_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,3,flanders
 5608,2020,0,adult,28-05-2020_arendonk 1,91a8e2bb-b682-4c53-b213-7494198b12ce,13001,Arendonk,Antwerpen,arendonk 1,arendonk 1,2,flanders
 5609,2020,0,juvenile,28-05-2020_arendonk 1,91a8e2bb-b682-4c53-b213-7494198b12ce,13001,Arendonk,Antwerpen,arendonk 1,arendonk 1,2,flanders
 5610,2020,0,larvae,28-05-2020_arendonk 1,91a8e2bb-b682-4c53-b213-7494198b12ce,13001,Arendonk,Antwerpen,arendonk 1,arendonk 1,2,flanders
@@ -5639,9 +5639,9 @@ gbifID,year,individualCount,lifeStage,eventID,locationID,NISCODE,gemeente,provin
 5638,2012,1,adult,28-06-2012_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,NA,NA,6,flanders
 5639,2012,0,juvenile,28-06-2012_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,NA,NA,6,flanders
 5640,2012,136,larvae,28-06-2012_arendonk 2,fbb3baeb-c846-444c-926e-02445e328b78,13001,Arendonk,Antwerpen,NA,NA,6,flanders
-5641,2017,0,adult,28-06-2017_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,8,flanders
-5642,2017,0,juvenile,28-06-2017_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,8,flanders
-5643,2017,0,larvae,28-06-2017_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,8,flanders
+5641,2017,0,adult,28-06-2017_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,8,flanders
+5642,2017,0,juvenile,28-06-2017_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,8,flanders
+5643,2017,0,larvae,28-06-2017_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,8,flanders
 5644,2017,3,adult,28-06-2017_arendonk 3,60e6e43e-6855-4917-a336-9ac46d087fad,13001,Arendonk,Antwerpen,NA,NA,7,flanders
 5645,2017,0,juvenile,28-06-2017_arendonk 3,60e6e43e-6855-4917-a336-9ac46d087fad,13001,Arendonk,Antwerpen,NA,NA,7,flanders
 5646,2017,136,larvae,28-06-2017_arendonk 3,60e6e43e-6855-4917-a336-9ac46d087fad,13001,Arendonk,Antwerpen,NA,NA,7,flanders
@@ -5651,9 +5651,9 @@ gbifID,year,individualCount,lifeStage,eventID,locationID,NISCODE,gemeente,provin
 5650,2018,0,adult,28-06-2018_arendonk 3,60e6e43e-6855-4917-a336-9ac46d087fad,13001,Arendonk,Antwerpen,NA,NA,1,flanders
 5651,2018,2,juvenile,28-06-2018_arendonk 3,60e6e43e-6855-4917-a336-9ac46d087fad,13001,Arendonk,Antwerpen,NA,NA,1,flanders
 5652,2018,70,larvae,28-06-2018_arendonk 3,60e6e43e-6855-4917-a336-9ac46d087fad,13001,Arendonk,Antwerpen,NA,NA,1,flanders
-5653,2021,0,adult,28-06-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,5,flanders
-5654,2021,0,juvenile,28-06-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,5,flanders
-5655,2021,0,larvae,28-06-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,NA,NA,arendonk 3,arendonk 3,5,flanders
+5653,2021,0,adult,28-06-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,5,flanders
+5654,2021,0,juvenile,28-06-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,5,flanders
+5655,2021,0,larvae,28-06-2021_arendonk 3,3F49AB70-7443-4002-8599-FA8F7F38616B,NA,unknown,unknown,arendonk 3,arendonk 3,5,flanders
 5656,2022,0,adult,28-06-2022_ham 4,DD9433B2-49C1-4233-A1D7-42E8EAD9388C,71069,Ham,Limburg,ham 4,ham 4,4,flanders
 5657,2022,0,juvenile,28-06-2022_ham 4,DD9433B2-49C1-4233-A1D7-42E8EAD9388C,71069,Ham,Limburg,ham 4,ham 4,4,flanders
 5658,2022,0,larvae,28-06-2022_ham 4,DD9433B2-49C1-4233-A1D7-42E8EAD9388C,71069,Ham,Limburg,ham 4,ham 4,4,flanders
