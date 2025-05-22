@@ -30,8 +30,10 @@ if(url("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/a8
 ```
 
 ```{r prep griis checklist}
+custom_links_pages <- c(1311477, 2427091)
+
 griis_checklist <- griis_checklist_raw %>% 
-  filter(!is.na(nubKey)) %>% 
+  filter(!is.na(nubKey) & !nubKey %in% custom_links_pages) %>% 
   select(nubKey, scientificName = canonicalName, vernacular_name_nl, vernacular_name_en, vernacular_name_fr) %>% 
   distinct() %>% 
   separate(vernacular_name_nl, sep = ", ", into = "vernacular_name_nl", extra = "drop") %>% 
