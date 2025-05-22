@@ -16,8 +16,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r sharedinfo, echo=FALSE}
 VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/<--TAXONKEY-->"
+faunabeheer_link <- "https://faunabeheer.inbo.be/<--TAXONKEY-->"
 style_str<-"font-size: 1.5em; font-style: italic;"
-image_link<-""
+image_link<-"../Pictures/<--TAXONKEY-->.jpg"
 copyright_font<-"font-size: 0.8em;"
 width="400"
 height="267"
