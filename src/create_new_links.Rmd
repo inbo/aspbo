@@ -9,6 +9,10 @@ output: html_document
 library(tidyverse)
 ```
 
+```{r}
+source("./HTML_pages/Render_single_HTML.R")
+```
+
 ```{r read template}
 links_template <- paste(readLines("./data/input/links_template.txt"), collapse = "\n")
 ```
@@ -36,7 +40,6 @@ griis_checklist <- griis_checklist_raw %>%
   mutate(vernacular_name_nl = coalesce(vernacular_name_nl, paste0("<i>", scientificName, "</i>")),
          vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
          vernacular_name_fr = coalesce(vernacular_name_fr, paste0("<i>", scientificName, "</i>"))) %>% 
-  mutate(faunabeheer_link = case_when())
   mutate(faunabeheer_link_nl = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
                                            paste0('<--VERNACULAR_NAME_NL--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\"https://faunabeheer.inbo.be/', 
                                                   nubKey, 
@@ -101,6 +104,9 @@ for(n in 1:nrow(griis_checklist)){
   
   # write the new link to a file
   writeLines(new_link, filename)
+  
+  render_single_html(input_file = filename,
+                     output_path = "./HTML_pages/HTML/")
 }
 ```
 
