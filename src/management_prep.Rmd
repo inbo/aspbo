@@ -83,6 +83,25 @@ cleanData <- cleanData %>%
   filter(!is.na(year)) %>% 
   arrange(gbifID)
 
+missing_gemeente <- cleanData %>% 
+  filter(is.na(gemeente)) %>% 
+  write_csv("./data/interim/Lithobates_catesbeianus_missing_gemeente.csv")
+
+cleanData <- cleanData %>% 
+  mutate(gemeente = case_when(is.na(gemeente) ~ "unknown",
+                              TRUE ~ gemeente)) %>% 
+  arrange(gbifID)
+
+missing_provincie <- cleanData %>% 
+  filter(is.na(provincie)) %>% 
+  write_csv("./data/interim/Lithobates_catesbeianus_missing_provincie.csv")
+
+cleanData <- cleanData %>% 
+  cleanData <- cleanData %>% 
+  mutate(provincie = case_when(is.na(provincie) ~ "unknown",
+                              TRUE ~ provincie)) %>% 
+  arrange(gbifID)
+
 table(cleanData$year, useNA = "ifany")
 table(cleanData$eventID, useNA = "ifany")
 
