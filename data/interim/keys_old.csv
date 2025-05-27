@@ -3093,7 +3093,7 @@ X,scientificName,taxonKey,rank,taxonomicStatus,kingdom,includes,classKey,gbifKey
 3082,Puccinia oxalidis,2515351,SPECIES,ACCEPTED,Fungi,2515351: Puccinia oxalidis Dietel & Ellis,270,152543181
 3083,Puccinia pazschkei,NA,NA,NA,NA,NA,NA,152543176
 3084,Puccinia porphyrogenita,NA,NA,NA,NA,NA,NA,213212271
-3085,Puccinia smyrnii,NA,NA,NA,NA,NA,NA,213212273
+3085,Puccinia smyrnii,2514552,SPECIES,ACCEPTED,Fungi,NA,270,213212273
 3086,Puccinia soldanellae,NA,NA,NA,NA,NA,NA,213212286
 3087,Puccinia sorghi,NA,NA,NA,NA,NA,NA,152543187
 3088,Puccinia subnitens,NA,NA,NA,NA,NA,NA,213212284
@@ -3712,7 +3712,7 @@ X,scientificName,taxonKey,rank,taxonomicStatus,kingdom,includes,classKey,gbifKey
 3700,Telekia speciosa,5389173,SPECIES,ACCEPTED,Plantae,5389173: Telekia speciosa (Schreb.) Baumg.,220,152543705
 3701,Tellima grandiflora,3032698,SPECIES,ACCEPTED,Plantae,3032698: Tellima grandiflora (Pursh) Douglas ex Lindl.,220,152544696
 3702,Telmatogeton japonicus,1450317,SPECIES,ACCEPTED,Animalia,"1450317: Telmatogeton japonicus Tokunaga, 1933",216,159748299
-3703,Teloxys aristata,NA,NA,NA,NA,NA,NA,213214947
+3703,Teloxys aristata,3083888,SPECIES,ACCEPTED,Plantae,NA,220,213214947
 3704,Tephritis carmen,NA,NA,NA,NA,NA,NA,213214411
 3705,Terapon jarbua,NA,NA,NA,NA,NA,NA,182133671
 3706,Teredo navalis,2288847,SPECIES,ACCEPTED,Animalia,"2288847: Teredo navalis Linnaeus, 1758",137,152543768
@@ -4105,3 +4105,5 @@ NA,Mentha spicata,7308335,SUBSPECIES,ACCEPTED,Plantae,NA,220,NA
 NA,Hordeum marinum,8338571,SUBSPECIES,ACCEPTED,Plantae,NA,196,NA
 NA,Adonis aestivalis,7277946,SUBSPECIES,ACCEPTED,Plantae,NA,220,NA
 NA,Lamium garganicum,7308043,SUBSPECIES,ACCEPTED,Plantae,NA,220,NA
+NA,Festuca guestfalica,4123394,SUBSPECIES,ACCEPTED,Plantae,NA,196,NA
+NA,Daucus carota,6550056,VARIETY,ACCEPTED,Plantae,NA,220,NA
