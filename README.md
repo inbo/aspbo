@@ -25,3 +25,5 @@ The alien species portal backoffice contains automated data preparation scripts 
 [![upload_files_direct](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml)
 
 [![upload_files_processing](https://github.com/inbo/aspbo/actions/workflows/upload_files_processing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/upload_files_processing.yaml)
+
+[![Copy S3 UAT to PROD](https://github.com/inbo/aspbo/actions/workflows/copy_s3_uat_to_prod.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/copy_s3_uat_to_prod.yaml)
