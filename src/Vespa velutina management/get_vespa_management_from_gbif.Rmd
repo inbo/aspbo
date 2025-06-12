@@ -80,12 +80,31 @@ wal_download <- occ_download_get(wal_downloadKey,
                                                   http_version = 2,
                                                   forbid_reuse = TRUE))
 
+not_valid <- c("not validated", "under validation")
+valid <- c("validated on the basis of rules", 
+           "validated with document",
+           "validated without document")
+
 wal_rawdata <- occ_download_import(x = wal_download) %>% 
   mutate(eventDate = as.Date(eventDate, format = "%Y-%m-%dT%H:%M:%S"),
-         verbatimEventDate = as.character(verbatimEventDate))
+         verbatimEventDate = as.character(verbatimEventDate)) %>% 
+  filter(organismRemarks %in% c("Nest", "Nest (inactive)", "Nest (neutralized)")) %>% # keep only nests
+  filter(!identificationVerificationStatus %in% not_valid) # omit invalid records
 
+# Check if there are new verification statuses in the data
+# and list those
+new_verification_statuses <- wal_rawdata %>% 
+  filter(!identificationVerificationStatus %in% valid) %>% 
+  distinct(identificationVerificationStatus) %>% 
+  pull(identificationVerificationStatus)
+
+testthat::expect_equal(length(new_verification_statuses), 0, 
+                     info = paste0("'", paste(new_verification_statuses, collapse = "', '"),"' are new in the data, please check them! And add them to the relevant list"))
+  
 summary(wal_rawdata$eventDate)
 table(wal_rawdata$level1Gid, useNA = "ifany")
+table(wal_rawdata$organismRemarks, useNA = "ifany")
+table(wal_rawdata$identificationVerificationStatus, useNA = "ifany")
 
 # combine datasets and export
 combined_data <- bind_rows(bxl_rawdata, wal_rawdata) %>% 
