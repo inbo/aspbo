@@ -20,28 +20,74 @@ BRUSSELS: iNaturalist Research-grade Observations: https://www.gbif.org/dataset/
 
 ```{r download data from gbif}
 taxonkeys <- c(1311477)
+datasetkey_wal <- "04871911-1b00-41f3-8dc6-fc0cea421f96"
+datasetkey_bxl <- "50c9509d-22c7-4a22-a47d-8c48425ef4a7"
 
-gbif_downloadKey <- occ_download(pred_in("taxonKey", taxonkeys),
-                                 pred_within(bel),
-                                 user = Sys.getenv("gbif_user"),
-                                 pwd = Sys.getenv("gbif_pwd"),
-                                 email = Sys.getenv("email"),
-                                 curlopts = list(verbose = TRUE,
-                                                 http_version = 2,
-                                                 forbid_reuse = TRUE))
+# Initiate brussels download
+bxl_downloadKey <- occ_download(pred_in("taxonKey", taxonkeys), # limit download to Vespa velutina
+                                pred_in("datasetKey", datasetkey_bxl), # limit download to inaturalist
+                                pred_in("level1Gid", "BEL.1_1"), # limit download to BXL
+                                user = Sys.getenv("gbif_user"),
+                                pwd = Sys.getenv("gbif_pwd"),
+                                email = Sys.getenv("email"),
+                                curlopts = list(verbose = TRUE,
+                                                http_version = 2,
+                                                forbid_reuse = TRUE))
 
-occ_download_wait(gbif_downloadKey, 
-                  curlopts = list(verbose = TRUE,
-                                  http_version = 2,
-                                  forbid_reuse = TRUE))
+# Initiate wallonia download
+wal_downloadKey <- occ_download(pred_in("taxonKey", taxonkeys), # limit download to Vespa velutina
+                                pred_in("datasetKey", datasetkey_wal), # limit download to DEMNA-DNE
+                                pred_in("level1Gid", "BEL.3_1"), # limit download to WALLONIA
+                                user = Sys.getenv("gbif_user"),
+                                pwd = Sys.getenv("gbif_pwd"),
+                                email = Sys.getenv("email"),
+                                curlopts = list(verbose = TRUE,
+                                                http_version = 2,
+                                                forbid_reuse = TRUE))
 
-gbif_download <- occ_download_get(gbif_downloadKey,
+# Wait for downloads to finish
+## BXL
+occ_download_wait(bxl_downloadKey,
+                   curlopts = list(verbose = TRUE,
+                                   http_version = 2,
+                                   forbid_reuse = TRUE))
+
+bxl_download <- occ_download_get(bxl_downloadKey,
                                   path = tempdir(),
                                   overwrite = TRUE,
                                   curlopts = list(verbose = TRUE,
                                                   http_version = 2,
                                                   forbid_reuse = TRUE))
 
-rawdata <- occ_download_import(x = gbif_download) %>% 
-  write_csv2("./data/input/Vespa-Watch_gbif.csv")
+bxl_rawdata <- occ_download_import(x = bxl_download) 
+
+bxl_rawdata <- bxl_rawdata %>% 
+  mutate(eventDate = as.Date(eventDate, format = "%Y-%m-%dT%H:%M:%S"),
+         verbatimEventDate = as.character(verbatimEventDate))
+
+summary(bxl_rawdata$eventDate)
+
+## WALLONIA
+occ_download_wait(wal_downloadKey,
+                   curlopts = list(verbose = TRUE,
+                                   http_version = 2,
+                                   forbid_reuse = TRUE))
+
+wal_download <- occ_download_get(wal_downloadKey,
+                                  path = tempdir(),
+                                  overwrite = TRUE,
+                                  curlopts = list(verbose = TRUE,
+                                                  http_version = 2,
+                                                  forbid_reuse = TRUE))
+
+wal_rawdata <- occ_download_import(x = wal_download) %>% 
+  mutate(eventDate = as.Date(eventDate, format = "%Y-%m-%dT%H:%M:%S"),
+         verbatimEventDate = as.character(verbatimEventDate))
+
+summary(wal_rawdata$eventDate)
+table(wal_rawdata$level1Gid, useNA = "ifany")
+
+# combine datasets and export
+combined_data <- bind_rows(bxl_rawdata, wal_rawdata) %>% 
+  write_csv(file = "./data/input/Vespa_management_gbif_data.csv")
 ```
