@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
   schedule: 
-   - cron: '0 6 * * 1'
+   - cron: '30 0 1,15 4-11 *' “At 00:30 on day-of-month 1 and 15 in every month from April through November.”
 
   
 name: get_vespa_velutina_management
@@ -32,18 +32,13 @@ jobs:
             echo "Please go to 'Settings > Secrets > Actions' to create it."
             exit 1
           fi
-          if [ $(echo "${{secrets.gsheet_token}}" | wc -c) -lt 2 ]; then
-            echo "The secret 'gsheet_token' has not been set."
-            echo "Please go to 'Settings > Secrets > Actions' to create it."
-            exit 1
-          fi
           if [ $(echo "${{secrets.amiabot}}" | wc -c) -lt 2 ]; then
             echo "The secret 'amiabot' has not been set."
             echo "Please go to 'Settings > Secrets > Actions' to create it."
             exit 1
           fi
 
-  get_data_from_gbif:
+  update vespa management:
     needs: test
     runs-on: ${{ matrix.config.os }}
 
@@ -62,7 +57,10 @@ jobs:
       email: ${{ secrets.GBIF_EMAIL }}
       gbif_pwd: ${{ secrets.GBIF_PWD }}
       amiabot: ${{ secrets.amiabot }}
-      gsheet_token: ${{ secrets.gsheet_token }}
+      
+    concurrency: 
+      group: vespa-velutina-updates-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: Checkout repository
@@ -97,9 +95,14 @@ jobs:
           source("src/Vespa velutina management/run_get_data_from_gbif.R")
         shell: Rscript {0}
 
+      - name: get data from vespadb
+        run: |
+          source("src/Vespa velutina management/run_get_data_from_vespadb.R")
+        shell: Rscript {0}
+        
       - name: update inputs
         run: |
-          source("src/Vespa velutina management/run_update_inputs.R")
+          source("src/Vespa velutina management/run_update_management.R")
         shell: Rscript {0}
 
       - name: Commit and push changes
@@ -107,9 +110,10 @@ jobs:
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
-          commit_message: "update inputs"
+          commit_message: "update management"
           target_branch: automatic-vespa-velutina-data
-      
+          force_push: false # Ensure safety
+        
       - name: Get branch name
         run: |
           git branch --show-current
@@ -121,6 +125,6 @@ jobs:
           target_branch: uat
           title: "[AUTO] get vespa velutina management data"
           template: .github/PR_vespa_velutina_management.md
-          reviewer: SanderDevisscher, jrhilae, soriadelva
+          reviewer: [SanderDevisscher, jrhilae, soriadelva]
           label: automated workflow
           get_diff: false
