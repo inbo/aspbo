@@ -9,14 +9,7 @@ Dit bestand deel je met niemand!
 
 ```{r libraries}
 library(sf)
-library(googlesheets4)
-library(dplyr)
-library(magrittr)
-library(tidyr)
-library(readr)
-library(lubridate)
-library(testthat)
-library(units)
+library(tidyverse)
 ```
 
 ```{r conflicted packages, eval=FALSE}
