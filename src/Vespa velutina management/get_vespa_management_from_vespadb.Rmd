@@ -1,0 +1,23 @@
+---
+title: "get_vespa_management_from_vespadb"
+author: "Sander Devisscher"
+date: "2025-06-12"
+output: html_document
+---
+
+```{r libraries}
+library(tidyverse)
+```
+
+```{r connect to vespadb}
+
+```
+
+```{r get vespa management from vespadb}
+
+```
+
+```{r export to csv}
+
+```
+
