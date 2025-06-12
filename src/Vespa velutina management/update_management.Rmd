@@ -39,3 +39,22 @@ data_vespadb_raw <- read_csv("./data/input/Vespa_management_vespadb_data.csv")
 ```
 
 ```{r GBIF: data prep}
+data_gbif <- data_gbif_raw 
+```
+
+```{r vespadb: data prep}
+data_vespadb <- data_vespadb_raw
+```
+
+```{r combine data}
+data_combined <- bind_rows(data_gbif, data_vespadb)
+```
+
+```{r tests}
+
+```
+
+```{r export}
+write_csv(data_combined, "./data/output/UAT_direct/Vespa_velutina.csv")
+```
+
