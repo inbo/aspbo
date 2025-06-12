@@ -7,10 +7,8 @@ output: html_document
 
 ```{r libraries}
 library(rgbif)
-library(dplyr)
 library(sf)
-library(readr)
-library(magrittr)
+library(tidyverse)
 ```
 
 Data from these datasets can be used to determine the status of the nests in

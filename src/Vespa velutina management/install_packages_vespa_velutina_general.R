@@ -2,10 +2,7 @@
 installed <- rownames(installed.packages())
 # specify packages we need
 required <- c(
-  "sf", "magrittr", "readr",
-  "dplyr", "tidyr", "googlesheets4",
-  "testthat", "units", "lubridate","ows4R",
-  "rgbif"
+  "sf", "tidyverse", "rmarkdown", "knitr", "testthat", "rgbif"
 )
 
 # install packages if needed
