@@ -18,6 +18,6 @@ library(tidyverse)
 ```
 
 ```{r export to csv}
-
+write_csv(vespa_management, "./data/input/Vespa_management_vespadb_data.csv")
 ```
 
