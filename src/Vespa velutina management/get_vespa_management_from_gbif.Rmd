@@ -46,37 +46,45 @@ wal_downloadKey <- occ_download(pred_in("taxonKey", taxonkeys), # limit download
 # Wait for downloads to finish
 ## BXL
 occ_download_wait(bxl_downloadKey,
-                   curlopts = list(verbose = TRUE,
-                                   http_version = 2,
-                                   forbid_reuse = TRUE))
+                  curlopts = list(verbose = TRUE,
+                                  http_version = 2,
+                                  forbid_reuse = TRUE))
 
 bxl_download <- occ_download_get(bxl_downloadKey,
-                                  path = tempdir(),
-                                  overwrite = TRUE,
-                                  curlopts = list(verbose = TRUE,
-                                                  http_version = 2,
-                                                  forbid_reuse = TRUE))
+                                 path = tempdir(),
+                                 overwrite = TRUE,
+                                 curlopts = list(verbose = TRUE,
+                                                 http_version = 2,
+                                                 forbid_reuse = TRUE))
 
 bxl_rawdata <- occ_download_import(x = bxl_download) 
 
 bxl_rawdata <- bxl_rawdata %>% 
   mutate(eventDate = as.Date(eventDate, format = "%Y-%m-%dT%H:%M:%S"),
-         verbatimEventDate = as.character(verbatimEventDate))
+         verbatimEventDate = as.character(verbatimEventDate)) %>% 
+  filter(behavior == "nest building" |
+           behavior == "visiting occupied nest"|
+           grepl("evidenceOfPresence:construction", dynamicProperties)|
+           organismRemarks == "Nest"|
+           occurrenceRemarks =="found as nest"
+  )
+
+
 
 summary(bxl_rawdata$eventDate)
 
 ## WALLONIA
 occ_download_wait(wal_downloadKey,
-                   curlopts = list(verbose = TRUE,
-                                   http_version = 2,
-                                   forbid_reuse = TRUE))
+                  curlopts = list(verbose = TRUE,
+                                  http_version = 2,
+                                  forbid_reuse = TRUE))
 
 wal_download <- occ_download_get(wal_downloadKey,
-                                  path = tempdir(),
-                                  overwrite = TRUE,
-                                  curlopts = list(verbose = TRUE,
-                                                  http_version = 2,
-                                                  forbid_reuse = TRUE))
+                                 path = tempdir(),
+                                 overwrite = TRUE,
+                                 curlopts = list(verbose = TRUE,
+                                                 http_version = 2,
+                                                 forbid_reuse = TRUE))
 
 not_valid <- c("not validated", "under validation")
 valid <- c("validated on the basis of rules", 
@@ -97,8 +105,8 @@ new_verification_statuses <- wal_rawdata %>%
   pull(identificationVerificationStatus)
 
 testthat::expect_equal(length(new_verification_statuses), 0, 
-                     info = paste0("'", paste(new_verification_statuses, collapse = "', '"),"' are new in the data, please check them! And add them to the relevant list"))
-  
+                       info = paste0("'", paste(new_verification_statuses, collapse = "', '"),"' are new in the data, please check them! And add them to the relevant list"))
+
 summary(wal_rawdata$eventDate)
 table(wal_rawdata$level1Gid, useNA = "ifany")
 table(wal_rawdata$organismRemarks, useNA = "ifany")
