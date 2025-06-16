@@ -7,10 +7,31 @@ output: html_document
 
 ```{r libraries}
 library(tidyverse)
+library(httr)
 ```
 
 ```{r connect to vespadb}
+# Prepare the login request
+url <- "https://uat-db.vespawatch.be/login/"
+body <- list(username = Sys.getenv("vespadb_username"), 
+             password = Sys.getenv("vespadb_password"))
 
+# Make the POST request and store the response
+h <- handle(url)
+response <- POST(
+  url,
+  body = body,
+  encode = "json",
+  add_headers(`Content-Type` = "application/json"),
+  handle = h
+)
+
+# Check if the login was successful
+if (status_code(response) == 200) {
+  message("Login successful!")
+} else {
+  stop("Login failed: ", content(response, "text"))
+}
 ```
 
 ```{r get vespa management from vespadb}
