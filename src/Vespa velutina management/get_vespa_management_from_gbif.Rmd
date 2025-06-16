@@ -59,19 +59,23 @@ bxl_download <- occ_download_get(bxl_downloadKey,
 
 bxl_rawdata <- occ_download_import(x = bxl_download) 
 
-bxl_rawdata <- bxl_rawdata %>% 
-  mutate(eventDate = as.Date(eventDate, format = "%Y-%m-%dT%H:%M:%S"),
+table(bxl_rawdata$eventDate, useNA = "ifany")
+
+bxl_data <- bxl_rawdata %>% 
+  tidylog::mutate(eventDate = parse_date_time2(eventDate, 
+                                               c("Ymd HMS", "Ymd", "Ymd HMSZ", "Ymd HMSz", "Ymd HMSzZ", "Ymd HM"),
+                                               tz = "UTC"),
          verbatimEventDate = as.character(verbatimEventDate)) %>% 
   filter(behavior == "nest building" |
            behavior == "visiting occupied nest"|
-           grepl("evidenceOfPresence:construction", dynamicProperties)|
+           grepl("construction", dynamicProperties)|
            organismRemarks == "Nest"|
            occurrenceRemarks =="found as nest"
   )
 
-
-
-summary(bxl_rawdata$eventDate)
+table(bxl_data$behavior, useNA = "ifany")
+table(bxl_data$organismRemarks, useNA = "ifany")
+summary(bxl_data$eventDate)
 
 ## WALLONIA
 occ_download_wait(wal_downloadKey,
@@ -91,7 +95,7 @@ valid <- c("validated on the basis of rules",
            "validated with document",
            "validated without document")
 
-wal_rawdata <- occ_download_import(x = wal_download) %>% 
+wal_data <- occ_download_import(x = wal_download) %>% 
   mutate(eventDate = as.Date(eventDate, format = "%Y-%m-%dT%H:%M:%S"),
          verbatimEventDate = as.character(verbatimEventDate)) %>% 
   filter(organismRemarks %in% c("Nest", "Nest (inactive)", "Nest (neutralized)")) %>% # keep only nests
@@ -99,7 +103,7 @@ wal_rawdata <- occ_download_import(x = wal_download) %>%
 
 # Check if there are new verification statuses in the data
 # and list those
-new_verification_statuses <- wal_rawdata %>% 
+new_verification_statuses <- wal_data %>% 
   filter(!identificationVerificationStatus %in% valid) %>% 
   distinct(identificationVerificationStatus) %>% 
   pull(identificationVerificationStatus)
@@ -107,12 +111,12 @@ new_verification_statuses <- wal_rawdata %>%
 testthat::expect_equal(length(new_verification_statuses), 0, 
                        info = paste0("'", paste(new_verification_statuses, collapse = "', '"),"' are new in the data, please check them! And add them to the relevant list"))
 
-summary(wal_rawdata$eventDate)
-table(wal_rawdata$level1Gid, useNA = "ifany")
-table(wal_rawdata$organismRemarks, useNA = "ifany")
-table(wal_rawdata$identificationVerificationStatus, useNA = "ifany")
+summary(wal_data$eventDate)
+table(wal_data$level1Gid, useNA = "ifany")
+table(wal_data$organismRemarks, useNA = "ifany")
+table(wal_data$identificationVerificationStatus, useNA = "ifany")
 
 # combine datasets and export
-combined_data <- bind_rows(bxl_rawdata, wal_rawdata) %>% 
+combined_data <- bind_rows(bxl_data, wal_data) %>% 
   write_csv(file = "./data/input/Vespa_management_gbif_data.csv")
 ```
