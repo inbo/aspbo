@@ -544,36 +544,76 @@ keys_completed <- keys_old %>%
   select(-contains("new")) %>%
   distinct()
 
+# Find rows with missing taxonKey
+keys_missing_taxonkey <- keys_completed %>% 
+  filter(is.na(taxonKey))
+
+# Function to derive the most likely taxonKey for a given scientific name
+get_derived_taxonKey <- function(scientific_name) {
+  taxonomic_data <- tryCatch(
+    rgbif::name_usage(name = scientific_name)$data,
+    error = function(e) NULL
+  )
+  if (is.null(taxonomic_data) || nrow(taxonomic_data) == 0) return(NA_integer_)
+  
+  derived_taxonKey <- taxonomic_data %>% 
+    dplyr::filter(taxonomicStatus == "ACCEPTED", !is.na(nubKey)) %>% 
+    group_by(nubKey) %>% 
+    add_tally() %>% 
+    distinct(nubKey, n) %>% 
+    ungroup() %>% 
+    filter(n == max(n, na.rm = TRUE)) %>% 
+    pull(nubKey)
+  
+  # If multiple, take the first
+  if (length(derived_taxonKey) > 0) return(derived_taxonKey[1])
+  else return(NA_integer_)
+}
+
+# Use lapply to process all missing names
+derived_keys <- pbapply::pblapply(keys_missing_taxonkey$scientificName, get_derived_taxonKey)
+names(derived_keys) <- keys_missing_taxonkey$scientificName
+
+# Update keys_completed with the derived taxonKeys
+keys_completed <- keys_completed %>%
+  mutate(
+    taxonKey = ifelse(
+      is.na(taxonKey) & scientificName %in% names(derived_keys),
+      unlist(derived_keys[scientificName]),
+      taxonKey
+    )
+  )
+
 keys_path <- here("data", "output", "UAT_direct", "keys.csv")
 
 write.csv(keys_completed, keys_path, row.names = FALSE)
 
 # Upload to S3 bucket
 aws.s3::put_object(file = keys_path,
-           object = "keys.csv",
-           bucket = UAT_bucket,
-           multipart = TRUE,
-           show_progress = TRUE,
-           region = "eu-west-1") 
+                   object = "keys.csv",
+                   bucket = UAT_bucket,
+                   multipart = TRUE,
+                   show_progress = TRUE,
+                   region = "eu-west-1") 
 
 
 # Complete unknowns, info not on cube or checklist
 ## Missing taxonkeys 
 # => might not be an issue? => monitoring for now
 # Fixing this will be a pain in the ass since `name_usage` returns every use of the scientific name in the gbif backbone as well as on very checklist worldwide
-keys_old_missing_taxonkey <- keys_old %>% 
+keys_missing_taxonkey <- keys_completed %>% 
   filter(is.na(taxonKey)) %>% 
   write_csv(here("data", "interim", "keys_missing_taxonkey.csv"))
 
 ## Missing scientific names => cause of https://github.com/inbo/alien-species-portal/issues/140
-keys_old_missing_name <- keys_old %>% 
+keys_missing_name <- keys_completed %>% 
   filter(is.na(scientificName)) %>% 
   write_csv(here("data", "interim", "keys_missing_name.csv"))
 
 # test whether any missing scientificnames remain
 test_that("missing scientificNames",
           {
-            expect_false(nrow(keys_old_missing_name) > 0)
+            expect_false(nrow(keys_missing_name) > 0)
           })
 ```
 
