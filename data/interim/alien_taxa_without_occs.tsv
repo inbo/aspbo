@@ -21,6 +21,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182134454	1195013	Otiorhynchus aurifer	1999	2018	Insecta	Animalia
 152544520	1319260	Tetraponera allaborans	1980	2018	Insecta	Animalia
 152544508	1321805	Pheidole bilimeki	1911	2018	Insecta	Animalia
+152544494	1325561	Paratrechina longicornis	1980	2018	Insecta	Animalia
 213213874	1349836	Hylaeus absolutus	2021	2021	Insecta	Animalia
 152544459	1419894	Euborellia annulipes	2016	2018	Insecta	Animalia
 152544422	1420197	Aleurodothrips fasciapennis	2018	2018	Insecta	Animalia
@@ -33,7 +34,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544412	1422818	Pseudagrion microcephalum	2011	2012	Insecta	Animalia
 182134330	1548900	Dohrniphora cornuta	2005	2005	Insecta	Animalia
 213214411	1623077	Tephritis carmen	1979	1979	Insecta	Animalia
-152544359	1722140	Eumodicogryllus bordigalensis	2018	2020	Insecta	Animalia
+152544359	1722140	Eumodicogryllus bordigalensis	2018	2018	Insecta	Animalia
 213214010	1835422	Schiffermuelleria bruandella	2016	2016	Insecta	Animalia
 213214212	2012520	Agonoscena succincta	2021	2021	Insecta	Animalia
 159748106	2114326	Eurytemora americana	NA	NA	Copepoda	Animalia
@@ -176,7 +177,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213212264	2515591	Uromyces dianthi	NA	NA	Pucciniomycetes	Fungi
 213212268	2515673	Uromyces hedysari-obscuri	NA	NA	Pucciniomycetes	Fungi
 213212261	2515982	Uromyces croci	1876	1876	Pucciniomycetes	Fungi
-152543166	2516117	Gymnosporangium confusum	1879	1882	Pucciniomycetes	Fungi
 152543128	2557730	Sporisorium destruens	1899	2018	Ustilaginomycetes	Fungi
 152543209	2627503	Batrachochytrium dendrobatidis	2018	2018	Rhizophydiomycetes	Fungi
 213213353	2653389	Ephedra gerardiana	1999	2021	Gnetopsida	Plantae
