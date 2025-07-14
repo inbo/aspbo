@@ -590,7 +590,7 @@ keys_completed <- keys_completed %>%
     )
   )
 
-keys_path <- here("data", "output", "UAT_direct", "keys.csv")
+keys_path <- here("data", "output", "keys.csv")
 
 write.csv(keys_completed, keys_path, row.names = FALSE)
 
