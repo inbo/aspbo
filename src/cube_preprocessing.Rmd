@@ -260,6 +260,12 @@ test_that("UPLOAD FAILED: 6709291 not included",
             expect_true(6709291 %in% df_species)
             expect_true(6709291 %in% post_update_species)
           })
+
+test_that("UPLOAD FAILED: 2502938 not included",
+          {
+            expect_true(2502938 %in% df_species)
+            expect_true(2502938 %in% post_update_species)
+          })
 ```
 
 ### Baseline
