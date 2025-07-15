@@ -588,11 +588,12 @@ keys_completed <- keys_completed %>%
       unlist(derived_keys[scientificName]),
       taxonKey
     )
-  )
+  ) %>% 
+  select(taxonKey, scientificName, rank, taxonomicStatus, kingdom, includes)
 
 keys_path <- here("data", "output", "UAT_processing", "be_alientaxa_info.csv")
 
-write_csv(keys_completed, keys_path)
+write_delim(keys_completed, keys_path, ",", quote = "needed")
 
 # Upload to S3 bucket
 # aws.s3::put_object(file = keys_path,
