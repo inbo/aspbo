@@ -170,7 +170,7 @@
 168,"Alyssum hirsutum",5289726,NA,NA,NA,NA,NA,152545431
 169,"Alyssum montanum",3044912,"SPECIES","ACCEPTED","Plantae","3044912: Alyssum montanum L.",220,152545430
 170,"Alyssum simplex",3045042,"SPECIES","ACCEPTED","Plantae","3045042: Alyssum simplex Rudolphi",220,152545429
-171,"Alyssum strigosum",NA,NA,NA,NA,NA,NA,152545427
+171,"Alyssum strigosum",4115425,NA,NA,NA,NA,NA,152545427
 172,"Alyssum turkestanicum",4250826,NA,NA,NA,NA,NA,213214614
 173,"Amandava amandava",2493698,"SPECIES","ACCEPTED","Animalia","2493698: Amandava amandava (Linnaeus, 1758)",212,159747311
 174,"Amandava subflava",7223276,NA,NA,NA,NA,NA,159747309
@@ -866,7 +866,7 @@
 863,"Chenopodium auricomiforme",4136390,NA,NA,NA,NA,NA,152545981
 864,"Chenopodium berlandieri",3083920,"SPECIES","ACCEPTED","Plantae","3083920: Chenopodium berlandieri Moq.",220,152545988
 865,"Chenopodium berlandieri bushianum",2949250,NA,NA,NA,NA,NA,213214934
-866,"Chenopodium borbasioides",8566446,NA,NA,NA,NA,NA,152545979
+866,"Chenopodium borbasioides",8566446,"SPECIES","ACCEPTED","Plantae",NA,220,152545979
 867,"Chenopodium giganteum",3756077,"SPECIES","ACCEPTED","Plantae","3756077: Chenopodium giganteum D.Don",220,152545983
 868,"Chenopodium hircinum",3083934,"SPECIES","ACCEPTED","Plantae","3083934: Chenopodium hircinum Schrad.",220,152545986
 869,"Chenopodium opulifolium",3083903,"SPECIES","ACCEPTED","Plantae",NA,220,152545984
@@ -930,7 +930,7 @@
 925,"Claytonia perfoliata",4126800,NA,NA,NA,NA,NA,213214852
 926,"Claytonia sibirica",3084742,"SPECIES","ACCEPTED","Plantae","3084742: Claytonia sibirica L.",220,152546033
 927,"Clematis flammula",3921611,"SPECIES","ACCEPTED","Plantae","3921611: Clematis flammula L.",220,152546348
-928,"Clematis integrifolia",7136602,NA,NA,NA,NA,NA,152546347
+928,"Clematis integrifolia",7136602,"SPECIES","ACCEPTED","Plantae",NA,220,152546347
 929,"Clematis jackmanii",7298085,NA,NA,NA,NA,NA,152546350
 930,"Clematis montana",6376216,"SPECIES","ACCEPTED","Plantae","6376216: Clematis montana Buch.-Ham. ex DC.",220,152546346
 931,"Clematis recta",3033543,"SPECIES","ACCEPTED","Plantae","3033543: Clematis recta L.",220,152546349
@@ -1860,7 +1860,7 @@
 1852,"Hordeum flexuosum",2723909,NA,NA,NA,NA,NA,152547147
 1853,"Hordeum jubatum",2706052,"SPECIES","ACCEPTED","Plantae","2706052: Hordeum jubatum L.",196,152547151
 1854,"Hordeum marinum gussoneanum",5375285,NA,NA,NA,NA,NA,213212895
-1855,"Hordeum murinum glaucum",NA,NA,NA,NA,NA,NA,213212901
+1855,"Hordeum murinum glaucum",4115425,NA,NA,NA,NA,NA,213212901
 1856,"Hordeum murinum leporinum",5289726,NA,NA,NA,NA,NA,213212900
 1857,"Hordeum pusillum",6076279,NA,NA,NA,NA,NA,152547150
 1858,"Hordeum vulgare",2706056,"SPECIES","ACCEPTED","Plantae","2706056: Hordeum vulgare L. | 2706063: Hordeum hexastichon L. | 4932619: Hordeum vulgare subsp. vulgare | 6313801: Hordeum vulgare subsp. hexastichon (L.) Celak. | 7940113: Hordeum distichon subsp. distichon",196,152547153
@@ -2169,7 +2169,7 @@
 2160,"Linum usitatissimum",2873861,"SPECIES","ACCEPTED","Plantae","2873861: Linum usitatissimum L.",220,152546480
 2161,"Liposcelis bostrychophila",9405645,NA,NA,NA,NA,NA,152544628
 2162,"Liposcelis brunnea",5605751,NA,NA,NA,NA,NA,152544627
-2163,"Liposcelis paeta",NA,NA,NA,NA,NA,NA,152544630
+2163,"Liposcelis paeta",3045193,NA,NA,NA,NA,NA,152544630
 2164,"Liquidambar styraciflua",3152824,"SPECIES","ACCEPTED","Plantae","3152824: Liquidambar styraciflua L.",220,152544670
 2165,"Liriodendron tulipifera",3152861,"SPECIES","ACCEPTED","Plantae","3152861: Liriodendron tulipifera L.",220,152543521
 2166,"Liriope muscari",5549949,"SPECIES","ACCEPTED","Plantae","5549949: Liriope muscari (Decne.) L.H.Bailey",196,182133214
@@ -3558,7 +3558,7 @@
 3546,"Sorbaria kirilowii",3012103,"SPECIES","ACCEPTED","Plantae","3012103: Sorbaria kirilowii (Regel) Maxim.",220,152544910
 3547,"Sorbaria sorbifolia",3012089,"SPECIES","ACCEPTED","Plantae","3012089: Sorbaria sorbifolia (L.) A.Braun",220,152544911
 3548,"Sorbaria tomentosa",3012117,"SPECIES","ACCEPTED","Plantae","3012117: Sorbaria tomentosa (Lindl.) Rehder",220,152544909
-3549,"Sorbus latifolia",NA,NA,NA,NA,NA,NA,213215741
+3549,"Sorbus latifolia",2706403,NA,NA,NA,NA,NA,213215741
 3550,"Sorghum bicolor",2705181,"SPECIES","ACCEPTED","Plantae","2705181: Sorghum bicolor (L.) Moench",196,152547048
 3551,"Sorghum halepense",2705185,"SPECIES","ACCEPTED","Plantae","2705185: Sorghum halepense (L.) Pers.",196,152547049
 3552,"Spartium junceum",5355395,"SPECIES","ACCEPTED","Plantae","5355395: Spartium junceum L.",220,152545108
@@ -3863,14 +3863,14 @@
 3849,"Triticum aestivum",7795888,"SPECIES","ACCEPTED","Plantae","7795888: Triticum aestivum L. | 4932510: Triticum aestivum subsp. aestivum | 2706402: Triticum spelta L. | 2706403: Triticum aestivum subsp. spelta (L.) Thell.",196,152547122
 3850,"Triticum aestivum",2706403,"SUBSPECIES","ACCEPTED","Plantae","2706402: Triticum spelta L. | 2706403: Triticum aestivum subsp. spelta (L.) Thell.",196,152547122
 3851,"Triticum aestivum compactum",5605751,NA,NA,NA,NA,NA,213212963
-3852,"Triticum aestivum spelta",NA,NA,NA,NA,NA,NA,152547124
+3852,"Triticum aestivum spelta",2706403,NA,NA,NA,NA,NA,152547124
 3853,"Triticum monococcum",7883427,"SPECIES","ACCEPTED","Plantae","7883427: Triticum monococcum L.",196,152547123
 3854,"Triticum turgidum",2706406,"SPECIES","ACCEPTED","Plantae","2706406: Triticum turgidum L. | 8168170: Triticum dicoccum Schrank ex Schübl. | 2706389: Triticum durum Desf.",196,152547125
 3855,"Triticum turgidum dicoccum",8864505,NA,NA,NA,NA,NA,213212957
 3856,"Triticum turgidum durum",2145078,NA,NA,NA,NA,NA,213212960
 3857,"Triticum turgidum polonicum",3140910,NA,NA,NA,NA,NA,213212959
 3858,"Triturus marmoratus",2431886,"SPECIES","ACCEPTED","Animalia","2431886: Triturus marmoratus (Latreille, 1800)",131,152543372
-3859,"Trochoidea elegans",3935202,NA,NA,NA,NA,NA,152543656
+3859,"Trochoidea elegans",3935202,"SPECIES","ACCEPTED","Animalia",NA,225,152543656
 3860,"Trogium pulsatorium",3141571,NA,NA,NA,NA,NA,152544616
 3861,"Trollius europaeus",3033289,"SPECIES","ACCEPTED","Plantae","3033289: Trollius europaeus L.",220,152546338
 3862,"Tropaeolum majus",2889934,"SPECIES","ACCEPTED","Plantae","2889934: Tropaeolum majus L.",220,152545477
