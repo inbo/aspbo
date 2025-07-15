@@ -593,17 +593,6 @@ keys_completed <- keys_completed %>%
 
 keys_path <- here("data", "output", "UAT_processing", "be_alientaxa_info.csv")
 
-write_delim(keys_completed, keys_path, ",", quote = "needed")
-
-# Upload to S3 bucket
-# aws.s3::put_object(file = keys_path,
-#                    object = "keys.csv",
-#                    bucket = UAT_bucket,
-#                    multipart = TRUE,
-#                    show_progress = TRUE,
-#                    region = "eu-west-1") 
-
-
 # Complete unknowns, info not on cube or checklist
 ## Missing taxonkeys 
 # => might not be an issue? => monitoring for now
@@ -622,6 +611,23 @@ test_that("missing scientificNames",
           {
             expect_false(nrow(keys_missing_name) > 0)
           })
+
+keys_completed <- keys_completed %>% 
+  filter(!scientificName %in% keys_missing_taxonkey$scientificName,
+         !taxonKey %in% keys_missing_name$taxonKey)
+
+write_delim(keys_completed, keys_path, ",", quote = "needed")
+
+# Upload to S3 bucket
+# aws.s3::put_object(file = keys_path,
+#                    object = "keys.csv",
+#                    bucket = UAT_bucket,
+#                    multipart = TRUE,
+#                    show_progress = TRUE,
+#                    region = "eu-west-1") 
+
+
+
 ```
 
 ## Extract x-y coordinates from cellcodes
