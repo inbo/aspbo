@@ -260,6 +260,12 @@ test_that("UPLOAD FAILED: 6709291 not included",
             expect_true(6709291 %in% df_species)
             expect_true(6709291 %in% post_update_species)
           })
+
+test_that("UPLOAD FAILED: 2502938 not included",
+          {
+            expect_true(2502938 %in% df_species)
+            expect_true(2502938 %in% post_update_species)
+          })
 ```
 
 ### Baseline
@@ -582,19 +588,20 @@ keys_completed <- keys_completed %>%
       unlist(derived_keys[scientificName]),
       taxonKey
     )
-  )
+  ) %>% 
+  select(taxonKey, scientificName, rank, taxonomicStatus, kingdom, includes)
 
-keys_path <- here("data", "output", "UAT_direct", "keys.csv")
+keys_path <- here("data", "output", "UAT_processing", "be_alientaxa_info.csv")
 
-write.csv(keys_completed, keys_path, row.names = FALSE)
+write_delim(keys_completed, keys_path, ",", quote = "needed")
 
 # Upload to S3 bucket
-aws.s3::put_object(file = keys_path,
-                   object = "keys.csv",
-                   bucket = UAT_bucket,
-                   multipart = TRUE,
-                   show_progress = TRUE,
-                   region = "eu-west-1") 
+# aws.s3::put_object(file = keys_path,
+#                    object = "keys.csv",
+#                    bucket = UAT_bucket,
+#                    multipart = TRUE,
+#                    show_progress = TRUE,
+#                    region = "eu-west-1") 
 
 
 # Complete unknowns, info not on cube or checklist

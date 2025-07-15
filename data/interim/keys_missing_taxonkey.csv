@@ -1,1 +1,2 @@
-X,scientificName,taxonKey,rank,taxonomicStatus,kingdom,includes,classKey,gbifKey
+taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
+NA,Salix sepulcralis chrysocoma,NA,NA,NA,NA
