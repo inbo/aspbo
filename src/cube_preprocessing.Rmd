@@ -613,8 +613,12 @@ test_that("missing scientificNames",
           })
 
 keys_completed <- keys_completed %>% 
-  filter(!scientificName %in% keys_missing_taxonkey$scientificName,
-         !taxonKey %in% keys_missing_name$taxonKey)
+  mutate(taxonKey = case_when(scientificName == "Trachemys scripta elegans" & is.na(taxonKey) ~ 6157026,
+                              scientificName == "Pyrus communis communis" & is.na(taxonKey) ~ 7271631,
+                              TRUE ~ taxonKey)) %>% 
+  filter(!(scientificName %in% keys_missing_taxonkey$scientificName & is.na(taxonKey)),
+         !(taxonKey %in% keys_missing_name$taxonKey & is.na(scientificName))) %>% 
+  distinct(taxonKey, scientificName, .keep_all = TRUE)
 
 write_delim(keys_completed, keys_path, ",", quote = "needed")
 
