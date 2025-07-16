@@ -618,7 +618,7 @@ keys_completed <- keys_completed %>%
                               TRUE ~ taxonKey)) %>% 
   filter(!(scientificName %in% keys_missing_taxonkey$scientificName & is.na(taxonKey)),
          !(taxonKey %in% keys_missing_name$taxonKey & is.na(scientificName))) %>% 
-  distinct(taxonKey, scientificName)
+  distinct(taxonKey, scientificName, .keep_all = TRUE)
 
 write_delim(keys_completed, keys_path, ",", quote = "needed")
 
