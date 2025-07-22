@@ -1,0 +1,84 @@
+---
+title: 3083745
+output: html_fragment
+params:
+  language: "en"
+---
+<style>
+h1.title {
+  display: none;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r sharedinfo, echo=FALSE}
+VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/3083745"
+faunabeheer_link <- "https://faunabeheer.inbo.be/3083745"
+style_str<-"font-size: 1.5em; font-style: italic;"
+image_link<-"../Pictures/"
+copyright_font<-"font-size: 0.8em;"
+width="400"
+height="267"
+```
+
+
+```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
+cat(paste0("
+## <i>Atriplex rosea</i>
+
+<span style=\"", style_str, "\">Atriplex rosea</span>
+<br>
+
+
+<br>
+
+#### **Nuttige links** <br>
+<p>Meer informatie over <i>Atriplex rosea</i> kunt u vinden op de Vlaams biodiversiteits portaal.<br>
+**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams biodiversiteit portaal</a>**
+
+<p>
+<br>
+<br>
+"))
+```
+
+```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
+cat(paste0("
+## Redscale
+
+<span style=\"", style_str, "\">Atriplex rosea</span>
+
+
+<br>
+
+#### **Useful links** <br>
+<p>You can find more information about Redscale on the Flemish biodiversity portal (note that this information is currently only invailable in Dutch).<br>
+**More information: <a href=\"", VBP_link, "\"target=\"_blank\">Flemish biodiversity portal</a>**
+
+<p>
+<br>
+<br>
+"))
+```
+
+```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
+cat(paste0("
+## Arroche rosee
+
+<span style=\"", style_str, "\">Atriplex rosea</span>
+
+
+<br>
+
+#### **Liens utiles** <br>
+<p>Vous pouvez trouver plus d'informations sur Arroche rosee sur la portal biodiversité Flamande (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
+**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">Portal biodiversité Flamande</a>**
+
+<p>
+<br>
+<br>
+"))
+```

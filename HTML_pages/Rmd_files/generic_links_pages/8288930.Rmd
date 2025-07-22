@@ -1,5 +1,5 @@
 ---
-title: 5179027
+title: 8288930
 output: html_fragment
 params:
   language: "en"
@@ -15,8 +15,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r sharedinfo, echo=FALSE}
-VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/5179027"
-faunabeheer_link <- "https://faunabeheer.inbo.be/5179027"
+VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/8288930"
+faunabeheer_link <- "https://faunabeheer.inbo.be/8288930"
 style_str<-"font-size: 1.5em; font-style: italic;"
 image_link<-"../Pictures/"
 copyright_font<-"font-size: 0.8em;"
@@ -27,16 +27,16 @@ height="267"
 
 ```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
 cat(paste0("
-## Spinduizendpoot
+## Grijs havikskruid
 
-<span style=\"", style_str, "\">Scutigera coleoptrata</span>
+<span style=\"", style_str, "\">Pilosella piloselloides</span>
 <br>
 
 
 <br>
 
 #### **Nuttige links** <br>
-<p>Meer informatie over Spinduizendpoot kunt u vinden op de Vlaams biodiversiteits portaal.<br>
+<p>Meer informatie over Grijs havikskruid kunt u vinden op de Vlaams biodiversiteits portaal.<br>
 **Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams biodiversiteit portaal</a>**
 
 <p>
@@ -47,15 +47,15 @@ cat(paste0("
 
 ```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
 cat(paste0("
-## House centipede
+## Glaucous king-devil
 
-<span style=\"", style_str, "\">Scutigera coleoptrata</span>
+<span style=\"", style_str, "\">Pilosella piloselloides</span>
 
 
 <br>
 
 #### **Useful links** <br>
-<p>You can find more information about House centipede on the Flemish biodiversity portal (note that this information is currently only invailable in Dutch).<br>
+<p>You can find more information about Glaucous king-devil on the Flemish biodiversity portal (note that this information is currently only invailable in Dutch).<br>
 **More information: <a href=\"", VBP_link, "\"target=\"_blank\">Flemish biodiversity portal</a>**
 
 <p>
@@ -66,15 +66,15 @@ cat(paste0("
 
 ```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
 cat(paste0("
-## Scutigère véloce
+## Fausse piloselle
 
-<span style=\"", style_str, "\">Scutigera coleoptrata</span>
+<span style=\"", style_str, "\">Pilosella piloselloides</span>
 
 
 <br>
 
 #### **Liens utiles** <br>
-<p>Vous pouvez trouver plus d'informations sur Scutigère véloce sur la portal biodiversité Flamande (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
+<p>Vous pouvez trouver plus d'informations sur Fausse piloselle sur la portal biodiversité Flamande (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
 **Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">Portal biodiversité Flamande</a>**
 
 <p>
