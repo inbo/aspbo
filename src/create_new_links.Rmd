@@ -104,6 +104,11 @@ TRUE ~ ""))
 redo_all <- TRUE
 ```
 
+```{r sample GRIIS checklist for troubleshooting, eval=FALSE}
+griis_checklist <- sample_n(griis_checklist, 5, replace = TRUE)
+```
+
+
 ```{r create link files}
 for(n in 1:nrow(griis_checklist)){
   
