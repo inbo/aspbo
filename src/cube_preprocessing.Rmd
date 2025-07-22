@@ -260,6 +260,12 @@ test_that("UPLOAD FAILED: 6709291 not included",
             expect_true(6709291 %in% df_species)
             expect_true(6709291 %in% post_update_species)
           })
+
+test_that("UPLOAD FAILED: 2502938 not included",
+          {
+            expect_true(2502938 %in% df_species)
+            expect_true(2502938 %in% post_update_species)
+          })
 ```
 
 ### Baseline
@@ -544,37 +550,88 @@ keys_completed <- keys_old %>%
   select(-contains("new")) %>%
   distinct()
 
-keys_path <- here("data", "output", "UAT_direct", "keys.csv")
+# Find rows with missing taxonKey
+keys_missing_taxonkey <- keys_completed %>% 
+  filter(is.na(taxonKey))
 
-write.csv(keys_completed, keys_path, row.names = FALSE)
+# Function to derive the most likely taxonKey for a given scientific name
+get_derived_taxonKey <- function(scientific_name) {
+  taxonomic_data <- tryCatch(
+    rgbif::name_usage(name = scientific_name)$data,
+    error = function(e) NULL
+  )
+  if (is.null(taxonomic_data) || nrow(taxonomic_data) == 0) return(NA_integer_)
+  
+  derived_taxonKey <- taxonomic_data %>% 
+    dplyr::filter(taxonomicStatus == "ACCEPTED", !is.na(nubKey)) %>% 
+    group_by(nubKey) %>% 
+    add_tally() %>% 
+    distinct(nubKey, n) %>% 
+    ungroup() %>% 
+    filter(n == max(n, na.rm = TRUE)) %>% 
+    pull(nubKey)
+  
+  # If multiple, take the first
+  if (length(derived_taxonKey) > 0) return(derived_taxonKey[1])
+  else return(NA_integer_)
+}
 
-# Upload to S3 bucket
-aws.s3::put_object(file = keys_path,
-           object = "keys.csv",
-           bucket = UAT_bucket,
-           multipart = TRUE,
-           show_progress = TRUE,
-           region = "eu-west-1") 
+# Use lapply to process all missing names
+derived_keys <- pbapply::pblapply(keys_missing_taxonkey$scientificName, get_derived_taxonKey)
+names(derived_keys) <- keys_missing_taxonkey$scientificName
 
+# Update keys_completed with the derived taxonKeys
+keys_completed <- keys_completed %>%
+  mutate(
+    taxonKey = ifelse(
+      is.na(taxonKey) & scientificName %in% names(derived_keys),
+      unlist(derived_keys[scientificName]),
+      taxonKey
+    )
+  ) %>% 
+  select(taxonKey, scientificName, rank, taxonomicStatus, kingdom, includes)
+
+keys_path <- here("data", "output", "UAT_processing", "be_alientaxa_info.csv")
 
 # Complete unknowns, info not on cube or checklist
 ## Missing taxonkeys 
 # => might not be an issue? => monitoring for now
 # Fixing this will be a pain in the ass since `name_usage` returns every use of the scientific name in the gbif backbone as well as on very checklist worldwide
-keys_old_missing_taxonkey <- keys_old %>% 
+keys_missing_taxonkey <- keys_completed %>% 
   filter(is.na(taxonKey)) %>% 
   write_csv(here("data", "interim", "keys_missing_taxonkey.csv"))
 
 ## Missing scientific names => cause of https://github.com/inbo/alien-species-portal/issues/140
-keys_old_missing_name <- keys_old %>% 
+keys_missing_name <- keys_completed %>% 
   filter(is.na(scientificName)) %>% 
   write_csv(here("data", "interim", "keys_missing_name.csv"))
 
 # test whether any missing scientificnames remain
 test_that("missing scientificNames",
           {
-            expect_false(nrow(keys_old_missing_name) > 0)
+            expect_false(nrow(keys_missing_name) > 0)
           })
+
+keys_completed <- keys_completed %>% 
+  mutate(taxonKey = case_when(scientificName == "Trachemys scripta elegans" & is.na(taxonKey) ~ 6157026,
+                              scientificName == "Pyrus communis communis" & is.na(taxonKey) ~ 7271631,
+                              TRUE ~ taxonKey)) %>% 
+  filter(!(scientificName %in% keys_missing_taxonkey$scientificName & is.na(taxonKey)),
+         !(taxonKey %in% keys_missing_name$taxonKey & is.na(scientificName))) %>% 
+  distinct(taxonKey, scientificName, .keep_all = TRUE)
+
+write_delim(keys_completed, keys_path, ",", quote = "needed")
+
+# Upload to S3 bucket
+# aws.s3::put_object(file = keys_path,
+#                    object = "keys.csv",
+#                    bucket = UAT_bucket,
+#                    multipart = TRUE,
+#                    show_progress = TRUE,
+#                    region = "eu-west-1") 
+
+
+
 ```
 
 ## Extract x-y coordinates from cellcodes
