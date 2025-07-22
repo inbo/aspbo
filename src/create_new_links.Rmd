@@ -27,6 +27,9 @@ if(url("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/a8
 }else{
   faunabeheer_species <- read_csv("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/uat/reporting-grofwild/inst/extdata/species-info.csv")
 }
+
+faunabeheer_species <- faunabeheer_species %>% 
+  mutate(faunbeheer_link = paste0("https://faunabeheer.inbo.be/app/01_faunabeheer/#", gsub(" ", "%20", `species name`)))
 ```
 
 ```{r detect images}
@@ -65,13 +68,13 @@ griis_checklist <- griis_checklist_raw %>%
          vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
          vernacular_name_fr = coalesce(vernacular_name_fr, paste0("<i>", scientificName, "</i>"))) %>% 
   mutate(faunabeheer_link_nl = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
-                                           paste0('<--VERNACULAR_NAME_NL--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\"", faunabeheer_link, \\"\\\\"target=\\\\"_blank\\\\">faunabeheer pagina</a>.'),
+                                           paste0('<--VERNACULAR_NAME_NL--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\""', faunabeheer_link, '\\"\\\\"target=\\\\"_blank\\\\">faunabeheer pagina</a>.'),
                                          TRUE ~ ""),
          faunabeheer_link_en = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
-                                           paste0('<--VERNACULAR_NAME_EN--> is classified as a game species in Flanders, more information concerning management and damages in Flanders can be found on the <a href=\\\\"", faunabeheer_link, \\"\\\\"target=\\\\"_blank\\\\">wildlife management page</a> (note that this information is currently only invailable in Dutch)'),
+                                           paste0('<--VERNACULAR_NAME_EN--> is classified as a game species in Flanders, more information concerning management and damages in Flanders can be found on the <a href=\\\\""', faunabeheer_link, '\\"\\\\"target=\\\\"_blank\\\\">wildlife management page</a> (note that this information is currently only invailable in Dutch)'),
                                          TRUE ~ ""),
          faunabeheer_link_fr = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
-                                           paste0('<--VERNACULAR_NAME_FR--> est classé comme espèce gibier en Flandre. Vous trouverez plus d`informations sur la gestion et les dommages en Flandre sur la page <a href=\\\\"", faunabeheer_link, \\"\\\\"target=\\\\"_blank\\\\">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu` en néerlandais)'),
+                                           paste0('<--VERNACULAR_NAME_FR--> est classé comme espèce gibier en Flandre. Vous trouverez plus d`informations sur la gestion et les dommages en Flandre sur la page <a href=\\\\""', faunabeheer_link, '\\"\\\\"target=\\\\"_blank\\\\">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu` en néerlandais)'),
                                          TRUE ~ "")) %>% 
   left_join(image_files, by = c("nubKey" = "taxonKey")) %>% 
   mutate(image_copyright = case_when(!is.na(copyright) ~ 
@@ -83,7 +86,7 @@ TRUE ~ ""))
 ```
 
 ```{r redo all?}
-redo_all <- FALSE
+redo_all <- TRUE
 ```
 
 ```{r create link files}
