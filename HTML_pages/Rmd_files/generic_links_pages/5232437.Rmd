@@ -1,0 +1,84 @@
+---
+title: 5232437
+output: html_fragment
+params:
+  language: "en"
+---
+<style>
+h1.title {
+  display: none;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r sharedinfo, echo=FALSE}
+VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/5232437"
+faunabeheer_link <- "https://faunabeheer.inbo.be/5232437"
+style_str<-"font-size: 1.5em; font-style: italic;"
+image_link<-"../Pictures/"
+copyright_font<-"font-size: 0.8em;"
+width="400"
+height="267"
+```
+
+
+```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
+cat(paste0("
+## Canadese gans
+
+<span style=\"", style_str, "\">Branta canadensis</span>
+<br>
+
+
+<br>
+
+#### **Nuttige links** <br>
+<p>Meer informatie over Canadese gans kunt u vinden op de Vlaams biodiversiteits portaal.<br>
+**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams biodiversiteit portaal</a>**
+
+<p>Canadese gans is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\"https://faunabeheer.inbo.be/app/01_faunabeheer/#Canadese%20gans\"target=\"_blank\">faunabeheer pagina</a>.
+<br>
+<br>
+"))
+```
+
+```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
+cat(paste0("
+## Canada goose
+
+<span style=\"", style_str, "\">Branta canadensis</span>
+
+
+<br>
+
+#### **Useful links** <br>
+<p>You can find more information about Canada goose on the Flemish biodiversity portal (note that this information is currently only invailable in Dutch).<br>
+**More information: <a href=\"", VBP_link, "\"target=\"_blank\">Flemish biodiversity portal</a>**
+
+<p>Canada goose is classified as a game species in Flanders, more information concerning management and damages in Flanders can be found on the <a href=\"https://faunabeheer.inbo.be/app/01_faunabeheer/#Canadese%20gans\"target=\"_blank\">wildlife management page</a> (note that this information is currently only invailable in Dutch)
+<br>
+<br>
+"))
+```
+
+```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
+cat(paste0("
+## Bernache du canada
+
+<span style=\"", style_str, "\">Branta canadensis</span>
+
+
+<br>
+
+#### **Liens utiles** <br>
+<p>Vous pouvez trouver plus d'informations sur Bernache du canada sur la portal biodiversité Flamande (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
+**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">Portal biodiversité Flamande</a>**
+
+<p>Bernache du canada est classé comme espèce gibier en Flandre. Vous trouverez plus d`informations sur la gestion et les dommages en Flandre sur la page <a href=\"https://faunabeheer.inbo.be/app/01_faunabeheer/#Canadese%20gans\"target=\"_blank\">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu` en néerlandais)
+<br>
+<br>
+"))
+```
