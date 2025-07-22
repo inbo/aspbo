@@ -29,7 +29,17 @@ if(url("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/a8
 }
 
 faunabeheer_species <- faunabeheer_species %>% 
-  mutate(faunbeheer_link = paste0("https://faunabeheer.inbo.be/app/01_faunabeheer/#", gsub(" ", "%20", `species name`)))
+  mutate(faunabeheer_link1 = paste0("https://faunabeheer.inbo.be/app/01_faunabeheer/#", gsub(" ", "%20", `species name`)),
+         faunabeheer_link2 = paste0("https://faunabeheer.inbo.be/app/01_faunabeheer/#", gbifkey))
+
+# test both urls and write the first that works into faunabeheer_link
+# This code anticipates changes in the faunabeheer links, where the first link is the one with the species name and the second link is the one with the gbifkey.
+faunabeheer_species <- faunabeheer_species %>% 
+  mutate(faunabeheer_link = case_when(
+    RCurl::url.exists(faunabeheer_link1) ~ faunabeheer_link1,
+    RCurl::url.exists(faunabeheer_link2) ~ faunabeheer_link2,
+    TRUE ~ NA_character_)) %>% 
+  select(gbifkey, faunabeheer_link)
 ```
 
 ```{r detect images}
@@ -67,14 +77,15 @@ griis_checklist <- griis_checklist_raw %>%
   mutate(vernacular_name_nl = coalesce(vernacular_name_nl, paste0("<i>", scientificName, "</i>")),
          vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
          vernacular_name_fr = coalesce(vernacular_name_fr, paste0("<i>", scientificName, "</i>"))) %>% 
+  left_join(faunabeheer_species, by = c("nubKey" = "gbifkey")) %>%
   mutate(faunabeheer_link_nl = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
-                                           paste0('<--VERNACULAR_NAME_NL--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\""', faunabeheer_link, '\\"\\\\"target=\\\\"_blank\\\\">faunabeheer pagina</a>.'),
+                                           paste0('<--VERNACULAR_NAME_NL--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\"', faunabeheer_link, '\\\\"target=\\\\"_blank\\\\">faunabeheer pagina</a>.'),
                                          TRUE ~ ""),
          faunabeheer_link_en = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
-                                           paste0('<--VERNACULAR_NAME_EN--> is classified as a game species in Flanders, more information concerning management and damages in Flanders can be found on the <a href=\\\\""', faunabeheer_link, '\\"\\\\"target=\\\\"_blank\\\\">wildlife management page</a> (note that this information is currently only invailable in Dutch)'),
+                                           paste0('<--VERNACULAR_NAME_EN--> is classified as a game species in Flanders, more information concerning management and damages in Flanders can be found on the <a href=\\\\"', faunabeheer_link, '\\\\"target=\\\\"_blank\\\\">wildlife management page</a> (note that this information is currently only invailable in Dutch)'),
                                          TRUE ~ ""),
          faunabeheer_link_fr = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
-                                           paste0('<--VERNACULAR_NAME_FR--> est classé comme espèce gibier en Flandre. Vous trouverez plus d`informations sur la gestion et les dommages en Flandre sur la page <a href=\\\\""', faunabeheer_link, '\\"\\\\"target=\\\\"_blank\\\\">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu` en néerlandais)'),
+                                           paste0('<--VERNACULAR_NAME_FR--> est classé comme espèce gibier en Flandre. Vous trouverez plus d`informations sur la gestion et les dommages en Flandre sur la page <a href=\\\\"', faunabeheer_link, '\\\\"target=\\\\"_blank\\\\">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu` en néerlandais)'),
                                          TRUE ~ "")) %>% 
   left_join(image_files, by = c("nubKey" = "taxonKey")) %>% 
   mutate(image_copyright = case_when(!is.na(copyright) ~ 
