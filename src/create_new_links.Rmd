@@ -97,7 +97,8 @@ griis_checklist <- griis_checklist_raw %>%
                                      TRUE ~ ""),
          image_link = case_when(!is.na(copyright) ~ paste0('<img src=\\\\"", image_link, "\\\\" width=\\\\"", width, "\\\\" height=\\\\"", height, "\\\\"><br>
 <span style=\\\\"", copyright_font, "\\\\">© <--COPYRIGHT--></span><br>'),
-TRUE ~ ""))
+TRUE ~ "")) %>% 
+  distinct()
 ```
 
 ```{r redo all?}
