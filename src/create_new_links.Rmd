@@ -112,13 +112,30 @@ TRUE ~ "")) %>%
 ```
 
 ```{r redo all?}
-redo_all <- TRUE
+redo_all <- TRUE # Set to TRUE to redo all files, or FALSE to skip existing files
+redo_existing <- TRUE # Set to TRUE to redo only existing files, or FALSE to redo all
+```
+
+| ALL = T & EXI. = F 	| All on GRIIS checklist (inclu. non - existing but exclu. Custom) 	|
+| ALL = T & EXI. = T 	| All existing on GRIIS checklist (exclu. Custom) 	|
+| ALL = F & EXI. = T 	| Skip all => no changes 	|
+| ALL = F & EXI. = F 	| Only non - existing files (exclu. Custom) 	|
+
+```{r determine existing}
+if(redo_existing){
+  existing_files <- dir(path = "./HTML_pages/Rmd_files/generic_links_pages/", 
+                       pattern = "[0-9].Rmd") %>% 
+  gsub(pattern = ".Rmd", replacement = "") %>% 
+  as.integer()
+  
+  griis_checklist <- griis_checklist %>% 
+    filter(nubKey %in% existing_files)
+}
 ```
 
 ```{r sample GRIIS checklist for troubleshooting, eval=FALSE}
 griis_checklist <- sample_n(griis_checklist, 5, replace = TRUE)
 ```
-
 
 ```{r create link files}
 for(n in 1:nrow(griis_checklist)){
