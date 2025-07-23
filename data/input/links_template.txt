@@ -55,7 +55,7 @@ cat(paste0("
 <br>
 
 #### **Useful links** <br>
-<p>You can find more information about <--VERNACULAR_NAME_EN--> on the Flemish biodiversity portal (note that this information is currently only invailable in Dutch).<br>
+<p>You can find more information about <--VERNACULAR_NAME_EN--> on the Flemish biodiversity portal (note that this information is currently only available in Dutch).<br>
 **More information: <a href=\"", VBP_link, "\"target=\"_blank\">Flemish biodiversity portal</a>**
 
 <p><--FAUNABEHEER_LINK_EN-->
