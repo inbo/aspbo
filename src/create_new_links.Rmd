@@ -6,6 +6,7 @@ output: html_document
 ---
 
 ```{r libraries}
+library(RCurl)
 library(tidyverse)
 ```
 
@@ -22,10 +23,19 @@ griis_checklist_raw <- read_tsv("./data/output/UAT_processing/data_input_checkli
 ```
 
 ```{r read faunabeheer species}
-if(url("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/a8cafd49f2644c079533711afeb1e712693acb6c/reporting-grofwild/inst/extdata/species-info.csv")){
-  faunabeheer_species <- read_csv("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/a8cafd49f2644c079533711afeb1e712693acb6c/reporting-grofwild/inst/extdata/species-info.csv")
-}else{
+#Test if the faunabeheer species file exists in the reporting-rshiny-grofwildjacht 
+# repository on the 557-make-species-page-linkable-by-vbpexotenportaal-inward-linking 
+# branch, if not, read the file from the uat branch.
+
+tryCatch({
+  faunabeheer_species <- read_csv("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/557-make-species-page-linkable-by-vbpexotenportaal-inward-linking/reporting-grofwild/inst/extdata/species-info.csv")
+}, error = function(e) {
+  message("File not found on the 557-make-species-page-linkable-by-vbpexotenportaal-inward-linking branch, reading from uat branch.")
   faunabeheer_species <- read_csv("https://raw.githubusercontent.com/inbo/reporting-rshiny-grofwildjacht/uat/reporting-grofwild/inst/extdata/species-info.csv")
+})
+
+if(!"gbifkey" %in% colnames(faunabeheer_species)){
+  stop("The faunabeheer species file does not contain a 'gbifkey' column. Please check the file.")
 }
 
 faunabeheer_species <- faunabeheer_species %>% 
@@ -47,11 +57,11 @@ pngs <- list.files(path = "./HTML_pages/Pictures/",
                    pattern = ".png", 
                    full.names = FALSE)
 jpgs <- list.files(path = "./HTML_pages/Pictures/", 
-                     pattern = ".jpg", 
-                     full.names = FALSE)
+                   pattern = ".jpg", 
+                   full.names = FALSE)
 jpegs <- list.files(path = "./HTML_pages/Pictures/", 
-                     pattern = ".jpeg", 
-                     full.names = FALSE)
+                    pattern = ".jpeg", 
+                    full.names = FALSE)
 
 image_files <- c(pngs, jpgs, jpegs)
 
@@ -162,7 +172,7 @@ for(n in 1:nrow(griis_checklist)){
     gsub(pattern = "<--COPYRIGHT-->",
          replacement = current_row$copyright, 
          x = .)
-    
+  
   
   # write the new link to a file
   writeLines(new_link, filename)
