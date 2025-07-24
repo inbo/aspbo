@@ -140,10 +140,12 @@ old_ranks <- c('SPECIES', 'SUBSPECIES', 'VARIETY', 'FORM', 'GENUS', 'FAMILY')
 test_that("A new rank was detected in GRIIS checklist", {
   missing <- setdiff(checklist_raw$rank, old_ranks)
   
-  new_rank_taxa <- checklist_raw %>% 
-    filter(rank == missing) %>% 
-    distinct(nubKey) %>% 
-    pull()
+  if(length(missing) != 0){
+    new_rank_taxa <- checklist_raw %>% 
+      filter(rank == missing) %>% 
+      distinct(nubKey) %>% 
+      pull()
+  }
   
   expect(length(missing) == 0, sprintf("New rank: %s \n containing the following taxa: \n-%s \n
                                        ===> You should do the following: <=== \n
