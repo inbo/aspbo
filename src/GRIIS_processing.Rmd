@@ -9,13 +9,14 @@ output: html_document
 library(tidyverse)
 library(progress)
 library(aws.s3)
+library(testthat)
 library(alienSpecies)
 ```
 
 ```{r read data}
 checklist_raw <- read_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
-                                   delim = "\t", escape_double = FALSE, 
-                                   trim_ws = TRUE)
+                            delim = "\t", escape_double = FALSE, 
+                            trim_ws = TRUE)
 ```
 
 ```{r add vernicular names}
@@ -42,15 +43,15 @@ for(t in taxon_keys){
     spec_vernicular_names <- spec_vernicular_names %>% 
       filter(language %in% c("eng", "fra", "nld")) %>% 
       mutate(vernacularName = str_to_sentence(vernacularName),
-                    language = str_sub(language, 0, 2)) %>% 
+             language = str_sub(language, 0, 2)) %>% 
       distinct(taxonKey, language, vernacularName) %>% 
       group_by(language, taxonKey) %>% 
       summarise(vernacular_name = paste(vernacularName, collapse = ", "), .groups = "drop") %>% 
       ungroup() %>% 
       pivot_wider(id_cols = taxonKey,
-                         names_from = language,
-                         names_prefix = "vernacular_name_",
-                         values_from = vernacular_name)
+                  names_from = language,
+                  names_prefix = "vernacular_name_",
+                  values_from = vernacular_name)
     
     if(nrow(all_vernicular_names) == 0){
       all_vernicular_names <- spec_vernicular_names
@@ -68,7 +69,7 @@ missing_scientific_names <- checklist_raw %>%
 if(nrow(missing_scientific_names) > 0){
   checklist_raw <- checklist_raw %>% 
     mutate(species = case_when(is.na(species) ~ canonicalName,
-                                             TRUE ~ species))
+                               TRUE ~ species))
   
   missing_scientific_names_recheck <- checklist_raw %>% 
     filter(is.na(species)) 
@@ -114,19 +115,57 @@ occurrence_data <- alienSpecies::loadTabularData(type = "occurrence")
 occurrence_data <- occurrence_data %>% 
   group_by(taxonKey) %>%
   summarise(last_observed_recalc = max(year, na.rm = TRUE),
-                   isFlanders = any(isFlanders),
-                   isWallonia = any(isWallonia),
-                   isBrussels = any(isBrussels),
-                   isBelgium = TRUE) %>% 
+            isFlanders = any(isFlanders),
+            isWallonia = any(isWallonia),
+            isBrussels = any(isBrussels),
+            isBelgium = TRUE) %>% 
   ungroup() %>% 
   pivot_longer(cols = c(isFlanders, isWallonia, isBrussels, isBelgium), names_to = "region", values_to = "isRegion") %>% 
   filter(isRegion) %>% 
   select(-isRegion) %>% 
   mutate(region = case_match(region,
-                                           "isFlanders" ~ "Flemish Region",
-                                           "isWallonia" ~ "Walloon Region",
-                                           "isBrussels" ~ "Brussels-Capital Region",
-                                           "isBelgium" ~ "Belgium"))
+                             "isFlanders" ~ "Flemish Region",
+                             "isWallonia" ~ "Walloon Region",
+                             "isBrussels" ~ "Brussels-Capital Region",
+                             "isBelgium" ~ "Belgium"))
+```
+
+```{r correct taxon rank placeholder}
+
+```
+
+```{r detect "new" ranks}
+old_ranks <- c('SPECIES', 'SUBSPECIES', 'VARIETY', 'FORM', 'GENUS')
+
+test_that("A new rank was detected in GRIIS checklist", {
+  missing <- setdiff(checklist_raw$rank, old_ranks)
+  
+  new_rank_taxa <- checklist_raw %>% 
+    filter(rank == missing) %>% 
+    distinct(nubKey) %>% 
+    pull()
+  
+  expect(length(missing) == 0, sprintf("New rank: %s \n containing the following taxa: \n-%s \n
+                                       ===> You should do the following: <=== \n
+      - Get this PR's branch locally \n
+      - Check if the taxa listed are correctly linked to the 'new' rank \n
+      - if correct;
+        - Create a new query base in './data/input/' named 'griis_belgium_<new rank>_base.txt
+        - Add <NEW RANK> to the character vector at './src/get_cubes/compile_cubes.Rmd#L18'
+        - Add <NEW RANK> to the character vector at './src/get_cubes/compile_metadata.Rmd#L18'
+        - Add <NEW RANK> to the character vector at '.github/workflows/get_occ_cube.yaml#L83'
+        - Add <NEW RANK> to the character vector at './src/GRIIS_processing.Rmd#L138'
+        - Commit & push these changes 
+        - Trigger a new workflow from the branch using workflow dispatch
+      - if incorrect;
+        - Create a issue at https://github.com/trias-project/unified-checklist/issues
+        - Write some temporary correction at './src/GRIIS_processing.Rmd#L134'
+        - Commit & push these changes 
+        - Trigger a new workflow from the branch using workflow dispatch
+      ", 
+      paste(missing, collapse = ", "), 
+      paste(new_rank_taxa, collapse = " \n-")))
+})
 ```
 
 ```{r join data & export}
@@ -134,10 +173,10 @@ checklist <- checklist_raw %>%
   left_join(all_vernicular_names, by = c("nubKey" = "taxonKey")) %>% 
   left_join(occurrence_data, by = c("nubKey" = "taxonKey", "locality" = "region")) %>%
   mutate(last_observed = case_when(is.na(last_observed) ~ last_observed_recalc,
-                                                 last_observed_recalc > last_observed ~ last_observed_recalc,
-                                                 TRUE ~ last_observed)) %>%
+                                   last_observed_recalc > last_observed ~ last_observed_recalc,
+                                   TRUE ~ last_observed)) %>%
   select(-last_observed_recalc) %>%
   write_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
-                     delim = "\t")
+              delim = "\t")
 ```
 
