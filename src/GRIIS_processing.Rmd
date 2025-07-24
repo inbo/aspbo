@@ -135,7 +135,7 @@ occurrence_data <- occurrence_data %>%
 ```
 
 ```{r detect "new" ranks}
-old_ranks <- c('SPECIES', 'SUBSPECIES', 'VARIETY', 'FORM', 'GENUS')
+old_ranks <- c('SPECIES', 'SUBSPECIES', 'VARIETY', 'FORM', 'GENUS', 'FAMILY')
 
 test_that("A new rank was detected in GRIIS checklist", {
   missing <- setdiff(checklist_raw$rank, old_ranks)
