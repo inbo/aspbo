@@ -6,8 +6,13 @@ output: html_document
 ---
 
 ```{r libraries}
+library(testthat)
 library(tidyverse)
 library(httr)
+```
+
+```{r}
+troubleshooting_datacleaning <- TRUE
 ```
 
 ```{r create target df}
@@ -32,87 +37,111 @@ response_length <- 50
 initial_page <- 1
 base_url <- "https://uat-db.vespawatch.be/observations/"
 
-while(response_length == 50){
-  # Construct the URL for the current page
-  if (initial_page == 1) {
-    current_url <- base_url
-  } else {
-    current_url <- response_content$`next`
+vespa_management_df <- data.frame()
+if(!troubleshooting_datacleaning){
+  cat("Retrieving data from Vespadb...\n")
+  
+  while(response_length == 50){
+    # Construct the URL for the current page
+    if (initial_page == 1) {
+      current_url <- base_url
+    } else {
+      current_url <- response_content$`next`
+    }
+    
+    
+    # Make the GET request
+    response <- GET(
+      current_url,
+      add_headers(accept = "application/json")
+    )
+    
+    # Check if the request was successful
+    if (status_code(response) != 200) {
+      warning("Failed to retrieve data from the API. Status code: ", status_code(response))
+      next
+    }
+    
+    # Parse the response content
+    response_content <- content(response, "parsed", type = "application/json")
+    
+    # Check if the 'results' field exists in the response
+    if (!"results" %in% names(response_content)) {
+      stop("The 'results' field is missing in the response.")
+    }
+    
+    # Create a data frame for the current page
+    current_vespa_management_df <- vespa_management_df_base
+    
+    # Add the results to the data frame
+    for(i in 1:length(response_content$results)){
+      current_vespa_management_df <- current_vespa_management_df %>% 
+        add_row(id = response_content$results[[i]]$id,
+                nest_status = response_content$results[[i]]$nest_status,
+                nest_type = response_content$results[[i]]$nest_type,
+                observation_datetime = response_content$results[[i]]$observation_datetime,
+                eradication_date = response_content$results[[i]]$eradication_date,
+                latitude = response_content$results[[i]]$location$coordinates[[2]],
+                longitude = response_content$results[[i]]$location$coordinates[[1]],
+                isduplicate = response_content$results[[i]]$isduplicate,
+                other_species_nest = response_content$results[[i]]$other_species_nest,
+                notes = response_content$results[[i]]$notes,
+                municipality_name = response_content$results[[i]]$municipality_name
+        )
+    }
+    
+    # Print the number of records retrieved so far
+    cat("Retrieved", nrow(current_vespa_management_df), "records from page", initial_page, "\n")
+    
+    # Print the current page number
+    cat("Current page:", initial_page, "\n")
+    
+    # Add results to final df
+    if (initial_page == 1) {
+      vespa_management_df <- current_vespa_management_df
+    } else {
+      vespa_management_df <- bind_rows(vespa_management_df, current_vespa_management_df)
+    }
+    
+    cat("Total records so far:", nrow(vespa_management_df), "\n")
+    
+    # Increment the page number for the next iteration
+    initial_page <- initial_page + 1
+    
+    # Check the length of the results
+    response_length <- length(response_content$results)
   }
-  
-  
-  # Make the GET request
-  response <- GET(
-    current_url,
-    add_headers(accept = "application/json")
-  )
-  
-  # Check if the request was successful
-  if (status_code(response) != 200) {
-    warning("Failed to retrieve data from the API. Status code: ", status_code(response))
-    next
-  }
-  
-  # Parse the response content
-  response_content <- content(response, "parsed", type = "application/json")
-  
-  # Check if the 'results' field exists in the response
-  if (!"results" %in% names(response_content)) {
-    stop("The 'results' field is missing in the response.")
-  }
-  
-  # Create a data frame for the current page
-  current_vespa_management_df <- vespa_management_df_base
-  
-  # Add the results to the data frame
-  for(i in 1:length(response_content$results)){
-    current_vespa_management_df <- current_vespa_management_df %>% 
-      add_row(id = response_content$results[[i]]$id,
-              nest_status = response_content$results[[i]]$nest_status,
-              nest_type = response_content$results[[i]]$nest_type,
-              observation_datetime = response_content$results[[i]]$observation_datetime,
-              eradication_date = response_content$results[[i]]$eradication_date,
-              latitude = response_content$results[[i]]$location$coordinates[[2]],
-              longitude = response_content$results[[i]]$location$coordinates[[1]],
-              isduplicate = response_content$results[[i]]$isduplicate,
-              other_species_nest = response_content$results[[i]]$other_species_nest,
-              notes = response_content$results[[i]]$notes,
-              municipality_name = response_content$results[[i]]$municipality_name
-      )
-  }
-  
-  # Print the number of records retrieved so far
-  cat("Retrieved", nrow(vespa_management_df), "records from page", initial_page, "\n")
-  
-  # Print the current page number
-  cat("Current page:", initial_page, "\n")
-  
-  # Add results to final df
-  if (initial_page == 1) {
-    vespa_management_df <- current_vespa_management_df
-  } else {
-    vespa_management_df <- bind_rows(vespa_management_df, current_vespa_management_df)
-  }
-  
-  # Increment the page number for the next iteration
-  initial_page <- initial_page + 1
-  
-  # Check the length of the results
-  response_length <- length(response_content$results)
+} else {
+  cat("Skipping data retrieval from Vespadb as troubleshooting_datacleaning is set to TRUE. \n")
+  vespa_management_df <- read_csv("https://raw.githubusercontent.com/inbo/aspbo/a9c7524de8cac1e7256b9d078bbf297c10eee2d5/data/input/Vespa_management_vespadb_data.csv", col_types = c("id" = "i" , 
+                                                                                                                                                                                 "nest_status" = "c" , 
+                                                                                                                                                                                 "nest_type" = "c", 
+                                                                                                                                                                                 "observation_datetime" = "c", 
+                                                                                                                                                                                 "eradication_date" = "c", 
+                                                                                                                                                                                 "latitude" = "d", 
+                                                                                                                                                                                 "longitude" = "d", 
+                                                                                                                                                                                 "isduplicate" = "l", 
+                                                                                                                                                                                 "other_species_nest" = "l", 
+                                                                                                                                                                                 "notes" = "c", 
+                                                                                                                                                                                 "municipality_name" = "c"))
 }
 ```
 
 ```{r clean data}
-table()
+table(vespa_management_df$isduplicate, useNA = "ifany")
+table(vespa_management_df$nest_status, useNA = "ifany")
+table(vespa_management_df$nest_type, useNA = "ifany")
 
-vespa_management <- vespa_management_df %>% 
-  
-```
-
-```{r checks}
+vespa_management <- vespa_management_df
 
 ```
 
+```{r checks using testthat}
+# Check for duplicates based on id
+test_that("No duplicate IDs in vespa_management", {
+  expect_equal(nrow(vespa_management), nrow(distinct(vespa_management, id)))
+})
+```
 
 ```{r export to csv}
 write_csv(vespa_management, "./data/input/Vespa_management_vespadb_data.csv")
