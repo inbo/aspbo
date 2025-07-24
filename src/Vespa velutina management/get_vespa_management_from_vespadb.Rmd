@@ -7,6 +7,7 @@ output: html_document
 
 ```{r libraries}
 library(testthat)
+library(sf)
 library(tidyverse)
 library(httr)
 ```
@@ -131,9 +132,29 @@ if(!troubleshooting_datacleaning){
 table(vespa_management_df$isduplicate, useNA = "ifany")
 table(vespa_management_df$nest_status, useNA = "ifany")
 table(vespa_management_df$nest_type, useNA = "ifany")
+table(vespa_management_df$other_species_nest, useNA = "ifany")
+table(vespa_management_df$notes, useNA = "ifany")
 
-vespa_management <- vespa_management_df
+vespa_management <- vespa_management_df %>% 
+  filter(!isduplicate | is.na(isduplicate),
+         !other_species_nest | is.na(other_species_nest)) %>% 
+  mutate(observation_datetime = as_datetime(observation_datetime),
+         eradication_date = as_date(eradication_date),
+         observation_date = format(observation_datetime, "%Y-%m-%d"))
+```
 
+```{r complete munipalities}
+vespa_management_missing_muni <- vespa_management %>% 
+  filter(is.na(municipality_name))
+
+if(nrow(vespa_management_missing_muni) > 0 ){
+  cat("There are", nrow(vespa_management_missing_muni), "nests missing a muncipalities => trying to complete")
+  
+  
+}
+
+vespa_management_with_muni <- vespa_management %>% 
+  filter(!is.na(municipality_name))
 ```
 
 ```{r checks using testthat}
