@@ -22,28 +22,68 @@ if(Sys.getenv("amiabot") != "yes"){
 }
 ```
 
-
-
 ```{r read sheets}
 catch_data_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
                              sheet = "catch data")
 
 species_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
-                             sheet = "LEGEND_species_code")
+                          sheet = "LEGEND_species_code")
 
 locations_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
-                             sheet = "LEGEND_locationID")
+                            sheet = "LEGEND_locationID")
 ```
 
 ```{r prep species}
-species_names <- species_raw %>%
-  distinct(species)
+species <- species_raw %>%
+  mutate(species = case_match(species,
+                              "Pelophylax species" ~ "Pelophylax",
+                              "Lissotriton species" ~ "Lissotriton",
+                              "Pseudorasboras parva" ~ "Pseudorasbora parva",
+                              .default = species))
+
+species_names <- species %>%
+  distinct(species) %>%
+  pull()
+
+remove(species_codes)
+
+# Create a data.frame with species names & gbif codes retrieved using rgbif::name_usage 
+for(s in species_names){
+  species_code <- rgbif::name_usage(name = s)$data %>%
+    filter(taxonomicStatus == "ACCEPTED",
+           !is.na(nubKey)) %>%
+    group_by(nubKey, canonicalName) %>% 
+    summarise(n = n()) %>% 
+    filter(n == max(n, na.rm = TRUE)) %>%  # filter the most common nubKey & canonicalName
+    distinct(nubKey, canonicalName) 
+  
+  if(nrow(species_code) > 1){
+    cat("Multiple species codes found for", s, "\n, 
+        => taking the first one\n")
+    species_code <- species_code %>% 
+      first()
+  }
+  
+  if(!exists("species_codes")){
+    species_codes <- species_code
+  }else{
+    species_codes <- bind_rows(species_codes, species_code)
+  }
+}
+
+species <- species %>% 
+  left_join(species_codes, by = c("species" = "canonicalName")) %>%
+  select(species, species_code, nubKey) %>% 
+  distinct()
 ```
 
+```{r}
+
+```
 
 ```{r datacleaning}
 catch_data <- catch_data_raw %>%
   
-```
+  ```
 
 
