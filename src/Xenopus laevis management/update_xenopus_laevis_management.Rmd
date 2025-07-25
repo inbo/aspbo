@@ -1,0 +1,49 @@
+---
+title: "update_xenopus_laevis_management"
+author: "Sander Devisscher"
+date: "2025-07-25"
+output: html_document
+---
+
+```{r libraries}
+library(rgbif)
+library(googlesheets4)
+library(tidyverse)
+```
+
+```{r auth}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is not a bot")
+  email <- paste0(Sys.getenv("email"), "@inbo.be")
+  gs4_auth(email)
+}else{
+  print("Executor of the script is a bot")
+  gs4_auth(path = Sys.getenv("gsheet_token"))
+}
+```
+
+
+
+```{r read sheets}
+catch_data_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
+                             sheet = "catch data")
+
+species_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
+                             sheet = "LEGEND_species_code")
+
+locations_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
+                             sheet = "LEGEND_locationID")
+```
+
+```{r prep species}
+species_names <- species_raw %>%
+  distinct(species)
+```
+
+
+```{r datacleaning}
+catch_data <- catch_data_raw %>%
+  
+```
+
+
