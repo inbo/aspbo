@@ -145,6 +145,8 @@ test_that("A new rank was detected in GRIIS checklist", {
       filter(rank == missing) %>% 
       distinct(nubKey) %>% 
       pull()
+  }else{
+    new_rank_taxa <- c("")
   }
   
   expect(length(missing) == 0, sprintf("New rank: %s \n containing the following taxa: \n-%s \n
