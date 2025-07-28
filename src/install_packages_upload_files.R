@@ -12,3 +12,10 @@ if (!all(required %in% installed)) {
   print(paste("Packages to install:", paste(pkgs_to_install, collapse = ", ")))
   install.packages(pkgs_to_install)
 }
+
+# Test if minimum version of aws.s3 is installed
+if (packageVersion("aws.s3") < "0.3.22") {
+  stop("Please update aws.s3 to version 0.3.21 or higher.")
+}else{
+  cat("aws.s3 version:", paste(unlist(packageVersion("aws.s3")), collapse = "."), "\n")
+}
