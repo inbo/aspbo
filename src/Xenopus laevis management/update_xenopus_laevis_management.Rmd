@@ -37,6 +37,8 @@ locations_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
 ```{r explore datasets, eval=FALSE}
 library(GWalkR)
 GWalkR::gwalkr(catch_data_raw)
+GWalkR::gwalkr(locations_raw)
+GWalkR::gwalkr(species_raw)
 ```
 
 ```{r prep species}
@@ -85,7 +87,6 @@ species <- species %>%
 
 ```{r}
 locations <- locations_raw %>%
-  st_as_sf(coords = c("long_X", "lat_Y"), crs = 4326)
 ```
 
 ```{r datacleaning}
