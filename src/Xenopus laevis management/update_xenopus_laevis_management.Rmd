@@ -34,6 +34,11 @@ locations_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
                             sheet = "LEGEND_locationID")
 ```
 
+```{r explore datasets, eval=FALSE}
+library(GWalkR)
+GWalkR::gwalkr(catch_data_raw)
+```
+
 ```{r prep species}
 species <- species_raw %>%
   mutate(species = case_match(species,
@@ -85,7 +90,6 @@ locations <- locations_raw %>%
 
 ```{r datacleaning}
 catch_data <- catch_data_raw %>%
-  
-  ```
+```
 
 
