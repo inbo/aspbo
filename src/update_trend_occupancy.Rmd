@@ -1,0 +1,38 @@
+---
+title: "update_trendOccupancy"
+author: "Sander Devisscher"
+date: "2025-07-30"
+output: html_document
+---
+
+Trendoccupancy or the evolution of union concern species according to the 
+National secretariat of invasive alien species (NSIAS) to the European Union 
+via the EASIN reporting tool. 
+This evolution consists the number of 10x10km squares infected by a species at 
+the moment of inclusion onto the list (t0) compared to the status at the moment of 
+a 6y reporting cycle (tx).
+
+```{r libraries}
+
+```
+
+```{r download zenodo files}
+
+```
+
+```{r connect to the bucket}
+
+```
+
+```{r get keys}
+
+```
+
+```{r check & correct species}
+
+```
+
+```{r export files}
+
+```
+
