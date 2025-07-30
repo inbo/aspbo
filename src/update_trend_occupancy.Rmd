@@ -77,6 +77,8 @@ for(x in tx){
       rename("Species" = "species")
   }
   
+  tx_file$source <- x
+  
   assign(paste0(x, "_raw"), tx_file)
 }
 ```
@@ -110,7 +112,8 @@ t0_cleaned <- t0_raw %>%
   filter(!is.na(Species)) %>% 
   mutate(Species = case_match(Species, 
                               "Orconectes limosus" ~ "Faxonius limosus",
-                              .default = Species))
+                              .default = Species)) %>% 
+  select(species = Species, source, cell_code10 = Cellcode)
 
 t0_species_not_keys <- t0_cleaned %>% 
   filter(Accepted != "N") %>% 
@@ -135,7 +138,9 @@ t1_cleaned <- t1_raw %>%
   mutate(Species = paste(head(strsplit(Species, " ")[[1]], 2), collapse = " ")) %>% 
   mutate(Species = case_match(Species, 
                               "voorbeeld fout" ~ "voorbeeld correctie",
-                              .default = Species))
+                              .default = Species)) %>% 
+  as.data.frame() %>% 
+  select(species = Species, source, cell_code10 = Cellcode)
 
 t1_species_not_keys <- t1_cleaned %>% 
   filter(!Species %in% keys$scientificName) %>% 
@@ -150,8 +155,11 @@ test_that("t1_species_not_keys should have length 0", {
 })
 ```
 
+```{r combine tx}
+trendOccupancy_belgium <- 
+```
+
 ```{r export files}
-st_write(t0_cleaned, "./data/output/UAT_processing/trendOccupancy/t0_belgium.geojson", append = FALSE)
-st_write(t1_cleaned, "./data/output/UAT_processing/trendOccupancy/t1_belgium.geojson", append = FALSE)
+write_csv(t0_cleaned, "./data/output/UAT_processing/trendOccupancy/trendOccupancy_belgium.csv")
 ```
 
