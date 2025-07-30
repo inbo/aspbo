@@ -13,11 +13,71 @@ the moment of inclusion onto the list (t0) compared to the status at the moment 
 a 6y reporting cycle (tx).
 
 ```{r libraries}
-
+library(dplyr)
+library(magrittr)
+library(sf)
 ```
 
 ```{r download zenodo files}
+t0_url <- "https://zenodo.org/api/records/7708520/files-archive"
+t0_files <- c("ias_belgium_t0_2016.geojson", 
+              "ias_belgium_t0_2018.geojson", 
+              "ias_belgium_t0_2020.geojson", 
+              "ias_belgium_t0_2023.geojson")
+t1_url <- "https://zenodo.org/api/records/3060173/files-archive"
+t1_files <- c("T1_Belgium_Union_List_Species.shp")
+t2_url <- ""
 
+tx <- c("t0", "t1")
+
+for(x in tx){
+  destfile <- paste0(tempdir(), "/", x, ".zip")
+  url <- get(paste0(x, "_url"))
+  tx_files <- get(paste0(x, "_files"))
+  exdir <- paste0(tempdir(), "/", x, "/")
+  
+  download.file(url, destfile, mode = "wb")
+  unzip(destfile, exdir = exdir)
+  
+  tx_file <- data.frame()
+  
+  for(f in tx_files){
+    temp <- sf::st_read(paste0(exdir, f))
+    
+    if("REFERENCE_" %in% colnames(temp)){
+      temp <- temp %>% 
+        rename("Reference" = "REFERENCE_")
+    }
+    
+    if("REFERENCE" %in% colnames(temp)){
+      temp <- temp %>% 
+        rename("Reference" = "REFERENCE")
+    }
+    
+    if("DATA_PARTN" %in% colnames(temp)){
+      temp <- temp %>% 
+        rename("Data_Partn" = "DATA_PARTN")
+    }
+    
+    if("CellCode" %in% colnames(temp)){
+       temp <- temp %>% 
+        rename("Cellcode" = "CellCode")
+    }
+    
+    if(nrow(tx_file) == 0){
+      tx_file <- temp
+    }else{
+      tx_file <- rbind(tx_file, temp)
+    }
+  }
+  
+  if("species" %in% colnames(tx_file)){
+    tx_file <- tx_file %>% 
+      rename("Species" = "species")
+  }
+  
+  assign(paste0(x, "_raw"), tx_file)
+}
 ```
 
 ```{r connect to the bucket}
