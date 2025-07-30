@@ -16,6 +16,7 @@ a 6y reporting cycle (tx).
 library(dplyr)
 library(magrittr)
 library(sf)
+library(testthat)
 ```
 
 ```{r download zenodo files}
@@ -102,11 +103,55 @@ if(Sys.getenv("amiabot") != "yes"){
 keys <- alienSpecies::loadMetaData(type = "keys")
 ```
 
-```{r check & correct species}
+```{r T0: check & correct species}
+table(t0_raw$Species, useNA = "ifany")
 
+t0_cleaned <- t0_raw %>% 
+  filter(!is.na(Species)) %>% 
+  mutate(Species = case_match(Species, 
+                              "Orconectes limosus" ~ "Faxonius limosus",
+                              .default = Species))
+
+t0_species_not_keys <- t0_cleaned %>% 
+  filter(Accepted != "N") %>% 
+  filter(!Species %in% keys$scientificName) %>% 
+  distinct(Species) %>% 
+  pull()
+
+test_that("t0_species_not_keys should have length 0", {
+  if (length(t0_species_not_keys) != 0) {
+    print(t0_species_not_keys)
+  }
+  expect_length(t0_species_not_keys, 0)
+})
+```
+
+```{r T1: check & correct species}
+table(t1_raw$Species, useNA = "ifany")
+
+t1_cleaned <- t1_raw %>% 
+  filter(!is.na(Species)) %>% 
+  mutate(Species = gsub("\\s*\\([^\\)]+\\)", "", Species)) %>% 
+  mutate(Species = paste(head(strsplit(Species, " ")[[1]], 2), collapse = " ")) %>% 
+  mutate(Species = case_match(Species, 
+                              "voorbeeld fout" ~ "voorbeeld correctie",
+                              .default = Species))
+
+t1_species_not_keys <- t1_cleaned %>% 
+  filter(!Species %in% keys$scientificName) %>% 
+  distinct(Species) %>% 
+  pull()
+
+test_that("t1_species_not_keys should have length 0", {
+  if (length(t1_species_not_keys) != 0) {
+    print(t1_species_not_keys)
+  }
+  expect_length(t1_species_not_keys, 0)
+})
 ```
 
 ```{r export files}
-
+st_write(t0_cleaned, "./data/output/UAT_processing/trendOccupancy/t0_belgium.geojson", append = FALSE)
+st_write(t1_cleaned, "./data/output/UAT_processing/trendOccupancy/t1_belgium.geojson", append = FALSE)
 ```
 
