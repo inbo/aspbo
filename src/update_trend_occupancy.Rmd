@@ -80,12 +80,26 @@ for(x in tx){
 }
 ```
 
-```{r connect to the bucket}
+```{r set creds}
+Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
 
+if(Sys.getenv("S3_BUCKET") != ""){
+  UAT_bucket <- Sys.getenv("S3_BUCKET")
+}else{
+  UAT_bucket <- Sys.getenv("UAT_bucket")
+}
+```
+
+```{r connect to the bucket}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket")
+  source("./src/connect_to_bucket.R")
+  connect_to_bucket(bucket_name = UAT_bucket)
+}
 ```
 
 ```{r get keys}
-
+keys <- alienSpecies::loadMetaData(type = "keys")
 ```
 
 ```{r check & correct species}
