@@ -17,6 +17,7 @@ library(dplyr)
 library(magrittr)
 library(sf)
 library(testthat)
+library(readr)
 ```
 
 ```{r download zenodo files}
@@ -112,14 +113,18 @@ t0_cleaned <- t0_raw %>%
   filter(!is.na(Species)) %>% 
   mutate(Species = case_match(Species, 
                               "Orconectes limosus" ~ "Faxonius limosus",
-                              .default = Species)) %>% 
-  select(species = Species, source, cell_code10 = Cellcode)
+                              .default = Species)) 
 
 t0_species_not_keys <- t0_cleaned %>% 
   filter(Accepted != "N") %>% 
   filter(!Species %in% keys$scientificName) %>% 
   distinct(Species) %>% 
   pull()
+
+t0_cleaned <- t0_cleaned %>% 
+  as.data.frame() %>% 
+  select(species = Species, source, cell_code10 = Cellcode)
+  
 
 test_that("t0_species_not_keys should have length 0", {
   if (length(t0_species_not_keys) != 0) {
@@ -138,14 +143,16 @@ t1_cleaned <- t1_raw %>%
   mutate(Species = paste(head(strsplit(Species, " ")[[1]], 2), collapse = " ")) %>% 
   mutate(Species = case_match(Species, 
                               "voorbeeld fout" ~ "voorbeeld correctie",
-                              .default = Species)) %>% 
-  as.data.frame() %>% 
-  select(species = Species, source, cell_code10 = Cellcode)
+                              .default = Species)) 
 
 t1_species_not_keys <- t1_cleaned %>% 
   filter(!Species %in% keys$scientificName) %>% 
   distinct(Species) %>% 
   pull()
+
+t1_cleaned <- t1_cleaned %>% 
+  as.data.frame() %>% 
+  select(species = Species, source, cell_code10 = Cellcode)
 
 test_that("t1_species_not_keys should have length 0", {
   if (length(t1_species_not_keys) != 0) {
@@ -156,7 +163,7 @@ test_that("t1_species_not_keys should have length 0", {
 ```
 
 ```{r combine tx}
-trendOccupancy_belgium <- 
+trendOccupancy_belgium <- rbind(t0_cleaned, t1_cleaned)
 ```
 
 ```{r export files}
