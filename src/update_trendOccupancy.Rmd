@@ -16,6 +16,7 @@ a 6y reporting cycle (tx).
 library(dplyr)
 library(magrittr)
 library(testthat)
+library(sf)
 library(readr)
 ```
 
