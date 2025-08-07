@@ -160,19 +160,19 @@ test_that("All locationIDs from locations_raw are present in locations_final", {
   # Ensure data frames exist
   expect_true(exists("locations_raw"), info = "locations_raw does not exist")
   expect_true(exists("locations_final"), info = "locations_final does not exist")
-
+  
   # Gather unique locationIDs
   locationIDs_raw <- unique(locations_raw$locationID)
   locationIDs_final <- unique(locations_final$locationID)
-
+  
   # Find missing locationIDs
   missing_locationIDs <- setdiff(locationIDs_raw, locationIDs_final)
-
+  
   # If any are missing, show them
   if (length(missing_locationIDs) > 0) {
     message("Missing locationIDs from locations_final: ", paste(missing_locationIDs, collapse = ", "))
   }
-
+  
   # Test passes only if no locationIDs are missing
   expect_equal(
     length(missing_locationIDs), 0, 
@@ -192,6 +192,42 @@ leaflet(locations) %>%
 
 ```{r datacleaning}
 catch_data <- catch_data_raw %>%
-```
+  filter(!is.na(locationID)) %>% 
+  left_join(species, by = "species_code") %>% 
+  left_join(locations_final, by = "locationID") %>% 
+  mutate(eventID = gsub(pattern = " ", replacement = "_",
+                        x = paste(locationID, date_setup, date_retrieval, sep = "_"))) %>% 
+  mutate(Jaar = format(date_setup, "%Y"))
+
+events <- catch_data %>% 
+  group_by(locationID, date_setup, date_retrieval) %>% 
+  summarise(period = as.integer(date_retrieval - date_setup),
+            n_fykes = n_distinct(fyke_nr),
+            effort = n_fykes * period) %>% 
+  ungroup() %>% 
+  mutate(eventID = gsub(pattern = " ", replacement = "_",
+                        x = paste(locationID, date_setup, date_retrieval, sep = "_"))) %>% 
+  distinct(eventID, period, n_fykes, effort) 
+
+table(catch_data$lifeStage, useNA = "ifany")
+
+# For default asp graphs with ID, year, individualCount, lifestage, eventID, locationID, gemeente, provincie, n_fuiken & gewest
+# indivudual count is summed per event and the max of n_fuiken is used.
+catch_data_results <- catch_data %>% 
+  left_join(events, by = "eventID") %>% 
+  group_by(eventID, locationID, lat_Y_decimal, long_X_decimal, lifeStage, Jaar, species, gemeente, provincie, gewest) %>% 
+  summarise(individualCount = sum(individualCount, na.rm = TRUE),
+            no_fuiken = max(effort, na.rm = TRUE)) %>% 
+  filter(species == "Xenopus laevis") %>% 
+  mutate(lifeStage = case_when(lifeStage %in% c("Larve", "larve") ~ "larvae",
+                               is.na(lifeStage) ~ "unknown",
+                               TRUE ~ lifeStage))
+
+table(catch_data_results$lifeStage, useNA = "ifany")
+
+# For additional asp graphs we need per individual Xenopus laevis the following: sex, svl, biomass, eventID, locationID, gemeente, provincie # & gewest 
+catch_data_ecology <- catch_data %>% 
+  
+  ```
 
 
