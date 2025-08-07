@@ -9,7 +9,9 @@ output: html_document
 library(rgbif)
 library(sf)
 library(googlesheets4)
-library(tidyverse)
+library(fistools)
+library(dplyr)
+library(testthat)
 ```
 
 ```{r auth}
@@ -57,7 +59,7 @@ remove(species_codes)
 
 # Create a data.frame with species names & gbif codes retrieved using rgbif::name_usage 
 for(s in species_names){
-  species_code <- rgbif::name_usage(name = s)$data %>%
+  species_code <- name_usage(name = s)$data %>%
     filter(taxonomicStatus == "ACCEPTED",
            !is.na(nubKey)) %>%
     group_by(nubKey, canonicalName) %>% 
@@ -85,8 +87,105 @@ species <- species %>%
   distinct()
 ```
 
-```{r}
+```{r prep locations}
+# Convert to sf
 locations <- locations_raw %>%
+  dms_column_to_decimal(c("lat_Y", "long_X")) %>% 
+  st_as_sf(coords = c("long_X_decimal", "lat_Y_decimal"),
+           crs = 4326,
+           remove = FALSE)
+
+# Add gewest
+gemeentes <- st_read("./data/output/UAT_processing/communes.geojson") %>% 
+  select(gemeente_shape = NAAM,
+         gewest_gem = GEWEST)
+provincies <- st_read("./data/output/UAT_processing/provinces.geojson") %>% 
+  select(provincie_shape = NAAM,
+         gewest_prov = GEWEST)
+
+locs_gem <- st_intersection(locations, gemeentes) %>% 
+  as.data.frame() %>% 
+  select(locationID, gemeente_shape, gewest_gem)
+locs_prov <- st_intersection(locations, provincies)  %>% 
+  as.data.frame() %>% 
+  select(locationID, provincie_shape, gewest_prov)
+
+locations <- locations %>% 
+  left_join(locs_gem, by = "locationID") %>% 
+  left_join(locs_prov, by = "locationID") %>% 
+  mutate(gemeente = coalesce(gemeente, gemeente_shape),
+         provincie = coalesce(provincie, provincie_shape),
+         gewest = coalesce(gewest_gem, gewest_prov)) %>% 
+  group_by(locationID) %>% 
+  add_tally() %>% 
+  ungroup()
+
+locations_uniek <- locations %>% 
+  filter(n == 1)
+
+locations_dupli <- locations %>% 
+  filter(n > 1) 
+
+locations_dupli_redux <- locations_dupli %>% 
+  filter(gemeente == "Komen-Waasten" & provincie == "Henegouwen") 
+
+locations_dupli_remaining <- locations_dupli %>% 
+  filter(!locationID %in% locations_dupli_redux$locationID)
+
+test_that("No gemeente-provincie combinations left in locations_dupli_remaining", {
+  # Check if locations_dupli_remaining exists
+  expect_true(exists("locations_dupli_remaining"), info = "locations_dupli_remaining data frame does not exist")
+  
+  # Select distinct combinations
+  unique_combos <- locations_dupli_remaining %>%
+    distinct(gemeente, provincie)
+  
+  n_left <- nrow(unique_combos)
+  
+  # Display remaining combinations if any
+  if (n_left > 0) {
+    print("Remaining (gemeente, provincie) combinations:")
+    print(unique_combos)
+  }
+  
+  expect_equal(n_left, 0, info = "There are gemeente-provincie combinations left in locations_dupli_remaining")
+})
+
+locations_final <- rbind(locations_uniek, locations_dupli_redux) %>% 
+  select(locationID, surface = `surface (m²)`, lat_Y_decimal, long_X_decimal, gemeente, provincie, gewest, geometry)
+
+test_that("All locationIDs from locations_raw are present in locations_final", {
+  # Ensure data frames exist
+  expect_true(exists("locations_raw"), info = "locations_raw does not exist")
+  expect_true(exists("locations_final"), info = "locations_final does not exist")
+
+  # Gather unique locationIDs
+  locationIDs_raw <- unique(locations_raw$locationID)
+  locationIDs_final <- unique(locations_final$locationID)
+
+  # Find missing locationIDs
+  missing_locationIDs <- setdiff(locationIDs_raw, locationIDs_final)
+
+  # If any are missing, show them
+  if (length(missing_locationIDs) > 0) {
+    message("Missing locationIDs from locations_final: ", paste(missing_locationIDs, collapse = ", "))
+  }
+
+  # Test passes only if no locationIDs are missing
+  expect_equal(
+    length(missing_locationIDs), 0, 
+    info = paste("The following locationIDs from locations_raw are missing in locations_final:", 
+                 paste(missing_locationIDs, collapse = ", "))
+  )
+})
+```
+
+```{r test locations, eval = FALSE}
+library(leaflet)
+
+leaflet(locations) %>% 
+  addTiles() %>% 
+  addCircles()
 ```
 
 ```{r datacleaning}
