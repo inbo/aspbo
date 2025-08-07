@@ -146,6 +146,8 @@ test_that("No gemeente-provincie combinations left in locations_dupli_remaining"
   if (n_left > 0) {
     print("Remaining (gemeente, provincie) combinations:")
     print(unique_combos)
+    
+    cat("Add the correct combination to the code @ line 130 as in the example `filter(gemeente == 'Komen-Waasten' & provincie == 'Henegouwen')`")
   }
   
   expect_equal(n_left, 0, info = "There are gemeente-provincie combinations left in locations_dupli_remaining")
