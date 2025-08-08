@@ -245,4 +245,119 @@ test_that("There are more individuals in the final data than at the source", {
 })
 ```
 
+```{r folder paths}
+interim_folder <- "./data/interim/Xenopus_laevis_management/"
+output_folder <- "./data/output/UAT_direct/"
+```
 
+```{r plot: catch per year}
+catch_per_year <- ggplot(catch_data_results, aes(x = factor(Jaar), y = individualCount, fill = lifeStage)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(x = "Year", y = "Catch", fill = "Lifestage") +
+  theme_minimal() +
+  facet_wrap(~provincie)
+
+catch_per_year
+
+ggsave(plot = catch_per_year,
+       filename = paste0(interim_folder, "catch_per_year.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: svl_cm v biomass per sex}
+svl_cm_v_biomass <- ggplot(catch_data_ecology, aes(x = svl_cm, y = biomass_g, color = as.factor(sex))) +
+  geom_point() +
+  labs(x = "Snout vent length (cm)", y = "Biomass (g)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage)
+
+svl_cm_v_biomass
+
+ggsave(plot = svl_cm_v_biomass,
+       filename = paste0(interim_folder, "svl_cm_v_biomass.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: trend svl}
+trend_svl <- catch_data_ecology %>%
+  mutate(year_month = format(date_setup, "%Y-%m")) %>% 
+  ggplot(aes(x = factor(year_month), y = svl_cm, color = as.factor(sex))) +
+  geom_boxplot() +
+  labs(x = "Date", y = "Snout vent length (cm)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+trend_svl
+
+ggsave(plot = trend_svl,
+       filename = paste0(interim_folder, "trend_svl.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: trend_svl_points_smooth}
+trend_svl_points_smooth <- catch_data_ecology %>%
+  mutate(date_setup = as.Date(date_setup)) %>% 
+  ggplot(aes(x = date_setup, y = svl_cm, color = as.factor(sex), group = as.factor(sex))) + 
+  geom_point() +                              # scatter points
+  geom_smooth(method = "lm", se = TRUE) + # smooth trendline per sex
+  labs(x = "Date", y = "Snout vent length (cm)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%Y-%m") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+trend_svl_points_smooth
+
+ggsave(plot = trend_svl_points_smooth,
+       filename = paste0(interim_folder, "trend_svl_points_smooth.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: trend biomass}
+trend_biomass <- catch_data_ecology %>%
+  mutate(year_month = format(date_setup, "%Y-%m")) %>% 
+  ggplot(aes(x = factor(year_month), y = biomass_g, color = as.factor(sex))) +
+  geom_boxplot() +
+  labs(x = "Date", y = "Biomass (g)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+trend_biomass
+
+ggsave(plot = trend_biomass,
+       filename = paste0(interim_folder, "trend_biomass.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: trend_svl_points_smooth}
+trend_biomass_points_smooth <- catch_data_ecology %>%
+  mutate(date_setup = as.Date(date_setup)) %>% 
+  ggplot(aes(x = date_setup, y = biomass_g, color = as.factor(sex), group = as.factor(sex))) + 
+  geom_point() +                              # scatter points
+  geom_smooth(method = "lm", se = TRUE) + # smooth trendline per sex
+  labs(x = "Date", y = "Biomass (g)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%Y-%m") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+trend_biomass_points_smooth
+
+ggsave(plot = trend_biomass_points_smooth,
+       filename = paste0(interim_folder, "trend_biomass_points_smooth.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
