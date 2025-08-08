@@ -11,6 +11,8 @@ library(sf)
 library(googlesheets4)
 library(fistools)
 library(dplyr)
+library(tidyr)
+library(ggplot2)
 library(testthat)
 ```
 
@@ -221,13 +223,26 @@ catch_data_results <- catch_data %>%
   filter(species == "Xenopus laevis") %>% 
   mutate(lifeStage = case_when(lifeStage %in% c("Larve", "larve") ~ "larvae",
                                is.na(lifeStage) ~ "unknown",
-                               TRUE ~ lifeStage))
+                               TRUE ~ lifeStage)) %>% 
+  rename(year = Jaar,
+         n_fuiken = no_fuiken)
 
 table(catch_data_results$lifeStage, useNA = "ifany")
 
 # For additional asp graphs we need per individual Xenopus laevis the following: sex, svl, biomass, eventID, locationID, gemeente, provincie # & gewest 
-catch_data_ecology <- catch_data %>% 
-  
-  ```
+catch_data_ecology_int <- catch_data %>% 
+  filter(species == "Xenopus laevis") 
+
+# Create a row per individual
+catch_data_ecology <- catch_data_ecology_int %>% 
+  uncount(weights = individualCount) %>%
+  group_by(across(-srt)) %>%  # group by all columns except srt
+  mutate(srt = paste(srt, row_number(), sep = "-")) %>%
+  ungroup()
+
+test_that("There are more individuals in the final data than at the source", {
+  expect_equal(sum(catch_data_ecology_int$individualCount, na.rm = TRUE), nrow(catch_data_ecology))
+})
+```
 
 
