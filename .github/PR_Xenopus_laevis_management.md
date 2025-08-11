@@ -13,19 +13,15 @@ and executed by `./src/update_xenopus_laevis_management.rmd`.
 This script is wrapped by `./src/run_xenopus_laevis_management.R` and assisted by 
 `./src/install_packages_xenopus.R`. 
 
-```{r}
-base_image_url <- paste0('https://github.com/inbo/aspbo/blob/', Sys.getenv("GITHUB_HEAD_REF"), '/data/interim/Xenopus_laevis_management/')
+### !!Before approving this PR please check the following graphs!!
+_They can be found in `./data/interim/Xenopus_laevis_management`_
 
-cat(paste0(
-"The following information is present in the data that will be uploaded when this \n",
-"PR is approved, using ./.github/workflows/upload_files_direct.yaml\n\n",
-"The catch per year split per lifeStage:\n",
-"![catch_per_year](", base_image_url, "catch_per_year.png)\n\n",
-"The relationship between svl & biomass per sex & lifeStage: \n",
-"![svl_cm_v_biomass](", base_image_url, "svl_cm_v_biomass.png)\n\n",
-"The trend in svl "
-))
-```
+- catch_per_year: the total number of indiviuals caught per year per lifestage
+- svl_cm_v_biomass: the relation between svl and biomass per lifestage
+- trend_svl: a boxplot graph displaying the trend in svl
+- trend_svl_points_smooth: the trend in svl obv een trendlijn
+- trend_biomass: a boxplot graph displaying the trend in biomass
+- trend_biomass_points_smooth: the trend in biomass obv een trendlijn
 
 Changes to the PR description can be made at `./.github/PR_Xenopus_laevis_management.md`
 
