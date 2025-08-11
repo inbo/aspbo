@@ -1,8 +1,8 @@
 # get packages installed on machine
 installed <- rownames(installed.packages())
 # specify packages we need
-required <- c("rgbif", "sf", "googlesheets4", "dplyr", "tidyr", "devtools", "readr",
-"ggplot2", "testthat"
+required <- c("rgbif", "sf", "googlesheets4", "dplyr", "tidyr", "readr",
+"ggplot2", "testthat", "pkgdown", "devtools"
 )
 # install packages if needed
 if (!all(required %in% installed)) {
