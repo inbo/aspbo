@@ -12,6 +12,7 @@ library(googlesheets4)
 library(fistools)
 library(dplyr)
 library(tidyr)
+library(readr)
 library(ggplot2)
 library(testthat)
 ```
@@ -248,6 +249,11 @@ test_that("There are more individuals in the final data than at the source", {
 ```{r folder paths}
 interim_folder <- "./data/interim/Xenopus_laevis_management/"
 output_folder <- "./data/output/UAT_direct/"
+```
+
+```{r export data}
+write_csv(catch_data_results, paste0(output_folder, "Xenopus_laevis.csv"))
+write_csv(catch_data_ecology, paste0(output_folder, "Xenopus_laevis_ecology.csv"))
 ```
 
 ```{r plot: catch per year}
