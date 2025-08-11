@@ -11,6 +11,8 @@ The alien species portal backoffice contains automated data preparation scripts 
 
 [![get_oxyura_jamaicensis_management](https://github.com/inbo/aspbo/actions/workflows/get_oxyura_jamaicensis_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_oxyura_jamaicensis_management.yaml)
 
+[![update Xenopus laevis management](https://github.com/inbo/aspbo/actions/workflows/update_Xenopus_laevis_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_Xenopus_laevis_management.yaml)
+
 ## Checklist dataflows
 [![get_griis](https://github.com/inbo/aspbo/actions/workflows/get_griis_checklist.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_griis_checklist.yaml)
 
