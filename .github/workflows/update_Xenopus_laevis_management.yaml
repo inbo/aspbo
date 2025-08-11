@@ -48,12 +48,12 @@ jobs:
 
       - name: Install R packages
         run: |
-          source("src/install_packages_Xenopus_laevis_management.R")
+          source("src/Xenopus laevis management/install_packages_Xenopus_laevis_management.R")
         shell: Rscript {0}
         
       - name: Xenopus laevis management
         run: |
-          source("src/run_Xenopus_laevis_management.R")
+          source("src/Xenopus laevis management/run_Xenopus_laevis_management.R")
         shell: Rscript {0}
 
       - name: Commit and push changes
