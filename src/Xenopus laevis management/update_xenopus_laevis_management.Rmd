@@ -257,7 +257,7 @@ write_csv(catch_data_ecology, paste0(output_folder, "Xenopus_laevis_ecology.csv"
 ```
 
 ```{r plot: catch per year}
-catch_per_year <- ggplot(catch_data_results, aes(x = factor(Jaar), y = individualCount, fill = lifeStage)) +
+catch_per_year <- ggplot(catch_data_results, aes(x = factor(year), y = individualCount, fill = lifeStage)) +
   geom_bar(stat = "identity", position = "stack") +
   labs(x = "Year", y = "Catch", fill = "Lifestage") +
   theme_minimal() +
