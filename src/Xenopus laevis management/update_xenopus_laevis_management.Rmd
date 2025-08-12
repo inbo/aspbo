@@ -347,7 +347,7 @@ ggsave(plot = trend_biomass,
        units = "px")
 ```
 
-```{r plot: trend_svl_points_smooth}
+```{r plot: trend_biomass_points_smooth}
 trend_biomass_points_smooth <- catch_data_ecology %>%
   mutate(date_setup = as.Date(date_setup)) %>% 
   ggplot(aes(x = date_setup, y = biomass_g, color = as.factor(sex), group = as.factor(sex))) + 
