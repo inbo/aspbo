@@ -1,7 +1,7 @@
 # load required packages (install them if needed)
 installed <- rownames(installed.packages())
-required <- c("devtools", "knitr", "dplyr", "magrittr", "readr", 
-              "testthat", "sf")
+required <- c("devtools", "knitr", "dplyr", "magrittr", "readr", "tidyr", 
+              "stringr", "testthat", "sf")
 if (!all(required %in% installed)) {
   install.packages(required[!required %in% installed])
 }
