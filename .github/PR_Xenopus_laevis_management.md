@@ -25,6 +25,5 @@ _They can be found in `./data/interim/Xenopus_laevis_management`_
 
 Changes to the PR description can be made at `./.github/PR_Xenopus_laevis_management.md`
 
-<sup>1</sup>Set to trigger every 30th of the month between March & November or 
-when triggered manually using workflow_dispatch.
+<sup>1</sup>Set to trigger every 1th of the month or when triggered manually using workflow_dispatch.
 
