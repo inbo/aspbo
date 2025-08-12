@@ -19,6 +19,60 @@ checklist_raw <- read_delim("data/output/UAT_processing/data_input_checklist_ind
                             trim_ws = TRUE)
 ```
 
+```{r add species level for subspecies}
+species_to_add <- checklist_raw %>% 
+  filter(rank == "SUBSPECIES") %>% 
+  distinct(key, nubKey, canonicalName) %>% 
+  separate(col = "canonicalName",
+           into = c("canonicalName_1", "canonicalName_2"),
+           sep = " ",
+           remove = FALSE,
+           extra = "drop") %>% 
+  mutate(Species = paste(canonicalName_1, canonicalName_2)) %>% 
+  filter(!Species %in% checklist_raw$canonicalName) %>% 
+  distinct(Species) %>% 
+  pull()
+
+pb <- progress_bar$new(total = length(species_to_add))
+
+species_failed <- NULL
+species_known <- c("Achillea salicifolia", "Vulpia ciliata", "Salix elaeagnos")
+
+for(s in species_to_add){
+  pb$tick()
+  temp_name_usage <- rgbif::name_usage(name = s, data = "all")$data %>% 
+    filter(taxonomicStatus == "ACCEPTED",
+           !is.na(nubKey))
+  
+  # if an entry exists on the GBIF Backbone Taxonomy use it else use another
+  temp_name_usage_backbone <- temp_name_usage %>% 
+    filter(datasetKey == "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c")
+  
+  if(nrow(temp_name_usage_backbone) == 0){
+    warning(paste(s, "cannot be found on the GBIF Backbone Taxonomy specify another source"))
+    cat("The following issues are known and a solution is pending:\n-", 
+        paste(species_known, colapse = "\n-")
+        )
+    species_failed <- c(species_failed, s)
+    next
+  }else{
+    temp_name_usage_backbone <- temp_name_usage_backbone %>% 
+      select(any_of(colnames(checklist_raw)))
+    
+    checklist_raw <- bind_rows(checklist_raw, temp_name_usage_backbone) 
+  }
+}
+
+test_that("New species cannot be found on the GBIF Backbone Taxonomy or the alternative source",{
+  missing_species <- setdiff(species_failed, species_known)
+  expect_true(
+    length(missing_species) == 0,
+    info = paste("These species are missing from species_known:",
+                 paste(missing_species, collapse = ", "))
+  )
+})
+```
+
 ```{r add vernicular names}
 taxon_keys <- unique(checklist_raw$nubKey)
 
