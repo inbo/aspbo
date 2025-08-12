@@ -18,6 +18,8 @@ library(magrittr)
 library(testthat)
 library(sf)
 library(readr)
+library(stringr)
+library(tidyr)
 ```
 
 ```{r download zenodo files}
@@ -45,6 +47,21 @@ for(x in tx){
   
   for(f in tx_files){
     temp <- sf::st_read(paste0(exdir, f))
+    
+    # Determine period
+    if(x == "t0"){
+      period  <- paste("2000-", str_extract(f, "\\d{4}"))
+    }else{
+      if(x == "t1"){
+        period <- "2015-2018"
+      }
+      if(!x %in% c("t0", "t1")){
+        stop(paste("Set the period for", x))
+      }
+    }
+    
+    # add period
+    temp$period <- period
     
     if("REFERENCE_" %in% colnames(temp)){
       temp <- temp %>% 
@@ -82,6 +99,8 @@ for(x in tx){
   
   assign(paste0(x, "_raw"), tx_file)
 }
+
+table(t0_raw$period)
 ```
 
 ```{r set creds}
@@ -123,7 +142,8 @@ t0_species_not_keys <- t0_cleaned %>%
 
 t0_cleaned <- t0_cleaned %>% 
   as.data.frame() %>% 
-  select(species = Species, source, cell_code10 = Cellcode)
+  filter(Accepted != "N") %>% # Filter rejected squares
+  select(species = Species, source, cell_code10 = Cellcode, period)
   
 
 test_that("t0_species_not_keys should have length 0", {
@@ -140,10 +160,18 @@ table(t1_raw$Species, useNA = "ifany")
 t1_cleaned <- t1_raw %>% 
   filter(!is.na(Species)) %>% 
   mutate(Species = gsub("\\s*\\([^\\)]+\\)", "", Species)) %>% 
-  mutate(Species = paste(head(strsplit(Species, " ")[[1]], 2), collapse = " ")) %>% 
+  separate(col = "Species",
+           into = c("Species_1", "Species_2"),
+           sep = " ",
+           remove = TRUE,
+           extra = "drop") %>% 
+  mutate(Species = paste(Species_1, Species_2)) %>% 
   mutate(Species = case_match(Species, 
-                              "voorbeeld fout" ~ "voorbeeld correctie",
+                              "Orconectes limosus" ~ "Faxonius limosus",
+                              "Trachemys Agassiz," ~ "Trachemys scripta",
                               .default = Species)) 
+
+table(t1_cleaned$Species, useNA = "ifany")
 
 t1_species_not_keys <- t1_cleaned %>% 
   filter(!Species %in% keys$scientificName) %>% 
@@ -152,7 +180,7 @@ t1_species_not_keys <- t1_cleaned %>%
 
 t1_cleaned <- t1_cleaned %>% 
   as.data.frame() %>% 
-  select(species = Species, source, cell_code10 = Cellcode)
+  select(species = Species, source, cell_code10 = Cellcode, period)
 
 test_that("t1_species_not_keys should have length 0", {
   if (length(t1_species_not_keys) != 0) {
@@ -164,9 +192,11 @@ test_that("t1_species_not_keys should have length 0", {
 
 ```{r combine tx}
 trendOccupancy_belgium <- rbind(t0_cleaned, t1_cleaned)
+
+table(trendOccupancy_belgium$species, trendOccupancy_belgium$period, useNA = "ifany")
 ```
 
 ```{r export files}
-write_csv(t0_cleaned, "./data/output/UAT_processing/trendOccupancy/trendOccupancy_belgium.csv")
+write_csv(trendOccupancy_belgium, "./data/output/UAT_processing/trendOccupancy/trendOccupancy_belgium.csv")
 ```
 
