@@ -78,6 +78,6 @@ jobs:
           target_branch: uat
           title: "[AUTO] update Xenopus laevis management"
           template: .github/PR_Xenopus_laevis_management.md
-          reviewer: [SanderDevisscher, maudsegal, soriadelva]
+          reviewer: SanderDevisscher, maudsegal, soriadelva
           label: automated workflow
           get_diff: false
