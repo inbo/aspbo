@@ -5,7 +5,7 @@ date: "2025-07-30"
 output: html_document
 ---
 
-Trendoccupancy or the evolution of union concern species according to the 
+Trend occupancy or the evolution of union concern species according to the 
 National secretariat of invasive alien species (NSIAS) to the European Union 
 via the EASIN reporting tool. 
 This evolution consists the number of 10x10km squares infected by a species at 
