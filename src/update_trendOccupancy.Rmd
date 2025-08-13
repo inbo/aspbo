@@ -30,7 +30,7 @@ t0_files <- c("ias_belgium_t0_2016.geojson",
               "ias_belgium_t0_2023.geojson")
 t1_url <- "https://zenodo.org/api/records/3060173/files-archive"
 t1_files <- c("T1_Belgium_Union_List_Species.shp")
-t2_url <- ""
+t2_url <- "" #Placeholder future t2 url. Also add 't2' to 'tx' & add a period for 't2'
 
 tx <- c("t0", "t1")
 
