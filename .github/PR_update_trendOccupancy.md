@@ -8,7 +8,7 @@ The following steps are all automatically performed:
 - export as `./data/output/UAT_processing/trendOccupancy/trendOccupancy_belgium.csv`
 
 All the steps above are triggered by `./.github/workflows/update_trendOccupancy.yaml`<sup>1</sup>
-and executed by `./src/update_trendOccupancy.rmd`. 
+and executed by `./src/update_trendOccupancy.Rmd`. 
 This script is wrapped by `./src/run_update_trendOccupancy.R` and assisted by 
 `./src/install_packages_trendOccupancy.R`. 
 
