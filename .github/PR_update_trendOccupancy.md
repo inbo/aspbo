@@ -5,7 +5,7 @@ The following steps are all automatically performed:
 
 - download tx - files from zenodo
 - cleanup, map & combine all tx files into 1 dataframe
-- export as `./data/output/trendOccupancy/trendOccupancy_belgium.csv`
+- export as `./data/output/UAT_processing/trendOccupancy/trendOccupancy_belgium.csv`
 
 All the steps above are triggered by `./.github/workflows/update_trendOccupancy.yaml`<sup>1</sup>
 and executed by `./src/update_trendOccupancy.rmd`. 
