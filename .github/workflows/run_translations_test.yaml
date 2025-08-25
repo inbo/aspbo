@@ -7,6 +7,10 @@ on:
       - 'data/output/UAT_processing/**'
       - 'data/output/UAT_direct/**'
 
+concurrency:
+  group: translations-test-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 name: run_translations_test
 
 jobs:
