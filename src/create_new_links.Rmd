@@ -100,11 +100,15 @@ griis_checklist <- griis_checklist_raw %>%
   separate(vernacular_name_en, sep = ", ", into = "vernacular_name_en", extra = "drop") %>%
   separate(vernacular_name_fr, sep = ", ", into = "vernacular_name_fr", extra = "drop") %>% 
   mutate(vernacular_name_nl2 = case_when(!is.na(vernacular_name_nl) ~ paste(article_nl, tolower(vernacular_name_nl)),
-                                         TRUE ~ vernacular_name_nl)) %>% 
+                                         TRUE ~ vernacular_name_nl),
+         vernacular_name_en2  = case_when(!is.na(vernacular_name_en) ~ paste("the", str_to_title(vernacular_name_en)),
+                                         TRUE ~ vernacular_name_en),
+         vernacular_name_fr2 = tolower(vernacular_name_fr)) %>% 
   mutate(vernacular_name_nl = coalesce(vernacular_name_nl, paste0("<i>", scientificName, "</i>")),
          vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
          vernacular_name_fr = coalesce(vernacular_name_fr, paste0("<i>", scientificName, "</i>")),
-         vernacular_name_nl2 = coalesce(vernacular_name_nl2, paste0("<i>", scientificName, "</i>"))) %>% 
+         vernacular_name_nl2 = coalesce(vernacular_name_nl2, paste0("<i>", scientificName, "</i>")),
+         vernacular_name_en2 = coalesce(vernacular_name_en2, paste0("<i>", scientificName, "</i>"))) %>% 
   left_join(faunabeheer_species, by = c("nubKey" = "gbifkey")) %>%
   mutate(faunabeheer_link_nl = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
                                            paste0('<--VERNACULAR_NAME_NL2--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\"', faunabeheer_link, '\\\\"target=\\\\"_blank\\\\">faunabeheer pagina</a>.'),
@@ -145,11 +149,14 @@ geo_words = c("Chinese",
               "Zuidelijke", 
               "Californische", 
               "Carolina",
+              "Mississippi",
               "Griekse", 
               "Magelhaengans")
 
 for(g_up in geo_words){
   g_low <- tolower(g_up)
+  
+  cat("Converting", g_low, "into", g_up, "\n")
   
   griis_checklist <- griis_checklist %>% 
     mutate(vernacular_name_nl2 = str_replace_all(vernacular_name_nl2, 
@@ -227,8 +234,14 @@ for(n in 1:nrow(griis_checklist)){
     gsub(pattern = "<--VERNACULAR_NAME_EN-->",
          replacement = current_row$vernacular_name_en, 
          x = .) %>%
+    gsub(pattern = "<--VERNACULAR_NAME_EN2-->",
+         replacement = current_row$vernacular_name_en2, 
+         x = .) %>%
     gsub(pattern = "<--VERNACULAR_NAME_FR-->",
          replacement = current_row$vernacular_name_fr, 
+         x = .) %>%
+    gsub(pattern = "<--VERNACULAR_NAME_FR2-->",
+         replacement = current_row$vernacular_name_fr2, 
          x = .) %>%
     gsub(pattern = "<--IMAGE-COPYRIGHT-->",
          replacement = current_row$image_copyright, 
