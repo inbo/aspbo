@@ -10,8 +10,9 @@ library(RCurl)
 library(tidyverse)
 ```
 
-```{r}
+```{r functies}
 source("./HTML_pages/Render_single_HTML.R")
+source("./src/assign_dutch_article.R")
 ```
 
 ```{r read template}
@@ -84,24 +85,26 @@ Most species have "het" as the correct article in dutch while occasionally
 "de" is used, these should be set manually by adding the nubkey of these species
 to the "de_species" - list. 
 
-```{r}
-de_species <- c() 
+```{r assign dutch article}
+griis_checklist_raw <- assign_dutch_article(griis_checklist_raw,
+                                            het_exception = c(5403508, 8288930, 5220136),
+                                            de_exception = c(2874199))
 ```
 
 ```{r prep griis checklist}
 griis_checklist <- griis_checklist_raw %>% 
   filter(!is.na(nubKey) & !nubKey %in% custom_links_pages) %>% 
-  select(nubKey, scientificName = canonicalName, vernacular_name_nl, vernacular_name_en, vernacular_name_fr) %>% 
+  select(nubKey, scientificName = canonicalName, vernacular_name_nl, vernacular_name_en, vernacular_name_fr, article_nl) %>% 
   distinct() %>% 
   separate(vernacular_name_nl, sep = ", ", into = "vernacular_name_nl", extra = "drop") %>% 
   separate(vernacular_name_en, sep = ", ", into = "vernacular_name_en", extra = "drop") %>%
   separate(vernacular_name_fr, sep = ", ", into = "vernacular_name_fr", extra = "drop") %>% 
-  mutate(vernacular_name_nl2 = case_when(nubKey %in% de_species ~ paste("de", tolower(vernacular_name_nl)),
-                                        !is.na(vernacular_name_nl) ~ paste("het", tolower(vernacular_name_nl)),
-                                        TRUE ~ vernacular_name_nl)) %>% 
+  mutate(vernacular_name_nl2 = case_when(!is.na(vernacular_name_nl) ~ paste(article_nl, tolower(vernacular_name_nl)),
+                                         TRUE ~ vernacular_name_nl)) %>% 
   mutate(vernacular_name_nl = coalesce(vernacular_name_nl, paste0("<i>", scientificName, "</i>")),
          vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
-         vernacular_name_fr = coalesce(vernacular_name_fr, paste0("<i>", scientificName, "</i>"))) %>% 
+         vernacular_name_fr = coalesce(vernacular_name_fr, paste0("<i>", scientificName, "</i>")),
+         vernacular_name_nl2 = coalesce(vernacular_name_nl2, paste0("<i>", scientificName, "</i>"))) %>% 
   left_join(faunabeheer_species, by = c("nubKey" = "gbifkey")) %>%
   mutate(faunabeheer_link_nl = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
                                            paste0('<--VERNACULAR_NAME_NL2--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\"', faunabeheer_link, '\\\\"target=\\\\"_blank\\\\">faunabeheer pagina</a>.'),
@@ -120,6 +123,39 @@ griis_checklist <- griis_checklist_raw %>%
 <span style=\\\\"", copyright_font, "\\\\">© <--COPYRIGHT--></span><br>'),
 TRUE ~ "")) %>% 
   distinct()
+```
+
+```{r Convert geographical annotations to Uppercase}
+geo_words = c("Chinese", 
+              "Amerikaanse", 
+              "Europees", 
+              "Europese", 
+              "Japans", 
+              "Afrikaanse", 
+              "Indische", 
+              "Canadese", 
+              "Amerikaans", 
+              "Australische",
+              "Aziatische",
+              "Siberische", 
+              "Oosterse", 
+              "Westelijke", 
+              "Noordse",
+              "Noorse",
+              "Zuidelijke", 
+              "Californische", 
+              "Carolina",
+              "Griekse", 
+              "Magelhaengans")
+
+for(g_up in geo_words){
+  g_low <- tolower(g_up)
+  
+  griis_checklist <- griis_checklist %>% 
+    mutate(vernacular_name_nl2 = str_replace_all(vernacular_name_nl2, 
+                                                 pattern = g_low, 
+                                                 replacement = g_up))
+}
 ```
 
 ```{r redo all?}
@@ -185,7 +221,7 @@ for(n in 1:nrow(griis_checklist)){
     gsub(pattern = "<--VERNACULAR_NAME_NL-->",
          replacement = current_row$vernacular_name_nl, 
          x = .) %>%
-     gsub(pattern = "<--VERNACULAR_NAME_NL2-->",
+    gsub(pattern = "<--VERNACULAR_NAME_NL2-->",
          replacement = current_row$vernacular_name_nl2, 
          x = .) %>%
     gsub(pattern = "<--VERNACULAR_NAME_EN-->",
