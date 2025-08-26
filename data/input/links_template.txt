@@ -36,8 +36,8 @@ cat(paste0("
 <br>
 
 #### **Nuttige links** <br>
-<p>Meer informatie over <--VERNACULAR_NAME_NL2--> kunt u vinden op het Vlaams Biodiversiteits Portaal.<br>
-**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteit Portaal</a>**
+<p>Meer informatie over <--VERNACULAR_NAME_NL2--> kunt u vinden op het Vlaams Biodiversiteitsportaal.<br>
+**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteitportaal</a>**
 
 <p><--FAUNABEHEER_LINK_NL-->
 <br>
