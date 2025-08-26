@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r sharedinfo, echo=FALSE}
 VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/2914754"
+VBP_link_en <- "https://natuurdata.inbo.be/bie-hub/species/2914754?lang=en"
 faunabeheer_link <- "https://faunabeheer.inbo.be/2914754"
 style_str<-"font-size: 1.5em; font-style: italic;"
 image_link<-"../Pictures/"
@@ -36,8 +37,8 @@ cat(paste0("
 <br>
 
 #### **Nuttige links** <br>
-<p>Meer informatie over <i>Galium verrucosum</i> kunt u vinden op de Vlaams biodiversiteits portaal.<br>
-**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams biodiversiteit portaal</a>**
+<p>Meer informatie over <i>Galium verrucosum</i> kunt u vinden op het Vlaams Biodiversiteitsportaal.<br>
+**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteitportaal</a>**
 
 <p>
 <br>
@@ -55,8 +56,8 @@ cat(paste0("
 <br>
 
 #### **Useful links** <br>
-<p>You can find more information about Southern cleavers on the Flemish biodiversity portal (note that this information is currently only available in Dutch).<br>
-**More information: <a href=\"", VBP_link, "\"target=\"_blank\">Flemish biodiversity portal</a>**
+<p>You can find more information about the Southern cleavers on the Flemish Biodiversity Portal.<br>
+**More information: <a href=\"", VBP_link_en, "\"target=\"_blank\">Flemish Biodiversity Portal</a>**
 
 <p>
 <br>
@@ -74,8 +75,8 @@ cat(paste0("
 <br>
 
 #### **Liens utiles** <br>
-<p>Vous pouvez trouver plus d'informations sur Gaillet verruqueux sur la portal biodiversité Flamande (notez que cette information est actuellement disponible uniquement en néerlandais).<br>
-**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">Portal biodiversité Flamande</a>**
+<p>Vous pouvez trouver plus d'informations sur gaillet verruqueux sur le portal biodiversité flamande (notez que ces informations sont actuellement disponible uniquement en néerlandais).<br>
+**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">portal biodiversité flamande</a>**
 
 <p>
 <br>
