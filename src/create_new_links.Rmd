@@ -81,6 +81,8 @@ custom_links_pages <- dir(path = "./HTML_pages/Rmd_files/", pattern = "[0-9].Rmd
 ```
 
 ```{r prep griis checklist}
+het_species <- c(5220136)
+
 griis_checklist <- griis_checklist_raw %>% 
   filter(!is.na(nubKey) & !nubKey %in% custom_links_pages) %>% 
   select(nubKey, scientificName = canonicalName, vernacular_name_nl, vernacular_name_en, vernacular_name_fr) %>% 
@@ -88,12 +90,15 @@ griis_checklist <- griis_checklist_raw %>%
   separate(vernacular_name_nl, sep = ", ", into = "vernacular_name_nl", extra = "drop") %>% 
   separate(vernacular_name_en, sep = ", ", into = "vernacular_name_en", extra = "drop") %>%
   separate(vernacular_name_fr, sep = ", ", into = "vernacular_name_fr", extra = "drop") %>% 
+  mutate(vernacular_name_nl2 = case_when(nubKey %in% het_species ~ paste("het", tolower(vernacular_name_nl)),
+                                        !is.na(vernacular_name_nl) ~ paste("de", tolower(vernacular_name_nl)),
+                                        TRUE ~ vernacular_name_nl)) %>% 
   mutate(vernacular_name_nl = coalesce(vernacular_name_nl, paste0("<i>", scientificName, "</i>")),
          vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
          vernacular_name_fr = coalesce(vernacular_name_fr, paste0("<i>", scientificName, "</i>"))) %>% 
   left_join(faunabeheer_species, by = c("nubKey" = "gbifkey")) %>%
   mutate(faunabeheer_link_nl = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
-                                           paste0('<--VERNACULAR_NAME_NL--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\"', faunabeheer_link, '\\\\"target=\\\\"_blank\\\\">faunabeheer pagina</a>.'),
+                                           paste0('<--VERNACULAR_NAME_NL2--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\"', faunabeheer_link, '\\\\"target=\\\\"_blank\\\\">faunabeheer pagina</a>.'),
                                          TRUE ~ ""),
          faunabeheer_link_en = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
                                            paste0('<--VERNACULAR_NAME_EN--> is classified as a game species in Flanders, more information concerning management and damages in Flanders can be found on the <a href=\\\\"', faunabeheer_link, '\\\\"target=\\\\"_blank\\\\">wildlife management page</a> (note that this information is currently only available in Dutch)'),
@@ -124,9 +129,9 @@ redo_existing <- TRUE # Set to TRUE to redo only existing files, or FALSE to red
 ```{r determine existing}
 if(redo_existing){
   existing_files <- dir(path = "./HTML_pages/Rmd_files/generic_links_pages/", 
-                       pattern = "[0-9].Rmd") %>% 
-  gsub(pattern = ".Rmd", replacement = "") %>% 
-  as.integer()
+                        pattern = "[0-9].Rmd") %>% 
+    gsub(pattern = ".Rmd", replacement = "") %>% 
+    as.integer()
   
   griis_checklist <- griis_checklist %>% 
     filter(nubKey %in% existing_files)
@@ -172,6 +177,9 @@ for(n in 1:nrow(griis_checklist)){
          replacement = current_row$faunabeheer_link_fr, 
          x = .) %>%
     gsub(pattern = "<--VERNACULAR_NAME_NL-->",
+         replacement = current_row$vernacular_name_nl, 
+         x = .) %>%
+     gsub(pattern = "<--VERNACULAR_NAME_NL2-->",
          replacement = current_row$vernacular_name_nl, 
          x = .) %>%
     gsub(pattern = "<--VERNACULAR_NAME_EN-->",
