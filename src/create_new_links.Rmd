@@ -80,9 +80,15 @@ custom_links_pages <- dir(path = "./HTML_pages/Rmd_files/", pattern = "[0-9].Rmd
   as.integer()
 ```
 
-```{r prep griis checklist}
-het_species <- c(5220136)
+Most species have "het" as the correct article in dutch while occasionally 
+"de" is used, these should be set manually by adding the nubkey of these species
+to the "de_species" - list. 
 
+```{r}
+de_species <- c() 
+```
+
+```{r prep griis checklist}
 griis_checklist <- griis_checklist_raw %>% 
   filter(!is.na(nubKey) & !nubKey %in% custom_links_pages) %>% 
   select(nubKey, scientificName = canonicalName, vernacular_name_nl, vernacular_name_en, vernacular_name_fr) %>% 
@@ -90,8 +96,8 @@ griis_checklist <- griis_checklist_raw %>%
   separate(vernacular_name_nl, sep = ", ", into = "vernacular_name_nl", extra = "drop") %>% 
   separate(vernacular_name_en, sep = ", ", into = "vernacular_name_en", extra = "drop") %>%
   separate(vernacular_name_fr, sep = ", ", into = "vernacular_name_fr", extra = "drop") %>% 
-  mutate(vernacular_name_nl2 = case_when(nubKey %in% het_species ~ paste("het", tolower(vernacular_name_nl)),
-                                        !is.na(vernacular_name_nl) ~ paste("de", tolower(vernacular_name_nl)),
+  mutate(vernacular_name_nl2 = case_when(nubKey %in% de_species ~ paste("de", tolower(vernacular_name_nl)),
+                                        !is.na(vernacular_name_nl) ~ paste("het", tolower(vernacular_name_nl)),
                                         TRUE ~ vernacular_name_nl)) %>% 
   mutate(vernacular_name_nl = coalesce(vernacular_name_nl, paste0("<i>", scientificName, "</i>")),
          vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
@@ -180,7 +186,7 @@ for(n in 1:nrow(griis_checklist)){
          replacement = current_row$vernacular_name_nl, 
          x = .) %>%
      gsub(pattern = "<--VERNACULAR_NAME_NL2-->",
-         replacement = current_row$vernacular_name_nl, 
+         replacement = current_row$vernacular_name_nl2, 
          x = .) %>%
     gsub(pattern = "<--VERNACULAR_NAME_EN-->",
          replacement = current_row$vernacular_name_en, 
