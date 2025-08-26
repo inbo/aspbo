@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r sharedinfo, echo=FALSE}
 VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/<--TAXONKEY-->"
+VBP_link_en <- "https://natuurdata.inbo.be/bie-hub/species/<--TAXONKEY-->?lang=en"
 faunabeheer_link <- "https://faunabeheer.inbo.be/<--TAXONKEY-->"
 style_str<-"font-size: 1.5em; font-style: italic;"
 image_link<-"../Pictures/<--IMAGE-COPYRIGHT-->"
@@ -55,8 +56,8 @@ cat(paste0("
 <br>
 
 #### **Useful links** <br>
-<p>You can find more information about <--VERNACULAR_NAME_EN2--> on the Flemish Biodiversity Portal (note that this information is currently only available in Dutch).<br>
-**More information: <a href=\"", VBP_link, "\"target=\"_blank\">Flemish Biodiversity Portal</a>**
+<p>You can find more information about <--VERNACULAR_NAME_EN2--> on the Flemish Biodiversity Portal.<br>
+**More information: <a href=\"", VBP_link_en, "\"target=\"_blank\">Flemish Biodiversity Portal</a>**
 
 <p><--FAUNABEHEER_LINK_EN-->
 <br>
