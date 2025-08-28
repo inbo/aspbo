@@ -29,7 +29,7 @@ if(Sys.getenv("S3_BUCKET") != ""){
 # test S3_bucket ####
 test_that("Check S3_BUCKET env variable", {
     
-    expect_false(bucket == "s3://", "env S3_BUCKET is not provided")
+    expect_false(bucket == "s3://", "Neither S3_BUCKET nor UAT_bucket environment variables are provided")
     
   })
 
