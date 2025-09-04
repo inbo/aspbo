@@ -1,944 +1,668 @@
 id,nl
-België_title,België
-brussels_title,Brussels Hoofdstedelijk Gewest
-flanders_title,Vlaanderen
-wallonia_title,Wallonië
-Namen_title,Namen
-Oost-Vlaanderen_title,Oost-Vlaanderen
-Waals-Brabant_title,Waals-Brabant
-Limburg_title,Limburg
-Henegouwen_title,Henegouwen
-Luxemburg_title,Luxemburg
-Antwerpen_title,Antwerpen
-Luik_title,Luik
-HoofdstedelijkGewest_title,Hoofdstedelijk Gewest
-Vlaams-Brabant_title,Vlaams-Brabant
-West-Vlaanderen_title,West-Vlaanderen
-Aartselaar_title,Aartselaar
-Boechout_title,Boechout
-Boom_title,Boom
-Borsbeek_title,Borsbeek
-Brasschaat_title,Brasschaat
-Brecht_title,Brecht
-Edegem_title,Edegem
-Essen_title,Essen
-Hemiksem_title,Hemiksem
-Hove_title,Hove
-Kalmthout_title,Kalmthout
-Kapellen_title,Kapellen
-Kontich_title,Kontich
-Lint_title,Lint
-Mortsel_title,Mortsel
-Niel_title,Niel
-Ranst_title,Ranst
-Rumst_title,Rumst
-Schelle_title,Schelle
-Schilde_title,Schilde
-Schoten_title,Schoten
-Stabroek_title,Stabroek
-Wijnegem_title,Wijnegem
-Wommelgem_title,Wommelgem
-Wuustwezel_title,Wuustwezel
-Zandhoven_title,Zandhoven
-Zoersel_title,Zoersel
-Zwijndrecht_title,Zwijndrecht
-Malle_title,Malle
-Berlaar_title,Berlaar
-Bonheiden_title,Bonheiden
-Bornem_title,Bornem
-Duffel_title,Duffel
-Heist-Op-Den-Berg_title,Heist-Op-Den-Berg
-Lier_title,Lier
-Mechelen_title,Mechelen
-Nijlen_title,Nijlen
-Putte_title,Putte
-Puurs_title,Puurs
-Sint-Amands_title,Sint-Amands
-Sint-Katelijne-Waver_title,Sint-Katelijne-Waver
-Willebroek_title,Willebroek
-Arendonk_title,Arendonk
-Baarle-Hertog_title,Baarle-Hertog
-Balen_title,Balen
-Beerse_title,Beerse
-Dessel_title,Dessel
-Geel_title,Geel
-Grobbendonk_title,Grobbendonk
-Herentals_title,Herentals
-Herenthout_title,Herenthout
-Herselt_title,Herselt
-Hoogstraten_title,Hoogstraten
-Hulshout_title,Hulshout
-Kasterlee_title,Kasterlee
-Lille_title,Lille
-Meerhout_title,Meerhout
-Merksplas_title,Merksplas
-Mol_title,Mol
-Olen_title,Olen
-Oud-Turnhout_title,Oud-Turnhout
-Ravels_title,Ravels
-Retie_title,Retie
-Rijkevorsel_title,Rijkevorsel
-Turnhout_title,Turnhout
-Vorselaar_title,Vorselaar
-Vosselaar_title,Vosselaar
-Westerlo_title,Westerlo
-Laakdal_title,Laakdal
-Anderlecht_title,Anderlecht
-Oudergem_title,Oudergem
-Sint-Agatha-Berchem_title,Sint-Agatha-Berchem
-Brussel_title,Brussel
-Etterbeek_title,Etterbeek
-Evere_title,Evere
-Vorst_title,Vorst
-Ganshoren_title,Ganshoren
-Elsene_title,Elsene
-Jette_title,Jette
-Koekelberg_title,Koekelberg
-Sint-Jans-Molenbeek_title,Sint-Jans-Molenbeek
-Sint-Gillis_title,Sint-Gillis
-Sint-Joost-Ten-Node_title,Sint-Joost-Ten-Node
-Schaarbeek_title,Schaarbeek
-Ukkel_title,Ukkel
-Watermaal-Bosvoorde_title,Watermaal-Bosvoorde
-Sint-Lambrechts-Woluwe_title,Sint-Lambrechts-Woluwe
-Sint-Pieters-Woluwe_title,Sint-Pieters-Woluwe
-Asse_title,Asse
-Beersel_title,Beersel
-Bever_title,Bever
-Dilbeek_title,Dilbeek
-Galmaarden_title,Galmaarden
-Gooik_title,Gooik
-Grimbergen_title,Grimbergen
-Hal_title,Hal
-Herne_title,Herne
-Hoeilaart_title,Hoeilaart
-Kampenhout_title,Kampenhout
-Kapelle-Op-Den-Bos_title,Kapelle-Op-Den-Bos
-Liedekerke_title,Liedekerke
-Londerzeel_title,Londerzeel
-Machelen_title,Machelen
-Meise_title,Meise
-Merchtem_title,Merchtem
-Opwijk_title,Opwijk
-Overijse_title,Overijse
-Pepingen_title,Pepingen
-Sint-Pieters-Leeuw_title,Sint-Pieters-Leeuw
-Steenokkerzeel_title,Steenokkerzeel
-Ternat_title,Ternat
-Vilvoorde_title,Vilvoorde
-Zaventem_title,Zaventem
-Zemst_title,Zemst
-Roosdaal_title,Roosdaal
-Drogenbos_title,Drogenbos
-Kraainem_title,Kraainem
-Linkebeek_title,Linkebeek
-Sint-Genesius-Rode_title,Sint-Genesius-Rode
-Wemmel_title,Wemmel
-Wezembeek-Oppem_title,Wezembeek-Oppem
-Lennik_title,Lennik
-Affligem_title,Affligem
-Aarschot_title,Aarschot
-Begijnendijk_title,Begijnendijk
-Bekkevoort_title,Bekkevoort
-Bertem_title,Bertem
-Bierbeek_title,Bierbeek
-Boortmeerbeek_title,Boortmeerbeek
-Boutersem_title,Boutersem
-Diest_title,Diest
-Geetbets_title,Geetbets
-Haacht_title,Haacht
-Herent_title,Herent
-Hoegaarden_title,Hoegaarden
-Holsbeek_title,Holsbeek
-Huldenberg_title,Huldenberg
-Keerbergen_title,Keerbergen
-Kortenaken_title,Kortenaken
-Kortenberg_title,Kortenberg
-Landen_title,Landen
-Leuven_title,Leuven
-Lubbeek_title,Lubbeek
-Oud-Heverlee_title,Oud-Heverlee
-Rotselaar_title,Rotselaar
-Tervuren_title,Tervuren
-Tienen_title,Tienen
-Tremelo_title,Tremelo
-Zoutleeuw_title,Zoutleeuw
-Linter_title,Linter
-Scherpenheuvel-Zichem_title,Scherpenheuvel-Zichem
-Tielt-Winge_title,Tielt-Winge
-Glabbeek_title,Glabbeek
-Bevekom_title,Bevekom
-Eigenbrakel_title,Eigenbrakel
-Kasteelbrakel_title,Kasteelbrakel
-Chaumont-Gistoux_title,Chaumont-Gistoux
-Court-Saint-Etienne_title,Court-Saint-Etienne
-Genepien_title,Genepien
-Graven_title,Graven
-Incourt_title,Incourt
-Itter_title,Itter
-Geldenaken_title,Geldenaken
-Terhulpen_title,Terhulpen
-Mont-Saint-Guibert_title,Mont-Saint-Guibert
-Nijvel_title,Nijvel
-Perwijs_title,Perwijs
-Rixensart_title,Rixensart
-Tubeke_title,Tubeke
-Villers-La-Ville_title,Villers-La-Ville
-Waterloo_title,Waterloo
-Waver_title,Waver
-Chastre_title,Chastre
-Helecine_title,Helecine
-Lasne_title,Lasne
-Orp-Jauche_title,Orp-Jauche
-Ottignies-Louvain-La-Neu_title,Ottignies-Louvain-La-Neu
-Ramillies_title,Ramillies
-Rebecq_title,Rebecq
-Walhain_title,Walhain
-Beernem_title,Beernem
-Blankenberge_title,Blankenberge
-Brugge_title,Brugge
-Damme_title,Damme
-Jabbeke_title,Jabbeke
-Oostkamp_title,Oostkamp
-Torhout_title,Torhout
-Zedelgem_title,Zedelgem
-Zuienkerke_title,Zuienkerke
-Knokke-Heist_title,Knokke-Heist
-Diksmuide_title,Diksmuide
-Houthulst_title,Houthulst
-Koekelare_title,Koekelare
-Kortemark_title,Kortemark
-Lo-Reninge_title,Lo-Reninge
-Ieper_title,Ieper
-Mesen_title,Mesen
-Poperinge_title,Poperinge
-Wervik_title,Wervik
-Zonnebeke_title,Zonnebeke
-Heuvelland_title,Heuvelland
-Langemark-Poelkapelle_title,Langemark-Poelkapelle
-Vleteren_title,Vleteren
-Anzegem_title,Anzegem
-Avelgem_title,Avelgem
-Deerlijk_title,Deerlijk
-Harelbeke_title,Harelbeke
-Kortrijk_title,Kortrijk
-Kuurne_title,Kuurne
-Lendelede_title,Lendelede
-Menen_title,Menen
-Waregem_title,Waregem
-Wevelgem_title,Wevelgem
-Zwevegem_title,Zwevegem
-Spiere-Helkijn_title,Spiere-Helkijn
-Bredene_title,Bredene
-Gistel_title,Gistel
-Ichtegem_title,Ichtegem
-Middelkerke_title,Middelkerke
-Oostende_title,Oostende
-Oudenburg_title,Oudenburg
-De Haan_title,De Haan
-Hooglede_title,Hooglede
-Ingelmunster_title,Ingelmunster
-Izegem_title,Izegem
-Ledegem_title,Ledegem
-Lichtervelde_title,Lichtervelde
-Moorslede_title,Moorslede
-Roeselare_title,Roeselare
-Staden_title,Staden
-Dentergem_title,Dentergem
-Meulebeke_title,Meulebeke
-Oostrozebeke_title,Oostrozebeke
-Pittem_title,Pittem
-Ruiselede_title,Ruiselede
-Tielt_title,Tielt
-Wielsbeke_title,Wielsbeke
-Wingene_title,Wingene
-Ardooie_title,Ardooie
-Alveringem_title,Alveringem
-De Panne_title,De Panne
-Koksijde_title,Koksijde
-Nieuwpoort_title,Nieuwpoort
-Veurne_title,Veurne
-Aalst_title,Aalst
-Denderleeuw_title,Denderleeuw
-Geraardsbergen_title,Geraardsbergen
-Haaltert_title,Haaltert
-Herzele_title,Herzele
-Lede_title,Lede
-Ninove_title,Ninove
-Sint-Lievens-Houtem_title,Sint-Lievens-Houtem
-Zottegem_title,Zottegem
-Erpe-Mere_title,Erpe-Mere
-Berlare_title,Berlare
-Buggenhout_title,Buggenhout
-Dendermonde_title,Dendermonde
-Hamme_title,Hamme
-Laarne_title,Laarne
-Lebbeke_title,Lebbeke
-Waasmunster_title,Waasmunster
-Wetteren_title,Wetteren
-Wichelen_title,Wichelen
-Zele_title,Zele
-Assenede_title,Assenede
-Eeklo_title,Eeklo
-Kaprijke_title,Kaprijke
-Maldegem_title,Maldegem
-Sint-Laureins_title,Sint-Laureins
-Zelzate_title,Zelzate
-Aalter_title,Aalter
-Deinze_title,Deinze
-De Pinte_title,De Pinte
-Destelbergen_title,Destelbergen
-Evergem_title,Evergem
-Gavere_title,Gavere
-Gent_title,Gent
-Knesselare_title,Knesselare
-Lochristi_title,Lochristi
-Lovendegem_title,Lovendegem
-Melle_title,Melle
-Merelbeke_title,Merelbeke
-Moerbeke_title,Moerbeke
-Nazareth_title,Nazareth
-Nevele_title,Nevele
-Oosterzele_title,Oosterzele
-Sint-Martens-Latem_title,Sint-Martens-Latem
-Waarschoot_title,Waarschoot
-Wachtebeke_title,Wachtebeke
-Zomergem_title,Zomergem
-Zulte_title,Zulte
-Kruishoutem_title,Kruishoutem
-Oudenaarde_title,Oudenaarde
-Ronse_title,Ronse
-Zingem_title,Zingem
-Brakel_title,Brakel
-Kluisbergen_title,Kluisbergen
-Wortegem-Petegem_title,Wortegem-Petegem
-Horebeke_title,Horebeke
-Lierde_title,Lierde
-Maarkedal_title,Maarkedal
-Zwalm_title,Zwalm
-Beveren_title,Beveren
-Kruibeke_title,Kruibeke
-Lokeren_title,Lokeren
-Sint-Gillis-Waas_title,Sint-Gillis-Waas
-Sint-Niklaas_title,Sint-Niklaas
-Stekene_title,Stekene
-Temse_title,Temse
-Aat_title,Aat
-Beloeil_title,Beloeil
-Bernissart_title,Bernissart
-Brugelette_title,Brugelette
-Chievres_title,Chievres
-Elzele_title,Elzele
-Vloesberg_title,Vloesberg
-Frasnes-Lez-Anvaing_title,Frasnes-Lez-Anvaing
-Chapelle-Lez-Herlaimont_title,Chapelle-Lez-Herlaimont
-Charleroi_title,Charleroi
-Chatelet_title,Chatelet
-Courcelles_title,Courcelles
-Farciennes_title,Farciennes
-Fleurus_title,Fleurus
-Fontaine-L'eveque_title,Fontaine-L'eveque
-Gerpinnes_title,Gerpinnes
-Manage_title,Manage
-Montigny-Le-Tilleul_title,Montigny-Le-Tilleul
-Pont-A-Celles_title,Pont-A-Celles
-Seneffe_title,Seneffe
-Aiseau-Presles_title,Aiseau-Presles
-Les Bons Villers_title,Les Bons Villers
-Boussu_title,Boussu
-Dour_title,Dour
-Frameries_title,Frameries
-Hensies_title,Hensies
-Jurbeke_title,Jurbeke
-Lens_title,Lens
-Bergen_title,Bergen
-Quaregnon_title,Quaregnon
-Quievrain_title,Quievrain
-Saint-Ghislain_title,Saint-Ghislain
-Colfontaine_title,Colfontaine
-Honnelles_title,Honnelles
-Quevy_title,Quevy
-Moeskroen_title,Moeskroen
-Komen-Waasten_title,Komen-Waasten
 'S Gravenbrakel_title,'S Gravenbrakel
-Edingen_title,Edingen
-La Louviere_title,La Louviere
-Lessen_title,Lessen
-Le Roeulx_title,Le Roeulx
-Opzullik_title,Opzullik
-Zinnik_title,Zinnik
-Ecaussinnes_title,Ecaussinnes
-Anderlues_title,Anderlues
-Beaumont_title,Beaumont
-Binche_title,Binche
-Chimay_title,Chimay
-Erquelinnes_title,Erquelinnes
-Froidchapelle_title,Froidchapelle
-Lobbes_title,Lobbes
-Merbes-Le-Chateau_title,Merbes-Le-Chateau
-Momignies_title,Momignies
-Thuin_title,Thuin
-Estinnes_title,Estinnes
-Ham-Sur-Heure-Nalinnes_title,Ham-Sur-Heure-Nalinnes
-Morlanwelz_title,Morlanwelz
-Sivry-Rance_title,Sivry-Rance
-Antoing_title,Antoing
-Celles_title,Celles
-Estaimpuis_title,Estaimpuis
-Pecq_title,Pecq
-Peruwelz_title,Peruwelz
-Rumes_title,Rumes
-Doornik_title,Doornik
-Brunehaut_title,Brunehaut
-Leuze-En-Hainaut_title,Leuze-En-Hainaut
-Mont-De-L'enclus_title,Mont-De-L'enclus
-Amay_title,Amay
-Burdinne_title,Burdinne
-Clavier_title,Clavier
-Ferrieres_title,Ferrieres
-Hamoir_title,Hamoir
-Heron_title,Heron
-Hoei_title,Hoei
-Marchin_title,Marchin
-Modave_title,Modave
-Nandrin_title,Nandrin
-Ouffet_title,Ouffet
-Verlaine_title,Verlaine
-Villers-Le-Bouillet_title,Villers-Le-Bouillet
-Wanze_title,Wanze
-Anthisnes_title,Anthisnes
-Engis_title,Engis
-Tinlot_title,Tinlot
-Ans_title,Ans
-Awans_title,Awans
-Aywaille_title,Aywaille
-Bitsingen_title,Bitsingen
-Beyne-Heusay_title,Beyne-Heusay
-Chaudfontaine_title,Chaudfontaine
-Comblain-Au-Pont_title,Comblain-Au-Pont
-Dalhem_title,Dalhem
-Esneux_title,Esneux
-Fleron_title,Fleron
-Herstal_title,Herstal
-Juprelle_title,Juprelle
-Oupeye_title,Oupeye
-Saint-Nicolas_title,Saint-Nicolas
-Seraing_title,Seraing
-Soumagne_title,Soumagne
-Sprimont_title,Sprimont
-Wezet_title,Wezet
-Grace-Hollogne_title,Grace-Hollogne
-Blegny_title,Blegny
-Flemalle_title,Flemalle
-Neupre_title,Neupre
-Trooz_title,Trooz
-Amel_title,Amel
-Aubel_title,Aubel
-Baelen_title,Baelen
-Buellingen_title,Buellingen
-Bütgenbach_title,Bütgenbach
-Dison_title,Dison
-Eupen_title,Eupen
-Herve_title,Herve
-Jalhay_title,Jalhay
-Kelmis_title,Kelmis
-Lierneux_title,Lierneux
-Lontzen_title,Lontzen
-Malmedy_title,Malmedy
-Olne_title,Olne
-Pepinster_title,Pepinster
-Raeren_title,Raeren
-Sankt Vith_title,Sankt Vith
-Spa_title,Spa
-Stavelot_title,Stavelot
-Stoumont_title,Stoumont
-Theux_title,Theux
-Verviers_title,Verviers
-Weismes_title,Weismes
-Welkenraedt_title,Welkenraedt
-Trois-Ponts_title,Trois-Ponts
-Burg-Reuland_title,Burg-Reuland
-Plombieres_title,Plombieres
-Thimister-Clermont_title,Thimister-Clermont
-Berloz_title,Berloz
-Braives_title,Braives
-Crisnee_title,Crisnee
-Donceel_title,Donceel
-Fexhe-Le-Haut-Clocher_title,Fexhe-Le-Haut-Clocher
-Geer_title,Geer
-Hannuit_title,Hannuit
-Lijsem_title,Lijsem
-Oerle_title,Oerle
-Remicourt_title,Remicourt
-Saint-Georges-Sur-Meuse_title,Saint-Georges-Sur-Meuse
-Borgworm_title,Borgworm
-Wasseiges_title,Wasseiges
-Faimes_title,Faimes
-As_title,As
-Beringen_title,Beringen
-Diepenbeek_title,Diepenbeek
-Genk_title,Genk
-Gingelom_title,Gingelom
-Halen_title,Halen
-Hasselt_title,Hasselt
-Herk-De-Stad_title,Herk-De-Stad
-Leopoldsburg_title,Leopoldsburg
-Lummen_title,Lummen
-Nieuwerkerken_title,Nieuwerkerken
-Opglabbeek_title,Opglabbeek
-Sint-Truiden_title,Sint-Truiden
-Tessenderlo_title,Tessenderlo
-Zonhoven_title,Zonhoven
-Zutendaal_title,Zutendaal
-Ham_title,Ham
-Heusden-Zolder_title,Heusden-Zolder
-Bocholt_title,Bocholt
-Bree_title,Bree
-Kinrooi_title,Kinrooi
-Lommel_title,Lommel
-Maaseik_title,Maaseik
-Neerpelt_title,Neerpelt
-Overpelt_title,Overpelt
-Peer_title,Peer
-Hamont-Achel_title,Hamont-Achel
-Hechtel-Eksel_title,Hechtel-Eksel
-Houthalen-Helchteren_title,Houthalen-Helchteren
-Meeuwen-Gruitrode_title,Meeuwen-Gruitrode
-Dilsen-Stokkem_title,Dilsen-Stokkem
-Alken_title,Alken
-Bilzen_title,Bilzen
-Borgloon_title,Borgloon
-Heers_title,Heers
-Herstappe_title,Herstappe
-Hoeselt_title,Hoeselt
-Kortessem_title,Kortessem
-Lanaken_title,Lanaken
-Riemst_title,Riemst
-Tongeren_title,Tongeren
-Wellen_title,Wellen
-Maasmechelen_title,Maasmechelen
-Voeren_title,Voeren
+AE_title,Actief embryonaal nest
+AP_title,Actief primair nest
+AS_title,Actief secundair nest
+Aalst_title,Aalst
+Aalter_title,Aalter
 Aarlen_title,Aarlen
+Aarschot_title,Aarschot
+Aartselaar_title,Aartselaar
+Aat_title,Aat
+Ad hoc alien species checklist_title,Ad hoc alien species checklist
+Affligem_title,Affligem
+Africa_title,Afrika
+Aiseau-Presles_title,Aiseau-Presles
+Alien Bird Checklist_title,Alien Bird Checklist
+Alien Fish Flanders_title,Alien Fish Flanders
+Alien Macroinverts_title,Alien Macroinverts
+Alien Mollusc checklist_title,Alien Mollusc checklist
+Alken_title,Alken
+Alveringem_title,Alveringem
+Amay_title,Amay
+Amel_title,Amel
+Americas_title,Amerika
+Andenne_title,Andenne
+Anderlecht_title,Anderlecht
+Anderlues_title,Anderlues
+Anhee_title,Anhee
+Ans_title,Ans
+Anthisnes_title,Anthisnes
+Antoing_title,Antoing
+Antwerpen_title,Antwerpen
+Anzegem_title,Anzegem
+Ardooie_title,Ardooie
+Arendonk_title,Arendonk
+As_title,As
+Asia_title,Azië
+Asse_title,Asse
+Assenede_title,Assenede
+Assesse_title,Assesse
 Attert_title,Attert
 Aubange_title,Aubange
-Martelange_title,Martelange
-Messancy_title,Messancy
-Bastenaken_title,Bastenaken
-Bertogne_title,Bertogne
-Fauvillers_title,Fauvillers
-Houffalize_title,Houffalize
-Vielsalm_title,Vielsalm
-Vaux-Sur-Sure_title,Vaux-Sur-Sure
-Gouvy_title,Gouvy
-Sainte-Ode_title,Sainte-Ode
-Durbuy_title,Durbuy
-Erezee_title,Erezee
-Hotton_title,Hotton
-La Roche-En-Ardenne_title,La Roche-En-Ardenne
-Marche-En-Famenne_title,Marche-En-Famenne
-Nassogne_title,Nassogne
-Rendeux_title,Rendeux
-Tenneville_title,Tenneville
-Manhay_title,Manhay
-Bertrix_title,Bertrix
-Bouillon_title,Bouillon
-Daverdisse_title,Daverdisse
-Herbeumont_title,Herbeumont
-Leglise_title,Leglise
-Libin_title,Libin
-Neufchateau_title,Neufchateau
-Paliseul_title,Paliseul
-Saint-Hubert_title,Saint-Hubert
-Tellin_title,Tellin
-Wellin_title,Wellin
-Libramont-Chevigny_title,Libramont-Chevigny
-Chiny_title,Chiny
-Etalle_title,Etalle
-Florenville_title,Florenville
-Meix-Devant-Virton_title,Meix-Devant-Virton
-Musson_title,Musson
-Saint-Leger_title,Saint-Leger
-Tintigny_title,Tintigny
-Virton_title,Virton
-Habay_title,Habay
-Rouvroy_title,Rouvroy
-Anhee_title,Anhee
-Beauraing_title,Beauraing
-Bievre_title,Bievre
-Ciney_title,Ciney
-Dinant_title,Dinant
-Gedinne_title,Gedinne
-Hamois_title,Hamois
-Havelange_title,Havelange
-Houyet_title,Houyet
-Onhaye_title,Onhaye
-Rochefort_title,Rochefort
-Somme-Leuze_title,Somme-Leuze
-Yvoir_title,Yvoir
-Hastiere_title,Hastiere
-Vresse-Sur-Semois_title,Vresse-Sur-Semois
-Andenne_title,Andenne
-Assesse_title,Assesse
-Eghezee_title,Eghezee
-Floreffe_title,Floreffe
-Fosses-La-Ville_title,Fosses-La-Ville
-Gesves_title,Gesves
-Mettet_title,Mettet
-Ohey_title,Ohey
-Profondeville_title,Profondeville
-Sombreffe_title,Sombreffe
-Sambreville_title,Sambreville
-Fernelmont_title,Fernelmont
-Jemeppe-Sur-Sambre_title,Jemeppe-Sur-Sambre
-La Bruyere_title,La Bruyere
-Gembloux_title,Gembloux
-Cerfontaine_title,Cerfontaine
-Couvin_title,Couvin
-Doische_title,Doische
-Florenne_title,Florenne
-Philippeville_title,Philippeville
-Walcourt_title,Walcourt
-Viroinval_title,Viroinval
-Africa_title,Afrika
-Americas_title,Amerika
-Asia_title,Azië
-Europe_title,Europa
-Oceania_title,Oceanië
+Aubel_title,Aubel
 Australia and New Zealand_title,Australië en Nieuw-Zeeland
+Avelgem_title,Avelgem
+Awans_title,Awans
+Aywaille_title,Aywaille
+Baarle-Hertog_title,Baarle-Hertog
+Baelen_title,Baelen
+Balen_title,Balen
+Bastenaken_title,Bastenaken
+Beaumont_title,Beaumont
+Beauraing_title,Beauraing
+Beernem_title,Beernem
+Beerse_title,Beerse
+Beersel_title,Beersel
+Begijnendijk_title,Begijnendijk
+Behandeling_title,Behandeling
+Bekkevoort_title,Bekkevoort
+Belgian rust fungi_title,Belgian rust fungi
+België_title,België
+Beloeil_title,Beloeil
+Bergen_title,Bergen
+Beringen_title,Beringen
+Berlaar_title,Berlaar
+Berlare_title,Berlare
+Berloz_title,Berloz
+Bernissart_title,Bernissart
+Bertem_title,Bertem
+Bertogne_title,Bertogne
+Bertrix_title,Bertrix
+Bevekom_title,Bevekom
+Bever_title,Bever
+Beveren_title,Beveren
+Beyne-Heusay_title,Beyne-Heusay
+Bierbeek_title,Bierbeek
+Bievre_title,Bievre
+Bilzen_title,Bilzen
+Binche_title,Binche
+Bitsingen_title,Bitsingen
+Blankenberge_title,Blankenberge
+Blegny_title,Blegny
+Bocholt_title,Bocholt
+Boechout_title,Boechout
+Bonheiden_title,Bonheiden
+Boom_title,Boom
+Boortmeerbeek_title,Boortmeerbeek
+Borgloon_title,Borgloon
+Borgworm_title,Borgworm
+Bornem_title,Bornem
+Borsbeek_title,Borsbeek
+Bouillon_title,Bouillon
+Boussu_title,Boussu
+Boutersem_title,Boutersem
+Braives_title,Braives
+Brakel_title,Brakel
+Brasschaat_title,Brasschaat
+Brecht_title,Brecht
+Bredene_title,Bredene
+Bree_title,Bree
+Brugelette_title,Brugelette
+Brugge_title,Brugge
+Brunehaut_title,Brunehaut
+Brussel_title,Brussel
+Buellingen_title,Buellingen
+Buggenhout_title,Buggenhout
+Burdinne_title,Burdinne
+Burg-Reuland_title,Burg-Reuland
+Bütgenbach_title,Bütgenbach
+Capture_title,vangst
 Caribbean_title,Caraïben
+Celles_title,Celles
 Central America_title,Centraal-Amerika
 Central Asia_title,Centraal-Azië
+Cerfontaine_title,Cerfontaine
+Chapelle-Lez-Herlaimont_title,Chapelle-Lez-Herlaimont
+Charleroi_title,Charleroi
+Chastre_title,Chastre
+Chatelet_title,Chatelet
+Chaudfontaine_title,Chaudfontaine
+Chaumont-Gistoux_title,Chaumont-Gistoux
+Chievres_title,Chievres
+Chimay_title,Chimay
+Chiny_title,Chiny
+Ciney_title,Ciney
+Clavier_title,Clavier
+Colfontaine_title,Colfontaine
+Comblain-Au-Pont_title,Comblain-Au-Pont
+Courcelles_title,Courcelles
+Court-Saint-Etienne_title,Court-Saint-Etienne
+Couvin_title,Couvin
+Crisnee_title,Crisnee
+Dalhem_title,Dalhem
+Damme_title,Damme
+Daverdisse_title,Daverdisse
+De Haan_title,De Haan
+De Panne_title,De Panne
+De Pinte_title,De Pinte
+Deerlijk_title,Deerlijk
+Deinze_title,Deinze
+Denderleeuw_title,Denderleeuw
+Dendermonde_title,Dendermonde
+Dentergem_title,Dentergem
+Dessel_title,Dessel
+Destelbergen_title,Destelbergen
+Diepenbeek_title,Diepenbeek
+Diest_title,Diest
+Diksmuide_title,Diksmuide
+Dilbeek_title,Dilbeek
+Dilsen-Stokkem_title,Dilsen-Stokkem
+Dinant_title,Dinant
+Dison_title,Dison
+Doische_title,Doische
+Donceel_title,Donceel
+Doornik_title,Doornik
+Dour_title,Dour
+Drogenbos_title,Drogenbos
+Duffel_title,Duffel
+Durbuy_title,Durbuy
 Eastern Africa_title,Oost-Afrika
 Eastern Asia_title,Oost-Azië
 Eastern Europe_title,Oost-Europa
+Ecaussinnes_title,Ecaussinnes
+Edegem_title,Edegem
+Edingen_title,Edingen
+Eeklo_title,Eeklo
+Eghezee_title,Eghezee
+Eigenbrakel_title,Eigenbrakel
+Elsene_title,Elsene
+Elzele_title,Elzele
+Engis_title,Engis
+Erezee_title,Erezee
+Erpe-Mere_title,Erpe-Mere
+Erquelinnes_title,Erquelinnes
+Esneux_title,Esneux
+Essen_title,Essen
+Estaimpuis_title,Estaimpuis
+Estinnes_title,Estinnes
+Etalle_title,Etalle
+Etterbeek_title,Etterbeek
+Eupen_title,Eupen
+Europe_title,Europa
+Evere_title,Evere
+Evergem_title,Evergem
+Faimes_title,Faimes
+Farciennes_title,Farciennes
+Fauvillers_title,Fauvillers
+Fernelmont_title,Fernelmont
+Ferrieres_title,Ferrieres
+Fexhe-Le-Haut-Clocher_title,Fexhe-Le-Haut-Clocher
+Flemalle_title,Flemalle
+Fleron_title,Fleron
+Fleurus_title,Fleurus
+Floreffe_title,Floreffe
+Florenne_title,Florenne
+Florenville_title,Florenville
+Fontaine-L'eveque_title,Fontaine-L'eveque
+Fosses-La-Ville_title,Fosses-La-Ville
+Frameries_title,Frameries
+Frasnes-Lez-Anvaing_title,Frasnes-Lez-Anvaing
+Froidchapelle_title,Froidchapelle
+Galmaarden_title,Galmaarden
+Ganshoren_title,Ganshoren
+Gavere_title,Gavere
+Gedinne_title,Gedinne
+Geel_title,Geel
+Geer_title,Geer
+Geetbets_title,Geetbets
+Geldenaken_title,Geldenaken
+Gembloux_title,Gembloux
+Genepien_title,Genepien
+Genk_title,Genk
+Gent_title,Gent
+Geraardsbergen_title,Geraardsbergen
+Gerpinnes_title,Gerpinnes
+Gesves_title,Gesves
+Gingelom_title,Gingelom
+Gistel_title,Gistel
+Glabbeek_title,Glabbeek
+Gooik_title,Gooik
+Gouvy_title,Gouvy
+Grace-Hollogne_title,Grace-Hollogne
+Graven_title,Graven
+Grimbergen_title,Grimbergen
+Grobbendonk_title,Grobbendonk
+Haacht_title,Haacht
+Haaltert_title,Haaltert
+Habay_title,Habay
+Hal_title,Hal
+Halen_title,Halen
+Ham-Sur-Heure-Nalinnes_title,Ham-Sur-Heure-Nalinnes
+Ham_title,Ham
+Hamme_title,Hamme
+Hamoir_title,Hamoir
+Hamois_title,Hamois
+Hamont-Achel_title,Hamont-Achel
+Hannuit_title,Hannuit
+Harelbeke_title,Harelbeke
+Hasselt_title,Hasselt
+Hastiere_title,Hastiere
+Havelange_title,Havelange
+Hechtel-Eksel_title,Hechtel-Eksel
+Heers_title,Heers
+Heist-Op-Den-Berg_title,Heist-Op-Den-Berg
+Helecine_title,Helecine
+Hemiksem_title,Hemiksem
+Henegouwen_title,Henegouwen
+Hensies_title,Hensies
+Herbeumont_title,Herbeumont
+Herent_title,Herent
+Herentals_title,Herentals
+Herenthout_title,Herenthout
+Herk-De-Stad_title,Herk-De-Stad
+Herne_title,Herne
+Heron_title,Heron
+Herselt_title,Herselt
+Herstal_title,Herstal
+Herstappe_title,Herstappe
+Herve_title,Herve
+Herzele_title,Herzele
+Heusden-Zolder_title,Heusden-Zolder
+Heuvelland_title,Heuvelland
+Hoegaarden_title,Hoegaarden
+Hoei_title,Hoei
+Hoeilaart_title,Hoeilaart
+Hoeselt_title,Hoeselt
+Holsbeek_title,Holsbeek
+Honnelles_title,Honnelles
+HoofdstedelijkGewest_title,Hoofdstedelijk Gewest
+Hooglede_title,Hooglede
+Hoogstraten_title,Hoogstraten
+Horebeke_title,Horebeke
+Hotton_title,Hotton
+Houffalize_title,Houffalize
+Houthalen-Helchteren_title,Houthalen-Helchteren
+Houthulst_title,Houthulst
+Houyet_title,Houyet
+Hove_title,Hove
+Huldenberg_title,Huldenberg
+Hulshout_title,Hulshout
+IE_title,Inactief/leeg nest
+Ichtegem_title,Ichtegem
+Ieper_title,Ieper
+Incourt_title,Incourt
+Ingelmunster_title,Ingelmunster
+Itter_title,Itter
+Izegem_title,Izegem
+Jabbeke_title,Jabbeke
+Jalhay_title,Jalhay
+Jemeppe-Sur-Sambre_title,Jemeppe-Sur-Sambre
+Jette_title,Jette
+Juprelle_title,Juprelle
+Jurbeke_title,Jurbeke
+Kalmthout_title,Kalmthout
+Kampenhout_title,Kampenhout
+Kapelle-Op-Den-Bos_title,Kapelle-Op-Den-Bos
+Kapellen_title,Kapellen
+Kaprijke_title,Kaprijke
+Kasteelbrakel_title,Kasteelbrakel
+Kasterlee_title,Kasterlee
+Keerbergen_title,Keerbergen
+Kelmis_title,Kelmis
+Kinrooi_title,Kinrooi
+Kluisbergen_title,Kluisbergen
+Knesselare_title,Knesselare
+Knokke-Heist_title,Knokke-Heist
+Koekelare_title,Koekelare
+Koekelberg_title,Koekelberg
+Koksijde_title,Koksijde
+Komen-Waasten_title,Komen-Waasten
+Kontich_title,Kontich
+Kortemark_title,Kortemark
+Kortenaken_title,Kortenaken
+Kortenberg_title,Kortenberg
+Kortessem_title,Kortessem
+Kortrijk_title,Kortrijk
+Kraainem_title,Kraainem
+Kruibeke_title,Kruibeke
+Kruishoutem_title,Kruishoutem
+Kuurne_title,Kuurne
+La Bruyere_title,La Bruyere
+La Louviere_title,La Louviere
+La Roche-En-Ardenne_title,La Roche-En-Ardenne
+Laakdal_title,Laakdal
+Laarne_title,Laarne
+Lanaken_title,Lanaken
+Landen_title,Landen
+Langemark-Poelkapelle_title,Langemark-Poelkapelle
+Lasne_title,Lasne
+Le Roeulx_title,Le Roeulx
+Lebbeke_title,Lebbeke
+Lede_title,Lede
+Ledegem_title,Ledegem
+Leglise_title,Leglise
+Lendelede_title,Lendelede
+Lennik_title,Lennik
+Lens_title,Lens
+Leopoldsburg_title,Leopoldsburg
+Les Bons Villers_title,Les Bons Villers
+Lessen_title,Lessen
+Leuven_title,Leuven
+Leuze-En-Hainaut_title,Leuze-En-Hainaut
+Libin_title,Libin
+Libramont-Chevigny_title,Libramont-Chevigny
+Lichtervelde_title,Lichtervelde
+Liedekerke_title,Liedekerke
+Lier_title,Lier
+Lierde_title,Lierde
+Lierneux_title,Lierneux
+Lijsem_title,Lijsem
+Lille_title,Lille
+Limburg_title,Limburg
+Linkebeek_title,Linkebeek
+Lint_title,Lint
+Linter_title,Linter
+Lo-Reninge_title,Lo-Reninge
+Lobbes_title,Lobbes
+Lochristi_title,Lochristi
+Lokeren_title,Lokeren
+Lommel_title,Lommel
+Londerzeel_title,Londerzeel
+Lontzen_title,Lontzen
+Lovendegem_title,Lovendegem
+Lubbeek_title,Lubbeek
+Luik_title,Luik
+Lummen_title,Lummen
+Luxemburg_title,Luxemburg
+Maarkedal_title,Maarkedal
+Maaseik_title,Maaseik
+Maasmechelen_title,Maasmechelen
+Machelen_title,Machelen
+Maldegem_title,Maldegem
+Malle_title,Malle
+Malmedy_title,Malmedy
+Manage_title,Manage
+Manhay_title,Manhay
+Manual of Alien Plants_title,Manual of Alien Plants
+Marche-En-Famenne_title,Marche-En-Famenne
+Marchin_title,Marchin
+Martelange_title,Martelange
+Mechelen_title,Mechelen
+Meerhout_title,Meerhout
+Meeuwen-Gruitrode_title,Meeuwen-Gruitrode
+Meise_title,Meise
+Meix-Devant-Virton_title,Meix-Devant-Virton
 Melanesia_title,Melanesië
+Melle_title,Melle
+Menen_title,Menen
+Merbes-Le-Chateau_title,Merbes-Le-Chateau
+Merchtem_title,Merchtem
+Merelbeke_title,Merelbeke
+Merksplas_title,Merksplas
+Mesen_title,Mesen
+Messancy_title,Messancy
+Mettet_title,Mettet
+Meulebeke_title,Meulebeke
 Micronesia_title,Micronesië
+Middelkerke_title,Middelkerke
 Middle Africa_title,Midden-Afrika
+Modave_title,Modave
+Moerbeke_title,Moerbeke
+Moeskroen_title,Moeskroen
+Mol_title,Mol
+Momignies_title,Momignies
+Mont-De-L'enclus_title,Mont-De-L'enclus
+Mont-Saint-Guibert_title,Mont-Saint-Guibert
+Montigny-Le-Tilleul_title,Montigny-Le-Tilleul
+Moorslede_title,Moorslede
+Morlanwelz_title,Morlanwelz
+Mortsel_title,Mortsel
+Musson_title,Musson
+NA_title,NA
+Namen_title,Namen
+Nandrin_title,Nandrin
+Nassogne_title,Nassogne
+Natuurpunt_title,Natuurpunt
+Nazareth_title,Nazareth
+Neerpelt_title,Neerpelt
+Neufchateau_title,Neufchateau
+Neupre_title,Neupre
+Nevele_title,Nevele
+Niel_title,Niel
+Nieuwerkerken_title,Nieuwerkerken
+Nieuwpoort_title,Nieuwpoort
+Nijlen_title,Nijlen
+Nijvel_title,Nijvel
+Ninove_title,Ninove
+Non-union list_title,niet-Unielijst
 Northern Africa_title,Noord-Afrika
 Northern America_title,Noord-Amerika
+Oceania_title,Oceanië
+Oerle_title,Oerle
+Ohey_title,Ohey
+Olen_title,Olen
+Olne_title,Olne
+Onhaye_title,Onhaye
+Oost-Vlaanderen_title,Oost-Vlaanderen
+Oostende_title,Oostende
+Oosterzele_title,Oosterzele
+Oostkamp_title,Oostkamp
+Oostrozebeke_title,Oostrozebeke
+Opglabbeek_title,Opglabbeek
+Opwijk_title,Opwijk
+Opzullik_title,Opzullik
+Orp-Jauche_title,Orp-Jauche
+Ottignies-Louvain-La-Neu_title,Ottignies-Louvain-La-Neu
+Oud-Heverlee_title,Oud-Heverlee
+Oud-Turnhout_title,Oud-Turnhout
+Oudenaarde_title,Oudenaarde
+Oudenburg_title,Oudenburg
+Oudergem_title,Oudergem
+Ouffet_title,Ouffet
+Oupeye_title,Oupeye
+Overijse_title,Overijse
+Overpelt_title,Overpelt
+Paliseul_title,Paliseul
+Pecq_title,Pecq
+Peer_title,Peer
+Pepingen_title,Pepingen
+Pepinster_title,Pepinster
+Peruwelz_title,Peruwelz
+Perwijs_title,Perwijs
+Philippeville_title,Philippeville
+Pittem_title,Pittem
+Plombieres_title,Plombieres
+Pont-A-Celles_title,Pont-A-Celles
+Poperinge_title,Poperinge
+Profondeville_title,Profondeville
+Putte_title,Putte
+Puurs_title,Puurs
+Quaregnon_title,Quaregnon
+Quevy_title,Quevy
+Quievrain_title,Quievrain
+RINSE1_title,RINSE1
+RINSE2_title,RINSE2
+Raeren_title,Raeren
+Ramillies_title,Ramillies
+Ranst_title,Ranst
+Ravels_title,Ravels
+Rebecq_title,Rebecq
+Remicourt_title,Remicourt
+Rendeux_title,Rendeux
+Retie_title,Retie
+Riemst_title,Riemst
+Rijkevorsel_title,Rijkevorsel
+Rixensart_title,Rixensart
+Rochefort_title,Rochefort
+Roeselare_title,Roeselare
+Ronse_title,Ronse
+Roosdaal_title,Roosdaal
+Rotselaar_title,Rotselaar
+Rouvroy_title,Rouvroy
+Ruiselede_title,Ruiselede
+Rumes_title,Rumes
+Rumst_title,Rumst
+Saint-Georges-Sur-Meuse_title,Saint-Georges-Sur-Meuse
+Saint-Ghislain_title,Saint-Ghislain
+Saint-Hubert_title,Saint-Hubert
+Saint-Leger_title,Saint-Leger
+Saint-Nicolas_title,Saint-Nicolas
+Sainte-Ode_title,Sainte-Ode
+Sambreville_title,Sambreville
+Sankt Vith_title,Sankt Vith
+Schaarbeek_title,Schaarbeek
+Schelle_title,Schelle
+Scherpenheuvel-Zichem_title,Scherpenheuvel-Zichem
+Schilde_title,Schilde
+Schoten_title,Schoten
+Seneffe_title,Seneffe
+Seraing_title,Seraing
+Sint-Agatha-Berchem_title,Sint-Agatha-Berchem
+Sint-Amands_title,Sint-Amands
+Sint-Genesius-Rode_title,Sint-Genesius-Rode
+Sint-Gillis-Waas_title,Sint-Gillis-Waas
+Sint-Gillis_title,Sint-Gillis
+Sint-Jans-Molenbeek_title,Sint-Jans-Molenbeek
+Sint-Joost-Ten-Node_title,Sint-Joost-Ten-Node
+Sint-Katelijne-Waver_title,Sint-Katelijne-Waver
+Sint-Lambrechts-Woluwe_title,Sint-Lambrechts-Woluwe
+Sint-Laureins_title,Sint-Laureins
+Sint-Lievens-Houtem_title,Sint-Lievens-Houtem
+Sint-Martens-Latem_title,Sint-Martens-Latem
+Sint-Niklaas_title,Sint-Niklaas
+Sint-Pieters-Leeuw_title,Sint-Pieters-Leeuw
+Sint-Pieters-Woluwe_title,Sint-Pieters-Woluwe
+Sint-Truiden_title,Sint-Truiden
+Sivry-Rance_title,Sivry-Rance
+Sombreffe_title,Sombreffe
+Somme-Leuze_title,Somme-Leuze
+Soumagne_title,Soumagne
 South America_title,Zuid-Amerika
 Southeastern Asia_title,Zuidoost-Azië
 Southern Africa_title,Zuid-Afrika
 Southern Asia_title,Zuid-Azië
 Southern Europe_title,Zuid-Europa
+Spa_title,Spa
+Spiere-Helkijn_title,Spiere-Helkijn
+Sprimont_title,Sprimont
+Stabroek_title,Stabroek
+Staden_title,Staden
+Stavelot_title,Stavelot
+Steenokkerzeel_title,Steenokkerzeel
+Stekene_title,Stekene
+Stoumont_title,Stoumont
+Tellin_title,Tellin
+Temse_title,Temse
+Tenneville_title,Tenneville
+Terhulpen_title,Terhulpen
+Ternat_title,Ternat
+Tervuren_title,Tervuren
+Tessenderlo_title,Tessenderlo
+Theux_title,Theux
+Thimister-Clermont_title,Thimister-Clermont
+Thuin_title,Thuin
+Tielt-Winge_title,Tielt-Winge
+Tielt_title,Tielt
+Tienen_title,Tienen
+Tinlot_title,Tinlot
+Tintigny_title,Tintigny
+Tongeren_title,Tongeren
+Torhout_title,Torhout
+Tremelo_title,Tremelo
+Trois-Ponts_title,Trois-Ponts
+Trooz_title,Trooz
+Tubeke_title,Tubeke
+Turnhout_title,Turnhout
+UK_title,Onbekend
+Ukkel_title,Ukkel
+Union list_title,Unielijst
+Vaux-Sur-Sure_title,Vaux-Sur-Sure
+Verlaine_title,Verlaine
+Verviers_title,Verviers
+Vespawatch_title,Vespawatch
+Veurne_title,Veurne
+Vielsalm_title,Vielsalm
+Villers-La-Ville_title,Villers-La-Ville
+Villers-Le-Bouillet_title,Villers-Le-Bouillet
+Vilvoorde_title,Vilvoorde
+Viroinval_title,Viroinval
+Virton_title,Virton
+Vlaams-Brabant_title,Vlaams-Brabant
+Vleteren_title,Vleteren
+Vloesberg_title,Vloesberg
+Voeren_title,Voeren
+Vorselaar_title,Vorselaar
+Vorst_title,Vorst
+Vosselaar_title,Vosselaar
+Vresse-Sur-Semois_title,Vresse-Sur-Semois
+WRiMS_title,WRiMS
+Waals-Brabant_title,Waals-Brabant
+Waarschoot_title,Waarschoot
+Waasmunster_title,Waasmunster
+Wachtebeke_title,Wachtebeke
+Walcourt_title,Walcourt
+Walhain_title,Walhain
+Wanze_title,Wanze
+Waregem_title,Waregem
+Wasseiges_title,Wasseiges
+Waterloo_title,Waterloo
+Watermaal-Bosvoorde_title,Watermaal-Bosvoorde
+Waver_title,Waver
+Weismes_title,Weismes
+Welkenraedt_title,Welkenraedt
+Wellen_title,Wellen
+Wellin_title,Wellin
+Wemmel_title,Wemmel
+Wervik_title,Wervik
+West-Vlaanderen_title,West-Vlaanderen
+Westerlo_title,Westerlo
 Western Africa_title,West-Afrika
 Western Asia_title,West-Azië
 Western Europe_title,West-Europa
-unknown_title,Onbekend
-first_observed_title,jaar van eerste waarneming
-last_observed_title,jaar van laatste waarneming
-kingdom_title,rijk
-phylum_title,stam
-class_title,klasse
-order_title,orde
-family_title,familie
-locality_title,locatie
-locationId_title,locatie-ID
-native_range_title,natuurlijke verspreiding
-degree_of_establishment_title,mate van vestiging
-pathway_title,introductieroutes
-pathway_level1_title,Categorie van introductieroute
-pathway_level2_title,Subcategorie van introductieroute
-habitat_title,habitat
-marine_title,marien
-freshwater_title,zoetwater
-terrestrial_title,terrestrisch
-source_title,Bron
-species_title,Soort
-native_continent_title,continent van oorsprong
-more_title,Meer
-less_title,Minder
-gbifLink_title,GBIF taxonomisch ID (taxonkey)
-sourceLink_title,Bron
-examples_title,voorbeelden
-start_title,Start
-checklist_indicators_title,Checklist indicatoren
-species_information_title,Soortgegevens
-early_warning_title,Early alert
-management_title,Beheer
-taxa_title,Taxa
-trend_title,Trend
-pathways_title,Introductieroutes
-origin_title,Oorsprong
-observations_title,Waarnemingen
-indicators_title,Indicatoren
-reporting_title,Rapportering
-habitats_title,Habitats
-risk_maps_title,Risicokaarten
-links_title,Links
-risk_assessment_title,Risicoanalyse
-images_title,Beelden
-gender_title,Geslacht
-samplingProtocol_title,Staalnameprotocol
-noData_title,Geen data beschikbaar
-shareLink_title,Deel link
-allTaxa_title,Alle taxa
-allHabitats_title,Alle habitats
-allPathways_title,Alle routes
+Wetteren_title,Wetteren
+Wevelgem_title,Wevelgem
+Wezembeek-Oppem_title,Wezembeek-Oppem
+Wezet_title,Wezet
+Wichelen_title,Wichelen
+Wielsbeke_title,Wielsbeke
+Wijnegem_title,Wijnegem
+Willebroek_title,Willebroek
+Wingene_title,Wingene
+Wommelgem_title,Wommelgem
+Wortegem-Petegem_title,Wortegem-Petegem
+Wuustwezel_title,Wuustwezel
+Yvoir_title,Yvoir
+Zandhoven_title,Zandhoven
+Zaventem_title,Zaventem
+Zedelgem_title,Zedelgem
+Zele_title,Zele
+Zelzate_title,Zelzate
+Zemst_title,Zemst
+Zingem_title,Zingem
+Zinnik_title,Zinnik
+Zoersel_title,Zoersel
+Zomergem_title,Zomergem
+Zonhoven_title,Zonhoven
+Zonnebeke_title,Zonnebeke
+Zottegem_title,Zottegem
+Zoutleeuw_title,Zoutleeuw
+Zuienkerke_title,Zuienkerke
+Zulte_title,Zulte
+Zutendaal_title,Zutendaal
+Zwalm_title,Zwalm
+Zwevegem_title,Zwevegem
+Zwijndrecht_title,Zwijndrecht
+absolute_title,absoluut
 allDoe_title,Alle mate van vestiging
+allHabitats_title,Alle habitats
 allNative_title,Alle natuurlijk arealen
-allYears_title,Alle jaartallen
+allPathways_title,Alle routes
 allRegions_title,Alle regio's
 allSources_title,Alle bronnen
+allTaxa_title,Alle taxa
 allUnion_title,Unie- en niet-unielijstsoorten
-andMissing_title,en ontbrekend
-includeMissing_title,inclusief ontbrekend
-totalSpecies_title,Totaal aantal soorten
-tableLegend_title,Legende Tabel
-tableTitle_title,Overzicht Tabel
-icons_title,Iconen
-colors_title,Kleur van het icoon
-colors_text_title,De kleur van deze iconen geeft aan welke gegevens beschikbaar zijn op het exotenportaal voor de betreffende soort:
-min_1_obs_title,De soort werd waargenomen in België sinds 1950 (gegevens van GBIF)
-is_union_title,"De soort is opgenomen in <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> de lijst van soorten van Uniebelang</a>."
-only_obs_title,"Het portaal bevat gegevens over waarnemingen, indicatoren en (voor Unielijstsoorten) rapportage."
-incomplete_out_title,Onvolledige output
+allYears_title,Alle jaartallen
 all_out_title,"Het portaal bevat gegevens over waarnemingen, indicatoren, beheer en (voor Unielijstsoorten) rapportage."
-year_title,Jaar
-numberTaxa_title,Aantal geïntroduceerde taxa
-period_title,Periode
-singlePathway_title,Gelieve 1 route (niveau 1) te selecteren voor deze figuur
-number_title,Aantal
-legend_title,Legende
-topright_title,Bovenaan rechts
-bottomright_title,Onderaan rechts
-topleft_title,Bovenaan links
-bottomleft_title,Onderaan links
-none_title,<geen>
-hideGlobe_title,Verberg landkaart
-showGlobe_title,Toon landkaart
-downloadMap_title,Download kaart
-correctBias_title,Gecorrigeerd voor waarnemer-bias
-protectAreas_title,Beschermde gebieden
-percentCages_title,Percentage bezette hokken (10km2) in Vlaanderen
-baseline_title,Basis
 all_title,Alle
-male_title,mannelijk
-female_title,vrouwelijk
-juvenile_title,juveniel
-pulli_title,pulli
-missing_title,ontbrekend
-culling - shooting_title,afschot
-Capture_title,vangst
-region_title,Gewest
-regions_title,Regio’s
-regionLevel_title,Regio-schaal
-unit_title,eenheid
-communes_title,gemeentes
-provinces_title,provincies
-cpue_title,vangst per eenheid inspanning
-absolute_title,absoluut
-group_title,groep
-summary_title,samenvatting
-sum_title,aantal
-cumsum_title,cumulatief aantal
-count_title,aantal
-lifeStage_title,levensstadium
-combineRegions_title,Combineer alle geselecteerde regio’s in de trendgrafiek
-NA_title,NA
-release_title,UITZETTING in de natuur
-escape_title,ONTSNAPPING uit afsluiting
-contaminant_title,TRANSPORT - besmetting
-stowaway_title,TRANSPORT - verstekeling
-corridor_title,CORRIDOR
-unaided_title,ZONDER HULP
-release_biological_control_title,Biologische bestrijding
-release_erosion_control_title,"Erosiebestrijding / duinversteviging (windbrekers, heggen, ...)"
-release_fishery_title,Visvangst in het wild (incl. hengelsport)
-release_hunting_title,Jacht
-release_landscape_improvement_title,Landschaps-/flora-/faunaverbetering
-release_conservation_title,Introductie voor het natuurbehoud of faunabeheer
-release_use_title,"Uitzetting in de natuur voor gebruik (verschillend van bovenstaande, b.v., pelsdieren, transport, medisch gebruik)"
-release_other_title,Andere opzettelijke uitzetting
-escape_agriculture_title,Landbouw (incl. biobrandstoffen)
-escape_aquaculture_title,Aquacultuur / maricultuur
-escape_zoo_title,Planten-/dierentuinen of aquaria (excl. particuliere aquaria)
-escape_pet_title,Huis-/aquarium-/terrariumdieren (incl. hun levend voeder)
-escape_farm_title,Gekweekte dieren (incl. dieren onder beperkt toezicht)
-escape_forestry_title,Bosbouw (incl. bebossing of herbebossing)
-escape_fur_farm_title,Pelsdierkwekerijen
-escape_horticulture_title,Tuinbouw
-escape_ornamental_title,Andere sierdoeleinden dan tuinbouw
-escape_research_title,Onderzoek en ex-situ kweek (binnen faciliteiten)
-escape_food_bait_title,Levend voeder en aas
-escape_other_title,Andere ontsnapping uit gehouden omgeving
-contaminant_nursery_title,Besmetting van plantgoed
-contaminant_bait_title,Besmetting van aas
-contaminant_food_title,Besmetting van voedsel (incl. van levend voedsel)
-contaminant_on_animals_title,"Besmetting op dieren (excl. parasieten, soorten vervoerd door gastheer/vector)"
-contaminant_animal_parasite_title,Parasieten van dieren (incl. soorten vervoerd door gastheer/vector)
-contaminant_on_plants_title,"Besmetting op planten (excl. parasieten, soorten vervoerd door gastheer/vector)"
-contaminant_plant_parasite_title,Parasieten van planten (incl. soorten vervoerd door gastheer/vector)
-contaminant_seed_title,Besmetting van zaadgoed
-contaminant_timber_title,Houthandel
-contaminant_habitat_material_title,"Vervoer van habitatmateriaal (bodem, vegetatie, ...)"
-stowaway_fishing_equipment_title,Visseij- en hengelmateriaal
-stowaway_container_title,Container / vracht
-stowaway_airplane_title,Verstekeling in of op vliegtuigen
-stowaway_ship_title,Verstekeling van schepen/boten (excl. ballastwater of rompvervuiling)
-stowaway_machinery_title,Machines / uitrusting
-stowaway_people_luggage_title,Mensen en hun bagage/materiaal (in bijzonder toerisme)
-stowaway_organic_packing_title,"Organisch verpakkingsmateriaal, in bijzonder houten verpakkingen"
-stowaway_ballast_water_title,Ballastwater van schepen / boten
-stowaway_hull_fouling_title,Scheeps-/bootrompvervuiling
-stowaway_vehicles_title,"Voertuigen (auto's, treinen, ...)"
-stowaway_other_title,Andere vervoerswijzen
-corridor_water_title,Verbonden waterwegen / -bekkens / zeeën
-corridor_land_title,Tunnels en landbruggen
-natural_dispersal_title,Natuurlijke verspreiding
-release_unknown_title,UITZETTING IN DE NATUUR (niet gespecificeerd)
-escape_unknown_title,ONTSNAPPING uit gehouden omgeving (niet gespecificeerd)
-contaminant_unknown_title,TRANSPORT - BESMETTING (niet gespecificeerd)
-stowaway_unknown_title,TRANSPORT - VERSTEKELING (niet gespecificeerd)
-corridor_unknown_title,CORRIDOR (niet gespecificeerd)
-unaided_unknown_title,ZONDER HULP (niet gespecificeerd)
-unaided_natural_dispersal_title,ZONDER HULP (natuurlijke verspreiding)
-unknown_unknown_title,Onbekend (niet gespecificeerd)
-captive_title,in gevangenschap
-casual_title,sporadisch
-colonizing_title,koloniserend
-cultivated_title,geteeld/gekweekt
-established_title,gevestigd
-extinct_title,uitgestorven
-introduced_title,geïntroduceerd
-invasive_title,invasief
-released_title,losgelaten
-reproducing_title,zich voortplantend
-widespreadInvasive_title,wijdverspreid en invasief
-Union list_title,Unielijst
-Non-union list_title,niet-Unielijst
-gewest_title,gewest
-multipleRegions_title,meer dan 1 gewest
-not selected_title,niet geselecteerd
-selected_title,geselecteerd
-Ad hoc alien species checklist_title,Ad hoc alien species checklist
-Alien Bird Checklist_title,Alien Bird Checklist
-Alien Fish Flanders_title,Alien Fish Flanders
-Alien Macroinverts_title,Alien Macroinverts
-Alien Mollusc checklist_title,Alien Mollusc checklist
-Belgian rust fungi_title,Belgian rust fungi
-Manual of Alien Plants_title,Manual of Alien Plants
-RINSE1_title,RINSE1
-RINSE2_title,RINSE2
-WRiMS_title,WRiMS
-unionColor_title,Unie kleur
-occurColor_title,Waarneming kleur
-occurrence_title,Waarneming
-graph_title,Figuur
-managed nest_title,Behandeld nest
-untreated nest_title,Onbehandeld nest
-individual_title,Individu
-nest_title,Nest
-lenteNesten_title,Aantal gemelde nesten t.e.m. 19 mei
-total_title,Totaal
-map_title,Kaart
-difference_title,Verschil
-disclaimerVespa_title,"De soort is momenteel niet actief. Wanneer u een individu observeert, kan dit een overwinterende koningin zijn, wat geen nestactiviteit aangeeft"
-AE_title,Actief embryonaal nest
-AP_title,Actief primair nest
-AS_title,Actief secundair nest
-IE_title,Inactief/leeg nest
-UK_title,Onbekend
-Behandeling_title,Behandeling
-succesvol_title,succesvol
-niet succesvol_title,niet succesvol
-behandeld_title,behandeld
-niet behandeld_title,niet behandeld
-onbekend_title,onbekend
-row_title,rij
-modelScenario_title,Model scenario
-hist_title,Model gebaseerd op historische klimaatdata
-rcp26_title,model gebaseerd op klimaatvoorspellingen onder RCP 2.6 voor 2040-2070
-rcp45_title,model gebaseerd op klimaatvoorspellingen onder RCP 4.5 voor 2040-2070
-rcp85_title,model gebaseerd op klimaatvoorspellingen onder RCP 8.5 voor 2040-2070
-modelType_title,Model type
-riskMap_title,Risicokaart
-diffMap_title,Kaart met verschil in risico tussen het RCP-klimaatscenario en de historische klimaatgegevens
-confMap_title,Kaart met confidentie in voorspeld risico
-riskLow_title,laag risico
-riskHigh_title,hoog risico
-diffLow_title,laag risicoverschil
-diffHigh_title,hoog risicoverschil
-confLow_title,lage betrouwbaarheid
-confHigh_title,hoge betrouwbaarheid
-failing_title,falend
-gam_0_title,niet opkomend
-gam_1_title,onduidelijk
-gam_2_title,mogelijk opkomend
-gam_3_title,opkomend
-contents_title,Inhoudsopgave
-createReport_title,Maak rapport
-parameters_title,Parameters
-noParameters_title,Geen parameters geselecteerd
-version_title,Versie
-yes_title,ja
-no_title,nee
-radius_title,radius
-Natuurpunt_title,Natuurpunt
-Vespawatch_title,Vespawatch
-bottom_title,onderaan
-top_title,bovenaan
-right_title,rechts
-left_title,links
-summarizeBy_title,samenvatten per
-t0_title,t0
-t1_title,t1
-contactMissing_title,Rapporteer ontbrekende data
-contactApp_title,Rapporteer een probleem met de applicatie
-nBins_title,Aantal groepen
-break_title,Afkapwaarde
-binType_title,Type groepen
-quantiles_title,Kwantielen
-uniform_title,Uniforme verdeling
-userDefined_title,Aangepast door gebruiker
-name_title,Naam
-binConfirm_title,Bevestig groepen
-isBeheerd_title,Beheerd
-nest_type_title,Nest type
-key_title,
-undefined_title,
-cumulative_title,cumulatief aantal
-vernacular_name_title,zoeken op gangbare namen
-vernacular_name_col_title,gangbare namen
-other_db_title,Andere dashboards
-mica_db_title,MICA dashboard
-radius_db_title,RadIUS dashboard
-faq_title,FAQ
-apply_gamObservations_title,Status van opkomst (GAM) - Gemodelleerd aantal waarnemingen
-apply_gamOccupancy_title,Status van opkomst (GAM) - Gemodelleerde bezette oppervlakte
-barplotLenteNesten_title,Voorjaarsnesten
-countNesten_title,Aantal nesten per provincie (figuur)
-indicator_introduction_year_title,Aantal nieuw geïntroduceerde soorten per jaar
-indicator_total_year_title,Cumulatief aantal geïntroduceerde soorten
-indicator_native_range_year_title,Aantal geïntroduceerde soorten per jaar en per continent van oorsprong
-countOccupancy_title,Trend in de bezetting van Unielijstsoorten in Vlaanderen
-get_table_pathways_title,Aantal geïntroduceerde soorten per introductieroute
-management2_active-mapHeat_title,Actieve haarden
-management2_observed-mapHeat_title,Alle observaties huidig jaar
-management2-countYearGroup_title,Beheer van nesten
-management3-countYearGroup_title,Het aantal beheerde {{species}} individuen
-observations-mapOccurrence_title,Waarnemingen van {{species}}
-reporting_t1-mapOccurrence_title,Rapportering van {{species}}
-reporting_t01-mapOccurrence_title,Rapportering van {{species}}
-management-mapOccurrence_title,Beheer van {{species}}
-management-mapInvasion_title,Invasie geschiedenis van <i>{{species}}</i>
-risk-mapRaster_title,TrIAS Risicokaarten
-tableIndicators_title,
-tableNesten_title,Aantal nesten per provincie (tabel)
-visualize_pathways_level1_title,Aantal geïntroduceerde taxa per introductieroutecategorie
-visualize_pathways_year_level1_title,Trends in het aantal geïntroduceerde taxa per introductie route categorie
-visualize_pathways_level2_title,Aantal geïntroduceerde taxa per introductie route subcategorie
-visualize_pathways_year_level2_title,Trends in het aantal geïntroduceerde taxa per introductie route subcategorie
-welcomeTitle_title,Welkom op het exotenportaal
-occupancy_title,Verspreiding
-checklist-welcome_title,Checklijst indicatoren
-species-welcome_title,Soortgegevens
+andMissing_title,en ontbrekend
 apply_gamObservations_description,"<p>Gegeneraliseerd Additief Model (GAM) gebaseerd op het aantal waarnemingen van een soort.</p> 
 <p>Dit model is gebaseerd op de <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes voor niet-inheemse taxa in België en Europa.</a>
 <p>De zwarte punten geven het aantal waarnemingen van de soort weer per jaar. De trendlijn toont het verloop volgens een GAM, gebaseerd op deze waarnemingen. De kleuren geven de status van opkomst voor een bepaald jaar weer: <b style=""color: green;"">groene</b> bollen geven aan dat de soort niet opkomend is, <b style=""color: orange;"">oranje</b> dat de soort mogelijk opkomend is, <b style=""color: red;"">rode</b> dat de soort opkomend is en <b style=""color: grey;"">grijze</b> dat het model geen uitsluitsel kan geven.</p>
 <p>Dit model kan gecorrigeerd worden op basis van waarnemers bias<sup>1</sup> en kan specifiek gelopen worden voor beschermde Natura2000 gebieden<sup>2</sup>.</p>
 <p><i><sup>1</sup>Het aantal waarnemingen wordt gecorrigeerd ten opzichte van het aantal waarnemingen van de klasse van de soort (bv. in het geval van Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>) worden waarnemingen van andere Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) in rekening gebracht).</i></br><i><sup>2</sup>Enkel waarnemingen waarvan de 1x1km gridcel overlapt met een Natura2000-gebied worden in rekening gebracht. Elke waarneming wordt toegewezen aan een willekeurige gridcel op basis van de nauwkeurigheid van de gerapporteerde locatie. Hierdoor kan het resultaat van het GAM-model voor Natura2000 gebieden licht variëren na een update.</i>
 </p>Voor meer informatie over de gebruikte methode kan u steeds  <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank""> de documentatie van de TrIAS indicatoren</a> raadplegen."
+apply_gamObservations_title,Status van opkomst (GAM) - Gemodelleerd aantal waarnemingen
 apply_gamOccupancy_description,"<p>Gegeneraliseerd Additief Model (GAM) gebaseerd op de oppervlakte die bezet wordt door een soort.</p> 
 <p>Dit model is gebaseerd op de <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes voor niet-inheemse taxa in België en Europa.</a>
 <p>De zwarte punten geven het aantal bezette hokken van de soort weer per jaar. De trendlijn geeft de GAM gebaseerd op de graad van bezetting weer. De kleuren geven de status van opkomst voor een bepaald jaar weer. <b style=""color: green;"">Groene</b> bollen geven aan dat de soort niet opkomend is, <b style=""color: orange;"">oranje</b> dat de soort mogelijk opkomend is, <b style=""color: red;"">rode</b> dat de soort opkomend is en <b style=""color: grey;"">grijze</b> dat het model geen uitsluitsel kan geven.</p>
@@ -946,43 +670,170 @@ apply_gamOccupancy_description,"<p>Gegeneraliseerd Additief Model (GAM) gebaseer
 <p><i><sup>1</sup>Het aantal waarnemingen wordt gecorrigeerd ten opzichte van het aantal waarnemingen van de klasse van de soort, bvb in het geval van Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>) worden waarnemingen van andere Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) in rekening gebracht.</i></br>
 <i><sup>2</sup>Enkel waarnemingen wiens 1x1km hok overlap heeft met een Natura2000 gebied worden in rekening gebracht. Iedere observatie krijgt een willekeurig hok toegewezen gebaseerd op de nauwkeurigheid van de melding. Hierdoor kan het voorkomen dat het resultaat van de GAM voor Natura2000 na een update licht andere resultaten geeft</i></p>
 <p>Voor meer informatie in verband met de gebruikte methode kan u steeds terecht bij de <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">TrIAS indicatoren</a></p>"
+apply_gamOccupancy_title,Status van opkomst (GAM) - Gemodelleerde bezette oppervlakte
 barplotLenteNesten_description,Het aantal op vespawatch.be gemelde nesten tussen 1 januari en 19 mei
+barplotLenteNesten_title,Voorjaarsnesten
+baseline_title,Basis
+behandeld_title,behandeld
+binConfirm_title,Bevestig groepen
+binType_title,Type groepen
+bottom_title,onderaan
+bottomleft_title,Onderaan links
+bottomright_title,Onderaan rechts
+break_title,Afkapwaarde
+brussels_title,Brussels Hoofdstedelijk Gewest
+captive_title,in gevangenschap
+casual_title,sporadisch
+checklist-welcome_description,"Op deze pagina vindt u tabellen en grafieken terug gebaseerd op de <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklijst van België</a>."
+checklist-welcome_title,Checklijst indicatoren
+checklist_indicators_title,Checklist indicatoren
+class_title,klasse
+colonizing_title,koloniserend
+colors_text_title,De kleur van deze iconen geeft aan welke gegevens beschikbaar zijn op het exotenportaal voor de betreffende soort:
+colors_title,Kleur van het icoon
+combineRegions_title,Combineer alle geselecteerde regio’s in de trendgrafiek
+communes_title,gemeentes
+confHigh_title,hoge betrouwbaarheid
+confLow_title,lage betrouwbaarheid
+confMap_title,Kaart met confidentie in voorspeld risico
+confirmLanguageChange_description,Weet u zeker dat u de taal van de applicatie wilt wijzigen? Dit zal leiden tot verlies van grafiek- en tabelinstellingen.
+confirmLanguageChange_title,Taal wijzigen
+contactApp_title,Rapporteer een probleem met de applicatie
+contactMissing_title,Rapporteer ontbrekende data
+contaminant_animal_parasite_title,Parasieten van dieren (incl. soorten vervoerd door gastheer/vector)
+contaminant_bait_title,Besmetting van aas
+contaminant_food_title,Besmetting van voedsel (incl. van levend voedsel)
+contaminant_habitat_material_title,"Vervoer van habitatmateriaal (bodem, vegetatie, ...)"
+contaminant_nursery_title,Besmetting van plantgoed
+contaminant_on_animals_title,"Besmetting op dieren (excl. parasieten, soorten vervoerd door gastheer/vector)"
+contaminant_on_plants_title,"Besmetting op planten (excl. parasieten, soorten vervoerd door gastheer/vector)"
+contaminant_plant_parasite_title,Parasieten van planten (incl. soorten vervoerd door gastheer/vector)
+contaminant_seed_title,Besmetting van zaadgoed
+contaminant_timber_title,Houthandel
+contaminant_title,TRANSPORT - besmetting
+contaminant_unknown_title,TRANSPORT - BESMETTING (niet gespecificeerd)
+contents_title,Inhoudsopgave
+correctBias_title,Gecorrigeerd voor waarnemer-bias
+corridor_land_title,Tunnels en landbruggen
+corridor_title,CORRIDOR
+corridor_unknown_title,CORRIDOR (niet gespecificeerd)
+corridor_water_title,Verbonden waterwegen / -bekkens / zeeën
 countNesten_description,Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>
-indicator_introduction_year_description,"Deze grafiek geeft een tijdsreeks weer van het aantal nieuw geïntroduceerde uitheemse soorten in België. De punten geven het aantal geïntroduceerde soorten weer voor een specifiek jaar (indien gegevens beschikbaar zijn), gebaseerd op de datum van de eerste waarneming van de soort zoals aangeven in de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e\"" target=""_blank""> GRIIS-checklist </a>. De algemene trend, gefit met behulp van een LOESS-model, wordt weergegeven in <b style=""color:#356196ff;"">blauw</b>, terwijl het <b style=""color:#94a7baff;"">blauw gearceerde gebied</b> het 95% betrouwbaarheidsinterval aangeeft."
-indicator_total_year_description,"Deze grafiek toont het cumulatieve aantal geïntroduceerde uitheemse soorten in België, gebaseerd op hun jaar van eerste observatie, zoals gedocumenteerd in de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">GRIIS-checklist</a>."
-indicator_native_range_year_description,"p>Het aantal geïntroduceerde soorten per jaar van eerste waarneming in België en per continent van oorsprong (of natuurlijke verspreiding)</p> <p><i>Verdere onderverdeling van continenten in subregio's is mogelijk door de optie ""natuurlijke verspreiding"" te selecteren in het dropdown-menu voor regio-schaal.</i></p>"
+countNesten_title,Aantal nesten per provincie (figuur)
 countOccupancy_description,"<img src=""https://cdn-icons-png.flaticon.com/512/7801/7801791.png"" alt=""attention"" style=""width:15px;height:15px;""> <i>AANDACHT: Deze figuur is onafhankelijk van geselecteerde filters bovenaan.</i>
 <br>
 <br>
 Deze grafiek toont de trend in bezetting (d.w.z. het percentage bezette 10 km<sup>2</sup> hokken) in Vlaanderen voor alle soorten die op <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> de lijst van soorten van Uniebelang</a> staan. Voor elke soort wordt de bezetting op het moment van opname in de Unie-lijst aangegeven in <span style=""color: #4f7c9bff;"">blauw</span> (Basis), terwijl de bezetting tijdens de meest recente driejaarlijkse rapporteringsperiode wordt weergegeven in <span style=""color: #e87837ff;"">oranje</span> (Rapportering)."
+countOccupancy_title,Trend in de bezetting van Unielijstsoorten in Vlaanderen
+count_title,aantal
+cpue_title,vangst per eenheid inspanning
+createReport_title,Maak rapport
+culling - shooting_title,afschot
+cultivated_title,geteeld/gekweekt
+cumsum_title,cumulatief aantal
+cumulative_title,cumulatief aantal
+degree_of_establishment_title,mate van vestiging
+diffHigh_title,hoog risicoverschil
+diffLow_title,laag risicoverschil
+diffMap_title,Kaart met verschil in risico tussen het RCP-klimaatscenario en de historische klimaatgegevens
+difference_title,Verschil
+disclaimerVespa_title,"De soort is momenteel niet actief. Wanneer u een individu observeert, kan dit een overwinterende koningin zijn, wat geen nestactiviteit aangeeft"
+downloadMap_title,Download kaart
+early_warning_title,Early alert
+endYear_title,Eind jaar
+escape_agriculture_title,Landbouw (incl. biobrandstoffen)
+escape_aquaculture_title,Aquacultuur / maricultuur
+escape_farm_title,Gekweekte dieren (incl. dieren onder beperkt toezicht)
+escape_food_bait_title,Levend voeder en aas
+escape_forestry_title,Bosbouw (incl. bebossing of herbebossing)
+escape_fur_farm_title,Pelsdierkwekerijen
+escape_horticulture_title,Tuinbouw
+escape_ornamental_title,Andere sierdoeleinden dan tuinbouw
+escape_other_title,Andere ontsnapping uit gehouden omgeving
+escape_pet_title,Huis-/aquarium-/terrariumdieren (incl. hun levend voeder)
+escape_research_title,Onderzoek en ex-situ kweek (binnen faciliteiten)
+escape_title,ONTSNAPPING uit afsluiting
+escape_unknown_title,ONTSNAPPING uit gehouden omgeving (niet gespecificeerd)
+escape_zoo_title,Planten-/dierentuinen of aquaria (excl. particuliere aquaria)
+established_title,gevestigd
+examples_title,voorbeelden
+extinct_title,uitgestorven
+failing_title,falend
+family_title,familie
+faq_title,FAQ
+female_title,vrouwelijk
+first_observed_title,jaar van eerste waarneming
+flanders_title,Vlaanderen
+freshwater_title,zoetwater
+gam_0_title,niet opkomend
+gam_1_title,onduidelijk
+gam_2_title,mogelijk opkomend
+gam_3_title,opkomend
+gbifLink_title,GBIF taxonomisch ID (taxonkey)
+gender_title,Geslacht
 get_table_pathways_description,"Deze tabel toont het aantal geïntroduceerde soorten en (maximaal) vijf voorbeelden per introductieroute-categorie en bijbehorende subcategorieën, zoals gespecificeerd in
  <a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf"" target = ""_blank"">de CBD categorieën</a>."
-management2_active-mapHeat_description,"Deze kaart illustreert waar Aziatische hoornaar is waargenomen, maar waar nog geen nest succesvol beheerd werd. Op deze plaatsen vinden mogelijks opsporingsacties plaats door de Vespawatchers.
-Waarnemingen worden weerhouden wanneer ze verder dan 2km van een succesvol beheerd nest bevinden en/of na een succesvolle beheeractie gemeld worden. Hoe intenser rood, hoe meer meldingen er in de buurt van elkaar zijn.
-Ontbrekende nesten kunnen steeds gemeld worden op <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
-</br><em>Data beschikbaar tot {{maxDate}}</em>"
-management2_observed-mapHeat_description,Op deze kaart worden alle nesten en individuen van Aziatische hoornaar getoond die in {{maxYear}} zijn gemeld via diverse kanalen. Nog niet alle meldingen zijn op dit kaartje weergegeven. Binnenkort zullen alle meldingen zichtbaar zijn. </br><em>Data beschikbaar tot {{maxDate}}</em>
-management2-countYearGroup_description,NA
-management3-countYearGroup_description,"<p>Deze grafiek toont de evolutie in het absolute of cumulatieve aantal beheerde individuen.</p>
-<p><i>Het aantal individuen kan worden onderverdeeld per levensfase indien beschikbaar</i></p>"
-observations-mapOccurrence_description,"<p>Kaart met waarnemingen. </p>
-<ul>
-<li><p><b style=""color: #000000;"">Zwarte</b> vierkanten geven gebieden van 10km x 10km aan waarin de soort is waargenomen.<br>
-<li><p><b style=""color: #FF0000;"">Rode</b> vierkanten markeren specifieke locaties van 1km x 1km binnen deze gebieden waar waarnemingen zijn gemeld.</p>
-</ul>
-<p>Het bijgevoegde staafdiagram toont een tijdreeks met het aantal waarnemingen per jaar in elke regio sinds 1950.</p>"
-reporting_t1-mapOccurrence_description,"Kaart waarop het volgende weergegeven wordt:
-<ul>
-  <li><b>alleen t<sub>0</sub>:</b> 10 km x 10 km gridcellen met alleen waarnemingen van de soort van 2000 tot het jaar van opname op de <a href=""https://environment.ec.europa.eu/topics/nature-and-biodiversity/invasive-alien-species_en"" target=""_blank"">lijst van soorten van Uniebezorgdheid</a>, zonder latere meldingen.</li>
-  <li><b>alleen t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort voor het eerst verscheen tijdens de eerste driejaarlijkse rapportagecyclus.</li>
-  <li><b>t<sub>0</sub> & t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort nog steeds aanwezig is.</li>
-</ul>"
-reporting_t01-mapOccurrence_description,"Kaart waarop het volgende weergegeven wordt:
-<ul>
-  <li><b>alleen t<sub>0</sub>:</b> 10 km x 10 km gridcellen met alleen waarnemingen van de soort van 2000 tot het jaar van opname op de <a href=""https://environment.ec.europa.eu/topics/nature-and-biodiversity/invasive-alien-species_en"" target=""_blank"">lijst van soorten van Uniebezorgdheid</a>, zonder latere meldingen.</li>
-  <li><b>alleen t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort voor het eerst verscheen tijdens de eerste driejaarlijkse rapportagecyclus.</li>
-  <li><b>t<sub>0</sub> & t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort nog steeds aanwezig is.</li>
-</ul>"
+get_table_pathways_title,Aantal geïntroduceerde soorten per introductieroute
+gewest_title,gewest
+graph_title,Figuur
+group_title,groep
+habitat_title,habitat
+habitats_title,Habitats
+hideGlobe_title,Verberg landkaart
+hist_title,Model gebaseerd op historische klimaatdata
+icons_title,Iconen
+images_title,Beelden
+includeMissing_title,inclusief ontbrekend
+incomplete_out_title,Onvolledige output
+indicator_introduction_year_description,"Deze grafiek geeft een tijdsreeks weer van het aantal nieuw geïntroduceerde uitheemse soorten in België. De punten geven het aantal geïntroduceerde soorten weer voor een specifiek jaar (indien gegevens beschikbaar zijn), gebaseerd op de datum van de eerste waarneming van de soort zoals aangeven in de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e\"" target=""_blank""> GRIIS-checklist </a>. De algemene trend, gefit met behulp van een LOESS-model, wordt weergegeven in <b style=""color:#356196ff;"">blauw</b>, terwijl het <b style=""color:#94a7baff;"">blauw gearceerde gebied</b> het 95% betrouwbaarheidsinterval aangeeft."
+indicator_introduction_year_title,Aantal nieuw geïntroduceerde soorten per jaar
+indicator_native_range_year_description,"p>Het aantal geïntroduceerde soorten per jaar van eerste waarneming in België en per continent van oorsprong (of natuurlijke verspreiding)</p> <p><i>Verdere onderverdeling van continenten in subregio's is mogelijk door de optie ""natuurlijke verspreiding"" te selecteren in het dropdown-menu voor regio-schaal.</i></p>"
+indicator_native_range_year_title,Aantal geïntroduceerde soorten per jaar en per continent van oorsprong
+indicator_total_year_description,"Deze grafiek toont het cumulatieve aantal geïntroduceerde uitheemse soorten in België, gebaseerd op hun jaar van eerste observatie, zoals gedocumenteerd in de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">GRIIS-checklist</a>."
+indicator_total_year_title,Cumulatief aantal geïntroduceerde soorten
+indicators_title,Indicatoren
+individual_title,Individu
+introduced_title,geïntroduceerd
+invasive_title,invasief
+isBeheerd_title,Beheerd
+is_union_title,"De soort is opgenomen in <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> de lijst van soorten van Uniebelang</a>."
+juvenile_title,juveniel
+key_title,NA
+kingdom_title,rijk
+last_observed_title,jaar van laatste waarneming
+left_title,links
+legend_title,Legende
+lenteNesten_title,Aantal gemelde nesten t.e.m. 19 mei
+less_title,Minder
+lifeStage_title,levensstadium
+links_title,Links
+locality_title,locatie
+locationId_title,locatie-ID
+male_title,mannelijk
+managed nest_title,Behandeld nest
+management-mapInvasion_description,"<div>
+  <p>
+    Deze kaarten tonen de verspreiding van de soort in het gekozen referentiejaar en vergelijken deze met de verspreiding in de twee voorgaande periodes van drie jaar.
+  </p>
+
+  <p>Als gebruiker kunt u zelf kiezen hoe de observatiegegevens worden ingedeeld. Dit gaat als volgt:</p>
+
+  <ol>
+    <li>Selecteer de knop <strong>'Edit classes'</strong>.</li>
+    <li>Stel het aantal categorieën in waarin u de waarnemingen wilt onderverdelen met de optie <strong>nBins</strong>.</li>
+    <li>
+      Bepaal hoe de gegevens worden verdeeld. U kunt kiezen tussen:
+      <ul>
+        <li><strong>Aangepaste indeling:</strong> u bepaalt zelf de grenzen.</li>
+        <li><strong>Uniforme verdeling:</strong> alle categorieën hebben een gelijke spreiding.</li>
+        <li><strong>Verdeling op basis van kwantielen:</strong> elke categorie bevat ongeveer evenveel waarnemingen.</li>
+      </ul>
+    </li>
+    <li>Geef de categorieën een naam: maak de weergave duidelijker door elke groep een passende naam te geven.</li>
+    <li>Bevestig uw instellingen: klik op <strong>'Confirm groups'</strong> om de kaart met uw indeling te vernieuwen.</li>
+  </ol>
+</div>"
+management-mapInvasion_title,Invasie geschiedenis van <i>{{species}}</i>
 management-mapOccurrence_description,"<p>Kaart en bijbehorende grafieken van de ruimtelijke verdeling van het gerealiseerd beheer.
 <li>Op de kaart ziet u de ruimtelijke verdeling voor het gekozen jaar.
 <li>Op de grafiek linksonder de kaart vindt u de trend per gewest (Vlaanderen, Wallonië en/of Brussel).
@@ -1032,29 +883,150 @@ management-mapOccurrence_description,"<p>Kaart en bijbehorende grafieken van de 
 </p>
 Voor meer informatie over het aanpassen van classes zie de <a href="""" target=""_blank"">veel gestelde vragen</a>
 </details>"
-management-mapInvasion_description,"<div>
-  <p>
-    Deze kaarten tonen de verspreiding van de soort in het gekozen referentiejaar en vergelijken deze met de verspreiding in de twee voorgaande periodes van drie jaar.
-  </p>
-
-  <p>Als gebruiker kunt u zelf kiezen hoe de observatiegegevens worden ingedeeld. Dit gaat als volgt:</p>
-
-  <ol>
-    <li>Selecteer de knop <strong>'Edit classes'</strong>.</li>
-    <li>Stel het aantal categorieën in waarin u de waarnemingen wilt onderverdelen met de optie <strong>nBins</strong>.</li>
-    <li>
-      Bepaal hoe de gegevens worden verdeeld. U kunt kiezen tussen:
-      <ul>
-        <li><strong>Aangepaste indeling:</strong> u bepaalt zelf de grenzen.</li>
-        <li><strong>Uniforme verdeling:</strong> alle categorieën hebben een gelijke spreiding.</li>
-        <li><strong>Verdeling op basis van kwantielen:</strong> elke categorie bevat ongeveer evenveel waarnemingen.</li>
-      </ul>
-    </li>
-    <li>Geef de categorieën een naam: maak de weergave duidelijker door elke groep een passende naam te geven.</li>
-    <li>Bevestig uw instellingen: klik op <strong>'Confirm groups'</strong> om de kaart met uw indeling te vernieuwen.</li>
-  </ol>
-</div>"
-risk-mapRaster_description,"Invasieve uitheemse soorten hebben het potentieel om ecosystemen te beschadigen,de biodiversiteit te verminderen en andere problemen voor mensen en dieren in het wild te veroorzaken. Om deze problemen te mitigeren is onderzoek nodig naar wat de potentiële risico’s zijn en welke soorten het meest waarschijnlijk een probleem vormen. Eén van de technieken die we gebruiken is het modelleren van de verspreiding van soorten. Deze modellen zijn bedoeld om de potentiële verspreiding van een soort te schatten, gegeven de bekende omgevingsomstandigheden waarin hij momenteel leeft. In dergelijke modellen kunnen we ook toekomstscenario's in dergelijke modellen integreren, zodat we bij onze risicobeoordeling rekening kunnen houden met klimaatverandering. </br>Het is onwaarschijnlijk dat deze kaarten nauwkeurige voorspellingen zijn van de huidige of toekomstige verspreiding van soorten, maar ze zijn niettemin een leidraad voor wetenschappers die risicobeoordelingen uitvoeren. Ze helpen ons door aan te geven welke gebieden het meest kwetsbaar zijn voor invasie, en of de klimaatverandering waarschijnlijk een grotere of kleinere vestiging van de soort zal veroorzaken."
+management-mapOccurrence_title,Beheer van {{species}}
+management2-countYearGroup_description,NA
+management2-countYearGroup_title,Beheer van nesten
+management2_active-mapHeat_description,"Deze kaart illustreert waar Aziatische hoornaar is waargenomen, maar waar nog geen nest succesvol beheerd werd. Op deze plaatsen vinden mogelijks opsporingsacties plaats door de Vespawatchers.
+Waarnemingen worden weerhouden wanneer ze verder dan 2km van een succesvol beheerd nest bevinden en/of na een succesvolle beheeractie gemeld worden. Hoe intenser rood, hoe meer meldingen er in de buurt van elkaar zijn.
+Ontbrekende nesten kunnen steeds gemeld worden op <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
+</br><em>Data beschikbaar tot {{maxDate}}</em>"
+management2_active-mapHeat_title,Actieve haarden
+management2_observed-mapHeat_description,Op deze kaart worden alle nesten en individuen van Aziatische hoornaar getoond die in {{maxYear}} zijn gemeld via diverse kanalen. Nog niet alle meldingen zijn op dit kaartje weergegeven. Binnenkort zullen alle meldingen zichtbaar zijn. </br><em>Data beschikbaar tot {{maxDate}}</em>
+management2_observed-mapHeat_title,Alle observaties huidig jaar
+management3-countYearGroup_description,"<p>Deze grafiek toont de evolutie in het absolute of cumulatieve aantal beheerde individuen.</p>
+<p><i>Het aantal individuen kan worden onderverdeeld per levensfase indien beschikbaar</i></p>"
+management3-countYearGroup_title,Het aantal beheerde {{species}} individuen
+management_title,Beheer
+map_title,Kaart
+marine_title,marien
+mica_db_title,MICA dashboard
+min_1_obs_title,De soort werd waargenomen in België sinds 1950 (gegevens van GBIF)
+missing_title,ontbrekend
+modelScenario_title,Model scenario
+modelType_title,Model type
+more_title,Meer
+multipleRegions_title,meer dan 1 gewest
+nBins_title,Aantal groepen
+name_title,Naam
+native_continent_title,continent van oorsprong
+native_range_title,natuurlijke verspreiding
+natural_dispersal_title,Natuurlijke verspreiding
+nest_title,Nest
+nest_type_title,Nest type
+niet behandeld_title,niet behandeld
+niet succesvol_title,niet succesvol
+noData_title,Geen data beschikbaar
+noParameters_title,Geen parameters geselecteerd
+no_title,nee
+none_title,<geen>
+not selected_title,niet geselecteerd
+numberTaxa_title,Aantal geïntroduceerde taxa
+number_title,Aantal
+observations-mapOccurrence_description,"<p>Kaart met waarnemingen. </p>
+<ul>
+<li><p><b style=""color: #000000;"">Zwarte</b> vierkanten geven gebieden van 10km x 10km aan waarin de soort is waargenomen.<br>
+<li><p><b style=""color: #FF0000;"">Rode</b> vierkanten markeren specifieke locaties van 1km x 1km binnen deze gebieden waar waarnemingen zijn gemeld.</p>
+</ul>
+<p>Het bijgevoegde staafdiagram toont een tijdreeks met het aantal waarnemingen per jaar in elke regio sinds 1950.</p>"
+observations-mapOccurrence_title,Waarnemingen van {{species}}
+observations_title,Waarnemingen
+occupancy_description,Oppervlakte bezet door een soort
+occupancy_title,Verspreiding
+occurColor_title,Waarneming kleur
+occurrence_title,Waarneming
+onbekend_title,onbekend
+only_obs_title,"Het portaal bevat gegevens over waarnemingen, indicatoren en (voor Unielijstsoorten) rapportage."
+order_title,orde
+origin_title,Oorsprong
+other_db_title,Andere dashboards
+parameters_title,Parameters
+pathway_level1_title,Categorie van introductieroute
+pathway_level2_title,Subcategorie van introductieroute
+pathway_title,introductieroutes
+pathways_title,Introductieroutes
+percentCages_title,Percentage bezette hokken (10km2) in Vlaanderen
+period_title,Periode
+phylum_title,stam
+protectAreas_title,Beschermde gebieden
+provinces_title,provincies
+pulli_title,pulli
+quantiles_title,Kwantielen
+radius_db_title,RadIUS dashboard
+radius_title,radius
+rcp26_title,model gebaseerd op klimaatvoorspellingen onder RCP 2.6 voor 2040-2070
+rcp45_title,model gebaseerd op klimaatvoorspellingen onder RCP 4.5 voor 2040-2070
+rcp85_title,model gebaseerd op klimaatvoorspellingen onder RCP 8.5 voor 2040-2070
+regionLevel_title,Regio-schaal
+region_title,Gewest
+regions_title,Regio’s
+release_biological_control_title,Biologische bestrijding
+release_conservation_title,Introductie voor het natuurbehoud of faunabeheer
+release_erosion_control_title,"Erosiebestrijding / duinversteviging (windbrekers, heggen, ...)"
+release_fishery_title,Visvangst in het wild (incl. hengelsport)
+release_hunting_title,Jacht
+release_landscape_improvement_title,Landschaps-/flora-/faunaverbetering
+release_other_title,Andere opzettelijke uitzetting
+release_title,UITZETTING in de natuur
+release_unknown_title,UITZETTING IN DE NATUUR (niet gespecificeerd)
+release_use_title,"Uitzetting in de natuur voor gebruik (verschillend van bovenstaande, b.v., pelsdieren, transport, medisch gebruik)"
+released_title,losgelaten
+reporting_t01-mapOccurrence_description,"Kaart waarop het volgende weergegeven wordt:
+<ul>
+  <li><b>alleen t<sub>0</sub>:</b> 10 km x 10 km gridcellen met alleen waarnemingen van de soort van 2000 tot het jaar van opname op de <a href=""https://environment.ec.europa.eu/topics/nature-and-biodiversity/invasive-alien-species_en"" target=""_blank"">lijst van soorten van Uniebezorgdheid</a>, zonder latere meldingen.</li>
+  <li><b>alleen t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort voor het eerst verscheen tijdens de eerste driejaarlijkse rapportagecyclus.</li>
+  <li><b>t<sub>0</sub> & t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort nog steeds aanwezig is.</li>
+</ul>"
+reporting_t01-mapOccurrence_title,Rapportering van {{species}}
+reporting_t1-mapOccurrence_description,"Kaart waarop het volgende weergegeven wordt:
+<ul>
+  <li><b>alleen t<sub>0</sub>:</b> 10 km x 10 km gridcellen met alleen waarnemingen van de soort van 2000 tot het jaar van opname op de <a href=""https://environment.ec.europa.eu/topics/nature-and-biodiversity/invasive-alien-species_en"" target=""_blank"">lijst van soorten van Uniebezorgdheid</a>, zonder latere meldingen.</li>
+  <li><b>alleen t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort voor het eerst verscheen tijdens de eerste driejaarlijkse rapportagecyclus.</li>
+  <li><b>t<sub>0</sub> & t<sub>1</sub>:</b> 10 km x 10 km gridcellen waar de soort nog steeds aanwezig is.</li>
+</ul>"
+reporting_t1-mapOccurrence_title,Rapportering van {{species}}
+reporting_title,Rapportering
+reproducing_title,zich voortplantend
+right_title,rechts
+risk-mapRaster_description,"Invasieve uitheemse soorten hebben het potentieel om ecosystemen te beschadigen, de biodiversiteit te verminderen en andere problemen voor mensen en dieren in het wild te veroorzaken. Om deze problemen te mitigeren is onderzoek nodig naar wat de potentiële risico’s zijn en welke soorten het meest waarschijnlijk een probleem vormen. Eén van de technieken die we gebruiken is het modelleren van de verspreiding van soorten. Deze modellen zijn bedoeld om de potentiële verspreiding van een soort te schatten, gegeven de bekende omgevingsomstandigheden waarin hij momenteel leeft. In dergelijke modellen kunnen we ook toekomstscenario's in dergelijke modellen integreren, zodat we bij onze risicobeoordeling rekening kunnen houden met klimaatverandering. </br>Het is onwaarschijnlijk dat deze kaarten nauwkeurige voorspellingen zijn van de huidige of toekomstige verspreiding van soorten, maar ze zijn niettemin een leidraad voor wetenschappers die risicobeoordelingen uitvoeren. Ze helpen ons door aan te geven welke gebieden het meest kwetsbaar zijn voor invasie, en of de klimaatverandering waarschijnlijk een grotere of kleinere vestiging van de soort zal veroorzaken."
+risk-mapRaster_title,TrIAS Risicokaarten
+riskHigh_title,hoog risico
+riskLow_title,laag risico
+riskMap_title,Risicokaart
+risk_assessment_title,Risicoanalyse
+risk_maps_title,Risicokaarten
+row_title,rij
+samplingProtocol_title,Staalnameprotocol
+selected_title,geselecteerd
+shareLink_title,Deel link
+showGlobe_title,Toon landkaart
+singlePathway_title,Gelieve 1 route (niveau 1) te selecteren voor deze figuur
+sourceLink_title,Bron
+source_title,Bron
+species-welcome_description,"<p style=""text-align: center;"">Op deze pagina vindt u interactieve figuren en trends voor individuele soorten, die u kan selecteren via het keuzemenu hieronder. Standaard worden de gegevens voor heel België weergegeven, maar u kan ook één of meerdere specifieke regio's selecteren voor een meer op maat gemaakte weergave. Onze belangrijkste gegevensbron is <a href=""https://www.gbif.org"" target=""_blank"">GBIF.org</a>, aangevuld met andere datasets waar relevant. </p>"
+species-welcome_title,Soortgegevens
+species_information_title,Soortgegevens
+species_title,Soort
+startYear_title,Start jaar
+start_title,Start
+stowaway_airplane_title,Verstekeling in of op vliegtuigen
+stowaway_ballast_water_title,Ballastwater van schepen / boten
+stowaway_container_title,Container / vracht
+stowaway_fishing_equipment_title,Visseij- en hengelmateriaal
+stowaway_hull_fouling_title,Scheeps-/bootrompvervuiling
+stowaway_machinery_title,Machines / uitrusting
+stowaway_organic_packing_title,"Organisch verpakkingsmateriaal, in bijzonder houten verpakkingen"
+stowaway_other_title,Andere vervoerswijzen
+stowaway_people_luggage_title,Mensen en hun bagage/materiaal (in bijzonder toerisme)
+stowaway_ship_title,Verstekeling van schepen/boten (excl. ballastwater of rompvervuiling)
+stowaway_title,TRANSPORT - verstekeling
+stowaway_unknown_title,TRANSPORT - VERSTEKELING (niet gespecificeerd)
+stowaway_vehicles_title,"Voertuigen (auto's, treinen, ...)"
+succesvol_title,succesvol
+sum_title,aantal
+summarizeBy_title,samenvatten per
+summary_title,samenvatting
+t0_title,t0
+t1_title,t1
 tableIndicators_description,"<p>Deze tabel biedt een overzicht van alle soorten waarvoor informatie beschikbaar is op het exotenportaal (= alle soorten op de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS-checklijst van België</a>). Voor elke soort bevat de tabel informatie over de invasiestatus in België zoals gedocumenteerd in de GRIIS-checklijst. De kolommen worden hieronder beschreven: </p>
 
 - <b>Soort</b> toont de wetenschappelijke naam van de exoot.<br>
@@ -1065,22 +1037,52 @@ tableIndicators_description,"<p>Deze tabel biedt een overzicht van alle soorten 
 - <b>Jaar van eerste waarneming</b> geeft het eerste jaar aan waarin de soort werd waargenomen in België (per regio), zoals gedocumenteerd in de GRIIS-checklijst.<br>
 - <b>Mate van vestiging</b> geeft de mate van vestiging van de soort in België weer, zoals aangegeven in de GRIIS-checklijst. ""NA"" betekent dat deze informatie niet beschikbaar was in de GRIIS-checklijst voor de betreffende soort.<br>
 - <b>Introductieroutes</b> toont de introductieroute(s) van de soort in België zoals gespecificeerd in de GRIIS-checklijst.<br>
-- <b>Meer</b> Geeft aan of er meer informatie beschikbaar is over de soort (aan de hand van iconen): <br> "
+- <b>Meer</b> Geeft aan of er meer informatie beschikbaar is over de soort (aan de hand van iconen): <br>"
+tableIndicators_title,NA
+tableLegend_title,Legende Tabel
 tableNesten_description,Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>
+tableNesten_title,Aantal nesten per provincie (tabel)
+tableTitle_title,Overzicht Tabel
+taxa_title,Taxa
+terrestrial_title,terrestrisch
+top_title,bovenaan
+topleft_title,Bovenaan links
+topright_title,Bovenaan rechts
+totalSpecies_title,Totaal aantal soorten
+total_title,Totaal
+trend_title,Trend
+unaided_natural_dispersal_title,ZONDER HULP (natuurlijke verspreiding)
+unaided_title,ZONDER HULP
+unaided_unknown_title,ZONDER HULP (niet gespecificeerd)
+undefined_title,NA
+uniform_title,Uniforme verdeling
+unionColor_title,Unie kleur
+unit_title,eenheid
+unknown_title,Onbekend
+unknown_unknown_title,Onbekend (niet gespecificeerd)
+untreated nest_title,Onbehandeld nest
+userDefined_title,Aangepast door gebruiker
+vernacular_name_col_title,gangbare namen
+vernacular_name_title,zoeken op gangbare namen
+version_title,Versie
 visualize_pathways_level1_description,"Deze grafiek toont het aantal geïntroduceerde taxa per introductieroutecategorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau1</a>)</i>."
-visualize_pathways_year_level1_description,"<p>Deze grafiek toont de trends in het aantal geïntroduceerde taxa per introductie route categorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 1</a>)</i>.
-<p>De taxa zijn gegroepeerd per decennium op basis van hun jaar van eerste waarneming zoals gespecificeerd op de <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist van België</a>.
-<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Een taxon kan via meerdere introductie route categoriën worden geïntroduceerd, een taxon kan dus meer dan eens op deze grafiek voorkomen. Dit betekent dat de som van het 'aantal geïntroduceerde taxa per introductie route categorie' groter kan zijn dan het 'aantal taxa'.</i>"
+visualize_pathways_level1_title,Aantal geïntroduceerde taxa per introductieroutecategorie
 visualize_pathways_level2_description,"<p>Deze grafiek toont het aantal geïntroduceerde taxa per introductie route subcategorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 2</a>)</i>.</p>
 <p></p>
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Deze grafiek kan alleen de subcategorieën van een enkele introductie route categorie weergeven. Selecteer <b>één</b> categorie met behulp van het filter bovenaan deze pagina</i>.</p>"
+visualize_pathways_level2_title,Aantal geïntroduceerde taxa per introductie route subcategorie
+visualize_pathways_year_level1_description,"<p>Deze grafiek toont de trends in het aantal geïntroduceerde taxa per introductie route categorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 1</a>)</i>.
+<p>De taxa zijn gegroepeerd per decennium op basis van hun jaar van eerste waarneming zoals gespecificeerd op de <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist van België</a>.
+<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Een taxon kan via meerdere introductie route categoriën worden geïntroduceerd, een taxon kan dus meer dan eens op deze grafiek voorkomen. Dit betekent dat de som van het 'aantal geïntroduceerde taxa per introductie route categorie' groter kan zijn dan het 'aantal taxa'.</i>"
+visualize_pathways_year_level1_title,Trends in het aantal geïntroduceerde taxa per introductie route categorie
 visualize_pathways_year_level2_description,"<p>Deze grafiek toont de trends in het aantal geïntroduceerde taxa per introductie route subcategorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 2</a>)</i></p>
 <p>De taxa zijn gegroepeerd per decennium op basis van hun jaar van eerste waarneming zoals gespecificeerd op de <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist van België</a>.</p>
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Deze grafiek kan alleen de subcategorieën van <b>één</b> enkele introductie route categorie weergeven. Selecteer een categorie met behulp van het filter bovenaan deze pagina</i>.</p>
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Een enkel taxon kan via meerdere introductie route subcategorieën worden geïntroduceerd, een taxon kan dus meer dan eens op deze grafiek voorkomen. Dit betekent dat de som van het 'aantal geïntroduceerde taxa per introductie route categorie' groter kan zijn dan het 'aantal taxa'.</i></p>"
+visualize_pathways_year_level2_title,Trends in het aantal geïntroduceerde taxa per introductie route subcategorie
+wallonia_title,Wallonië
 welcomeTitle_description,Op deze pagina vind je alle cijfers en trends over uitheemse soorten in België.
-occupancy_description,Oppervlakte bezet door een soort
-checklist-welcome_description,"Op deze pagina vindt u tabellen en grafieken terug gebaseerd op de <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklijst van België</a>."
-species-welcome_description,"<p style=""text-align: center;"">Op deze pagina vindt u interactieve figuren en trends voor individuele soorten, die u kan selecteren via het keuzemenu hieronder. Standaard worden de gegevens voor heel België weergegeven, maar u kan ook één of meerdere specifieke regio's selecteren voor een meer op maat gemaakte weergave. Onze belangrijkste gegevensbron is <a href=""https://www.gbif.org"" target=""_blank"">GBIF.org</a>, aangevuld met andere datasets waar relevant. </p>"
-confirm_language_change_title,Taal wijzigen
-confirm_language_change_description,Weet u zeker dat u de taal van de applicatie wilt wijzigen? Dit zal leiden tot verlies van grafiek- en tabelinstellingen.
+welcomeTitle_title,Welkom op het exotenportaal
+widespreadInvasive_title,wijdverspreid en invasief
+year_title,Jaar
+yes_title,ja
