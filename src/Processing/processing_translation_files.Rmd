@@ -17,6 +17,7 @@ as *translations_nl*, *translations_fr* & *translations_en* in
 ```{r libraries}
 library(readr)
 library(dplyr)
+library(tidyr)
 ```
 
 ```{r determine input directory}
@@ -38,13 +39,50 @@ cat("reading data from:", current_dir, "\n")
 output_dir <- "./data/output/uat_direct/translations/"
 ```
 
-```{r read files}
-translations_raw <- read_csv2(paste0(current_dir, "translations.csv"))
+```{r convert files & combine them}
+files <- c("translations", "translations_simple", "translations_regions")
 
-translations_simple_raw <- read_csv2(paste0(current_dir, "translations_simple.csv"))
+translations_combined <- data.frame()
 
-translations_regions_raw <- read_csv2(paste0(current_dir, "translations_regions.csv"))
+for(f in files){
+  temp_raw <- read_csv2(paste0(current_dir, f, ".csv"))
+  
+  temp <- temp_raw %>% 
+    pivot_longer(cols = -title_id,
+                 names_to = "type_language",
+                 values_to = "value") %>% 
+    separate(col = type_language,
+             into = c("type", "language")) %>% 
+    mutate(id = paste(title_id, type, sep = "_")) %>% 
+    select(id, value, language)
+  
+  if(nrow(translations_combined) == 0){
+    translations_combined <- temp
+  }else{
+    translations_combined <- rbind(translations_combined, temp)
+  }
+}
 
-translations_template <- read_csv(paste0(output_dir, "translation_nl.csv"), n_max = 5)
+translations_combined <- translations_combined %>% 
+  distinct() 
 ```
 
+```{r split into languages}
+languages <- c("en", "nl", "fr")
+
+for(l in languages){
+  translations_language <- translations_combined %>% 
+    filter(language == l) 
+  
+  translations_language[[l]] <- translations_language$value
+  
+  translations_language <- translations_language %>% 
+    select(id, l) %>% 
+    write_csv(paste0(output_dir, "translation_", l, ".csv"))
+}
+```
+
+
+```{r read template, eval=FALSE}
+translations_template <- read_csv(paste0(output_dir, "translation_nl.csv"))
+```
