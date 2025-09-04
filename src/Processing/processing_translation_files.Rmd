@@ -1,0 +1,50 @@
+---
+title: "processing translation files"
+author: "Sander Devisscher"
+date: "2025-09-04"
+output: html_document
+---
+
+This script is tiggered by changes in *translations*, *translations_simple* 
+and/or *translations_regions*.
+Currently a transition period these files reside in *./data/output/uat_direct/*.
+In the future these files will be moved to *./data/interim/translations/*
+
+This script converts the files into 1 files per language and stores the results 
+as *translations_nl*, *translations_fr* & *translations_en* in 
+*./data/output/uat_direct/translations*.
+
+```{r libraries}
+library(readr)
+library(dplyr)
+```
+
+```{r determine input directory}
+new_dir <- "./data/interim/translations/"
+old_dir <- "./data/output/uat_direct/"
+
+if(all(file.exists(paste0(new_dir, "translations.csv")),
+       file.exists(paste0(new_dir, "translations_simple.csv")),
+       file.exists(paste0(new_dir, "translations_regions.csv")))){
+  current_dir <- new_dir
+}else{
+  current_dir <- old_dir
+}
+
+cat("reading data from:", current_dir, "\n")
+```
+
+```{r set output dir}
+output_dir <- "./data/output/uat_direct/translations/"
+```
+
+```{r read files}
+translations_raw <- read_csv2(paste0(current_dir, "translations.csv"))
+
+translations_simple_raw <- read_csv2(paste0(current_dir, "translations_simple.csv"))
+
+translations_regions_raw <- read_csv2(paste0(current_dir, "translations_regions.csv"))
+
+translations_template <- read_csv(paste0(output_dir, "translation_nl.csv"), n_max = 5)
+```
+
