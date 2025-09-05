@@ -35,6 +35,10 @@ if(all(file.exists(paste0(new_dir, "translations.csv")),
 cat("reading data from:", current_dir, "\n")
 ```
 
+```{r read template, eval=FALSE}
+translations_template <- read_csv(paste0(output_dir, "translation_nl.csv"))
+```
+
 ```{r set output dir}
 output_dir <- "./data/output/uat_direct/translations/"
 ```
@@ -72,17 +76,13 @@ languages <- c("en", "nl", "fr")
 
 for(l in languages){
   translations_language <- translations_combined %>% 
-    filter(language == l) 
+    filter(language == l) %>% 
+    arrange(id)
   
   translations_language[[l]] <- translations_language$value
   
   translations_language <- translations_language %>% 
-    select(id, l) %>% 
+    select(id, all_of(l)) %>% 
     write_csv(paste0(output_dir, "translation_", l, ".csv"))
 }
-```
-
-
-```{r read template, eval=FALSE}
-translations_template <- read_csv(paste0(output_dir, "translation_nl.csv"))
 ```
