@@ -20,36 +20,24 @@ directFilePath <- "./data/output/UAT_direct"
 # connect_to_bucket(Sys.getenv("UAT_BUCKET"))
 # get feedback ####
 
-if(Sys.getenv("S3_BUCKET") != ""){
-  bucket <- paste0("s3://",Sys.getenv("S3_BUCKET"))
-}else{
-  bucket <- paste0("s3://",Sys.getenv("UAT_bucket"))
-}
-
 # test S3_bucket ####
 test_that("Check S3_BUCKET env variable", {
     
-    expect_false(bucket == "s3://", "Neither S3_BUCKET nor UAT_bucket environment variables are provided")
+    expect_false(Sys.getenv("S3_BUCKET") == "", "env S3_BUCKET is not provided")
     
   })
 
+bucket <- paste0("s3://",Sys.getenv("S3_BUCKET"))
 print(bucket)
 
 # files that are currently in management needs to be uploaded to the bucket
-directFiles <- list.files(directFilePath, recursive = TRUE)
-
-
-if(Sys.getenv("amiabot") != "yes"){
-  print("Executor of the script is a human >> connecting to bucket")
-  source("./src/connect_to_bucket.R")
-  connect_to_bucket(bucket_name = bucket)
-}
+directFiles <- list.files(directFilePath)
 
 test_that("Upload direct files", {
     
     lapply(directFiles, function(fileName){
         
-        put_object(file = file.path(directFilePath, fileName),
+        put_object(file.path(directFilePath, fileName),
           object = fileName,
           bucket = bucket,
           multipart = TRUE,
@@ -58,7 +46,6 @@ test_that("Upload direct files", {
       })
     
   })
-
 
 ## test to see if all data on bucket
 
