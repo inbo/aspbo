@@ -5,7 +5,7 @@ date: "2025-09-04"
 output: html_document
 ---
 
-This script is tiggered by changes in *translations*, *translations_simple* 
+This script is triggered by changes in *translations*, *translations_simple* 
 and/or *translations_regions*.
 Currently a transition period these files reside in *./data/output/uat_direct/*.
 In the future these files will be moved to *./data/interim/translations/*
