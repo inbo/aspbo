@@ -22,7 +22,7 @@ library(tidyr)
 
 ```{r determine input directory}
 new_dir <- "./data/interim/translations/"
-old_dir <- "./data/output/uat_direct/"
+old_dir <- "./data/output/UAT_direct/"
 
 if(all(file.exists(paste0(new_dir, "translations.csv")),
        file.exists(paste0(new_dir, "translations_simple.csv")),
