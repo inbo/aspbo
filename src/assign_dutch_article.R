@@ -47,7 +47,7 @@ assign_dutch_article <- function(
     } else if (row$kingdom == "Plantae") {
       # Plants mostly get "de" but "het" for diminutives and certain keywords
       het_suffixes <- c("je", "tje", "pje", "etje", "mpje")
-      het_keywords <- c("blad", "bloem", "plant", "spruit", "gewas")
+      het_keywords <- c("blad", "gewas")
       
       is_het <- any(sapply(het_suffixes, function(suf) grepl(paste0(suf, "$"), name))) ||
         any(sapply(het_keywords, function(k) grepl(k, name)))
