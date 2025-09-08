@@ -37,7 +37,7 @@ assign_dutch_article <- function(
     if (row$kingdom == "Animalia") {
       # Most animal species get "de"
       # Small set of animal exceptions for "het"
-      het_animal_exceptions <- c("kalf", "lam", "varken", "paard", "jong")
+      het_animal_exceptions <- c("kalf", "lam", "varken", "paard", "jong", "hert")
       if (any(sapply(het_animal_exceptions, function(x) grepl(x, name)))) {
         species_data$article_nl[i] <- "het"
       } else {
