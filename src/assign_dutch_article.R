@@ -8,6 +8,11 @@
 #' @param het_exception species which article is "het" in contradiction of the rules
 #' @param de_exception species which article is "de" in contradiction of the rules
 #' 
+#' @details
+#' Add a $ at the end of an exception to make sure the string is detected at the 
+#' end of the name.
+#' 
+#' 
 #' @return the input df with a new column article_nl containing the article 
 #' according to grammar rules and exception lists. 
 
@@ -37,7 +42,7 @@ assign_dutch_article <- function(
     if (row$kingdom == "Animalia") {
       # Most animal species get "de"
       # Small set of animal exceptions for "het"
-      het_animal_exceptions <- c("kalf", "lam", "varken", "paard", "jong", "hert")
+      het_animal_exceptions <- c("kalf$", "lam$", "varken$", "paard$", "jong$", "hert$")
       if (any(sapply(het_animal_exceptions, function(x) grepl(x, name)))) {
         species_data$article_nl[i] <- "het"
       } else {
@@ -46,8 +51,8 @@ assign_dutch_article <- function(
       
     } else if (row$kingdom == "Plantae") {
       # Plants mostly get "de" but "het" for diminutives and certain keywords
-      het_suffixes <- c("je", "tje", "pje", "etje", "mpje")
-      het_keywords <- c("blad", "gewas")
+      het_suffixes <- c("je$", "tje$", "pje$", "etje$", "mpje$")
+      het_keywords <- c("blad$", "gewas$")
       
       is_het <- any(sapply(het_suffixes, function(suf) grepl(paste0(suf, "$"), name))) ||
         any(sapply(het_keywords, function(k) grepl(k, name)))
