@@ -37,7 +37,7 @@ cat(paste0("
 <br>
 
 #### **Nuttige links** <br>
-<p>Meer informatie over de nieuw-zeelandse zeepok kunt u vinden op het Vlaams Biodiversiteitsportaal.<br>
+<p>Meer informatie over de Nieuw-Zeelandse zeepok kunt u vinden op het Vlaams Biodiversiteitsportaal.<br>
 **Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteitportaal</a>**
 
 <p>
