@@ -1,11 +1,9 @@
 library(shiny)
 
 html_folder <- "~/github/aspbo/HTML_pages/HTML/"
-
-# Define paths for previous lists
-ok_list_path <- "./data/interim/links_html_ok_list.txt"
-de_list_path <- "./data/interim/links_html_de_list.txt"
-het_list_path <- "./data/interim/links_html_het_list.txt"
+ok_list_path <- "~/github/aspbo/data/interim/links_html_ok_list.txt"
+de_list_path <- "~/github/aspbo/data/interim/links_html_de_list.txt"
+het_list_path <- "~/github/aspbo/data/interim/links_html_het_list.txt"
 
 ui <- fluidPage(
   titlePanel("HTML Review App"),
@@ -17,22 +15,20 @@ ui <- fluidPage(
   actionButton("btn_skip", "skip"),
   br(),
   br(),
-  downloadButton("download_ok", "Download OK List"),
-  downloadButton("download_de", "Download DE List"),
-  downloadButton("download_het", "Download HET List")
+  actionButton("btn_save", "Save Lists")
 )
 
 server <- function(input, output, session) {
-  # Load all HTML files w/ '_nl.html' ending
-  all_files <- list.files(html_folder, pattern = "_nl\\.html$", full.names = FALSE)
-  base_names <- sub("_nl\\.html$", "", all_files)
-  
-  # Helper to read list safely (returns character vector or empty if not present)
+  # Helper to read list safely
   safe_read <- function(path) {
     if (file.exists(path)) readLines(path) else character(0)
   }
   
-  # Initial loading of already checked lists
+  # Find all HTMLs and basenames
+  all_files <- list.files(html_folder, pattern = "_nl\\.html$", full.names = FALSE)
+  base_names <- sub("_nl\\.html$", "", all_files)
+  
+  # Initial already-checked lists
   ok_initial <- safe_read(ok_list_path)
   de_initial <- safe_read(de_list_path)
   het_initial <- safe_read(het_list_path)
@@ -56,7 +52,7 @@ server <- function(input, output, session) {
     )
   ))
   
-  # Handle "Yes": redo all files
+  # "Yes" logic - redo all files
   observeEvent(input$redo_yes, {
     rv$redo_all <- TRUE
     rv$files_to_review <- all_files
@@ -64,14 +60,13 @@ server <- function(input, output, session) {
     removeModal()
   })
   
-  # Handle "No" or modal dismissed
+  # "No" logic and modal dismiss (simulate with delay)
   observe({
     if (!is.null(rv$redo_all)) return()
     if (!is.null(input$redo_yes)) return()
-    # Check for modal dismiss (simulate with a delay since modalButton doesn't trigger an input)
     invalidateLater(250, session)
     if (isTruthy(input$btn_ok) || isTruthy(input$btn_de) || isTruthy(input$btn_het) || isTruthy(input$btn_skip)) return()
-    # If still undecided after a small delay, treat as "No"
+    # Treat as "No" after delay
     isolate({
       checked <- unique(c(ok_initial, de_initial, het_initial))
       unchecked_files <- all_files[!base_names %in% checked]
@@ -82,6 +77,7 @@ server <- function(input, output, session) {
     })
   })
   
+  # Helper for current file
   current_file <- reactive({
     if (is.null(rv$files_to_review)) return(NULL)
     if (rv$current_idx > length(rv$files_to_review)) return(NULL)
@@ -121,18 +117,12 @@ server <- function(input, output, session) {
     }
   })
   
-  output$download_ok <- downloadHandler(
-    filename = function() ok_list_path,
-    content = function(file) writeLines(rv$ok_list, file)
-  )
-  output$download_de <- downloadHandler(
-    filename = function() de_list_path,
-    content = function(file) writeLines(rv$de_list, file)
-  )
-  output$download_het <- downloadHandler(
-    filename = function() het_list_path,
-    content = function(file) writeLines(rv$het_list, file)
-  )
+  observeEvent(input$btn_save, {
+    writeLines(rv$ok_list, ok_list_path)
+    writeLines(rv$de_list, de_list_path)
+    writeLines(rv$het_list, het_list_path)
+    showNotification("Lists saved to disk.", type = "message")
+  })
 }
 
 shinyApp(ui, server)
