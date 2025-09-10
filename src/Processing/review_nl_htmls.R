@@ -1,9 +1,11 @@
 library(shiny)
 
-# Folder containing the '_nl.html' files
 html_folder <- "~/github/aspbo/HTML_pages/HTML/"
 
-cat(path.expand(html_folder), dir(html_folder))
+# Define paths for previous lists
+ok_list_path <- "./data/interim/links_html_ok_list.txt"
+de_list_path <- "./data/interim/links_html_de_list.txt"
+het_list_path <- "./data/interim/links_html_het_list.txt"
 
 ui <- fluidPage(
   titlePanel("HTML Review App"),
@@ -21,24 +23,30 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-  
-  # Load list of html filenames ending with _nl.html
+  # Load all HTML files w/ '_nl.html' ending
   all_files <- list.files(html_folder, pattern = "_nl\\.html$", full.names = FALSE)
-  
-  # Extract base names before _nl
   base_names <- sub("_nl\\.html$", "", all_files)
   
-  # ReactiveValues for tracking indices and lists
+  # Helper to read list safely (returns character vector or empty if not present)
+  safe_read <- function(path) {
+    if (file.exists(path)) readLines(path) else character(0)
+  }
+  
+  # Initial loading of already checked lists
+  ok_initial <- safe_read(ok_list_path)
+  de_initial <- safe_read(de_list_path)
+  het_initial <- safe_read(het_list_path)
+  
   rv <- reactiveValues(
     current_idx = 1,
-    ok_list = character(),
-    de_list = character(),
-    het_list = character(),
+    ok_list = ok_initial,
+    de_list = de_initial,
+    het_list = het_initial,
     redo_all = NULL,
     files_to_review = NULL
   )
   
-  # Startup modal dialog to ask redo all or only unchecked
+  # Startup modal
   showModal(modalDialog(
     title = "Redo checked HTMLs?",
     "Do you want to redo all files (Yes) or only files not yet checked (No)?",
@@ -48,6 +56,7 @@ server <- function(input, output, session) {
     )
   ))
   
+  # Handle "Yes": redo all files
   observeEvent(input$redo_yes, {
     rv$redo_all <- TRUE
     rv$files_to_review <- all_files
@@ -55,45 +64,36 @@ server <- function(input, output, session) {
     removeModal()
   })
   
-  observeEvent(input$modal_dismiss, {
-    # No button clicked or modal dismissed
-    if (is.null(rv$redo_all)) {
-      rv$redo_all <- FALSE
-      # Determine unchecked files (not in any list)
-      checked <- unique(c(rv$ok_list, rv$de_list, rv$het_list))
+  # Handle "No" or modal dismissed
+  observe({
+    if (!is.null(rv$redo_all)) return()
+    if (!is.null(input$redo_yes)) return()
+    # Check for modal dismiss (simulate with a delay since modalButton doesn't trigger an input)
+    invalidateLater(250, session)
+    if (isTruthy(input$btn_ok) || isTruthy(input$btn_de) || isTruthy(input$btn_het) || isTruthy(input$btn_skip)) return()
+    # If still undecided after a small delay, treat as "No"
+    isolate({
+      checked <- unique(c(ok_initial, de_initial, het_initial))
       unchecked_files <- all_files[!base_names %in% checked]
+      rv$redo_all <- FALSE
       rv$files_to_review <- if (length(unchecked_files) == 0) all_files else unchecked_files
       rv$current_idx <- 1
       removeModal()
-    }
-  }, once = TRUE)
-  
-  # Because modalButton doesn't trigger input explicitly, simulate modal dismiss event
-  observe({
-    if (!is.null(rv$redo_all)) return()
-    invalidateLater(1000, session)
-    if (is.null(session$clientData)) return()
-    if (!isTruthy(input$redo_yes) && !isTruthy(input$btn_ok) && !isTruthy(input$btn_de) && !isTruthy(input$btn_het) && !isTruthy(input$btn_skip)) {
-      # Assume dismissed if no interaction
-      session$sendCustomMessage(type = "dismissModal", message = list())
-    }
+    })
   })
   
-  # Helper to get current HTML file path
   current_file <- reactive({
     if (is.null(rv$files_to_review)) return(NULL)
     if (rv$current_idx > length(rv$files_to_review)) return(NULL)
     file.path(html_folder, rv$files_to_review[rv$current_idx])
   })
   
-  # Display current HTML content
   output$html_content <- renderUI({
     file <- current_file()
     if (is.null(file)) return(h4("No more HTML files to review."))
     includeHTML(file)
   })
   
-  # Button handler for storing and moving to next file
   observeEvent(input$btn_ok, {
     if (!is.null(current_file())) {
       val <- sub("_nl\\.html$", "", basename(current_file()))
@@ -121,30 +121,17 @@ server <- function(input, output, session) {
     }
   })
   
-  # Download handlers for each list as text file
   output$download_ok <- downloadHandler(
-    filename = function() {
-      paste0("ok_list_", Sys.Date(), ".txt")
-    },
-    content = function(file) {
-      writeLines(rv$ok_list, file)
-    }
+    filename = function() ok_list_path,
+    content = function(file) writeLines(rv$ok_list, file)
   )
   output$download_de <- downloadHandler(
-    filename = function() {
-      paste0("de_list_", Sys.Date(), ".txt")
-    },
-    content = function(file) {
-      writeLines(rv$de_list, file)
-    }
+    filename = function() de_list_path,
+    content = function(file) writeLines(rv$de_list, file)
   )
   output$download_het <- downloadHandler(
-    filename = function() {
-      paste0("het_list_", Sys.Date(), ".txt")
-    },
-    content = function(file) {
-      writeLines(rv$het_list, file)
-    }
+    filename = function() het_list_path,
+    content = function(file) writeLines(rv$het_list, file)
   )
 }
 
