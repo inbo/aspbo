@@ -173,7 +173,7 @@ for(g_up in geo_words){
 
 ```{r redo all?}
 redo_all <- TRUE # Set to TRUE to redo all files, or FALSE to skip existing files
-redo_existing <- FALSE # Set to TRUE to redo only existing files, or FALSE to redo all
+redo_existing <- TRUE # Set to TRUE to redo only existing files, or FALSE to redo all
 ```
 
 | ALL = T & EXI. = F 	| All on GRIIS checklist (inclu. non - existing but exclu. Custom) 	|
