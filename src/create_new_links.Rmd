@@ -111,7 +111,8 @@ griis_checklist <- griis_checklist_raw %>%
          vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
          vernacular_name_fr = coalesce(vernacular_name_fr, paste0("<i>", scientificName, "</i>")),
          vernacular_name_nl2 = coalesce(vernacular_name_nl2, paste0("<i>", scientificName, "</i>")),
-         vernacular_name_en2 = coalesce(vernacular_name_en2, paste0("<i>", scientificName, "</i>"))) %>% 
+         vernacular_name_en2 = coalesce(vernacular_name_en2, paste0("<i>", scientificName, "</i>")),
+         vernacular_name_fr2 = coalesce(vernacular_name_fr2, paste0("<i>", scientificName, "</i>"))) %>% 
   left_join(faunabeheer_species, by = c("nubKey" = "gbifkey")) %>%
   mutate(faunabeheer_link_nl = case_when(nubKey %in% faunabeheer_species$gbifkey ~ 
                                            paste0('<--VERNACULAR_NAME_NL2--> is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\\\\"', faunabeheer_link, '\\\\"target=\\\\"_blank\\\\">faunabeheer pagina</a>.'),
