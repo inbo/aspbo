@@ -86,9 +86,12 @@ Most species have "het" as the correct article in dutch while occasionally
 to the "de_species" - list. 
 
 ```{r assign dutch article}
+het_exception_list <- readLines("./data/interim/links_html_het_list.txt")
+de_exception_list <- readLines("./data/interim/links_html_de_list.txt")
+
 griis_checklist_raw <- assign_dutch_article(griis_checklist_raw,
-                                            het_exception = c(5403508, 8288930, 5220136),
-                                            de_exception = c(2874199))
+                                            het_exception = c(5403508, 8288930, 5220136, het_exception_list),
+                                            de_exception = c(2874199, de_exception_list))
 ```
 
 ```{r prep griis checklist}
@@ -166,8 +169,8 @@ for(g_up in geo_words){
 ```
 
 ```{r redo all?}
-redo_all <- TRUE # Set to TRUE to redo all files, or FALSE to skip existing files
-redo_existing <- TRUE # Set to TRUE to redo only existing files, or FALSE to redo all
+redo_all <- FALSE # Set to TRUE to redo all files, or FALSE to skip existing files
+redo_existing <- FALSE # Set to TRUE to redo only existing files, or FALSE to redo all
 ```
 
 | ALL = T & EXI. = F 	| All on GRIIS checklist (inclu. non - existing but exclu. Custom) 	|
