@@ -146,7 +146,8 @@ geo_words = c("Chinese",
               "Australische",
               "Aziatische",
               "Siberische", 
-              "Oosterse", 
+              "Oosterse",
+              "oostelijke", 
               "Westelijke", 
               "Noordse",
               "Noorse",
@@ -155,7 +156,8 @@ geo_words = c("Chinese",
               "Carolina",
               "Mississippi",
               "Griekse", 
-              "Magelhaengans")
+              "Magelhaengans",
+              "Nieuw-Zeelandse")
 
 for(g_up in geo_words){
   g_low <- tolower(g_up)
@@ -170,7 +172,7 @@ for(g_up in geo_words){
 ```
 
 ```{r redo all?}
-redo_all <- FALSE # Set to TRUE to redo all files, or FALSE to skip existing files
+redo_all <- TRUE # Set to TRUE to redo all files, or FALSE to skip existing files
 redo_existing <- FALSE # Set to TRUE to redo only existing files, or FALSE to redo all
 ```
 
