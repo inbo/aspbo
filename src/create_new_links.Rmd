@@ -105,7 +105,7 @@ griis_checklist <- griis_checklist_raw %>%
   mutate(vernacular_name_nl2 = case_when(!is.na(vernacular_name_nl) ~ paste(article_nl, tolower(vernacular_name_nl)),
                                          TRUE ~ vernacular_name_nl),
          vernacular_name_en2  = case_when(!is.na(vernacular_name_en) ~ paste("the", vernacular_name_en),
-                                         TRUE ~ vernacular_name_en),
+                                          TRUE ~ vernacular_name_en),
          vernacular_name_fr2 = tolower(vernacular_name_fr)) %>% 
   mutate(vernacular_name_nl = coalesce(vernacular_name_nl, paste0("<i>", scientificName, "</i>")),
          vernacular_name_en = coalesce(vernacular_name_en, paste0("<i>", scientificName, "</i>")),
@@ -172,8 +172,13 @@ for(g_up in geo_words){
 ```
 
 ```{r redo all?}
-redo_all <- TRUE # Set to TRUE to redo all files, or FALSE to skip existing files
-redo_existing <- TRUE # Set to TRUE to redo only existing files, or FALSE to redo all
+if(interactive()){
+  redo_all <- TRUE # Set to TRUE to redo all files, or FALSE to skip existing files
+  redo_existing <- TRUE # Set to TRUE to redo only existing files, or FALSE to redo all
+}else{
+  redo_all <- TRUE # Set to TRUE to redo all files, or FALSE to skip existing files
+  redo_existing <- FALSE # Set to TRUE to redo only existing files, or FALSE to redo all
+}
 ```
 
 | ALL = T & EXI. = F 	| All on GRIIS checklist (inclu. non - existing but exclu. Custom) 	|
