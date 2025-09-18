@@ -32,6 +32,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544412	1422818	Pseudagrion microcephalum	2011	2012	Insecta	Animalia
 182134330	1548900	Dohrniphora cornuta	2005	2005	Insecta	Animalia
 213214411	1623077	Tephritis carmen	1979	1979	Insecta	Animalia
+213213908	1795068	Thysanoplusia orichalcea	2021	2025	Insecta	Animalia
 213214212	2012520	Agonoscena succincta	2021	2021	Insecta	Animalia
 159748106	2114326	Eurytemora americana	NA	NA	Copepoda	Animalia
 159748091	2115724	Balanus trigonus	NA	NA	Maxillopoda	Animalia
@@ -80,7 +81,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182133944	2308549	Limnodrilus maumeensis	2014	2014	Clitellata	Animalia
 152543695	2308605	Potamothrix vejdovskyi	2009	2016	Clitellata	Animalia
 182133960	2321001	Boccardiella ligerica	NA	NA	Polychaeta	Animalia
-152543727	2321012	Marenzelleria viridis	1995	2016	Polychaeta	Animalia
 152543510	2351064	Coregonus nasus	NA	NA	NA	Animalia
 152543513	2351136	Coregonus peled	1978	2017	NA	Animalia
 152543517	2351413	Hucho hucho	1954	2017	NA	Animalia
