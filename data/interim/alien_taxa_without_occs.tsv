@@ -18,7 +18,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544545	1043978	Stelidota geminata	2018	2018	Insecta	Animalia
 182134456	1194885	Otiorhynchus meridionalis	2003	2018	Insecta	Animalia
 182134455	1194989	Otiorhynchus cribricollis	2002	2018	Insecta	Animalia
-182134454	1195013	Otiorhynchus aurifer	1999	2018	Insecta	Animalia
 152544520	1319260	Tetraponera allaborans	1980	2018	Insecta	Animalia
 152544508	1321805	Pheidole bilimeki	1911	2018	Insecta	Animalia
 213213874	1349836	Hylaeus absolutus	2021	2021	Insecta	Animalia
@@ -33,7 +32,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544412	1422818	Pseudagrion microcephalum	2011	2012	Insecta	Animalia
 182134330	1548900	Dohrniphora cornuta	2005	2005	Insecta	Animalia
 213214411	1623077	Tephritis carmen	1979	1979	Insecta	Animalia
-213214010	1835422	Schiffermuelleria bruandella	2016	2016	Insecta	Animalia
 213214212	2012520	Agonoscena succincta	2021	2021	Insecta	Animalia
 159748106	2114326	Eurytemora americana	NA	NA	Copepoda	Animalia
 159748091	2115724	Balanus trigonus	NA	NA	Maxillopoda	Animalia
@@ -596,7 +594,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213344	6476579	Dolichoplana signata	2018	2018	NA	Animalia
 159747368	6559940	Helictochloa bromoides	1950	1950	Liliopsida	Plantae
 152546942	6710856	Austrostipa scabra scabra	1897	1939	Liliopsida	Plantae
-213214813	6913023	Aceria brachytarsus	2014	2021	Arachnida	Animalia
 213214803	6913500	Eriophyes alniincanae	2013	2018	Arachnida	Animalia
 152544386	6931186	Nicoletia phytophila	2016	2018	Insecta	Animalia
 152543712	7009279	Laonome calida	2014	2016	Polychaeta	Animalia
@@ -630,7 +627,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545907	7323632	Ptilotus spicatus	1947	1947	Magnoliopsida	Plantae
 152545937	7323834	Amaranthus macrocarpus macrocarpus	1911	1949	Magnoliopsida	Plantae
 213213574	7324507	Ipomoea lacunosa lacunosa	1993	2018	Magnoliopsida	Plantae
-182134831	7327719	Erica darleyensis	2016	2018	Magnoliopsida	Plantae
 213215596	7327959	Daboecia cantabrica cantabrica	2012	2017	Magnoliopsida	Plantae
 159749052	7331548	Alonsoa linearis	2017	2017	Magnoliopsida	Plantae
 213215552	7332416	Chaenorhinum origanifolium origanifolium	2001	2018	Magnoliopsida	Plantae
@@ -738,7 +734,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213618	8864505	Macomopsis melo	2021	2021	Bivalvia	Animalia
 182133699	8953936	Caiman crocodilus	2017	2017	Crocodylia	Animalia
 213212580	8991514	Caracara plancus cheriway	NA	NA	Aves	Animalia
-182133741	9022569	Chrysopelea ornata	2014	2014	Squamata	Animalia
 213214673	9067615	Mentzelia albicaulis	1893	1893	Magnoliopsida	Plantae
 213212483	9099408	Elaphe quatuorlineata	2012	2013	Squamata	Animalia
 182133749	9187223	Pituophis melanoleucus	2013	2013	Squamata	Animalia
