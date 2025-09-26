@@ -1,6 +1,6 @@
 on:
   schedule: 
-   - cron: '0 0 1 1-12 *'
+   - cron: '0 0 1 1-12 *' #At 00:00 on day-of-month 1 in every month from January through December.
   workflow_dispatch:
   
 name: update Xenopus laevis management
@@ -41,23 +41,26 @@ jobs:
 
       - name: Install linux libraries
         run: |
-          sudo apt install libsodium-dev
-          sudo apt-get install libcurl4-openssl-dev
-          sudo apt-get install libgdal-dev libproj-dev
-          sudo apt install libudunits2-dev
+          sudo apt update
+          sudo apt install -y libsodium-dev
+          sudo apt-get install -y libcurl4-openssl-dev
+          sudo apt-get install -y libgdal-dev libproj-dev
+          sudo apt install -y libudunits2-dev
+          sudo apt-get install -y libfontconfig1-dev libfreetype6-dev
+          sudo apt-get install -y libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev
 
       - name: Install R packages
         run: |
-          source("src/install_packages_Xenopus_laevis_management.R")
+          source("src/Xenopus laevis management/install_packages_Xenopus_laevis_management.R")
         shell: Rscript {0}
         
       - name: Xenopus laevis management
         run: |
-          source("src/run_Xenopus_laevis_management.R")
+          source("src/Xenopus laevis management/run_Xenopus_laevis_management.R")
         shell: Rscript {0}
 
       - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
+        uses: devops-infra/action-commit-push@v0.11.1
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
@@ -75,6 +78,6 @@ jobs:
           target_branch: uat
           title: "[AUTO] update Xenopus laevis management"
           template: .github/PR_Xenopus_laevis_management.md
-          reviewer: [SanderDevisscher, maudsegal, soriadelva]
+          reviewer: SanderDevisscher, maudsegal, soriadelva
           label: automated workflow
           get_diff: false
