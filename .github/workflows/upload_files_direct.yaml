@@ -28,6 +28,7 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
       USERNAME: ${{ secrets.USERNAME }}
+      amiabot: ${{ secrets.AMIABOT }}
 
     steps:
       - name: Checkout repository
