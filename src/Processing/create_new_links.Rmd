@@ -12,7 +12,7 @@ library(tidyverse)
 
 ```{r functies}
 source("./HTML_pages/Render_single_HTML.R")
-source("./src/assign_dutch_article.R")
+source("./src/Processing/assign_dutch_article.R")
 ```
 
 ```{r read template}
