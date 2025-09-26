@@ -1,0 +1,369 @@
+---
+title: "update_xenopus_laevis_management"
+author: "Sander Devisscher"
+date: "2025-07-25"
+output: html_document
+---
+
+```{r libraries}
+library(rgbif)
+library(sf)
+library(googlesheets4)
+library(fistools)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+library(testthat)
+```
+
+```{r auth}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is not a bot")
+  email <- paste0(Sys.getenv("email"), "@inbo.be")
+  gs4_auth(email)
+}else{
+  print("Executor of the script is a bot")
+  gs4_auth(path = Sys.getenv("gsheet_token"))
+}
+```
+
+```{r read sheets}
+catch_data_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
+                             sheet = "catch data")
+
+species_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
+                          sheet = "LEGEND_species_code")
+
+locations_raw <- read_sheet(ss = "1w8iYS-8l9bdpzAQFqpRw0r8RL7TPQyFDqiZh2-S4Im0",
+                            sheet = "LEGEND_locationID")
+```
+
+```{r explore datasets, eval=FALSE}
+library(GWalkR)
+GWalkR::gwalkr(catch_data_raw)
+GWalkR::gwalkr(locations_raw)
+GWalkR::gwalkr(species_raw)
+```
+
+```{r prep species}
+species <- species_raw %>%
+  mutate(species = case_match(species,
+                              "Pelophylax species" ~ "Pelophylax",
+                              "Lissotriton species" ~ "Lissotriton",
+                              "Pseudorasboras parva" ~ "Pseudorasbora parva",
+                              .default = species))
+
+species_names <- species %>%
+  distinct(species) %>%
+  pull()
+
+remove(species_codes)
+
+# Create a data.frame with species names & gbif codes retrieved using rgbif::name_usage 
+for(s in species_names){
+  species_code <- name_usage(name = s)$data %>%
+    filter(taxonomicStatus == "ACCEPTED",
+           !is.na(nubKey)) %>%
+    group_by(nubKey, canonicalName) %>% 
+    summarise(n = n()) %>% 
+    filter(n == max(n, na.rm = TRUE)) %>%  # filter the most common nubKey & canonicalName
+    distinct(nubKey, canonicalName) 
+  
+  if(nrow(species_code) > 1){
+    cat("Multiple species codes found for", s, "\n, 
+        => taking the first one\n")
+    species_code <- species_code %>% 
+      first()
+  }
+  
+  if(!exists("species_codes")){
+    species_codes <- species_code
+  }else{
+    species_codes <- bind_rows(species_codes, species_code)
+  }
+}
+
+species <- species %>% 
+  left_join(species_codes, by = c("species" = "canonicalName")) %>%
+  select(species, species_code, nubKey) %>% 
+  distinct()
+```
+
+```{r prep locations}
+# Convert to sf
+locations <- locations_raw %>%
+  dms_column_to_decimal(c("lat_Y", "long_X")) %>% 
+  st_as_sf(coords = c("long_X_decimal", "lat_Y_decimal"),
+           crs = 4326,
+           remove = FALSE)
+
+# Add gewest
+gemeentes <- st_read("./data/output/UAT_processing/communes.geojson") %>% 
+  select(gemeente_shape = NAAM,
+         gewest_gem = GEWEST)
+provincies <- st_read("./data/output/UAT_processing/provinces.geojson") %>% 
+  select(provincie_shape = NAAM,
+         gewest_prov = GEWEST)
+
+locs_gem <- st_intersection(locations, gemeentes) %>% 
+  as.data.frame() %>% 
+  select(locationID, gemeente_shape, gewest_gem)
+locs_prov <- st_intersection(locations, provincies)  %>% 
+  as.data.frame() %>% 
+  select(locationID, provincie_shape, gewest_prov)
+
+locations <- locations %>% 
+  left_join(locs_gem, by = "locationID") %>% 
+  left_join(locs_prov, by = "locationID") %>% 
+  mutate(gemeente = coalesce(gemeente, gemeente_shape),
+         provincie = coalesce(provincie, provincie_shape),
+         gewest = coalesce(gewest_gem, gewest_prov)) %>% 
+  group_by(locationID) %>% 
+  add_tally() %>% 
+  ungroup()
+
+locations_uniek <- locations %>% 
+  filter(n == 1)
+
+locations_dupli <- locations %>% 
+  filter(n > 1) 
+
+locations_dupli_redux <- locations_dupli %>% 
+  filter(gemeente == "Komen-Waasten" & provincie == "Henegouwen") 
+
+locations_dupli_remaining <- locations_dupli %>% 
+  filter(!locationID %in% locations_dupli_redux$locationID)
+
+test_that("No gemeente-provincie combinations left in locations_dupli_remaining", {
+  # Check if locations_dupli_remaining exists
+  expect_true(exists("locations_dupli_remaining"), info = "locations_dupli_remaining data frame does not exist")
+  
+  # Select distinct combinations
+  unique_combos <- locations_dupli_remaining %>%
+    distinct(gemeente, provincie)
+  
+  n_left <- nrow(unique_combos)
+  
+  # Display remaining combinations if any
+  if (n_left > 0) {
+    print("Remaining (gemeente, provincie) combinations:")
+    print(unique_combos)
+    
+    cat("Add the correct combination to the code @ line 130 as in the example `filter(gemeente == 'Komen-Waasten' & provincie == 'Henegouwen')`")
+  }
+  
+  expect_equal(n_left, 0, info = "There are gemeente-provincie combinations left in locations_dupli_remaining")
+})
+
+locations_final <- rbind(locations_uniek, locations_dupli_redux) %>% 
+  select(locationID, surface = `surface (m²)`, lat_Y_decimal, long_X_decimal, gemeente, provincie, gewest, geometry)
+
+test_that("All locationIDs from locations_raw are present in locations_final", {
+  # Ensure data frames exist
+  expect_true(exists("locations_raw"), info = "locations_raw does not exist")
+  expect_true(exists("locations_final"), info = "locations_final does not exist")
+  
+  # Gather unique locationIDs
+  locationIDs_raw <- unique(locations_raw$locationID)
+  locationIDs_final <- unique(locations_final$locationID)
+  
+  # Find missing locationIDs
+  missing_locationIDs <- setdiff(locationIDs_raw, locationIDs_final)
+  
+  # If any are missing, show them
+  if (length(missing_locationIDs) > 0) {
+    message("Missing locationIDs from locations_final: ", paste(missing_locationIDs, collapse = ", "))
+  }
+  
+  # Test passes only if no locationIDs are missing
+  expect_equal(
+    length(missing_locationIDs), 0, 
+    info = paste("The following locationIDs from locations_raw are missing in locations_final:", 
+                 paste(missing_locationIDs, collapse = ", "))
+  )
+})
+```
+
+```{r test locations, eval = FALSE}
+library(leaflet)
+
+leaflet(locations) %>% 
+  addTiles() %>% 
+  addCircles()
+```
+
+```{r datacleaning}
+catch_data <- catch_data_raw %>%
+  filter(!is.na(locationID)) %>% 
+  left_join(species, by = "species_code") %>% 
+  left_join(locations_final, by = "locationID") %>% 
+  mutate(eventID = gsub(pattern = " ", replacement = "_",
+                        x = paste(locationID, date_setup, date_retrieval, sep = "_"))) %>% 
+  mutate(Jaar = format(date_setup, "%Y"))
+
+events <- catch_data %>% 
+  group_by(locationID, date_setup, date_retrieval) %>% 
+  summarise(period = as.integer(date_retrieval - date_setup),
+            n_fykes = n_distinct(fyke_nr),
+            effort = n_fykes * period) %>% 
+  ungroup() %>% 
+  mutate(eventID = gsub(pattern = " ", replacement = "_",
+                        x = paste(locationID, date_setup, date_retrieval, sep = "_"))) %>% 
+  distinct(eventID, period, n_fykes, effort) 
+
+table(catch_data$lifeStage, useNA = "ifany")
+
+# For default asp graphs with ID, year, individualCount, lifestage, eventID, locationID, gemeente, provincie, n_fuiken & gewest
+# indivudual count is summed per event and the max of n_fuiken is used.
+catch_data_results <- catch_data %>% 
+  left_join(events, by = "eventID") %>% 
+  group_by(eventID, locationID, lat_Y_decimal, long_X_decimal, lifeStage, Jaar, species, gemeente, provincie, gewest) %>% 
+  summarise(individualCount = sum(individualCount, na.rm = TRUE),
+            no_fuiken = max(effort, na.rm = TRUE)) %>% 
+  filter(species == "Xenopus laevis") %>% 
+  mutate(lifeStage = case_when(lifeStage %in% c("Larve", "larve") ~ "larvae",
+                               is.na(lifeStage) ~ "unknown",
+                               TRUE ~ lifeStage)) %>% 
+  rename(year = Jaar,
+         n_fuiken = no_fuiken)
+
+table(catch_data_results$lifeStage, useNA = "ifany")
+
+# For additional asp graphs we need per individual Xenopus laevis the following: sex, svl, biomass, eventID, locationID, gemeente, provincie # & gewest 
+catch_data_ecology_int <- catch_data %>% 
+  filter(species == "Xenopus laevis") 
+
+# Create a row per individual
+catch_data_ecology <- catch_data_ecology_int %>% 
+  uncount(weights = individualCount) %>%
+  group_by(across(-srt)) %>%  # group by all columns except srt
+  mutate(srt = paste(srt, row_number(), sep = "-")) %>%
+  ungroup()
+
+test_that("There are more individuals in the final data than at the source", {
+  expect_equal(sum(catch_data_ecology_int$individualCount, na.rm = TRUE), nrow(catch_data_ecology))
+})
+```
+
+```{r folder paths}
+interim_folder <- "./data/interim/Xenopus_laevis_management/"
+output_folder <- "./data/output/UAT_direct/"
+```
+
+```{r export data}
+write_csv(catch_data_results, paste0(output_folder, "Xenopus_laevis.csv"))
+write_csv(catch_data_ecology, paste0(output_folder, "Xenopus_laevis_ecology.csv"))
+```
+
+```{r plot: catch per year}
+catch_per_year <- ggplot(catch_data_results, aes(x = factor(year), y = individualCount, fill = lifeStage)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(x = "Year", y = "Catch", fill = "Lifestage") +
+  theme_minimal() +
+  facet_wrap(~provincie)
+
+catch_per_year
+
+ggsave(plot = catch_per_year,
+       filename = paste0(interim_folder, "catch_per_year.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: svl_cm v biomass per sex}
+svl_cm_v_biomass <- ggplot(catch_data_ecology, aes(x = svl_cm, y = biomass_g, color = as.factor(sex))) +
+  geom_point() +
+  labs(x = "Snout vent length (cm)", y = "Biomass (g)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage)
+
+svl_cm_v_biomass
+
+ggsave(plot = svl_cm_v_biomass,
+       filename = paste0(interim_folder, "svl_cm_v_biomass.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: trend svl}
+trend_svl <- catch_data_ecology %>%
+  mutate(year_month = format(date_setup, "%Y-%m")) %>% 
+  ggplot(aes(x = factor(year_month), y = svl_cm, color = as.factor(sex))) +
+  geom_boxplot() +
+  labs(x = "Date", y = "Snout vent length (cm)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+trend_svl
+
+ggsave(plot = trend_svl,
+       filename = paste0(interim_folder, "trend_svl.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: trend_svl_points_smooth}
+trend_svl_points_smooth <- catch_data_ecology %>%
+  mutate(date_setup = as.Date(date_setup)) %>% 
+  ggplot(aes(x = date_setup, y = svl_cm, color = as.factor(sex), group = as.factor(sex))) + 
+  geom_point() +                              # scatter points
+  geom_smooth(method = "lm", se = TRUE) + # smooth trendline per sex
+  labs(x = "Date", y = "Snout vent length (cm)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%Y-%m") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+trend_svl_points_smooth
+
+ggsave(plot = trend_svl_points_smooth,
+       filename = paste0(interim_folder, "trend_svl_points_smooth.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: trend biomass}
+trend_biomass <- catch_data_ecology %>%
+  mutate(year_month = format(date_setup, "%Y-%m")) %>% 
+  ggplot(aes(x = factor(year_month), y = biomass_g, color = as.factor(sex))) +
+  geom_boxplot() +
+  labs(x = "Date", y = "Biomass (g)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+trend_biomass
+
+ggsave(plot = trend_biomass,
+       filename = paste0(interim_folder, "trend_biomass.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```
+
+```{r plot: trend_biomass_points_smooth}
+trend_biomass_points_smooth <- catch_data_ecology %>%
+  mutate(date_setup = as.Date(date_setup)) %>% 
+  ggplot(aes(x = date_setup, y = biomass_g, color = as.factor(sex), group = as.factor(sex))) + 
+  geom_point() +                              # scatter points
+  geom_smooth(method = "lm", se = TRUE) + # smooth trendline per sex
+  labs(x = "Date", y = "Biomass (g)", color = "Sex") +
+  theme_minimal() +
+  facet_wrap(~lifeStage) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%Y-%m") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+trend_biomass_points_smooth
+
+ggsave(plot = trend_biomass_points_smooth,
+       filename = paste0(interim_folder, "trend_biomass_points_smooth.png"),
+       width = 2048,
+       height = 1560,
+       units = "px")
+```

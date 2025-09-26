@@ -107,6 +107,7 @@ muskrat_data <- muskrat_data %>%
                                is.na(provincie) & gemeente == "Overijse" ~ "Vlaams-Brabant",
                                is.na(provincie) & gemeente == "Waver" ~ "Waals-Brabant",
                                is.na(provincie) & gemeente == "Edingen" ~ "Henegouwen",
+                               is.na(provincie) & gemeente == "Mechelen" ~ "Antwerpen",
                                TRUE ~ provincie)) %>%
   left_join(provincies %>% 
               as.data.frame() %>% 
@@ -186,7 +187,7 @@ missing_provinces_geom <- missing_provinces_geom %>%
          provincie_new = provincie,
          gewest_new = GEWEST,
          gbifID) %>% 
-  filter(!is.na(gemeente_new)) 
+  filter(!is.na(gemeente_new))
 
 dupli_missing_provinces_geom <- missing_provinces_geom %>% 
   group_by(gbifID) %>% 
