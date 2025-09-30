@@ -1,0 +1,88 @@
+---
+title: "processing translation files"
+author: "Sander Devisscher"
+date: "2025-09-04"
+output: html_document
+---
+
+This script is triggered by changes in *translations*, *translations_simple* 
+and/or *translations_regions*.
+Currently a transition period these files reside in *./data/output/uat_direct/*.
+In the future these files will be moved to *./data/interim/translations/*
+
+This script converts the files into 1 files per language and stores the results 
+as *translations_nl*, *translations_fr* & *translations_en* in 
+*./data/output/uat_direct/translations*.
+
+```{r libraries}
+library(readr)
+library(dplyr)
+library(tidyr)
+```
+
+```{r determine input directory}
+new_dir <- "./data/interim/translations/"
+old_dir <- "./data/output/UAT_direct/"
+
+if(all(file.exists(paste0(new_dir, "translations.csv")),
+       file.exists(paste0(new_dir, "translations_simple.csv")),
+       file.exists(paste0(new_dir, "translations_regions.csv")))){
+  current_dir <- new_dir
+}else{
+  current_dir <- old_dir
+}
+
+cat("reading data from:", current_dir, "\n")
+```
+
+```{r read template, eval=FALSE}
+translations_template <- read_csv(paste0(output_dir, "translation_nl.csv"))
+```
+
+```{r set output dir}
+output_dir <- "./data/output/UAT_direct/translations/"
+```
+
+```{r convert files & combine them}
+files <- c("translations", "translations_simple", "translations_regions")
+
+translations_combined <- data.frame()
+
+for(f in files){
+  temp_raw <- read_csv2(paste0(current_dir, f, ".csv"))
+  
+  temp <- temp_raw %>% 
+    pivot_longer(cols = -title_id,
+                 names_to = "type_language",
+                 values_to = "value") %>% 
+    separate(col = type_language,
+             into = c("type", "language")) %>% 
+    mutate(id = paste(title_id, type, sep = "_")) %>% 
+    select(id, value, language)
+  
+  if(nrow(translations_combined) == 0){
+    translations_combined <- temp
+  }else{
+    translations_combined <- rbind(translations_combined, temp)
+  }
+}
+
+translations_combined <- translations_combined %>% 
+  distinct() 
+```
+
+```{r split into languages}
+languages <- c("en", "nl", "fr")
+
+for(l in languages){
+  translations_language <- translations_combined %>% 
+    filter(language == l) %>% 
+    arrange(id)
+  
+  translations_language[[l]] <- translations_language$value
+  
+  translations_language <- translations_language %>% 
+    select(id, all_of(l)) %>% 
+    write_csv(paste0(output_dir, "translation_", l, ".csv"))
+}
+```

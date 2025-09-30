@@ -11,6 +11,8 @@ The alien species portal backoffice contains automated data preparation scripts 
 
 [![get_oxyura_jamaicensis_management](https://github.com/inbo/aspbo/actions/workflows/get_oxyura_jamaicensis_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_oxyura_jamaicensis_management.yaml)
 
+[![update Xenopus laevis management](https://github.com/inbo/aspbo/actions/workflows/update_Xenopus_laevis_management.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_Xenopus_laevis_management.yaml)
+
 ## Checklist dataflows
 [![get_griis](https://github.com/inbo/aspbo/actions/workflows/get_griis_checklist.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_griis_checklist.yaml)
 
@@ -20,6 +22,11 @@ The alien species portal backoffice contains automated data preparation scripts 
 [![download occurrence cube](https://github.com/inbo/aspbo/actions/workflows/get_occ_cube.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_occ_cube.yaml)
 
 [![cube preprocessing](https://github.com/inbo/aspbo/actions/workflows/cube_preprocessing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/cube_preprocessing.yaml)
+
+## Processing & Testing
+[![translation processing](https://github.com/inbo/aspbo/actions/workflows/run_translations_processing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/run_translations_processing.yaml)
+
+[![run_translations_test](https://github.com/inbo/aspbo/actions/workflows/run_translations_test.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/run_translations_test.yaml)
 
 ## Upload dataflows
 [![upload_files_direct](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml)
