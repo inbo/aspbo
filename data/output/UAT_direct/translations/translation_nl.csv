@@ -883,6 +883,8 @@ management-mapOccurrence_description,"<p>Kaart en bijbehorende grafieken van de 
 </p>
 Voor meer informatie over het aanpassen van classes zie de <a href="""" target=""_blank"">veel gestelde vragen</a>
 </details>"
+management-mapOccurrence_oxyura_jamaicensis_description,Beschrijving van Beheer van {{species}}
+management-mapOccurrence_oxyura_jamaicensis_title,Beheer van {{species}}
 management-mapOccurrence_title,Beheer van {{species}}
 management2-countYearGroup_description,NA
 management2-countYearGroup_title,Beheer van nesten
