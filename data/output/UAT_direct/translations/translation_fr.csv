@@ -853,7 +853,16 @@ details summary {
 <li> <b>différence :</b> La différence dans le nombre absolu d'individus gérés d'une année par rapport au nombre absolu d'individus gérés de l'année précédente. Cette valeur est calculée en soustrayant la valeur absolue de l'année de celle de l'année précédente. Cette valeur peut donc être négative. Une valeur positive indique que plus d'individus ont été gérés dans une certaine année par rapport à l'année précédente, une valeur négative indique une diminution du nombre d'individus gérés, tandis qu'un zéro indique le même nombre d'individus gérés. La différence pour la première année de la série temporelle est toujours zéro. 
 <li> <b>unité d'effort :</b> Le nombre absolu d'individus gérés divisé par les efforts réalisés. Cela corrige la gestion pour les changements d'effort. L'unité d'effort dépend de la méthode utilisée, mais correspond généralement à 1 piège ou 1 tir par 24 heures. </ul> 
 </p> Pour plus d'informations sur l'ajustement des classes, consultez la <a href="""" target=""_blank"">foire aux questions</a> </details> </body> </html>"
-management-mapOccurrence_oxyura_jamaicensis_description,Description pour Gestion de {{species}}
+management-mapOccurrence_oxyura_jamaicensis_description,"<p>Carte et graphiques associés de la gestion réalisée.</p>
+<p>
+<li>Sur la carte vous pouvez voir la répartition spatiale de la gestion pendant la période choisie<sup>1</sup>.
+<li>Sur le graphique sous la carte vous trouverez la tendance par région (Flandre, Wallonie et/ou Bruxelles)
+</p>
+
+<p>Les données peuvent être affichées par <i>Sexe</i> et <i>Protocole d’échantillonnage</i>. 
+<br>
+<p><sup>1</sup><i>Le curseur de la période se trouve sous le graphique</i>
+"
 management-mapOccurrence_oxyura_jamaicensis_title,Gestion de {{species}}
 management-mapOccurrence_title,Gestion de {{species}}
 management2-countYearGroup_description,NA

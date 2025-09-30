@@ -870,7 +870,16 @@ For more information on adjusting classes, see the <a href="""" target=""_blank"
 
 </body>
 </html>"
-management-mapOccurrence_oxyura_jamaicensis_description,Descriptions of Management of {{species}}
+management-mapOccurrence_oxyura_jamaicensis_description,"<p>Map and associated graphs of realized management.</p>
+
+<p>
+<li>On the map you can see the spatial distribution of management of the chosen period<sup>1</sup>. 
+<li>On the graph below the map you can find the trend per region (Flanders, Wallonia and/or Brussels)
+</p>
+
+<p>Data can be displayed by <i>Gender</i> and <i>Sampling protocol</i>. 
+<br>
+<p><sup>1</sup><i>The period slider can be found below the graph</i>"
 management-mapOccurrence_oxyura_jamaicensis_title,Management of {{species}}
 management-mapOccurrence_title,Management of {{species}}
 management2-countYearGroup_description,NA
