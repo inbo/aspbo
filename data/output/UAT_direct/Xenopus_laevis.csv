@@ -142,6 +142,24 @@ Field_pond_2025-07-02_2025-07-03,Field pond,50.75672222222222,2.9182777777777775
 Field_pond_2025-07-02_2025-07-03,Field pond,50.75672222222222,2.9182777777777775,larvae,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,5,4
 Field_pond_2025-07-02_2025-07-03,Field pond,50.75672222222222,2.9182777777777775,subadult,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,4,4
 Field_pond_2025-07-03_2025-07-04,Field pond,50.75672222222222,2.9182777777777775,larvae,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,1,4
+Field_pond_2025-07-22_2025-07-23,Field pond,50.75672222222222,2.9182777777777775,adult,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,6,4
+Field_pond_2025-07-22_2025-07-23,Field pond,50.75672222222222,2.9182777777777775,larvae,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,3,4
+Field_pond_2025-07-23_2025-07-24,Field pond,50.75672222222222,2.9182777777777775,adult,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,1,4
+Field_pond_2025-07-23_2025-07-24,Field pond,50.75672222222222,2.9182777777777775,eggs,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,100,4
+Field_pond_2025-08-11_2025-08-12,Field pond,50.75672222222222,2.9182777777777775,adult,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,2,4
+Field_pond_2025-08-11_2025-08-12,Field pond,50.75672222222222,2.9182777777777775,juvenile,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,1,4
+Field_pond_2025-08-11_2025-08-12,Field pond,50.75672222222222,2.9182777777777775,larvae,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,1,4
+Field_pond_2025-08-12_2025-08-13,Field pond,50.75672222222222,2.9182777777777775,eggs,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,30,4
+Field_pond_2025-08-12_2025-08-13,Field pond,50.75672222222222,2.9182777777777775,juvenile,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,4,4
+Field_pond_2025-08-12_2025-08-13,Field pond,50.75672222222222,2.9182777777777775,larvae,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,1,4
+Field_pond_2025-09-02_2025-09-03,Field pond,50.75672222222222,2.9182777777777775,adult,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,4,3
+Field_pond_2025-09-03_2025-09-04,Field pond,50.75672222222222,2.9182777777777775,adult,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,4,4
+Field_pond_2025-09-03_2025-09-04,Field pond,50.75672222222222,2.9182777777777775,juvenile,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,1,4
+Field_pond_2025-09-22_2025-09-23,Field pond,50.75672222222222,2.9182777777777775,adult,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,1,4
+Field_pond_2025-09-22_2025-09-23,Field pond,50.75672222222222,2.9182777777777775,juvenile,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,14,4
+Field_pond_2025-09-22_2025-09-23,Field pond,50.75672222222222,2.9182777777777775,juvenile,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,2,4
+Field_pond_2025-09-23_2025-09-24,Field pond,50.75672222222222,2.9182777777777775,adult,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,1,4
+Field_pond_2025-09-23_2025-09-24,Field pond,50.75672222222222,2.9182777777777775,juvenile,2025,Xenopus laevis,Mesen,West-Vlaanderen,flanders,6,4
 Fish_passage_2024-04-03_2024-04-05,Fish passage,50.75802777777778,2.8552222222222223,adult,2024,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,18,12
 Fish_passage_2024-04-03_2024-04-05,Fish passage,50.75802777777778,2.8552222222222223,juvenile,2024,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,23,12
 Fish_passage_2024-04-03_2024-04-05,Fish passage,50.75802777777778,2.8552222222222223,subadult,2024,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,7,12
@@ -188,3 +206,6 @@ La_basse_cour_pond_2024-08-13_2024-08-14,La basse cour pond,50.75402777777778,2.
 La_basse_cour_pond_2024-08-13_2024-08-14,La basse cour pond,50.75402777777778,2.8904722222222223,larvae,2024,Xenopus laevis,Mesen,West-Vlaanderen,flanders,1,4
 Schomminkel_cow_pond_2024-07-08_2024-07-09,Schomminkel cow pond,50.778055555555554,2.7528888888888887,subadult,2024,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,3,4
 Schomminkel_cow_pond_2024-07-09_2024-07-10,Schomminkel cow pond,50.778055555555554,2.7528888888888887,subadult,2024,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,4
+Stuiversbeek_2025-08-11_2025-08-12,Stuiversbeek,50.76419444444444,2.858777777777778,adult,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,4,5
+Stuiversbeek_2025-08-11_2025-08-12,Stuiversbeek,50.76419444444444,2.858777777777778,eggs,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,35,5
+Stuiversbeek_2025-08-12_2025-08-13,Stuiversbeek,50.76419444444444,2.858777777777778,adult,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,5
