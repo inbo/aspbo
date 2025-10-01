@@ -31,6 +31,10 @@ eu_concern_list_new <- eu_concern_list_new %>%
                                        & nubKey == 6247411 ~ 1311477,
                                        canonicalName == "Salvinia molesta" 
                                        & nubKey == 5274863 ~ 5274861,
+                                       canonicalName == "Neogale vison" & 
+                                         is.na(nubKey) ~ 5218823,
+                                       canonicalName == "Triadica spec." &
+                                         is.na(nubKey) ~ 3054399,
                                        TRUE ~ nubKey),
          checklist_scientificName = case_when(!is.na(species) ~ species,
                                               TRUE ~ canonicalName)) %>% 
