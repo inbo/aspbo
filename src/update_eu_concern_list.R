@@ -31,6 +31,10 @@ eu_concern_list_new <- eu_concern_list_new %>%
                                        & nubKey == 6247411 ~ 1311477,
                                        canonicalName == "Salvinia molesta" 
                                        & nubKey == 5274863 ~ 5274861,
+                                       canonicalName == "Neogale vison" & 
+                                         is.na(nubKey) ~ 5218823,
+                                       canonicalName == "Triadica spec." &
+                                         is.na(nubKey) ~ 3054399,
                                        TRUE ~ nubKey),
          checklist_scientificName = case_when(!is.na(species) ~ species,
                                               TRUE ~ canonicalName)) %>% 
@@ -40,6 +44,22 @@ eu_concern_list_new <- eu_concern_list_new %>%
          backbone_taxonKey,
          backbone_taxonomicStatus = taxonomicStatus) %>% 
   arrange(checklist_scientificName)
+
+new_taxa <- eu_concern_list_new %>% 
+  filter(!checklist_scientificName %in% eu_concern_list_old$checklist_scientificName &
+           !backbone_taxonKey %in% eu_concern_list_old$backbone_taxonKey) %>% 
+  write_csv("./data/interim/eu_concern_list_new_taxa.csv")
+
+changed_taxa <- eu_concern_list_new %>% 
+  filter(!checklist_scientificName %in% eu_concern_list_old$checklist_scientificName &
+           backbone_taxonKey %in% eu_concern_list_old$backbone_taxonKey | 
+           checklist_scientificName %in% eu_concern_list_old$checklist_scientificName &
+           !backbone_taxonKey %in% eu_concern_list_old$backbone_taxonKey) %>% 
+  write_csv("./data/interim/eu_concern_list_changed_taxa.csv")
+
+omited_taxa <- eu_concern_list_old %>% 
+  filter(!checklist_scientificName %in% eu_concern_list_new$checklist_scientificName) %>% 
+  write_csv("./data/interim/eu_concern_list_omited_taxa.csv")
 
 if(nrow(eu_concern_list_new) > nrow(eu_concern_list_old)){
   ## list has expanded ####

@@ -1,5 +1,7 @@
 checklist_scientificName	english_name	checklist_kingdom	backbone_taxonKey	backbone_taxonomicStatus
+Acacia mearnsii	Black wattle	Plantae	2979775	ACCEPTED
 Acacia saligna	Golden wreath wattle	Plantae	2978552	ACCEPTED
+Acridotheres cristatellus	Crested myna	Animalia	2489010	ACCEPTED
 Acridotheres tristis	Common myna	Animalia	2489005	ACCEPTED
 Ailanthus altissima	Tree of heaven	Plantae	3190653	ACCEPTED
 Alopochen aegyptiacus	Egyptian goose	Animalia	2498252	ACCEPTED
@@ -8,20 +10,31 @@ Ameiurus melas	Black bullhead	Animalia	2340977	ACCEPTED
 Andropogon virginicus	Broomsedge bluestem	Plantae	2706080	ACCEPTED
 Arthurdendyus triangulatus	New Zealand flatworm	Animalia	2502792	ACCEPTED
 Asclepias syriaca	Common milkweed	Plantae	3170247	ACCEPTED
+Asterias amurensis	Northern pacific seastar	Animalia	5187508	ACCEPTED
 Axis axis	axis deer	Animalia	2440934	ACCEPTED
 Baccharis halimifolia	Eastern baccharis	Plantae	3129663	ACCEPTED
+Bipalium kewense	Arrowhead flatworm	Animalia	2502938	ACCEPTED
+Brachyponera chinensis	Asian needle-ant	Animalia	10314173	ACCEPTED
+Broussonetia papyrifera	Paper mulberry	Plantae	5361944	ACCEPTED
 Cabomba caroliniana	Fanwort	Plantae	2882443	ACCEPTED
 Callosciurus erythraeus	Pallas' squirrel	Animalia	2437394	ACCEPTED
 Callosciurus finlaysonii	Finlayson's squirrel	Animalia	2437399	ACCEPTED
 Cardiospermum grandiflorum	Balloon vine	Plantae	3189935	ACCEPTED
+Castor canadensis	North American beaver	Animalia	2439838	ACCEPTED
 Celastrus orbiculatus	Oriental bittersweet	Plantae	3169169	ACCEPTED
+Cervus nippon	Sika dear	Animalia	2440954	ACCEPTED
 Channa argus	northern snakehead	Animalia	4284921	ACCEPTED
+Cherax destructor	Common yabby	Animalia	4417558	ACCEPTED
+Cipangopaludina chinensis	Chinese mystery snail	Animalia	9738098	ACCEPTED
 Cortaderia jubata	Purple pampas grass	Plantae	2704521	ACCEPTED
 Corvus splendens	Indian house crow	Animalia	2482499	ACCEPTED
+Crassula helmsii	New Zealand pigmyweed	Plantae	5362054	ACCEPTED
+Delairea odorata	Cape ivy	Plantae	3134183	ACCEPTED
 Ehrharta calycina	Perrenial veldt grass	Plantae	2702865	ACCEPTED
 Eichhornia crassipes	Water hyacinth	Plantae	2765940	ACCEPTED
 Elodea nuttallii	Nuttall's waterweed	Plantae	5329212	ACCEPTED
 Eriocheir sinensis	Chinese mittencrab	Animalia	2225776	ACCEPTED
+Faxonius immunis	Calico crayfish	Animalia	8930656	ACCEPTED
 Faxonius rusticus	rusty crayfish	Animalia	8979506	ACCEPTED
 Fundulus heteroclitus	mummichog	Animalia	5712056	ACCEPTED
 Gambusia affinis	western mosquitofish	Animalia	2350580	ACCEPTED
@@ -38,7 +51,7 @@ Hydrocotyle ranunculoides	Floating pennywort	Plantae	7978544	ACCEPTED
 Impatiens glandulifera	Himalayan balsam	Plantae	2891770	ACCEPTED
 Koenigia polystachya	Himalayan knotweed	Plantae	8848208	ACCEPTED
 Lagarosiphon major	Curly waterweed	Plantae	2865565	ACCEPTED
-Lampropeltis getula	common kingsnake	Animalia	5224480	ACCEPTED
+Lampropeltis getula	common kingsnake	Animalia	9799308	ACCEPTED
 Lepomis gibbosus	Pumpkinseed	Animalia	2394486	ACCEPTED
 Lespedeza cuneata	Chinese bushclover	Plantae	8114276	ACCEPTED
 Limnoperna fortunei	golden mussel	Animalia	5855350	ACCEPTED
@@ -47,14 +60,21 @@ Ludwigia grandiflora	Water-primrose	Plantae	5421039	ACCEPTED
 Ludwigia peploides	Floating primrose-willow	Plantae	5420991	ACCEPTED
 Lygodium japonicum	Vine-like fern	Plantae	2650436	ACCEPTED
 Lysichiton americanus	American skunk cabbage	Plantae	2869311	ACCEPTED
+Marisa cornuarietis	Ramshorn apple snail	Animalia	2292586	ACCEPTED
 Microstegium vimineum	Japanese stiltgrass	Plantae	5289808	ACCEPTED
+Misgurnus anguillicaudatus	Oriental weatherfish	Animalia	2367919	ACCEPTED
+Misgurnus bipartitus	Northern oriental weatherfish	Animalia	2367913	ACCEPTED
 Morone americana	white perch	Animalia	2394604	ACCEPTED
+Mulinia lateralis	Dwarf surf clamb	Animalia	2286388	ACCEPTED
 Muntiacus reevesi	Muntjac deer	Animalia	2440946	ACCEPTED
 Myocastor coypus	Coypu	Animalia	4264680	ACCEPTED
 Myriophyllum aquaticum	Parrot's feather	Plantae	5361785	ACCEPTED
 Myriophyllum heterophyllum	Broadleaf watermilfoil	Plantae	5361762	ACCEPTED
+Nanozostera japonica	Japanese eelgras	Plantae	2863941	ACCEPTED
 Nasua nasua	Coati rode	Animalia	2433536	ACCEPTED
+Neogale vison	American mink	Animalia	5218823	ACCEPTED
 Nyctereutes procyonoides	Raccoon dog	Animalia	2434552	ACCEPTED
+Obama nungara	Obama flatworm	Animalia	8701771	ACCEPTED
 Ondatra zibethicus	Muskrat	Animalia	5219858	ACCEPTED
 Orconectes limosus	Spiny-cheek crayfish	Animalia	2227000	ACCEPTED
 Orconectes virilis	Virile crayfish	Animalia	2227064	ACCEPTED
@@ -65,6 +85,7 @@ Pennisetum setaceum	Crimson fountaingrass	Plantae	2706134	ACCEPTED
 Perccottus glenii	Amur sleeper	Animalia	2390064	ACCEPTED
 Persicaria perfoliata	Asiatic tearthumb	Plantae	4033648	ACCEPTED
 Pistia stratiotes	water lettuce	Plantae	2870583	ACCEPTED
+Platydemus manokwari	New-guinea flatworm	Animalia	5892137	ACCEPTED
 Plotosus lineatus	Striped eel catfish	Animalia	7965247	ACCEPTED
 Procambarus clarkii	Red swamp crayfish	Animalia	2227300	ACCEPTED
 Procambarus fallax virginalis	Marbled crayfish	Animalia	8879526	ACCEPTED
@@ -73,6 +94,9 @@ Prosopis juliflora	Mesquite	Plantae	5358460	ACCEPTED
 Pseudorasbora parva	Stone moroko	Animalia	2362868	ACCEPTED
 Pueraria montana lobata	Kudzu vine	Plantae	2977647	ACCEPTED
 Pycnonotus cafer	red-vented bulbul	Animalia	2486131	ACCEPTED
+Pycnonotus jocosus	Red whiskered bulbul	Animalia	2486151	ACCEPTED
+Reynoutria japonica	Japanese knotweed	Plantae	2889173	ACCEPTED
+Reynoutria sachalinensis	Giant knotweed	Plantae	2889088	ACCEPTED
 Rugulopteryx okamurae	algae stomp	Chromista	5824863	ACCEPTED
 Salvinia molesta	Salvinia moss	Plantae	5274861	ACCEPTED
 Sciurus carolinensis	Grey squirrel	Animalia	5219681	ACCEPTED
@@ -82,8 +106,9 @@ Solenopsis invicta	red imported fire ant	Animalia	5035230	ACCEPTED
 Solenopsis richteri	black imported fire ant	Animalia	5035017	ACCEPTED
 Tamias sibiricus	Siberian chipmunk	Animalia	2437450	ACCEPTED
 Threskiornis aethiopicus	Sacred ibis	Animalia	2480764	ACCEPTED
-Trachemys scripta	NA	Animalia	2443002	ACCEPTED
-Triadica sebifera	Chinese tallow	Plantae	3054399	ACCEPTED
+Trachemys scripta	Red-eared, yellow-bellied and Cumberland sliders	Animalia	2443002	ACCEPTED
+Triadica spec.	Chinese tallow	Plantae	3054399	ACCEPTED
+Vespa mandarinia	Giant asian hornet	Animalia	5871429	ACCEPTED
 Vespa velutina nigrithorax	Asian hornet	Animalia	1311477	ACCEPTED
 Wasmannia auropunctata	little fire ant	Animalia	1315391	ACCEPTED
 Xenopus laevis	African clawed frog	Animalia	5217334	ACCEPTED
