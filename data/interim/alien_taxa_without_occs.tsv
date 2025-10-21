@@ -15,12 +15,10 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544600	1031743	Dorypteryx pallida	2018	2018	Insecta	Animalia
 152544591	1032262	Enderleinellus kumadai	2004	2011	Insecta	Animalia
 152544587	1032377	Hoplopleura erismata	2004	2011	Insecta	Animalia
-152544545	1043978	Stelidota geminata	2018	2018	Insecta	Animalia
 182134456	1194885	Otiorhynchus meridionalis	2003	2018	Insecta	Animalia
 182134455	1194989	Otiorhynchus cribricollis	2002	2018	Insecta	Animalia
 152544520	1319260	Tetraponera allaborans	1980	2018	Insecta	Animalia
 152544508	1321805	Pheidole bilimeki	1911	2018	Insecta	Animalia
-152544494	1325561	Paratrechina longicornis	1980	2018	Insecta	Animalia
 213213874	1349836	Hylaeus absolutus	2021	2021	Insecta	Animalia
 152544459	1419894	Euborellia annulipes	2016	2018	Insecta	Animalia
 152544422	1420197	Aleurodothrips fasciapennis	2018	2018	Insecta	Animalia
@@ -268,7 +266,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213214647	3047147	Neslia paniculata thracica	1866	1927	Magnoliopsida	Plantae
 213214628	3048073	Erysimum collisparsum	1893	1941	Magnoliopsida	Plantae
 152545461	3048288	Erysimum diffusum	1877	1896	Magnoliopsida	Plantae
-152545462	3048532	Erysimum marshallii	2000	2000	Magnoliopsida	Plantae
 152545439	3053950	Enarthrocarpus lyratus	1892	1893	Magnoliopsida	Plantae
 152546431	3056259	Acalypha indica	2003	2003	Magnoliopsida	Plantae
 152546433	3060710	Manihot grahamii	2017	2017	Magnoliopsida	Plantae
@@ -540,7 +537,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152543796	5402627	Iva annua	1994	2000	Magnoliopsida	Plantae
 152543800	5402874	Eupatorium perfoliatum	2007	2008	Magnoliopsida	Plantae
 152543587	5408775	Lobelia sessilifolia	2004	2004	Magnoliopsida	Plantae
-152545244	5414550	Vincetoxicum rossicum	1965	1965	Magnoliopsida	Plantae
 213215540	5414989	Digitalis lanata	2020	2020	Magnoliopsida	Plantae
 152545655	5415014	Linaria angustissima	1835	1835	Magnoliopsida	Plantae
 159746847	5421557	Coscinodiscus wailesii	1997	1997	Bacillariophyceae	Chromista
@@ -690,7 +686,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545901	7933495	Sclerolaena muricata	1907	1911	Magnoliopsida	Plantae
 213213069	7948459	Aira elegans	1898	1994	Liliopsida	Plantae
 213212288	7954545	Puccinia conglomerata	1850	2012	Pucciniomycetes	Fungi
-152544536	7987143	Anoplophora chinensis	2005	2006	Insecta	Animalia
 152546784	7998563	Diplachne fusca fusca	1911	1953	Liliopsida	Plantae
 213215546	8006893	Kickxia elatine sieberi	1955	1971	Magnoliopsida	Plantae
 152546073	8012084	Dianthus subacaulis	2002	2020	Magnoliopsida	Plantae
