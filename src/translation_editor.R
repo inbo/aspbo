@@ -1,6 +1,7 @@
 library(shiny)
 library(dplyr)
 library(readr)
+library(magrittr)
 library(htmltools)
 library(googlesheets4)
 
