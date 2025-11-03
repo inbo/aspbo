@@ -7,10 +7,10 @@ output: html_document
 
 This script is triggered by changes in *translations*, *translations_simple* 
 and/or *translations_regions*.
-Currently a transition period these files reside in *./data/output/uat_direct/*.
+Currently these files reside in *./data/output/uat_direct/*.
 In the future these files will be moved to *./data/interim/translations/*
 
-This script converts the files into 1 files per language and stores the results 
+This script converts the files into 1 file per language and stores the results 
 as *translations_nl*, *translations_fr* & *translations_en* in 
 *./data/output/uat_direct/translations*.
 
