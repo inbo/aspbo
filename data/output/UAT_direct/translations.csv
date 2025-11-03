@@ -60,7 +60,7 @@ Ontbrekende nesten kunnen steeds gemeld worden op <a href=""https://vespawatch.b
 </br><em>Data beschikbaar tot {{maxDate}}</em>";Points chauds actifs;"Cette carte illustre les endroits où des frelons asiatiques ont été signalées, mais où aucun nid n'a encore été géré avec succès. Les observateurs Vespa peuvent mener des enquêtes à ces endroits.
 Les observations sont conservées si elles sont situées à plus de 2 km d'un nid géré avec succès et/ou sont rapportées après une action de gestion réussie. Plus le rouge est intense, plus il y a de notifications à proximité les unes des autres.
 Les nids manquants peuvent toujours être signalés sur <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
-</br><em>Dates disponibles jusqu'au {{maxDate}}</em>";Active hotbeds;"This map illustrates where Asian hornet has been sighted, but where no nest has yet been successfully managed. Vespa watchers may conduct investigations at these locations.
+</br><em>Dates disponibles jusqu'au {{maxDate}}</em>";Active hotbeds;"This map illustrates where the Asian hornet has been sighted, but where no nest has yet been successfully managed. Vespa watchers may conduct investigations at these locations.
 Observations are retained if they are located further than 2km from a successfully managed nest and/or are reported after a successful management action. The more intense red, the more notifications there are in close proximity to each other.
 Missing nests can always be reported at <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
 </br><em>Dates available until {{maxDate}}</em>"
