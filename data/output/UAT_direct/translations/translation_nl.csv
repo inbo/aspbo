@@ -883,13 +883,13 @@ management-mapOccurrence_description,"<p>Kaart en bijbehorende grafieken van de 
 </p>
 Voor meer informatie over het aanpassen van classes zie de <a href="""" target=""_blank"">veel gestelde vragen</a>
 </details>"
-management-mapOccurrence_oxyura_jamaicensis_description,"<p>Kaart en bijhorende grafieken van gerealiseerd beheer.</p>
+management-mapOccurrence_oxyura_jamaicensis_description,"<p>Kaart en bijbehorende grafieken van gerealiseerd beheer.</p>
 <p>
 <li>Op de kaart zie je de ruimtelijke verspreiding van het beheer in de gekozen periode<sup>1</sup>.
 <li>In de grafiek onder de kaart vind je de trend per regio (Vlaanderen, Wallonië en/of Brussel)
 </p>
 
-<p>Gegevens kunnen worden weergegeven volgens <i>Geslacht</i> en <i>Steekprotocol</i>. 
+<p>Gegevens kunnen worden weergegeven volgens <i>Geslacht</i> en <i>Staalnameprotocol</i>. 
 <br>
 <p><sup>1</sup><i>De schuifbalk voor de periode bevindt zich onder de grafiek</i>"
 management-mapOccurrence_oxyura_jamaicensis_title,Beheer van {{species}}
