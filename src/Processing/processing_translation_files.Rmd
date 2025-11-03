@@ -35,12 +35,12 @@ if(all(file.exists(paste0(new_dir, "translations.csv")),
 cat("reading data from:", current_dir, "\n")
 ```
 
-```{r read template, eval=FALSE}
-translations_template <- read_csv(paste0(output_dir, "translation_nl.csv"))
-```
-
 ```{r set output dir}
 output_dir <- "./data/output/UAT_direct/translations/"
+```
+
+```{r read template, eval=FALSE}
+translations_template <- read_csv(paste0(output_dir, "translation_nl.csv"))
 ```
 
 ```{r convert files & combine them}
