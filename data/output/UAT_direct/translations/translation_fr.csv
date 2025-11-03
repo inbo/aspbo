@@ -861,8 +861,7 @@ management-mapOccurrence_oxyura_jamaicensis_description,"<p>Carte et graphiques 
 
 <p>Les données peuvent être affichées par <i>Sexe</i> et <i>Protocole d’échantillonnage</i>. 
 <br>
-<p><sup>1</sup><i>Le curseur de la période se trouve sous le graphique</i>
-"
+<p><sup>1</sup><i>Le curseur de la période se trouve sous le graphique</i>"
 management-mapOccurrence_oxyura_jamaicensis_title,Gestion de {{species}}
 management-mapOccurrence_title,Gestion de {{species}}
 management2-countYearGroup_description,NA
