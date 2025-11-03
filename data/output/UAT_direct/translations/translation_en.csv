@@ -874,7 +874,7 @@ management-mapOccurrence_oxyura_jamaicensis_description,"<p>Map and associated g
 
 <p>
 <li>On the map you can see the spatial distribution of management for the chosen period<sup>1</sup>. 
-<li>On the graph below the map you can find the trend per region (Flanders, Wallonia and/or Brussels)
+<li>On the graph below the map, you can see the trend per region (Flanders, Wallonia and/or Brussels)
 </p>
 
 <p>Data can be displayed by <i>Gender</i> and <i>Sampling protocol</i>. 
@@ -884,7 +884,7 @@ management-mapOccurrence_oxyura_jamaicensis_title,Management of {{species}}
 management-mapOccurrence_title,Management of {{species}}
 management2-countYearGroup_description,NA
 management2-countYearGroup_title,Management of nests
-management2_active-mapHeat_description,"This map illustrates where Asian hornet has been sighted, but where no nest has yet been successfully managed. Vespa watchers may conduct investigations at these locations.
+management2_active-mapHeat_description,"This map illustrates where the Asian hornet has been sighted, but where no nest has yet been successfully managed. Vespa watchers may conduct investigations at these locations.
 Observations are retained if they are located further than 2km from a successfully managed nest and/or are reported after a successful management action. The more intense red, the more notifications there are in close proximity to each other.
 Missing nests can always be reported at <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
 </br><em>Dates available until {{maxDate}}</em>"
