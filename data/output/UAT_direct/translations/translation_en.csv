@@ -644,7 +644,7 @@ Zwalm_title,NA
 Zwevegem_title,NA
 Zwijndrecht_title,NA
 absolute_title,absolute
-allDoe_title,All degree of establishment
+allDoe_title,All degrees of establishment
 allHabitats_title,All habitats
 allNative_title,All native regions
 allPathways_title,All pathways
@@ -708,7 +708,7 @@ contaminant_animal_parasite_title,Parasites on animals (including species transp
 contaminant_bait_title,Contaminated bait
 contaminant_food_title,Food contaminant (including of live food)
 contaminant_habitat_material_title,"Transportation of habitat material (soil, vegetation, ...)"
-contaminant_nursery_title,Contaminant nursery material
+contaminant_nursery_title,Nursery material contaminant
 contaminant_on_animals_title,"Contaminant on animals (except parasites, species transported by host/vector)"
 contaminant_on_plants_title,"Contaminant on plants (except parasites, species transported by host/vector)"
 contaminant_plant_parasite_title,Parasites on plants (including species transported by host and vector)
@@ -739,7 +739,7 @@ cumulative_title,cumulative number
 degree_of_establishment_title,degree of establishment
 diffHigh_title,high risk difference
 diffLow_title,low risk difference
-diffMap_title,Map of difference in risk between the RCP climate scenario and the historical climate data
+diffMap_title,Map of the difference in suitability between the future SSP scenario and historical predictions
 difference_title,Difference
 disclaimerVespa_title,The species is currently not active. When you observe an individual this might be a wintering queen which does not indicate nesting activity.
 downloadMap_title,Download map
@@ -754,11 +754,11 @@ escape_fur_farm_title,Fur farms
 escape_horticulture_title,Horticulture
 escape_ornamental_title,Ornamental purpose other than horticulture
 escape_other_title,Other escape from confinement
-escape_pet_title,Pet/aquarium/terrarium species (including live food for such species )
+escape_pet_title,Pet / Aquarium / Terrarium species (including live food for such species )
 escape_research_title,Research and ex-situ breeding (in facilities)
 escape_title,ESCAPE from confinement
 escape_unknown_title,ESCAPE from confinement (not specified)
-escape_zoo_title,Botanical garden/zoo/aquaria (excluding domestic aquaria)
+escape_zoo_title,Botanical garden / Zoo / Aquaria (excluding domestic aquaria)
 established_title,established
 examples_title,examples
 extinct_title,extinct
@@ -784,7 +784,7 @@ group_title,group
 habitat_title,habitat
 habitats_title,Habitats
 hideGlobe_title,Hide globe
-hist_title,model based on historical climate data
+hist_title,model based on historical climate and landuse data
 icons_title,Icons
 images_title,Images
 includeMissing_title,include missing
@@ -942,7 +942,7 @@ pathway_level1_title,Introduction pathway category
 pathway_level2_title,Introduction pathway subcategory
 pathway_title,pathways
 pathways_title,Pathways
-percentCages_title,Percentage of occupied cells (10km2) in Flanders
+percentCages_title,Percentage of occupied cells (10km<sup>2</sup>) in Flanders
 period_title,Time Period
 phylum_title,phylum
 protectAreas_title,Protected areas
@@ -966,7 +966,7 @@ release_landscape_improvement_title,Landscape / flora / fauna improvement in the
 release_other_title,Other intentional release
 release_title,RELEASE in nature
 release_unknown_title,RELEASE IN NATURE (not specified)
-release_use_title,"Release in nature for use (other than above, e.g., fur, transport, medical use)"
+release_use_title,"Release in nature for other uses (e.g., fur, transport, medical use)"
 released_title,released
 reporting_t01-mapOccurrence_description,"A map displaying:
 <ul>
@@ -1004,7 +1004,7 @@ species_information_title,Species information
 species_title,Species
 startYear_title,Start year
 start_title,Start
-stowaway_airplane_title,Hitchhikers in or on airplane
+stowaway_airplane_title,Hitchhikers in or on airplanes
 stowaway_ballast_water_title,Ship / boat ballast water
 stowaway_container_title,Container / bulk
 stowaway_fishing_equipment_title,Angling / fishing equipment
@@ -1013,7 +1013,7 @@ stowaway_machinery_title,Machinery / equipment
 stowaway_organic_packing_title,"Organic packing material, in particular wood packaging"
 stowaway_other_title,Other means of transport
 stowaway_people_luggage_title,People and their luggage/equipment (in particular tourism)
-stowaway_ship_title,Hitchhikers on ship/boat (excluding ballast water and hull fouling)
+stowaway_ship_title,Hitchhikers on ships / boats (excluding ballast water and hull fouling)
 stowaway_title,TRANSPORT - stowaway
 stowaway_unknown_title,TRANSPORT - STOWAWAY (not specified)
 stowaway_vehicles_title,"Vehicles (car, train, ...)"

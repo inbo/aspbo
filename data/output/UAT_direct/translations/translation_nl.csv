@@ -695,7 +695,7 @@ combineRegions_title,Combineer alle geselecteerde regio’s in de trendgrafiek
 communes_title,gemeentes
 confHigh_title,hoge betrouwbaarheid
 confLow_title,lage betrouwbaarheid
-confMap_title,Kaart met confidentie in voorspeld risico
+confMap_title,Kaart van de betrouwbaarheid in de voorspelde geschiktheid
 confirmLanguageChange_description,Weet u zeker dat u de taal van de applicatie wilt wijzigen? Dit zal leiden tot verlies van grafiek- en tabelinstellingen.
 confirmLanguageChange_title,Taal wijzigen
 contactApp_title,Rapporteer een probleem met de applicatie
@@ -705,19 +705,19 @@ contaminant_bait_title,Besmetting van aas
 contaminant_food_title,Besmetting van voedsel (incl. van levend voedsel)
 contaminant_habitat_material_title,"Vervoer van habitatmateriaal (bodem, vegetatie, ...)"
 contaminant_nursery_title,Besmetting van plantgoed
-contaminant_on_animals_title,"Besmetting op dieren (excl. parasieten, soorten vervoerd door gastheer/vector)"
-contaminant_on_plants_title,"Besmetting op planten (excl. parasieten, soorten vervoerd door gastheer/vector)"
+contaminant_on_animals_title,"Contaminant op dieren (uitgezonderd parasieten, soorten getransporteerd door gastheer/drager)"
+contaminant_on_plants_title,"Contaminant op planten (uitgezonderd parasieten, soorten getransporteerd door gastheer/drager)"
 contaminant_plant_parasite_title,Parasieten van planten (incl. soorten vervoerd door gastheer/vector)
-contaminant_seed_title,Besmetting van zaadgoed
+contaminant_seed_title,Gecontamineerd zaad (mengsel)
 contaminant_timber_title,Houthandel
-contaminant_title,TRANSPORT - besmetting
-contaminant_unknown_title,TRANSPORT - BESMETTING (niet gespecificeerd)
+contaminant_title,TRANSPORT - contaminant
+contaminant_unknown_title,TRANSPORT - CONTAMINANT (niet gespecificeerd)
 contents_title,Inhoudsopgave
-correctBias_title,Gecorrigeerd voor waarnemer-bias
+correctBias_title,Gecorrigeerd voor observator bias
 corridor_land_title,Tunnels en landbruggen
 corridor_title,CORRIDOR
 corridor_unknown_title,CORRIDOR (niet gespecificeerd)
-corridor_water_title,Verbonden waterwegen / -bekkens / zeeën
+corridor_water_title,Verbonden waterwegen / bekkens / zeeën
 countNesten_description,Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>
 countNesten_title,Aantal nesten per provincie (figuur)
 countOccupancy_description,"<img src=""https://cdn-icons-png.flaticon.com/512/7801/7801791.png"" alt=""attention"" style=""width:15px;height:15px;""> <i>AANDACHT: Deze figuur is onafhankelijk van geselecteerde filters bovenaan.</i>
@@ -954,7 +954,7 @@ pathway_level1_title,Categorie van introductieroute
 pathway_level2_title,Subcategorie van introductieroute
 pathway_title,introductieroutes
 pathways_title,Introductieroutes
-percentCages_title,Percentage bezette hokken (10km2) in Vlaanderen
+percentCages_title,Percentage bezette hokken (10km<sup>2</sup>) in Vlaanderen
 period_title,Periode
 phylum_title,stam
 protectAreas_title,Beschermde gebieden
