@@ -13,6 +13,10 @@ library(httr)
 ```
 
 ```{r}
+pak::pak("inbo/vespadb")
+```
+
+```{r}
 troubleshooting_datacleaning <- TRUE
 ```
 
