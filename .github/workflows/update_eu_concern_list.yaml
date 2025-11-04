@@ -84,12 +84,12 @@ jobs:
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
 
       - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
+        uses: devops-infra/action-commit-push@v0.11.1
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
           commit_message: "update eu concern list"
-          target_branch: automatic-management-prep
+          target_branch: automatic-eu-concern-update
 
       - name: Get branch name
         run: |

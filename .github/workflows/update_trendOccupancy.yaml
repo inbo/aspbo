@@ -1,19 +1,17 @@
+name: update trend occupancy
+
 on:
+  workflow_dispatch:
   push:
     branches:
-      - uat
+      - "uat"
     paths:
-      - data/output/UAT_direct/**
-  workflow_dispatch:
-
-name: upload_files_direct
-
-concurrency:
-  group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}  # Use the event name, branch reference, and workflow name as the concurrency group
-  cancel-in-progress: true    # Cancel any in-progress runs in the same group
+      - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
+  schedule: 
+   - cron: '30 23 1 5 *' # At 23:30 on day-of-month 1 in May.
 
 jobs:
-  upload_files:
+  update-trend-occupancy:
     runs-on: ${{ matrix.config.os }}
     environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -28,11 +26,12 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
       USERNAME: ${{ secrets.USERNAME }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
       amiabot: ${{ secrets.AMIABOT }}
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
@@ -59,9 +58,9 @@ jobs:
           R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
                          subdir = "alienSpecies", force = TRUE)'
 
-      - name: Install R packages
+      - name: install packages
         run: |
-          source("src/install_packages_upload_files.R")
+          source("src/install_packages_trendOccupancy.R")
         shell: Rscript {0}
 
       - name: Setup AWS credentials
@@ -81,10 +80,10 @@ jobs:
           echo "::set-output name=AWS_ACCESS_KEY_ID::$(echo $TEMP_ROLE | jq -r .Credentials.AccessKeyId)"
           echo "::set-output name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)"
           echo "::set-output name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)"
-
-      - name: upload files
+          
+      - name: update trend occupancy
         run: |
-          source("src/upload_direct_to_UAT.R")
+          source("src/run_update_trendOccupancy.R")
         shell: Rscript {0}
         env:
           AWS_ACCESS_KEY_ID: ${{ steps.assume_role.outputs.AWS_ACCESS_KEY_ID }}
@@ -92,3 +91,27 @@ jobs:
           AWS_SESSION_TOKEN: ${{ steps.assume_role.outputs.AWS_SESSION_TOKEN }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
+
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@v0.11.1
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "update trend occupancy"
+          target_branch: automatic-update-trendOccupancy
+          add_timestamp: true
+
+      - name: Get branch name
+        run: |
+          git branch --show-current
+
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          target_branch: uat
+          title: "[AUTO] update cube_preprocessing"
+          template: .github/PR_update_trendOccupancy.md
+          reviewer: SanderDevisscher
+          label: automated workflow
+          get_diff: false

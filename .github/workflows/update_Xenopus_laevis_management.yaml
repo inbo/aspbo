@@ -1,9 +1,9 @@
 on:
   schedule: 
-   - cron: '0 0 1 1-12 *'
+   - cron: '0 0 1 1-12 *' #At 00:00 on day-of-month 1 in every month from January through December.
   workflow_dispatch:
   
-name: sk-management-prep
+name: update Xenopus laevis management
 
 jobs:
   fetch-data:
@@ -20,13 +20,12 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
-      gbif_user: ${{ secrets.GBIF_USER }}
-      email: ${{ secrets.GBIF_EMAIL }}
-      gbif_pwd: ${{ secrets.GBIF_PWD }}
+      amiabot: ${{ secrets.amiabot }}
+      gsheet_token: ${{ secrets.gsheet_token }}
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
@@ -42,19 +41,22 @@ jobs:
 
       - name: Install linux libraries
         run: |
-          sudo apt install libsodium-dev
-          sudo apt-get install libcurl4-openssl-dev
-          sudo apt-get install libgdal-dev libproj-dev
-          sudo apt install libudunits2-dev
+          sudo apt update
+          sudo apt install -y libsodium-dev
+          sudo apt-get install -y libcurl4-openssl-dev
+          sudo apt-get install -y libgdal-dev libproj-dev
+          sudo apt install -y libudunits2-dev
+          sudo apt-get install -y libfontconfig1-dev libfreetype6-dev
+          sudo apt-get install -y libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev
 
       - name: Install R packages
         run: |
-          source("src/install_packages_management.R")
+          source("src/Xenopus laevis management/install_packages_Xenopus_laevis_management.R")
         shell: Rscript {0}
         
-      - name: Management prep
+      - name: Xenopus laevis management
         run: |
-          source("src/run_management_prep.R")
+          source("src/Xenopus laevis management/run_Xenopus_laevis_management.R")
         shell: Rscript {0}
 
       - name: Commit and push changes
@@ -62,8 +64,8 @@ jobs:
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
-          commit_message: "run management prep"
-          target_branch: automatic-sk-management-prep
+          commit_message: "run Xenopus laevis management"
+          target_branch: automatic-xenopus-laevis-management
           
       - name: Get branch name
         run: |
@@ -74,8 +76,8 @@ jobs:
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
           target_branch: uat
-          title: "[AUTO] management prep"
-          template: .github/PR_management_prep.md
-          reviewer: SanderDevisscher
+          title: "[AUTO] update Xenopus laevis management"
+          template: .github/PR_Xenopus_laevis_management.md
+          reviewer: SanderDevisscher, maudsegal, soriadelva
           label: automated workflow
           get_diff: false

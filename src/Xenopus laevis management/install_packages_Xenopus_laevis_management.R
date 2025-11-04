@@ -1,7 +1,8 @@
 # get packages installed on machine
 installed <- rownames(installed.packages())
 # specify packages we need
-required <- c("tidyverse", "rgbif", "tidylog", "janitor", "here", "devtools", "progress", "testthat"
+required <- c("rgbif", "sf", "googlesheets4", "dplyr", "tidyr", "readr",
+"ggplot2", "testthat", "pkgdown", "devtools"
 )
 # install packages if needed
 if (!all(required %in% installed)) {
@@ -10,5 +11,5 @@ if (!all(required %in% installed)) {
   install.packages(pkgs_to_install, repos = "https://cran.r-project.org/")
 }
 
-# install trias
-devtools::install_github("trias-project/trias")
+# install fistools
+devtools::install_github("inbo/fistools")
