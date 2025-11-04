@@ -970,15 +970,15 @@ regionLevel_title,Regio-schaal
 region_title,Gewest
 regions_title,Regio’s
 release_biological_control_title,Biologische bestrijding
-release_conservation_title,Introductie voor het natuurbehoud of faunabeheer
+release_conservation_title,Introductie voor natuurbehoud of faunabeheer
 release_erosion_control_title,"Erosiebestrijding / duinversteviging (windbrekers, heggen, ...)"
-release_fishery_title,Visvangst in het wild (incl. hengelsport)
+release_fishery_title,Visserij (incl. sportvisserij)
 release_hunting_title,Jacht
-release_landscape_improvement_title,Landschaps-/flora-/faunaverbetering
-release_other_title,Andere opzettelijke uitzetting
+release_landscape_improvement_title,Verbetering of ontwikkeling van landschap / flora / fauna in natuurlijke omgeving
+release_other_title,Overige opzettelijke uitzettingen
 release_title,UITZETTING in de natuur
 release_unknown_title,UITZETTING IN DE NATUUR (niet gespecificeerd)
-release_use_title,"Uitzetting in de natuur voor gebruik (verschillend van bovenstaande, b.v., pelsdieren, transport, medisch gebruik)"
+release_use_title,"Uitzetting in de natuur voor gebruik (anders dan hierboven, bv. bont, transport, medische doeleinden)"
 released_title,losgelaten
 reporting_t01-mapOccurrence_description,"Kaart waarop het volgende weergegeven wordt:
 <ul>
@@ -1018,16 +1018,16 @@ species_information_title,Soortgegevens
 species_title,Soort
 startYear_title,Start jaar
 start_title,Start
-stowaway_airplane_title,Verstekeling in of op vliegtuigen
+stowaway_airplane_title,Meeliften in of op vliegtuigen
 stowaway_ballast_water_title,Ballastwater van schepen / boten
-stowaway_container_title,Container / vracht
-stowaway_fishing_equipment_title,Visseij- en hengelmateriaal
-stowaway_hull_fouling_title,Scheeps-/bootrompvervuiling
-stowaway_machinery_title,Machines / uitrusting
-stowaway_organic_packing_title,"Organisch verpakkingsmateriaal, in bijzonder houten verpakkingen"
+stowaway_container_title,Container / vrachtlading
+stowaway_fishing_equipment_title,Visserij- en hengelmateriaal
+stowaway_hull_fouling_title,Aangroei op scheepswanden
+stowaway_machinery_title,"Grote machines en toebehoren (landbouw, grondverzet, graafwerken)"
+stowaway_organic_packing_title,Organisch verpakkingsmateriaal (in het bijzonder houtverpakkingen)
 stowaway_other_title,Andere vervoerswijzen
-stowaway_people_luggage_title,Mensen en hun bagage/materiaal (in bijzonder toerisme)
-stowaway_ship_title,Verstekeling van schepen/boten (excl. ballastwater of rompvervuiling)
+stowaway_people_luggage_title,Mensen en hun bagage / materiaal (in het bijzonder toerisme)
+stowaway_ship_title,Meeliften op schepen / boten (excl. ballastwater en aangroei op scheepswanden)
 stowaway_title,TRANSPORT - verstekeling
 stowaway_unknown_title,TRANSPORT - VERSTEKELING (niet gespecificeerd)
 stowaway_vehicles_title,"Voertuigen (auto's, treinen, ...)"
@@ -1075,21 +1075,21 @@ userDefined_title,Aangepast door gebruiker
 vernacular_name_col_title,gangbare namen
 vernacular_name_title,zoeken op gangbare namen
 version_title,Versie
-visualize_pathways_level1_description,"Deze grafiek toont het aantal geïntroduceerde taxa per introductieroutecategorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau1</a>)</i>."
-visualize_pathways_level1_title,Aantal geïntroduceerde taxa per introductieroutecategorie
-visualize_pathways_level2_description,"<p>Deze grafiek toont het aantal geïntroduceerde taxa per introductie route subcategorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 2</a>)</i>.</p>
+visualize_pathways_level1_description,"Deze grafiek toont het aantal geïntroduceerde taxa per categorie van introductieroute <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau1</a>)</i>."
+visualize_pathways_level1_title,Aantal geïntroduceerde taxa per categorie van introductieroute
+visualize_pathways_level2_description,"<p>Deze grafiek toont het aantal geïntroduceerde taxa per subcategorie van introductieroute <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 2</a>)</i>.</p>
 <p></p>
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Deze grafiek kan alleen de subcategorieën van een enkele introductie route categorie weergeven. Selecteer <b>één</b> categorie met behulp van het filter bovenaan deze pagina</i>.</p>"
-visualize_pathways_level2_title,Aantal geïntroduceerde taxa per introductie route subcategorie
-visualize_pathways_year_level1_description,"<p>Deze grafiek toont de trends in het aantal geïntroduceerde taxa per introductie route categorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 1</a>)</i>.
+visualize_pathways_level2_title,Aantal geïntroduceerde taxa per subcategorie van introductieroute
+visualize_pathways_year_level1_description,"<p>Deze grafiek toont de trends in het aantal geïntroduceerde taxa per categorie van introductieroute <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 1</a>)</i>.
 <p>De taxa zijn gegroepeerd per decennium op basis van hun jaar van eerste waarneming zoals gespecificeerd op de <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist van België</a>.
-<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Een taxon kan via meerdere introductie route categoriën worden geïntroduceerd, een taxon kan dus meer dan eens op deze grafiek voorkomen. Dit betekent dat de som van het 'aantal geïntroduceerde taxa per introductie route categorie' groter kan zijn dan het 'aantal taxa'.</i>"
-visualize_pathways_year_level1_title,Trends in het aantal geïntroduceerde taxa per introductie route categorie
-visualize_pathways_year_level2_description,"<p>Deze grafiek toont de trends in het aantal geïntroduceerde taxa per introductie route subcategorie <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 2</a>)</i></p>
+<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Een taxon kan via meerdere (categorieën van) introductieroutes worden geïntroduceerd. Een taxon kan dus meer dan eens op deze grafiek voorkomen. Dit betekent dat de som van 'het aantal geïntroduceerde taxa per categorie van introductieroute' groter kan zijn dan het 'totale aantal taxa'.</i>"
+visualize_pathways_year_level1_title,Trends in het aantal geïntroduceerde taxa per categorie van introductieroute
+visualize_pathways_year_level2_description,"<p>Deze grafiek toont de trends in het aantal geïntroduceerde taxa per subcategorie van introductieroute <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 2</a>)</i></p>
 <p>De taxa zijn gegroepeerd per decennium op basis van hun jaar van eerste waarneming zoals gespecificeerd op de <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist van België</a>.</p>
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Deze grafiek kan alleen de subcategorieën van <b>één</b> enkele introductie route categorie weergeven. Selecteer een categorie met behulp van het filter bovenaan deze pagina</i>.</p>
-<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Een enkel taxon kan via meerdere introductie route subcategorieën worden geïntroduceerd, een taxon kan dus meer dan eens op deze grafiek voorkomen. Dit betekent dat de som van het 'aantal geïntroduceerde taxa per introductie route categorie' groter kan zijn dan het 'aantal taxa'.</i></p>"
-visualize_pathways_year_level2_title,Trends in het aantal geïntroduceerde taxa per introductie route subcategorie
+<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Een taxon kan via meerdere (subcategorieën van) introductieroutes worden geïntroduceerd. Een taxon kan dus meer dan eens op deze grafiek voorkomen. Dit betekent dat de som van 'het aantal geïntroduceerde taxa per subcategorie van introductieroute' groter kan zijn dan het 'totale aantal taxa'.</i></p>"
+visualize_pathways_year_level2_title,Trends in het aantal geïntroduceerde taxa per subcategorie van introductieroute
 wallonia_title,Wallonië
 welcomeTitle_description,Op deze pagina vind je alle cijfers en trends over uitheemse soorten in België.
 welcomeTitle_title,Welkom op het exotenportaal
