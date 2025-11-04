@@ -19,6 +19,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182134455	1194989	Otiorhynchus cribricollis	2002	2018	Insecta	Animalia
 152544520	1319260	Tetraponera allaborans	1980	2018	Insecta	Animalia
 152544508	1321805	Pheidole bilimeki	1911	2018	Insecta	Animalia
+152544494	1325561	Paratrechina longicornis	1980	2018	Insecta	Animalia
 213213874	1349836	Hylaeus absolutus	2021	2021	Insecta	Animalia
 152544459	1419894	Euborellia annulipes	2016	2018	Insecta	Animalia
 152544422	1420197	Aleurodothrips fasciapennis	2018	2018	Insecta	Animalia
@@ -49,7 +50,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544188	2153791	Chaetopelma olivaceum	2011	2011	Arachnida	Animalia
 152544194	2155557	Selenops radiatus	2004	2004	Arachnida	Animalia
 152544145	2155807	Euryopis episinoides	2002	2002	Arachnida	Animalia
-152544152	2157278	Steatoda paykulliana	2015	2015	Arachnida	Animalia
 152544161	2157335	Hadrotarsus ornatus	1999	1999	Arachnida	Animalia
 152544167	2157928	Latrodectus hasselti	1999	1999	Arachnida	Animalia
 152544170	2157942	Latrodectus hesperus	2013	2013	Arachnida	Animalia
@@ -225,7 +225,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545265	2908428	Galium divaricatum	1900	2008	Magnoliopsida	Plantae
 152545795	2925492	Verbena supina	1947	1947	Magnoliopsida	Plantae
 152545798	2925515	Verbena halei	1921	1940	Magnoliopsida	Plantae
-152545799	2925518	Verbena brasiliensis	1993	2024	Magnoliopsida	Plantae
+152545799	2925518	Verbena brasiliensis	1993	1993	Magnoliopsida	Plantae
 152545539	2925754	Lappula marginata	1880	1896	Magnoliopsida	Plantae
 152545543	2925790	Heliotropium amplexicaule	1890	1890	Magnoliopsida	Plantae
 152545522	2926041	Nonea rosea	1828	1828	Magnoliopsida	Plantae
