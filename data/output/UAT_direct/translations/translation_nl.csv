@@ -700,14 +700,14 @@ confirmLanguageChange_description,Weet u zeker dat u de taal van de applicatie w
 confirmLanguageChange_title,Taal wijzigen
 contactApp_title,Rapporteer een probleem met de applicatie
 contactMissing_title,Rapporteer ontbrekende data
-contaminant_animal_parasite_title,Parasieten van dieren (incl. soorten vervoerd door gastheer/vector)
-contaminant_bait_title,Besmetting van aas
-contaminant_food_title,Besmetting van voedsel (incl. van levend voedsel)
-contaminant_habitat_material_title,"Vervoer van habitatmateriaal (bodem, vegetatie, ...)"
-contaminant_nursery_title,Besmetting van plantgoed
+contaminant_animal_parasite_title,Parasieten op dieren (inclusief soorten getransporteerd door gastheer/drager)
+contaminant_bait_title,Gecontamineerd aas
+contaminant_food_title,Gecontamineerd voedsel (inclusief levende organismen)
+contaminant_habitat_material_title,"Transport van habitatmateriaal (grond, vegetatie, …)"
+contaminant_nursery_title,Gecontamineerd materiaal van kwekerijen
 contaminant_on_animals_title,"Contaminant op dieren (uitgezonderd parasieten, soorten getransporteerd door gastheer/drager)"
 contaminant_on_plants_title,"Contaminant op planten (uitgezonderd parasieten, soorten getransporteerd door gastheer/drager)"
-contaminant_plant_parasite_title,Parasieten van planten (incl. soorten vervoerd door gastheer/vector)
+contaminant_plant_parasite_title,Parasieten op planten (inclusief soorten getransporteerd door gastheer/drager)
 contaminant_seed_title,Gecontamineerd zaad (mengsel)
 contaminant_timber_title,Houthandel
 contaminant_title,TRANSPORT - contaminant
@@ -743,18 +743,18 @@ early_warning_title,Early alert
 endYear_title,Eind jaar
 escape_agriculture_title,Landbouw (incl. biobrandstoffen)
 escape_aquaculture_title,Aquacultuur / maricultuur
-escape_farm_title,Gekweekte dieren (incl. dieren onder beperkt toezicht)
+escape_farm_title,Veehouderij / productiedieren (incl. dieren onder beperkt toezicht)
 escape_food_bait_title,Levend voeder en aas
-escape_forestry_title,Bosbouw (incl. bebossing of herbebossing)
-escape_fur_farm_title,Pelsdierkwekerijen
-escape_horticulture_title,Tuinbouw
-escape_ornamental_title,Andere sierdoeleinden dan tuinbouw
+escape_forestry_title,Bosbouw (inclusief aanplanting of herbebossing)
+escape_fur_farm_title,Pelsdierfokkerijen
+escape_horticulture_title,Tuinbouw (horticultuur)
+escape_ornamental_title,Sierplanten (anders dan tuinbouw)
 escape_other_title,Andere ontsnapping uit gehouden omgeving
 escape_pet_title,Huis-/aquarium-/terrariumdieren (incl. hun levend voeder)
-escape_research_title,Onderzoek en ex-situ kweek (binnen faciliteiten)
+escape_research_title,Onderzoeksdoeleinden en ex-situ kweken/ fokken (in voorzieningen)
 escape_title,ONTSNAPPING uit afsluiting
 escape_unknown_title,ONTSNAPPING uit gehouden omgeving (niet gespecificeerd)
-escape_zoo_title,Planten-/dierentuinen of aquaria (excl. particuliere aquaria)
+escape_zoo_title,Botanische tuinen / dierentuinen / aquaria (exclusief particuliere aquaria)
 established_title,gevestigd
 examples_title,voorbeelden
 extinct_title,uitgestorven
@@ -896,8 +896,8 @@ management-mapOccurrence_oxyura_jamaicensis_title,Beheer van {{species}}
 management-mapOccurrence_title,Beheer van {{species}}
 management2-countYearGroup_description,NA
 management2-countYearGroup_title,Beheer van nesten
-management2_active-mapHeat_description,"Deze kaart illustreert waar Aziatische hoornaar is waargenomen, maar waar nog geen nest succesvol beheerd werd. Op deze plaatsen vinden mogelijks opsporingsacties plaats door de Vespawatchers.
-Waarnemingen worden weerhouden wanneer ze verder dan 2km van een succesvol beheerd nest bevinden en/of na een succesvolle beheeractie gemeld worden. Hoe intenser rood, hoe meer meldingen er in de buurt van elkaar zijn.
+management2_active-mapHeat_description,"Deze kaart illustreert waar de Aziatische hoornaar is waargenomen, maar waar nog geen nest succesvol beheerd werd. Op deze plaatsen vinden mogelijks opsporingsacties plaats door de Vespawatchers.
+Waarnemingen worden weerhouden wanneer ze zich verder dan 2km van een succesvol beheerd nest bevinden en/of na een succesvolle beheeractie gemeld worden. Hoe intenser het rood, hoe meer meldingen er dicht bij elkaar liggen.
 Ontbrekende nesten kunnen steeds gemeld worden op <a href=""https://vespawatch.be"" target = ""_blank"">vespawatch.be</a>.
 </br><em>Data beschikbaar tot {{maxDate}}</em>"
 management2_active-mapHeat_title,Actieve haarden
