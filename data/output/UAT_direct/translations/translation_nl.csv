@@ -711,12 +711,12 @@ contaminant_plant_parasite_title,Parasieten op planten (inclusief soorten getran
 contaminant_seed_title,Gecontamineerd zaad (mengsel)
 contaminant_timber_title,Houthandel
 contaminant_title,TRANSPORT - contaminant
-contaminant_unknown_title,TRANSPORT - CONTAMINANT (niet gespecificeerd)
+contaminant_unknown_title,Contaminant (niet gespecificeerd)
 contents_title,Inhoudsopgave
 correctBias_title,Gecorrigeerd voor observator bias
 corridor_land_title,Tunnels en landbruggen
 corridor_title,CORRIDOR
-corridor_unknown_title,CORRIDOR (niet gespecificeerd)
+corridor_unknown_title,Corridor (niet gespecificeerd)
 corridor_water_title,Verbonden waterwegen / bekkens / zeeën
 countNesten_description,Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>
 countNesten_title,Aantal nesten per provincie (figuur)
@@ -753,7 +753,7 @@ escape_other_title,Andere ontsnapping uit gehouden omgeving
 escape_pet_title,Huis-/aquarium-/terrariumdieren (incl. hun levend voeder)
 escape_research_title,Onderzoeksdoeleinden en ex-situ kweken/ fokken (in voorzieningen)
 escape_title,ONTSNAPPING uit afsluiting
-escape_unknown_title,ONTSNAPPING uit gehouden omgeving (niet gespecificeerd)
+escape_unknown_title,ONTSNAPPING (niet gespecificeerd)
 escape_zoo_title,Botanische tuinen / dierentuinen / aquaria (exclusief particuliere aquaria)
 established_title,gevestigd
 examples_title,voorbeelden
@@ -977,7 +977,7 @@ release_hunting_title,Jacht
 release_landscape_improvement_title,Verbetering of ontwikkeling van landschap / flora / fauna in natuurlijke omgeving
 release_other_title,Overige opzettelijke uitzettingen
 release_title,UITZETTING in de natuur
-release_unknown_title,UITZETTING IN DE NATUUR (niet gespecificeerd)
+release_unknown_title,Uitzetting (niet gespecificeerd)
 release_use_title,"Uitzetting in de natuur voor gebruik (anders dan hierboven, bv. bont, transport, medische doeleinden)"
 released_title,losgelaten
 reporting_t01-mapOccurrence_description,"Kaart waarop het volgende weergegeven wordt:
@@ -1029,7 +1029,7 @@ stowaway_other_title,Andere vervoerswijzen
 stowaway_people_luggage_title,Mensen en hun bagage / materiaal (in het bijzonder toerisme)
 stowaway_ship_title,Meeliften op schepen / boten (excl. ballastwater en aangroei op scheepswanden)
 stowaway_title,TRANSPORT - verstekeling
-stowaway_unknown_title,TRANSPORT - VERSTEKELING (niet gespecificeerd)
+stowaway_unknown_title,Verstekeling (niet gespecificeerd)
 stowaway_vehicles_title,"Voertuigen (auto's, treinen, ...)"
 succesvol_title,succesvol
 sum_title,aantal
@@ -1063,7 +1063,7 @@ total_title,Totaal
 trend_title,Trend
 unaided_natural_dispersal_title,ZONDER HULP (natuurlijke verspreiding)
 unaided_title,ZONDER HULP
-unaided_unknown_title,ZONDER HULP (niet gespecificeerd)
+unaided_unknown_title,Zonder hulp (niet gespecificeerd)
 undefined_title,NA
 uniform_title,Uniforme verdeling
 unionColor_title,Unie kleur

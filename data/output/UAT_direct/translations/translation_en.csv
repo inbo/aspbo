@@ -715,12 +715,12 @@ contaminant_plant_parasite_title,Parasites on plants (including species transpor
 contaminant_seed_title,Seed contaminant
 contaminant_timber_title,Timber trade
 contaminant_title,TRANSPORT - contaminant
-contaminant_unknown_title,TRANSPORT - CONTAMINANT (not specified)
+contaminant_unknown_title,Contaminant (not specified)
 contents_title,Table of contents
 correctBias_title,Corrected for observer bias
 corridor_land_title,Tunnels and land bridges
 corridor_title,CORRIDOR
-corridor_unknown_title,CORRIDOR (not specified)
+corridor_unknown_title,Corridor (not specified)
 corridor_water_title,Interconnected waterways / basins / seas
 countNesten_description,The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
 countNesten_title,Number of nests per province (figure)
@@ -757,7 +757,7 @@ escape_other_title,Other escape from confinement
 escape_pet_title,Pet / Aquarium / Terrarium species (including live food for such species )
 escape_research_title,Research and ex-situ breeding (in facilities)
 escape_title,ESCAPE from confinement
-escape_unknown_title,ESCAPE from confinement (not specified)
+escape_unknown_title,Escape (not specified)
 escape_zoo_title,Botanical garden / Zoo / Aquaria (excluding domestic aquaria)
 established_title,established
 examples_title,examples
@@ -965,7 +965,7 @@ release_hunting_title,Hunting
 release_landscape_improvement_title,Landscape / flora / fauna improvement in the wild
 release_other_title,Other intentional release
 release_title,RELEASE in nature
-release_unknown_title,RELEASE IN NATURE (not specified)
+release_unknown_title,Release (not specified)
 release_use_title,"Release in nature for other uses (e.g., fur, transport, medical use)"
 released_title,released
 reporting_t01-mapOccurrence_description,"A map displaying:
@@ -1015,7 +1015,7 @@ stowaway_other_title,Other means of transport
 stowaway_people_luggage_title,People and their luggage/equipment (in particular tourism)
 stowaway_ship_title,Hitchhikers on ships / boats (excluding ballast water and hull fouling)
 stowaway_title,TRANSPORT - stowaway
-stowaway_unknown_title,TRANSPORT - STOWAWAY (not specified)
+stowaway_unknown_title,Stowaway (not specified)
 stowaway_vehicles_title,"Vehicles (car, train, ...)"
 succesvol_title,successful
 sum_title,number
@@ -1049,7 +1049,7 @@ total_title,Total
 trend_title,Trend
 unaided_natural_dispersal_title,UNAIDED (natural dispersal)
 unaided_title,UNAIDED
-unaided_unknown_title,UNAIDED (not specified)
+unaided_unknown_title,Unaided (not specified)
 undefined_title,Undefined
 uniform_title,Uniform
 unionColor_title,Union colour

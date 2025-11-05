@@ -704,12 +704,12 @@ contaminant_plant_parasite_title,Parasites des végétaux (y compris les espèce
 contaminant_seed_title,Contaminants des graines
 contaminant_timber_title,Commerce du bois
 contaminant_title,TRANSPORT - contaminant
-contaminant_unknown_title,TRANSPORT - CONTAMINANT (non spécifié)
+contaminant_unknown_title,Contaminant (non spécifié)
 contents_title,Table des matières
 correctBias_title,Corrigé pour biais d'observateurs
 corridor_land_title,Tunnels et ponts
 corridor_title,COULOIR
-corridor_unknown_title,COULOIR (non spécifié)
+corridor_unknown_title,Couloir (non spécifié)
 corridor_water_title,Cours d’eau / bassins / mers reliés entre eux
 countNesten_description,Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>
 countNesten_title,Nombre de nids par province (figure)
@@ -749,7 +749,7 @@ escape_other_title,Autres fuites de zones de confinement
 escape_pet_title,Animaux de compagnie/espèces d’aquarium/terrarium (y compris les aliments vivants issus de ces espèces)
 escape_research_title,Recherche et reproduction d’animaux ex-situ (dans des installations)
 escape_title,ÉCHAPPEMENT de confinement
-escape_unknown_title,FUITE d'une zone de confinement (non spécifié)
+escape_unknown_title,Fuite (non spécifié)
 escape_zoo_title,Jardins botaniques/zoologiques/aquariums (hors aquariums privés)
 established_title,établi
 examples_title,exemples
@@ -947,7 +947,7 @@ release_hunting_title,Chasse dans le milieu naturel
 release_landscape_improvement_title,"« Amélioration » du paysage, de la flore et de la faune dans le milieu naturel"
 release_other_title,Autre libération intentionnelle
 release_title,LIBÉRATION dans la nature
-release_unknown_title,LIBÉRATION DANS LA NATURE (non spécifié)
+release_unknown_title,Libération (non spécifié)
 release_use_title,"Libération dans la nature pour utilisation (à des fins autres que celles stipulées ci-dessus, par exemple production de fourrure, transport, médecine)"
 released_title,libéré
 reporting_t01-mapOccurrence_description,"Carte avec:
@@ -1001,7 +1001,7 @@ stowaway_other_title,Autres moyens de transport
 stowaway_people_luggage_title,Personnes et leurs bagages/matériel (tourisme en particulier)
 stowaway_ship_title,Organismes clandestins dans les navires/bateaux (hormis les eaux de ballast et la salissure des coques)
 stowaway_title,TRANSPORT - clandestin
-stowaway_unknown_title,TRANSPORT - CLANDESTIN (non spécifié)
+stowaway_unknown_title,Clandestin (non spécifié)
 stowaway_vehicles_title,"Véhicules (voitures, trains, etc.)"
 succesvol_title,réussi
 sum_title,nombre
@@ -1035,7 +1035,7 @@ total_title,Total
 trend_title,Tendance
 unaided_natural_dispersal_title,SANS AIDE (dispersion naturelle)
 unaided_title,SANS AIDE
-unaided_unknown_title,SANS AIDE (non spécifié)
+unaided_unknown_title,Sans aide (non spécifié)
 undefined_title,NA
 uniform_title,NA
 unionColor_title,Union couleur
