@@ -137,6 +137,6 @@ jobs:
           target_branch: uat
           title: "[AUTO] update cube_preprocessing"
           template: .github/PR_occ_indic_preprocessing.md
-          reviewer: SanderDevisscher
+          reviewer: SanderDevisscher,soriadelva
           label: automated workflow
           get_diff: false
