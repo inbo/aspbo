@@ -1,6 +1,7 @@
 library(shiny)
 library(dplyr)
 library(readr)
+library(magrittr)
 library(htmltools)
 library(googlesheets4)
 
@@ -13,6 +14,14 @@ if(!grepl("@", email)) {
 
 gs4_auth(email)
 sheet_id <- "1Rgkn1qEFpk7zAc_8QgL_bbXghlD09UzEMSGAIevq2rI" 
+
+# Load %||% operator if not found####
+if(!existsFunction("%||%")){
+  warning("'%||%' not found loading custom function")
+  `%||%` <- function(a, b) {
+    if (!is.null(a)) a else b
+  }
+}
 
 # Function to load data ####
 load_data_initiate <- function() {
