@@ -20,6 +20,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182134454	1195013	Otiorhynchus aurifer	1999	2018	Insecta	Animalia
 152544520	1319260	Tetraponera allaborans	1980	2018	Insecta	Animalia
 152544508	1321805	Pheidole bilimeki	1911	2018	Insecta	Animalia
+152544494	1325561	Paratrechina longicornis	1980	2018	Insecta	Animalia
 213213874	1349836	Hylaeus absolutus	2021	2021	Insecta	Animalia
 152544459	1419894	Euborellia annulipes	2016	2018	Insecta	Animalia
 152544422	1420197	Aleurodothrips fasciapennis	2018	2018	Insecta	Animalia
@@ -584,7 +585,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544565	6308164	Scandix australis grandiflora	1894	1894	Magnoliopsida	Plantae
 213212959	6313049	Triticum turgidum polonicum	1895	1926	Liliopsida	Plantae
 213213515	6402873	Physalis ixocarpa	1912	1970	Magnoliopsida	Plantae
-213214066	6420901	Nemophila menziesii menziesii	1888	2016	Magnoliopsida	Plantae
 213213461	6427623	Oenothera villosa villosa	1828	2017	Magnoliopsida	Plantae
 152547112	6431764	Aristida longespica	1891	1891	Liliopsida	Plantae
 213213344	6476579	Dolichoplana signata	2018	2018	NA	Animalia
