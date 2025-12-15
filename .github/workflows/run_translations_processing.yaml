@@ -65,7 +65,7 @@ jobs:
 
       - name: process translations
         run: |
-          source("src/get_cubes/run_processing_translation_files.R")
+          source("src/Processing/run_processing_translation_files.R")
         shell: Rscript {0}
         
       - name: Commit and push changes
