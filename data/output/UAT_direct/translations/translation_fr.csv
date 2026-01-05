@@ -721,6 +721,8 @@ Pour chaque espèce, l'occupation au moment de son inclusion dans la liste de l'
 <span style=""color: #4f7c9bff;"">bleu</span> (Base), tandis que l'occupation pendant la période de rapport triennal la plus récente est représentée en 
 <span style=""color: #e87837ff;"">orange</span> (Rapport)."
 countOccupancy_title,Tendance d'occupation des espèces de la liste de l'Union en Flandre
+countOccurrence_yLabel_description,NA
+countOccurrence_yLabel_title,Occupancy<br>(no. 1x1km squares)
 count_title,nombre
 cpue_title,prise par unité d'effort
 createReport_title,Créer un rapport
