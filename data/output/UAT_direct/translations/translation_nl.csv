@@ -725,6 +725,8 @@ countOccupancy_description,"<img src=""https://cdn-icons-png.flaticon.com/512/78
 <br>
 Deze grafiek toont de trend in bezetting (d.w.z. het percentage bezette 10 km<sup>2</sup> hokken) in Vlaanderen voor alle soorten die op <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> de lijst van soorten van Uniebelang</a> staan. Voor elke soort wordt de bezetting op het moment van opname in de Unie-lijst aangegeven in <span style=""color: #4f7c9bff;"">blauw</span> (Basis), terwijl de bezetting tijdens de meest recente driejaarlijkse rapporteringsperiode wordt weergegeven in <span style=""color: #e87837ff;"">oranje</span> (Rapportering)."
 countOccupancy_title,Trend in de bezetting van Unielijstsoorten in Vlaanderen
+countOccurrence_yLabel_description,NA
+countOccurrence_yLabel_title,Occupancy<br>(no. 1x1km squares)
 count_title,aantal
 cpue_title,vangst per eenheid inspanning
 createReport_title,Maak rapport

@@ -729,6 +729,8 @@ countOccupancy_description,"<I>NOTE: Plot independent of the selected filters ab
 <br>
 This graph displays the trend in occupancy (i.e., the percentage of occupied 10 km<sup>2</sup> cells) in Flanders for all species that are included in <a href= ""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> the list of species of Union concern</a>. For each species, the occupancy at the time of  its inclusion on the Union list is indicated in <span style=""color: #4f7c9bff;"">blue</span> (baseline), while the occupancy during the most recent three-year reporting period is represented in <span style=""color: #e87837ff;"">orange</span> (reporting)."
 countOccupancy_title,Trend in occupancy of Union list species in Flanders
+countOccurrence_yLabel_description,NA
+countOccurrence_yLabel_title,Occupancy<br>(no. 1x1km squares)
 count_title,count
 cpue_title,catch per unit effort
 createReport_title,Create report
