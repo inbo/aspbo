@@ -26,7 +26,7 @@ cleanData <- rawData %>%
                                 .default = NA_character_)) %>% 
   filter(!is.na(n), 
          !is.na(long_vijver)) %>% 
-  group_by(eventID, locationID, Locatie, long_vijver, lat_vijver, lifeStage, Jaar, fuiktype) %>% 
+  group_by(eventID, locationID, Locatie, long_vijver, lat_vijver, lifeStage, Jaar, fuiktype, fuiklengte) %>% 
   summarise(n = sum(n, na.rm = TRUE),
             no_fuiken = sum(unique(no_fuiken), na.rm = TRUE)) %>% 
   ungroup() %>% 
