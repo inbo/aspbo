@@ -8,7 +8,7 @@ library(uuid)
 ```
 
 ```{r download data, include=FALSE}
-rawData <- read_csv("https://raw.githubusercontent.com/inbo/sk-analyse/refs/heads/main/interim/afvangsten_per_fuik_combined.csv")
+rawData <- read_csv("https://raw.githubusercontent.com/inbo/sk-analyse/refs/heads/147-check-effort-calculation/interim/afvangsten_per_fuik_combined.csv")
 
 export_template <- read_csv("https://raw.githubusercontent.com/inbo/aspbo/refs/heads/uat/data/output/UAT_direct/Lithobates_catesbeianus.csv")
 ```
