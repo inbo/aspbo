@@ -904,13 +904,14 @@ none_title,<non>
 not selected_title,non séléctionné
 numberTaxa_title,Nombre de taxons introduits
 number_title,Nombre
-observations-mapOccurrence_description,"<p>Carte des observations.</p>
+observations-mapOccurrence_description,"<p>Carte de la répartition dans les régions sélectionnées depuis 1950.</p>
 <ul>
 <li><p>Les carrés <b style=""color: #000000;"">noirs</b> indiquent des zones de 10 km x 10 km où l’espèce a été observée.<br>
 <li>Les carrés <b style=""color: #FF0000;"">rouges</b> rouges marquent des emplacements plus précis de 1 km x 1 km à l’intérieur de ces zones où des observations ont été signalées.</p> 
 </ul>
-<p>Le graphique en barres joint présente une série chronologique montrant le nombre d’observations par an dans chaque région depuis 1950.</p>"
-observations-mapOccurrence_title,Observations de {{species}}
+<p>Le graphique en barres joint présente une série chronologique montrant le nombre de carrés par an dans chaque région depuis 1950.<br>
+Lorsqu’un carré chevauche plusieurs régions, il est compté comme ""plusieurs régions"".</p>"
+observations-mapOccurrence_title,Répartition de {{species}}
 observations_title,Observations
 occupancy_description,Surface occupée par une espèce
 occupancy_title,Répartition
