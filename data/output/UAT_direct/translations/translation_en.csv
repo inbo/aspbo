@@ -922,13 +922,14 @@ none_title,<none>
 not selected_title,not selected
 numberTaxa_title,Number of introduced taxa
 number_title,Number
-observations-mapOccurrence_description,"<p>Map showing observations in the selected region.</p>
+observations-mapOccurrence_description,"<p>Map showing occupancy in the selected region since 1950.</p>
 <ul>
 <li><p><b style=""color: #000000;"">Black</b> squares represent 10 km x 10 km areas where the species has been recorded.<br>
 <li><b style=""color: #FF0000;"">Red </b> squares highlight more precise 1 km x 1 km locations within these areas where sightings have been reported. <br>
 </ul>
-The accompanying bar graph presents a time series showing the number of observations per year in each region since 1950.</p>"
-observations-mapOccurrence_title,Observations of {{species}}
+The accompanying bar graph presents a time series showing the number of 1x1km squares per year in each region since 1950. <br>
+Squares that overlap with multiple regions are counted as ""multiple regions"".</p>"
+observations-mapOccurrence_title,Occupancy of {{species}}
 observations_title,Observations
 occupancy_description,Area occupied by a species
 occupancy_title,Occupancy

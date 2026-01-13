@@ -934,13 +934,12 @@ none_title,<geen>
 not selected_title,niet geselecteerd
 numberTaxa_title,Aantal geïntroduceerde taxa
 number_title,Aantal
-observations-mapOccurrence_description,"<p>Kaart met waarnemingen. </p>
-<ul>
-<li><p><b style=""color: #000000;"">Zwarte</b> vierkanten geven gebieden van 10km x 10km aan waarin de soort is waargenomen.<br>
-<li><p><b style=""color: #FF0000;"">Rode</b> vierkanten markeren specifieke locaties van 1km x 1km binnen deze gebieden waar waarnemingen zijn gemeld.</p>
-</ul>
-<p>Het bijgevoegde staafdiagram toont een tijdreeks met het aantal waarnemingen per jaar in elke regio sinds 1950.</p>"
-observations-mapOccurrence_title,Waarnemingen van {{species}}
+observations-mapOccurrence_description,"<p>Kaart met de verspreiding in de gekozen gewesten sinds 1950.</p><ul> 
+<li><p><b style=""color: #000000;"">Zwarte</b> vierkanten geven de gebieden van 10 km × 10 km aan waarin de soort werd waargenomen.</p></li> 
+<li><p><b style=""color: #FF0000;"">Rode</b> vierkanten markeren specifieke locaties van 1 km × 1 km binnen deze gebieden waar waarnemingen zijn gemeld.</p></li> </ul> 
+<p>Het bijgevoegde staafdiagram toont een tijdreeks van het aantal vierkanten per jaar in elk gewest sinds 1950.<br>
+ Wanneer een vierkant meerdere gewesten overlapt, wordt dit geteld als ""meer dan 1 gewest"".</p>"
+observations-mapOccurrence_title,Verspreiding van {{species}}
 observations_title,Waarnemingen
 occupancy_description,Oppervlakte bezet door een soort
 occupancy_title,Verspreiding
