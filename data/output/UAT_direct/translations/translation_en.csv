@@ -930,7 +930,7 @@ observations-mapOccurrence_description,"<p>Map showing occupancy in the selected
 The accompanying bar graph presents a time series showing the number of 1x1km squares per year in each region since 1950. <br>
 Squares that overlap with multiple regions are counted as ""multiple regions"".</p>"
 observations-mapOccurrence_title,Occupancy of {{species}}
-observations_title,Observations
+observations_title,Occupancy
 occupancy_description,Area occupied by a species
 occupancy_title,Occupancy
 occurColor_title,Observation colour

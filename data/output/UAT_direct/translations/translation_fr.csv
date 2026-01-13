@@ -912,7 +912,7 @@ observations-mapOccurrence_description,"<p>Carte de la répartition dans les ré
 <p>Le graphique en barres joint présente une série chronologique montrant le nombre de carrés par an dans chaque région depuis 1950.<br>
 Lorsqu’un carré chevauche plusieurs régions, il est compté comme ""plusieurs régions"".</p>"
 observations-mapOccurrence_title,Répartition de {{species}}
-observations_title,Observations
+observations_title,Répartition
 occupancy_description,Surface occupée par une espèce
 occupancy_title,Répartition
 occurColor_title,Observation couleur

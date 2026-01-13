@@ -940,7 +940,7 @@ observations-mapOccurrence_description,"<p>Kaart met de verspreiding in de gekoz
 <p>Het bijgevoegde staafdiagram toont een tijdreeks van het aantal vierkanten per jaar in elk gewest sinds 1950.<br>
  Wanneer een vierkant meerdere gewesten overlapt, wordt dit geteld als ""meer dan 1 gewest"".</p>"
 observations-mapOccurrence_title,Verspreiding van {{species}}
-observations_title,Waarnemingen
+observations_title,Verspreiding
 occupancy_description,Oppervlakte bezet door een soort
 occupancy_title,Verspreiding
 occurColor_title,Waarneming kleur
