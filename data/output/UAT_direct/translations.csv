@@ -372,4 +372,4 @@ management-mapOccurrence_oxyura_jamaicensis;Beheer van {{species}};"<p>Kaart en 
 <br>
 <p><sup>1</sup><i>The period slider can be found below the graph</i>"
 confirmLanguageChange;Taal wijzigen;Weet u zeker dat u de taal van de applicatie wilt wijzigen? Dit zal leiden tot verlies van grafiek- en tabelinstellingen.;Changer de langue;Voulez-vous vraiment changer la langue de l'application? Cela entraînera la perte des paramètres des graphiques et des tableaux.;Change language;Are you sure you want to change the language of the application? This will result in a loss of graph and table settings.
-countOccurrence_yLabel;Occupancy<br>(no. 1x1km squares);NA;Occupancy<br>(no. 1x1km squares);NA;Occupancy<br>(no. 1x1km squares);NA
+countOccurrence_yLabel;Verspreiding (aantal 1x1 km hokken);;Répartition (nombre de carrés de 1x1 km);NA;Occupancy<br>(no. 1x1km squares);NA
