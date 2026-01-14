@@ -646,10 +646,10 @@ Zwijndrecht_title,NA
 absolute_title,absolut
 allDoe_title,Tous les degrés d'établi
 allHabitats_title,Tous les habitats
-allNativeRanges_title,TODO
-allNative_title,Toutes les aires d'origine
-allPathwaySubCategories_title,TODO
-allPathways_title,Toutes les voies d'intro
+allNativeRanges_title,Toutes les aires d'origine
+allNative_title,Tous les continents d'origine
+allPathwaySubCategories_title,Toutes les sous-catégories de voies d'intro
+allPathways_title,Toutes les catégories voies d'intro
 allRegions_title,Toutes les régions
 allSources_title,Toutes sources
 allTaxa_title,Tous les taxons
@@ -738,8 +738,8 @@ diffLow_title,faible différence de risque
 diffMap_title,Carte de différence de risque entre le scénario climatique RCP et les données climatiques historiques
 difference_title,Différence
 disclaimerVespa_title,"L'espèce n'est actuellement pas active. Lorsque vous observez un individu, il peut s'agir d'une reine hivernante, ce qui n'indique pas d'activité de nidification."
-downloadData_title,TODO
-downloadGraph_title,TODO
+downloadData_title,Télécharger les données
+downloadGraph_title,Télécharger le graphique
 downloadMap_title,Télécharger la carte
 early_warning_title,Early alert
 endYear_title,Année de fin
@@ -887,7 +887,7 @@ map_title,Carte
 marine_title,marine
 mica_db_title,MICA dashboard
 min_1_obs_title,L'espèce a été observée en Belgique depuis 1950 (données de GBIF)
-missingFilters_species_title,TODO
+missingFilters_species_title,Aucune espèce ni région sélectionnée ! => Veuillez sélectionner une espèce et une région
 missing_title,manquant
 modelScenario_title,Scénario modèle
 modelType_title,Type de modèle

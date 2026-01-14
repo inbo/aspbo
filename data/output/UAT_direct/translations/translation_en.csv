@@ -646,10 +646,10 @@ Zwijndrecht_title,NA
 absolute_title,absolute
 allDoe_title,All degrees of establishment
 allHabitats_title,All habitats
-allNativeRanges_title,TODO
-allNative_title,All native regions
-allPathwaySubCategories_title,TODO
-allPathways_title,All pathways
+allNativeRanges_title,All native regions
+allNative_title,All native continents
+allPathwaySubCategories_title,All pathwaysubcategories
+allPathways_title,All pathwaycategories
 allRegions_title,All regions
 allSources_title,All sources
 allTaxa_title,All taxa
@@ -746,8 +746,8 @@ diffLow_title,low risk difference
 diffMap_title,Map of the difference in suitability between the future SSP scenario and historical predictions
 difference_title,Difference
 disclaimerVespa_title,The species is currently not active. When you observe an individual this might be a wintering queen which does not indicate nesting activity.
-downloadData_title,TODO
-downloadGraph_title,TODO
+downloadData_title,Download data
+downloadGraph_title,Download graph
 downloadMap_title,Download map
 early_warning_title,Early alert
 endYear_title,End year
@@ -905,7 +905,7 @@ map_title,Map
 marine_title,marine
 mica_db_title,MICA dashboard
 min_1_obs_title,The species has been observed in Belgium since 1950 (data from GBIF)
-missingFilters_species_title,TODO
+missingFilters_species_title,No species or region selected! => select a species and a region
 missing_title,missing
 modelScenario_title,Model scenario
 modelType_title,Model type

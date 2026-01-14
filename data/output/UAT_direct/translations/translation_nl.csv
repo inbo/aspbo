@@ -646,10 +646,10 @@ Zwijndrecht_title,Zwijndrecht
 absolute_title,absoluut
 allDoe_title,Alle mate van vestiging
 allHabitats_title,Alle habitats
-allNativeRanges_title,TODO
-allNative_title,Alle natuurlijk arealen
-allPathwaySubCategories_title,TODO
-allPathways_title,Alle routes
+allNativeRanges_title,Alle natuurlijk arealen
+allNative_title,Alle herkomst continenten
+allPathwaySubCategories_title,Alle routesubcategorieën
+allPathways_title,Alle routecategorieën
 allRegions_title,Alle regio's
 allSources_title,Alle bronnen
 allTaxa_title,Alle taxa
@@ -743,7 +743,7 @@ diffMap_title,Kaart met verschil in risico tussen het RCP-klimaatscenario en de 
 difference_title,Verschil
 disclaimerVespa_title,"De soort is momenteel niet actief. Wanneer u een individu observeert, kan dit een overwinterende koningin zijn, wat geen nestactiviteit aangeeft"
 downloadData_title,Download data
-downloadGraph_title,Download graph
+downloadGraph_title,Download grafiek
 downloadMap_title,Download kaart
 early_warning_title,Early alert
 endYear_title,Eind jaar
@@ -917,7 +917,7 @@ map_title,Kaart
 marine_title,marien
 mica_db_title,MICA dashboard
 min_1_obs_title,De soort werd waargenomen in België sinds 1950 (gegevens van GBIF)
-missingFilters_species_title,TODO
+missingFilters_species_title,Geen soort of regio geselecteerd! => selecteer een soort and regio
 missing_title,ontbrekend
 modelScenario_title,Model scenario
 modelType_title,Model type
