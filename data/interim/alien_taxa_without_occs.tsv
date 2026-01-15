@@ -91,7 +91,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213205	2426658	Pelophylax perezi	2005	2005	Amphibia	Animalia
 213213247	2431993	Ambystoma tigrinum	1970	1970	Amphibia	Animalia
 182133525	2432063	Siren intermedia	2014	2014	Amphibia	Animalia
-152543332	2433536	Nasua nasua	2007	2018	Mammalia	Animalia
 152543348	2435451	Sarcophilus harrisii	2007	2018	Mammalia	Animalia
 152543358	2436886	Sylvilagus floridanus	1950	2017	Mammalia	Animalia
 152543254	2441122	Ovis ammon	2018	2018	Mammalia	Animalia
@@ -726,7 +725,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213020	9473367	Antigone vipio	2011	2011	Aves	Animalia
 152543663	9479629	Tasserkidrilus americanus	2006	2016	Clitellata	Animalia
 156872745	9491873	Dichotomyctere fluviatilis	2001	2017	NA	Animalia
-152543327	9518324	Procyon cancrivorus	2006	2018	Mammalia	Animalia
 213214847	9554442	Tamarix gallica	2008	2021	Magnoliopsida	Plantae
 182133911	9601519	Pseudemys rubriventris	2015	2015	Testudines	Animalia
 213213238	9662775	Gastoniella chaerophylla	2005	2005	Polypodiopsida	Plantae
