@@ -37,6 +37,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8991514,Acer tataricum,SPECIES,ACCEPTED,Plantae,NA
 4274443,Acer tataricum,SPECIES,ACCEPTED,Plantae,NA
 7227181,Acer tataricum,SPECIES,ACCEPTED,Plantae,NA
+4274443,Acer tataricum ginnala,NA,NA,NA,NA
 2294131,Aceria brachytarsus,SPECIES,ACCEPTED,Animalia,NA
 2128502,Aceria erinea,SPECIES,ACCEPTED,Animalia,NA
 7606014,Aceria heteronyx,NA,NA,NA,NA
@@ -82,14 +83,16 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2914404,Achillea salicifolia,NA,NA,NA,NA
 5659657,Achillea salicifolia,NA,NA,NA,NA
 7223680,Achillea salicifolia,NA,NA,NA,NA
-6157050,Achillea salicifolia salicifolia,NA,NA,NA,NA
+6157050,Achillea salicifolia,NA,NA,NA,NA
+8134874,Achillea salicifolia salicifolia,NA,NA,NA,NA
 7323341,Achillea setacea,NA,NA,NA,NA
 5548011,Achnatherum bromoides,NA,NA,NA,NA
 4142326,Achnatherum calamagrostis,SPECIES,ACCEPTED,Plantae,4142326: Achnatherum calamagrostis (L.) P.Beauv.
 4287131,Acipenser baerii,SPECIES,ACCEPTED,Animalia,"4287131: Acipenser baerii Brandt, 1869"
 2402129,Acipenser gueldenstaedtii,SPECIES,ACCEPTED,Animalia,"2402129: Acipenser gueldenstaedtii Brandt & Ratzeburg, 1833"
 2402168,Acipenser ruthenus,SPECIES,ACCEPTED,Animalia,"2402168: Acipenser ruthenus Linnaeus, 1758"
-8338571,Acmella,NA,NA,NA,NA
+4048052,Acmella,NA,NA,NA,NA
+8338571,Acmella NA,NA,NA,NA,NA
 4219118,Acmella NA,NA,NA,NA,NA
 4248063,Acmella NA,NA,NA,NA,NA
 3596131,Acmella NA,NA,NA,NA,NA
@@ -161,7 +164,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8045533,Aconitum napellus,VARIETY,SYNONYM,Plantae,NA
 11136683,Aconitum napellus,VARIETY,SYNONYM,Plantae,NA
 6076957,Aconitum napellus,VARIETY,SYNONYM,Plantae,NA
-2457378,Aconitum napellus giganteum,NA,NA,NA,NA
+2457378,Aconitum napellus,VARIETY,SYNONYM,Plantae,NA
+4194303,Aconitum napellus giganteum,NA,NA,NA,NA
 2873769,Acorus calamus,SPECIES,ACCEPTED,Plantae,2873769: Acorus calamus L.
 2489010,Acridotheres cristatellus,SPECIES,ACCEPTED,Animalia,"2489010: Acridotheres cristatellus (Linnaeus, 1758)"
 2489004,Acridotheres ginginianus,SPECIES,ACCEPTED,Animalia,"2489004: Acridotheres ginginianus (Latham, 1790)"
@@ -210,7 +214,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8983123,Adonis aestivalis,SUBSPECIES,ACCEPTED,Plantae,NA
 7225471,Adonis aestivalis,SUBSPECIES,ACCEPTED,Plantae,NA
 11794300,Adonis aestivalis,SUBSPECIES,ACCEPTED,Plantae,NA
-7277946,Adonis aestivalis aestivalis,NA,NA,NA,NA
+9537212,Adonis aestivalis aestivalis,NA,NA,NA,NA
 5371709,Adonis annua,SPECIES,ACCEPTED,Plantae,5371709: Adonis annua L.
 8246651,Adonis flammea,SPECIES,ACCEPTED,Plantae,7809794: Adonis flammea var. flammea | 8246651: Adonis flammea Jacq.
 1651430,Aedes albopictus,SPECIES,ACCEPTED,Animalia,"1651430: Aedes albopictus (Skuse, 1894)"
@@ -284,7 +288,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7223177,Aira caryophyllea,SUBSPECIES,SYNONYM,Plantae,NA
 7350944,Aira caryophyllea,SUBSPECIES,SYNONYM,Plantae,NA
 8257546,Aira caryophyllea,SUBSPECIES,SYNONYM,Plantae,NA
-4123394,Aira caryophyllea plesiantha,NA,NA,NA,NA
+4123394,Aira caryophyllea,SUBSPECIES,SYNONYM,Plantae,NA
+2914404,Aira caryophyllea plesiantha,NA,NA,NA,NA
 8322034,Aira elegans,NA,NA,NA,NA
 2498388,Aix galericulata,SPECIES,ACCEPTED,Animalia,"2498388: Aix galericulata (Linnaeus, 1758)"
 2498387,Aix sponsa,SPECIES,ACCEPTED,Animalia,"2498387: Aix sponsa (Linnaeus, 1758)"
@@ -337,7 +342,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9405645,Alkekengi officinarum,SPECIES,ACCEPTED,Plantae,NA
 3611735,Alkekengi officinarum,SPECIES,ACCEPTED,Plantae,NA
 3047147,Alkekengi officinarum,SPECIES,ACCEPTED,Plantae,NA
-2445496,Alkekengi officinarum franchetii,NA,NA,NA,NA
+2445496,Alkekengi officinarum,SPECIES,ACCEPTED,Plantae,NA
+7466434,Alkekengi officinarum franchetii,NA,NA,NA,NA
 2856037,Allium ampeloprasum,SPECIES,ACCEPTED,Plantae,7668251: Allium porrum L. | 2856037: Allium ampeloprasum L.
 2855968,Allium carinatum,SPECIES,ACCEPTED,Plantae,2855968: Allium carinatum L.
 2857697,Allium cepa,SPECIES,ACCEPTED,Plantae,2857697: Allium cepa L.
@@ -383,7 +389,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4250826,Alyssum turkestanicum,NA,NA,NA,NA
 2493698,Amandava amandava,SPECIES,ACCEPTED,Animalia,"2493698: Amandava amandava (Linnaeus, 1758)"
 7223276,Amandava subflava,NA,NA,NA,NA
-2441533,Amanita inopinata,NA,NA,NA,NA
+2441533,Amanita inopinata,SPECIES,ACCEPTED,Fungi,NA
 7905507,Amaranthus albus,SPECIES,ACCEPTED,Plantae,7905507: Amaranthus albus L.
 5384395,Amaranthus blitoides,SPECIES,ACCEPTED,Plantae,5384395: Amaranthus blitoides S.Watson
 8911082,Amaranthus blitum,SPECIES,ACCEPTED,Plantae,8911082: Amaranthus blitum L. | 7323358: Amaranthus blitum subsp. blitum
@@ -453,46 +459,49 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7226804,Amaranthus capensis,NA,NA,NA,NA
 6409536,Amaranthus capensis,NA,NA,NA,NA
 3042889,Amaranthus capensis,NA,NA,NA,NA
-7227181,Amaranthus capensis capensis,NA,NA,NA,NA
+7227181,Amaranthus capensis,NA,NA,NA,NA
+7223276,Amaranthus capensis capensis,NA,NA,NA,NA
+2161467,Amaranthus capensis uncinatus,NA,NA,NA,NA
 6109611,Amaranthus caudatus,SPECIES,ACCEPTED,Plantae,6109611: Amaranthus caudatus L.
 2153791,Amaranthus clementii,NA,NA,NA,NA
 5384341,Amaranthus crispus,SPECIES,ACCEPTED,Plantae,5384341: Amaranthus crispus (Lesp. & Thévenau) N.Terracc.
 5384390,Amaranthus cruentus,SPECIES,ACCEPTED,Plantae,5384390: Amaranthus cruentus L. | 5547889: Amaranthus hybridus var. chlorostachys (Willd.) Thell. | 7695818: Amaranthus hybridus subsp. cruentus (L.) Thell.
 5384396,Amaranthus deflexus,SPECIES,ACCEPTED,Plantae,5384396: Amaranthus deflexus L.
-2480317,Amaranthus emarginatus,NA,NA,NA,NA
-7225456,Amaranthus emarginatus,NA,NA,NA,NA
-7277946,Amaranthus emarginatus,NA,NA,NA,NA
-4273336,Amaranthus emarginatus,NA,NA,NA,NA
-8429888,Amaranthus emarginatus,NA,NA,NA,NA
-8918909,Amaranthus emarginatus,NA,NA,NA,NA
-6076279,Amaranthus emarginatus,NA,NA,NA,NA
-5544928,Amaranthus emarginatus,NA,NA,NA,NA
-5831060,Amaranthus emarginatus,NA,NA,NA,NA
-7267631,Amaranthus emarginatus,NA,NA,NA,NA
-4123394,Amaranthus emarginatus,NA,NA,NA,NA
-7190901,Amaranthus emarginatus,NA,NA,NA,NA
-6302047,Amaranthus emarginatus,NA,NA,NA,NA
-5224481,Amaranthus emarginatus,NA,NA,NA,NA
-2284443,Amaranthus emarginatus,NA,NA,NA,NA
-7652364,Amaranthus emarginatus,NA,NA,NA,NA
-6449041,Amaranthus emarginatus,NA,NA,NA,NA
-2447418,Amaranthus emarginatus,NA,NA,NA,NA
-5365494,Amaranthus emarginatus,NA,NA,NA,NA
-6369140,Amaranthus emarginatus,NA,NA,NA,NA
-4194303,Amaranthus emarginatus,NA,NA,NA,NA
-8257857,Amaranthus emarginatus,NA,NA,NA,NA
-4250676,Amaranthus emarginatus,NA,NA,NA,NA
-5359402,Amaranthus emarginatus,NA,NA,NA,NA
-9603492,Amaranthus emarginatus,NA,NA,NA,NA
-4925890,Amaranthus emarginatus,NA,NA,NA,NA
-9454901,Amaranthus emarginatus,NA,NA,NA,NA
-7068732,Amaranthus emarginatus,NA,NA,NA,NA
-2473221,Amaranthus emarginatus,NA,NA,NA,NA
-7226794,Amaranthus emarginatus,NA,NA,NA,NA
-2161467,Amaranthus emarginatus,NA,NA,NA,NA
-7096205,Amaranthus emarginatus,NA,NA,NA,NA
-7331861,Amaranthus emarginatus,NA,NA,NA,NA
-8925248,Amaranthus emarginatus emarginatus,NA,NA,NA,NA
+2480317,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+7225456,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+7277946,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+4273336,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+8429888,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+8918909,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+6076279,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+5544928,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+5831060,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+7267631,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+4123394,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+7190901,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+6302047,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+5224481,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+2284443,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+7652364,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+6449041,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+2447418,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+5365494,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+6369140,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+4194303,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+8257857,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+4250676,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+5359402,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+9603492,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+4925890,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+9454901,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+7068732,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+2473221,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+7226794,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+2161467,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+7096205,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+7331861,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+8925248,Amaranthus emarginatus,SUBSPECIES,ACCEPTED,Plantae,NA
+5659657,Amaranthus emarginatus emarginatus,NA,NA,NA,NA
 5384373,Amaranthus graecizans,SPECIES,ACCEPTED,Plantae,5384373: Amaranthus graecizans L. | 7826322: Amaranthus graecizans subsp. silvestris (Vill.) Brenan
 5384364,Amaranthus hybridus,SPECIES,ACCEPTED,Plantae,5384364: Amaranthus hybridus L. | 7323184: Amaranthus hybridus var. hybridus | 5547885: Amaranthus hybridus var. erythrostachys Moq. | 7323185: Amaranthus hybridus subsp. hybridus
 9080185,Amaranthus hypochondriacus,SPECIES,ACCEPTED,Plantae,9080185: Amaranthus hypochondriacus L.
@@ -554,8 +563,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5224543,Amaranthus macrocarpus,NA,NA,NA,NA
 5545159,Amaranthus macrocarpus,NA,NA,NA,NA
 9405645,Amaranthus macrocarpus,NA,NA,NA,NA
-5825913,Amaranthus macrocarpus macrocarpus,NA,NA,NA,NA
-7230699,Amaranthus macrocarpus pallidus,NA,NA,NA,NA
+5825913,Amaranthus macrocarpus,NA,NA,NA,NA
+7230699,Amaranthus macrocarpus,NA,NA,NA,NA
+8336551,Amaranthus macrocarpus macrocarpus,NA,NA,NA,NA
+5652131,Amaranthus macrocarpus pallidus,NA,NA,NA,NA
 7323810,Amaranthus mitchellii,SPECIES,ACCEPTED,Plantae,7323810: Amaranthus mitchellii Benth.
 3757457,Amaranthus muricatus,NA,NA,NA,NA
 3083921,Amaranthus ozanonii,NA,NA,NA,NA
@@ -641,7 +652,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8389446,Amsinckia menziesii,SPECIES,ACCEPTED,Plantae,NA
 4925890,Amsinckia menziesii,SPECIES,ACCEPTED,Plantae,NA
 7323834,Amsinckia menziesii,SPECIES,ACCEPTED,Plantae,NA
-8429888,Amsinckia menziesii intermedia,NA,NA,NA,NA
+8429888,Amsinckia menziesii,SPECIES,ACCEPTED,Plantae,NA
+2473221,Amsinckia menziesii intermedia,NA,NA,NA,NA
 2925877,Amsinckia tessellata,SPECIES,ACCEPTED,Plantae,NA
 1702101,Anacridium aegyptium,SPECIES,ACCEPTED,Animalia,"1702101: Anacridium aegyptium (Linnaeus, 1764)"
 3148589,Anacyclus clavatus,SPECIES,ACCEPTED,Plantae,3148589: Anacyclus clavatus (Desf.) Pers.
@@ -705,7 +717,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7068732,Anchusa officinalis,SPECIES,ACCEPTED,Plantae,NA
 3757050,Anchusa officinalis,SPECIES,ACCEPTED,Plantae,NA
 2717402,Anchusa officinalis,SPECIES,ACCEPTED,Plantae,NA
-7190901,Anchusa officinalis officinalis,NA,NA,NA,NA
+7190901,Anchusa officinalis,SPECIES,ACCEPTED,Plantae,NA
+8338571,Anchusa officinalis officinalis,NA,NA,NA,NA
 5621983,Anchusa procera,NA,NA,NA,NA
 5661914,Anchusa thessala,SPECIES,ACCEPTED,Plantae,NA
 3079631,Andrachne telephioides,SPECIES,ACCEPTED,Plantae,NA
@@ -729,7 +742,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2705391,Anguillicola crassus,NA,NA,NA,NA
 8241853,Anisocampium niponicum,SPECIES,ACCEPTED,Plantae,"8241853: Anisocampium niponicum (Mett.) Yea C.Liu, W.L.Chiou & M.Kato"
 3152493,Anoda cristata,SPECIES,ACCEPTED,Plantae,3152493: Anoda cristata (L.) Schltdl.
-5545159,Anolis,NA,NA,NA,NA
+2443339,Anolis,NA,NA,NA,NA
+5545159,Anolis NA,NA,NA,NA,NA
 7222255,Anolis NA,NA,NA,NA,NA
 3596131,Anolis NA,NA,NA,NA,NA
 7998563,Anolis NA,NA,NA,NA,NA
@@ -844,8 +858,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3047633,Anthyllis vulneraria,SUBSPECIES,ACCEPTED,Plantae,NA
 8983123,Anthyllis vulneraria,SUBSPECIES,ACCEPTED,Plantae,NA
 6084799,Anthyllis vulneraria,SUBSPECIES,ACCEPTED,Plantae,NA
-7068732,Anthyllis vulneraria carpatica,NA,NA,NA,NA
-7298085,Anthyllis vulneraria polyphylla,NA,NA,NA,NA
+7068732,Anthyllis vulneraria,SUBSPECIES,ACCEPTED,Plantae,NA
+7298085,Anthyllis vulneraria,SUBSPECIES,ACCEPTED,Plantae,NA
+7068845,Anthyllis vulneraria carpatica,NA,NA,NA,NA
+8323119,Anthyllis vulneraria polyphylla,NA,NA,NA,NA
 1419894,Antigone vipio,NA,NA,NA,NA
 7581174,Antirrhinum graniticum,NA,NA,NA,NA
 3172001,Antirrhinum majus,SPECIES,ACCEPTED,Plantae,3172001: Antirrhinum majus L.
@@ -894,7 +910,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2974921,Arabidopsis arenosa,SUBSPECIES,ACCEPTED,Plantae,NA
 6710856,Arabidopsis arenosa,SUBSPECIES,ACCEPTED,Plantae,NA
 7323906,Arabidopsis arenosa,SUBSPECIES,ACCEPTED,Plantae,NA
-7350944,Arabidopsis arenosa arenosa,NA,NA,NA,NA
+7350944,Arabidopsis arenosa,SUBSPECIES,ACCEPTED,Plantae,NA
+3065244,Arabidopsis arenosa arenosa,NA,NA,NA,NA
 3052450,Arabidopsis halleri,SPECIES,ACCEPTED,Plantae,3052450: Arabidopsis halleri (L.) O'Kane & Al-Shehbaz | 3052453: Cardaminopsis halleri (L.) Hayek | 7225571: Arabidopsis halleri subsp. halleri
 5375020,Arabis alpina,SPECIES,ACCEPTED,Plantae,NA
 5221988,Arabis auriculata,NA,NA,NA,NA
@@ -953,7 +970,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7267631,Armeria humilis,NA,NA,NA,NA
 4123394,Armeria humilis,NA,NA,NA,NA
 8006893,Armeria humilis,NA,NA,NA,NA
-3666059,Armeria humilis humilis,NA,NA,NA,NA
+3666059,Armeria humilis,NA,NA,NA,NA
+6300531,Armeria humilis humilis,NA,NA,NA,NA
 4090836,Armeria maritima,SUBSPECIES,ACCEPTED,Plantae,4090836: Armeria maritima subsp. elongata (Hoffm.) Bonnier
 1008610,Armeria maritima,SUBSPECIES,ACCEPTED,Plantae,NA
 2706403,Armeria maritima,SUBSPECIES,ACCEPTED,Plantae,NA
@@ -988,7 +1006,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6411098,Armeria maritima,SUBSPECIES,ACCEPTED,Plantae,NA
 5545159,Armeria maritima,SUBSPECIES,ACCEPTED,Plantae,NA
 2445496,Armeria maritima,SUBSPECIES,ACCEPTED,Plantae,NA
-3040999,Armeria maritima elongata,NA,NA,NA,NA
+3040999,Armeria maritima,SUBSPECIES,ACCEPTED,Plantae,NA
+7266329,Armeria maritima elongata,NA,NA,NA,NA
 3041022,Armoracia rusticana,SPECIES,ACCEPTED,Plantae,"3041022: Armoracia rusticana P.Gaertn., B.Mey. & Scherb. | 3690611: Armoracia rustica Schur"
 2295309,Arnebia decumbens,NA,NA,NA,NA
 4486297,Arocatus longiceps,SPECIES,ACCEPTED,Animalia,NA
@@ -1127,8 +1146,9 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5831060,Austrostipa scabra,NA,NA,NA,NA
 2653392,Austrostipa scabra,NA,NA,NA,NA
 3065244,Austrostipa scabra,NA,NA,NA,NA
-4048052,Austrostipa scabra falcata,NA,NA,NA,NA
-8338571,Austrostipa scabra scabra,NA,NA,NA,NA
+8338571,Austrostipa scabra,NA,NA,NA,NA
+5224481,Austrostipa scabra falcata,NA,NA,NA,NA
+5224543,Austrostipa scabra scabra,NA,NA,NA,NA
 4104718,Austrostipa verticillata,SPECIES,ACCEPTED,Plantae,NA
 7293222,Avellinia festucoides,NA,NA,NA,NA
 2705300,Avena barbata,SPECIES,ACCEPTED,Plantae,2705300: Avena barbata Pott ex Link
@@ -1199,8 +1219,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6449041,Avena sterilis,SPECIES,ACCEPTED,Plantae,NA
 3602069,Avena sterilis,SPECIES,ACCEPTED,Plantae,NA
 5365494,Avena sterilis,SPECIES,ACCEPTED,Plantae,NA
-7624620,Avena sterilis ludoviciana,NA,NA,NA,NA
-7901010,Avena sterilis sterilis,NA,NA,NA,NA
+7624620,Avena sterilis,SPECIES,ACCEPTED,Plantae,NA
+7901010,Avena sterilis,SPECIES,ACCEPTED,Plantae,NA
+5587240,Avena sterilis ludoviciana,NA,NA,NA,NA
+3047633,Avena sterilis sterilis,NA,NA,NA,NA
 2705295,Avena strigosa,SPECIES,ACCEPTED,Plantae,2705295: Avena strigosa Schreb.
 2705932,Axonopus fissifolius,SPECIES,ACCEPTED,Plantae,2705933: Axonopus affinis Chase
 6447806,Axyris amaranthoides,SPECIES,ACCEPTED,Plantae,6447806: Axyris amaranthoides L.
@@ -1245,7 +1267,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8045533,Ballota nigra,SUBSPECIES,ACCEPTED,Plantae,NA
 3898065,Ballota nigra,SUBSPECIES,ACCEPTED,Plantae,NA
 2706403,Ballota nigra,SUBSPECIES,ACCEPTED,Plantae,NA
-7277946,Ballota nigra nigra,NA,NA,NA,NA
+7277946,Ballota nigra,SUBSPECIES,ACCEPTED,Plantae,NA
+7298085,Ballota nigra nigra,NA,NA,NA,NA
 2976091,Baptisia australis,SPECIES,ACCEPTED,Plantae,NA
 5374614,Barbarea stricta,SPECIES,ACCEPTED,Plantae,7560578: Barbarea stricta Andrz. | 5374614: Barbarea stricta Andrz. ex Besser
 5374672,Barbarea verna,SPECIES,ACCEPTED,Plantae,5374672: Barbarea verna (Mill.) Asch.
@@ -1310,7 +1333,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7225456,Beta vulgaris,SUBSPECIES,ACCEPTED,Plantae,NA
 7323341,Beta vulgaris,SUBSPECIES,ACCEPTED,Plantae,NA
 8918909,Beta vulgaris,SUBSPECIES,ACCEPTED,Plantae,NA
-10966302,Beta vulgaris vulgaris,NA,NA,NA,NA
+10966302,Beta vulgaris,SUBSPECIES,ACCEPTED,Plantae,NA
+5659657,Beta vulgaris vulgaris,NA,NA,NA,NA
 3905825,Betonica macrantha,SPECIES,ACCEPTED,Plantae,3905825: Betonica macrantha K.Koch
 5332004,Betula nana,SPECIES,ACCEPTED,Plantae,5332004: Betula nana L.
 5332120,Betula papyrifera,SPECIES,ACCEPTED,Plantae,5332120: Betula papyrifera Marshall
@@ -1354,7 +1378,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7225712,Bidens triplinervia,SPECIES,ACCEPTED,Plantae,NA
 2717402,Bidens triplinervia,SPECIES,ACCEPTED,Plantae,NA
 4115425,Bidens triplinervia,SPECIES,ACCEPTED,Plantae,NA
-2284443,Bidens triplinervia macrantha,NA,NA,NA,NA
+2284443,Bidens triplinervia,SPECIES,ACCEPTED,Plantae,NA
+7332517,Bidens triplinervia macrantha,NA,NA,NA,NA
 5391810,Bidens vulgata,SPECIES,ACCEPTED,Plantae,5391810: Bidens vulgata Greene
 5371870,Bifora radians,SPECIES,ACCEPTED,Plantae,5371870: Bifora radians M.Bieb.
 7440977,Bifora testiculata,NA,NA,NA,NA
@@ -1363,7 +1388,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7577557,Bispira polyomma,SPECIES,ACCEPTED,Animalia,NA
 4033335,Bistorta affinis,SPECIES,ACCEPTED,Plantae,4033335: Bistorta affinis (D.Don) Greene
 7291264,Bistorta amplexicaulis,SPECIES,ACCEPTED,Plantae,7291264: Bistorta amplexicaulis (D.Don) Greene | 4036951: Persicaria amplexicaulis (D.Don) Ronse Decr.
-3047147,Blanus,NA,NA,NA,NA
+11162940,Blanus,NA,NA,NA,NA
+3047147,Blanus NA,NA,NA,NA,NA
 9391215,Blanus NA,NA,NA,NA,NA
 5659657,Blanus NA,NA,NA,NA,NA
 7427741,Blanus NA,NA,NA,NA,NA
@@ -1406,7 +1432,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5568899,Blitum nuttallianum,SPECIES,ACCEPTED,Plantae,5383905: Monolepis nuttalliana (Roem. & Schult.) Greene
 5383969,Blitum virgatum,SPECIES,ACCEPTED,Plantae,3083844: Chenopodium foliosum (Moench) Asch. | 5383969: Blitum virgatum L. | 8245372: Chenopodium virgatum (L.) Ambrosi
 5646410,Blumenbachia hieronymi,SPECIES,ACCEPTED,Plantae,NA
-7272185,Boa,NA,NA,NA,NA
+2444221,Boa,NA,NA,NA,NA
+7272185,Boa NA,NA,NA,NA,NA
 7230699,Boa NA,NA,NA,NA,NA
 7440977,Boa NA,NA,NA,NA,NA
 4211590,Boa NA,NA,NA,NA,NA
@@ -1441,7 +1468,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4035024,Boa NA,NA,NA,NA,NA
 7420522,Boa NA,NA,NA,NA,NA
 7846821,Boa constrictor,NA,NA,NA,NA
-7225456,Boaedon,NA,NA,NA,NA
+7323251,Boaedon,NA,NA,NA,NA
+7225456,Boaedon NA,NA,NA,NA,NA
 7226776,Boaedon NA,NA,NA,NA,NA
 11136683,Boaedon NA,NA,NA,NA,NA
 2445496,Boaedon NA,NA,NA,NA,NA
@@ -1529,7 +1557,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6313051,Brassica elongata,NA,NA,NA,NA
 9537212,Brassica elongata,NA,NA,NA,NA
 7225712,Brassica elongata,NA,NA,NA,NA
-2914404,Brassica elongata integrifolia,NA,NA,NA,NA
+2914404,Brassica elongata,NA,NA,NA,NA
+7222255,Brassica elongata integrifolia,NA,NA,NA,NA
 3042751,Brassica juncea,SPECIES,ACCEPTED,Plantae,3042751: Brassica juncea (L.) Czern.
 3042636,Brassica napus,SPECIES,ACCEPTED,Plantae,3042636: Brassica napus L. | 7225635: Brassica napus subsp. napus | 7801836: Brassica napus subsp. napobrassica (L.) O.Schwarz | 6392906: Brassica napus var. napus
 3042845,Brassica oleracea,SPECIES,ACCEPTED,Plantae,"3042845: Brassica oleracea L. | 3042853: Brassica oleracea subsp. caulorapa (DC.) Metzg. | 7836447: Brassica oleracea subsp. capitata (L.) Schübl. & G.Martens, 1834"
@@ -1606,42 +1635,45 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4132112,Bromus hordeaceus,SUBSPECIES,ACCEPTED,Plantae,NA
 2445496,Bromus hordeaceus,SUBSPECIES,ACCEPTED,Plantae,NA
 6449041,Bromus hordeaceus,SUBSPECIES,ACCEPTED,Plantae,NA
-3023671,Bromus hordeaceus divaricatus,NA,NA,NA,NA
-11136683,Bromus hordeaceus longipedicellatus,NA,NA,NA,NA
+3023671,Bromus hordeaceus,SUBSPECIES,ACCEPTED,Plantae,NA
+11136683,Bromus hordeaceus,SUBSPECIES,ACCEPTED,Plantae,NA
+6308164,Bromus hordeaceus divaricatus,NA,NA,NA,NA
+7226776,Bromus hordeaceus longipedicellatus,NA,NA,NA,NA
 2703670,Bromus inermis,SPECIES,ACCEPTED,Plantae,2703670: Bromus inermis Leyss. | 4112404: Bromopsis inermis (Leyss.) Holub
 4128347,Bromus intermedius,SPECIES,ACCEPTED,Plantae,4128347: Bromus intermedius Guss.
-3189760,Bromus japonicus,NA,NA,NA,NA
-4090836,Bromus japonicus,NA,NA,NA,NA
-7350944,Bromus japonicus,NA,NA,NA,NA
-11844792,Bromus japonicus,NA,NA,NA,NA
-2443339,Bromus japonicus,NA,NA,NA,NA
-7358677,Bromus japonicus,NA,NA,NA,NA
-3802956,Bromus japonicus,NA,NA,NA,NA
-9537212,Bromus japonicus,NA,NA,NA,NA
-7998563,Bromus japonicus,NA,NA,NA,NA
-5224481,Bromus japonicus,NA,NA,NA,NA
-6300531,Bromus japonicus,NA,NA,NA,NA
-4036957,Bromus japonicus,NA,NA,NA,NA
-9771172,Bromus japonicus,NA,NA,NA,NA
-6710856,Bromus japonicus,NA,NA,NA,NA
-7096205,Bromus japonicus,NA,NA,NA,NA
-7223680,Bromus japonicus,NA,NA,NA,NA
-5825913,Bromus japonicus,NA,NA,NA,NA
-6362724,Bromus japonicus,NA,NA,NA,NA
-7225471,Bromus japonicus,NA,NA,NA,NA
-8323119,Bromus japonicus,NA,NA,NA,NA
-7219988,Bromus japonicus,NA,NA,NA,NA
-7190901,Bromus japonicus,NA,NA,NA,NA
-10755213,Bromus japonicus,NA,NA,NA,NA
-5347854,Bromus japonicus,NA,NA,NA,NA
-7226776,Bromus japonicus,NA,NA,NA,NA
-2453882,Bromus japonicus,NA,NA,NA,NA
-3663237,Bromus japonicus,NA,NA,NA,NA
-3596131,Bromus japonicus,NA,NA,NA,NA
-7753114,Bromus japonicus,NA,NA,NA,NA
-2176168,Bromus japonicus,NA,NA,NA,NA
-4194303,Bromus japonicus,NA,NA,NA,NA
-7224427,Bromus japonicus japonicus,NA,NA,NA,NA
+3189760,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+4090836,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7350944,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+11844792,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+2443339,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7358677,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+3802956,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+9537212,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7998563,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+5224481,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+6300531,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+4036957,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+9771172,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+6710856,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7096205,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7223680,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+5825913,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+6362724,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7225471,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+8323119,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7219988,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7190901,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+10755213,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+5347854,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7226776,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+2453882,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+3663237,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+3596131,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7753114,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+2176168,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+4194303,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7224427,Bromus japonicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7277946,Bromus japonicus japonicus,NA,NA,NA,NA
 2703733,Bromus lanceolatus,SPECIES,ACCEPTED,Plantae,2703733: Bromus lanceolatus Roth
 2703711,Bromus lepidus,SPECIES,ACCEPTED,Plantae,2703711: Bromus lepidus Holmb.
 2703721,Bromus madritensis,SPECIES,ACCEPTED,Plantae,2703721: Bromus madritensis L. | 2703722: Anisantha madritensis (L.) Nevski
@@ -1747,7 +1779,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7277946,Calystegia silvatica,NA,NA,NA,NA
 6164210,Calystegia silvatica,NA,NA,NA,NA
 7331861,Calystegia silvatica,NA,NA,NA,NA
-4219118,Calystegia silvatica silvatica,NA,NA,NA,NA
+4219118,Calystegia silvatica,NA,NA,NA,NA
+9405645,Calystegia silvatica silvatica,NA,NA,NA,NA
 2769069,Camassia leichtlinii,SPECIES,ACCEPTED,Plantae,NA
 2769073,Camassia leichtlinii,SUBSPECIES,ACCEPTED,Plantae,NA
 2888945,Camassia leichtlinii,SPECIES,ACCEPTED,Plantae,NA
@@ -1781,7 +1814,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8991514,Camassia leichtlinii,SPECIES,ACCEPTED,Plantae,NA
 7267631,Camassia leichtlinii,SPECIES,ACCEPTED,Plantae,NA
 7324507,Camassia leichtlinii,SPECIES,ACCEPTED,Plantae,NA
-2161911,Camassia leichtlinii suksdorfii,NA,NA,NA,NA
+8336551,Camassia leichtlinii suksdorfii,NA,NA,NA,NA
 3042399,Camelina alyssum,SPECIES,ACCEPTED,Plantae,3042399: Camelina alyssum (Mill.) Thell. | 3042406: Camelina dentata (Willd.) Pers.
 3042416,Camelina microcarpa,SPECIES,ACCEPTED,Plantae,3042416: Camelina microcarpa Andrz. ex DC. | 3042423: Camelina microcarpa subsp. sylvestris (Wallr.) Hiitonen | 9778381: Camelina microcarpa subsp. microcarpa
 3042439,Camelina rumelica,SPECIES,ACCEPTED,Plantae,3042439: Camelina rumelica Velen.
@@ -1836,7 +1869,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4271356,Canis lupus,SUBSPECIES,ACCEPTED,Animalia,NA
 7652364,Canis lupus,SUBSPECIES,ACCEPTED,Animalia,NA
 7358677,Canis lupus,SUBSPECIES,ACCEPTED,Animalia,NA
-7267492,Canis lupus familiaris,NA,NA,NA,NA
+7267492,Canis lupus,SUBSPECIES,ACCEPTED,Animalia,NA
+7068379,Canis lupus familiaris,NA,NA,NA,NA
 5602664,Canna generalis,SPECIES,ACCEPTED,Plantae,5602664: Canna generalis L.H.Bailey
 7529533,Canna hybrida,SPECIES,ACCEPTED,Plantae,NA
 6308164,Canna indica,NA,NA,NA,NA
@@ -1879,7 +1913,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9508942,Caracara plancus,SPECIES,ACCEPTED,Animalia,NA
 3040999,Caracara plancus,SPECIES,ACCEPTED,Animalia,NA
 5359402,Caracara plancus,SPECIES,ACCEPTED,Animalia,NA
-7295374,Caracara plancus cheriway,NA,NA,NA,NA
+7295374,Caracara plancus,SPECIES,ACCEPTED,Animalia,NA
+4274443,Caracara plancus cheriway,NA,NA,NA,NA
 2943190,Caragana arborescens,SPECIES,ACCEPTED,Plantae,NA
 3967193,Caragana halodendron,SPECIES,ACCEPTED,Plantae,NA
 4286942,Carassius auratus,SPECIES,ACCEPTED,Animalia,"7193629: Carassius auratus auratus | 4286942: Carassius auratus (Linnaeus, 1758)"
@@ -1924,7 +1959,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7230699,Carduus nutans,SUBSPECIES,ACCEPTED,Plantae,NA
 4036350,Carduus nutans,SUBSPECIES,ACCEPTED,Plantae,NA
 2473221,Carduus nutans,SUBSPECIES,ACCEPTED,Plantae,NA
-7219988,Carduus nutans leiophyllus,NA,NA,NA,NA
+7219988,Carduus nutans,SUBSPECIES,ACCEPTED,Plantae,NA
+5659657,Carduus nutans leiophyllus,NA,NA,NA,NA
 3114667,Carduus pycnocephalus,SPECIES,ACCEPTED,Plantae,3114667: Carduus pycnocephalus L.
 8419625,Carduus theriotii,NA,NA,NA,NA
 4210773,Carduus vivariensis,SPECIES,ACCEPTED,Plantae,4210773: Carduus vivariensis Jord.
@@ -1967,7 +2003,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 10948891,Carex muricata,SUBSPECIES,ACCEPTED,Plantae,NA
 7277946,Carex muricata,SUBSPECIES,ACCEPTED,Plantae,NA
 10966302,Carex muricata,SUBSPECIES,ACCEPTED,Plantae,NA
-6411098,Carex muricata muricata,NA,NA,NA,NA
+6411098,Carex muricata,SUBSPECIES,ACCEPTED,Plantae,NA
+6427623,Carex muricata muricata,NA,NA,NA,NA
 2726538,Carex muskingumensis,SPECIES,ACCEPTED,Plantae,2726538: Carex muskingumensis Schwein.
 2149847,Carex plantaginea,NA,NA,NA,NA
 2726539,Carex scoparia,SPECIES,ACCEPTED,Plantae,2726539: Carex scoparia Schkuhr ex Willd.
@@ -2013,7 +2050,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4090836,Caryopteris incana,SPECIES,ACCEPTED,Plantae,NA
 5659657,Caryopteris incana,SPECIES,ACCEPTED,Plantae,NA
 2284443,Caryopteris incana,SPECIES,ACCEPTED,Plantae,NA
-10948891,Caryopteris incana x mongholica,NA,NA,NA,NA
+10948891,Caryopteris incana,SPECIES,ACCEPTED,Plantae,NA
+7266343,Caryopteris incana x mongholica,NA,NA,NA,NA
 5333294,Castanea sativa,SPECIES,ACCEPTED,Plantae,5333294: Castanea sativa Mill. | 5333296: Castanea vulgaris Lam.
 2439838,Castor canadensis,SPECIES,ACCEPTED,Animalia,"2439838: Castor canadensis Kuhl, 1820"
 3172615,Catalpa bignonioides,SPECIES,ACCEPTED,Plantae,3172615: Catalpa bignonioides Walter
@@ -2076,7 +2114,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7293222,Centaurea diluta,SPECIES,ACCEPTED,Plantae,NA
 7230699,Centaurea diluta,SPECIES,ACCEPTED,Plantae,NA
 3898065,Centaurea diluta,SPECIES,ACCEPTED,Plantae,NA
-4925890,Centaurea diluta algeriensis,NA,NA,NA,NA
+4925890,Centaurea diluta,SPECIES,ACCEPTED,Plantae,NA
+2453882,Centaurea diluta algeriensis,NA,NA,NA,NA
 5359402,Centaurea glaberrima,NA,NA,NA,NA
 3127837,Centaurea hyalolepis,SPECIES,ACCEPTED,Plantae,3127837: Centaurea hyalolepis Boiss.
 5359118,Centaurea jacea,NA,NA,NA,NA
@@ -2111,7 +2150,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2176168,Centaurea jacea,NA,NA,NA,NA
 6308164,Centaurea jacea,NA,NA,NA,NA
 7222196,Centaurea jacea,NA,NA,NA,NA
-2769073,Centaurea jacea x nigrescens,NA,NA,NA,NA
+2769073,Centaurea jacea,NA,NA,NA,NA
+7327959,Centaurea jacea x nigrescens,NA,NA,NA,NA
 3129064,Centaurea macrocephala,SPECIES,ACCEPTED,Plantae,3129064: Centaurea macrocephala Muss.Puschk. ex Willd.
 3128091,Centaurea melitensis,SPECIES,ACCEPTED,Plantae,3128091: Centaurea melitensis L.
 3128601,Centaurea napifolia,SPECIES,ACCEPTED,Plantae,NA
@@ -2158,7 +2198,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9405036,Centaurea solstitialis,SPECIES,ACCEPTED,Plantae,NA
 8782549,Centaurea solstitialis,SPECIES,ACCEPTED,Plantae,NA
 3757050,Centaurea solstitialis,SPECIES,ACCEPTED,Plantae,NA
-7223680,Centaurea solstitialis solstitialis,NA,NA,NA,NA
+7223680,Centaurea solstitialis,SPECIES,ACCEPTED,Plantae,NA
+3935202,Centaurea solstitialis solstitialis,NA,NA,NA,NA
 3127727,Centaurea stoebe,SPECIES,ACCEPTED,Plantae,3127727: Centaurea stoebe L.
 5391292,Centipeda minima,SPECIES,ACCEPTED,Plantae,5391292: Centipeda minima (L.) A.Br. & Asch.
 7298987,Centranthus calcitrapae,SPECIES,ACCEPTED,Plantae,NA
@@ -2175,7 +2216,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 1626096,Ceratitis capitata,SPECIES,ACCEPTED,Animalia,NA
 7380533,Ceratomegilla notata,SPECIES,ACCEPTED,Animalia,NA
 3082279,Ceratostigma plumbaginoides,SPECIES,ACCEPTED,Plantae,NA
-4211590,Cerbalus,NA,NA,NA,NA
+9567226,Cerbalus,NA,NA,NA,NA
+4211590,Cerbalus NA,NA,NA,NA,NA
 7327959,Cerbalus NA,NA,NA,NA,NA
 8918909,Cerbalus NA,NA,NA,NA,NA
 9603492,Cerbalus NA,NA,NA,NA,NA
@@ -2255,7 +2297,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7350944,Chaenorhinum origanifolium,SPECIES,ACCEPTED,Plantae,NA
 4132112,Chaenorhinum origanifolium,SPECIES,ACCEPTED,Plantae,NA
 5825913,Chaenorhinum origanifolium,SPECIES,ACCEPTED,Plantae,NA
-5587240,Chaenorhinum origanifolium origanifolium,NA,NA,NA,NA
+5587240,Chaenorhinum origanifolium,SPECIES,ACCEPTED,Plantae,NA
+6084799,Chaenorhinum origanifolium origanifolium,NA,NA,NA,NA
 5561475,Chaenostoma cordatum,SPECIES,ACCEPTED,Plantae,3728734: Sutera cordata (Thunb.) Kuntze | 5561475: Chaenostoma cordatum Benth.
 3642531,Chaerophyllum aureum,SPECIES,ACCEPTED,Plantae,3642531: Chaerophyllum aureum L.
 3034653,Chaerophyllum bulbosum,SPECIES,ACCEPTED,Plantae,3034653: Chaerophyllum bulbosum L.
@@ -2302,7 +2345,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7225471,Cheilanthes viridis,NA,NA,NA,NA
 7225712,Cheilanthes viridis,NA,NA,NA,NA
 7925720,Cheilanthes viridis,NA,NA,NA,NA
-4090836,Cheilanthes viridis macrophylla,NA,NA,NA,NA
+4090836,Cheilanthes viridis,NA,NA,NA,NA
+7427650,Cheilanthes viridis macrophylla,NA,NA,NA,NA
 2164194,Cheiracanthium furculatum,SPECIES,ACCEPTED,Animalia,NA
 2164198,Cheiracanthium mildei,SPECIES,ACCEPTED,Animalia,NA
 4314683,Chelicorophium curvispinum,SPECIES,ACCEPTED,Animalia,"4314683: Chelicorophium curvispinum (G.O.Sars, 1895)"
@@ -2345,7 +2389,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6369140,Chenopodium album,NA,NA,NA,NA
 8389446,Chenopodium album,NA,NA,NA,NA
 7226804,Chenopodium album,NA,NA,NA,NA
-7331861,Chenopodium album missouriense,NA,NA,NA,NA
+6302047,Chenopodium album missouriense,NA,NA,NA,NA
 4136390,Chenopodium auricomiforme,NA,NA,NA,NA
 3083920,Chenopodium berlandieri,SPECIES,ACCEPTED,Plantae,3083920: Chenopodium berlandieri Moq.
 2949250,Chenopodium berlandieri,SPECIES,ACCEPTED,Plantae,NA
@@ -2381,7 +2425,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7272439,Chenopodium berlandieri,SPECIES,ACCEPTED,Plantae,NA
 7062200,Chenopodium berlandieri,SPECIES,ACCEPTED,Plantae,NA
 7427741,Chenopodium berlandieri,SPECIES,ACCEPTED,Plantae,NA
-8006893,Chenopodium berlandieri bushianum,NA,NA,NA,NA
+8006893,Chenopodium berlandieri,SPECIES,ACCEPTED,Plantae,NA
+3602069,Chenopodium berlandieri bushianum,NA,NA,NA,NA
 8566446,Chenopodium borbasioides,SPECIES,ACCEPTED,Plantae,NA
 3756077,Chenopodium giganteum,SPECIES,ACCEPTED,Plantae,3756077: Chenopodium giganteum D.Don
 3083934,Chenopodium hircinum,SPECIES,ACCEPTED,Plantae,3083934: Chenopodium hircinum Schrad.
@@ -2444,7 +2489,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6076279,Chrysemys picta,SPECIES,ACCEPTED,Animalia,NA
 7223680,Chrysemys picta,SPECIES,ACCEPTED,Animalia,NA
 7652364,Chrysemys picta,SPECIES,ACCEPTED,Animalia,NA
-7271631,Chrysemys picta bellii,NA,NA,NA,NA
+9771172,Chrysemys picta bellii,NA,NA,NA,NA
 4460066,Chrysolina americana,SPECIES,ACCEPTED,Animalia,"4460066: Chrysolina americana (Linnaeus, 1758)"
 5228033,Chrysolophus amherstiae,SPECIES,ACCEPTED,Animalia,"5228033: Chrysolophus amherstiae (Leadbeater, 1829)"
 5228034,Chrysolophus pictus,SPECIES,ACCEPTED,Animalia,"5228034: Chrysolophus pictus (Linnaeus, 1758)"
@@ -2503,7 +2548,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4273336,Clarkia purpurea,NA,NA,NA,NA
 7331861,Clarkia purpurea,NA,NA,NA,NA
 6411098,Clarkia purpurea,NA,NA,NA,NA
-8782549,Clarkia purpurea quadrivulnera,NA,NA,NA,NA
+8782549,Clarkia purpurea,NA,NA,NA,NA
+7096205,Clarkia purpurea quadrivulnera,NA,NA,NA,NA
 5420957,Clarkia unguiculata,SPECIES,ACCEPTED,Plantae,NA
 4126800,Claytonia perfoliata,NA,NA,NA,NA
 3084742,Claytonia sibirica,SPECIES,ACCEPTED,Plantae,3084742: Claytonia sibirica L.
@@ -2579,8 +2625,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8257857,Clinopodium nepeta,SUBSPECIES,ACCEPTED,Plantae,NA
 5548011,Clinopodium nepeta,SUBSPECIES,ACCEPTED,Plantae,NA
 5544928,Clinopodium nepeta,SUBSPECIES,ACCEPTED,Plantae,NA
-4248063,Clinopodium nepeta nepeta,NA,NA,NA,NA
-4048052,Clinopodium nepeta spruneri,NA,NA,NA,NA
+4248063,Clinopodium nepeta,SUBSPECIES,ACCEPTED,Plantae,NA
+4048052,Clinopodium nepeta,SUBSPECIES,ACCEPTED,Plantae,NA
+9508942,Clinopodium nepeta nepeta,NA,NA,NA,NA
+7332517,Clinopodium nepeta spruneri,NA,NA,NA,NA
 4487598,Closterotomus trivialis,SPECIES,ACCEPTED,Animalia,NA
 8765358,Coccinella miranda,SPECIES,ACCEPTED,Animalia,"8765358: Coccinella miranda Wollaston, 1864"
 5712981,Coccus hesperidum,SPECIES,ACCEPTED,Animalia,NA
@@ -2672,8 +2720,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3663237,Convolvulus tricolor,SPECIES,ACCEPTED,Plantae,NA
 8421432,Convolvulus tricolor,SPECIES,ACCEPTED,Plantae,NA
 9391215,Convolvulus tricolor,SPECIES,ACCEPTED,Plantae,NA
-2202786,Convolvulus tricolor cupanianus,NA,NA,NA,NA
-6157026,Convolvulus tricolor tricolor,NA,NA,NA,NA
+2202786,Convolvulus tricolor,SPECIES,ACCEPTED,Plantae,NA
+6157026,Convolvulus tricolor,SPECIES,ACCEPTED,Plantae,NA
+5352372,Convolvulus tricolor cupanianus,NA,NA,NA,NA
+7068732,Convolvulus tricolor tricolor,NA,NA,NA,NA
 8050384,Coracias abyssinicus,NA,NA,NA,NA
 2475364,Coracias cyanogaster,SPECIES,ACCEPTED,Animalia,NA
 5189032,Corbicula fluminalis,SPECIES,ACCEPTED,Animalia,"5189032: Corbicula fluminalis (O.F.Müller, 1774)"
@@ -2746,8 +2796,9 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8257857,Cornus sanguinea,SUBSPECIES,ACCEPTED,Plantae,NA
 5548011,Cornus sanguinea,SUBSPECIES,ACCEPTED,Plantae,NA
 7323251,Cornus sanguinea,SUBSPECIES,ACCEPTED,Plantae,NA
-7757431,Cornus sanguinea australis,NA,NA,NA,NA
-7427650,Cornus sanguinea hungarica,NA,NA,NA,NA
+7427650,Cornus sanguinea,SUBSPECIES,ACCEPTED,Plantae,NA
+4048052,Cornus sanguinea australis,NA,NA,NA,NA
+8338571,Cornus sanguinea hungarica,NA,NA,NA,NA
 3082244,Cornus sericea,SPECIES,ACCEPTED,Plantae,3082244: Cornus sericea L.
 5348644,Coronilla scorpioides,SPECIES,ACCEPTED,Plantae,5348644: Coronilla scorpioides (L.) W.D.J.Koch
 5349991,Coronilla securidaca,SPECIES,ACCEPTED,Plantae,NA
@@ -2761,7 +2812,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5530855,Corydalis linstowiana,SPECIES,ACCEPTED,Plantae,5530855: Corydalis linstowiana Fedde
 2875968,Corylus colurna,SPECIES,ACCEPTED,Plantae,2875968: Corylus colurna L.
 2876049,Corylus maxima,SPECIES,ACCEPTED,Plantae,2876049: Corylus maxima Mill.
-5289726,Corynabutilon suntense,NA,NA,NA,NA
+5289726,Corynabutilon suntense,SPECIES,ACCEPTED,Plantae,NA
 2020655,Corythucha ciliata,SPECIES,ACCEPTED,Animalia,NA
 3128437,Coscinodiscus wailesii,NA,NA,NA,NA
 2498288,Coscoroba coscoroba,SPECIES,ACCEPTED,Animalia,"2498288: Coscoroba coscoroba (Molina, 1782)"
@@ -2837,7 +2888,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7624620,Crambe hispanica,SPECIES,ACCEPTED,Plantae,NA
 7277946,Crambe hispanica,SPECIES,ACCEPTED,Plantae,NA
 4211590,Crambe hispanica,SPECIES,ACCEPTED,Plantae,NA
-5825913,Crambe hispanica abyssinica,NA,NA,NA,NA
+5825913,Crambe hispanica,SPECIES,ACCEPTED,Plantae,NA
+4250676,Crambe hispanica abyssinica,NA,NA,NA,NA
 2217982,Crangonyx pseudogracilis,SPECIES,ACCEPTED,Animalia,"2217982: Crangonyx pseudogracilis Bousfield, 1958"
 2351136,Crassostrea virginica,NA,NA,NA,NA
 7334263,Crassula decumbens,SPECIES,ACCEPTED,Plantae,7334263: Crassula decumbens Thunb.
@@ -2875,7 +2927,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9603492,Crataegus microphylla,NA,NA,NA,NA
 4219118,Crataegus microphylla,NA,NA,NA,NA
 6300531,Crataegus microphylla,NA,NA,NA,NA
-3047633,Crataegus microphylla microphylla,NA,NA,NA,NA
+8782549,Crataegus microphylla microphylla,NA,NA,NA,NA
 3015577,Crataegus pedicellata,SPECIES,ACCEPTED,Plantae,3015577: Crataegus pedicellata Sarg.
 3015457,Crataegus persimilis,SPECIES,ACCEPTED,Plantae,3015457: Crataegus persimilis Sarg.
 2286079,Cratoxylum sumatranum,NA,NA,NA,NA
@@ -2909,7 +2961,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7068845,Cratoxylum sumatranum,NA,NA,NA,NA
 7225621,Cratoxylum sumatranum,NA,NA,NA,NA
 4036957,Cratoxylum sumatranum,NA,NA,NA,NA
-9537212,Cratoxylum sumatranum blancoi,NA,NA,NA,NA
+9537212,Cratoxylum sumatranum,NA,NA,NA,NA
+6156934,Cratoxylum sumatranum blancoi,NA,NA,NA,NA
 5192789,Crepidula fornicata,SPECIES,ACCEPTED,Animalia,"5192789: Crepidula fornicata (Linnaeus, 1758)"
 5403541,Crepis bursifolia,SPECIES,ACCEPTED,Plantae,5403541: Crepis bursifolia L.
 5831060,Crepis foetida,SUBSPECIES,ACCEPTED,Plantae,5831060: Crepis foetida subsp. rhoeadifolia (M.Bieb.) Celak.
@@ -2944,7 +2997,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5224543,Crepis foetida,SUBSPECIES,ACCEPTED,Plantae,NA
 6369140,Crepis foetida,SUBSPECIES,ACCEPTED,Plantae,NA
 7068379,Crepis foetida,SUBSPECIES,ACCEPTED,Plantae,NA
-6076279,Crepis foetida rhoeadifolia,NA,NA,NA,NA
+6076279,Crepis foetida,SUBSPECIES,ACCEPTED,Plantae,NA
+8134874,Crepis foetida rhoeadifolia,NA,NA,NA,NA
 7706146,Crepis nicaeensis,SPECIES,ACCEPTED,Plantae,7706146: Crepis nicaeensis Balb.
 5403272,Crepis pulchra,SPECIES,ACCEPTED,Plantae,5403272: Crepis pulchra L.
 5403605,Crepis sancta,SPECIES,ACCEPTED,Plantae,NA
@@ -2979,7 +3033,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6300531,Crepis sancta,SPECIES,ACCEPTED,Plantae,NA
 6157026,Crepis sancta,SPECIES,ACCEPTED,Plantae,NA
 2444141,Crepis sancta,SPECIES,ACCEPTED,Plantae,NA
-2653392,Crepis sancta sancta,NA,NA,NA,NA
+2653392,Crepis sancta,SPECIES,ACCEPTED,Plantae,NA
+7652364,Crepis sancta sancta,NA,NA,NA,NA
 4245384,Crepis setosa,SPECIES,ACCEPTED,Plantae,4245384: Crepis setosa Hallier fil.
 5403508,Crepis tectorum,SPECIES,ACCEPTED,Plantae,5403508: Crepis tectorum L.
 2475212,Crinifer zonurus,SPECIES,ACCEPTED,Animalia,"2475212: Crinifer zonurus (Ruppell, 1835)"
@@ -3071,7 +3126,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 10966302,Cymbalaria muralis,SPECIES,ACCEPTED,Plantae,NA
 7652364,Cymbalaria muralis,SPECIES,ACCEPTED,Plantae,NA
 4104890,Cymbalaria muralis,SPECIES,ACCEPTED,Plantae,NA
-4036957,Cymbalaria muralis muralis,NA,NA,NA,NA
+4036957,Cymbalaria muralis,SPECIES,ACCEPTED,Plantae,NA
+9537212,Cymbalaria muralis muralis,NA,NA,NA,NA
 5559837,Cymbalaria pallida,SPECIES,ACCEPTED,Plantae,5559837: Cymbalaria pallida (Ten.) Wettst.
 7261816,Cymbalaria pubescens,NA,NA,NA,NA
 12254070,Cynanchica aristata,SPECIES,ACCEPTED,Plantae,NA
@@ -3154,8 +3210,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7757431,Cyperus longus,SUBSPECIES,ACCEPTED,Plantae,NA
 7925720,Cyperus longus,SUBSPECIES,ACCEPTED,Plantae,NA
 6369140,Cyperus longus,SUBSPECIES,ACCEPTED,Plantae,NA
-7332416,Cyperus longus badius,NA,NA,NA,NA
-3746867,Cyperus longus longus,NA,NA,NA,NA
+7332416,Cyperus longus,SUBSPECIES,ACCEPTED,Plantae,NA
+3746867,Cyperus longus,SUBSPECIES,ACCEPTED,Plantae,NA
+4248063,Cyperus longus badius,NA,NA,NA,NA
+4048052,Cyperus longus longus,NA,NA,NA,NA
 2714722,Cyperus reflexus,SPECIES,ACCEPTED,Plantae,NA
 3826756,Cyperus rigens,NA,NA,NA,NA
 2714818,Cyperus rotundus,SPECIES,ACCEPTED,Plantae,2714818: Cyperus rotundus L.
@@ -3198,7 +3256,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7455425,Daboecia cantabrica,SPECIES,ACCEPTED,Plantae,NA
 6313051,Daboecia cantabrica,SPECIES,ACCEPTED,Plantae,NA
 4274443,Daboecia cantabrica,SPECIES,ACCEPTED,Plantae,NA
-4271356,Daboecia cantabrica cantabrica,NA,NA,NA,NA
+4271356,Daboecia cantabrica,SPECIES,ACCEPTED,Plantae,NA
+7466434,Daboecia cantabrica cantabrica,NA,NA,NA,NA
 7340811,Daboia palaestinae,NA,NA,NA,NA
 2475648,Dacelo novaeguineae,SPECIES,ACCEPTED,Animalia,"2475648: Dacelo novaeguineae (Hermann, 1783)"
 2114326,Dactylis glomerata,SUBSPECIES,ACCEPTED,Plantae,NA
@@ -3236,7 +3295,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3898065,Dactylis glomerata,SUBSPECIES,ACCEPTED,Plantae,NA
 7226804,Dactylis glomerata,SUBSPECIES,ACCEPTED,Plantae,NA
 2717402,Dactylis glomerata,SUBSPECIES,ACCEPTED,Plantae,NA
-3666059,Dactylis glomerata lobata,NA,NA,NA,NA
+3666059,Dactylis glomerata,SUBSPECIES,ACCEPTED,Plantae,NA
+7266343,Dactylis glomerata lobata,NA,NA,NA,NA
 2706188,Dactyloctenium aegyptium,SPECIES,ACCEPTED,Plantae,2706188: Dactyloctenium aegyptium (L.) Willd.
 2706190,Dactyloctenium radulans,SPECIES,ACCEPTED,Plantae,NA
 5387098,Dahlia coccinea,SPECIES,ACCEPTED,Plantae,5387098: Dahlia coccinea Cav.
@@ -3280,7 +3340,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7323251,Dasiphora davurica,SPECIES,ACCEPTED,Plantae,NA
 4932232,Dasiphora davurica,SPECIES,ACCEPTED,Plantae,NA
 10755213,Dasiphora davurica,SPECIES,ACCEPTED,Plantae,NA
-4036350,Dasiphora davurica mandshurica,NA,NA,NA,NA
+4036350,Dasiphora davurica,SPECIES,ACCEPTED,Plantae,NA
+9454901,Dasiphora davurica mandshurica,NA,NA,NA,NA
 5370380,Dasiphora fruticosa,SPECIES,ACCEPTED,Plantae,7740434: Potentilla fruticosa L. | 5370380: Dasiphora fruticosa (L.) Rydb. | 8276788: Potentilla ×friedrichsenii Späth
 7810452,Dasypyrum villosum,SPECIES,DOUBTFUL,Plantae,7810452: Dasypyrum villosum (L.) P.Candargy
 7894250,Datura ferox,SPECIES,ACCEPTED,Plantae,7894250: Datura ferox L.
@@ -3319,7 +3380,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9603492,Daucus carota,VARIETY,ACCEPTED,Plantae,NA
 5224543,Daucus carota,VARIETY,ACCEPTED,Plantae,NA
 3023671,Daucus carota,VARIETY,ACCEPTED,Plantae,NA
-7764312,Daucus carota sativus,NA,NA,NA,NA
+7764312,Daucus carota,VARIETY,ACCEPTED,Plantae,NA
+7757431,Daucus carota sativus,NA,NA,NA,NA
 3641853,Daucus durieua,SPECIES,ACCEPTED,Plantae,NA
 6027313,Daucus glochidiatus,SPECIES,ACCEPTED,Plantae,NA
 6027290,Daucus littoralis,SPECIES,ACCEPTED,Plantae,NA
@@ -3387,7 +3449,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3935202,Dianthus giganteus,SPECIES,ACCEPTED,Plantae,NA
 7266329,Dianthus giganteus,SPECIES,ACCEPTED,Plantae,NA
 7068732,Dianthus giganteus,SPECIES,ACCEPTED,Plantae,NA
-7998563,Dianthus giganteus giganteus,NA,NA,NA,NA
+7998563,Dianthus giganteus,SPECIES,ACCEPTED,Plantae,NA
+7225621,Dianthus giganteus giganteus,NA,NA,NA,NA
 3085412,Dianthus plumarius,SPECIES,ACCEPTED,Plantae,3085412: Dianthus plumarius L.
 4243464,Dianthus subacaulis,NA,NA,NA,NA
 6363496,Dianthus superbus,SPECIES,ACCEPTED,Plantae,6363496: Dianthus superbus L.
@@ -3439,7 +3502,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7332416,Digitaria sanguinalis,SPECIES,ACCEPTED,Plantae,NA
 4194303,Digitaria sanguinalis,SPECIES,ACCEPTED,Plantae,NA
 10966302,Digitaria sanguinalis,SPECIES,ACCEPTED,Plantae,NA
-2161911,Digitaria sanguinalis sanguinalis,NA,NA,NA,NA
+2161911,Digitaria sanguinalis,SPECIES,ACCEPTED,Plantae,NA
+3898065,Digitaria sanguinalis sanguinalis,NA,NA,NA,NA
 5289995,Digitaria violascens,SPECIES,ACCEPTED,Plantae,5289995: Digitaria violascens Link
 4315705,Dikerogammarus villosus,SPECIES,ACCEPTED,Animalia,"4315705: Dikerogammarus villosus (Sowinsky, 1894)"
 5402340,Dimorphotheca jucunda,SPECIES,ACCEPTED,Plantae,3093587: Osteospermum jucundum (E.Phillips) Norl.
@@ -3528,9 +3592,12 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 11136683,Diplachne fusca,SPECIES,ACCEPTED,Plantae,NA
 6076957,Diplachne fusca,SPECIES,ACCEPTED,Plantae,NA
 3890974,Diplachne fusca,SPECIES,ACCEPTED,Plantae,NA
-7323341,Diplachne fusca fascicularis,NA,NA,NA,NA
-5548011,Diplachne fusca fusca,NA,NA,NA,NA
-7323251,Diplachne fusca uninervia,NA,NA,NA,NA
+7323341,Diplachne fusca,SPECIES,ACCEPTED,Plantae,NA
+5548011,Diplachne fusca,SPECIES,ACCEPTED,Plantae,NA
+7323251,Diplachne fusca,SPECIES,ACCEPTED,Plantae,NA
+7331861,Diplachne fusca fascicularis,NA,NA,NA,NA
+7421129,Diplachne fusca fusca,NA,NA,NA,NA
+7070211,Diplachne fusca uninervia,NA,NA,NA,NA
 4136060,Diplosoma listerianum,NA,NA,NA,NA
 5376309,Diplotaxis erucoides,SPECIES,ACCEPTED,Plantae,5376309: Diplotaxis erucoides (L.) DC.
 5376326,Diplotaxis virgata,SPECIES,ACCEPTED,Plantae,5376326: Diplotaxis virgata (Cav.) DC.
@@ -3618,7 +3685,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5548011,Echinochloa muricata,SPECIES,ACCEPTED,Plantae,NA
 3065244,Echinochloa muricata,SPECIES,ACCEPTED,Plantae,NA
 12205713,Echinochloa muricata,SPECIES,ACCEPTED,Plantae,NA
-6302047,Echinochloa muricata muricata,NA,NA,NA,NA
+6302047,Echinochloa muricata,SPECIES,ACCEPTED,Plantae,NA
+8045533,Echinochloa muricata muricata,NA,NA,NA,NA
 2702820,Echinochloa oryzoides,SPECIES,ACCEPTED,Plantae,2702817: Echinochloa oryzicola Vasinger
 5331404,Echinocystis lobata,SPECIES,ACCEPTED,Plantae,NA
 4315760,Echinogammarus berilloni,SPECIES,ACCEPTED,Animalia,"4315760: Echinogammarus berilloni (Catta, 1878)"
@@ -3686,7 +3754,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7455425,Eleocharis mamillata,SUBSPECIES,ACCEPTED,Plantae,NA
 8983123,Eleocharis mamillata,SUBSPECIES,ACCEPTED,Plantae,NA
 7096205,Eleocharis mamillata,SUBSPECIES,ACCEPTED,Plantae,NA
-4194303,Eleocharis mamillata austriaca,NA,NA,NA,NA
+4194303,Eleocharis mamillata,SUBSPECIES,ACCEPTED,Plantae,NA
+7295374,Eleocharis mamillata austriaca,NA,NA,NA,NA
 2717467,Eleocharis obtusa,SPECIES,ACCEPTED,Plantae,2717467: Eleocharis obtusa (Willd.) Schult.
 4124350,Eleusine africana,SPECIES,ACCEPTED,Plantae,NA
 2705957,Eleusine coracana,SPECIES,ACCEPTED,Plantae,2705957: Eleusine coracana (L.) Gaertn.
@@ -3710,7 +3779,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2287249,Ensis directus,SPECIES,ACCEPTED,Animalia,"2287249: Ensis directus (Conrad, 1844)"
 8485639,Ensis leei,SPECIES,ACCEPTED,Animalia,"2287253: Ensis americanus (Gould, 1870) | 8485639: Ensis leei M.Huber, 2015"
 5679692,Enteropogon acicularis,SPECIES,ACCEPTED,Plantae,NA
-7420522,Entyloma calendulae,NA,NA,NA,NA
+7420522,Entyloma calendulae,SPECIES,ACCEPTED,Fungi,NA
 7846821,Entyloma dahliae,NA,NA,NA,NA
 4108297,Entyloma eschscholziae,NA,NA,NA,NA
 2294275,Eobania vermiculata,SPECIES,ACCEPTED,Animalia,NA
@@ -3748,7 +3817,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7302355,Ephedra gerardiana,VARIETY,ACCEPTED,Plantae,NA
 9405645,Ephedra gerardiana,VARIETY,ACCEPTED,Plantae,NA
 7901010,Ephedra gerardiana,VARIETY,ACCEPTED,Plantae,NA
-7298085,Ephedra gerardiana sikkimensis,NA,NA,NA,NA
+7298085,Ephedra gerardiana,VARIETY,ACCEPTED,Plantae,NA
+2653392,Ephedra gerardiana sikkimensis,NA,NA,NA,NA
 2653256,Ephedra intermedia,SPECIES,ACCEPTED,Plantae,NA
 3189073,Epilobium brachycarpum,SPECIES,ACCEPTED,Plantae,3189073: Epilobium brachycarpum C.Presl
 9188840,Epilobium ciliatum,SPECIES,ACCEPTED,Plantae,6427720: Epilobium adenocaulon Hausskn. | 9188840: Epilobium ciliatum Raf.
@@ -3796,7 +3866,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2705325,Eragrostis tef,SPECIES,ACCEPTED,Plantae,2705325: Eragrostis tef (Zuccagni) Trotter
 4139037,Eragrostis virescens,SPECIES,ACCEPTED,Plantae,NA
 3033227,Eranthis hyemalis,SPECIES,ACCEPTED,Plantae,3033227: Eranthis hyemalis (L.) Salisb.
-7727786,Eratigena fuesslini,NA,NA,NA,NA
+7727786,Eratigena fuesslini,SPECIES,ACCEPTED,Animalia,NA
 4132188,Eremopyrum bonaepartis,NA,NA,NA,NA
 5682465,Erica carnea,SPECIES,ACCEPTED,Plantae,7973745: Erica herbacea L.
 2704234,Erica darleyensis,SPECIES,ACCEPTED,Plantae,NA
@@ -3908,7 +3978,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4925890,Euphorbia amygdaloides,SUBSPECIES,ACCEPTED,Plantae,NA
 7421129,Euphorbia amygdaloides,SUBSPECIES,ACCEPTED,Plantae,NA
 6420901,Euphorbia amygdaloides,SUBSPECIES,ACCEPTED,Plantae,NA
-5587240,Euphorbia amygdaloides robbiae,NA,NA,NA,NA
+5587240,Euphorbia amygdaloides,SUBSPECIES,ACCEPTED,Plantae,NA
+3042889,Euphorbia amygdaloides robbiae,NA,NA,NA,NA
 5583195,Euphorbia chamaesyce,SPECIES,ACCEPTED,Plantae,NA
 3067353,Euphorbia characias,SPECIES,ACCEPTED,Plantae,3067353: Euphorbia characias L. | 7225838: Euphorbia characias subsp. characias | 3067369: Euphorbia characias subsp. wulfenii (Hoppe ex W.D.J.Koch) Radcl.-Sm.
 3066993,Euphorbia dentata,SPECIES,ACCEPTED,Plantae,3066993: Euphorbia dentata Michx.
@@ -4005,7 +4076,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4115425,Festuca guestfalica,SUBSPECIES,ACCEPTED,Plantae,NA
 3023671,Festuca guestfalica,SUBSPECIES,ACCEPTED,Plantae,NA
 7323341,Festuca guestfalica,SUBSPECIES,ACCEPTED,Plantae,NA
-7350944,Festuca guestfalica hirtula,NA,NA,NA,NA
+7350944,Festuca guestfalica,SUBSPECIES,ACCEPTED,Plantae,NA
+6427623,Festuca guestfalica hirtula,NA,NA,NA,NA
 4121365,Festuca ligustica,SPECIES,ACCEPTED,Plantae,NA
 2702727,Festuca myuros,SPECIES,ACCEPTED,Plantae,NA
 5928735,Festuca octoflora,NA,NA,NA,NA
@@ -4056,7 +4128,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2914404,Fraxinus angustifolia,SPECIES,ACCEPTED,Plantae,NA
 7230699,Fraxinus angustifolia,SPECIES,ACCEPTED,Plantae,NA
 7427741,Fraxinus angustifolia,SPECIES,ACCEPTED,Plantae,NA
-3611735,Fraxinus angustifolia oxycarpa,NA,NA,NA,NA
+3611735,Fraxinus angustifolia,SPECIES,ACCEPTED,Plantae,NA
+5587240,Fraxinus angustifolia oxycarpa,NA,NA,NA,NA
 3172343,Fraxinus latifolia,SPECIES,ACCEPTED,Plantae,NA
 3172347,Fraxinus ornus,SPECIES,ACCEPTED,Plantae,3172347: Fraxinus ornus L.
 3172348,Fraxinus pennsylvanica,SPECIES,ACCEPTED,Plantae,3172348: Fraxinus pennsylvanica Marshall
@@ -4113,7 +4186,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2176168,Galium parisiense,SPECIES,ACCEPTED,Plantae,NA
 5373483,Galium parisiense,SPECIES,ACCEPTED,Plantae,NA
 2443339,Galium parisiense,SPECIES,ACCEPTED,Plantae,NA
-7226776,Galium parisiense parisiense,NA,NA,NA,NA
+7226776,Galium parisiense,SPECIES,ACCEPTED,Plantae,NA
+8918909,Galium parisiense parisiense,NA,NA,NA,NA
 2914501,Galium tenuissimum,SPECIES,ACCEPTED,Plantae,NA
 2914754,Galium verrucosum,SPECIES,ACCEPTED,Plantae,NA
 2914404,Galium verum,SUBSPECIES,ACCEPTED,Plantae,2914404: Galium verum subsp. wirtgenii (F.W.Schultz) Oborny
@@ -4149,7 +4223,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7068845,Galium verum,SUBSPECIES,ACCEPTED,Plantae,NA
 4248063,Galium verum,SUBSPECIES,ACCEPTED,Plantae,NA
 8358048,Galium verum,SUBSPECIES,ACCEPTED,Plantae,NA
-6084799,Galium verum wirtgenii,NA,NA,NA,NA
+7350944,Galium verum wirtgenii,NA,NA,NA,NA
 9326020,Gallus gallus,SPECIES,ACCEPTED,Animalia,"9457155: Gallus gallus f. domesticus | 9326020: Gallus gallus (Linnaeus, 1758) | 7548673: Gallus gallus domesticus (Linnaeus, 1758) | 11004366: Gallus domesticus"
 5864277,Gammarus roeselii,SPECIES,ACCEPTED,Animalia,"5864277: Gammarus roeselii Gervais, 1835"
 2219863,Gammarus tigrinus,SPECIES,ACCEPTED,Animalia,"2219863: Gammarus tigrinus Sexton, 1939"
@@ -4225,7 +4299,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8991514,Geum ternatum,SPECIES,ACCEPTED,Plantae,NA
 7272185,Geum ternatum,SPECIES,ACCEPTED,Plantae,NA
 7298085,Geum ternatum,SPECIES,ACCEPTED,Plantae,NA
-11844792,Geum ternatum ternatum,NA,NA,NA,NA
+11844792,Geum ternatum,SPECIES,ACCEPTED,Plantae,NA
+10948891,Geum ternatum ternatum,NA,NA,NA,NA
 5341540,Gilia achilleifolia,SPECIES,ACCEPTED,Plantae,5341540: Gilia achilleifolia Benth.
 5341548,Gilia capitata,SPECIES,ACCEPTED,Plantae,NA
 7222196,Gilia capitata,SPECIES,ACCEPTED,Plantae,NA
@@ -4282,8 +4357,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5352425,Gilia capitata,SPECIES,ACCEPTED,Plantae,NA
 5352372,Gilia capitata,SPECIES,ACCEPTED,Plantae,NA
 3023671,Gilia capitata,SPECIES,ACCEPTED,Plantae,NA
-2176168,Gilia capitata capitata,NA,NA,NA,NA
-7455425,Gilia capitata mediomontana,NA,NA,NA,NA
+2176168,Gilia capitata,SPECIES,ACCEPTED,Plantae,NA
+7455425,Gilia capitata,SPECIES,ACCEPTED,Plantae,NA
+7225471,Gilia capitata capitata,NA,NA,NA,NA
+6085036,Gilia capitata mediomontana,NA,NA,NA,NA
 5341558,Gilia tricolor,SPECIES,ACCEPTED,Plantae,5341558: Gilia tricolor Benth.
 2687885,Ginkgo biloba,SPECIES,ACCEPTED,Plantae,2687885: Ginkgo biloba L.
 5892120,Girardia tigrina,SPECIES,ACCEPTED,Animalia,"2502879: Dugesia tigrina (Girard, 1850) | 5892120: Girardia tigrina (Girard, 1850)"
@@ -4333,7 +4410,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7225471,Glyceria striata,SUBSPECIES,SYNONYM,Plantae,NA
 7070211,Glyceria striata,SUBSPECIES,SYNONYM,Plantae,NA
 3666059,Glyceria striata,SUBSPECIES,SYNONYM,Plantae,NA
-5359402,Glyceria striata difformis,NA,NA,NA,NA
+5359402,Glyceria striata,SUBSPECIES,SYNONYM,Plantae,NA
+3757050,Glyceria striata difformis,NA,NA,NA,NA
 5359660,Glycine max,SPECIES,ACCEPTED,Plantae,5359660: Glycine max (L.) Merr.
 5208832,Gobiosoma bosc,SPECIES,ACCEPTED,Animalia,NA
 7150619,Gomphocarpus fruticosus,SPECIES,ACCEPTED,Plantae,7150619: Gomphocarpus fruticosus (L.) W.T.Aiton
@@ -4410,8 +4488,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2176168,Graptemys pseudogeographica,SPECIES,ACCEPTED,Animalia,NA
 7068379,Graptemys pseudogeographica,SPECIES,ACCEPTED,Animalia,NA
 2974921,Graptemys pseudogeographica,SPECIES,ACCEPTED,Animalia,NA
-7223177,Graptemys pseudogeographica kohnii,NA,NA,NA,NA
-7331861,Graptemys pseudogeographica pseudogeographica,NA,NA,NA,NA
+7223177,Graptemys pseudogeographica,SPECIES,ACCEPTED,Animalia,NA
+7331861,Graptemys pseudogeographica,SPECIES,ACCEPTED,Animalia,NA
+9508942,Graptemys pseudogeographica kohnii,NA,NA,NA,NA
+7332517,Graptemys pseudogeographica pseudogeographica,NA,NA,NA,NA
 11107889,Graptostethus servus,SPECIES,ACCEPTED,Animalia,NA
 3146219,Grindelia squarrosa,SPECIES,ACCEPTED,Plantae,3146219: Grindelia squarrosa (Pursh) Dunal
 2474944,Grus japonensis,SPECIES,ACCEPTED,Animalia,"2474944: Grus japonensis (Statius Muller, 1776)"
@@ -4477,7 +4557,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7224157,Halimium lasianthum,SPECIES,ACCEPTED,Plantae,NA
 7225471,Halimium lasianthum,SPECIES,ACCEPTED,Plantae,NA
 7223177,Halimium lasianthum,SPECIES,ACCEPTED,Plantae,NA
-9508942,Halimium lasianthum alyssoides,NA,NA,NA,NA
+9508942,Halimium lasianthum,SPECIES,ACCEPTED,Plantae,NA
+6313049,Halimium lasianthum alyssoides,NA,NA,NA,NA
 4485843,Halyomorpha halys,SPECIES,ACCEPTED,Animalia,"4485843: Halyomorpha halys (Stål, 1855)"
 2442665,Hanseniella caldaria,NA,NA,NA,NA
 3202936,Haplodrassus securifer,NA,NA,NA,NA
@@ -4563,7 +4644,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7267631,Heracleum sphondylium,SUBSPECIES,ACCEPTED,Plantae,NA
 8358048,Heracleum sphondylium,SUBSPECIES,ACCEPTED,Plantae,NA
 4273336,Heracleum sphondylium,SUBSPECIES,ACCEPTED,Plantae,NA
-5548011,Heracleum sphondylium sibiricum,NA,NA,NA,NA
+5548011,Heracleum sphondylium,SUBSPECIES,ACCEPTED,Plantae,NA
+3065244,Heracleum sphondylium sibiricum,NA,NA,NA,NA
 2473221,Hercinothrips bicinctus,NA,NA,NA,NA
 2444141,Hercinothrips femoralis,NA,NA,NA,NA
 1577153,Hermetia illucens,SPECIES,ACCEPTED,Animalia,NA
@@ -4611,7 +4693,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3935202,Hieracium glaucinum,SUBSPECIES,ACCEPTED,Plantae,NA
 7427741,Hieracium glaucinum,SUBSPECIES,ACCEPTED,Plantae,NA
 9567226,Hieracium glaucinum,SUBSPECIES,ACCEPTED,Plantae,NA
-5373483,Hieracium glaucinum recensitum,NA,NA,NA,NA
+5373483,Hieracium glaucinum,SUBSPECIES,ACCEPTED,Plantae,NA
+7440977,Hieracium glaucinum recensitum,NA,NA,NA,NA
 4122609,Hieracium pilosum,NA,NA,NA,NA
 2498325,Hieracium pulmonarioides,NA,NA,NA,NA
 9391215,Hieracium pulmonarioides,NA,NA,NA,NA
@@ -4643,7 +4726,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3596131,Hieracium pulmonarioides,NA,NA,NA,NA
 3890974,Hieracium pulmonarioides,NA,NA,NA,NA
 4090836,Hieracium pulmonarioides,NA,NA,NA,NA
-4271356,Hieracium pulmonarioides spelaeum,NA,NA,NA,NA
+11136683,Hieracium pulmonarioides spelaeum,NA,NA,NA,NA
 4055853,Hieracium speciosum,NA,NA,NA,NA
 2458916,Hierophis viridiflavus,SPECIES,ACCEPTED,Animalia,9360895: Coluber viridiflavus viridiflavus
 5324959,Himantoglossum robertianum,SPECIES,ACCEPTED,Plantae,5324959: Himantoglossum robertianum (Loisel.) P.Delforge
@@ -4681,7 +4764,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7225621,Hippophae rhamnoides,SUBSPECIES,ACCEPTED,Plantae,NA
 6313051,Hippophae rhamnoides,SUBSPECIES,ACCEPTED,Plantae,NA
 8421432,Hippophae rhamnoides,SUBSPECIES,ACCEPTED,Plantae,NA
-3666059,Hippophae rhamnoides caucasica,NA,NA,NA,NA
+3666059,Hippophae rhamnoides,SUBSPECIES,ACCEPTED,Plantae,NA
+6313049,Hippophae rhamnoides caucasica,NA,NA,NA,NA
 3050595,Hirschfeldia incana,SPECIES,ACCEPTED,Plantae,3050595: Hirschfeldia incana (L.) Lagr.-Foss.
 2149679,Holocnemus pluchei,SPECIES,ACCEPTED,Animalia,"2149679: Holocnemus pluchei (Scopoli, 1763)"
 2987780,Holodiscus discolor,SPECIES,ACCEPTED,Plantae,NA
@@ -4725,7 +4809,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7224157,Hordeum marinum,SUBSPECIES,ACCEPTED,Plantae,NA
 7323341,Hordeum marinum,SUBSPECIES,ACCEPTED,Plantae,NA
 7272185,Hordeum marinum,SUBSPECIES,ACCEPTED,Plantae,NA
-4036350,Hordeum marinum gussoneanum,NA,NA,NA,NA
+4036350,Hordeum marinum,SUBSPECIES,ACCEPTED,Plantae,NA
+7226794,Hordeum marinum gussoneanum,NA,NA,NA,NA
 4115425,Hordeum murinum,SUBSPECIES,ACCEPTED,Plantae,NA
 5289726,Hordeum murinum,SUBSPECIES,ACCEPTED,Plantae,NA
 4270548,Hordeum murinum,SUBSPECIES,ACCEPTED,Plantae,NA
@@ -4789,8 +4874,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4048052,Hordeum murinum,SUBSPECIES,ACCEPTED,Plantae,NA
 3040999,Hordeum murinum,SUBSPECIES,ACCEPTED,Plantae,NA
 7853188,Hordeum murinum,SUBSPECIES,ACCEPTED,Plantae,NA
-8323119,Hordeum murinum glaucum,NA,NA,NA,NA
-2473221,Hordeum murinum leporinum,NA,NA,NA,NA
+8323119,Hordeum murinum,SUBSPECIES,ACCEPTED,Plantae,NA
+2473221,Hordeum murinum,SUBSPECIES,ACCEPTED,Plantae,NA
+7222255,Hordeum murinum glaucum,NA,NA,NA,NA
+4211590,Hordeum murinum leporinum,NA,NA,NA,NA
 6076279,Hordeum pusillum,NA,NA,NA,NA
 2706056,Hordeum vulgare,SPECIES,ACCEPTED,Plantae,2706056: Hordeum vulgare L. | 2706063: Hordeum hexastichon L. | 4932619: Hordeum vulgare subsp. vulgare | 6313801: Hordeum vulgare subsp. hexastichon (L.) Celak. | 7940113: Hordeum distichon subsp. distichon
 5376139,Hornungia alpina,SPECIES,ACCEPTED,Plantae,5376139: Hornungia alpina (L.) O.Appel
@@ -4907,7 +4994,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2445496,Ipomoea lacunosa,SPECIES,ACCEPTED,Plantae,NA
 7066596,Ipomoea lacunosa,SPECIES,ACCEPTED,Plantae,NA
 7998563,Ipomoea lacunosa,SPECIES,ACCEPTED,Plantae,NA
-5347854,Ipomoea lacunosa lacunosa,NA,NA,NA,NA
+5347854,Ipomoea lacunosa,SPECIES,ACCEPTED,Plantae,NA
+7323834,Ipomoea lacunosa lacunosa,NA,NA,NA,NA
 2928583,Ipomoea leucantha,SPECIES,ACCEPTED,Plantae,3681600: Ipomoea lacunosa f. purpurata Fernald | 2928583: Ipomoea leucantha Jacq.
 2928534,Ipomoea nil,SPECIES,ACCEPTED,Plantae,NA
 2928576,Ipomoea purpurea,SPECIES,ACCEPTED,Plantae,2928576: Ipomoea purpurea (L.) Roth
@@ -4985,7 +5073,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9567226,Kalimeris incisa,NA,NA,NA,NA
 2653392,Kalimeris incisa,NA,NA,NA,NA
 5652131,Kalimeris incisa,NA,NA,NA,NA
-8782549,Kalimeris incisa incisa,NA,NA,NA,NA
+8782549,Kalimeris incisa,NA,NA,NA,NA
+4271356,Kalimeris incisa incisa,NA,NA,NA,NA
 2883007,Kalmia angustifolia,SPECIES,ACCEPTED,Plantae,2883007: Kalmia angustifolia L.
 9306058,Karpatiosorbus latifolia,SPECIES,ACCEPTED,Plantae,NA
 2705391,Keratella tropica,NA,NA,NA,NA
@@ -5020,7 +5109,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8369366,Kickxia elatine,NA,NA,NA,NA
 7753114,Kickxia elatine,NA,NA,NA,NA
 2444221,Kickxia elatine,NA,NA,NA,NA
-6156934,Kickxia elatine sieberi,NA,NA,NA,NA
+6156934,Kickxia elatine,NA,NA,NA,NA
+2161911,Kickxia elatine sieberi,NA,NA,NA,NA
 4939668,Kitaibela vitifolia,SPECIES,ACCEPTED,Plantae,NA
 7504215,Knautia integrifolia,SPECIES,ACCEPTED,Plantae,7504215: Knautia integrifolia (L.) Bertol.
 4102952,Knautia macedonica,SPECIES,ACCEPTED,Plantae,4102952: Knautia macedonica Griseb.
@@ -5101,8 +5191,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7753114,Lactuca macrophylla,SPECIES,ACCEPTED,Plantae,NA
 6157026,Lactuca macrophylla,SPECIES,ACCEPTED,Plantae,NA
 7062200,Lactuca macrophylla,SPECIES,ACCEPTED,Plantae,NA
-2445496,Lactuca macrophylla macrophylla,NA,NA,NA,NA
-6449041,Lactuca macrophylla uralensis,NA,NA,NA,NA
+4925890,Lactuca macrophylla macrophylla,NA,NA,NA,NA
+7222196,Lactuca macrophylla uralensis,NA,NA,NA,NA
 7403263,Lactuca sativa,SPECIES,ACCEPTED,Plantae,7403263: Lactuca sativa L. | 4210893: Lactuca serriola var. integrata Farw.
 5869933,Laelius pedatus,SPECIES,ACCEPTED,Animalia,NA
 2865565,Lagarosiphon major,SPECIES,ACCEPTED,Plantae,2865565: Lagarosiphon major (Ridl.) Moss
@@ -5144,7 +5234,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 10966302,Lamium galeobdolon,SUBSPECIES,ACCEPTED,Plantae,NA
 7358677,Lamium galeobdolon,SUBSPECIES,ACCEPTED,Plantae,NA
 6710856,Lamium galeobdolon,SUBSPECIES,ACCEPTED,Plantae,NA
-5373039,Lamium galeobdolon argentatum,NA,NA,NA,NA
+5373039,Lamium galeobdolon,SUBSPECIES,ACCEPTED,Plantae,NA
+2161467,Lamium galeobdolon argentatum,NA,NA,NA,NA
 3110293,Lamium garganicum,SUBSPECIES,ACCEPTED,Plantae,NA
 7308043,Lamium garganicum,SUBSPECIES,ACCEPTED,Plantae,NA
 9391215,Lamium garganicum,SUBSPECIES,ACCEPTED,Plantae,NA
@@ -5177,10 +5268,12 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7267492,Lamium garganicum,SUBSPECIES,ACCEPTED,Plantae,NA
 7757431,Lamium garganicum,SUBSPECIES,ACCEPTED,Plantae,NA
 9508942,Lamium garganicum,SUBSPECIES,ACCEPTED,Plantae,NA
-7066596,Lamium garganicum garganicum,NA,NA,NA,NA
+7066596,Lamium garganicum,SUBSPECIES,ACCEPTED,Plantae,NA
+4123394,Lamium garganicum garganicum,NA,NA,NA,NA
 3892732,Lamium orvala,SPECIES,ACCEPTED,Plantae,3892732: Lamium orvala L.
 2888564,Lamprocapnos spectabilis,SPECIES,ACCEPTED,Plantae,7606812: Dicentra spectabilis (L.) Lem. | 2888564: Lamprocapnos spectabilis (L.) Fukuhara
-7764312,Lampropeltis,NA,NA,NA,NA
+2914404,Lampropeltis,NA,NA,NA,NA
+7764312,Lampropeltis NA,NA,NA,NA,NA
 2445496,Lampropeltis NA,NA,NA,NA,NA
 3663237,Lampropeltis NA,NA,NA,NA,NA
 2444221,Lampropeltis NA,NA,NA,NA,NA
@@ -5240,7 +5333,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7925720,Lampropeltis getula,NA,NA,NA,NA
 2444141,Lampropeltis getula,NA,NA,NA,NA
 9405645,Lampropeltis getula,NA,NA,NA,NA
-7421129,Lampropeltis getula californiae,NA,NA,NA,NA
+7421129,Lampropeltis getula,NA,NA,NA,NA
+5581279,Lampropeltis getula californiae,NA,NA,NA,NA
 5224503,Lampropeltis triangulum,SPECIES,ACCEPTED,Animalia,"5224503: Lampropeltis triangulum (Lacépède, 1789)"
 2708808,Lampropeltis triangulum,SPECIES,ACCEPTED,Animalia,NA
 3935202,Lampropeltis triangulum,SPECIES,ACCEPTED,Animalia,NA
@@ -5273,7 +5367,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4250676,Lampropeltis triangulum,SPECIES,ACCEPTED,Animalia,NA
 7427741,Lampropeltis triangulum,SPECIES,ACCEPTED,Animalia,NA
 8782549,Lampropeltis triangulum,SPECIES,ACCEPTED,Animalia,NA
-7324507,Lampropeltis triangulum hondurensis,NA,NA,NA,NA
+7324507,Lampropeltis triangulum,SPECIES,ACCEPTED,Animalia,NA
+3898065,Lampropeltis triangulum hondurensis,NA,NA,NA,NA
 2489071,Lamprotornis chalybaeus,SPECIES,ACCEPTED,Animalia,"2489071: Lamprotornis chalybaeus Hemprich & Ehrenberg, 1828"
 6432925,Lamprotornis nitens,NA,NA,NA,NA
 2489080,Lamprotornis purpureus,SPECIES,ACCEPTED,Animalia,"2489080: Lamprotornis purpureus (Statius Muller, 1776)"
@@ -5363,7 +5458,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7421129,Lepidium draba,SPECIES,ACCEPTED,Plantae,NA
 6409536,Lepidium draba,SPECIES,ACCEPTED,Plantae,NA
 5224481,Lepidium draba,SPECIES,ACCEPTED,Plantae,NA
-9462721,Lepidium draba chalepense,NA,NA,NA,NA
+9462721,Lepidium draba,SPECIES,ACCEPTED,Plantae,NA
+7427741,Lepidium draba chalepense,NA,NA,NA,NA
 5376785,Lepidium fasciculatum,SPECIES,ACCEPTED,Plantae,NA
 5376994,Lepidium graminifolium,SPECIES,ACCEPTED,Plantae,5376994: Lepidium graminifolium L.
 5376846,Lepidium heterophyllum,SPECIES,ACCEPTED,Plantae,5376846: Lepidium heterophyllum Benth.
@@ -5414,7 +5510,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5545159,Leptochloa decipiens,NA,NA,NA,NA
 6313051,Leptochloa decipiens,NA,NA,NA,NA
 7925720,Leptochloa decipiens,NA,NA,NA,NA
-2444141,Leptochloa decipiens peacockii,NA,NA,NA,NA
+2444141,Leptochloa decipiens,NA,NA,NA,NA
+5545159,Leptochloa decipiens peacockii,NA,NA,NA,NA
 8720751,Leptochloa panicea,NA,NA,NA,NA
 8389446,Leptochloa panicea,NA,NA,NA,NA
 7266343,Leptochloa panicea,NA,NA,NA,NA
@@ -5445,7 +5542,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 11162940,Leptochloa panicea,NA,NA,NA,NA
 5352372,Leptochloa panicea,NA,NA,NA,NA
 9405036,Leptochloa panicea,NA,NA,NA,NA
-7427741,Leptochloa panicea brachiata,NA,NA,NA,NA
+7427741,Leptochloa panicea,NA,NA,NA,NA
+5581279,Leptochloa panicea brachiata,NA,NA,NA,NA
 2502805,Leptodeira ashmeadii,NA,NA,NA,NA
 5156102,Leptoglossus occidentalis,SPECIES,ACCEPTED,Animalia,"5156102: Leptoglossus occidentalis Heidemann, 1910"
 4136060,Leptoptilos crumenifer,NA,NA,NA,NA
@@ -5527,7 +5625,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7324507,Linum austriacum,SPECIES,ACCEPTED,Plantae,NA
 4250676,Linum austriacum,SPECIES,ACCEPTED,Plantae,NA
 7219988,Linum austriacum,SPECIES,ACCEPTED,Plantae,NA
-7455425,Linum austriacum austriacum,NA,NA,NA,NA
+7455425,Linum austriacum,SPECIES,ACCEPTED,Plantae,NA
+7068732,Linum austriacum austriacum,NA,NA,NA,NA
 2873926,Linum grandiflorum,SPECIES,ACCEPTED,Plantae,2873926: Linum grandiflorum Desf.
 2873861,Linum usitatissimum,SPECIES,ACCEPTED,Plantae,2873861: Linum usitatissimum L.
 9405645,Liposcelis bostrychophila,NA,NA,NA,NA
@@ -5613,7 +5712,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7226776,Lotus corniculatus,VARIETY,SYNONYM,Plantae,NA
 7427741,Lotus corniculatus,VARIETY,SYNONYM,Plantae,NA
 5581279,Lotus corniculatus,VARIETY,SYNONYM,Plantae,NA
-7298085,Lotus corniculatus sativus,NA,NA,NA,NA
+7298085,Lotus corniculatus,VARIETY,SYNONYM,Plantae,NA
+5224481,Lotus corniculatus sativus,NA,NA,NA,NA
 7294644,Lotus dorycnium,NA,NA,NA,NA
 2926041,Lotus hirsutus,NA,NA,NA,NA
 5356955,Lotus hispidus,SPECIES,ACCEPTED,Plantae,5356955: Lotus hispidus Desf. ex DC.
@@ -5656,7 +5756,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9567226,Ludwigia peploides,SPECIES,ACCEPTED,Plantae,NA
 7308043,Ludwigia peploides,SPECIES,ACCEPTED,Plantae,NA
 9405036,Ludwigia peploides,SPECIES,ACCEPTED,Plantae,NA
-7331861,Ludwigia peploides montevidensis,NA,NA,NA,NA
+7331861,Ludwigia peploides,SPECIES,ACCEPTED,Plantae,NA
+5652131,Ludwigia peploides montevidensis,NA,NA,NA,NA
 5373324,Lunaria annua,SPECIES,ACCEPTED,Plantae,5373324: Lunaria annua L.
 2964167,Lupinus albus,SPECIES,ACCEPTED,Plantae,2964167: Lupinus albus L.
 2964025,Lupinus angustifolius,SPECIES,ACCEPTED,Plantae,2964025: Lupinus angustifolius L.
@@ -5668,38 +5769,39 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2928809,Lycium chinense,SPECIES,ACCEPTED,Plantae,2928809: Lycium chinense Mill.
 1194885,Lycodon capucinus,NA,NA,NA,NA
 8167990,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,5662067: Anchusa ovata Lehm.
-7846821,Lycopsis arvensis,NA,NA,NA,NA
-7308335,Lycopsis arvensis,NA,NA,NA,NA
-9391215,Lycopsis arvensis,NA,NA,NA,NA
-7293222,Lycopsis arvensis,NA,NA,NA,NA
-7295374,Lycopsis arvensis,NA,NA,NA,NA
-2161911,Lycopsis arvensis,NA,NA,NA,NA
-2473221,Lycopsis arvensis,NA,NA,NA,NA
-3602069,Lycopsis arvensis,NA,NA,NA,NA
-6164210,Lycopsis arvensis,NA,NA,NA,NA
-2176168,Lycopsis arvensis,NA,NA,NA,NA
-7227181,Lycopsis arvensis,NA,NA,NA,NA
-2769073,Lycopsis arvensis,NA,NA,NA,NA
-2445496,Lycopsis arvensis,NA,NA,NA,NA
-2453882,Lycopsis arvensis,NA,NA,NA,NA
-3666059,Lycopsis arvensis,NA,NA,NA,NA
-4104890,Lycopsis arvensis,NA,NA,NA,NA
-3611735,Lycopsis arvensis,NA,NA,NA,NA
-7068732,Lycopsis arvensis,NA,NA,NA,NA
-2443339,Lycopsis arvensis,NA,NA,NA,NA
-7323834,Lycopsis arvensis,NA,NA,NA,NA
-4132902,Lycopsis arvensis,NA,NA,NA,NA
-4925890,Lycopsis arvensis,NA,NA,NA,NA
-6302047,Lycopsis arvensis,NA,NA,NA,NA
-9771172,Lycopsis arvensis,NA,NA,NA,NA
-6432925,Lycopsis arvensis,NA,NA,NA,NA
-3898065,Lycopsis arvensis,NA,NA,NA,NA
-4932232,Lycopsis arvensis,NA,NA,NA,NA
-4036957,Lycopsis arvensis,NA,NA,NA,NA
-7096205,Lycopsis arvensis,NA,NA,NA,NA
-5581279,Lycopsis arvensis,NA,NA,NA,NA
-7298085,Lycopsis arvensis,NA,NA,NA,NA
-5224543,Lycopsis arvensis orientalis,NA,NA,NA,NA
+7846821,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+7308335,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+9391215,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+7293222,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+7295374,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+2161911,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+2473221,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+3602069,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+6164210,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+2176168,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+7227181,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+2769073,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+2445496,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+2453882,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+3666059,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+4104890,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+3611735,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+7068732,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+2443339,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+7323834,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+4132902,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+4925890,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+6302047,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+9771172,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+6432925,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+3898065,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+4932232,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+4036957,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+7096205,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+5581279,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+7298085,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+5224543,Lycopsis arvensis,SUBSPECIES,ACCEPTED,Plantae,NA
+7224427,Lycopsis arvensis orientalis,NA,NA,NA,NA
 4108297,Lycopus exaltatus,NA,NA,NA,NA
 2020879,Lyctocoris campestris,SPECIES,ACCEPTED,Animalia,NA
 2869311,Lysichiton americanus,SPECIES,ACCEPTED,Plantae,2869311: Lysichiton americanus Hultén & H.St.John
@@ -5733,7 +5835,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 11844792,Lysichiton americanus,SPECIES,ACCEPTED,Plantae,NA
 7266343,Lysichiton americanus,SPECIES,ACCEPTED,Plantae,NA
 7096205,Lysichiton americanus,SPECIES,ACCEPTED,Plantae,NA
-11162940,Lysichiton americanus × camtschatcensis,NA,NA,NA,NA
+7298085,Lysichiton americanus × camtschatcensis,NA,NA,NA,NA
 2869301,Lysichiton camtschatcensis,SPECIES,ACCEPTED,Plantae,NA
 3169391,Lysimachia ciliata,SPECIES,ACCEPTED,Plantae,3169391: Lysimachia ciliata L.
 3169331,Lysimachia clethroides,SPECIES,ACCEPTED,Plantae,NA
@@ -5794,7 +5896,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5544928,Malva alcea,NA,NA,NA,NA
 8323119,Malva alcea,NA,NA,NA,NA
 9405645,Malva alcea,NA,NA,NA,NA
-7302355,Malva alcea ribifolia,NA,NA,NA,NA
+2914404,Malva alcea ribifolia,NA,NA,NA,NA
 3935079,Malva arborea,SPECIES,ACCEPTED,Plantae,NA
 8402586,Malva clementii,SPECIES,ACCEPTED,Plantae,NA
 7823743,Malva maroccana,SPECIES,ACCEPTED,Plantae,NA
@@ -5821,7 +5923,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2498390,Marmaronetta angustirostris,SPECIES,ACCEPTED,Animalia,"2498390: Marmaronetta angustirostris (Ménétries, 1832)"
 2465641,Marrubium peregrinum,NA,NA,NA,NA
 1886729,Maruca vitrata,SPECIES,ACCEPTED,Animalia,NA
-7298085,Mastophorus,NA,NA,NA,NA
+4132112,Mastophorus,NA,NA,NA,NA
+7298085,Mastophorus NA,NA,NA,NA,NA
 11162940,Mastophorus NA,NA,NA,NA,NA
 7427650,Mastophorus NA,NA,NA,NA,NA
 7901010,Mastophorus NA,NA,NA,NA,NA
@@ -5838,7 +5941,6 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7308335,Mastophorus NA,NA,NA,NA,NA
 5352425,Mastophorus NA,NA,NA,NA,NA
 2161911,Mastophorus NA,NA,NA,NA,NA
-7298085,Mastophorus NA,NA,NA,NA,NA
 9508942,Mastophorus NA,NA,NA,NA,NA
 7226804,Mastophorus NA,NA,NA,NA,NA
 4090836,Mastophorus NA,NA,NA,NA,NA
@@ -5885,9 +5987,11 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6300531,Matthiola longipetala,SPECIES,ACCEPTED,Plantae,NA
 4104890,Matthiola longipetala,SPECIES,ACCEPTED,Plantae,NA
 7068379,Matthiola longipetala,SPECIES,ACCEPTED,Plantae,NA
-5659657,Matthiola longipetala bicornis,NA,NA,NA,NA
+5659657,Matthiola longipetala,SPECIES,ACCEPTED,Plantae,NA
+5373039,Matthiola longipetala bicornis,NA,NA,NA,NA
 3096529,Mauranthemum paludosum,SPECIES,ACCEPTED,Plantae,7452956: Leucanthemum paludosum (Poir.) Bonnet & Barratte | 3096529: Mauranthemum paludosum (Poir.) Vogt & Oberpr.
-6157050,Mauremys,NA,NA,NA,NA
+6308164,Mauremys,NA,NA,NA,NA
+6157050,Mauremys NA,NA,NA,NA,NA
 7225471,Mauremys NA,NA,NA,NA,NA
 7308335,Mauremys NA,NA,NA,NA,NA
 8429888,Mauremys NA,NA,NA,NA,NA
@@ -6007,7 +6111,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7224069,Mentha spicata,SUBSPECIES,ACCEPTED,Plantae,NA
 7068845,Mentha spicata,SUBSPECIES,ACCEPTED,Plantae,NA
 2284443,Mentha spicata,SUBSPECIES,ACCEPTED,Plantae,NA
-6085036,Mentha spicata spicata,NA,NA,NA,NA
+6085036,Mentha spicata,SUBSPECIES,ACCEPTED,Plantae,NA
+4248063,Mentha spicata spicata,NA,NA,NA,NA
 3893979,Mentha wirtgeniana,SPECIES,ACCEPTED,Plantae,NA
 4136338,Mentzelia albicaulis,NA,NA,NA,NA
 5219380,Mephitis mephitis,SPECIES,ACCEPTED,Animalia,"5219380: Mephitis mephitis (Schreber, 1776)"
@@ -6091,37 +6196,38 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2374521,Nandayus nenday,NA,NA,NA,NA
 2858846,Narcissus bulbocodium,SPECIES,ACCEPTED,Plantae,NA
 4013762,Narcissus cyclazetta,SPECIES,ACCEPTED,Plantae,NA
-3895710,Narcissus hispanicus,NA,NA,NA,NA
-2447418,Narcissus hispanicus,NA,NA,NA,NA
-7230699,Narcissus hispanicus,NA,NA,NA,NA
-11162940,Narcissus hispanicus,NA,NA,NA,NA
-5544928,Narcissus hispanicus,NA,NA,NA,NA
-7901010,Narcissus hispanicus,NA,NA,NA,NA
-4123394,Narcissus hispanicus,NA,NA,NA,NA
-5359402,Narcissus hispanicus,NA,NA,NA,NA
-6411098,Narcissus hispanicus,NA,NA,NA,NA
-3922770,Narcissus hispanicus,NA,NA,NA,NA
-7308335,Narcissus hispanicus,NA,NA,NA,NA
-7068732,Narcissus hispanicus,NA,NA,NA,NA
-2445496,Narcissus hispanicus,NA,NA,NA,NA
-8918909,Narcissus hispanicus,NA,NA,NA,NA
-7455425,Narcissus hispanicus,NA,NA,NA,NA
-6164210,Narcissus hispanicus,NA,NA,NA,NA
-10948891,Narcissus hispanicus,NA,NA,NA,NA
-8336551,Narcissus hispanicus,NA,NA,NA,NA
-7358677,Narcissus hispanicus,NA,NA,NA,NA
-3755928,Narcissus hispanicus,NA,NA,NA,NA
-7409013,Narcissus hispanicus,NA,NA,NA,NA
-3757050,Narcissus hispanicus,NA,NA,NA,NA
-6369140,Narcissus hispanicus,NA,NA,NA,NA
-11136683,Narcissus hispanicus,NA,NA,NA,NA
-7223276,Narcissus hispanicus,NA,NA,NA,NA
-2161467,Narcissus hispanicus,NA,NA,NA,NA
-8045533,Narcissus hispanicus,NA,NA,NA,NA
-7227181,Narcissus hispanicus,NA,NA,NA,NA
-6300531,Narcissus hispanicus,NA,NA,NA,NA
-7298085,Narcissus hispanicus,NA,NA,NA,NA
-5545159,Narcissus hispanicus hispanicus,NA,NA,NA,NA
+3895710,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+2447418,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7230699,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+11162940,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+5544928,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7901010,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+4123394,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+5359402,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+6411098,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+3922770,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7308335,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7068732,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+2445496,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+8918909,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7455425,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+6164210,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+10948891,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+8336551,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7358677,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+3755928,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7409013,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+3757050,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+6369140,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+11136683,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7223276,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+2161467,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+8045533,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7227181,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+6300531,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7298085,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+5545159,Narcissus hispanicus,SUBSPECIES,ACCEPTED,Plantae,NA
+7225471,Narcissus hispanicus hispanicus,NA,NA,NA,NA
 2858909,Narcissus jonquilla,SPECIES,ACCEPTED,Plantae,NA
 2858581,Narcissus poeticus,SPECIES,ACCEPTED,Plantae,2858581: Narcissus poeticus L.
 2858963,Narcissus tazetta,SPECIES,ACCEPTED,Plantae,2858963: Narcissus tazetta L.
@@ -6195,8 +6301,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7764312,Nemophila menziesii,SPECIES,ACCEPTED,Plantae,NA
 4048052,Nemophila menziesii,SPECIES,ACCEPTED,Plantae,NA
 8338571,Nemophila menziesii,SPECIES,ACCEPTED,Plantae,NA
-9462721,Nemophila menziesii integrifolia,NA,NA,NA,NA
-2202786,Nemophila menziesii menziesii,NA,NA,NA,NA
+9462721,Nemophila menziesii,SPECIES,ACCEPTED,Plantae,NA
+2202786,Nemophila menziesii,SPECIES,ACCEPTED,Plantae,NA
+4270675,Nemophila menziesii integrifolia,NA,NA,NA,NA
+2717402,Nemophila menziesii menziesii,NA,NA,NA,NA
 2266561,Nemopsis bachei,SPECIES,ACCEPTED,Animalia,"2266561: Nemopsis bachei L.Agassiz, 1849"
 2493739,Neochmia ruficauda,SPECIES,ACCEPTED,Animalia,"10920460: Bathilda ruficauda (Gould, 1837)"
 4293134,Neoclytus acuminatus,SPECIES,ACCEPTED,Animalia,NA
@@ -6210,7 +6318,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5341498,Nepeta grandiflora,SPECIES,ACCEPTED,Plantae,NA
 5341497,Nepeta racemosa,SPECIES,ACCEPTED,Plantae,5341497: Nepeta racemosa Lam. | 5341500: Nepeta mussinii Spreng. ex Henckel
 5609603,Nepeta subsessilis,SPECIES,ACCEPTED,Plantae,NA
-7225456,Nephila,NA,NA,NA,NA
+4271356,Nephila,NA,NA,NA,NA
+7225456,Nephila NA,NA,NA,NA,NA
 4132902,Nephila NA,NA,NA,NA,NA
 5352372,Nephila NA,NA,NA,NA,NA
 7440977,Nephila NA,NA,NA,NA,NA
@@ -6299,8 +6408,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7308335,Neslia paniculata,SPECIES,ACCEPTED,Plantae,NA
 7277946,Neslia paniculata,SPECIES,ACCEPTED,Plantae,NA
 6313049,Neslia paniculata,SPECIES,ACCEPTED,Plantae,NA
-5659657,Neslia paniculata paniculata,NA,NA,NA,NA
-8134874,Neslia paniculata thracica,NA,NA,NA,NA
+5659657,Neslia paniculata,SPECIES,ACCEPTED,Plantae,NA
+8134874,Neslia paniculata,SPECIES,ACCEPTED,Plantae,NA
+2444221,Neslia paniculata paniculata,NA,NA,NA,NA
+3802956,Neslia paniculata thracica,NA,NA,NA,NA
 2515982,Nesticodes rufipes,NA,NA,NA,NA
 2498177,Netta erythrophthalma,SPECIES,ACCEPTED,Animalia,NA
 2498181,Netta peposaca,SPECIES,ACCEPTED,Animalia,"2498181: Netta peposaca (Vieillot, 1816)"
@@ -6325,7 +6436,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9603492,Ninox boobook,NA,NA,NA,NA
 7068379,Ninox connivens,NA,NA,NA,NA
 3045473,Noccaea brachypetala,SPECIES,ACCEPTED,Plantae,NA
-7753114,Nolavia,NA,NA,NA,NA
+7066596,Nolavia,NA,NA,NA,NA
+7753114,Nolavia NA,NA,NA,NA,NA
 8782549,Nolavia NA,NA,NA,NA,NA
 2445496,Nolavia NA,NA,NA,NA,NA
 3042889,Nolavia NA,NA,NA,NA,NA
@@ -6449,8 +6561,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3663237,Oenothera glazioviana,SPECIES,ACCEPTED,Plantae,NA
 8045533,Oenothera glazioviana,SPECIES,ACCEPTED,Plantae,NA
 7925720,Oenothera glazioviana,SPECIES,ACCEPTED,Plantae,NA
-3042889,Oenothera glazioviana azorica,NA,NA,NA,NA
-8918909,Oenothera glazioviana rubricalyx,NA,NA,NA,NA
+3042889,Oenothera glazioviana,SPECIES,ACCEPTED,Plantae,NA
+8918909,Oenothera glazioviana,SPECIES,ACCEPTED,Plantae,NA
+7332517,Oenothera glazioviana azorica,NA,NA,NA,NA
+9567226,Oenothera glazioviana rubricalyx,NA,NA,NA,NA
 7322393,Oenothera indecora,SPECIES,ACCEPTED,Plantae,NA
 7322373,Oenothera issleri,SPECIES,ACCEPTED,Plantae,NA
 3188867,Oenothera laciniata,SPECIES,ACCEPTED,Plantae,NA
@@ -6508,7 +6622,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7222196,Oenothera villosa,SPECIES,ACCEPTED,Plantae,NA
 5928306,Oenothera villosa,SPECIES,ACCEPTED,Plantae,NA
 7225456,Oenothera villosa,SPECIES,ACCEPTED,Plantae,NA
-4271356,Oenothera villosa villosa,NA,NA,NA,NA
+7062200,Oenothera villosa villosa,NA,NA,NA,NA
 3667721,Oenothera wratislaviensis,SPECIES,ACCEPTED,Plantae,NA
 2162003,Olios NA,GENUS,ACCEPTED,Animalia,NA
 2162049,Olios argelasius,SPECIES,ACCEPTED,Animalia,NA
@@ -6525,7 +6639,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2650903,Onoclea sensibilis,SPECIES,ACCEPTED,Plantae,2650903: Onoclea sensibilis L.
 2977222,Ononis alopecuroides,SPECIES,ACCEPTED,Plantae,2977222: Ononis alopecuroides L.
 2977234,Ononis natrix,SPECIES,ACCEPTED,Plantae,2977234: Ononis natrix L.
-7295374,Onopordum beckianum,NA,NA,NA,NA
+7295374,Onopordum beckianum,SPECIES,DOUBTFUL,Plantae,NA
 5341202,Onopordum macracanthum,NA,NA,NA,NA
 3094939,Onopordum tauricum,SPECIES,ACCEPTED,Plantae,3094939: Onopordum tauricum Willd.
 5230734,Onychognathus tristramii,SPECIES,ACCEPTED,Animalia,"5230734: Onychognathus tristramii (P.L.Sclater, 1858)"
@@ -6567,7 +6681,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5373483,Origanum vulgare,SUBSPECIES,ACCEPTED,Plantae,NA
 3040999,Origanum vulgare,SUBSPECIES,ACCEPTED,Plantae,NA
 5544928,Origanum vulgare,SUBSPECIES,ACCEPTED,Plantae,NA
-8336551,Origanum vulgare hirtum,NA,NA,NA,NA
+8336551,Origanum vulgare,SUBSPECIES,ACCEPTED,Plantae,NA
 2442665,Oriolus auratus,NA,NA,NA,NA
 3638303,Orlaya daucoides,SPECIES,ACCEPTED,Plantae,NA
 2773453,Ornithogalum divergens,SPECIES,ACCEPTED,Plantae,9424795: Ornithogalum umbellatum subsp. divergens (Boreau) Bonnier & Layens | 6316566: Ornithogalum umbellatum subsp. divergens (Boreau) Asch. & Graebn.
@@ -6609,7 +6723,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2974921,Orobanche flava,NA,NA,NA,NA
 7068379,Orobanche flava,NA,NA,NA,NA
 4248063,Orobanche flava,NA,NA,NA,NA
-7062200,Orobanche flava flava,NA,NA,NA,NA
+7062200,Orobanche flava,NA,NA,NA,NA
+7223680,Orobanche flava flava,NA,NA,NA,NA
 4486382,Orsillus depressus,SPECIES,ACCEPTED,Animalia,NA
 2888310,Orthilia secunda,SPECIES,ACCEPTED,Plantae,2888310: Orthilia secunda (L.) House
 2677047,Orthodontium lineare,SPECIES,ACCEPTED,Plantae,"2677047: Orthodontium lineare Schwaegrichen, 1827"
@@ -6667,7 +6782,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7272439,Oxybasis glauca,NA,NA,NA,NA
 7096205,Oxybasis glauca,NA,NA,NA,NA
 5652131,Oxybasis glauca,NA,NA,NA,NA
-7227181,Oxybasis glauca salina,NA,NA,NA,NA
+7227181,Oxybasis glauca,NA,NA,NA,NA
+5581279,Oxybasis glauca salina,NA,NA,NA,NA
 7226804,Oxybasis macrosperma,NA,NA,NA,NA
 9567226,Oxybasis salina,VARIETY,SYNONYM,Plantae,NA
 4486243,Oxycarenus lavaterae,SPECIES,ACCEPTED,Animalia,NA
@@ -6675,7 +6791,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2889358,Oxyria digyna,SPECIES,ACCEPTED,Plantae,NA
 2498305,Oxyura jamaicensis,SPECIES,ACCEPTED,Animalia,"2498305: Oxyura jamaicensis (Gmelin, 1789)"
 5232469,Oxyura vittata,SPECIES,ACCEPTED,Animalia,"5232469: Oxyura vittata (Philippi, 1860)"
-3755928,Pachydactylus,NA,NA,NA,NA
+5365494,Pachydactylus,NA,NA,NA,NA
+3755928,Pachydactylus NA,NA,NA,NA,NA
 7409013,Pachydactylus NA,NA,NA,NA,NA
 7427741,Pachydactylus NA,NA,NA,NA,NA
 3890974,Pachydactylus NA,NA,NA,NA,NA
@@ -6756,7 +6873,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3602069,Panicum miliaceum,SPECIES,ACCEPTED,Plantae,NA
 2444141,Panicum miliaceum,SPECIES,ACCEPTED,Plantae,NA
 7224069,Panicum miliaceum,SPECIES,ACCEPTED,Plantae,NA
-7332517,Panicum miliaceum miliaceum,NA,NA,NA,NA
+7332517,Panicum miliaceum,SPECIES,ACCEPTED,Plantae,NA
+7068845,Panicum miliaceum miliaceum,NA,NA,NA,NA
 4125308,Panicum schinzii,SPECIES,ACCEPTED,Plantae,4125308: Panicum schinzii Hack.
 2705081,Panicum virgatum,SPECIES,ACCEPTED,Plantae,2705081: Panicum virgatum L.
 2455615,Pantherophis guttatus,SPECIES,ACCEPTED,Animalia,"2455615: Pantherophis guttatus (Linnaeus, 1766)"
@@ -6801,7 +6919,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3898065,Papaver somniferum,SPECIES,ACCEPTED,Plantae,NA
 2444221,Papaver somniferum,SPECIES,ACCEPTED,Plantae,NA
 8369366,Papaver somniferum,SPECIES,ACCEPTED,Plantae,NA
-5373039,Papaver somniferum somniferum,NA,NA,NA,NA
+5373039,Papaver somniferum,SPECIES,ACCEPTED,Plantae,NA
+7998563,Papaver somniferum somniferum,NA,NA,NA,NA
 2480410,Parabuteo unicinctus,SPECIES,ACCEPTED,Animalia,"2480410: Parabuteo unicinctus (Temminck, 1824)"
 6476704,Parakontikia ventrolineata,SPECIES,ACCEPTED,Animalia,NA
 4568269,Paralaoma servilis,SPECIES,ACCEPTED,Animalia,"4568269: Paralaoma servilis (Shuttleworth, 1852)"
@@ -6884,8 +7003,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3663237,Pastinaca sativa,SUBSPECIES,ACCEPTED,Plantae,NA
 7925720,Pastinaca sativa,SUBSPECIES,ACCEPTED,Plantae,NA
 6369140,Pastinaca sativa,SUBSPECIES,ACCEPTED,Plantae,NA
-6156934,Pastinaca sativa sativa,NA,NA,NA,NA
-5544928,Pastinaca sativa urens,NA,NA,NA,NA
+6156934,Pastinaca sativa,SUBSPECIES,ACCEPTED,Plantae,NA
+5544928,Pastinaca sativa,SUBSPECIES,ACCEPTED,Plantae,NA
+7409013,Pastinaca sativa sativa,NA,NA,NA,NA
+3023671,Pastinaca sativa urens,NA,NA,NA,NA
 3170823,Paulownia tomentosa,SPECIES,ACCEPTED,Plantae,3170823: Paulownia tomentosa (Thunb.) Steud.
 9451184,Pavo cristatus,SPECIES,ACCEPTED,Animalia,"9451184: Pavo cristatus Linnaeus, 1758"
 1941864,Paysandisia archon,SPECIES,ACCEPTED,Animalia,NA
@@ -6955,7 +7076,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9454901,Petasites japonicus,SPECIES,ACCEPTED,Plantae,NA
 3047147,Petasites japonicus,SPECIES,ACCEPTED,Plantae,NA
 5352425,Petasites japonicus,SPECIES,ACCEPTED,Plantae,NA
-3611735,Petasites japonicus japonicus,NA,NA,NA,NA
+3611735,Petasites japonicus,SPECIES,ACCEPTED,Plantae,NA
+4090836,Petasites japonicus japonicus,NA,NA,NA,NA
 3088282,Petasites pyrenaicus,SPECIES,ACCEPTED,Plantae,3088282: Petasites pyrenaicus (L.) G.López
 2287615,Petricolaria pholadiformis,SPECIES,ACCEPTED,Animalia,"8180054: Petricola pholadiformis Lamarck, 1818 | 2287615: Petricolaria pholadiformis (Lamarck, 1818)"
 3085622,Petrorhagia nanteuilii,SPECIES,ACCEPTED,Plantae,NA
@@ -6993,7 +7115,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5652131,Petroselinum crispum,SPECIES,ACCEPTED,Plantae,NA
 3755928,Petroselinum crispum,SPECIES,ACCEPTED,Plantae,NA
 7427650,Petroselinum crispum,SPECIES,ACCEPTED,Plantae,NA
-3023671,Petroselinum crispum crispum,NA,NA,NA,NA
+3023671,Petroselinum crispum,SPECIES,ACCEPTED,Plantae,NA
+7219988,Petroselinum crispum crispum,NA,NA,NA,NA
 2928859,Petunia atkinsiana,SPECIES,ACCEPTED,Plantae,NA
 2928861,Petunia integrifolia,SPECIES,ACCEPTED,Plantae,2928861: Petunia integrifolia (Hook.) Schinz & Thell.
 2928238,Phacelia campanularia,SPECIES,ACCEPTED,Plantae,2928238: Phacelia campanularia A.Gray
@@ -7049,12 +7172,14 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4211590,Phedimus spurius,SPECIES,ACCEPTED,Plantae,NA
 6084799,Phedimus spurius,SPECIES,ACCEPTED,Plantae,NA
 4132112,Phedimus spurius,SPECIES,ACCEPTED,Plantae,NA
-7277946,Phedimus spurius spurius,NA,NA,NA,NA
+7277946,Phedimus spurius,SPECIES,ACCEPTED,Plantae,NA
+7740944,Phedimus spurius spurius,NA,NA,NA,NA
 7768495,Phedimus stolonifer,SPECIES,ACCEPTED,Plantae,NA
 1322674,Pheidole anastasii,SPECIES,ACCEPTED,Animalia,"1322674: Pheidole anastasii Emery, 1896"
 8012084,Pheidole bilimeki,NA,NA,NA,NA
 3728894,Phelipanche ramosa,SPECIES,ACCEPTED,Plantae,3173272: Orobanche ramosa L. | 3728894: Phelipanche ramosa (L.) Pomel
-7323251,Phelsuma,NA,NA,NA,NA
+6420901,Phelsuma,NA,NA,NA,NA
+7323251,Phelsuma NA,NA,NA,NA,NA
 7323834,Phelsuma NA,NA,NA,NA,NA
 5224543,Phelsuma NA,NA,NA,NA,NA
 6085036,Phelsuma NA,NA,NA,NA,NA
@@ -7084,9 +7209,9 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2447418,Phelsuma NA,NA,NA,NA,NA
 6302047,Phelsuma NA,NA,NA,NA,NA
 4487660,Phelsuma NA,NA,NA,NA,NA
-7227181,Phidippus,NA,NA,NA,NA
-5581279,Phidippus NA,NA,NA,NA,NA
+8358048,Phidippus,NA,NA,NA,NA
 7227181,Phidippus NA,NA,NA,NA,NA
+5581279,Phidippus NA,NA,NA,NA,NA
 6449041,Phidippus NA,NA,NA,NA,NA
 7068845,Phidippus NA,NA,NA,NA,NA
 7753114,Phidippus NA,NA,NA,NA,NA
@@ -7175,7 +7300,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7753114,Phyla nodiflora,SPECIES,ACCEPTED,Plantae,NA
 7323834,Phyla nodiflora,SPECIES,ACCEPTED,Plantae,NA
 6409536,Phyla nodiflora,SPECIES,ACCEPTED,Plantae,NA
-9567226,Phyla nodiflora minor,NA,NA,NA,NA
+9567226,Phyla nodiflora,SPECIES,ACCEPTED,Plantae,NA
+6164210,Phyla nodiflora minor,NA,NA,NA,NA
 2513637,Phyllanthus tenellus,NA,NA,NA,NA
 1749580,Phyllocnistis citrella,SPECIES,ACCEPTED,Animalia,NA
 1749886,Phyllonorycter robiniella,SPECIES,ACCEPTED,Animalia,"8741260: Macrosaccus robiniellus (Clemens, 1859) | 10423949: BOLD:AAC4327"
@@ -7218,7 +7344,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7358677,Physalis longifolia,NA,NA,NA,NA
 4036957,Physalis longifolia,NA,NA,NA,NA
 4932232,Physalis longifolia,NA,NA,NA,NA
-8257857,Physalis longifolia subglabrata,NA,NA,NA,NA
+8257857,Physalis longifolia,NA,NA,NA,NA
+8925248,Physalis longifolia subglabrata,NA,NA,NA,NA
 5341784,Physalis peruviana,SPECIES,ACCEPTED,Plantae,5341784: Physalis peruviana L.
 8969026,Physalis philadelphica,SPECIES,ACCEPTED,Plantae,8969026: Physalis philadelphica Lam. | 6402873: Physalis ixocarpa Brot. ex Hornem.
 5341819,Physalis pubescens,SPECIES,ACCEPTED,Plantae,5341819: Physalis pubescens L.
@@ -7314,8 +7441,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8421432,Pinus nigra,SPECIES,ACCEPTED,Plantae,NA
 3040999,Pinus nigra,SPECIES,ACCEPTED,Plantae,NA
 7853188,Pinus nigra,SPECIES,ACCEPTED,Plantae,NA
-7421129,Pinus nigra laricio,NA,NA,NA,NA
-7070211,Pinus nigra nigra,NA,NA,NA,NA
+7421129,Pinus nigra,SPECIES,ACCEPTED,Plantae,NA
+7070211,Pinus nigra,SPECIES,ACCEPTED,Plantae,NA
+5587240,Pinus nigra laricio,NA,NA,NA,NA
+3047633,Pinus nigra nigra,NA,NA,NA,NA
 5285565,Pinus pinaster,SPECIES,ACCEPTED,Plantae,5285565: Pinus pinaster Aiton
 5285053,Pinus ponderosa,SPECIES,ACCEPTED,Plantae,5285053: Pinus ponderosa Douglas ex C.Lawson | 7983588: Pinus ponderosa subsp. scopulorum (Engelm.) E.Murray
 5285635,Pinus rigida,SPECIES,ACCEPTED,Plantae,NA
@@ -7357,7 +7486,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9405036,Pisum sativum,NA,NA,NA,NA
 7324507,Pisum sativum,NA,NA,NA,NA
 2974921,Pisum sativum,NA,NA,NA,NA
-5928306,Pisum sativum sativum,NA,NA,NA,NA
+5352425,Pisum sativum sativum,NA,NA,NA,NA
 2049296,Pithyotettix abietinus,SPECIES,ACCEPTED,Animalia,NA
 8925248,Pituophis catenifer,NA,NA,NA,NA
 2914404,Pituophis melanoleucus,NA,NA,NA,NA
@@ -7425,7 +7554,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6300531,Podolepis aristata,NA,NA,NA,NA
 7271631,Podolepis aristata,NA,NA,NA,NA
 7331861,Podolepis aristata,NA,NA,NA,NA
-8257857,Podolepis aristata auriculata,NA,NA,NA,NA
+5659657,Podolepis aristata auriculata,NA,NA,NA,NA
 3033839,Podophyllum peltatum,SPECIES,ACCEPTED,Plantae,NA
 2350050,Poecilia reticulata,SPECIES,ACCEPTED,Animalia,NA
 2465626,Pogona,GENUS,ACCEPTED,Animalia,NA
@@ -7469,7 +7598,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7267492,Polygonum arenarium,SPECIES,ACCEPTED,Plantae,NA
 6157050,Polygonum arenarium,SPECIES,ACCEPTED,Plantae,NA
 4132112,Polygonum arenarium,SPECIES,ACCEPTED,Plantae,NA
-7323834,Polygonum arenarium pulchellum,NA,NA,NA,NA
+7323834,Polygonum arenarium,SPECIES,ACCEPTED,Plantae,NA
+9567226,Polygonum arenarium pulchellum,NA,NA,NA,NA
 2706070,Polygonum argyrocoleum,NA,NA,NA,NA
 5652131,Polygonum aviculare,SUBSPECIES,ACCEPTED,Plantae,5334432: Polygonum rurivagum Jord. ex Boreau | 5652131: Polygonum aviculare subsp. rurivagum (Boreau) Berher
 7480365,Polygonum aviculare,SUBSPECIES,ACCEPTED,Plantae,NA
@@ -7505,7 +7635,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 10755213,Polygonum aviculare,SUBSPECIES,ACCEPTED,Plantae,NA
 8918909,Polygonum aviculare,SUBSPECIES,ACCEPTED,Plantae,NA
 5581279,Polygonum aviculare,SUBSPECIES,ACCEPTED,Plantae,NA
-3746867,Polygonum aviculare rurivagum,NA,NA,NA,NA
+3746867,Polygonum aviculare,SUBSPECIES,ACCEPTED,Plantae,NA
+7624620,Polygonum aviculare rurivagum,NA,NA,NA,NA
 5334430,Polygonum bellardii,SPECIES,ACCEPTED,Plantae,5334430: Polygonum bellardii All.
 4202184,Polygonum patulum,NA,NA,NA,NA
 5334440,Polygonum plebeium,SPECIES,ACCEPTED,Plantae,NA
@@ -7567,7 +7698,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6308164,Populus nigra,VARIETY,ACCEPTED,Plantae,NA
 4248063,Populus nigra,VARIETY,ACCEPTED,Plantae,NA
 7068379,Populus nigra,VARIETY,ACCEPTED,Plantae,NA
-4132112,Populus nigra italica,NA,NA,NA,NA
+4132112,Populus nigra,VARIETY,ACCEPTED,Plantae,NA
+6710856,Populus nigra italica,NA,NA,NA,NA
 6362904,Populus trichocarpa,SPECIES,ACCEPTED,Plantae,NA
 8190077,Populus ×canadensis,SPECIES,ACCEPTED,Plantae,8190077: Populus ×canadensis Moench | 3040205: Populus canadensis Castigl.
 3040185,Populus ×canescens,SPECIES,ACCEPTED,Plantae,3040185: Populus ×canescens (Aiton) Sm.
@@ -7621,7 +7753,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4090836,Potentilla argyrophylla,NA,NA,NA,NA
 5581279,Potentilla argyrophylla,NA,NA,NA,NA
 3755928,Potentilla argyrophylla,NA,NA,NA,NA
-7271631,Potentilla argyrophylla atrosanguinea,NA,NA,NA,NA
+2653392,Potentilla argyrophylla atrosanguinea,NA,NA,NA,NA
 5365888,Potentilla inclinata,SPECIES,ACCEPTED,Plantae,5365888: Potentilla inclinata Vill.
 5365717,Potentilla indica,SPECIES,ACCEPTED,Plantae,5365717: Potentilla indica (Andr.) Wolf | 3031919: Duchesnea indica (Andr.) Focke
 5365705,Potentilla intermedia,SPECIES,ACCEPTED,Plantae,5365705: Potentilla intermedia L.
@@ -7688,8 +7820,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4925890,Potentilla recta,SPECIES,ACCEPTED,Plantae,NA
 3935202,Potentilla recta,SPECIES,ACCEPTED,Plantae,NA
 2284443,Potentilla recta,SPECIES,ACCEPTED,Plantae,NA
-6710856,Potentilla recta obscura,NA,NA,NA,NA
-8429888,Potentilla recta recta,NA,NA,NA,NA
+6710856,Potentilla recta,SPECIES,ACCEPTED,Plantae,NA
+8429888,Potentilla recta,SPECIES,ACCEPTED,Plantae,NA
+10948891,Potentilla recta obscura,NA,NA,NA,NA
+8336551,Potentilla recta recta,NA,NA,NA,NA
 5367186,Potentilla rivalis,SPECIES,ACCEPTED,Plantae,5367186: Potentilla rivalis Nutt. ex Torr. & A.Gray
 8045533,Potentilla supina,SUBSPECIES,ACCEPTED,Plantae,8045533: Potentilla supina subsp. costata Soják
 5185859,Potentilla supina,SUBSPECIES,ACCEPTED,Plantae,NA
@@ -7722,41 +7856,43 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7740944,Potentilla supina,SUBSPECIES,ACCEPTED,Plantae,NA
 8918909,Potentilla supina,SUBSPECIES,ACCEPTED,Plantae,NA
 10948891,Potentilla supina,SUBSPECIES,ACCEPTED,Plantae,NA
-3663237,Potentilla supina costata,NA,NA,NA,NA
-5545159,Poterium sanguisorba,NA,NA,NA,NA
-7440977,Poterium sanguisorba,NA,NA,NA,NA
-2706403,Poterium sanguisorba,NA,NA,NA,NA
-7062200,Poterium sanguisorba,NA,NA,NA,NA
-6300531,Poterium sanguisorba,NA,NA,NA,NA
-6432925,Poterium sanguisorba,NA,NA,NA,NA
-7068845,Poterium sanguisorba,NA,NA,NA,NA
-7266343,Poterium sanguisorba,NA,NA,NA,NA
-7308335,Poterium sanguisorba,NA,NA,NA,NA
-7427650,Poterium sanguisorba,NA,NA,NA,NA
-7225456,Poterium sanguisorba,NA,NA,NA,NA
-7466434,Poterium sanguisorba,NA,NA,NA,NA
-8369366,Poterium sanguisorba,NA,NA,NA,NA
-3922770,Poterium sanguisorba,NA,NA,NA,NA
-8336551,Poterium sanguisorba,NA,NA,NA,NA
-4270675,Poterium sanguisorba,NA,NA,NA,NA
-5548011,Poterium sanguisorba,NA,NA,NA,NA
-4123394,Poterium sanguisorba,NA,NA,NA,NA
-7764312,Poterium sanguisorba,NA,NA,NA,NA
-7455425,Poterium sanguisorba,NA,NA,NA,NA
-7998563,Poterium sanguisorba,NA,NA,NA,NA
-6084799,Poterium sanguisorba,NA,NA,NA,NA
-7224157,Poterium sanguisorba,NA,NA,NA,NA
-4932232,Poterium sanguisorba,NA,NA,NA,NA
-6313049,Poterium sanguisorba,NA,NA,NA,NA
-6427623,Poterium sanguisorba,NA,NA,NA,NA
-7227181,Poterium sanguisorba,NA,NA,NA,NA
-5373039,Poterium sanguisorba,NA,NA,NA,NA
-7308043,Poterium sanguisorba,NA,NA,NA,NA
-2444141,Poterium sanguisorba,NA,NA,NA,NA
-10948891,Poterium sanguisorba,NA,NA,NA,NA
-7421129,Poterium sanguisorba,NA,NA,NA,NA
-7267492,Poterium sanguisorba,NA,NA,NA,NA
-4271356,Poterium sanguisorba polygamum,NA,NA,NA,NA
+3663237,Potentilla supina,SUBSPECIES,ACCEPTED,Plantae,NA
+3047633,Potentilla supina costata,NA,NA,NA,NA
+5545159,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7440977,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+2706403,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7062200,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+6300531,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+6432925,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7068845,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7266343,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7308335,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7427650,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7225456,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7466434,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+8369366,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+3922770,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+8336551,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+4270675,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+5548011,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+4123394,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7764312,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7455425,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7998563,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+6084799,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7224157,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+4932232,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+6313049,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+6427623,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7227181,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+5373039,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7308043,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+2444141,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+10948891,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7421129,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7267492,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+4271356,Poterium sanguisorba,SUBSPECIES,ACCEPTED,Plantae,NA
+7323341,Poterium sanguisorba polygamum,NA,NA,NA,NA
 5222820,Pourthiaea beauverdiana,NA,NA,NA,NA
 8356787,Pourthiaea villosa,SPECIES,ACCEPTED,Plantae,NA
 1830823,Prays citri,SPECIES,ACCEPTED,Animalia,NA
@@ -7858,9 +7994,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3040999,Prunus domestica,SUBSPECIES,ACCEPTED,Plantae,NA
 7998563,Prunus domestica,SUBSPECIES,ACCEPTED,Plantae,NA
 8369366,Prunus domestica,SUBSPECIES,ACCEPTED,Plantae,NA
-7224427,Prunus domestica domestica,NA,NA,NA,NA
-12205713,Prunus domestica insititia,NA,NA,NA,NA
-2706403,Prunus domestica syriaca,NA,NA,NA,NA
+3935202,Prunus domestica insititia,NA,NA,NA,NA
+2284443,Prunus domestica syriaca,NA,NA,NA,NA
 3022203,Prunus fruticans,SPECIES,ACCEPTED,Plantae,NA
 3021955,Prunus incisa,SPECIES,ACCEPTED,Plantae,NA
 3021496,Prunus laurocerasus,SPECIES,ACCEPTED,Plantae,3021496: Prunus laurocerasus L.
@@ -7919,7 +8054,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2705066,Puccinia porphyrogenita,NA,NA,NA,NA
 2514552,Puccinia smyrnii,SPECIES,ACCEPTED,Fungi,NA
 7576179,Puccinia soldanellae,NA,NA,NA,NA
-3602069,Puccinia sorghi,NA,NA,NA,NA
+3602069,Puccinia sorghi,SPECIES,ACCEPTED,Fungi,NA
 7224157,Puccinia subnitens,NA,NA,NA,NA
 7466434,Puccinia umbilici,NA,NA,NA,NA
 6076957,Pulicaria arabica,SUBSPECIES,ACCEPTED,Plantae,6076957: Pulicaria arabica subsp. hispanica (Boiss.) Murb. | 3095595: Pulicaria paludosa Link
@@ -7982,8 +8117,9 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4270675,Pulicaria arabica,SUBSPECIES,ACCEPTED,Plantae,NA
 12205713,Pulicaria arabica,SUBSPECIES,ACCEPTED,Plantae,NA
 2706403,Pulicaria arabica,SUBSPECIES,ACCEPTED,Plantae,NA
-4132902,Pulicaria arabica arabica,NA,NA,NA,NA
-4132112,Pulicaria arabica hispanica,NA,NA,NA,NA
+4132112,Pulicaria arabica,SUBSPECIES,ACCEPTED,Plantae,NA
+2453882,Pulicaria arabica arabica,NA,NA,NA,NA
+3042889,Pulicaria arabica hispanica,NA,NA,NA,NA
 7294681,Pulmonaria longifolia,SPECIES,ACCEPTED,Plantae,7294681: Pulmonaria longifolia (Bastard) Boreau
 7958783,Pulmonaria mollis,SPECIES,ACCEPTED,Plantae,7958783: Pulmonaria mollis Hornem.
 5341204,Pulmonaria officinalis,SPECIES,ACCEPTED,Plantae,5341204: Pulmonaria officinalis L.
@@ -8025,7 +8161,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2706403,Pycnanthemum verticillatum,SPECIES,ACCEPTED,Plantae,NA
 2284443,Pycnanthemum verticillatum,SPECIES,ACCEPTED,Plantae,NA
 2473221,Pycnanthemum verticillatum,SPECIES,ACCEPTED,Plantae,NA
-5365494,Pycnanthemum verticillatum pilosum,NA,NA,NA,NA
+5365494,Pycnanthemum verticillatum,SPECIES,ACCEPTED,Plantae,NA
+4270675,Pycnanthemum verticillatum pilosum,NA,NA,NA,NA
 1045323,Pycnomerus sulcicollis,SPECIES,ACCEPTED,Animalia,NA
 5289751,Pycnonotus barbatus,NA,NA,NA,NA
 2486131,Pycnonotus cafer,SPECIES,ACCEPTED,Animalia,"2486131: Pycnonotus cafer (Linnaeus, 1766)"
@@ -8066,7 +8203,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7753114,Pyrus communis,SPECIES,ACCEPTED,Plantae,NA
 7068845,Pyrus communis,SPECIES,ACCEPTED,Plantae,NA
 6369140,Pyrus communis,SPECIES,ACCEPTED,Plantae,NA
-12205713,Pyrus communis communis,NA,NA,NA,NA
+12205713,Pyrus communis,SPECIES,ACCEPTED,Plantae,NA
+2443339,Pyrus communis communis,NA,NA,NA,NA
 2454645,Python,GENUS,ACCEPTED,Animalia,NA
 2454645,Python NA,GENUS,ACCEPTED,Animalia,NA
 5381097,Python molurus,NA,NA,NA,NA
@@ -8127,7 +8265,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7901010,Raphanus raphanistrum,SUBSPECIES,ACCEPTED,Plantae,NA
 8134874,Raphanus raphanistrum,SUBSPECIES,ACCEPTED,Plantae,NA
 9567226,Raphanus raphanistrum,SUBSPECIES,ACCEPTED,Plantae,NA
-3746867,Raphanus raphanistrum landra,NA,NA,NA,NA
+3746867,Raphanus raphanistrum,SUBSPECIES,ACCEPTED,Plantae,NA
+7267492,Raphanus raphanistrum landra,NA,NA,NA,NA
 7678610,Raphanus sativus,SPECIES,ACCEPTED,Plantae,7678610: Raphanus sativus L. | 4928064: Raphanus sativus var. oleiformis Pers. | 3040973: Raphanus sativus var. niger (Mill.) J.Kern.
 5373365,Rapistrum perenne,SPECIES,ACCEPTED,Plantae,5373365: Rapistrum perenne (L.) All.
 5373368,Rapistrum rugosum,SPECIES,ACCEPTED,Plantae,5373368: Rapistrum rugosum (L.) All. | 5373370: Rapistrum rugosum subsp. orientale (L.) Arcang. | 5373377: Rapistrum rugosum subsp. rugosum | 5373375: Rapistrum rugosum subsp. linnaeanum Rouy & Foucaud
@@ -8165,7 +8304,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7331861,Reseda lutea,NA,NA,NA,NA
 2974921,Reseda lutea,NA,NA,NA,NA
 7332416,Reseda lutea,NA,NA,NA,NA
-8134874,Reseda lutea vivantii,NA,NA,NA,NA
+8134874,Reseda lutea,NA,NA,NA,NA
+7323251,Reseda lutea vivantii,NA,NA,NA,NA
 3040255,Reseda odorata,SPECIES,ACCEPTED,Plantae,3040255: Reseda odorata L.
 3040253,Reseda phyteuma,SPECIES,ACCEPTED,Plantae,3040253: Reseda phyteuma L.
 4038524,Reyllopia conollyana,SPECIES,ACCEPTED,Plantae,NA
@@ -8179,7 +8319,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 1622599,Rhagoletis cingulata,SPECIES,ACCEPTED,Animalia,NA
 1622658,Rhagoletis completa,SPECIES,ACCEPTED,Animalia,NA
 6371424,Rhamnus alaternus,SPECIES,ACCEPTED,Plantae,NA
-7222255,Rhamphiophis,NA,NA,NA,NA
+7226804,Rhamphiophis,NA,NA,NA,NA
+7222255,Rhamphiophis NA,NA,NA,NA,NA
 2444221,Rhamphiophis NA,NA,NA,NA,NA
 7427741,Rhamphiophis NA,NA,NA,NA,NA
 7466434,Rhamphiophis NA,NA,NA,NA,NA
@@ -8264,7 +8405,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4271356,Ribes aureum,SPECIES,ACCEPTED,Plantae,NA
 5581279,Ribes aureum,SPECIES,ACCEPTED,Plantae,NA
 5373483,Ribes aureum,SPECIES,ACCEPTED,Plantae,NA
-4250676,Ribes aureum villosum,NA,NA,NA,NA
+4250676,Ribes aureum,SPECIES,ACCEPTED,Plantae,NA
+5545159,Ribes aureum villosum,NA,NA,NA,NA
 2986132,Ribes divaricatum,SPECIES,ACCEPTED,Plantae,2986132: Ribes divaricatum Douglas
 4194699,Ribes nidigrolaria,SPECIES,ACCEPTED,Plantae,NA
 2986130,Ribes sanguineum,SPECIES,ACCEPTED,Plantae,2986130: Ribes sanguineum Pursh
@@ -8313,7 +8455,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3663237,Rosa carolina,NA,NA,NA,NA
 7062200,Rosa carolina,NA,NA,NA,NA
 5224543,Rosa carolina,NA,NA,NA,NA
-6409536,Rosa carolina carolina,NA,NA,NA,NA
+6409536,Rosa carolina,NA,NA,NA,NA
+3890974,Rosa carolina carolina,NA,NA,NA,NA
 3005039,Rosa chinensis,SPECIES,ACCEPTED,Plantae,3006932: Rosa semperflorens Curtis | 3005039: Rosa chinensis Jacq.
 3002530,Rosa gallica,SPECIES,ACCEPTED,Plantae,NA
 3003709,Rosa glauca,SPECIES,ACCEPTED,Plantae,3003709: Rosa glauca Pourr. | 8684350: Rosa ferruginea Vill.
@@ -8375,7 +8518,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2706403,Rumex crispus,NA,NA,NA,NA
 7740944,Rumex crispus,NA,NA,NA,NA
 7272185,Rumex crispus,NA,NA,NA,NA
-7190901,Rumex crispus robustus,NA,NA,NA,NA
+7190901,Rumex crispus,NA,NA,NA,NA
+5352425,Rumex crispus robustus,NA,NA,NA,NA
 2889010,Rumex cristatus,SPECIES,ACCEPTED,Plantae,2889010: Rumex cristatus DC.
 2889038,Rumex dentatus,SPECIES,ACCEPTED,Plantae,2889038: Rumex dentatus L.
 8242651,Rumex erubescens,SPECIES,ACCEPTED,Plantae,NA
@@ -8419,7 +8563,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3023671,Rumex obtusifolius,SUBSPECIES,ACCEPTED,Plantae,NA
 5659657,Rumex obtusifolius,SUBSPECIES,ACCEPTED,Plantae,NA
 4925890,Rumex obtusifolius,SUBSPECIES,ACCEPTED,Plantae,NA
-9567226,Rumex obtusifolius sylvestris,NA,NA,NA,NA
+9567226,Rumex obtusifolius,SUBSPECIES,ACCEPTED,Plantae,NA
+5831060,Rumex obtusifolius sylvestris,NA,NA,NA,NA
 2889019,Rumex patientia,SPECIES,ACCEPTED,Plantae,2889019: Rumex patientia L.
 7911993,Rumex pseudonatronatus,SPECIES,ACCEPTED,Plantae,7911993: Rumex pseudonatronatus (Borbás) Borbás ex Murb.
 7415922,Rumex pulcher,SUBSPECIES,ACCEPTED,Plantae,7415922: Rumex pulcher subsp. woodsii (De Not.) Arcang.
@@ -8484,8 +8629,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7295374,Rumex pulcher,SPECIES,ACCEPTED,Plantae,NA
 7358677,Rumex pulcher,SPECIES,ACCEPTED,Plantae,NA
 5365494,Rumex pulcher,SPECIES,ACCEPTED,Plantae,NA
-7302355,Rumex pulcher pulcher,NA,NA,NA,NA
-7225456,Rumex pulcher woodsii,NA,NA,NA,NA
+7302355,Rumex pulcher,SPECIES,ACCEPTED,Plantae,NA
+7225456,Rumex pulcher,SPECIES,ACCEPTED,Plantae,NA
+7332517,Rumex pulcher pulcher,NA,NA,NA,NA
+9567226,Rumex pulcher woodsii,NA,NA,NA,NA
 2889037,Rumex rugosus,SPECIES,ACCEPTED,Plantae,2889037: Rumex rugosus Campd.
 2888990,Rumex salicifolius,SPECIES,ACCEPTED,Plantae,NA
 2432063,Rumex salicifolius,SPECIES,ACCEPTED,Plantae,NA
@@ -8521,7 +8668,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7652364,Rumex salicifolius,SPECIES,ACCEPTED,Plantae,NA
 9405036,Rumex salicifolius,SPECIES,ACCEPTED,Plantae,NA
 5224481,Rumex salicifolius,SPECIES,ACCEPTED,Plantae,NA
-2444141,Rumex salicifolius triangulivalvis,NA,NA,NA,NA
+2444141,Rumex salicifolius,SPECIES,ACCEPTED,Plantae,NA
+7624620,Rumex salicifolius triangulivalvis,NA,NA,NA,NA
 2888870,Rumex spinosus,SPECIES,ACCEPTED,Plantae,NA
 2889023,Rumex stenophyllus,SPECIES,ACCEPTED,Plantae,2889023: Rumex stenophyllus Ledeb.
 6391417,Rumex thyrsiflorus,SPECIES,ACCEPTED,Plantae,6391417: Rumex thyrsiflorus Fingerh.
@@ -8579,7 +8727,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7308043,Salix alba,SUBSPECIES,ACCEPTED,Plantae,NA
 4131042,Salix alba,SUBSPECIES,ACCEPTED,Plantae,NA
 3890974,Salix alba,SUBSPECIES,ACCEPTED,Plantae,NA
-6157050,Salix alba alba,NA,NA,NA,NA
+6157050,Salix alba,SUBSPECIES,ACCEPTED,Plantae,NA
+7068732,Salix alba alba,NA,NA,NA,NA
 5372639,Salix babylonica,SPECIES,ACCEPTED,Plantae,NA
 9153437,Salix daphnoides,SPECIES,ACCEPTED,Plantae,9153437: Salix daphnoides Vill.
 3151666,Salix dolichostachya,NA,NA,NA,NA
@@ -8614,7 +8763,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 11794300,Salix elaeagnos,NA,NA,NA,NA
 7224157,Salix elaeagnos,NA,NA,NA,NA
 8389446,Salix elaeagnos,NA,NA,NA,NA
-6420901,Salix elaeagnos angustifolia,NA,NA,NA,NA
+6420901,Salix elaeagnos,NA,NA,NA,NA
+7427650,Salix elaeagnos angustifolia,NA,NA,NA,NA
 5372655,Salix eleagnos,SPECIES,ACCEPTED,Plantae,NA
 8257857,Salix eleagnos,SUBSPECIES,ACCEPTED,Plantae,NA
 5372614,Salix eriocephala,SPECIES,ACCEPTED,Plantae,5372614: Salix eriocephala Michx.
@@ -8658,7 +8808,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5373039,Salix purpurea,SUBSPECIES,ACCEPTED,Plantae,NA
 4132112,Salix purpurea,SUBSPECIES,ACCEPTED,Plantae,NA
 2453882,Salix purpurea,SUBSPECIES,ACCEPTED,Plantae,NA
-2457378,Salix purpurea purpurea,NA,NA,NA,NA
+2457378,Salix purpurea,SUBSPECIES,ACCEPTED,Plantae,NA
+8006893,Salix purpurea purpurea,NA,NA,NA,NA
 8069977,Salix rorida,NA,NA,NA,NA
 10986555,Salix sepulcralis,VARIETY,ACCEPTED,Plantae,NA
 5373039,Salix sepulcralis,VARIETY,ACCEPTED,Plantae,NA
@@ -8693,7 +8844,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 11794300,Salix sepulcralis,VARIETY,ACCEPTED,Plantae,NA
 2176168,Salix sepulcralis,VARIETY,ACCEPTED,Plantae,NA
 7421129,Salix sepulcralis,VARIETY,ACCEPTED,Plantae,NA
-8983123,Salix sepulcralis chrysocoma,NA,NA,NA,NA
+8983123,Salix sepulcralis,VARIETY,ACCEPTED,Plantae,NA
+3602069,Salix sepulcralis chrysocoma,NA,NA,NA,NA
 5582033,Salix udensis,SPECIES,ACCEPTED,Plantae,5582602: Salix sachalinensis F.Schmidt | 5582033: Salix udensis Trautv. & C.A.Mey.
 5373039,Salix ×sepulcralis,VARIETY,ACCEPTED,Plantae,5582667: Salix ×chrysocoma Dode | 5373039: Salix ×sepulcralis var. chrysocoma (Dode) Meikle
 2932905,Salpiglossis sinuata,SPECIES,ACCEPTED,Plantae,NA
@@ -8736,7 +8888,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4274443,Salvia lavandulifolia,NA,NA,NA,NA
 3047633,Salvia lavandulifolia,NA,NA,NA,NA
 5224543,Salvia lavandulifolia,NA,NA,NA,NA
-7226794,Salvia lavandulifolia gallica,NA,NA,NA,NA
+7226794,Salvia lavandulifolia,NA,NA,NA,NA
+6308164,Salvia lavandulifolia gallica,NA,NA,NA,NA
 2927028,Salvia nemorosa,SPECIES,ACCEPTED,Plantae,2927028: Salvia nemorosa L.
 2927004,Salvia officinalis,SPECIES,ACCEPTED,Plantae,2927004: Salvia officinalis L.
 2927001,Salvia reflexa,SPECIES,ACCEPTED,Plantae,2927001: Salvia reflexa Hornem.
@@ -8814,7 +8967,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 2444221,Scandix australis,NA,NA,NA,NA
 3935202,Scandix australis,NA,NA,NA,NA
 6156934,Scandix australis,NA,NA,NA,NA
-9405645,Scandix australis grandiflora,NA,NA,NA,NA
+9405645,Scandix australis,NA,NA,NA,NA
+3755928,Scandix australis grandiflora,NA,NA,NA,NA
 3637507,Scandix balansae,SPECIES,ACCEPTED,Plantae,NA
 3637112,Scandix iberica,SPECIES,ACCEPTED,Plantae,3637112: Scandix iberica M.Bieb.
 6026954,Scandix stellata,SPECIES,ACCEPTED,Plantae,NA
@@ -8935,7 +9089,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4048052,Setaria verticillata,SPECIES,ACCEPTED,Plantae,NA
 6409536,Setaria verticillata,SPECIES,ACCEPTED,Plantae,NA
 4036957,Setaria verticillata,SPECIES,ACCEPTED,Plantae,NA
-7068845,Setaria verticillata verticillata,NA,NA,NA,NA
+7068845,Setaria verticillata,SPECIES,ACCEPTED,Plantae,NA
+4036957,Setaria verticillata verticillata,NA,NA,NA,NA
 5289684,Setaria viridis,SPECIES,ACCEPTED,Plantae,5289684: Setaria viridis (L.) P.Beauv. | 5708237: Setaria viridis var. viridis | 8348897: Setaria viridis var. major (Gaudin) Posp. | 5673918: Setaria italica subsp. viridis (L.) Thell. | 5673924: Setaria italica subsp. pycnocoma (Steud.) De Wet
 3099650,Shinnersia rivularis,SPECIES,ACCEPTED,Plantae,NA
 4926534,Sibbaldia tridentata,SPECIES,ACCEPTED,Plantae,NA
@@ -8995,7 +9150,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 11844792,Silene nocturna,SUBSPECIES,ACCEPTED,Plantae,NA
 7298085,Silene nocturna,SUBSPECIES,ACCEPTED,Plantae,NA
 8045533,Silene nocturna,SUBSPECIES,ACCEPTED,Plantae,NA
-8134874,Silene nocturna nocturna,NA,NA,NA,NA
+8134874,Silene nocturna,SUBSPECIES,ACCEPTED,Plantae,NA
+6710856,Silene nocturna nocturna,NA,NA,NA,NA
 7746901,Silene otites,SPECIES,ACCEPTED,Plantae,7746901: Silene otites (L.) Wibel
 5384773,Silene pendula,SPECIES,ACCEPTED,Plantae,5384773: Silene pendula L.
 3083659,Silene scabriflora,NA,NA,NA,NA
@@ -9036,7 +9192,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3611735,Silene vulgaris,SUBSPECIES,ACCEPTED,Plantae,NA
 5373483,Silene vulgaris,SUBSPECIES,ACCEPTED,Plantae,NA
 12205713,Silene vulgaris,SUBSPECIES,ACCEPTED,Plantae,NA
-7440977,Silene vulgaris vulgaris,NA,NA,NA,NA
+7440977,Silene vulgaris,SUBSPECIES,ACCEPTED,Plantae,NA
+7421129,Silene vulgaris vulgaris,NA,NA,NA,NA
 3092576,Silphium perfoliatum,SPECIES,ACCEPTED,Plantae,3092576: Silphium perfoliatum L.
 2337607,Silurus glanis,SPECIES,ACCEPTED,Animalia,"2337607: Silurus glanis Linnaeus, 1758"
 3145214,Silybum marianum,SPECIES,ACCEPTED,Plantae,3145214: Silybum marianum (L.) Gaertn.
@@ -9076,11 +9233,13 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3023671,Sinapis alba,SPECIES,ACCEPTED,Plantae,NA
 7324507,Sinapis alba,SPECIES,ACCEPTED,Plantae,NA
 6409536,Sinapis alba,SPECIES,ACCEPTED,Plantae,NA
-7272185,Sinapis alba dissecta,NA,NA,NA,NA
+7272185,Sinapis alba,SPECIES,ACCEPTED,Plantae,NA
+5224543,Sinapis alba dissecta,NA,NA,NA,NA
 2367033,Sinelobus stanfordi,NA,NA,NA,NA
 7547256,Sinelobus vanhaareni,SPECIES,ACCEPTED,Animalia,NA
 5188774,Siren intermedia,NA,NA,NA,NA
-7415922,Sistrurus,NA,NA,NA,NA
+7293222,Sistrurus,NA,NA,NA,NA
+7415922,Sistrurus NA,NA,NA,NA,NA
 2444141,Sistrurus NA,NA,NA,NA,NA
 4211590,Sistrurus NA,NA,NA,NA,NA
 7271631,Sistrurus NA,NA,NA,NA,NA
@@ -9180,7 +9339,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7225471,Solanum villosum,SPECIES,ACCEPTED,Plantae,NA
 6313049,Solanum villosum,SPECIES,ACCEPTED,Plantae,NA
 3666059,Solanum villosum,SPECIES,ACCEPTED,Plantae,NA
-7331861,Solanum villosum villosum,NA,NA,NA,NA
+7331861,Solanum villosum,SPECIES,ACCEPTED,Plantae,NA
+7764312,Solanum villosum villosum,NA,NA,NA,NA
 2984366,Soleirolia soleirolii,SPECIES,ACCEPTED,Plantae,2984366: Soleirolia soleirolii (Req.) Dandy
 5389058,Solidago altissima,SPECIES,ACCEPTED,Plantae,5389058: Solidago altissima L.
 5389029,Solidago canadensis,SPECIES,ACCEPTED,Plantae,5389029: Solidago canadensis L.
@@ -9221,7 +9381,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 8134874,Sonchus asper,SUBSPECIES,ACCEPTED,Plantae,NA
 2473221,Sonchus asper,SUBSPECIES,ACCEPTED,Plantae,NA
 7272185,Sonchus asper,SUBSPECIES,ACCEPTED,Plantae,NA
-9391215,Sonchus asper glaucescens,NA,NA,NA,NA
+9391215,Sonchus asper,SUBSPECIES,ACCEPTED,Plantae,NA
+2161467,Sonchus asper glaucescens,NA,NA,NA,NA
 3105768,Sonchus tenerrimus,SPECIES,ACCEPTED,Plantae,3105768: Sonchus tenerrimus L.
 3012103,Sorbaria kirilowii,SPECIES,ACCEPTED,Plantae,3012103: Sorbaria kirilowii (Regel) Maxim.
 3012089,Sorbaria sorbifolia,SPECIES,ACCEPTED,Plantae,3012089: Sorbaria sorbifolia (L.) A.Braun
@@ -9264,7 +9425,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7062200,Spatula cyanoptera,SPECIES,ACCEPTED,Animalia,NA
 7440977,Spatula cyanoptera,SPECIES,ACCEPTED,Animalia,NA
 7267631,Spatula cyanoptera,SPECIES,ACCEPTED,Animalia,NA
-10948891,Spatula cyanoptera cyanoptera,NA,NA,NA,NA
+10948891,Spatula cyanoptera,SPECIES,ACCEPTED,Animalia,NA
+3596131,Spatula cyanoptera cyanoptera,NA,NA,NA,NA
 9496048,Spatula hottentota,SPECIES,ACCEPTED,Animalia,NA
 9583342,Spatula puna,SPECIES,ACCEPTED,Animalia,NA
 9288935,Spatula rhynchotis,SPECIES,ACCEPTED,Animalia,NA
@@ -9299,7 +9461,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4273336,Spatula versicolor,SPECIES,ACCEPTED,Animalia,NA
 11136683,Spatula versicolor,SPECIES,ACCEPTED,Animalia,NA
 9391215,Spatula versicolor,SPECIES,ACCEPTED,Animalia,NA
-2444221,Spatula versicolor versicolor,NA,NA,NA,NA
+2444221,Spatula versicolor,SPECIES,ACCEPTED,Animalia,NA
+3047147,Spatula versicolor versicolor,NA,NA,NA,NA
 8096233,Spergularia bocconei,SPECIES,ACCEPTED,Plantae,8096233: Spergularia bocconei (Scheele) Graebn.
 2153791,Spermophora senoculata,NA,NA,NA,NA
 7116158,Sphaeralcea bonariensis,SPECIES,ACCEPTED,Plantae,7116158: Sphaeralcea bonariensis (Cav.) Griseb.
@@ -9326,7 +9489,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3026622,Spiraea vanhouttei,SPECIES,ACCEPTED,Plantae,NA
 7889822,Spiraea ×billardii,SPECIES,ACCEPTED,Plantae,7889822: Spiraea ×billardii Hérincq
 3027332,Spiraea ×rosalba,SPECIES,ACCEPTED,Plantae,3027332: Spiraea ×rosalba Dippel
-2739769,Spiranthes cernua,NA,NA,NA,NA
+2739769,Spiranthes cernua,SPECIES,ACCEPTED,Plantae,NA
 8243150,Spirobassia hirsuta,SPECIES,ACCEPTED,Plantae,5383911: Bassia hirsuta (L.) Asch.
 2764337,Spirodela punctata,NA,NA,NA,NA
 3040923,Spizaetus melanoleucus,NA,NA,NA,NA
@@ -9399,7 +9562,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4067302,Symphytum grandiflorum,SPECIES,ACCEPTED,Plantae,4067302: Symphytum grandiflorum DC.
 4067281,Symphytum hidcotense,SPECIES,ACCEPTED,Plantae,NA
 4067112,Symphytum orientale,SPECIES,ACCEPTED,Plantae,4067112: Symphytum orientale L.
-8369366,Synarmadillo,NA,NA,NA,NA
+8782549,Synarmadillo,NA,NA,NA,NA
+8369366,Synarmadillo NA,NA,NA,NA,NA
 7224157,Synarmadillo NA,NA,NA,NA,NA
 9603492,Synarmadillo NA,NA,NA,NA,NA
 6156934,Synarmadillo NA,NA,NA,NA,NA
@@ -9621,9 +9785,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7421129,Trachemys scripta,SPECIES,ACCEPTED,Animalia,NA
 6369140,Trachemys scripta,SPECIES,ACCEPTED,Animalia,NA
 7409013,Trachemys scripta,SPECIES,ACCEPTED,Animalia,NA
-4115425,Trachemys scripta elegans,NA,NA,NA,NA
-4270548,Trachemys scripta scripta,NA,NA,NA,NA
-7324507,Trachemys scripta troostii,NA,NA,NA,NA
+4115425,Trachemys scripta,SPECIES,ACCEPTED,Animalia,NA
+8991514,Trachemys scripta elegans,NA,NA,NA,NA
+4274443,Trachemys scripta scripta,NA,NA,NA,NA
+7227181,Trachemys scripta troostii,NA,NA,NA,NA
 2739071,Trachycarpus fortunei,SPECIES,ACCEPTED,Plantae,2739071: Trachycarpus fortunei (Hook.) H.Wendl.
 2161710,Trachylepis striata,NA,NA,NA,NA
 8244019,Trachyspermum ammi,SPECIES,DOUBTFUL,Plantae,NA
@@ -9720,8 +9885,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7293222,Trifolium hybridum,SPECIES,ACCEPTED,Plantae,NA
 2161467,Trifolium hybridum,SPECIES,ACCEPTED,Plantae,NA
 7332416,Trifolium hybridum,SPECIES,ACCEPTED,Plantae,NA
-2706403,Trifolium hybridum elegans,NA,NA,NA,NA
-8389446,Trifolium hybridum hybridum,NA,NA,NA,NA
+2706403,Trifolium hybridum,SPECIES,ACCEPTED,Plantae,NA
+8389446,Trifolium hybridum,SPECIES,ACCEPTED,Plantae,NA
+2447418,Trifolium hybridum elegans,NA,NA,NA,NA
+2176168,Trifolium hybridum hybridum,NA,NA,NA,NA
 5359378,Trifolium incarnatum,SPECIES,ACCEPTED,Plantae,5359378: Trifolium incarnatum L. | 7302754: Trifolium incarnatum var. incarnatum | 5359380: Trifolium incarnatum subsp. molinerii (Hornem.) Syme
 5359447,Trifolium isthmocarpum,SPECIES,ACCEPTED,Plantae,5359447: Trifolium isthmocarpum Brot.
 5358913,Trifolium lappaceum,SPECIES,ACCEPTED,Plantae,5358913: Trifolium lappaceum L.
@@ -9821,8 +9988,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7323906,Triticum aestivum,SPECIES,ACCEPTED,Plantae,NA
 7277946,Triticum aestivum,SPECIES,ACCEPTED,Plantae,NA
 6084799,Triticum aestivum,SPECIES,ACCEPTED,Plantae,NA
-4115425,Triticum aestivum compactum,NA,NA,NA,NA
-4270548,Triticum aestivum spelta,NA,NA,NA,NA
+7227181,Triticum aestivum compactum,NA,NA,NA,NA
 7883427,Triticum monococcum,SPECIES,ACCEPTED,Plantae,7883427: Triticum monococcum L.
 2706406,Triticum turgidum,SPECIES,ACCEPTED,Plantae,2706406: Triticum turgidum L. | 8168170: Triticum dicoccum Schrank ex Schübl. | 2706389: Triticum durum Desf.
 8864505,Triticum turgidum,SPECIES,ACCEPTED,Plantae,NA
@@ -9907,9 +10073,12 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3042889,Triticum turgidum,SPECIES,ACCEPTED,Plantae,NA
 8918909,Triticum turgidum,SPECIES,ACCEPTED,Plantae,NA
 4131042,Triticum turgidum,SPECIES,ACCEPTED,Plantae,NA
-2444221,Triticum turgidum dicoccum,NA,NA,NA,NA
-3802956,Triticum turgidum durum,NA,NA,NA,NA
-4250676,Triticum turgidum polonicum,NA,NA,NA,NA
+2444221,Triticum turgidum,SPECIES,ACCEPTED,Plantae,NA
+3802956,Triticum turgidum,SPECIES,ACCEPTED,Plantae,NA
+4250676,Triticum turgidum,SPECIES,ACCEPTED,Plantae,NA
+9567226,Triticum turgidum dicoccum,NA,NA,NA,NA
+2445496,Triticum turgidum durum,NA,NA,NA,NA
+6449041,Triticum turgidum polonicum,NA,NA,NA,NA
 2431886,Triturus marmoratus,SPECIES,ACCEPTED,Animalia,"2431886: Triturus marmoratus (Latreille, 1800)"
 3935202,Trochoidea elegans,SPECIES,ACCEPTED,Animalia,NA
 3141571,Trogium pulsatorium,NA,NA,NA,NA
@@ -9962,40 +10131,41 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7298858,Valerianella coronata,SPECIES,ACCEPTED,Plantae,7298858: Valerianella coronata (L.) DC.
 2888773,Valerianella eriocarpa,SPECIES,ACCEPTED,Plantae,2888773: Valerianella eriocarpa Desv.
 7988337,Valerianella locusta,VARIETY,ACCEPTED,Plantae,7988337: Valerianella locusta var. oleracea (Schltdl.) Breistr.
-4206362,Valerianella locusta,NA,NA,NA,NA
-4123394,Valerianella locusta,NA,NA,NA,NA
-7223276,Valerianella locusta,NA,NA,NA,NA
-7066596,Valerianella locusta,NA,NA,NA,NA
-8983123,Valerianella locusta,NA,NA,NA,NA
-3802956,Valerianella locusta,NA,NA,NA,NA
-4036350,Valerianella locusta,NA,NA,NA,NA
-7272439,Valerianella locusta,NA,NA,NA,NA
-2176168,Valerianella locusta,NA,NA,NA,NA
-10755213,Valerianella locusta,NA,NA,NA,NA
-4211590,Valerianella locusta,NA,NA,NA,NA
-8421432,Valerianella locusta,NA,NA,NA,NA
-2444141,Valerianella locusta,NA,NA,NA,NA
-7764312,Valerianella locusta,NA,NA,NA,NA
-7226776,Valerianella locusta,NA,NA,NA,NA
-7925720,Valerianella locusta,NA,NA,NA,NA
-3047147,Valerianella locusta,NA,NA,NA,NA
-4048052,Valerianella locusta,NA,NA,NA,NA
-7427650,Valerianella locusta,NA,NA,NA,NA
-7068732,Valerianella locusta,NA,NA,NA,NA
-5359402,Valerianella locusta,NA,NA,NA,NA
-11136683,Valerianella locusta,NA,NA,NA,NA
-3611735,Valerianella locusta,NA,NA,NA,NA
-7190901,Valerianella locusta,NA,NA,NA,NA
-5544928,Valerianella locusta,NA,NA,NA,NA
-7298085,Valerianella locusta,NA,NA,NA,NA
-7266343,Valerianella locusta,NA,NA,NA,NA
-7224069,Valerianella locusta,NA,NA,NA,NA
-4132902,Valerianella locusta,NA,NA,NA,NA
-7350944,Valerianella locusta,NA,NA,NA,NA
-5352372,Valerianella locusta,NA,NA,NA,NA
-7267492,Valerianella locusta,NA,NA,NA,NA
-7308335,Valerianella locusta,NA,NA,NA,NA
-7331861,Valerianella locusta locusta,NA,NA,NA,NA
+4206362,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+4123394,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7223276,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7066596,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+8983123,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+3802956,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+4036350,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7272439,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+2176168,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+10755213,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+4211590,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+8421432,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+2444141,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7764312,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7226776,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7925720,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+3047147,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+4048052,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7427650,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7068732,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+5359402,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+11136683,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+3611735,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7190901,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+5544928,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7298085,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7266343,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7224069,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+4132902,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7350944,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+5352372,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7267492,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7308335,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+7331861,Valerianella locusta,SUBSPECIES,ACCEPTED,Plantae,NA
+9454901,Valerianella locusta locusta,NA,NA,NA,NA
 3094899,Valerianella vesicaria,NA,NA,NA,NA
 2865501,Vallisneria americana,SPECIES,ACCEPTED,Plantae,NA
 2865524,Vallisneria australis,SPECIES,ACCEPTED,Plantae,NA
@@ -10074,7 +10244,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 4048052,Veronica teucrium,VARIETY,SYNONYM,Plantae,NA
 3755928,Veronica teucrium,VARIETY,SYNONYM,Plantae,NA
 8389446,Veronica teucrium,VARIETY,SYNONYM,Plantae,NA
-2176168,Veronica teucrium teucrium,NA,NA,NA,NA
+2176168,Veronica teucrium,NA,NA,NA,NA
+4248063,Veronica teucrium teucrium,NA,NA,NA,NA
 3172206,Veronicastrum virginicum,SPECIES,ACCEPTED,Plantae,3172206: Veronicastrum virginicum (L.) Farw.
 1311477,Vespa velutina,SPECIES,ACCEPTED,Animalia,"1311477: Vespa velutina Lepeletier, 1836 | 6247411: Vespa velutina nigrithorax Buysson, 1905"
 3856436,Viburnum davidi,SPECIES,ACCEPTED,Plantae,NA
@@ -10114,7 +10285,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 9508942,Vicia benghalensis,SPECIES,ACCEPTED,Plantae,NA
 8134874,Vicia benghalensis,SPECIES,ACCEPTED,Plantae,NA
 7068845,Vicia benghalensis,SPECIES,ACCEPTED,Plantae,NA
-5587240,Vicia benghalensis benghalensis,NA,NA,NA,NA
+2445496,Vicia benghalensis benghalensis,NA,NA,NA,NA
 2975309,Vicia bithynica,SPECIES,ACCEPTED,Plantae,2975309: Vicia bithynica (L.) L.
 2975187,Vicia cuspidata,SPECIES,ACCEPTED,Plantae,2975187: Vicia cuspidata Boiss.
 3973636,Vicia dalmatica,SPECIES,ACCEPTED,Plantae,3971572: Vicia tenuifolia subsp. dalmatica (A.Kern.) Greuter
@@ -10166,7 +10337,7 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7226776,Vicia narbonensis,SPECIES,ACCEPTED,Plantae,NA
 7466434,Vicia narbonensis,SPECIES,ACCEPTED,Plantae,NA
 3065244,Vicia narbonensis,SPECIES,ACCEPTED,Plantae,NA
-6409536,Vicia narbonensis narbonensis,NA,NA,NA,NA
+9405036,Vicia narbonensis narbonensis,NA,NA,NA,NA
 2975097,Vicia noeana,SPECIES,ACCEPTED,Plantae,NA
 2974811,Vicia pannonica,SPECIES,ACCEPTED,Plantae,NA
 9603492,Vicia pannonica,VARIETY,SYNONYM,Plantae,NA
@@ -10201,7 +10372,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7757431,Vicia pannonica,SPECIES,ACCEPTED,Plantae,NA
 3922770,Vicia pannonica,SPECIES,ACCEPTED,Plantae,NA
 7415922,Vicia pannonica,SPECIES,ACCEPTED,Plantae,NA
-7427741,Vicia pannonica pannonica,NA,NA,NA,NA
+7427741,Vicia pannonica,SPECIES,ACCEPTED,Plantae,NA
+7295374,Vicia pannonica pannonica,NA,NA,NA,NA
 2975262,Vicia peregrina,SPECIES,ACCEPTED,Plantae,2975262: Vicia peregrina L.
 7068379,Vicia sativa,SUBSPECIES,ACCEPTED,Plantae,7068379: Vicia sativa subsp. sativa
 5739284,Vicia sativa,SUBSPECIES,ACCEPTED,Plantae,NA
@@ -10237,7 +10409,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 6164210,Vicia sativa,SUBSPECIES,ACCEPTED,Plantae,NA
 2974921,Vicia sativa,SUBSPECIES,ACCEPTED,Plantae,NA
 8336551,Vicia sativa,SUBSPECIES,ACCEPTED,Plantae,NA
-4270548,Vicia sativa sativa,NA,NA,NA,NA
+4270548,Vicia sativa,SUBSPECIES,ACCEPTED,Plantae,NA
+5544928,Vicia sativa sativa,NA,NA,NA,NA
 2975135,Vicia serratifolia,SPECIES,ACCEPTED,Plantae,NA
 2975393,Vicia sicula,SPECIES,ACCEPTED,Plantae,NA
 2974793,Vicia sylvatica,SPECIES,ACCEPTED,Plantae,2974793: Vicia sylvatica L.
@@ -10300,8 +10473,10 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5373483,Vicia villosa,SUBSPECIES,ACCEPTED,Plantae,NA
 7219988,Vicia villosa,SUBSPECIES,ACCEPTED,Plantae,NA
 4925890,Vicia villosa,SUBSPECIES,ACCEPTED,Plantae,NA
-11136683,Vicia villosa varia,NA,NA,NA,NA
-6076957,Vicia villosa villosa,NA,NA,NA,NA
+11136683,Vicia villosa,SUBSPECIES,ACCEPTED,Plantae,NA
+6076957,Vicia villosa,SUBSPECIES,ACCEPTED,Plantae,NA
+2284443,Vicia villosa varia,NA,NA,NA,NA
+7740944,Vicia villosa villosa,NA,NA,NA,NA
 8045533,Victorella pavida,NA,NA,NA,NA
 7925720,Vidua macroura,NA,NA,NA,NA
 2982380,Vigna radiata,SPECIES,ACCEPTED,Plantae,2982380: Vigna radiata (L.) R.Wilczek
@@ -10353,7 +10528,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 5347854,Vulpia ciliata,NA,NA,NA,NA
 4132112,Vulpia ciliata,NA,NA,NA,NA
 7757431,Vulpia ciliata,NA,NA,NA,NA
-7764312,Vulpia ciliata ciliata,NA,NA,NA,NA
+7764312,Vulpia ciliata,NA,NA,NA,NA
+7901010,Vulpia ciliata ciliata,NA,NA,NA,NA
 5679032,Vulpia geniculata,SPECIES,ACCEPTED,Plantae,5679032: Vulpia geniculata (L.) Link
 5679007,Vulpia ligustica,SPECIES,ACCEPTED,Plantae,4121365: Festuca ligustica (All.) Bertol.
 5289590,Vulpia myuros,SPECIES,ACCEPTED,Plantae,5289590: Vulpia myuros (L.) C.C.Gmel.
@@ -10394,7 +10570,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 3802956,Xanthium orientale,SPECIES,ACCEPTED,Plantae,NA
 10948891,Xanthium orientale,SPECIES,ACCEPTED,Plantae,NA
 4048052,Xanthium orientale,SPECIES,ACCEPTED,Plantae,NA
-7223276,Xanthium orientale saccharatum,NA,NA,NA,NA
+7223276,Xanthium orientale,SPECIES,ACCEPTED,Plantae,NA
+7222196,Xanthium orientale saccharatum,NA,NA,NA,NA
 3089150,Xanthium spinosum,SPECIES,ACCEPTED,Plantae,3089150: Xanthium spinosum L.
 3089154,Xanthium strumarium,SPECIES,ACCEPTED,Plantae,3089154: Xanthium strumarium L.
 2683894,Xanthocyparis nootkatensis,SPECIES,ACCEPTED,Plantae,2683903: Cupressus nootkatensis D.Don
@@ -10446,7 +10623,8 @@ taxonKey,scientificName,rank,taxonomicStatus,kingdom,includes
 7350944,Zinnia angustifolia,NA,NA,NA,NA
 6409536,Zinnia angustifolia,NA,NA,NA,NA
 5825913,Zinnia angustifolia,NA,NA,NA,NA
-4270548,Zinnia angustifolia angustifolia,NA,NA,NA,NA
+4270548,Zinnia angustifolia,NA,NA,NA,NA
+7323906,Zinnia angustifolia angustifolia,NA,NA,NA,NA
 3111754,Zinnia elegans,SPECIES,ACCEPTED,Plantae,NA
 7517279,Zinnia violacea,NA,NA,NA,NA
 2703231,Zizania latifolia,SPECIES,ACCEPTED,Plantae,2703231: Zizania latifolia (Griseb.) Turcz. ex Stapf
