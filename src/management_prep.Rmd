@@ -15,6 +15,9 @@ export_template <- read_csv("https://raw.githubusercontent.com/inbo/aspbo/refs/h
 
 ```{r select necessary columns}
 cleanData <- rawData %>% 
+  group_by(eventID) %>% 
+  mutate(no_fuiken = n()) %>%
+  ungroup() %>% 
   pivot_longer(cols = c("larven_fuik", "juveniel_fuik", "adult_fuik"),
                names_to = "lifeStage",
                values_to = "n") %>% 
@@ -26,13 +29,13 @@ cleanData <- rawData %>%
                                 .default = NA_character_)) %>% 
   filter(!is.na(n), 
          !is.na(long_vijver)) %>% 
-  group_by(eventID, locationID, Locatie, long_vijver, lat_vijver, lifeStage, Jaar, fuiktype, fuiklengte) %>% 
+  group_by(eventID, locationID, Locatie, long_vijver, lat_vijver, lifeStage, Jaar, fuiktype) %>% 
   summarise(n = sum(n, na.rm = TRUE),
-            no_fuiken = sum(unique(no_fuiken), na.rm = TRUE)) %>% 
+            no_fuiken = max(no_fuiken, na.rm = TRUE)) %>% 
   ungroup() %>% 
-  group_by(eventID, locationID, Locatie, long_vijver, lat_vijver, lifeStage, Jaar) %>% 
+  group_by(eventID, locationID, Locatie, long_vijver, lat_vijver, Jaar, lifeStage) %>%
   summarise(n = sum(n, na.rm = TRUE),
-            no_fuiken = sum(no_fuiken, na.rm = TRUE)) %>% 
+            no_fuiken = max(no_fuiken, na.rm = TRUE)) %>% 
   ungroup() %>% 
   mutate(gbifID = row_number())
 
