@@ -648,8 +648,8 @@ allDoe_title,All degrees of establishment
 allHabitats_title,All habitats
 allNativeRanges_title,All native regions
 allNative_title,All native continents
-allPathwaySubCategories_title,All pathwaysubcategories
-allPathways_title,All pathwaycategories
+allPathwaySubCategories_title,All pathways (subcategories)
+allPathways_title,All pathways (categories)
 allRegions_title,All regions
 allSources_title,All sources
 allTaxa_title,All taxa
