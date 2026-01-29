@@ -646,8 +646,8 @@ Zwijndrecht_title,Zwijndrecht
 absolute_title,absoluut
 allDoe_title,Alle mate van vestiging
 allHabitats_title,Alle habitats
-allNativeRanges_title,Alle natuurlijk arealen
-allNative_title,Alle herkomst continenten
+allNativeRanges_title,Alle oorsprongkelijke herkomsten
+allNative_title,Alle continenten van herkomst
 allPathwaySubCategories_title,Alle routesubcategorieën
 allPathways_title,Alle routecategorieën
 allRegions_title,Alle regio's
@@ -728,7 +728,7 @@ countOccupancy_description,"<img src=""https://cdn-icons-png.flaticon.com/512/78
 Deze grafiek toont de trend in bezetting (d.w.z. het percentage bezette 10 km<sup>2</sup> hokken) in Vlaanderen voor alle soorten die op <a href=""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> de lijst van soorten van Uniebelang</a> staan. Voor elke soort wordt de bezetting op het moment van opname in de Unie-lijst aangegeven in <span style=""color: #4f7c9bff;"">blauw</span> (Basis), terwijl de bezetting tijdens de meest recente driejaarlijkse rapporteringsperiode wordt weergegeven in <span style=""color: #e87837ff;"">oranje</span> (Rapportering)."
 countOccupancy_title,Trend in de bezetting van Unielijstsoorten in Vlaanderen
 countOccurrence_yLabel_description,NA
-countOccurrence_yLabel_title,Verspreiding (aantal 1x1 km hokken)
+countOccurrence_yLabel_title,Verspreiding (aantal 1 x 1 km hokken)
 count_title,aantal
 cpue_title,vangst per eenheid inspanning
 createReport_title,Maak rapport
@@ -917,7 +917,7 @@ map_title,Kaart
 marine_title,marien
 mica_db_title,MICA dashboard
 min_1_obs_title,De soort werd waargenomen in België sinds 1950 (gegevens van GBIF)
-missingFilters_species_title,Geen soort of regio geselecteerd! => selecteer een soort and regio
+missingFilters_species_title,Geen soort of regio geselecteerd! => selecteer een soort en regio
 missing_title,ontbrekend
 modelScenario_title,Model scenario
 modelType_title,Model type
@@ -940,8 +940,8 @@ not selected_title,niet geselecteerd
 numberTaxa_title,Aantal geïntroduceerde taxa
 number_title,Aantal
 observations-mapOccurrence_description,"<p>Kaart met de verspreiding in de gekozen gewesten sinds 1950.</p><ul> 
-<li><p><b style=""color: #000000;"">Zwarte</b> vierkanten geven de gebieden van 10 km × 10 km aan waarin de soort werd waargenomen.</p></li> 
-<li><p><b style=""color: #FF0000;"">Rode</b> vierkanten markeren specifieke locaties van 1 km × 1 km binnen deze gebieden waar waarnemingen zijn gemeld.</p></li> </ul> 
+<li><p><b style=""color: #000000;"">Zwarte</b> hokken geven de gebieden van 10 × 10 km aan waarin de soort werd waargenomen.</p></li> 
+<li><p><b style=""color: #FF0000;"">Rode</b> hokken markeren specifieke locaties van 1 × 1 km binnen deze gebieden waar waarnemingen zijn gemeld.</p></li> </ul> 
 <p>Het bijgevoegde staafdiagram toont een tijdreeks van het aantal vierkanten per jaar in elk gewest sinds 1950.<br>
  Wanneer een vierkant meerdere gewesten overlapt, wordt dit geteld als ""meer dan 1 gewest"".</p>"
 observations-mapOccurrence_title,Verspreiding van {{species}}

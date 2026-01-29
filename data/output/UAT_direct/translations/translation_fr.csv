@@ -724,7 +724,7 @@ Pour chaque espèce, l'occupation au moment de son inclusion dans la liste de l'
 <span style=""color: #e87837ff;"">orange</span> (Rapport)."
 countOccupancy_title,Tendance d'occupation des espèces de la liste de l'Union en Flandre
 countOccurrence_yLabel_description,NA
-countOccurrence_yLabel_title,Répartition (nombre de carrés de 1x1 km)
+countOccurrence_yLabel_title,Répartition (nombre de carrés de 1 x 1 km)
 count_title,nombre
 cpue_title,prise par unité d'effort
 createReport_title,Créer un rapport
@@ -911,8 +911,8 @@ numberTaxa_title,Nombre de taxons introduits
 number_title,Nombre
 observations-mapOccurrence_description,"<p>Carte de la répartition dans les régions sélectionnées depuis 1950.</p>
 <ul>
-<li><p>Les carrés <b style=""color: #000000;"">noirs</b> indiquent des zones de 10 km x 10 km où l’espèce a été observée.<br>
-<li>Les carrés <b style=""color: #FF0000;"">rouges</b> rouges marquent des emplacements plus précis de 1 km x 1 km à l’intérieur de ces zones où des observations ont été signalées.</p> 
+<li><p>Les carrés <b style=""color: #000000;"">noirs</b> indiquent des zones de 10 x 10 km où l’espèce a été observée.<br>
+<li>Les carrés <b style=""color: #FF0000;"">rouges</b> rouges marquent des emplacements plus précis de 1 x 1 km à l’intérieur de ces zones où des observations ont été signalées.</p> 
 </ul>
 <p>Le graphique en barres joint présente une série chronologique montrant le nombre de carrés par an dans chaque région depuis 1950.<br>
 Lorsqu’un carré chevauche plusieurs régions, il est compté comme ""plusieurs régions"".</p>"
