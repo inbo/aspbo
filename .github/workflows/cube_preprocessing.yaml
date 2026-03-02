@@ -40,10 +40,17 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
-          cache: true
 
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
+        
+      - name: Get latest successful run ID 
+        id: get-latest-run
+        run: |
+          run_id=$(gh run list -w get_occ_cube.yaml --status success --json databaseId --jq '.[0].databaseId')
+          echo "run_id=$run_id" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Download be_alientaxa_cube artifact
         uses: actions/download-artifact@v4
@@ -94,14 +101,6 @@ jobs:
           echo "::set-output name=AWS_ACCESS_KEY_ID::$(echo $TEMP_ROLE | jq -r .Credentials.AccessKeyId)"
           echo "::set-output name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)"
           echo "::set-output name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)"
-          
-      - name: Get latest successful run ID 
-        id: get-latest-run
-        run: |
-          run_id=$(gh run list -w get_occ_cube.yaml --status success --json databaseId --jq '.[0].databaseId')
-          echo "run_id=$run_id" >> $GITHUB_OUTPUT
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: cube_preprocessing
         run: |
