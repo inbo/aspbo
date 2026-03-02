@@ -3,7 +3,7 @@
 installed <- rownames(installed.packages())
 # specify packages we need
 required <- c("aws.s3", "magrittr", "readr",
-              "dplyr", "rgbif", "devtools", "leaflet.extras"
+              "dplyr", "rgbif", "devtools"
 )
 # install packages if needed
 if (!all(required %in% installed)) {
@@ -13,6 +13,7 @@ if (!all(required %in% installed)) {
 }
 
 # install non-CRAN packages ####
+devtools::install_github("trafficonese/leaflet.extras", force = TRUE)
 devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)
 devtools::install_github("inbo/alien-species-portal@uat", 
                          subdir = "alienSpecies", force = TRUE)
