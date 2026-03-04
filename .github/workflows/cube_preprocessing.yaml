@@ -6,6 +6,10 @@ on:
     workflows: ["download occurrence cube"]
     types:
       - completed
+      
+env:
+  # Enable debug if the branch is NOT 'uat'
+  ACTIONS_STEP_DEBUG: ${{ github.ref_name != 'uat' && 'true' || 'false' }}
 
 jobs:
   fetch-data:
