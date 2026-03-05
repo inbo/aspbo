@@ -89,23 +89,13 @@ jobs:
         shell: Rscript {0}
 
       - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
 
-      - name: Assume Role
-        id: assume_role
-        run: |
-          ROLE_ARN="${{ secrets.AWS_ROLE_ARN }}"
-          TEMP_ROLE=$(aws sts assume-role \
-            --role-arn $ROLE_ARN \
-            --role-session-name inbo-deployment)
-          echo "name=AWS_ACCESS_KEY_ID::$(echo $TEMP_ROLE | jq -r .Credentials.AccessKeyId)" >> $GITHUB_OUTPUT
-          echo "name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)" >> $GITHUB_OUTPUT
-          echo "name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)" >> $GITHUB_OUTPUT
-          
       - name: cube_preprocessing
         run: |
           source("src/run_cube_preprocessing.R")
