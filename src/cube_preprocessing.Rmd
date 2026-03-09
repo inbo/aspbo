@@ -93,6 +93,21 @@ if(Sys.getenv("amiabot") != "yes"){
   print("Executor of the script is a human >> connecting to bucket")
   source("./src/connect_to_bucket.R")
   connect_to_bucket(bucket_name = UAT_bucket)
+}else{
+  test_that("AWS credentials are set in the environment", {
+    # 1. Check Access Key
+    expect_true(Sys.getenv("AWS_ACCESS_KEY_ID") != "", 
+                info = "AWS_ACCESS_KEY_ID is missing or empty")
+    
+    # 2. Check Secret Key
+    expect_true(Sys.getenv("AWS_SECRET_ACCESS_KEY") != "", 
+                info = "AWS_SECRET_ACCESS_KEY is missing or empty")
+    
+    # 3. Check Session Token (Required since you are using role-to-assume)
+    expect_true(Sys.getenv("AWS_SESSION_TOKEN") != "", 
+                info = "AWS_SESSION_TOKEN is missing (Required for assumed roles)")
+    
+  })
 }
 ```
 
