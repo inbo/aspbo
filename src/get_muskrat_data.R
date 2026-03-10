@@ -27,7 +27,7 @@ occ_download_wait(down_musk,
                                   http_version = 2,
                                   forbid_reuse = TRUE))
 ## Use manual download ####
-# down_musk <- "0026587-231002084531237"
+# down_musk <- "0052744-251120083545085"
 
 raw_muskrat_data <- occ_download_get(down_musk) %>%
   occ_download_import()
@@ -40,10 +40,13 @@ table(raw_muskrat_data$datasetName,
       raw_muskrat_data$samplingProtocol, 
       useNA = "ifany")
 
+table(raw_muskrat_data$occurrenceStatus, useNA = "ifany")
+
 muskrat_data_redux <- raw_muskrat_data %>% 
   filter(samplingProtocol != "casual observation",
          !grepl(pattern = "material lost/broken",
-                x = samplingProtocol)) %>% 
+                x = samplingProtocol),
+         occurrenceStatus != "ABSENT") %>% 
   filter(!is.na(individualCount))
 
 # Add spatial component ####

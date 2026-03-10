@@ -15,11 +15,12 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544600	1031743	Dorypteryx pallida	2018	2018	Insecta	Animalia
 152544591	1032262	Enderleinellus kumadai	2004	2011	Insecta	Animalia
 152544587	1032377	Hoplopleura erismata	2004	2011	Insecta	Animalia
-152544545	1043978	Stelidota geminata	2018	2018	Insecta	Animalia
 182134456	1194885	Otiorhynchus meridionalis	2003	2018	Insecta	Animalia
 182134455	1194989	Otiorhynchus cribricollis	2002	2018	Insecta	Animalia
+182134454	1195013	Otiorhynchus aurifer	1999	2018	Insecta	Animalia
 152544520	1319260	Tetraponera allaborans	1980	2018	Insecta	Animalia
 152544508	1321805	Pheidole bilimeki	1911	2018	Insecta	Animalia
+152544494	1325561	Paratrechina longicornis	1980	2018	Insecta	Animalia
 213213874	1349836	Hylaeus absolutus	2021	2021	Insecta	Animalia
 152544459	1419894	Euborellia annulipes	2016	2018	Insecta	Animalia
 152544422	1420197	Aleurodothrips fasciapennis	2018	2018	Insecta	Animalia
@@ -32,6 +33,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544412	1422818	Pseudagrion microcephalum	2011	2012	Insecta	Animalia
 182134330	1548900	Dohrniphora cornuta	2005	2005	Insecta	Animalia
 213214411	1623077	Tephritis carmen	1979	1979	Insecta	Animalia
+213213908	1795068	Thysanoplusia orichalcea	2021	2021	Insecta	Animalia
 213214212	2012520	Agonoscena succincta	2021	2021	Insecta	Animalia
 159748106	2114326	Eurytemora americana	NA	NA	Copepoda	Animalia
 159748091	2115724	Balanus trigonus	NA	NA	Maxillopoda	Animalia
@@ -49,7 +51,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544188	2153791	Chaetopelma olivaceum	2011	2011	Arachnida	Animalia
 152544194	2155557	Selenops radiatus	2004	2004	Arachnida	Animalia
 152544145	2155807	Euryopis episinoides	2002	2002	Arachnida	Animalia
-152544152	2157278	Steatoda paykulliana	2015	2015	Arachnida	Animalia
 152544161	2157335	Hadrotarsus ornatus	1999	1999	Arachnida	Animalia
 152544167	2157928	Latrodectus hasselti	1999	1999	Arachnida	Animalia
 152544170	2157942	Latrodectus hesperus	2013	2013	Arachnida	Animalia
@@ -80,7 +81,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182133944	2308549	Limnodrilus maumeensis	2014	2014	Clitellata	Animalia
 152543695	2308605	Potamothrix vejdovskyi	2009	2016	Clitellata	Animalia
 182133960	2321001	Boccardiella ligerica	NA	NA	Polychaeta	Animalia
-152543727	2321012	Marenzelleria viridis	1995	2016	Polychaeta	Animalia
 152543510	2351064	Coregonus nasus	NA	NA	NA	Animalia
 152543513	2351136	Coregonus peled	1978	2017	NA	Animalia
 152543517	2351413	Hucho hucho	1954	2017	NA	Animalia
@@ -92,7 +92,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213205	2426658	Pelophylax perezi	2005	2005	Amphibia	Animalia
 213213247	2431993	Ambystoma tigrinum	1970	1970	Amphibia	Animalia
 182133525	2432063	Siren intermedia	2014	2014	Amphibia	Animalia
-152543332	2433536	Nasua nasua	2007	2018	Mammalia	Animalia
 152543348	2435451	Sarcophilus harrisii	2007	2018	Mammalia	Animalia
 152543358	2436886	Sylvilagus floridanus	1950	2017	Mammalia	Animalia
 152543254	2441122	Ovis ammon	2018	2018	Mammalia	Animalia
@@ -162,13 +161,11 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213212733	2498325	Bucephala islandica	1990	1990	Aves	Animalia
 182132858	2502805	Kontikia ventrolineata	2016	2018	NA	Animalia
 213212299	2513597	Entyloma dahliae	1905	1905	Exobasidiomycetes	Fungi
-152543197	2513609	Entyloma calendulae	1900	1902	Exobasidiomycetes	Fungi
 213212302	2513637	Entyloma eschscholziae	2014	2018	Exobasidiomycetes	Fungi
 213212282	2514345	Puccinia helianthi-mollis	NA	NA	Pucciniomycetes	Fungi
 213212278	2514415	Puccinia umbilici	NA	NA	Pucciniomycetes	Fungi
 213212286	2514484	Puccinia soldanellae	NA	NA	Pucciniomycetes	Fungi
 213212284	2514574	Puccinia subnitens	NA	NA	Pucciniomycetes	Fungi
-152543187	2514966	Puccinia sorghi	1997	1997	Pucciniomycetes	Fungi
 213212264	2515591	Uromyces dianthi	NA	NA	Pucciniomycetes	Fungi
 213212268	2515673	Uromyces hedysari-obscuri	NA	NA	Pucciniomycetes	Fungi
 213212261	2515982	Uromyces croci	1876	1876	Pucciniomycetes	Fungi
@@ -208,7 +205,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152546606	2742119	Veratrum album	1835	1893	Liliopsida	Plantae
 152546724	2764337	Commelina obliqua	1999	2000	Liliopsida	Plantae
 152546634	2784401	Traunsteinera globosa	1812	1812	Liliopsida	Plantae
-213212557	2805420	Spiranthes cernua	2021	2021	Liliopsida	Plantae
 213212605	2870049	Pinellia tripartita	2017	2020	Liliopsida	Plantae
 213212609	2871376	Spirodela punctata	2015	2016	Liliopsida	Plantae
 152546215	2874019	Aristolochia rotunda	1952	1952	Magnoliopsida	Plantae
@@ -226,6 +222,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545265	2908428	Galium divaricatum	1900	2008	Magnoliopsida	Plantae
 152545795	2925492	Verbena supina	1947	1947	Magnoliopsida	Plantae
 152545798	2925515	Verbena halei	1921	1940	Magnoliopsida	Plantae
+152545799	2925518	Verbena brasiliensis	1993	1993	Magnoliopsida	Plantae
 152545539	2925754	Lappula marginata	1880	1896	Magnoliopsida	Plantae
 152545543	2925790	Heliotropium amplexicaule	1890	1890	Magnoliopsida	Plantae
 152545522	2926041	Nonea rosea	1828	1828	Magnoliopsida	Plantae
@@ -266,7 +263,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213214647	3047147	Neslia paniculata thracica	1866	1927	Magnoliopsida	Plantae
 213214628	3048073	Erysimum collisparsum	1893	1941	Magnoliopsida	Plantae
 152545461	3048288	Erysimum diffusum	1877	1896	Magnoliopsida	Plantae
-152545462	3048532	Erysimum marshallii	2000	2000	Magnoliopsida	Plantae
 152545439	3053950	Enarthrocarpus lyratus	1892	1893	Magnoliopsida	Plantae
 152546431	3056259	Acalypha indica	2003	2003	Magnoliopsida	Plantae
 152546433	3060710	Manihot grahamii	2017	2017	Magnoliopsida	Plantae
@@ -302,6 +298,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544191	3114343	Athanasia trifurcata	1909	1912	Magnoliopsida	Plantae
 152544203	3114679	Carduus hamulosus	1876	1877	Magnoliopsida	Plantae
 152544045	3120066	Achillea setacea	1885	1886	Magnoliopsida	Plantae
+213215085	3121474	Artemisia rubripes	2012	2012	Magnoliopsida	Plantae
 213215086	3121547	Artemisia mongolica	2019	2019	Magnoliopsida	Plantae
 213215088	3121593	Artemisia gmelinii	2009	2021	Magnoliopsida	Plantae
 152544016	3122190	Amberboa moschata	1952	1952	Magnoliopsida	Plantae
@@ -357,14 +354,12 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545736	3895710	Teucrium lucidrys	2011	2018	Magnoliopsida	Plantae
 213215469	3898065	Salvia lavandulifolia gallica	1900	1900	Magnoliopsida	Plantae
 152545743	3905970	Marrubium peregrinum	1835	1912	Magnoliopsida	Plantae
-152546234	3937506	Corynabutilon suntense	2006	2006	Magnoliopsida	Plantae
 213214346	3982013	Epimedium pubigerum	2020	2020	Magnoliopsida	Plantae
 213214366	3982284	Mahonia wagneri	2010	2020	Magnoliopsida	Plantae
 152543401	3989886	Lythrum acutangulum	1874	1989	Magnoliopsida	Plantae
 152545821	4007682	Lysimachia linum-stellatum	1858	1858	Magnoliopsida	Plantae
 213214842	4022910	Portulaca macrantha	1948	2013	Magnoliopsida	Plantae
 152546009	4023424	Portulaca trituberculata	1865	2011	Magnoliopsida	Plantae
-152545611	4055853	Buddleja albiflora	1945	1945	Magnoliopsida	Plantae
 152545529	4064572	Cynoglossum clandestinum	1948	1948	Magnoliopsida	Plantae
 152546297	4095186	Valeriana pyrenaica	1957	1957	Magnoliopsida	Plantae
 152546305	4095244	Valerianella vesicaria	1850	1850	Magnoliopsida	Plantae
@@ -413,10 +408,8 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213143	4149175	Eragrostis brownii	1920	1920	Liliopsida	Plantae
 152546900	4152037	Helictotrichon sempervirens	1981	1981	Liliopsida	Plantae
 152547043	4154800	Avena brevis	1885	1909	Liliopsida	Plantae
-213213619	4194303	Ribes aureum villosum	1897	2020	Magnoliopsida	Plantae
 213213642	4202184	Hylotelephium anacampseros	1850	1850	Magnoliopsida	Plantae
 213215374	4205304	Pterocarya rehderiana	1995	2019	Magnoliopsida	Plantae
-152544378	4206362	Onopordum beckianum	2018	2018	Magnoliopsida	Plantae
 213215030	4211074	Carduus theriotii	1850	1892	Magnoliopsida	Plantae
 182134919	4211590	Lactuca macrophylla uralensis	1948	2020	Magnoliopsida	Plantae
 213215122	4233822	Vittadinia dentata	1892	1892	Magnoliopsida	Plantae
@@ -479,9 +472,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 182133781	5225659	Morelia spilota	2013	2019	Squamata	Animalia
 182133795	5226308	Agama agama	2015	2020	Squamata	Animalia
 159747376	5229072	Psittacula derbiana	2016	2016	Aves	Animalia
-213212319	5240299	Amanita inopinata	2008	2018	Agaricomycetes	Fungi
 152543121	5250090	Urocystis trollii	1894	2018	Ustilaginomycetes	Fungi
-182132946	5270720	Chara braunii	1864	2018	Charophyceae	Plantae
 152547227	5274858	Salvinia natans	1835	1889	Polypodiopsida	Plantae
 152547198	5274964	Polypodium hesperium	1980	1980	Polypodiopsida	Plantae
 152546737	5289490	Typha provincialis	2012	2020	Liliopsida	Plantae
@@ -539,8 +530,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152543796	5402627	Iva annua	1994	2000	Magnoliopsida	Plantae
 152543800	5402874	Eupatorium perfoliatum	2007	2008	Magnoliopsida	Plantae
 152543587	5408775	Lobelia sessilifolia	2004	2004	Magnoliopsida	Plantae
-152545242	5414545	Periploca graeca	1918	1918	Magnoliopsida	Plantae
-152545244	5414550	Vincetoxicum rossicum	1965	1965	Magnoliopsida	Plantae
 213215540	5414989	Digitalis lanata	2020	2020	Magnoliopsida	Plantae
 152545655	5415014	Linaria angustissima	1835	1835	Magnoliopsida	Plantae
 159746847	5421557	Coscinodiscus wailesii	1997	1997	Bacillariophyceae	Chromista
@@ -562,6 +551,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545883	5621983	Echinopsis silvestrii	2012	2012	Magnoliopsida	Plantae
 182134198	5632022	Lotus dorycnium	1903	1903	Magnoliopsida	Plantae
 152545119	5632334	Trigonella hierosolymitana	1886	1901	Magnoliopsida	Plantae
+152545816	5640518	Primula florindae	2010	2010	Magnoliopsida	Plantae
 152546420	5646136	Elatine alsinastrum	1860	1863	Magnoliopsida	Plantae
 152545829	5659657	Gilia capitata mediomontana	1893	1898	Magnoliopsida	Plantae
 152546865	5674047	Nassella hyalina	1897	1897	Liliopsida	Plantae
@@ -588,7 +578,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544565	6308164	Scandix australis grandiflora	1894	1894	Magnoliopsida	Plantae
 213212959	6313049	Triticum turgidum polonicum	1895	1926	Liliopsida	Plantae
 213213515	6402873	Physalis ixocarpa	1912	1970	Magnoliopsida	Plantae
-213214066	6420901	Nemophila menziesii menziesii	1888	2016	Magnoliopsida	Plantae
 213213461	6427623	Oenothera villosa villosa	1828	2017	Magnoliopsida	Plantae
 152547112	6431764	Aristida longespica	1891	1891	Liliopsida	Plantae
 213213344	6476579	Dolichoplana signata	2018	2018	NA	Animalia
@@ -598,17 +587,13 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152544386	6931186	Nicoletia phytophila	2016	2018	Insecta	Animalia
 152543712	7009279	Laonome calida	2014	2016	Polychaeta	Animalia
 152543660	7066596	Zinnia angustifolia angustifolia	1948	1950	Magnoliopsida	Plantae
-152545727	7096205	Clinopodium nepeta nepeta	1885	2020	Magnoliopsida	Plantae
 213214756	7104074	Salix lapponum	1993	2021	Magnoliopsida	Plantae
 213214926	7136602	Armeria alliacea	2020	2021	Magnoliopsida	Plantae
 213215678	7219988	Crataegus microphylla microphylla	2017	2020	Magnoliopsida	Plantae
 152544039	7222196	Achillea salicifolia salicifolia	1986	1986	Magnoliopsida	Plantae
-213215073	7222255	Lactuca macrophylla macrophylla	2002	2021	Magnoliopsida	Plantae
-213215071	7223177	Crepis sancta sancta	1948	2020	Magnoliopsida	Plantae
 152545828	7223680	Gilia capitata capitata	1921	2016	Magnoliopsida	Plantae
 213215279	7224069	Petroselinum crispum crispum	1872	2018	Magnoliopsida	Plantae
 213213583	7225712	Calystegia silvatica silvatica	2008	2020	Magnoliopsida	Plantae
-213213019	7226794	Bromus japonicus japonicus	1862	2019	Liliopsida	Plantae
 152543162	7239373	Uromyces veratri	1852	1852	Pucciniomycetes	Fungi
 213212265	7239389	Uromyces proeminens	NA	NA	Pucciniomycetes	Fungi
 213212211	7261816	Eptesicus nilssonii	2016	2016	Mammalia	Animalia
@@ -622,14 +607,12 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213764	7302355	Vicia benghalensis benghalensis	1984	2022	Magnoliopsida	Plantae
 213214184	7318199	Oxalis tetraphylla	2009	2021	Magnoliopsida	Plantae
 152543454	7322373	Oenothera issleri	1955	2014	Magnoliopsida	Plantae
-213214941	7323251	Amaranthus emarginatus emarginatus	1908	1928	Magnoliopsida	Plantae
 152545940	7323341	Amaranthus capensis capensis	1890	1911	Magnoliopsida	Plantae
 152545907	7323632	Ptilotus spicatus	1947	1947	Magnoliopsida	Plantae
 152545937	7323834	Amaranthus macrocarpus macrocarpus	1911	1949	Magnoliopsida	Plantae
 213213574	7324507	Ipomoea lacunosa lacunosa	1993	2018	Magnoliopsida	Plantae
 213215596	7327959	Daboecia cantabrica cantabrica	2012	2017	Magnoliopsida	Plantae
 159749052	7331548	Alonsoa linearis	2017	2017	Magnoliopsida	Plantae
-213215552	7332416	Chaenorhinum origanifolium origanifolium	2001	2018	Magnoliopsida	Plantae
 213215431	7332517	Orobanche flava flava	1944	1945	Magnoliopsida	Plantae
 152545687	7333212	Antirrhinum graniticum	1975	1975	Magnoliopsida	Plantae
 152544723	7334576	Sempervivum barbulatum	2009	2018	Magnoliopsida	Plantae
@@ -641,7 +624,6 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 159746880	7425750	Stropholoma aurantiacum	2018	2018	Agaricomycetes	Fungi
 213214773	7427741	Cratoxylum sumatranum blancoi	2014	2020	Magnoliopsida	Plantae
 213212499	7444957	Podarcis liolepis	2011	2011	Squamata	Animalia
-152545787	7455425	Phyla nodiflora minor	2010	2017	Magnoliopsida	Plantae
 213215270	7480365	Hydrocotyle moschata	2012	2022	Magnoliopsida	Plantae
 152544270	7481364	Fulvius subnitens	2008	2018	Insecta	Animalia
 182134182	7484581	Desmanthus illinoensis	1995	1998	Magnoliopsida	Plantae
@@ -685,12 +667,10 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 152545471	7853188	Reseda lutea vivantii	1898	1898	Magnoliopsida	Plantae
 213213666	7863397	Petrosedum ochroleucum	1873	1898	Magnoliopsida	Plantae
 213215715	7882872	Prunus domestica	1985	2021	Magnoliopsida	Plantae
-213215712	7925720	Poterium sanguisorba polygamum	1824	2018	Magnoliopsida	Plantae
 213213995	7926816	Monsonia angustifolia	1893	1893	Magnoliopsida	Plantae
 152545901	7933495	Sclerolaena muricata	1907	1911	Magnoliopsida	Plantae
 213213069	7948459	Aira elegans	1898	1994	Liliopsida	Plantae
 213212288	7954545	Puccinia conglomerata	1850	2012	Pucciniomycetes	Fungi
-152544536	7987143	Anoplophora chinensis	2005	2006	Insecta	Animalia
 152546784	7998563	Diplachne fusca fusca	1911	1953	Liliopsida	Plantae
 213215546	8006893	Kickxia elatine sieberi	1955	1971	Magnoliopsida	Plantae
 152546073	8012084	Dianthus subacaulis	2002	2020	Magnoliopsida	Plantae
@@ -718,13 +698,11 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213214746	8345607	Populus berolinensis	2015	2015	Magnoliopsida	Plantae
 152544425	8351995	Frankliniella occidentalis	2018	2018	Insecta	Animalia
 152544492	8364220	Torilis leptophylla	1872	1955	Magnoliopsida	Plantae
-152546786	8369366	Diplachne fusca uninervia	1998	1998	Liliopsida	Plantae
 213212957	8389446	Triticum turgidum dicoccum	2012	2012	Liliopsida	Plantae
 213214001	8391331	Erodium moschatum	1971	2022	Magnoliopsida	Plantae
 152546616	8418777	Lilium hollandicum	2016	2017	Liliopsida	Plantae
 213215004	8419625	Silene scabriflora	1860	1860	Magnoliopsida	Plantae
 152546821	8420312	Phalaris platensis	1895	1921	Liliopsida	Plantae
-213214723	8427207	Eratigena fuesslini	2011	2011	Arachnida	Animalia
 213212274	8427910	Puccinia oreoselini	NA	NA	Pucciniomycetes	Fungi
 159748459	8428595	Bugulina stolonifera	NA	NA	Gymnolaemata	Animalia
 182133821	8566446	Aesculus indica	1997	1997	Magnoliopsida	Plantae
@@ -733,6 +711,7 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213213511	8791507	Physalis philadelphica	2008	2017	Magnoliopsida	Plantae
 213213618	8864505	Macomopsis melo	2021	2021	Bivalvia	Animalia
 182133699	8953936	Caiman crocodilus	2017	2017	Crocodylia	Animalia
+213215537	8983123	Veronica teucrium teucrium	1948	2019	Magnoliopsida	Plantae
 213212580	8991514	Caracara plancus cheriway	NA	NA	Aves	Animalia
 213214673	9067615	Mentzelia albicaulis	1893	1893	Magnoliopsida	Plantae
 213212483	9099408	Elaphe quatuorlineata	2012	2013	Squamata	Animalia
@@ -741,19 +720,16 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213212721	9267300	Sporobolus advenus	1921	1921	Liliopsida	Plantae
 213212453	9342283	Thamnophis marcianus	1993	1994	Squamata	Animalia
 213212726	9405036	Spatula cyanoptera cyanoptera	NA	NA	Aves	Animalia
-213214077	9405645	Lycopsis arvensis orientalis	1850	2019	Magnoliopsida	Plantae
 152543667	9442679	Bratislavia dadayi	2002	2016	Clitellata	Animalia
 213214939	9454901	Amaranthus macrocarpus pallidus	1947	1949	Magnoliopsida	Plantae
 213212725	9462721	Spatula versicolor versicolor	NA	NA	Aves	Animalia
 213213020	9473367	Antigone vipio	2011	2011	Aves	Animalia
 152543663	9479629	Tasserkidrilus americanus	2006	2016	Clitellata	Animalia
 156872745	9491873	Dichotomyctere fluviatilis	2001	2017	NA	Animalia
-152543327	9518324	Procyon cancrivorus	2006	2018	Mammalia	Animalia
 213214847	9554442	Tamarix gallica	2008	2021	Magnoliopsida	Plantae
 182133911	9601519	Pseudemys rubriventris	2015	2015	Testudines	Animalia
 213213238	9662775	Gastoniella chaerophylla	2005	2005	Polypodiopsida	Plantae
 213214042	9711656	Pelargonium capitatum	1980	1980	Magnoliopsida	Plantae
-213215403	9771172	Valerianella locusta locusta	2005	2015	Magnoliopsida	Plantae
 182133918	9803191	Pelusios castaneus	2020	2020	Testudines	Animalia
 213215083	10108775	Pentanema spiraeifolium	1868	1874	Magnoliopsida	Plantae
 213212627	10236166	NA	1997	2020	Liliopsida	Plantae
@@ -763,18 +739,15 @@ key	nubKey	canonicalName	first_observed	last_observed	class	kingdom
 213215082	10629881	Pentanema hirtum	1850	1900	Magnoliopsida	Plantae
 213215451	10646747	NA	2011	2018	Magnoliopsida	Plantae
 213213675	10730110	Crassula peduncularis	1894	1920	Magnoliopsida	Plantae
-213212537	10755213	Narcissus hispanicus hispanicus	2014	2020	Liliopsida	Plantae
 213212281	10797854	Puccinia grisea	NA	NA	Pucciniomycetes	Fungi
 213213227	10857535	Dryophytes japonicus	2021	2021	Amphibia	Animalia
 213212760	10920460	Bathilda ruficauda	2009	2013	Aves	Animalia
 213215173	10948891	Podolepis aristata auriculata	1899	1899	Magnoliopsida	Plantae
 213213042	10986555	Thinopyrum obtusiflorum	1900	1900	Liliopsida	Plantae
 213215131	11136683	Pulicaria arabica arabica	1898	1898	Magnoliopsida	Plantae
-213213646	11162940	Phedimus spurius spurius	1866	2020	Magnoliopsida	Plantae
 213212490	11205618	Leptodeira ashmeadii	2023	2023	Squamata	Animalia
 213212736	11335341	Trisetaria panicea	1947	2015	Liliopsida	Plantae
 213214692	11528335	Tliltocatl albopilosus	1986	1986	Arachnida	Animalia
 213215228	11794300	Xanthium orientale saccharatum	2020	2020	Magnoliopsida	Plantae
-213215664	11844792	Geum ternatum ternatum	2008	2021	Magnoliopsida	Plantae
 213215339	12132283	Malva alcea ribifolia	2004	2010	Magnoliopsida	Plantae
 213212963	12205713	Triticum aestivum compactum	1901	1954	Liliopsida	Plantae

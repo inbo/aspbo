@@ -25,6 +25,11 @@ The alien species portal backoffice contains automated data preparation scripts 
 
 [![cube preprocessing](https://github.com/inbo/aspbo/actions/workflows/cube_preprocessing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/cube_preprocessing.yaml)
 
+## Processing & Testing
+[![translation processing](https://github.com/inbo/aspbo/actions/workflows/run_translations_processing.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/run_translations_processing.yaml)
+
+[![run_translations_test](https://github.com/inbo/aspbo/actions/workflows/run_translations_test.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/run_translations_test.yaml)
+
 ## Upload dataflows
 [![upload_files_direct](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/upload_files_direct.yaml)
 

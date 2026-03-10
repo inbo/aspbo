@@ -89,7 +89,7 @@ jobs:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
           commit_message: "update eu concern list"
-          target_branch: automatic-management-prep
+          target_branch: automatic-eu-concern-update
 
       - name: Get branch name
         run: |

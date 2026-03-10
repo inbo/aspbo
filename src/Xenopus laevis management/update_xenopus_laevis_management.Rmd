@@ -93,8 +93,8 @@ species <- species %>%
 ```{r prep locations}
 # Convert to sf
 locations <- locations_raw %>%
-  dms_column_to_decimal(c("lat_Y", "long_X")) %>% 
-  st_as_sf(coords = c("long_X_decimal", "lat_Y_decimal"),
+#  dms_column_to_decimal(c("lat_Y", "long_X")) %>% 
+  st_as_sf(coords = c("long_X", "lat_Y"),
            crs = 4326,
            remove = FALSE)
 
@@ -157,7 +157,7 @@ test_that("No gemeente-provincie combinations left in locations_dupli_remaining"
 })
 
 locations_final <- rbind(locations_uniek, locations_dupli_redux) %>% 
-  select(locationID, surface = `surface (m²)`, lat_Y_decimal, long_X_decimal, gemeente, provincie, gewest, geometry)
+  select(locationID, surface = `surface (m²)`, lat_Y, long_X, gemeente, provincie, gewest, geometry)
 
 test_that("All locationIDs from locations_raw are present in locations_final", {
   # Ensure data frames exist
@@ -218,11 +218,12 @@ table(catch_data$lifeStage, useNA = "ifany")
 # indivudual count is summed per event and the max of n_fuiken is used.
 catch_data_results <- catch_data %>% 
   left_join(events, by = "eventID") %>% 
-  group_by(eventID, locationID, lat_Y_decimal, long_X_decimal, lifeStage, Jaar, species, gemeente, provincie, gewest) %>% 
+  group_by(eventID, locationID, lat_Y, long_X, lifeStage, Jaar, species, gemeente, provincie, gewest) %>% 
   summarise(individualCount = sum(individualCount, na.rm = TRUE),
             no_fuiken = max(effort, na.rm = TRUE)) %>% 
   filter(species == "Xenopus laevis") %>% 
   mutate(lifeStage = case_when(lifeStage %in% c("Larve", "larve") ~ "larvae",
+                               lifeStage %in% c("juv", "juvenile") ~ "juvenile",
                                is.na(lifeStage) ~ "unknown",
                                TRUE ~ lifeStage)) %>% 
   rename(year = Jaar,
@@ -243,6 +244,14 @@ catch_data_ecology <- catch_data_ecology_int %>%
 
 test_that("There are more individuals in the final data than at the source", {
   expect_equal(sum(catch_data_ecology_int$individualCount, na.rm = TRUE), nrow(catch_data_ecology))
+})
+
+test_that("There are new values in lifeStage => check/fix these",{
+  expect_in(catch_data_results$lifeStage, c("adult",
+                                            "eggs",
+                                            "juvenile",
+                                            "larvae",
+                                            "subadult"))
 })
 ```
 
