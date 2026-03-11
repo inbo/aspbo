@@ -170,8 +170,8 @@ p18c_2025-10-07_2025-10-08,p18c,50.769927,2.879769,juvenile,2025,Xenopus laevis,
 p18c_2025-10-07_2025-10-08,p18c,50.769927,2.879769,larvae,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,3,4
 p18c_2025-10-08_2025-10-09,p18c,50.769927,2.879769,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,10,5
 p18c_2025-10-08_2025-10-09,p18c,50.769927,2.879769,larvae,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,8,5
-p18c_2025-10-09_2015-10-10,p18c,50.769927,2.879769,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,2,-18260
-p18c_2025-10-09_2015-10-10,p18c,50.769927,2.879769,larvae,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,8,-18260
+p18c_2025-10-09_2025-10-10,p18c,50.769927,2.879769,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,2,5
+p18c_2025-10-09_2025-10-10,p18c,50.769927,2.879769,larvae,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,8,5
 p18c_2025-10-21_2025-10-22,p18c,50.769927,2.879769,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,7,5
 p18c_2025-10-21_2025-10-22,p18c,50.769927,2.879769,larvae,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,3,5
 p18c_2025-10-22_2025-10-23,p18c,50.769927,2.879769,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,4,5
@@ -230,11 +230,11 @@ p41a_2025-04-28_2025-04-29,p41a,50.768028,2.770806,adult,2025,Xenopus laevis,Heu
 p42b_2024-08-06_2024-08-07,p42b,50.773444,2.765528,adult,2024,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,2,4
 p44b_2024-07-08_2024-07-09,p44b,50.778056,2.752889,subadult,2024,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,3,4
 p44b_2024-07-09_2024-07-10,p44b,50.778056,2.752889,subadult,2024,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,4
-p54_1935-08-26_1935-08-27,p54,50.764718,2.76806,juvenile,1935,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,2,4
-p54_1935-08-26_1935-08-27,p54,50.764718,2.76806,larvae,1935,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,4
 p54_2025-08-25_2025-08-26,p54,50.764718,2.76806,adult,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,3,4
 p54_2025-08-25_2025-08-26,p54,50.764718,2.76806,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,2,4
 p54_2025-08-25_2025-08-26,p54,50.764718,2.76806,larvae,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,4
+p54_2025-08-26_2025-08-27,p54,50.764718,2.76806,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,2,4
+p54_2025-08-26_2025-08-27,p54,50.764718,2.76806,larvae,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,4
 p54_2025-08-27_2025-08-28,p54,50.764718,2.76806,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,4
 p54_2025-08-28_2025-08-29,p54,50.764718,2.76806,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,2,4
 p5e_2025-09-22_2025-09-23,p5e,50.75563,2.850164,adult,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,26,11
@@ -259,8 +259,8 @@ p7b_2024-08-13_2024-08-14,p7b,50.758111,2.838278,subadult,2024,Xenopus laevis,He
 p7b_2025-08-25_2025-08-26,p7b,50.758111,2.838278,adult,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,2,5
 p7b_2025-08-25_2025-08-26,p7b,50.758111,2.838278,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,6,5
 p7b_2025-08-25_2025-08-26,p7b,50.758111,2.838278,subadult,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,22,5
-p7b_2025-08-26_2025-08-27,p7b,50.758111,2.838278,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,1
-p7b_2025-08-26_2025-08-27,p7b,50.758111,2.838278,subadult,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,1
+p7b_2025-08-26_2025-08-27,p7b,50.758111,2.838278,juvenile,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,5
+p7b_2025-08-26_2025-08-27,p7b,50.758111,2.838278,subadult,2025,Xenopus laevis,Heuvelland,West-Vlaanderen,flanders,1,5
 p9c_2025-09-15_2025-09-16,p9c,50.755472,2.885806,adult,2025,Xenopus laevis,Mesen,West-Vlaanderen,wallonia,13,5
 p9c_2025-09-15_2025-09-16,p9c,50.755472,2.885806,subadult,2025,Xenopus laevis,Mesen,West-Vlaanderen,wallonia,1,5
 p9c_2025-09-15_2025-09-17,p9c,50.755472,2.885806,adult,2025,Xenopus laevis,Mesen,West-Vlaanderen,wallonia,4,10
