@@ -13,6 +13,8 @@ output:
     toc_depth: 3
     toc_float: true
     number_sections: true
+params:
+  decade_min: 2010
 ---
 
 This script is based on [05_occurrence_indicators_preprocessing.Rmd](https://github.com/trias-project/indicators/blob/main/src/05_occurrence_indicators_preprocessing.Rmd) from the [trias-project/indicators](https://github.com/trias-project/indicators) repository.
@@ -285,10 +287,25 @@ test_that("UPLOAD FAILED: 2502938 not included",
 
 ### Baseline
 
+```{r set decade}
+decade_min <- params$decade_min
+decade_max <- decade_min + 9
+
+cat("Calculating", decade_min, "-", decade_max, "timeframe")
+```
+
+```{r get_data_cube}
+df <- df %>% 
+  filter(year >= decade_min,
+         year <= decade_max)
+```
+
 We get occurrence data of non alien species grouped at class level, which will be used for correcting the research bias effort:
 
 ```{r get_data_baseline}
-df_bl <- read_csv("./cube_data/be_classes_cube.csv")
+df_bl <- read_csv("./cube_data/be_classes_cube.csv") %>% 
+  filter(year >= decade_min,
+         year <= decade_max)
 ```
 
 We add gemeente and provincie to the baseline data cube:
