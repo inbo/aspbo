@@ -263,3 +263,207 @@ test_that("UPLOAD FAILED: 2502938 not included",
 ```{r export for artifact upload}
 write_csv(df, "./cube_data/be_alientaxa_cube_processed.csv")
 ```
+
+```{r get_canonical_names}
+taxon_key <-
+  df %>%
+  distinct(taxonKey) %>%
+  pull()
+# get basic species information
+pb <- progress_bar$new(total = length(taxon_key))
+spec_names_raw <- map_df(
+  taxon_key,
+  function(k) {
+    pb$tick()
+    name_usage(key = k)$data
+  }
+) 
+
+spec_names <- spec_names_raw %>%
+  mutate(scientificName = coalesce(species, genus, family)) %>% 
+  select(
+    taxonKey = key,
+    canonicalName,
+    scientificName,
+    rank,
+    taxonomicStatus,
+    kingdomKey, 
+    classKey,
+    authorship
+  ) %>%
+  mutate(canonicalName = ifelse(
+    is.na(canonicalName), scientificName, canonicalName
+  ))
+```
+
+In the rare case multiple taxa share the same scientific name, authorship is added:
+
+```{r add_authorship_if_needed}
+spec_names <-
+  spec_names %>%
+  group_by(canonicalName) %>%
+  add_tally() %>%
+  ungroup() %>%
+  mutate(canonicalName = if_else(n > 1,
+                                 scientificName,
+                                 canonicalName)) %>%
+  select(-c(n))
+```
+
+We also retrieve kingdom and class:
+
+```{r get_kingdom_class}
+class_key <-
+  spec_names %>%
+  distinct(classKey) %>%
+  filter(!is.na(classKey)) %>%
+  pull()
+pb <- progress_bar$new(total = length(class_key))
+kingdom_class <- map_df(
+  class_key,
+  function(x) {
+    pb$tick()
+    name_usage(key = x)$data
+  }
+) %>%
+  select(classKey, class, kingdomKey, kingdom)
+```
+
+and we add them:
+
+```{r add_kingdom_class}
+# add class
+spec_names <-
+  spec_names %>%
+  left_join(kingdom_class %>%
+              distinct(.data$classKey, .data$class),
+            by = "classKey"
+  )
+
+# add kingdom
+spec_names <-
+  spec_names %>%
+  left_join(kingdom_class %>%
+              distinct(.data$kingdomKey, .data$kingdom),
+            by = "kingdomKey"
+  ) 
+```
+
+Preview:
+
+```{r preview_species}
+spec_names %>% head(10)
+```
+
+Taxa not assigned to any class:
+
+```{r taxa_no_class}
+spec_names %>%
+  filter(is.na(classKey))
+```
+
+```{r complete keys}
+keys_old <- alienSpecies::loadMetaData(type = "keys")
+
+# backup current keys.csv file
+keys_old %>%
+  write_csv(here("data", "interim", "keys_old.csv"))
+
+# remove columns we will not use
+keys_new <- spec_names %>%
+  select(-canonicalName, -authorship)
+
+# rename columns to avoid confusion
+colnames(keys_new) <- paste0(colnames(keys_new), "_new")
+
+# Complete knowns, info in cube on checklist
+keys_completed <- keys_old %>%
+  full_join(keys_new, by = c("scientificName" = "scientificName_new")) %>% 
+  mutate(taxonKey = coalesce(taxonKey, taxonKey_new),
+         rank = coalesce(rank, rank_new),
+         taxonomicStatus = coalesce(taxonomicStatus, taxonomicStatus_new),
+         classKey = coalesce(classKey, classKey_new),
+         kingdom = coalesce(kingdom, kingdom_new)) %>% 
+  select(-contains("new")) %>%
+  distinct()
+
+# Find rows with missing taxonKey
+keys_missing_taxonkey <- keys_completed %>% 
+  filter(is.na(taxonKey))
+
+# Function to derive the most likely taxonKey for a given scientific name
+get_derived_taxonKey <- function(scientific_name) {
+  taxonomic_data <- tryCatch(
+    rgbif::name_usage(name = scientific_name)$data,
+    error = function(e) NULL
+  )
+  if (is.null(taxonomic_data) || nrow(taxonomic_data) == 0) return(NA_integer_)
+  
+  derived_taxonKey <- taxonomic_data %>% 
+    dplyr::filter(taxonomicStatus == "ACCEPTED", !is.na(nubKey)) %>% 
+    group_by(nubKey) %>% 
+    add_tally() %>% 
+    distinct(nubKey, n) %>% 
+    ungroup() %>% 
+    filter(n == max(n, na.rm = TRUE)) %>% 
+    pull(nubKey)
+  
+  # If multiple, take the first
+  if (length(derived_taxonKey) > 0) return(derived_taxonKey[1])
+  else return(NA_integer_)
+}
+
+# Use lapply to process all missing names
+derived_keys <- pbapply::pblapply(keys_missing_taxonkey$scientificName, get_derived_taxonKey)
+names(derived_keys) <- keys_missing_taxonkey$scientificName
+
+# Update keys_completed with the derived taxonKeys
+keys_completed <- keys_completed %>%
+  mutate(
+    taxonKey = ifelse(
+      is.na(taxonKey) & scientificName %in% names(derived_keys),
+      unlist(derived_keys[scientificName]),
+      taxonKey
+    )
+  ) %>% 
+  select(taxonKey, scientificName, rank, taxonomicStatus, kingdom, includes)
+
+keys_path <- here("data", "output", "UAT_processing", "be_alientaxa_info.csv")
+
+# Complete unknowns, info not on cube or checklist
+## Missing taxonkeys 
+# => might not be an issue? => monitoring for now
+# Fixing this will be a pain in the ass since `name_usage` returns every use of the scientific name in the gbif backbone as well as on very checklist worldwide
+keys_missing_taxonkey <- keys_completed %>% 
+  filter(is.na(taxonKey)) %>% 
+  write_csv(here("data", "interim", "keys_missing_taxonkey.csv"))
+
+## Missing scientific names => cause of https://github.com/inbo/alien-species-portal/issues/140
+keys_missing_name <- keys_completed %>% 
+  filter(is.na(scientificName)) %>% 
+  write_csv(here("data", "interim", "keys_missing_name.csv"))
+
+# test whether any missing scientificnames remain
+test_that("missing scientificNames",
+          {
+            expect_false(nrow(keys_missing_name) > 0)
+          })
+
+keys_completed <- keys_completed %>% 
+  mutate(taxonKey = case_when(scientificName == "Trachemys scripta elegans" & is.na(taxonKey) ~ 6157026,
+                              scientificName == "Pyrus communis communis" & is.na(taxonKey) ~ 7271631,
+                              TRUE ~ taxonKey)) %>% 
+  filter(!(scientificName %in% keys_missing_taxonkey$scientificName & is.na(taxonKey)),
+         !(taxonKey %in% keys_missing_name$taxonKey & is.na(scientificName))) %>% 
+  distinct(taxonKey, scientificName, .keep_all = TRUE)
+
+write_delim(keys_completed, keys_path, ",", quote = "needed")
+
+# Upload to S3 bucket
+# aws.s3::put_object(file = keys_path,
+#                    object = "keys.csv",
+#                    bucket = UAT_bucket,
+#                    multipart = TRUE,
+#                    show_progress = TRUE,
+#                    region = "eu-west-1") 
+```
