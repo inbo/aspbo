@@ -12,7 +12,7 @@ env:
   ACTIONS_STEP_DEBUG: ${{ github.ref_name != 'uat' && 'true' || 'false' }}
 
 jobs:
-  cube_processing:
+  cube-processing:
     runs-on: ${{ matrix.config.os }}
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
@@ -87,7 +87,7 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
           role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
 
-      - name: cube_processing
+      - name: Run cube-processing
         run: |
           source("src/process_cubes/run_cube_processing.R")
         shell: Rscript {0}
@@ -109,9 +109,9 @@ jobs:
           name: be_alientaxa_cube_processed
           path: ./cube_data/be_alientaxa_cube_processed.csv
 
-  create_timeseries_decade:
+  create-timeseries-decade:
     runs-on: ${{ matrix.config.os }}
-    needs: cube_processing
+    needs: cube-processing
     strategy:
       fail-fast: false
       matrix:
@@ -209,7 +209,7 @@ jobs:
           name: "timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}"
           path: "./cube/data/timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}.csv"
 
-  compile_upload_timeseries:
+  compile-upload-timeseries:
     runs-on: ${{ matrix.config.os }}
     needs: create_timeseries_decade
     name: compile upload timeseries
@@ -273,7 +273,7 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
           role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
 
-     - name: compile_upload_timeseries
+     - name: compile & upload timeseries
         run: |
           source("src/process_cubes/run_compile_upload_timeseries.R")
         shell: Rscript {0}
