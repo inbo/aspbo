@@ -94,7 +94,7 @@ jobs:
         env:
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
 
-     - name: Commit and push changes
+      - name: Commit and push changes
         uses: devops-infra/action-commit-push@v0.11.1
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
@@ -103,7 +103,7 @@ jobs:
           target_branch: automatic-update-occ_indic_preprocessing
           add_timestamp: true
 
-     - name: upload processed cube
+      - name: upload processed cube
         uses: actions/upload-artifact@v4
         with:
           name: be_alientaxa_cube_processed
