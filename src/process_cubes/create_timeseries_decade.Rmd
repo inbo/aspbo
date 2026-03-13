@@ -163,8 +163,13 @@ presence_within <- data_input_checklist_indicators %>%
   filter(!species %in% presence_wider$species) %>% 
   filter(first_observed >= decade_min & last_observed <= decade_max)
 
+spec_names <- read_csv("./data/interim/spec_names.csv")
+
 taxa_df <- bind_rows(presence_wider, presence_within) %>%
-  dplyr::filter(locationId == "ISO_3166:BE")
+  dplyr::filter(locationId == "ISO_3166:BE") %>% 
+  select(-class, -classKey, -kingdom, -kingdomKey) %>% 
+  left_join(spec_names, 
+            by = c("nubKey" = "taxonKey")) 
 
 table(taxa_df$first_observed, useNA = "ifany")
 table(taxa_df$last_observed, useNA = "ifany")
@@ -182,8 +187,6 @@ rm(utm1_gemeentes_provincies)
 gc() #garbage collection
 ```
 
-Nota: these data have been also published on [Zenodo](https://doi.org/10.5281/zenodo.3632749).
-
 We remove columns we will never use:
 
 ```{r remove_coords_uncertainty_baseline}
@@ -192,8 +195,6 @@ df_bl <-
   select(-min_coord_uncertainty) %>% 
   filter(!is.na(classKey))
 ```
-
-
 
 ## Remove some taxa
 
@@ -365,24 +366,6 @@ df_bl_xy %>% head()
 Recalculate last observed date for each taxon:
 using last observation date from the occurrence data, if available, or the last observation date from the unified checklist, if available.
 
-```{r recalculate_last_observed_date, eval=FALSE}
-taxa_df <- 
-  taxa_df %>% 
-  mutate(last_observed_old = as.integer(last_observed)) %>% 
-  select(-last_observed) %>% 
-  left_join(last_observed_taxon %>% 
-              mutate(last_observed_new = as.integer(last_observed)) %>% 
-              select(-last_observed), 
-            by = c("nubKey" = "taxonKey")) %>% 
-  mutate(last_observed = case_when(last_observed_old == last_observed_new ~ last_observed_old,
-                                   last_observed_old < last_observed_new ~ last_observed_new,
-                                   is.na(last_observed_old) ~ last_observed_new,
-                                   is.na(last_observed_new) ~ last_observed_old,
-                                   last_observed_new < last_observed_old ~ last_observed_old,
-                                   TRUE ~ NA_integer_)) %>% 
-  select(-last_observed_old, -last_observed_new)
-```
-
 Select alien species that were observed after 1950 (`year_cutoff`: 1950) or whose date of introduction is not known:
 
 ```{r select_aliens_with_recent_observations}
@@ -462,10 +445,10 @@ write_tsv(old_introductions_taxa,
 )
 ```
 
-We also limit the time series analysis to species which were last observed in 1950 or later, and limit their observations to after 1950, as this is the start of state of invasion researches
+We limit the time series analysis to the first year of the decade (decade_min)
 
 ```{r define_year_range}
-first_year <- year_cutoff
+first_year <- decade_min
 ```
 
 Some observations can be published with erroneous coordinates (see [#trias-project/occ-processing#13](https://github.com/trias-project/occ-processing/issues/13)) or can be assigned to a grid cell out of Belgium and should therefore removed.
@@ -483,7 +466,7 @@ df <-
   filter(taxonKey %in% recent_alien_species$taxonKey) %>%
   left_join(df_xy, by = "eea_cell_code") %>%
   # recent history
-  filter(year > first_year) %>%
+  filter(year >= first_year) %>%
   # in Belgium
   filter(eea_cell_code %in% be_cellcodes)
 ```
@@ -493,7 +476,7 @@ df_bl <-
   df_bl %>%
   tidylog::left_join(df_bl_xy, by = "eea_cell_code") %>%
   # Recent history
-  tidylog::filter(year > first_year) %>% 
+  tidylog::filter(year >= first_year) %>% 
   # in Belgium
   tidylog::filter(eea_cell_code %in% be_cellcodes)
 ```
@@ -541,7 +524,6 @@ make_time_series <- function(eea_cell_code, taxonKey, begin_year, last_year ) {
   expand_grid(eea_cell_code = eea_cell_code,
               taxonKey = taxonKey,
               year = seq(from = begin_year, to = last_year))
-  
 }
 ```
 
@@ -614,7 +596,7 @@ if(Sys.getenv("amiabot") == "yes"){
 df_ts <- 
   df_ts %>%
   left_join(spec_names %>% 
-              select(taxonKey, classKey), 
+              distinct(taxonKey, classKey), 
             by = "taxonKey")
 ```
 
