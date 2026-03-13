@@ -96,7 +96,7 @@ if(Sys.getenv("amiabot") != "yes"){
 decade_min <- params$decade_min
 decade_max <- decade_min + 9
 
-cat("Calculating", decade_min, "-", decade_max, "timeframe")
+cat("Calculating", decade_min, "-", decade_max, "timeframe \n")
 ```
 
 ```{r get_data_cube}
@@ -153,7 +153,8 @@ presence_wider_3 <- data_input_checklist_indicators %>%
   filter(!species %in% presence_wider_1$species) %>% 
   filter(!species %in% presence_wider_2$species) %>% 
   filter(first_observed <= decade_min & 
-           last_observed <= decade_max)
+           (last_observed <= decade_max & 
+              last_observed >= decade_min))
 
 presence_wider <- rbind(presence_wider_1, presence_wider_2, presence_wider_3)
 
