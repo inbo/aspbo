@@ -6,7 +6,7 @@ on:
     workflows: ["download occurrence cube"]
     types:
       - completed
-      
+
 env:
   # Enable debug if the branch is NOT 'uat'
   ACTIONS_STEP_DEBUG: ${{ github.ref_name != 'uat' && 'true' || 'false' }}
@@ -16,7 +16,6 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
-    
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
@@ -24,6 +23,7 @@ jobs:
       matrix:
         config:
           - { os: ubuntu-latest, r: "release" }
+
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -47,15 +47,15 @@ jobs:
 
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
-        
-      - name: Get latest successful run ID 
+
+      - name: Get latest successful run ID
         id: get-latest-run
         run: |
           run_id=$(gh run list -w get_occ_cube.yaml --status success --json databaseId --jq '.[0].databaseId')
           echo "run_id=$run_id" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+
       - name: Download be_alientaxa_cube artifact
         uses: actions/download-artifact@v4
         with:
@@ -64,7 +64,7 @@ jobs:
           run-id: ${{ steps.get-latest-run.outputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           merge-multiple: true
-          
+
       - name: Install linux libraries
         run: |
           sudo apt install libsodium-dev
@@ -118,16 +118,16 @@ jobs:
         config:
           - { os: ubuntu-latest, r: "release" }
         decade:
-         - { start: 1950, end: 1959 }
-         - { start: 1960, end: 1969 }
-         - { start: 1970, end: 1979 }
-         - { start: 1980, end: 1989 }
-         - { start: 1990, end: 1999 }
-         - { start: 2000, end: 2009 }
-         - { start: 2010, end: 2019 }
-         - { start: 2020, end: 2029 }
+          - { start: 1950, end: 1959 }
+          - { start: 1960, end: 1969 }
+          - { start: 1970, end: 1979 }
+          - { start: 1980, end: 1989 }
+          - { start: 1990, end: 1999 }
+          - { start: 2000, end: 2009 }
+          - { start: 2010, end: 2019 }
+          - { start: 2020, end: 2029 }
     name: create - timeseries - ${{ matrix.decade.start }} - ${{ matrix.decade.end }}
-    
+
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -151,15 +151,15 @@ jobs:
 
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
-        
-      - name: Get latest successful run ID 
+
+      - name: Get latest successful run ID
         id: get-latest-run
         run: |
           run_id=$(gh run list -w get_occ_cube.yaml --status success --json databaseId --jq '.[0].databaseId')
           echo "run_id=$run_id" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Download be_classes_cube artifact
         uses: actions/download-artifact@v4
         with:
@@ -168,7 +168,7 @@ jobs:
           run-id: ${{ steps.get-latest-run.outputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           merge-multiple: true
-          
+
       - name: Download processed cube
         uses: actions/download-artifact@v4
         with:
@@ -176,7 +176,7 @@ jobs:
           path: ./cube_data/be_alientaxa_cube_processed.csv
           github-token: ${{ secrets.GITHUB_TOKEN }}
           merge-multiple: true
-          
+
       - name: Install linux libraries
         run: |
           sudo apt install libsodium-dev
@@ -199,10 +199,10 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
           role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
 
-     - name: create timeseries decade
+      - name: create timeseries decade
         run: |
           Rscript -e "rmarkdown::render('src/process_cubes/create_timeseries_decade.Rmd', params = list(decade_min = '${{ matrix.decade.start }}'), knit_root_dir = '../../')"
-          
+
       - name: Upload cube artifact
         uses: actions/upload-artifact@v4
         with:
@@ -213,13 +213,13 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     needs: create-timeseries-decade
     name: compile upload timeseries
-    
+
     strategy:
       fail-fast: false
       matrix:
         config:
           - { os: ubuntu-latest, r: "release" }
-          
+
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -243,15 +243,15 @@ jobs:
 
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
-        
-      - name: download rank cubes artifacts 
-        uses: actions/download-artifact@v4 
-        with: 
+
+      - name: download rank cubes artifacts
+        uses: actions/download-artifact@v4
+        with:
           pattern: timeseries_*
           merge-multiple: true
           path: ./cube_data/
-          
-       - name: Install linux libraries
+
+      - name: Install linux libraries
         run: |
           sudo apt install libsodium-dev
           sudo apt-get install libcurl4-openssl-dev
@@ -273,14 +273,14 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
           role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
 
-     - name: compile & upload timeseries
+      - name: compile & upload timeseries
         run: |
           source("src/process_cubes/run_compile_upload_timeseries.R")
         shell: Rscript {0}
         env:
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
-  
-     - name: Get branch name
+
+      - name: Get branch name
         run: |
           git branch --show-current
 
