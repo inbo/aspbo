@@ -76,7 +76,7 @@ jobs:
 
       - name: install packages
         run: |
-          source("src/install_packages_occ_indic.R")
+          source("src/process_cubes/install_packages_occ_indic.R")
         shell: Rscript {0}
 
       - name: Setup AWS credentials
@@ -188,7 +188,7 @@ jobs:
 
       - name: install packages
         run: |
-          source("src/install_packages_occ_indic.R")
+          source("src/process_cubes/install_packages_occ_indic.R")
         shell: Rscript {0}
 
       - name: Setup AWS credentials
@@ -262,7 +262,7 @@ jobs:
 
       - name: install packages
         run: |
-          source("src/install_packages_occ_indic.R")
+          source("src/process_cubes/install_packages_occ_indic.R")
         shell: Rscript {0}
 
       - name: Setup AWS credentials
