@@ -260,10 +260,13 @@ test_that("UPLOAD FAILED: 2502938 not included",
           })
 ```
 
+# Export the cube for timeseries creation
+
 ```{r export for artifact upload}
 write_csv(df, "./cube_data/be_alientaxa_cube_processed.csv")
 ```
 
+# Get correct class/kingdom info
 ```{r get_canonical_names}
 taxon_key <-
   df %>%
@@ -360,6 +363,13 @@ Taxa not assigned to any class:
 ```{r taxa_no_class}
 spec_names %>%
   filter(is.na(classKey))
+```
+
+export spec_names
+```{r}
+spec_names %>% 
+              distinct(taxonKey, class, classKey, kingdom, kingdomKey) %>% 
+  write_csv("./data/spec_names.csv")
 ```
 
 ```{r complete keys}
