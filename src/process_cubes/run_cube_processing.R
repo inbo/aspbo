@@ -17,7 +17,7 @@ download.file(url = "https://raw.githubusercontent.com/trias-project/indicators/
 
 # create temporary R file
 tempR <- tempfile(fileext = ".R")
-knitr::purl("src/cube_processing.Rmd", output=tempR)
+knitr::purl("src/process_cubes/cube_processing.Rmd", output=tempR)
 source(tempR)
 unlink(tempR)
 
