@@ -211,7 +211,7 @@ jobs:
 
   compile-upload-timeseries:
     runs-on: ${{ matrix.config.os }}
-    needs: create_timeseries_decade
+    needs: create-timeseries-decade
     name: compile upload timeseries
     
     strategy:
