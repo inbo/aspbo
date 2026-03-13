@@ -369,7 +369,7 @@ export spec_names
 ```{r}
 spec_names %>% 
               distinct(taxonKey, class, classKey, kingdom, kingdomKey) %>% 
-  write_csv("./data/spec_names.csv")
+  write_csv("./data/interim/spec_names.csv")
 ```
 
 ```{r complete keys}
