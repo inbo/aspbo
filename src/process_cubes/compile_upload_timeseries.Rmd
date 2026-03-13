@@ -1,0 +1,128 @@
+---
+title: "compile_upload_timeseries"
+author: "Sander Devisscher"
+date: "2026-03-13"
+output: html_document
+---
+
+```{r}
+library(readr)
+library(dplyr)
+library(magrittr)
+library(rlang)
+```
+
+```{r detect timeseries files}
+files <- list.files(path = "./cube_data/",
+                    pattern = "timeseries_",
+                    full.names = TRUE) 
+```
+
+```{r read & combine files}
+timeseries_compiled <- data.frame()
+
+for(f in files){
+  timeseries_temp <- read_csv(f)
+  
+  if(nrow(timeseries_compiled) == 0){
+    timeseries_compiled <- timeseries_temp
+  }else{
+    timeseries_compiled <- rbind(timeseries_compiled, timeseries_temp)
+  }
+}
+```
+
+```{r}
+df_ts <- timeseries_compiled %>% 
+  distinct(taxonKey, year, eea_cell_code, .keep_all = TRUE)
+```
+
+```{r load correct version of INBOtheme, eval=TRUE}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> checking INBOtheme version")
+  # determine the loaded INBOtheme version
+  loaded_inbotheme <- installed.packages() %>% 
+    as_tibble() %>% 
+    filter(Package == "INBOtheme")
+  loaded_inbotheme_version <- loaded_inbotheme$Version
+  
+  if(is_empty(loaded_inbotheme_version)){
+    print("INBOtheme is not installed >> installing INBOtheme")
+    devtools::install_github("inbo/INBOtheme@v0.5.8")
+  }
+  
+  if(length(loaded_inbotheme_version) > 1 || loaded_inbotheme_version != "0.5.8"){
+    print("INBOtheme version is not correct >> loading correct version")
+    # remove installed INBOtheme
+    remove.packages("INBOtheme")
+    
+    # load correct version of INBOtheme
+    devtools::install_github("inbo/INBOtheme@v0.5.8")
+  }else{
+    print("Correct INBOtheme version is loaded")
+  }
+}else{
+  print("Executor of the script is a bot >> correct INBOtheme version is loaded")
+}
+
+library(INBOtheme)
+```
+
+# Connect to bucket
+## set credentials
+```{r set creds}
+Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
+
+if(Sys.getenv("S3_BUCKET") != ""){
+  UAT_bucket <- Sys.getenv("S3_BUCKET")
+}else{
+  UAT_bucket <- Sys.getenv("UAT_bucket")
+}
+```
+
+## connect to bucket
+```{r connect to bucket}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket")
+  source("./src/connect_to_bucket.R")
+  connect_to_bucket(bucket_name = UAT_bucket)
+}else{
+  test_that("AWS credentials are set in the environment", {
+    # 1. Check Access Key
+    expect_true(Sys.getenv("AWS_ACCESS_KEY_ID") != "", 
+                info = "AWS_ACCESS_KEY_ID is missing or empty")
+    
+    # 2. Check Secret Key
+    expect_true(Sys.getenv("AWS_SECRET_ACCESS_KEY") != "", 
+                info = "AWS_SECRET_ACCESS_KEY is missing or empty")
+    
+    # 3. Check Session Token (Required since you are using role-to-assume)
+    expect_true(Sys.getenv("AWS_SESSION_TOKEN") != "", 
+                info = "AWS_SESSION_TOKEN is missing (Required for assumed roles)")
+    
+  })
+}
+```
+
+Save `df_ts` as it will be used as start point of modelling pipelines:
+
+```{r save_data_as_tsv}
+# upload data to S3 bucket
+aws.s3::s3save(df_ts, 
+               object = "df_timeseries.Rdata", 
+               bucket = UAT_bucket, 
+               opts = list(show_progress = TRUE,
+                           multipart = TRUE))
+```
+
+Create time series data
+input:  "df_timeseries.RData" and "grid.RData" from bucket
+output: full_timeseries.RData
+
+```{r create timeseries}
+alienSpecies::createTimeseries(
+  # read grid.RData from bucket
+  shapeData = alienSpecies::loadShapeData("grid.RData")$utm1_bel_with_regions, 
+  bucket = UAT_bucket
+)
+```
