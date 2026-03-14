@@ -85,7 +85,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-          role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
 
       - name: Run cube-processing
         run: |
@@ -197,11 +197,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-          role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
 
       - name: create timeseries decade
         run: |
           Rscript -e "rmarkdown::render('src/process_cubes/create_timeseries_decade.Rmd', params = list(decade_min = '${{ matrix.decade.start }}'), knit_root_dir = '../../')"
+        env:
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
 
       - name: Upload cube artifact
         uses: actions/upload-artifact@v4
