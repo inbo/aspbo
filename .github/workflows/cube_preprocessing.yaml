@@ -84,10 +84,9 @@ jobs:
       - name: Install R packages
         if: steps.r-cache.outputs.cache-hit != 'true'
         run: |
-          R --no-save -e 'install.packages("devtools")'
-          R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
-          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat",
-                         subdir = "alienSpecies", force = TRUE)'
+          R --no-save -e 'install.packages("pak")'
+          R --no-save -e 'pak::pak("inbo/INBOtheme@v0.5.9")'
+          R --no-save -e 'pak::pak("inbo/alien-species-portal@uat/alienSpecies")'
 
       - name: Install remaining packages
         run: |
@@ -212,10 +211,9 @@ jobs:
       - name: Install R packages
         if: steps.r-cache.outputs.cache-hit != 'true'
         run: |
-          R --no-save -e 'install.packages("devtools")'
-          R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
-          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat",
-                         subdir = "alienSpecies", force = TRUE)'
+          R --no-save -e 'install.packages("pak")'
+          R --no-save -e 'pak::pak("inbo/INBOtheme@v0.5.9")'
+          R --no-save -e 'pak::pak("inbo/alien-species-portal@uat/alienSpecies")'
 
       - name: Install remaining packages
         run: |
@@ -304,10 +302,9 @@ jobs:
       - name: Install R packages
         if: steps.r-cache.outputs.cache-hit != 'true'
         run: |
-          R --no-save -e 'install.packages("devtools")'
-          R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
-          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat",
-                         subdir = "alienSpecies", force = TRUE)'
+          R --no-save -e 'install.packages("pak")'
+          R --no-save -e 'pak::pak("inbo/INBOtheme@v0.5.9")'
+          R --no-save -e 'pak::pak("inbo/alien-species-portal@uat/alienSpecies")'
 
       - name: Install remaining packages
         run: |
