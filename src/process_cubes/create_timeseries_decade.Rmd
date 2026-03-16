@@ -93,7 +93,7 @@ if(Sys.getenv("amiabot") != "yes"){
 ### Baseline
 
 ```{r set decade}
-decade_min <- params$decade_min
+decade_min <- as.integer(params$decade_min)
 decade_max <- decade_min + 9
 
 cat("Calculating", decade_min, "-", decade_max, "timeframe \n")
