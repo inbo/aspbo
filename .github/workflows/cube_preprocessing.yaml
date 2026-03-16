@@ -112,6 +112,7 @@ jobs:
   create-timeseries-decade:
     runs-on: ${{ matrix.config.os }}
     needs: cube-processing
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
     strategy:
       fail-fast: false
       matrix:
@@ -199,7 +200,6 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
 
-
       - name: create timeseries decade
         run: |
           Rscript -e "rmarkdown::render('src/process_cubes/create_timeseries_decade.Rmd', params = list(decade_min = '${{ matrix.decade.start }}'), knit_root_dir = '../../')"
@@ -215,6 +215,7 @@ jobs:
   compile-upload-timeseries:
     runs-on: ${{ matrix.config.os }}
     needs: create-timeseries-decade
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
     name: compile upload timeseries
 
     strategy:
