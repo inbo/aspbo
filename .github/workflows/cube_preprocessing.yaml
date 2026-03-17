@@ -181,8 +181,8 @@ jobs:
       - name: Download processed cube
         uses: actions/download-artifact@v4
         with:
-          name: be_alientaxa_cube_processed
-          path: ./cube_data/be_alientaxa_cube_processed.csv
+          name: be_alientaxa_cube_processed.csv
+          path: ./cube_data/
           github-token: ${{ secrets.GITHUB_TOKEN }}
           merge-multiple: true
 
