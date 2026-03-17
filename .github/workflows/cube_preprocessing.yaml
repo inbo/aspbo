@@ -149,9 +149,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: automatic-update-occ_indic_preprocessing
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
+          
+      - name: Sync with target branch
+        run: |
+          # 1. Fetch the remote branch if it exists
+          git fetch origin automatic-update-occ_indic_preprocessing || echo "Remote branch doesn't exist yet."
+          
+          # 2. Switch to the branch, or create it if it's the very first time
+          git checkout automatic-update-occ_indic_preprocessing || git checkout -b automatic-update-occ_indic_preprocessing
+          
+          # 3. Pull the latest history so your local runner is fully up to date
+          git pull origin automatic-update-occ_indic_preprocessing || echo "Nothing to pull."
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -228,15 +238,6 @@ jobs:
         with:
           name: "timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}"
           path: "./cube/data/timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}.csv"
-      
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@v0.11.1
-        with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          commit_prefix: "[AUTO]"
-          commit_message: "update cube_processing"
-          target_branch: automatic-update-occ_indic_preprocessing
-          add_timestamp: false
 
   compile-upload-timeseries:
     runs-on: ${{ matrix.config.os }}
@@ -319,15 +320,6 @@ jobs:
         env:
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
           
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@v0.11.1
-        with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          commit_prefix: "[AUTO]"
-          commit_message: "update cube_processing"
-          target_branch: automatic-update-occ_indic_preprocessing
-          add_timestamp: false
-
       - name: Get branch name
         run: |
           git branch --show-current
