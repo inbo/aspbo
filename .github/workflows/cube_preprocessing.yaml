@@ -237,7 +237,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}"
-          path: "./cube/data/timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}.csv"
+          path: "./cube_data/timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}.csv"
 
   compile-upload-timeseries:
     runs-on: ${{ matrix.config.os }}
