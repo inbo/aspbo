@@ -81,14 +81,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-r-${{ matrix.config.r }}-
 
-      - name: Install R packages
+      - name: Install packages
         if: steps.r-cache.outputs.cache-hit != 'true'
-        run: |
-          R --no-save -e 'install.packages("pak")'
-          R --no-save -e 'pak::pak("inbo/INBOtheme@v0.5.9")'
-          R --no-save -e 'pak::pak("inbo/alien-species-portal/alienSpecies@uat")'
-
-      - name: Install remaining packages
         run: |
           source("src/process_cubes/install_packages_occ_indic.R")
         shell: Rscript {0}
@@ -208,14 +202,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-r-${{ matrix.config.r }}-
 
-      - name: Install R packages
+      - name: Install packages
         if: steps.r-cache.outputs.cache-hit != 'true'
-        run: |
-          R --no-save -e 'install.packages("pak")'
-          R --no-save -e 'pak::pak("inbo/INBOtheme@v0.5.9")'
-          R --no-save -e 'pak::pak("inbo/alien-species-portal/alienSpecies@uat")'
-
-      - name: Install remaining packages
         run: |
           source("src/process_cubes/install_packages_occ_indic.R")
         shell: Rscript {0}
@@ -299,14 +287,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-r-${{ matrix.config.r }}-
 
-      - name: Install R packages
+      - name: Install packages
         if: steps.r-cache.outputs.cache-hit != 'true'
-        run: |
-          R --no-save -e 'install.packages("pak")'
-          R --no-save -e 'pak::pak("inbo/INBOtheme@v0.5.9")'
-          R --no-save -e 'pak::pak("inbo/alien-species-portal/alienSpecies@uat")'
-
-      - name: Install remaining packages
         run: |
           source("src/process_cubes/install_packages_occ_indic.R")
         shell: Rscript {0}
