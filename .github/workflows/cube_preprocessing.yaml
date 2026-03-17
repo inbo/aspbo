@@ -86,7 +86,7 @@ jobs:
         run: |
           R --no-save -e 'install.packages("pak")'
           R --no-save -e 'pak::pak("inbo/INBOtheme@v0.5.9")'
-          R --no-save -e 'pak::pak("inbo/alien-species-portal@uat/alienSpecies")'
+          R --no-save -e 'pak::pak("inbo/alien-species-portal/alienSpecies@uat")'
 
       - name: Install remaining packages
         run: |
@@ -213,7 +213,7 @@ jobs:
         run: |
           R --no-save -e 'install.packages("pak")'
           R --no-save -e 'pak::pak("inbo/INBOtheme@v0.5.9")'
-          R --no-save -e 'pak::pak("inbo/alien-species-portal@uat/alienSpecies")'
+          R --no-save -e 'pak::pak("inbo/alien-species-portal/alienSpecies@uat")'
 
       - name: Install remaining packages
         run: |
@@ -304,7 +304,7 @@ jobs:
         run: |
           R --no-save -e 'install.packages("pak")'
           R --no-save -e 'pak::pak("inbo/INBOtheme@v0.5.9")'
-          R --no-save -e 'pak::pak("inbo/alien-species-portal@uat/alienSpecies")'
+          R --no-save -e 'pak::pak("inbo/alien-species-portal/alienSpecies@uat")'
 
       - name: Install remaining packages
         run: |
