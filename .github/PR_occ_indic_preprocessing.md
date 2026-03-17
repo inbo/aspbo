@@ -16,7 +16,8 @@ This is an **automatically generated PR** created by the `cube preprocessing` Gi
 - [ ] The workflow run completed successfully without silent errors in the R scripts ?
 - [ ] The compiled outputs in the UAT S3 bucket have been verified. Go to [exoten-uat.inbo.be](https://exoten-uat.inbo.be/app/01_exotenportaal/) ?
 - [ ] The species information page of at least 3 species works without a flaw ?
-- [ ] The GAMs were generated for at least 1 of the test species ? 
+- [ ] The GAMs were generated for at least 1 of the test species ?
+- [ ] The Current year is not above 2029 ?
 
 Every question is answered with `yes` => approve & merge
 At least one question is answered with `no` => request changes 
