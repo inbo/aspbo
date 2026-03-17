@@ -109,7 +109,7 @@ jobs:
           commit_prefix: "[AUTO]"
           commit_message: "update cube_processing"
           target_branch: automatic-update-occ_indic_preprocessing
-          add_timestamp: true
+          add_timestamp: false
 
       - name: upload processed cube
         uses: actions/upload-artifact@v4
@@ -149,6 +149,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: automatic-update-occ_indic_preprocessing
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
 
@@ -227,6 +228,15 @@ jobs:
         with:
           name: "timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}"
           path: "./cube/data/timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}.csv"
+      
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@v0.11.1
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "update cube_processing"
+          target_branch: automatic-update-occ_indic_preprocessing
+          add_timestamp: false
 
   compile-upload-timeseries:
     runs-on: ${{ matrix.config.os }}
@@ -252,6 +262,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: automatic-update-occ_indic_preprocessing
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
 
@@ -307,6 +318,15 @@ jobs:
         shell: Rscript {0}
         env:
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@v0.11.1
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "update cube_processing"
+          target_branch: automatic-update-occ_indic_preprocessing
+          add_timestamp: false
 
       - name: Get branch name
         run: |
