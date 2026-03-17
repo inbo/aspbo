@@ -10,6 +10,7 @@ library(readr)
 library(dplyr)
 library(magrittr)
 library(rlang)
+library(testthat)
 ```
 
 ```{r detect timeseries files}
