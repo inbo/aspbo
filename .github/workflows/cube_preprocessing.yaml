@@ -7,6 +7,11 @@ on:
     types:
       - completed
 
+
+permissions:
+  contents: read
+  id-token: write
+  
 env:
   # Enable debug if the branch is NOT 'uat'
   ACTIONS_STEP_DEBUG: ${{ github.ref_name != 'uat' && 'true' || 'false' }}
