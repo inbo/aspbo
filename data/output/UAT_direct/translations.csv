@@ -70,22 +70,23 @@ management3-countYearGroup;Het aantal beheerde {{species}} individuen;"<p>Deze g
 <p><i>Het aantal individuen kan worden onderverdeeld per levensfase indien beschikbaar</i></p>";Le nombre d'individus de {{species}} gérés;"<p>Ce graphique montre l'évolution du nombre absolu ou cumulé d'individus gérés.</p> 
 <p><i>Le nombre d'individus peut être subdivisé par stade de vie si disponible</i></p>";The number of {{species}} individuals managed;"<p>This graph shows the evolution in the absolute or cumulative number of individuals managed.</p>
 <p><i>The number of individuals can be subdivided by lifestage if available</i></p>"
-observations-mapOccurrence;Waarnemingen van {{species}};"<p>Kaart met waarnemingen. </p>
+observations-mapOccurrence;Verspreiding van {{species}};"<p>Kaart met de verspreiding in de gekozen gewesten sinds 1950.</p><ul> 
+<li><p><b style=""color: #000000;"">Zwarte</b> hokken geven de gebieden van 10 × 10 km aan waarin de soort werd waargenomen.</p></li> 
+<li><p><b style=""color: #FF0000;"">Rode</b> hokken markeren specifieke locaties van 1 × 1 km binnen deze gebieden waar waarnemingen zijn gemeld.</p></li> </ul> 
+<p>Het bijgevoegde staafdiagram toont een tijdreeks van het aantal vierkanten per jaar in elk gewest sinds 1950.<br>
+ Wanneer een vierkant meerdere gewesten overlapt, wordt dit geteld als ""meer dan 1 gewest"".</p>";Répartition de {{species}};"<p>Carte de la répartition dans les régions sélectionnées depuis 1950.</p>
 <ul>
-<li><p><b style=""color: #000000;"">Zwarte</b> vierkanten geven gebieden van 10km x 10km aan waarin de soort is waargenomen.<br>
-<li><p><b style=""color: #FF0000;"">Rode</b> vierkanten markeren specifieke locaties van 1km x 1km binnen deze gebieden waar waarnemingen zijn gemeld.</p>
+<li><p>Les carrés <b style=""color: #000000;"">noirs</b> indiquent des zones de 10 x 10 km où l’espèce a été observée.<br>
+<li>Les carrés <b style=""color: #FF0000;"">rouges</b> rouges marquent des emplacements plus précis de 1 x 1 km à l’intérieur de ces zones où des observations ont été signalées.</p> 
 </ul>
-<p>Het bijgevoegde staafdiagram toont een tijdreeks met het aantal waarnemingen per jaar in elke regio sinds 1950.</p>";Observations de {{species}};"<p>Carte des observations.</p>
+<p>Le graphique en barres joint présente une série chronologique montrant le nombre de carrés par an dans chaque région depuis 1950.<br>
+Lorsqu’un carré chevauche plusieurs régions, il est compté comme ""plusieurs régions"".</p>";Occupancy of {{species}};"<p>Map showing occupancy in the selected region since 1950.</p>
 <ul>
-<li><p>Les carrés <b style=""color: #000000;"">noirs</b> indiquent des zones de 10 km x 10 km où l’espèce a été observée.<br>
-<li>Les carrés <b style=""color: #FF0000;"">rouges</b> rouges marquent des emplacements plus précis de 1 km x 1 km à l’intérieur de ces zones où des observations ont été signalées.</p> 
+<li><p><b style=""color: #000000;"">Black</b> squares represent 10 x 10 km areas where the species has been recorded.<br>
+<li><b style=""color: #FF0000;"">Red </b> squares highlight more precise 1 x 1 km locations within these areas where sightings have been reported. <br>
 </ul>
-<p>Le graphique en barres joint présente une série chronologique montrant le nombre d’observations par an dans chaque région depuis 1950.</p>";Observations of {{species}};"<p>Map showing observations in the selected region.</p>
-<ul>
-<li><p><b style=""color: #000000;"">Black</b> squares represent 10 km x 10 km areas where the species has been recorded.<br>
-<li><b style=""color: #FF0000;"">Red </b> squares highlight more precise 1 km x 1 km locations within these areas where sightings have been reported. <br>
-</ul>
-The accompanying bar graph presents a time series showing the number of observations per year in each region since 1950.</p>"
+The accompanying bar graph presents a time series showing the number of 1 x 1 km squares per year in each region since 1950. <br>
+Squares that overlap with multiple regions are counted as ""multiple regions"".</p>"
 reporting_t1-mapOccurrence;Rapportering van {{species}};"Kaart waarop het volgende weergegeven wordt:
 <ul>
   <li><b>alleen t<sub>0</sub>:</b> 10 km x 10 km gridcellen met alleen waarnemingen van de soort van 2000 tot het jaar van opname op de <a href=""https://environment.ec.europa.eu/topics/nature-and-biodiversity/invasive-alien-species_en"" target=""_blank"">lijst van soorten van Uniebezorgdheid</a>, zonder latere meldingen.</li>
@@ -371,4 +372,4 @@ management-mapOccurrence_oxyura_jamaicensis;Beheer van {{species}};"<p>Kaart en 
 <br>
 <p><sup>1</sup><i>The period slider can be found below the graph</i>"
 confirmLanguageChange;Taal wijzigen;Weet u zeker dat u de taal van de applicatie wilt wijzigen? Dit zal leiden tot verlies van grafiek- en tabelinstellingen.;Changer de langue;Voulez-vous vraiment changer la langue de l'application? Cela entraînera la perte des paramètres des graphiques et des tableaux.;Change language;Are you sure you want to change the language of the application? This will result in a loss of graph and table settings.
-countOccurrence_yLabel;"Occupancy<br>(no. 1x1km squares)";"";"Occupancy<br>(no. 1x1km squares)";"";"Occupancy<br>(no. 1x1km squares)";""
+countOccurrence_yLabel;Verspreiding (aantal 1 x 1 km hokken);;Répartition (nombre de carrés de 1 x 1 km);NA;Occupancy<br>(no. 1 x 1 km squares);NA
