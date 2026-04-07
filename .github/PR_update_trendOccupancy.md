@@ -14,6 +14,6 @@ This script is wrapped by `./src/run_update_trendOccupancy.R` and assisted by
 
 Changes to the PR description can be made at `./.github/PR_update_trendOccupancy.md`
 
-<sup>1</sup>set to trigger once per year at the first of may, 
+<sup>1</sup>set to trigger once per year at the first of May, 
 when changes are pushed to `./data/output/UAT_processing/data_input_checklist_indicators.tsv` on the `uat` branch 
 or by workflow dispatch.
