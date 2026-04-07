@@ -1,4 +1,4 @@
-#' R code to automatically run all chunks of fetch_data.Rmd
+#' R code to automatically run all chunks of update_trendOccupancy.Rmd
 
 # load required packages (install them if needed)
 installed <- rownames(installed.packages())
