@@ -7,12 +7,20 @@ on:
     types:
       - completed
 
+
+permissions:
+  contents: read
+  id-token: write
+  
+env:
+  # Enable debug if the branch is NOT 'uat'
+  ACTIONS_STEP_DEBUG: ${{ github.ref_name != 'uat' && 'true' || 'false' }}
+
 jobs:
-  fetch-data:
+  cube-processing:
     runs-on: ${{ matrix.config.os }}
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
-
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
@@ -20,6 +28,7 @@ jobs:
       matrix:
         config:
           - { os: ubuntu-latest, r: "release" }
+
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -44,50 +53,14 @@ jobs:
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
 
-      - name: Install linux libraries
-        run: |
-          sudo apt install libsodium-dev
-          sudo apt-get install libcurl4-openssl-dev
-          sudo apt-get install libgdal-dev libproj-dev
-          sudo apt install libudunits2-dev
-          sudo apt install --yes libharfbuzz-dev libfribidi-dev
-          sudo apt-get install -y libfontconfig1-dev
-          R --no-save -e 'install.packages("devtools")'
-          R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
-          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
-                         subdir = "alienSpecies", force = TRUE)'
-
-      - name: install packages
-        run: |
-          source("src/install_packages_occ_indic.R")
-        shell: Rscript {0}
-
-      - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-
-      - name: Assume Role
-        id: assume_role
-        run: |
-          ROLE_ARN="${{ secrets.AWS_ROLE_ARN }}"
-          TEMP_ROLE=$(aws sts assume-role \
-            --role-arn $ROLE_ARN \
-            --role-session-name inbo-deployment)
-          echo "::set-output name=AWS_ACCESS_KEY_ID::$(echo $TEMP_ROLE | jq -r .Credentials.AccessKeyId)"
-          echo "::set-output name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)"
-          echo "::set-output name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)"
-          
-      - name: Get latest successful run ID 
+      - name: Get latest successful run ID
         id: get-latest-run
         run: |
           run_id=$(gh run list -w get_occ_cube.yaml --status success --json databaseId --jq '.[0].databaseId')
           echo "run_id=$run_id" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Download be_alientaxa_cube artifact
         uses: actions/download-artifact@v4
         with:
@@ -96,7 +69,120 @@ jobs:
           run-id: ${{ steps.get-latest-run.outputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           merge-multiple: true
+
+      - name: Install linux libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsodium-dev libcurl4-openssl-dev \
+            libgdal-dev libproj-dev libudunits2-dev \
+            libharfbuzz-dev libfribidi-dev libfontconfig1-dev
+
+      - name: Cache R packages
+        uses: actions/cache@v4
+        id: r-cache
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('src/process_cubes/install_packages_occ_indic.R') }}-2
+          restore-keys: |
+            ${{ runner.os }}-r-${{ matrix.config.r }}-
+
+      - name: Install packages
+        if: steps.r-cache.outputs.cache-hit != 'true'
+        run: |
+          source("src/process_cubes/install_packages_occ_indic.R")
+        shell: Rscript {0}
+
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
+      - name: Run cube-processing
+        run: |
+          source("src/process_cubes/run_cube_processing.R")
+        shell: Rscript {0}
+        env:
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@v0.11.1
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "update cube_processing"
+          target_branch: automatic-update-occ_indic_preprocessing
+          add_timestamp: false
+
+      - name: upload processed cube
+        uses: actions/upload-artifact@v4
+        with:
+          name: be_alientaxa_cube_processed
+          path: ./cube_data/be_alientaxa_cube_processed.csv
+
+  create-timeseries-decade:
+    runs-on: ${{ matrix.config.os }}
+    needs: cube-processing
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+        decade:
+          - { start: 1950, end: 1959 }
+          - { start: 1960, end: 1969 }
+          - { start: 1970, end: 1979 }
+          - { start: 1980, end: 1989 }
+          - { start: 1990, end: 1999 }
+          - { start: 2000, end: 2009 }
+          - { start: 2010, end: 2019 }
+          - { start: 2020, end: 2029 }
+    name: create - timeseries - ${{ matrix.decade.start }} - ${{ matrix.decade.end }}
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      USERNAME: ${{ secrets.USERNAME }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      amiabot: ${{ secrets.AMIABOT }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
           
+      - name: Sync with target branch
+        run: |
+          # 1. Fetch the remote branch if it exists
+          git fetch origin automatic-update-occ_indic_preprocessing || echo "Remote branch doesn't exist yet."
+          
+          # 2. Switch to the branch, or create it if it's the very first time
+          git checkout automatic-update-occ_indic_preprocessing || git checkout -b automatic-update-occ_indic_preprocessing
+          
+          # 3. Pull the latest history so your local runner is fully up to date
+          git pull origin automatic-update-occ_indic_preprocessing || echo "Nothing to pull."
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Get latest successful run ID
+        id: get-latest-run
+        run: |
+          run_id=$(gh run list -w get_occ_cube.yaml --status success --json databaseId --jq '.[0].databaseId')
+          echo "run_id=$run_id" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Download be_classes_cube artifact
         uses: actions/download-artifact@v4
         with:
@@ -106,26 +192,133 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           merge-multiple: true
 
-      - name: cube_preprocessing
+      - name: Download processed cube
+        uses: actions/download-artifact@v4
+        with:
+          name: be_alientaxa_cube_processed
+          path: ./cube_data/
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          merge-multiple: true
+
+      - name: Install linux libraries
         run: |
-          source("src/run_cube_preprocessing.R")
+          sudo apt-get update
+          sudo apt-get install -y libsodium-dev libcurl4-openssl-dev \
+            libgdal-dev libproj-dev libudunits2-dev \
+            libharfbuzz-dev libfribidi-dev libfontconfig1-dev
+
+      - name: Cache R packages
+        uses: actions/cache@v4
+        id: r-cache
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('src/process_cubes/install_packages_occ_indic.R') }}-2
+          restore-keys: |
+            ${{ runner.os }}-r-${{ matrix.config.r }}-
+
+      - name: Install packages
+        if: steps.r-cache.outputs.cache-hit != 'true'
+        run: |
+          source("src/process_cubes/install_packages_occ_indic.R")
         shell: Rscript {0}
+
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
+      - name: create timeseries decade
+        run: |
+          Rscript -e "rmarkdown::render('src/process_cubes/create_timeseries_decade.Rmd', params = list(decade_min = '${{ matrix.decade.start }}'), knit_root_dir = '../../')"
         env:
-          AWS_ACCESS_KEY_ID: ${{ steps.assume_role.outputs.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ steps.assume_role.outputs.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ steps.assume_role.outputs.AWS_SESSION_TOKEN }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
 
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@v0.11.1
+      - name: Upload cube artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.AUTOMATISATION }}
-          commit_prefix: "[AUTO]"
-          commit_message: "update cube_preprocessing"
-          target_branch: automatic-update-occ_indic_preprocessing
-          add_timestamp: true
+          name: "timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}"
+          path: "./cube_data/timeseries_${{ matrix.decade.start }}_${{ matrix.decade.end }}.csv"
 
+  compile-upload-timeseries:
+    runs-on: ${{ matrix.config.os }}
+    needs: create-timeseries-decade
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
+    name: compile upload timeseries
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      USERNAME: ${{ secrets.USERNAME }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      amiabot: ${{ secrets.AMIABOT }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: automatic-update-occ_indic_preprocessing
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: download rank cubes artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: timeseries_*
+          merge-multiple: true
+          path: ./cube_data/
+
+      - name: Install linux libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsodium-dev libcurl4-openssl-dev \
+            libgdal-dev libproj-dev libudunits2-dev \
+            libharfbuzz-dev libfribidi-dev libfontconfig1-dev
+
+      - name: Cache R packages
+        uses: actions/cache@v4
+        id: r-cache
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('src/process_cubes/install_packages_occ_indic.R') }}-2
+          restore-keys: |
+            ${{ runner.os }}-r-${{ matrix.config.r }}-
+
+      - name: Install packages
+        if: steps.r-cache.outputs.cache-hit != 'true'
+        run: |
+          source("src/process_cubes/install_packages_occ_indic.R")
+        shell: Rscript {0}
+
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
+      - name: compile & upload timeseries
+        run: |
+          source("src/process_cubes/run_compile_upload_timeseries.R")
+        shell: Rscript {0}
+        env:
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          
       - name: Get branch name
         run: |
           git branch --show-current
