@@ -646,8 +646,10 @@ Zwijndrecht_title,NA
 absolute_title,absolute
 allDoe_title,All degrees of establishment
 allHabitats_title,All habitats
-allNative_title,All native regions
-allPathways_title,All pathways
+allNativeRanges_title,All native regions
+allNative_title,All native continents
+allPathwaySubCategories_title,All pathways (subcategories)
+allPathways_title,All pathways (categories)
 allRegions_title,All regions
 allSources_title,All sources
 allTaxa_title,All taxa
@@ -730,7 +732,7 @@ countOccupancy_description,"<I>NOTE: Plot independent of the selected filters ab
 This graph displays the trend in occupancy (i.e., the percentage of occupied 10 km<sup>2</sup> cells) in Flanders for all species that are included in <a href= ""https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02016R1141-20220802&from=EN"" target=""_blank""> the list of species of Union concern</a>. For each species, the occupancy at the time of  its inclusion on the Union list is indicated in <span style=""color: #4f7c9bff;"">blue</span> (baseline), while the occupancy during the most recent three-year reporting period is represented in <span style=""color: #e87837ff;"">orange</span> (reporting)."
 countOccupancy_title,Trend in occupancy of Union list species in Flanders
 countOccurrence_yLabel_description,NA
-countOccurrence_yLabel_title,Occupancy<br>(no. 1x1km squares)
+countOccurrence_yLabel_title,Occupancy<br>(no. 1 x 1 km squares)
 count_title,count
 cpue_title,catch per unit effort
 createReport_title,Create report
@@ -744,6 +746,8 @@ diffLow_title,low risk difference
 diffMap_title,Map of the difference in suitability between the future SSP scenario and historical predictions
 difference_title,Difference
 disclaimerVespa_title,The species is currently not active. When you observe an individual this might be a wintering queen which does not indicate nesting activity.
+downloadData_title,Download data
+downloadGraph_title,Download graph
 downloadMap_title,Download map
 early_warning_title,Early alert
 endYear_title,End year
@@ -901,6 +905,7 @@ map_title,Map
 marine_title,marine
 mica_db_title,MICA dashboard
 min_1_obs_title,The species has been observed in Belgium since 1950 (data from GBIF)
+missingFilters_species_title,No species or region selected! => select a species and a region
 missing_title,missing
 modelScenario_title,Model scenario
 modelType_title,Model type
@@ -922,14 +927,15 @@ none_title,<none>
 not selected_title,not selected
 numberTaxa_title,Number of introduced taxa
 number_title,Number
-observations-mapOccurrence_description,"<p>Map showing observations in the selected region.</p>
+observations-mapOccurrence_description,"<p>Map showing occupancy in the selected region since 1950.</p>
 <ul>
-<li><p><b style=""color: #000000;"">Black</b> squares represent 10 km x 10 km areas where the species has been recorded.<br>
-<li><b style=""color: #FF0000;"">Red </b> squares highlight more precise 1 km x 1 km locations within these areas where sightings have been reported. <br>
+<li><p><b style=""color: #000000;"">Black</b> squares represent 10 x 10 km areas where the species has been recorded.<br>
+<li><b style=""color: #FF0000;"">Red </b> squares highlight more precise 1 x 1 km locations within these areas where sightings have been reported. <br>
 </ul>
-The accompanying bar graph presents a time series showing the number of observations per year in each region since 1950.</p>"
-observations-mapOccurrence_title,Observations of {{species}}
-observations_title,Observations
+The accompanying bar graph presents a time series showing the number of 1 x 1 km squares per year in each region since 1950. <br>
+Squares that overlap with multiple regions are counted as ""multiple regions"".</p>"
+observations-mapOccurrence_title,Occupancy of {{species}}
+observations_title,Occupancy
 occupancy_description,Area occupied by a species
 occupancy_title,Occupancy
 occurColor_title,Observation colour
