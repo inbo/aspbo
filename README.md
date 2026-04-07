@@ -18,6 +18,8 @@ The alien species portal backoffice contains automated data preparation scripts 
 
 [![update eu concern list](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_eu_concern_list.yaml)
 
+[![update trend occupancy](https://github.com/inbo/aspbo/actions/workflows/update_trendOccupancy.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/update_trendOccupancy.yaml)
+
 ## Observations dataflows
 [![download occurrence cube](https://github.com/inbo/aspbo/actions/workflows/get_occ_cube.yaml/badge.svg)](https://github.com/inbo/aspbo/actions/workflows/get_occ_cube.yaml)
 
