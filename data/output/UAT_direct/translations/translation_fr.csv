@@ -648,8 +648,8 @@ allDoe_title,Tous les degrés d'établi
 allHabitats_title,Tous les habitats
 allNativeRanges_title,Toutes les aires d'origine
 allNative_title,Tous les continents d'origine
-allPathwaySubCategories_title,Toutes les sous-catégories de voies d'intro
-allPathways_title,Toutes les catégories voies d'intro
+allPathwaySubCategories_title,Toutes les voies d'introduction (sous-catégories)
+allPathways_title,Toutes les voies d'introduction (catégories)
 allRegions_title,Toutes les régions
 allSources_title,Toutes sources
 allTaxa_title,Tous les taxons
