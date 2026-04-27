@@ -469,11 +469,9 @@ keys_completed <- keys_completed %>%
 
 write_delim(keys_completed, keys_path, ",", quote = "needed")
 
-# Upload to S3 bucket
-# aws.s3::put_object(file = keys_path,
-#                    object = "keys.csv",
-#                    bucket = UAT_bucket,
-#                    multipart = TRUE,
-#                    show_progress = TRUE,
-#                    region = "eu-west-1") 
+# create key data
+# input:  "be_alientaxa_info.csv"
+# output: "keys.csv"
+print("uploading key data")
+alienSpecies::createKeyData(dataDir = keys_path, bucket = UAT_bucket)
 ```
