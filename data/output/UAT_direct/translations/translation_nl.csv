@@ -646,10 +646,10 @@ Zwijndrecht_title,Zwijndrecht
 absolute_title,absoluut
 allDoe_title,Alle mate van vestiging
 allHabitats_title,Alle habitats
-allNativeRanges_title,Alle oorsprongkelijke herkomsten
+allNativeRanges_title,Alle herkomstgebieden
 allNative_title,Alle continenten van herkomst
-allPathwaySubCategories_title,Alle routesubcategorieën
-allPathways_title,Alle routecategorieën
+allPathwaySubCategories_title,Alle introductieroutes (subcategorieën)
+allPathways_title,Alle introductieroutes (categorieën)
 allRegions_title,Alle regio's
 allSources_title,Alle bronnen
 allTaxa_title,Alle taxa

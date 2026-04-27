@@ -2,7 +2,7 @@
 installed <- rownames(installed.packages())
 # specify packages we need
 required <- c("rgbif", "sf", "googlesheets4", "dplyr", "tidyr", "readr",
-"ggplot2", "testthat", "pkgdown", "devtools"
+"ggplot2", "testthat", "pkgdown", "remotes"
 )
 # install packages if needed
 if (!all(required %in% installed)) {
@@ -12,4 +12,4 @@ if (!all(required %in% installed)) {
 }
 
 # install fistools
-devtools::install_github("inbo/fistools")
+remotes::install_github("inbo/fistools")
