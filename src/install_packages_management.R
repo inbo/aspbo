@@ -3,7 +3,7 @@ installed <- rownames(installed.packages())
 # specify packages we need
 required <- c("rgbif", "sf", "geojsonsf",
               "dplyr", "tidyr", "stringr",
-              "uuid", "readr"
+              "uuid", "readr", "testthat"
 )
 # install packages if needed
 if (!all(required %in% installed)) {
