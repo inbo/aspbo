@@ -59,12 +59,6 @@ createShapeData(dataDir = file.path(processingFilePath,"provinces.geojson"), buc
 print("communes")
 createShapeData(dataDir = file.path(processingFilePath,"communes.geojson"), bucket = bucket)
 
-# create key data
-# input:  "be_alientaxa_info.csv"
-# output: "keys.csv"
-print("key data")
-createKeyData(dataDir = processingFilePath, bucket = bucket)
-
 # create occupancy cube 
 
 # input: trendOccupancy folder containing T1* and ias_belgium_t0_2016/18/20 geojson data
