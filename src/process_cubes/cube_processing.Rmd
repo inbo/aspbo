@@ -438,7 +438,9 @@ keys_completed <- keys_completed %>%
   ) %>% 
   select(taxonKey, scientificName, rank, taxonomicStatus, kingdom, includes)
 
+keys_path_short <- here("data", "output", "UAT_processing")
 keys_path <- here("data", "output", "UAT_processing", "be_alientaxa_info.csv")
+
 
 # Complete unknowns, info not on cube or checklist
 ## Missing taxonkeys 
@@ -473,5 +475,5 @@ write_delim(keys_completed, keys_path, ",", quote = "needed")
 # input:  "be_alientaxa_info.csv"
 # output: "keys.csv"
 print("uploading key data")
-alienSpecies::createKeyData(dataDir = keys_path, bucket = UAT_bucket)
+alienSpecies::createKeyData(dataDir = keys_path_short, bucket = UAT_bucket)
 ```
