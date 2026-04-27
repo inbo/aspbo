@@ -73,9 +73,9 @@ jobs:
       - name: Install linux libraries
         run: |
           sudo apt-get update
-          sudo apt-get install -y libsodium-dev libcurl4-openssl-dev \
-            libgdal-dev libproj-dev libudunits2-dev \
-            libharfbuzz-dev libfribidi-dev libfontconfig1-dev
+          sudo apt-get install -y libsodium-dev libcurl4-openssl-dev libuv1-dev \
+                                  libgdal-dev libproj-dev libudunits2-dev \
+                                  libharfbuzz-dev libfribidi-dev libfontconfig1-dev
 
       - name: Cache R packages
         uses: actions/cache@v4
