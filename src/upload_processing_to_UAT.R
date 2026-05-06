@@ -70,8 +70,8 @@ createOccupancyCube(file.path(processingFilePath, "trendOccupancy"), bucket = bu
 # input: data_input_checklist_indicators.tsv/eu_concern_species.tsv/be_alientaxa_cube.csv
 # output: "eu_concern_species_processed.RData"/"data_input_checklist_indicators_processed.RData"/ "be_alientaxa_cube_processed.RData" 
 print("tabular data")
-print("indicators")
-createTabularData(dataDir =  processingFilePath, type = "indicators", bucket = bucket)
+# print("indicators")
+# createTabularData(dataDir =  processingFilePath, type = "indicators", bucket = bucket)
 print("unionlist")
 createTabularData(dataDir =  processingFilePath, type = "unionlist", bucket = bucket)
 
