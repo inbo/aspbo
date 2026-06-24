@@ -99,6 +99,7 @@ muskrat_data <- muskrat_data %>%
                                is.na(provincie) & gemeente == "Ronse" ~ "Oost-Vlaanderen",
                                is.na(provincie) & gemeente == "Sint-Laureins" ~ "Oost-Vlaanderen",
                                is.na(provincie) & gemeente == "Kortrijk" ~ "West-Vlaanderen",
+                               is.na(provincie) & gemeente == "Waregem" ~ "West-Vlaanderen",
                                is.na(provincie) & gemeente == "Damme" ~ "West-Vlaanderen",
                                is.na(provincie) & gemeente == "Hoegaarden" ~ "Vlaams-Brabant",
                                is.na(provincie) & gemeente == "Graven" ~ "Waals-Brabant",

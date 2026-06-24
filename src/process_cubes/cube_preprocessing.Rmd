@@ -13,6 +13,8 @@ output:
     toc_depth: 3
     toc_float: true
     number_sections: true
+params:
+  decade_min: 2010
 ---
 
 This script is based on [05_occurrence_indicators_preprocessing.Rmd](https://github.com/trias-project/indicators/blob/main/src/05_occurrence_indicators_preprocessing.Rmd) from the [trias-project/indicators](https://github.com/trias-project/indicators) repository.
@@ -93,6 +95,21 @@ if(Sys.getenv("amiabot") != "yes"){
   print("Executor of the script is a human >> connecting to bucket")
   source("./src/connect_to_bucket.R")
   connect_to_bucket(bucket_name = UAT_bucket)
+}else{
+  test_that("AWS credentials are set in the environment", {
+    # 1. Check Access Key
+    expect_true(Sys.getenv("AWS_ACCESS_KEY_ID") != "", 
+                info = "AWS_ACCESS_KEY_ID is missing or empty")
+    
+    # 2. Check Secret Key
+    expect_true(Sys.getenv("AWS_SECRET_ACCESS_KEY") != "", 
+                info = "AWS_SECRET_ACCESS_KEY is missing or empty")
+    
+    # 3. Check Session Token (Required since you are using role-to-assume)
+    expect_true(Sys.getenv("AWS_SESSION_TOKEN") != "", 
+                info = "AWS_SESSION_TOKEN is missing (Required for assumed roles)")
+    
+  })
 }
 ```
 
@@ -270,10 +287,25 @@ test_that("UPLOAD FAILED: 2502938 not included",
 
 ### Baseline
 
+```{r set decade}
+decade_min <- params$decade_min
+decade_max <- decade_min + 9
+
+cat("Calculating", decade_min, "-", decade_max, "timeframe")
+```
+
+```{r get_data_cube}
+df <- df %>% 
+  filter(year >= decade_min,
+         year <= decade_max)
+```
+
 We get occurrence data of non alien species grouped at class level, which will be used for correcting the research bias effort:
 
 ```{r get_data_baseline}
-df_bl <- read_csv("./cube_data/be_classes_cube.csv")
+df_bl <- read_csv("./cube_data/be_classes_cube.csv") %>% 
+  filter(year >= decade_min,
+         year <= decade_max)
 ```
 
 We add gemeente and provincie to the baseline data cube:

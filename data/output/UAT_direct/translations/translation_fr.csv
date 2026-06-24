@@ -646,8 +646,10 @@ Zwijndrecht_title,NA
 absolute_title,absolut
 allDoe_title,Tous les degrés d'établi
 allHabitats_title,Tous les habitats
-allNative_title,Toutes les aires d'origine
-allPathways_title,Toutes les voies d'intro
+allNativeRanges_title,Toutes les aires d'origine
+allNative_title,Tous les continents d'origine
+allPathwaySubCategories_title,Toutes les voies d'introduction (sous-catégories)
+allPathways_title,Toutes les voies d'introduction (catégories)
 allRegions_title,Toutes les régions
 allSources_title,Toutes sources
 allTaxa_title,Tous les taxons
@@ -722,7 +724,7 @@ Pour chaque espèce, l'occupation au moment de son inclusion dans la liste de l'
 <span style=""color: #e87837ff;"">orange</span> (Rapport)."
 countOccupancy_title,Tendance d'occupation des espèces de la liste de l'Union en Flandre
 countOccurrence_yLabel_description,NA
-countOccurrence_yLabel_title,Occupancy<br>(no. 1x1km squares)
+countOccurrence_yLabel_title,Répartition (nombre de carrés de 1 x 1 km)
 count_title,nombre
 cpue_title,prise par unité d'effort
 createReport_title,Créer un rapport
@@ -736,6 +738,8 @@ diffLow_title,faible différence de risque
 diffMap_title,Carte de différence de risque entre le scénario climatique RCP et les données climatiques historiques
 difference_title,Différence
 disclaimerVespa_title,"L'espèce n'est actuellement pas active. Lorsque vous observez un individu, il peut s'agir d'une reine hivernante, ce qui n'indique pas d'activité de nidification."
+downloadData_title,Télécharger les données
+downloadGraph_title,Télécharger le graphique
 downloadMap_title,Télécharger la carte
 early_warning_title,Early alert
 endYear_title,Année de fin
@@ -883,6 +887,7 @@ map_title,Carte
 marine_title,marine
 mica_db_title,MICA dashboard
 min_1_obs_title,L'espèce a été observée en Belgique depuis 1950 (données de GBIF)
+missingFilters_species_title,Aucune espèce ni région sélectionnée ! => Veuillez sélectionner une espèce et une région
 missing_title,manquant
 modelScenario_title,Scénario modèle
 modelType_title,Type de modèle
@@ -904,14 +909,15 @@ none_title,<non>
 not selected_title,non séléctionné
 numberTaxa_title,Nombre de taxons introduits
 number_title,Nombre
-observations-mapOccurrence_description,"<p>Carte des observations.</p>
+observations-mapOccurrence_description,"<p>Carte de la répartition dans les régions sélectionnées depuis 1950.</p>
 <ul>
-<li><p>Les carrés <b style=""color: #000000;"">noirs</b> indiquent des zones de 10 km x 10 km où l’espèce a été observée.<br>
-<li>Les carrés <b style=""color: #FF0000;"">rouges</b> rouges marquent des emplacements plus précis de 1 km x 1 km à l’intérieur de ces zones où des observations ont été signalées.</p> 
+<li><p>Les carrés <b style=""color: #000000;"">noirs</b> indiquent des zones de 10 x 10 km où l’espèce a été observée.<br>
+<li>Les carrés <b style=""color: #FF0000;"">rouges</b> rouges marquent des emplacements plus précis de 1 x 1 km à l’intérieur de ces zones où des observations ont été signalées.</p> 
 </ul>
-<p>Le graphique en barres joint présente une série chronologique montrant le nombre d’observations par an dans chaque région depuis 1950.</p>"
-observations-mapOccurrence_title,Observations de {{species}}
-observations_title,Observations
+<p>Le graphique en barres joint présente une série chronologique montrant le nombre de carrés par an dans chaque région depuis 1950.<br>
+Lorsqu’un carré chevauche plusieurs régions, il est compté comme ""plusieurs régions"".</p>"
+observations-mapOccurrence_title,Répartition de {{species}}
+observations_title,Répartition
 occupancy_description,Surface occupée par une espèce
 occupancy_title,Répartition
 occurColor_title,Observation couleur

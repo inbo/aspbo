@@ -1,10 +1,14 @@
 name: get_griis
 
 on:
-  schedule: 
+  schedule:
    - cron: '0 0 1 1-12 *'
   workflow_dispatch:
-  
+
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   get-griis:
     runs-on: ${{ matrix.config.os }}
@@ -51,10 +55,6 @@ jobs:
           sudo apt install libharfbuzz-dev
           sudo apt install libfribidi-dev
           sudo apt-get install -y libfontconfig1-dev
-          R --no-save -e 'install.packages("devtools")'
-          R --no-save -e 'devtools::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)'
-          R --no-save -e 'devtools::install_github("inbo/alien-species-portal@uat", 
-                         subdir = "alienSpecies", force = TRUE)'
           
       - name: Install R packages
         run: |
@@ -62,32 +62,16 @@ jobs:
         shell: Rscript {0}
         
       - name: Setup AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v6
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
 
-      - name: Assume Role
-        id: assume_role
-        run: |
-          ROLE_ARN="${{ secrets.AWS_ROLE_ARN }}"
-          TEMP_ROLE=$(aws sts assume-role \
-            --role-arn $ROLE_ARN \
-            --role-session-name inbo-deployment)
-          echo "::set-output name=AWS_ACCESS_KEY_ID::$(echo $TEMP_ROLE | jq -r .Credentials.AccessKeyId)"
-          echo "::set-output name=AWS_SECRET_ACCESS_KEY::$(echo $TEMP_ROLE | jq -r .Credentials.SecretAccessKey)"
-          echo "::set-output name=AWS_SESSION_TOKEN::$(echo $TEMP_ROLE | jq -r .Credentials.SessionToken)"
-    
       - name: download_griis_checklist
         run: |
           source("src/download_griis_checklist.R")
         shell: Rscript {0}
         env:
-          AWS_ACCESS_KEY_ID: ${{ steps.assume_role.outputs.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ steps.assume_role.outputs.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ steps.assume_role.outputs.AWS_SESSION_TOKEN }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
     
       - name: Commit and push changes
