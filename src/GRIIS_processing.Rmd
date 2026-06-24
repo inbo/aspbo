@@ -22,11 +22,14 @@ checklist_raw <- read_delim("data/output/UAT_processing/data_input_checklist_ind
 ```{r add vernicular names}
 taxon_keys <- unique(checklist_raw$nubKey)
 
-all_vernicular_names <- data.frame(
+all_vernicular_names <- tibble(
   taxonKey = numeric(),
   vernacular_name_nl = character(),
   vernacular_name_fr = character(),
   vernacular_name_en = character(),
+  vernacular_name_nl_list = list(),
+  vernacular_name_fr_list = list(),
+  vernacular_name_en_list = list(),
   stringsAsFactors = FALSE
 )
 
@@ -37,26 +40,82 @@ pb <- progress_bar$new(total = length(taxon_keys))
 for(t in taxon_keys){
   pb$tick()
   temp_name_usage <- rgbif::name_usage(key = t, data = "vernacularNames")
-  spec_vernicular_names <- temp_name_usage$data 
+  temp_name_usage_2 <- rgbif::name_usage(key = t, data = "name")
+  spec_vernicular_names_raw <- temp_name_usage$data 
+  spec_name <- temp_name_usage_2$data %>% 
+    pull(canonicalName)
   
-  if(nrow(spec_vernicular_names) > 0){
-    spec_vernicular_names <- spec_vernicular_names %>% 
+  if(nrow(spec_vernicular_names_raw) > 0){
+    # Select the vernicular names of relevant languages ####
+    spec_vernicular_names_languages <- spec_vernicular_names_raw %>% 
       filter(language %in% c("eng", "fra", "nld")) %>% 
       mutate(vernacularName = str_to_sentence(vernacularName),
-             language = str_sub(language, 0, 2)) %>% 
+             language = str_sub(language, 0, 2))
+    
+    # Create the lists ####
+    # These options will be used for searching by common name and include all
+    # relevant language options present on gbif
+    spec_vernicular_names_lists <- spec_vernicular_names_languages %>% 
       distinct(taxonKey, language, vernacularName) %>% 
       group_by(language, taxonKey) %>% 
       summarise(vernacular_name = paste(vernacularName, collapse = ", "), .groups = "drop") %>% 
       ungroup() %>% 
+      complete(language = c("en", "fr", "nl")) %>%
+      mutate(taxonKey = t,
+             vernacular_name = coalesce(vernacular_name, spec_name)) %>% 
       pivot_wider(id_cols = taxonKey,
                   names_from = language,
                   names_prefix = "vernacular_name_",
+                  values_from = vernacular_name) %>% 
+      rename(vernacular_name_en_list = vernacular_name_en,
+             vernacular_name_fr_list = vernacular_name_fr,
+             vernacular_name_nl_list = vernacular_name_nl)
+    
+    # Create vernicular_names for the table ####
+    # These values will be used to display in the checklist indicators table
+    # This should be the most commonly used 
+    spec_vernicular_names_solo <- spec_vernicular_names_languages %>% 
+      group_by(language, taxonKey, vernacularName) %>% 
+      summarise(n = n()) %>% 
+      ungroup() %>% 
+      group_by(taxonKey, language) %>%
+      arrange(desc(n)) %>% 
+      summarise(vernacularName = first(vernacularName)) %>% 
+      ungroup() %>% 
+      complete(language = c("en", "fr", "nl")) %>%
+      mutate(taxonKey = t,
+             vernacular_name = coalesce(vernacularName, spec_name)) %>% 
+      pivot_wider(id_cols = taxonKey,
+                  names_from = language,
+                  names_prefix = "vernacular_name_",
+                  names_expand = TRUE,
                   values_from = vernacular_name)
+    
+    spec_vernicular_names <- spec_vernicular_names_solo %>% 
+      left_join(spec_vernicular_names_lists, by = "taxonKey")
     
     if(nrow(all_vernicular_names) == 0){
       all_vernicular_names <- spec_vernicular_names
     }else{
-      all_vernicular_names <- bind_rows(all_vernicular_names, spec_vernicular_names)
+      if(is_character(spec_vernicular_names$vernacular_name_en_list)){
+        
+        spec_vernicular_names$vernacular_name_en_list <- list(spec_vernicular_names$vernacular_name_en_list)
+        
+      }
+      
+      if(is_character(spec_vernicular_names$vernacular_name_fr_list)){
+        
+        spec_vernicular_names$vernacular_name_fr_list <- list(spec_vernicular_names$vernacular_name_fr_list)
+        
+      }
+      
+      if(is_character(spec_vernicular_names$vernacular_name_nl_list)){
+        
+        spec_vernicular_names$vernacular_name_nl_list <- list(spec_vernicular_names$vernacular_name_nl_list)
+        
+      }
+      
+      all_vernicular_names <- rbind(all_vernicular_names, spec_vernicular_names)
     }
   }else{
     warning(paste0("No vernicular names for ", t))
@@ -110,7 +169,7 @@ head(connection_test)
 ```
 
 ```{r get occurrence data from bucket}
-occurrence_data <- alienSpecies::loadTabularData(type = "occurrence")
+occurrence_data <- alienSpecies::loadTafbularData(type = "occurrence")
 
 occurrence_data <- occurrence_data %>% 
   group_by(taxonKey) %>%
