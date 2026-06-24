@@ -23,7 +23,7 @@ if (packageVersion("aws.s3") < "0.3.22") {
 # ensure dependencies are installed ####
 if(!requireNamespace("aws.ec2metadata", quietly = TRUE)){
   warning("1st 'aws.ec2metadata' installation failed, retrying")
-  install.packages("aws.ec2metadata", 
+  remotes::install_version("aws.ec2metadata", version = "0.2.0",
                    dependencies = TRUE)
 }
 
