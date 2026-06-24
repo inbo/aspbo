@@ -181,18 +181,27 @@ cube_pre_update_lastmod <- cube_pre_update$LastModified
 cube_pre_update_size <- cube_pre_update$Size
 ```
 
-```{r save modified GRIIS checklist to s3 bucket}
-print("indicators")
-alienSpecies::createTabularData(dataDir =  "./data/output/UAT_processing/", 
-                                type = "indicators", 
-                                bucket = UAT_bucket)
-```
-
 ```{r save data_cube to S3 bucket}
 print("occurrence")
 alienSpecies::createTabularData(dataDir = cube_path, 
                                 type = "occurrence", 
                                 bucket = UAT_bucket) 
+```
+
+```{r run GRIIS processing}
+tempR <- tempfile(fileext = ".R")
+knitr::purl("./src/GRIIS_processing.Rmd", output=tempR)
+source(tempR)
+unlink(tempR)
+
+print("processing successful")
+```
+
+```{r save modified GRIIS checklist to s3 bucket}
+print("indicators")
+alienSpecies::createTabularData(dataDir =  "./data/output/UAT_processing/", 
+                                type = "indicators", 
+                                bucket = UAT_bucket)
 ```
 
 ```{r get post update values}
