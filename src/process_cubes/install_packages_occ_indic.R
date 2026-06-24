@@ -3,7 +3,8 @@
 installed <- rownames(installed.packages())
 required <- c("remotes", "knitr", "dplyr", "magrittr", "rgbif", "tidylog", 
               "progress", "here", "lubridate", "readr", "purrr",
-              "stringr", "tidyr", "aws.s3", "sf", "testthat", "pbapply")
+              "stringr", "tidyr", "aws.s3", "sf", "testthat", "pbapply", 
+              "aws.ec2metadata")
 
 if (!all(required %in% installed)) {
   install.packages(required[!required %in% installed], dependencies = TRUE)
@@ -21,7 +22,9 @@ if (packageVersion("aws.s3") < "0.3.22") {
 
 # ensure dependencies are installed ####
 if(!requireNamespace("aws.ec2metadata", quietly = TRUE)){
-  install.packages("aws.ec2metadata", dependencies = TRUE)
+  warning("1st 'aws.ec2metadata' installation failed, retrying")
+  install.packages("aws.ec2metadata", 
+                   dependencies = TRUE)
 }
 
 # install non-CRAN packages ####
