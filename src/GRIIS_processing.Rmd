@@ -6,7 +6,11 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
+library(readr)
+library(dplyr)
+library(magrittr)
+library(tibble)
+library(stringr)
 library(progress)
 library(aws.s3)
 library(testthat)
