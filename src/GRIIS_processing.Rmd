@@ -47,7 +47,16 @@ for(t in taxon_keys){
   temp_name_usage <- rgbif::name_usage(key = t, data = "vernacularNames")
   temp_name_usage_2 <- rgbif::name_usage(key = t, data = "name")
   spec_vernicular_names_raw <- temp_name_usage$data 
-  spec_name <- temp_name_usage_2$data %>% 
+  spec_name <- temp_name_usage_2$data 
+  
+  if(!"canonicalName" %in% colnames(spec_name)){
+    spec_name <- spec_name %>% 
+      rename(canonicalName = scientificName)
+    
+    warning("canonicalName is missing using scientificName instead")
+  }
+  
+  spec_name <- spec_name %>% 
     pull(canonicalName)
   
   if(nrow(spec_vernicular_names_raw) > 0){
