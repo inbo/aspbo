@@ -183,7 +183,7 @@ head(connection_test)
 ```
 
 ```{r get occurrence data from bucket}
-occurrence_data <- alienSpecies::loadTafbularData(type = "occurrence")
+occurrence_data <- alienSpecies::loadTabularData(type = "occurrence")
 
 occurrence_data <- occurrence_data %>% 
   group_by(taxonKey) %>%
