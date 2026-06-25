@@ -43,6 +43,7 @@ pb <- progress_bar$new(total = length(taxon_keys))
 
 for(t in taxon_keys){
   pb$tick()
+  cat("processing taxonKey --",t, "-- \n")
   temp_name_usage <- rgbif::name_usage(key = t, data = "vernacularNames")
   temp_name_usage_2 <- rgbif::name_usage(key = t, data = "name")
   spec_vernicular_names_raw <- temp_name_usage$data 
