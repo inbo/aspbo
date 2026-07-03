@@ -139,6 +139,11 @@ for(t in taxon_keys){
   }
 }
 
+all_vernicular_names <- all_vernicular_names %>% 
+  mutate(vernacular_name_en_list = as.character(vernacular_name_en_list),
+         vernacular_name_nl_list = as.character(vernacular_name_nl_list),
+         vernacular_name_fr_list = as.character(vernacular_name_fr_list))
+
 missing_scientific_names <- checklist_raw %>% 
   filter(is.na(species)) 
 
@@ -260,7 +265,7 @@ checklist <- checklist_raw %>%
                                    last_observed_recalc > last_observed ~ last_observed_recalc,
                                    TRUE ~ last_observed)) %>%
   select(-last_observed_recalc) %>%
-  write_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
-              delim = "\t")
+write_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
+            delim = "\t")
 ```
 
