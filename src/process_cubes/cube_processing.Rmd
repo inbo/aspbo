@@ -68,8 +68,7 @@ if(Sys.getenv("S3_BUCKET") != ""){
 ```{r connect to bucket}
 if(Sys.getenv("amiabot") != "yes"){
   print("Executor of the script is a human >> connecting to bucket")
-  source("./src/connect_to_bucket.R")
-  connect_to_bucket(bucket_name = UAT_bucket)
+  fistools::connect_to_bucket(bucket_name = UAT_bucket)
 }else{
   test_that("AWS credentials are set in the environment", {
     # 1. Check Access Key
@@ -199,6 +198,10 @@ print("processing successful")
 
 ```{r save modified GRIIS checklist to s3 bucket}
 print("indicators")
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket")
+  alienSpecies::setupS3(inboUserName = "sander_devisscher")
+} 
 alienSpecies::createTabularData(dataDir =  "./data/output/UAT_processing/", 
                                 type = "indicators", 
                                 bucket = UAT_bucket)
@@ -387,7 +390,7 @@ spec_names %>%
 export spec_names
 ```{r}
 spec_names %>% 
-              distinct(taxonKey, class, classKey, kingdom, kingdomKey) %>% 
+  distinct(taxonKey, class, classKey, kingdom, kingdomKey) %>% 
   write_csv("./data/interim/spec_names.csv")
 ```
 

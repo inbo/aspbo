@@ -10,6 +10,8 @@ library(readr)
 library(dplyr)
 library(magrittr)
 library(tibble)
+library(tidyr)
+library(purrr)
 library(stringr)
 library(progress)
 library(aws.s3)
@@ -20,7 +22,8 @@ library(alienSpecies)
 ```{r read data}
 checklist_raw <- read_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
                             delim = "\t", escape_double = FALSE, 
-                            trim_ws = TRUE)
+                            trim_ws = TRUE) %>% 
+  select(-contains("vernacular_name_"))
 ```
 
 ```{r add vernicular names}
@@ -183,6 +186,10 @@ head(connection_test)
 ```
 
 ```{r get occurrence data from bucket}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket")
+  alienSpecies::setupS3(inboUserName = "sander_devisscher")
+} 
 occurrence_data <- alienSpecies::loadTabularData(type = "occurrence")
 
 occurrence_data <- occurrence_data %>% 
