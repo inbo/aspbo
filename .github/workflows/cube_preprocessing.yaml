@@ -97,7 +97,7 @@ jobs:
         if: steps.r-cache.outputs.cache-hit != 'true'
         run: |
           source("src/process_cubes/install_packages_occ_indic.R")
-          source("src/install_alienSpecies")
+          source("src/install_alienSpecies.R")
         shell: Rscript {0}
 
       - name: Setup AWS credentials
