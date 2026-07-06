@@ -52,6 +52,7 @@ jobs:
       - name: Install R packages
         run: |
           source("src/install_packages_eu_concern_list.R")
+          source("src/install_alienSpecies.R")
         shell: Rscript {0}
 
       - name: Setup AWS credentials
