@@ -68,8 +68,7 @@ if(Sys.getenv("S3_BUCKET") != ""){
 ```{r connect to bucket}
 if(Sys.getenv("amiabot") != "yes"){
   print("Executor of the script is a human >> connecting to bucket")
-  source("./src/connect_to_bucket.R")
-  connect_to_bucket(bucket_name = UAT_bucket)
+  fistools::connect_to_bucket(bucket_name = UAT_bucket)
 }else{
   test_that("AWS credentials are set in the environment", {
     # 1. Check Access Key
@@ -182,7 +181,30 @@ cube_pre_update_size <- cube_pre_update$Size
 ```
 
 ```{r save data_cube to S3 bucket}
-alienSpecies::createTabularData(dataDir = cube_path, type = "occurrence", bucket = UAT_bucket) 
+print("occurrence")
+alienSpecies::createTabularData(dataDir = cube_path, 
+                                type = "occurrence", 
+                                bucket = UAT_bucket) 
+```
+
+```{r run GRIIS processing}
+tempR <- tempfile(fileext = ".R")
+knitr::purl("./src/GRIIS_processing.Rmd", output=tempR)
+source(tempR)
+unlink(tempR)
+
+print("processing successful")
+```
+
+```{r save modified GRIIS checklist to s3 bucket}
+print("indicators")
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket")
+  alienSpecies::setupS3(inboUserName = "sander_devisscher")
+} 
+alienSpecies::createTabularData(dataDir =  "./data/output/UAT_processing/", 
+                                type = "indicators", 
+                                bucket = UAT_bucket)
 ```
 
 ```{r get post update values}
@@ -368,7 +390,7 @@ spec_names %>%
 export spec_names
 ```{r}
 spec_names %>% 
-              distinct(taxonKey, class, classKey, kingdom, kingdomKey) %>% 
+  distinct(taxonKey, class, classKey, kingdom, kingdomKey) %>% 
   write_csv("./data/interim/spec_names.csv")
 ```
 
@@ -438,7 +460,9 @@ keys_completed <- keys_completed %>%
   ) %>% 
   select(taxonKey, scientificName, rank, taxonomicStatus, kingdom, includes)
 
+keys_path_short <- here("data", "output", "UAT_processing")
 keys_path <- here("data", "output", "UAT_processing", "be_alientaxa_info.csv")
+
 
 # Complete unknowns, info not on cube or checklist
 ## Missing taxonkeys 
@@ -469,11 +493,9 @@ keys_completed <- keys_completed %>%
 
 write_delim(keys_completed, keys_path, ",", quote = "needed")
 
-# Upload to S3 bucket
-# aws.s3::put_object(file = keys_path,
-#                    object = "keys.csv",
-#                    bucket = UAT_bucket,
-#                    multipart = TRUE,
-#                    show_progress = TRUE,
-#                    region = "eu-west-1") 
+# create key data
+# input:  "be_alientaxa_info.csv"
+# output: "keys.csv"
+print("uploading key data")
+alienSpecies::createKeyData(dataDir = keys_path_short, bucket = UAT_bucket)
 ```
