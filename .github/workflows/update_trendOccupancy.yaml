@@ -66,6 +66,7 @@ jobs:
       - name: install packages
         run: |
           source("src/install_packages_trendOccupancy.R")
+          source("src/install_alienSpecies.R")
         shell: Rscript {0}
 
       - name: Setup AWS credentials
