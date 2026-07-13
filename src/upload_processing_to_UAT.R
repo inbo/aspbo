@@ -132,7 +132,7 @@ test_that("Load full_timeseries", {
 test_that("Load cube data", {
   
   occupancy <- loadOccupancyData()
-  expect_true(exists("dfCube"))
+  expect_true(exists("occupancy"))
   expect_s3_class(occupancy, "data.table")
 })
 
