@@ -96,6 +96,11 @@ if(Sys.getenv("amiabot") != "yes"){
 decade_min <- as.integer(params$decade_min)
 decade_max <- decade_min + 9
 
+# Overwrite decade_max when larger than current year
+if(decade_max > year(Sys.Date())){
+  decade_max <- year(Sys.Date())
+}
+
 cat("Calculating", decade_min, "-", decade_max, "timeframe \n")
 ```
 

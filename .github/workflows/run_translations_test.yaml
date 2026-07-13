@@ -44,7 +44,13 @@ jobs:
       - name: Install linux libraries
         run: |
           sudo apt-get update
-          sudo apt-get install -y libsodium-dev libcurl4-openssl-dev libgdal-dev libproj-dev libudunits2-dev
+          sudo apt-get install -y \
+            libsodium-dev \
+            libcurl4-openssl-dev \
+            libgdal-dev \
+            libproj-dev \
+            libudunits2-dev \
+            libuv1-dev
      
       - name: Test translations
         run: |
