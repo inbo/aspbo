@@ -21,6 +21,9 @@ processingFilePath <- "./data/output/UAT_processing"
 #source("./src/connect_to_bucket.R")
 
 print("test S3_bucket")
+
+#Sys.getenv("UAT_bucket")
+
 if(Sys.getenv("S3_BUCKET") == ""){
   stop("S3_bucket is not provided")
 }
@@ -28,7 +31,9 @@ if(Sys.getenv("S3_BUCKET") == ""){
 bucket <-  paste0("s3://",Sys.getenv("S3_BUCKET"))
 #Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
 
-#connect_to_bucket(bucket) #=> run this before continuing locally
+#=> run this before continuing locally
+#fistools::connect_to_bucket(bucket) 
+#alienSpecies::setupS3(inboUserName = "voornaam_achternaam") 
 
 ###############################################################
 ## The following create* function will take input data, 
