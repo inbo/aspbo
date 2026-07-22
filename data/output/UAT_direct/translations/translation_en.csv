@@ -927,6 +927,8 @@ none_title,<none>
 not selected_title,not selected
 numberTaxa_title,Number of introduced taxa
 number_title,Number
+obs_disclaimer_1311477_description,"Attention: The data shown under <b>Occupancy</b> include sightings of both nests and individuals of <i>Vespa velutina</i>.<br> For information on the number of reported nests, go to the <strong>Management</strong> section."
+obs_disclaimer_1311477_title,NA
 observations-mapOccurrence_description,"<p>Map showing occupancy in the selected region since 1950.</p>
 <ul>
 <li><p><b style=""color: #000000;"">Black</b> squares represent 10 x 10 km areas where the species has been recorded.<br>
