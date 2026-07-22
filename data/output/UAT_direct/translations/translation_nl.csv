@@ -939,6 +939,8 @@ none_title,<geen>
 not selected_title,niet geselecteerd
 numberTaxa_title,Aantal geïntroduceerde taxa
 number_title,Aantal
+obs_disclaimer_1311477_description,"Let op: De gegevens onder <b>Bezetting</b> omvatten waarnemingen van zowel nesten als individuen van <i>Vespa velutina</i>.<br>Voor informatie over het aantal gemelde nesten, ga naar het tabblad <b>Beheer</b>."
+obs_disclaimer_1311477_title,NA
 observations-mapOccurrence_description,"<p>Kaart met de verspreiding in de gekozen gewesten sinds 1950.</p><ul> 
 <li><p><b style=""color: #000000;"">Zwarte</b> hokken geven de gebieden van 10 × 10 km aan waarin de soort werd waargenomen.</p></li> 
 <li><p><b style=""color: #FF0000;"">Rode</b> hokken markeren specifieke locaties van 1 × 1 km binnen deze gebieden waar waarnemingen zijn gemeld.</p></li> </ul> 
