@@ -24,5 +24,5 @@ if(!requireNamespace("aws.ec2metadata", quietly = TRUE)){
 
 remotes::install_github("trafficonese/leaflet.extras", force = TRUE)
 remotes::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)
-remotes::install_github("inbo/alien-species-portal@fix_v1.3.0", 
+remotes::install_github("inbo/alien-species-portal@uat", 
                          subdir = "alienSpecies", force = TRUE)
