@@ -909,7 +909,7 @@ none_title,<non>
 not selected_title,non séléctionné
 numberTaxa_title,Nombre de taxons introduits
 number_title,Nombre
-obs_disclaimer_1311477_description,"Attention: Les données affichées sous <strong>Répartition</strong> comprennent des observations à la fois de nids et d'individus de <i>Vespa velutina</i>.<br>Pour obtenir des informations sur le nombre de nids signalés, consultez la section <strong>Gestion</strong>."
+obs_disclaimer_1311477_description,"Attention: Les données affichées sous <b>Répartition</b> comprennent des observations à la fois de nids et d'individus de <i>Vespa velutina</i>.<br>Pour obtenir des informations sur le nombre de nids signalés, consultez la section <b>Gestion</b>."
 obs_disclaimer_1311477_title,NA
 observations-mapOccurrence_description,"<p>Carte de la répartition dans les régions sélectionnées depuis 1950.</p>
 <ul>
