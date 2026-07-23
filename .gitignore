@@ -20,6 +20,9 @@
 # RStudio files
 .Rproj.user/
 
+# Architect project
+.project
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
@@ -39,6 +42,8 @@ vignettes/*.pdf
 .Renviron
 
 # too large files
-*.zip
+/*.zip
 data/output/UAT_processing/full_timeseries.csv
 data/output/UAT_processing/df_timeseries.tsv
+/cube_data/*
+.positai

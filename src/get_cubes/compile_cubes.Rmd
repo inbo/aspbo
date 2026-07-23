@@ -1,0 +1,80 @@
+---
+title: "compile_cubes"
+author: "Sander Devisscher"
+date: "2024-10-22"
+output: html_document
+---
+
+A script to compile the occurrence cubes from different ranks into a single cube.
+
+```{r libraries}
+library(readr)
+library(magrittr)
+library(dplyr)
+library(stringr)
+```
+
+```{r set ranks}
+ranks <- c("GENUS", "FAMILY", "SPECIES", "SUBSPECIES_FORM_VARIETY")
+```
+
+```{r read in the data, message=NA}
+# get a list of all the files in the cube_data folder
+cube_files <- list.files(path = "./cube_data/", 
+                         pattern = "be_alientaxa_cube_.+\\.csv$", 
+                         recursive = TRUE, 
+                         full.names = TRUE)
+
+# Create an empty data frame to store the compiled cube
+compiled_cube <- data.frame()
+
+# Define the path to the folder containing the occurrence cubes
+for(r in cube_files){
+  # Read in the cube
+  cube <- read_csv(r)
+  
+  # add rank info
+  cube$rank <- str_extract(r, "be_alientaxa_cube_(.+?)\\.csv$") %>% 
+    str_replace_all("be_alientaxa_cube_", "") %>% 
+    str_replace_all(".csv", "") %>%
+    toupper()
+  
+  # Combine the cube with the compiled cube
+  compiled_cube <- compiled_cube %>% bind_rows(cube)
+}
+```
+
+```{r map compiled cube to match occ cube format, message=NA}
+compiled_cube <- compiled_cube %>% 
+  filter(!is.na(eeacellcode)) %>%
+  mutate(taxonKey = case_when(
+    rank == "SPECIES" ~ specieskey,
+    rank == "GENUS" ~ genuskey,
+    rank == "FAMILY" ~ familykey,
+    rank == "SUBSPECIES_FORM_VARIETY" ~ taxonkey,
+    TRUE ~ as.numeric(NA)
+  )) 
+
+missing_taxonKeys <- compiled_cube %>% 
+  filter(is.na(taxonKey)) %>% 
+  distinct(rank) 
+
+if(nrow(missing_taxonKeys) > 0){
+  stop(paste0("Missing taxonKeys for ranks: ", paste(missing_taxonKeys$rank, collapse = ", ")))
+}
+
+cat("These ranks where included in the compiled cube: ", paste(unique(compiled_cube$rank), collapse = ", "))
+
+compiled_cube <- compiled_cube %>% 
+  select(year, 
+         "eea_cell_code" = "eeacellcode", 
+         taxonKey, 
+         classKey = "classkey",
+         obs = "occurrences", 
+         min_coord_uncertainty = "mincoordinateuncertaintyinmeters")
+```
+
+```{r write compiled cube}
+# Write the compiled cube to a csv file
+write_csv(compiled_cube, "./cube_data/be_alientaxa_cube.csv")
+```

@@ -1,0 +1,168 @@
+---
+title: "download_cubes"
+author: "Sander Devisscher"
+date: "2024-10-18"
+params:
+  rank: "CLASS"
+---
+
+```{r error handling, message=NA}
+message("Received rank parameter:", params$rank, "\n")
+if(is.null(params$rank) || params$rank == "") {
+  stop("Rank parameter is empty or not set")
+}
+```
+
+```{r libraries}
+library(rgbif)
+library(readr)
+library(magrittr)
+library(dplyr)
+```
+
+```{r build query path, message=NA}
+rank <- params$rank
+
+cat(rank)
+
+# determine which query to use based on rank
+# CLASS is a special case because it will be used to correct for observation bias.
+# it is exported as the be_classes_cube.csv
+if(rank == "CLASS"){
+  query <- "./data/interim/cube_queries/belgium_class_query.txt"
+} else {
+  query <- paste0("./data/interim/cube_queries/griis_belgium_", tolower(rank), "_query.txt")
+}
+
+message(query)
+```
+
+```{r check query}
+if(!file.exists(query)){
+  stop(paste(getwd(), query, " does not exist"))
+}
+```
+
+```{r read query}
+query <- query %>% 
+  readLines() 
+```
+
+```{r FUN: countdown_sleep}
+countdown_sleep <- function(sleep_time) {
+  message(paste("Sleeping for", sleep_time, "seconds"))
+  
+  for (i in sleep_time:1) {
+    cat("\rTime remaining:", i, " seconds")
+    Sys.sleep(1)
+  }
+  
+  message("\nDone sleeping => recalculating status\n")
+}
+```
+
+```{r halt execution if too many active downloads, message=NA}
+num_active_downloads <- "--init--" 
+# set to --init-- to trigger the while loop
+# and to stagger the downloads
+
+while(num_active_downloads >= 3 | num_active_downloads == "--init--"){
+  
+  message(paste("Number of active downloads:", num_active_downloads))
+  
+  if(num_active_downloads == "--init--"){
+    sleep_time <- 165 # initial sleep time if rank is not one of the options
+  }
+  
+  if(rank == "CLASS"){
+    sleep_time <- 5
+  }
+  
+  if(rank == "SPECIES"){
+    sleep_time <- 20
+  }
+  
+  if(rank == "SUBSPECIES_FORM_VARIETY"){
+    sleep_time <- 45
+  }
+  
+  if(rank == "NO_FILTER"){
+    sleep_time <- 65
+  }
+  
+  if(rank == "GENUS"){
+    sleep_time <- 95
+  }
+  
+  if(rank == "FAMILY"){
+    sleep_time <- 145
+  }
+  
+  if(num_active_downloads >= 3 | num_active_downloads == "--init--"){
+    # downloads are staggered to avoid overloading the GBIF API
+    # longest lists are triggered first to avoid long waiting times
+    countdown_sleep(sleep_time)
+    
+    # Get list of all downloads
+    downloads <- occ_download_list(user = Sys.getenv("gbif_user"),
+                                   pwd = Sys.getenv("gbif_pwd"))
+    
+    downloads <- as.data.frame(downloads)
+    
+    # Filter for active downloads (status is RUNNING or PREPARING)
+    active_downloads <- downloads[downloads$results.status %in% c("RUNNING", "PREPARING"), ]
+    
+    # Get the count of active downloads
+    num_active_downloads <- nrow(active_downloads)
+    
+  }
+}
+
+if(num_active_downloads < 3){
+  message(paste("Number of active downloads:", num_active_downloads))
+  message("initiating download")
+}
+```
+
+```{r initiate download}
+cube <- occ_download_sql(q = query, 
+                         format = "SQL_TSV_ZIP",
+                         email = Sys.getenv("email"),
+                         user = Sys.getenv("gbif_user"),
+                         pwd = Sys.getenv("gbif_pwd"))
+```
+
+```{r create cube_data folder}
+if(!dir.exists("./cube_data")){
+  dir.create("./cube_data")
+}
+```
+
+```{r download cube}
+occ_download_wait(cube)
+
+data <- occ_download_get(cube, overwrite = TRUE) %>%
+  occ_download_import() 
+
+if(rank == "CLASS"){
+  data <- data %>% 
+    write_csv(file = "./cube_data/be_classes_cube_raw.csv")
+} else {
+  data <- data %>% 
+    write_csv(file = paste0("./cube_data/be_alientaxa_cube_", rank, ".csv"))
+}
+```
+
+```{r get metadata}
+metadata_list <- occ_download_meta(cube)
+
+metadata <- data.frame(
+  rank = rank,
+  doi = metadata_list$doi,
+  created = metadata_list$created
+) 
+
+metadata <- metadata %>% 
+  write_csv(file = paste0("./cube_data/be_cube_metadata_", rank, ".csv"))
+```
+

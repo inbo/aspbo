@@ -1,9 +1,9 @@
 # get packages installed on machine
 installed <- rownames(installed.packages())
 # specify packages we need
-required <- c(
-  "aws.s3", "magrittr", "readr",
-  "dplyr", "tidyr", "stringr"
+required <- c("aws.s3", "magrittr", "readr",
+  "dplyr", "tidyr", "stringr",
+  "testthat", "remotes"
 )
 # install packages if needed
 if (!all(required %in% installed)) {

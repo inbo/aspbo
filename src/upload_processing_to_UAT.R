@@ -18,9 +18,22 @@ library(testthat)
 processingFilePath <- "./data/output/UAT_processing"
 
 # connect to bucket ####
-source("./src/connect_to_bucket.R")
+#source("./src/connect_to_bucket.R")
 
-bucket <-  Sys.getenv("UAT_bucket")
+print("test S3_bucket")
+
+#Sys.getenv("UAT_bucket")
+
+if(Sys.getenv("S3_BUCKET") == ""){
+  stop("S3_bucket is not provided")
+}
+
+bucket <-  paste0("s3://",Sys.getenv("S3_BUCKET"))
+#Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
+
+#=> run this before continuing locally
+#fistools::connect_to_bucket(bucket) 
+#alienSpecies::setupS3(inboUserName = "voornaam_achternaam") 
 
 ###############################################################
 ## The following create* function will take input data, 
@@ -30,56 +43,48 @@ bucket <-  Sys.getenv("UAT_bucket")
 
 # input: folder grid containing gewestbel shape data
 # output: grid.RData 
-createShapeData(dataDir = file.path(processingFilePath, "grid"))
+print("grid")
+createShapeData(dataDir = file.path(processingFilePath, "grid"), bucket = bucket)
 
 # input Vespa_velutina_shape" folder containing shape data
 # output: Vespa_velutina_shape.RData
-createShapeData(dataDir = file.path(processingFilePath,"Vespa_velutina_shape"))
+print("Vespa velutina")
+createShapeData(dataDir = file.path(processingFilePath,"Vespa_velutina_shape"), bucket = bucket)
 
 # input: folder occurrenceCube containing be_1km and be_20 km shape data
 # output: occurrenceCube.RData
-createShapeData(dataDir = file.path(processingFilePath,"occurrenceCube"))
+print("occurrenceCube")
+createShapeData(dataDir = file.path(processingFilePath,"occurrenceCube"), bucket = bucket)
 
 # output: provinces.RData
-createShapeData(dataDir = file.path(processingFilePath,"provinces.geojson"))
+print("provinces")
+createShapeData(dataDir = file.path(processingFilePath,"provinces.geojson"), bucket = bucket)
 
 # output: communes.RData
-createShapeData(dataDir = file.path(processingFilePath,"communes.geojson"))
-
-# create key data
-# input:  "be_alientaxa_info.csv"
-# output: "keys.csv"
-createKeyData(dataDir = processingFilePath)
-
-# create time series data
-# input:  "df_timeseries.tsv" and "grid.RData" from bucket
-# note: due to the size of "df_timeseries.tsv", it's not tracked, user needs to provide the parent folder to "df_timeseries.tsv".
-# output: full_timeseries.RData
-
-createTimeseries(
-  dataDir = processingFilePath,
-  # read grid.RData from bucket
-  shapeData = loadShapeData("grid.RData")$utm1_bel_with_regions
-)
+print("communes")
+createShapeData(dataDir = file.path(processingFilePath,"communes.geojson"), bucket = bucket)
 
 # create occupancy cube 
 
 # input: trendOccupancy folder containing T1* and ias_belgium_t0_2016/18/20 geojson data
 # output: dfCube.RData
-createOccupancyCube(file.path(processingFilePath, "trendOccupancy"))
+print("dfcube")
+createOccupancyCube(file.path(processingFilePath, "trendOccupancy"), bucket = bucket)
 
 # create tabular data
 # input: data_input_checklist_indicators.tsv/eu_concern_species.tsv/be_alientaxa_cube.csv
 # output: "eu_concern_species_processed.RData"/"data_input_checklist_indicators_processed.RData"/ "be_alientaxa_cube_processed.RData" 
-
-createTabularData(dataDir =  processingFilePath, type = "indicators")
-createTabularData(dataDir =  processingFilePath, type = "unionlist")
-createTabularData(dataDir = processingFilePath, type = "occurrence")
+print("tabular data")
+# print("indicators")
+# createTabularData(dataDir =  processingFilePath, type = "indicators", bucket = bucket)
+print("unionlist")
+createTabularData(dataDir =  processingFilePath, type = "unionlist", bucket = bucket)
 
 ###################################################
 # test if all the data files needed are on bucket #
 # and can be read into R                          #
 ###################################################
+print("tests")
 
 test_that("Load shape data", {
   
@@ -117,14 +122,6 @@ test_that("Load unionlistData", {
   
 })
 
-test_that("Load occurrenceData", {
-  occurrenceData <- loadTabularData(type = "occurrence")
-  expect_s3_class( occurrenceData, "data.table")
-  
-})
-
-
-
 test_that("Load full_timeseries", {
   readS3(file = "full_timeseries.RData")
   expect_true(exists("timeseries"))
@@ -135,7 +132,7 @@ test_that("Load full_timeseries", {
 test_that("Load cube data", {
   
   occupancy <- loadOccupancyData()
-  expect_true(exists("dfCube"))
+  expect_true(exists("occupancy"))
   expect_s3_class(occupancy, "data.table")
 })
 

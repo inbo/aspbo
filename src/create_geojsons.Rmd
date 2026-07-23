@@ -38,7 +38,7 @@ prov_recalc <- prov %>%
 
 prov_recalc$NAAM <- str_replace_all(string = prov_recalc$NAAM, pattern = fixed(" "), replacement = "")
   
-write_sf(prov_recalc, "./data/spatial/provinces.geojson", delete_dsn = TRUE)
+write_sf(prov_recalc, "./data/output/UAT_processing/provinces.geojson", delete_dsn = TRUE)
 ```
 
 ```{r test prov, eval = FALSE}
@@ -80,6 +80,6 @@ mun_redux <- mun_recalc %>%
   st_transform("EPSG:4326")
 
 
-write_sf(mun_redux, "./data/spatial/communes.geojson", delete_dsn = TRUE)
+write_sf(mun_redux, "./data/output/UAT_processing/communes.geojson", delete_dsn = TRUE)
 ```
 

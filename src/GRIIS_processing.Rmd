@@ -1,0 +1,271 @@
+---
+title: "GRIIS_processing"
+author: "Sander Devisscher"
+date: "2025-03-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(readr)
+library(dplyr)
+library(magrittr)
+library(tibble)
+library(tidyr)
+library(purrr)
+library(stringr)
+library(progress)
+library(aws.s3)
+library(testthat)
+library(alienSpecies)
+```
+
+```{r read data}
+checklist_raw <- read_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
+                            delim = "\t", escape_double = FALSE, 
+                            trim_ws = TRUE) %>% 
+  select(-contains("vernacular_name_"))
+```
+
+```{r add vernicular names}
+taxon_keys <- unique(checklist_raw$nubKey)
+
+all_vernicular_names <- tibble(
+  taxonKey = numeric(),
+  vernacular_name_nl = character(),
+  vernacular_name_fr = character(),
+  vernacular_name_en = character(),
+  vernacular_name_nl_list = list(),
+  vernacular_name_fr_list = list(),
+  vernacular_name_en_list = list(),
+  stringsAsFactors = FALSE
+)
+
+# initiate progress bar 
+pb <- progress_bar$new(total = length(taxon_keys))
+
+
+for(t in taxon_keys){
+  pb$tick()
+  cat("processing taxonKey --",t, "-- \n")
+  temp_name_usage <- rgbif::name_usage(key = t, data = "vernacularNames")
+  temp_name_usage_2 <- rgbif::name_usage(key = t, data = "name")
+  spec_vernicular_names_raw <- temp_name_usage$data 
+  spec_name <- temp_name_usage_2$data 
+  
+  if(!"canonicalName" %in% colnames(spec_name)){
+    spec_name <- spec_name %>% 
+      rename(canonicalName = scientificName)
+    
+    warning("canonicalName is missing using scientificName instead")
+  }
+  
+  spec_name <- spec_name %>% 
+    pull(canonicalName)
+  
+  if(nrow(spec_vernicular_names_raw) > 0){
+    # Select the vernicular names of relevant languages ####
+    spec_vernicular_names_languages <- spec_vernicular_names_raw %>% 
+      filter(language %in% c("eng", "fra", "nld")) %>% 
+      mutate(vernacularName = str_to_sentence(vernacularName),
+             language = str_sub(language, 0, 2))
+    
+    # Create the lists ####
+    # These options will be used for searching by common name and include all
+    # relevant language options present on gbif
+    spec_vernicular_names_lists <- spec_vernicular_names_languages %>% 
+      distinct(taxonKey, language, vernacularName) %>% 
+      group_by(language, taxonKey) %>% 
+      summarise(vernacular_name = paste(vernacularName, collapse = ", "), .groups = "drop") %>% 
+      ungroup() %>% 
+      complete(language = c("en", "fr", "nl")) %>%
+      mutate(taxonKey = t,
+             vernacular_name = coalesce(vernacular_name, spec_name)) %>% 
+      pivot_wider(id_cols = taxonKey,
+                  names_from = language,
+                  names_prefix = "vernacular_name_",
+                  values_from = vernacular_name) %>% 
+      rename(vernacular_name_en_list = vernacular_name_en,
+             vernacular_name_fr_list = vernacular_name_fr,
+             vernacular_name_nl_list = vernacular_name_nl)
+    
+    # Create vernicular_names for the table ####
+    # These values will be used to display in the checklist indicators table
+    # This should be the most commonly used 
+    spec_vernicular_names_solo <- spec_vernicular_names_languages %>% 
+      group_by(language, taxonKey, vernacularName) %>% 
+      summarise(n = n()) %>% 
+      ungroup() %>% 
+      group_by(taxonKey, language) %>%
+      arrange(desc(n)) %>% 
+      summarise(vernacularName = first(vernacularName)) %>% 
+      ungroup() %>% 
+      complete(language = c("en", "fr", "nl")) %>%
+      mutate(taxonKey = t,
+             vernacular_name = coalesce(vernacularName, spec_name)) %>% 
+      pivot_wider(id_cols = taxonKey,
+                  names_from = language,
+                  names_prefix = "vernacular_name_",
+                  names_expand = TRUE,
+                  values_from = vernacular_name)
+    
+    spec_vernicular_names <- spec_vernicular_names_solo %>% 
+      left_join(spec_vernicular_names_lists, by = "taxonKey")
+    
+    if(nrow(all_vernicular_names) == 0){
+      all_vernicular_names <- spec_vernicular_names
+    }else{
+      if(is_character(spec_vernicular_names$vernacular_name_en_list)){
+        
+        spec_vernicular_names$vernacular_name_en_list <- list(spec_vernicular_names$vernacular_name_en_list)
+        
+      }
+      
+      if(is_character(spec_vernicular_names$vernacular_name_fr_list)){
+        
+        spec_vernicular_names$vernacular_name_fr_list <- list(spec_vernicular_names$vernacular_name_fr_list)
+        
+      }
+      
+      if(is_character(spec_vernicular_names$vernacular_name_nl_list)){
+        
+        spec_vernicular_names$vernacular_name_nl_list <- list(spec_vernicular_names$vernacular_name_nl_list)
+        
+      }
+      
+      all_vernicular_names <- rbind(all_vernicular_names, spec_vernicular_names)
+    }
+  }else{
+    warning(paste0("No vernicular names for ", t))
+  }
+}
+
+all_vernicular_names <- all_vernicular_names %>% 
+  mutate(vernacular_name_en_list = as.character(vernacular_name_en_list),
+         vernacular_name_nl_list = as.character(vernacular_name_nl_list),
+         vernacular_name_fr_list = as.character(vernacular_name_fr_list))
+
+missing_scientific_names <- checklist_raw %>% 
+  filter(is.na(species)) 
+
+if(nrow(missing_scientific_names) > 0){
+  checklist_raw <- checklist_raw %>% 
+    mutate(species = case_when(is.na(species) ~ canonicalName,
+                               TRUE ~ species))
+  
+  missing_scientific_names_recheck <- checklist_raw %>% 
+    filter(is.na(species)) 
+  
+  if(nrow(missing_scientific_names_recheck) > 0){
+    stop(paste0("After the fix these taxa are still missing their scientific names: ", paste(missing_scientific_names_recheck$nubKey, collapse = ", ")))
+  }
+}
+```
+
+# Recalculate the last observation year
+Sometimes the last observation year on the GRIIS checklist is not the same as 
+the last observation year in the occurrence data. This is because the GRIIS
+checklist is not updated in real-time. Therefore, we need to recalculate the
+last observation year based on the occurrence data.
+
+```{r connect to bucket}
+Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
+
+if(Sys.getenv("S3_BUCKET") != ""){
+  print("Using github secrets for bucket name")
+  UAT_bucket <- Sys.getenv("S3_BUCKET")
+}else{
+  print("Using local environment for bucket name")
+  UAT_bucket <- Sys.getenv("UAT_bucket")
+}
+
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket via rScript")
+  source("./src/connect_to_bucket.R")
+  connection_test <- connect_to_bucket(bucket_name = UAT_bucket)
+}else{
+  print("Executor of the script is a bot >> connecting to bucket via github action")
+  connection_test <- get_bucket(bucket = UAT_bucket)
+}
+
+head(connection_test)
+```
+
+```{r get occurrence data from bucket}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket")
+  alienSpecies::setupS3(inboUserName = "sander_devisscher")
+} 
+occurrence_data <- alienSpecies::loadTabularData(type = "occurrence")
+
+occurrence_data <- occurrence_data %>% 
+  group_by(taxonKey) %>%
+  summarise(last_observed_recalc = max(year, na.rm = TRUE),
+            isFlanders = any(isFlanders),
+            isWallonia = any(isWallonia),
+            isBrussels = any(isBrussels),
+            isBelgium = TRUE) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = c(isFlanders, isWallonia, isBrussels, isBelgium), names_to = "region", values_to = "isRegion") %>% 
+  filter(isRegion) %>% 
+  select(-isRegion) %>% 
+  mutate(region = case_match(region,
+                             "isFlanders" ~ "Flemish Region",
+                             "isWallonia" ~ "Walloon Region",
+                             "isBrussels" ~ "Brussels-Capital Region",
+                             "isBelgium" ~ "Belgium"))
+```
+
+```{r correct taxon rank placeholder}
+
+```
+
+```{r detect "new" ranks}
+old_ranks <- c('SPECIES', 'SUBSPECIES', 'VARIETY', 'FORM', 'GENUS', 'FAMILY')
+
+test_that("A new rank was detected in GRIIS checklist", {
+  missing <- setdiff(checklist_raw$rank, old_ranks)
+  
+  if(length(missing) != 0){
+    new_rank_taxa <- checklist_raw %>% 
+      filter(rank == missing) %>% 
+      distinct(nubKey) %>% 
+      pull()
+  }else{
+    new_rank_taxa <- c("")
+  }
+  
+  expect(length(missing) == 0, sprintf("New rank: %s \n containing the following taxa: \n-%s \n
+                                       ===> You should do the following: <=== \n
+      - Get this PR's branch locally \n
+      - Check if the taxa listed are correctly linked to the 'new' rank \n
+      - if correct;
+        - Create a new query base in './data/input/' named 'griis_belgium_<new rank>_base.txt
+        - Add <NEW RANK> to the character vector at './src/get_cubes/compile_cubes.Rmd#L18'
+        - Add <NEW RANK> to the character vector at './src/get_cubes/compile_metadata.Rmd#L18'
+        - Add <NEW RANK> to the character vector at '.github/workflows/get_occ_cube.yaml#L83'
+        - Add <NEW RANK> to the character vector at './src/GRIIS_processing.Rmd#L138'
+        - Commit & push these changes 
+        - Trigger a new workflow from the branch using workflow dispatch
+      - if incorrect;
+        - Create a issue at https://github.com/trias-project/unified-checklist/issues
+        - Write some temporary correction at './src/GRIIS_processing.Rmd#L134'
+        - Commit & push these changes 
+        - Trigger a new workflow from the branch using workflow dispatch
+      ", 
+      paste(missing, collapse = ", "), 
+      paste(new_rank_taxa, collapse = " \n-")))
+})
+```
+
+```{r join data & export}
+checklist <- checklist_raw %>% 
+  left_join(all_vernicular_names, by = c("nubKey" = "taxonKey")) %>% 
+  left_join(occurrence_data, by = c("nubKey" = "taxonKey", "locality" = "region")) %>%
+  mutate(last_observed = case_when(is.na(last_observed) ~ last_observed_recalc,
+                                   last_observed_recalc > last_observed ~ last_observed_recalc,
+                                   TRUE ~ last_observed)) %>%
+  select(-last_observed_recalc) %>%
+write_delim("data/output/UAT_processing/data_input_checklist_indicators.tsv", 
+            delim = "\t")
+```
+

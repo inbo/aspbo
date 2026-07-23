@@ -1,8 +1,9 @@
+# install CRAN packages ####
 # get packages installed on machine
 installed <- rownames(installed.packages())
 # specify packages we need
 required <- c("aws.s3", "magrittr", "readr",
-              "dplyr", "rgbif"
+              "dplyr", "rgbif", "remotes"
 )
 # install packages if needed
 if (!all(required %in% installed)) {

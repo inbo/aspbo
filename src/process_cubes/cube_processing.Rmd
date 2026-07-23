@@ -1,0 +1,501 @@
+---
+title: "cube_processing"
+author: "Sander Devisscher"
+date: "2026-03-11"
+output: html_document
+---
+
+```{r load_libraries, message = FALSE}
+library(dplyr) # To do data science
+library(readr)
+library(magrittr)
+library(purrr)
+library(stringr)
+library(tidyr)
+library(tidylog) # To provide feedback on dplyr functions
+library(progress) # To add progress bars
+library(here) # To find files
+library(lubridate) # To work with dates
+library(rgbif) # To get taxa from publisehd unified checklist
+library(sf) # To work with spatial data
+library(testthat) # To test functions
+```
+
+```{r load correct version of INBOtheme, eval=TRUE}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> checking INBOtheme version")
+  # determine the loaded INBOtheme version
+  loaded_inbotheme <- installed.packages() %>% 
+    as_tibble() %>% 
+    filter(Package == "INBOtheme")
+  loaded_inbotheme_version <- loaded_inbotheme$Version
+  
+  if(is_empty(loaded_inbotheme_version)){
+    print("INBOtheme is not installed >> installing INBOtheme")
+    devtools::install_github("inbo/INBOtheme@v0.5.8")
+  }
+  
+  if(length(loaded_inbotheme_version) > 1 || loaded_inbotheme_version != "0.5.8"){
+    print("INBOtheme version is not correct >> loading correct version")
+    # remove installed INBOtheme
+    remove.packages("INBOtheme")
+    
+    # load correct version of INBOtheme
+    devtools::install_github("inbo/INBOtheme@v0.5.8")
+  }else{
+    print("Correct INBOtheme version is loaded")
+  }
+}else{
+  print("Executor of the script is a bot >> correct INBOtheme version is loaded")
+}
+
+library(INBOtheme)
+```
+
+# Connect to bucket
+## set credentials
+```{r set creds}
+Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
+
+if(Sys.getenv("S3_BUCKET") != ""){
+  UAT_bucket <- Sys.getenv("S3_BUCKET")
+}else{
+  UAT_bucket <- Sys.getenv("UAT_bucket")
+}
+```
+
+## connect to bucket
+```{r connect to bucket}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket")
+  fistools::connect_to_bucket(bucket_name = UAT_bucket)
+}else{
+  test_that("AWS credentials are set in the environment", {
+    # 1. Check Access Key
+    expect_true(Sys.getenv("AWS_ACCESS_KEY_ID") != "", 
+                info = "AWS_ACCESS_KEY_ID is missing or empty")
+    
+    # 2. Check Secret Key
+    expect_true(Sys.getenv("AWS_SECRET_ACCESS_KEY") != "", 
+                info = "AWS_SECRET_ACCESS_KEY is missing or empty")
+    
+    # 3. Check Session Token (Required since you are using role-to-assume)
+    expect_true(Sys.getenv("AWS_SESSION_TOKEN") != "", 
+                info = "AWS_SESSION_TOKEN is missing (Required for assumed roles)")
+    
+  })
+}
+```
+
+# Get data
+
+## read utm1_bel_with_regions file
+```{r read utm1_gemeentes_provincies}
+utm1_gemeentes_provincies <- sf::st_read("./data/output/UAT_processing/grid/utm1_bel_with_regions.gpkg", 
+                                         layer="utm1_bel_with_regions" )
+```
+
+We get occurrence data as obtained in `trias-project/occ-processing` repository. 
+
+## Occurrence data
+
+### Alien species
+
+We load occurrence data related to alien species in Belgium:
+
+```{r read_data_cube}
+df <- read_csv("./cube_data/be_alientaxa_cube.csv") 
+
+print(file.info("./cube_data/be_alientaxa_cube.csv"))
+```
+
+To save the data cube to the S3 bucket, we use the following code:
+A temporary directory is created to store the data cube.
+```{r create_temp_dir}
+cube_path <- tempdir()
+dir.create(cube_path, showWarnings = FALSE)
+```
+
+For display on invasion history maps of the alienspecies portal we add the 
+gemeente and provincie to the data cube.
+This is done by joining the data cube with the `utm1_gemeentes_provincies` dataset.
+which is updated by the following code:
+[processing_utm10_files.R](./src/Processing/processing_utm10_files.R)
+
+```{r add gemeente and provincie to data_cube}
+be_alientaxa_cube <- df %>% 
+  left_join(utm1_gemeentes_provincies, by = c("eea_cell_code" = "CELLCODE")) %>% 
+  st_drop_geometry() %>% 
+  filter(!is.na(isFlanders)|!is.na(isWallonia)|!is.na(isBrussels))
+
+be_alientaxa_cube %>%
+  select(c(year,eea_cell_code,taxonKey,n = obs,min_coord_uncertainty,isFlanders,isWallonia,isBrussels,gemeente,provincie,gewest)) %>% 
+  write_csv(file.path(cube_path, "be_alientaxa_cube.csv"))
+```
+
+Recalculate last_observed column per taxonkey
+```{r recalculate_last_observed}
+last_observed_taxon <- be_alientaxa_cube %>% 
+  group_by(taxonKey) %>% 
+  summarise(last_observed_recalc = max(year, na.rm = TRUE),
+            isFlanders = any(isFlanders),
+            isWallonia = any(isWallonia),
+            isBrussels = any(isBrussels),
+            isBelgium = TRUE) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = c(isFlanders, isWallonia, isBrussels, isBelgium), names_to = "region", values_to = "isRegion") %>% 
+  filter(isRegion) %>% 
+  select(-isRegion) %>% 
+  mutate(region = case_match(region,
+                             "isFlanders" ~ "Flemish Region",
+                             "isWallonia" ~ "Walloon Region",
+                             "isBrussels" ~ "Brussels-Capital Region",
+                             "isBelgium" ~ "Belgium")) 
+
+data_input_checklist_indicators <- read_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv") %>% 
+  left_join(last_observed_taxon, by = c("nubKey" = "taxonKey", "locality" = "region")) %>% 
+  mutate(last_observed = case_when(is.na(last_observed) ~ last_observed_recalc,
+                                   last_observed < last_observed_recalc ~ last_observed_recalc,
+                                   TRUE ~ last_observed)) %>% 
+  select(-last_observed_recalc) %>% 
+  write_tsv("./data/output/UAT_processing/data_input_checklist_indicators.tsv")
+```
+
+Free some ram. `be_alientaxa_cube` is no longer needed.
+```{r free_ram}
+df <- be_alientaxa_cube
+
+rm(be_alientaxa_cube)
+gc() #garbage collection
+```
+
+The function `createTabularData()` from the alien species portal package is used 
+to process & save the data cube to the S3 bucket for use in the alien species portal.
+
+```{r get pre update values}
+cube_pre_update <- as.data.frame(aws.s3::get_bucket(bucket = UAT_bucket)) %>% 
+  filter(grepl("be_alientaxa_cube_processed.parquet", Key))
+
+cube_pre_update_lastmod <- cube_pre_update$LastModified
+cube_pre_update_size <- cube_pre_update$Size
+```
+
+```{r save data_cube to S3 bucket}
+print("occurrence")
+alienSpecies::createTabularData(dataDir = cube_path, 
+                                type = "occurrence", 
+                                bucket = UAT_bucket) 
+```
+
+```{r run GRIIS processing}
+tempR <- tempfile(fileext = ".R")
+knitr::purl("./src/GRIIS_processing.Rmd", output=tempR)
+source(tempR)
+unlink(tempR)
+
+print("processing successful")
+```
+
+```{r save modified GRIIS checklist to s3 bucket}
+print("indicators")
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is a human >> connecting to bucket")
+  alienSpecies::setupS3(inboUserName = "sander_devisscher")
+} 
+alienSpecies::createTabularData(dataDir =  "./data/output/UAT_processing/", 
+                                type = "indicators", 
+                                bucket = UAT_bucket)
+```
+
+```{r get post update values}
+cube_post_update <- as.data.frame(aws.s3::get_bucket(bucket = UAT_bucket)) %>% 
+  filter(grepl("be_alientaxa_cube_processed.parquet", Key))
+
+cube_post_update_lastmod <- cube_post_update$LastModified
+cube_post_update_size <- cube_post_update$Size
+
+cube_post_update_nrow <- nrow(alienSpecies::loadTabularData(type = "occurrence"))
+```
+
+We test if the data have been correctly saved:
+```{r test_load_occurrenceData}
+test_that("Load occurrenceData", { 
+  occurrenceData <- alienSpecies::loadTabularData(type = "occurrence") 
+  expect_s3_class( occurrenceData, "data.table") 
+}) 
+
+print("lastmod pre update")
+print(cube_pre_update_lastmod)
+print("lastmod post update")
+print(cube_post_update_lastmod)
+
+print("size pre update")
+print(cube_pre_update_size)
+print("size post update")
+print(cube_post_update_size)
+
+print("nrow update")
+print(nrow(df %>% filter(year >= 1950 & !is.na(year))))
+print("nrow post update")
+print(cube_post_update_nrow)
+
+# we expect the post update last modified date to be later than the pre update last modified date
+test_that("UPLOAD FAILED: last modified date not updated",
+          {
+            expect_true(cube_post_update_lastmod > cube_pre_update_lastmod)
+          })
+
+# we expect the post update number of rows to be equal to the new number of rows
+test_that("UPLOAD FAILED: number of rows not equal",
+          {
+            expect_equal(cube_post_update_nrow, nrow(df %>% filter(year >= 1950 & !is.na(year))))
+          })
+
+df_species <- df %>% 
+  filter(year >= 1950 & !is.na(year)) %>% 
+  distinct(taxonKey) %>% 
+  pull()
+
+post_update_species <- alienSpecies::loadTabularData(type = "occurrence") %>%
+  distinct(taxonKey) %>%
+  pull()
+
+# we expect all species included in dataset provided to be included in the uploaded data
+test_that("UPLOAD FAILED: not all species included",
+          {
+            
+            
+            expect_in(df_species, post_update_species)
+          })
+
+# we expect 6709291 to be included in both species lists
+test_that("UPLOAD FAILED: 6709291 not included",
+          {
+            expect_true(6709291 %in% df_species)
+            expect_true(6709291 %in% post_update_species)
+          })
+
+test_that("UPLOAD FAILED: 2502938 not included",
+          {
+            expect_true(2502938 %in% df_species)
+            expect_true(2502938 %in% post_update_species)
+          })
+```
+
+# Export the cube for timeseries creation
+
+```{r export for artifact upload}
+write_csv(df, "./cube_data/be_alientaxa_cube_processed.csv")
+```
+
+# Get correct class/kingdom info
+```{r get_canonical_names}
+taxon_key <-
+  df %>%
+  distinct(taxonKey) %>%
+  pull()
+# get basic species information
+pb <- progress_bar$new(total = length(taxon_key))
+spec_names_raw <- map_df(
+  taxon_key,
+  function(k) {
+    pb$tick()
+    name_usage(key = k)$data
+  }
+) 
+
+spec_names <- spec_names_raw %>%
+  mutate(scientificName = coalesce(species, genus, family)) %>% 
+  select(
+    taxonKey = key,
+    canonicalName,
+    scientificName,
+    rank,
+    taxonomicStatus,
+    kingdomKey, 
+    classKey,
+    authorship
+  ) %>%
+  mutate(canonicalName = ifelse(
+    is.na(canonicalName), scientificName, canonicalName
+  ))
+```
+
+In the rare case multiple taxa share the same scientific name, authorship is added:
+
+```{r add_authorship_if_needed}
+spec_names <-
+  spec_names %>%
+  group_by(canonicalName) %>%
+  add_tally() %>%
+  ungroup() %>%
+  mutate(canonicalName = if_else(n > 1,
+                                 scientificName,
+                                 canonicalName)) %>%
+  select(-c(n))
+```
+
+We also retrieve kingdom and class:
+
+```{r get_kingdom_class}
+class_key <-
+  spec_names %>%
+  distinct(classKey) %>%
+  filter(!is.na(classKey)) %>%
+  pull()
+pb <- progress_bar$new(total = length(class_key))
+kingdom_class <- map_df(
+  class_key,
+  function(x) {
+    pb$tick()
+    name_usage(key = x)$data
+  }
+) %>%
+  select(classKey, class, kingdomKey, kingdom)
+```
+
+and we add them:
+
+```{r add_kingdom_class}
+# add class
+spec_names <-
+  spec_names %>%
+  left_join(kingdom_class %>%
+              distinct(.data$classKey, .data$class),
+            by = "classKey"
+  )
+
+# add kingdom
+spec_names <-
+  spec_names %>%
+  left_join(kingdom_class %>%
+              distinct(.data$kingdomKey, .data$kingdom),
+            by = "kingdomKey"
+  ) 
+```
+
+Preview:
+
+```{r preview_species}
+spec_names %>% head(10)
+```
+
+Taxa not assigned to any class:
+
+```{r taxa_no_class}
+spec_names %>%
+  filter(is.na(classKey))
+```
+
+export spec_names
+```{r}
+spec_names %>% 
+  distinct(taxonKey, class, classKey, kingdom, kingdomKey) %>% 
+  write_csv("./data/interim/spec_names.csv")
+```
+
+```{r complete keys}
+keys_old <- alienSpecies::loadMetaData(type = "keys")
+
+# backup current keys.csv file
+keys_old %>%
+  write_csv(here("data", "interim", "keys_old.csv"))
+
+# remove columns we will not use
+keys_new <- spec_names %>%
+  select(-canonicalName, -authorship)
+
+# rename columns to avoid confusion
+colnames(keys_new) <- paste0(colnames(keys_new), "_new")
+
+# Complete knowns, info in cube on checklist
+keys_completed <- keys_old %>%
+  full_join(keys_new, by = c("scientificName" = "scientificName_new")) %>% 
+  mutate(taxonKey = coalesce(taxonKey, taxonKey_new),
+         rank = coalesce(rank, rank_new),
+         taxonomicStatus = coalesce(taxonomicStatus, taxonomicStatus_new),
+         classKey = coalesce(classKey, classKey_new),
+         kingdom = coalesce(kingdom, kingdom_new)) %>% 
+  select(-contains("new")) %>%
+  distinct()
+
+# Find rows with missing taxonKey
+keys_missing_taxonkey <- keys_completed %>% 
+  filter(is.na(taxonKey))
+
+# Function to derive the most likely taxonKey for a given scientific name
+get_derived_taxonKey <- function(scientific_name) {
+  taxonomic_data <- tryCatch(
+    rgbif::name_usage(name = scientific_name)$data,
+    error = function(e) NULL
+  )
+  if (is.null(taxonomic_data) || nrow(taxonomic_data) == 0) return(NA_integer_)
+  
+  derived_taxonKey <- taxonomic_data %>% 
+    dplyr::filter(taxonomicStatus == "ACCEPTED", !is.na(nubKey)) %>% 
+    group_by(nubKey) %>% 
+    add_tally() %>% 
+    distinct(nubKey, n) %>% 
+    ungroup() %>% 
+    filter(n == max(n, na.rm = TRUE)) %>% 
+    pull(nubKey)
+  
+  # If multiple, take the first
+  if (length(derived_taxonKey) > 0) return(derived_taxonKey[1])
+  else return(NA_integer_)
+}
+
+# Use lapply to process all missing names
+derived_keys <- pbapply::pblapply(keys_missing_taxonkey$scientificName, get_derived_taxonKey)
+names(derived_keys) <- keys_missing_taxonkey$scientificName
+
+# Update keys_completed with the derived taxonKeys
+keys_completed <- keys_completed %>%
+  mutate(
+    taxonKey = ifelse(
+      is.na(taxonKey) & scientificName %in% names(derived_keys),
+      unlist(derived_keys[scientificName]),
+      taxonKey
+    )
+  ) %>% 
+  select(taxonKey, scientificName, rank, taxonomicStatus, kingdom, includes)
+
+keys_path_short <- here("data", "output", "UAT_processing")
+keys_path <- here("data", "output", "UAT_processing", "be_alientaxa_info.csv")
+
+
+# Complete unknowns, info not on cube or checklist
+## Missing taxonkeys 
+# => might not be an issue? => monitoring for now
+# Fixing this will be a pain in the ass since `name_usage` returns every use of the scientific name in the gbif backbone as well as on very checklist worldwide
+keys_missing_taxonkey <- keys_completed %>% 
+  filter(is.na(taxonKey)) %>% 
+  write_csv(here("data", "interim", "keys_missing_taxonkey.csv"))
+
+## Missing scientific names => cause of https://github.com/inbo/alien-species-portal/issues/140
+keys_missing_name <- keys_completed %>% 
+  filter(is.na(scientificName)) %>% 
+  write_csv(here("data", "interim", "keys_missing_name.csv"))
+
+# test whether any missing scientificnames remain
+test_that("missing scientificNames",
+          {
+            expect_false(nrow(keys_missing_name) > 0)
+          })
+
+keys_completed <- keys_completed %>% 
+  mutate(taxonKey = case_when(scientificName == "Trachemys scripta elegans" & is.na(taxonKey) ~ 6157026,
+                              scientificName == "Pyrus communis communis" & is.na(taxonKey) ~ 7271631,
+                              TRUE ~ taxonKey)) %>% 
+  filter(!(scientificName %in% keys_missing_taxonkey$scientificName & is.na(taxonKey)),
+         !(taxonKey %in% keys_missing_name$taxonKey & is.na(scientificName))) %>% 
+  distinct(taxonKey, scientificName, .keep_all = TRUE)
+
+write_delim(keys_completed, keys_path, ",", quote = "needed")
+
+# create key data
+# input:  "be_alientaxa_info.csv"
+# output: "keys.csv"
+print("uploading key data")
+alienSpecies::createKeyData(dataDir = keys_path_short, bucket = UAT_bucket)
+```

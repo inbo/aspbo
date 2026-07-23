@@ -1,0 +1,728 @@
+Om dit script te laten lopen moet je een .renviron bestand aanmaken met de 
+volgende regels:
+
+email = "<je email adres>"
+gbif_user = "<je gbif username>"
+gbif_pwd = "<je gbif password>"
+
+Dit bestand deel je met niemand!
+
+```{r libraries}
+library(sf)
+library(googlesheets4)
+library(dplyr)
+library(magrittr)
+library(tidyr)
+library(readr)
+library(lubridate)
+library(testthat)
+library(units)
+```
+
+```{r conflicted packages, eval=FALSE}
+library(tidylog)
+conflicted::conflicts_prefer(tidylog::select)
+conflicted::conflicts_prefer(tidylog::filter)
+conflicted::conflicts_prefer(tidylog::left_join)
+conflicted::conflicts_prefer(tidylog::mutate)
+conflicted::conflicts_prefer(tidylog::drop_na)
+conflicted::conflicts_prefer(tidylog::mutate_at)
+conflicted::conflicts_prefer(tidylog::rename)
+conflicted::conflicts_prefer(tidylog::replace_na)
+conflicted::conflicts_prefer(tidylog::ungroup)
+conflicted::conflicts_prefer(tidylog::group_by)
+conflicted::conflicts_prefer(tidylog::full_join)
+conflicted::conflicts_prefer(tidylog::summarise)
+conflicted::conflicts_prefer(tidylog::pivot_longer)
+conflicted::conflicts_prefer(tidylog::distinct)
+```
+
+```{r auth}
+if(Sys.getenv("amiabot") != "yes"){
+  print("Executor of the script is not a bot")
+  email <- paste0(Sys.getenv("email"), "@inbo.be")
+  gs4_auth(email)
+}else{
+  print("Executor of the script is a bot")
+  gs4_auth(path = Sys.getenv("gsheet_token"))
+}
+
+```
+
+```{r read data}
+# Vespawatch nesten van voor iasset
+data_nest_gs_raw <- read_sheet("1AGgMQvJUfQGaKP02jFo-MRP4SKWhq3Cbc2_nmZUcgnw",
+                               sheet = "curated: nests_20230116",
+                               col_types = "c")
+
+# Vespawatch nesten van iAsset
+data_nest_iasset_raw <- read_sheet("1dqSLTOF3GB1_gsth2jEIbXgaCC8KTAtTMuysk3zMdfk",
+                                   sheet = "Sheet1",
+                                   col_types = "c")
+
+# Vespa-Watch nesten van waarnemingenAPI
+data_nests_waarnemingen_raw <- read_sheet("1gVrPeMj74pDkHd5oQJ8fmlMRAP5Dh85SManUzLI1eJQ",
+                                          sheet = "Sheet2",
+                                          col_types = "c")
+
+# Vespa-Watch nesten van inaturalist# Gbif nesten en individuen data 
+data_gbif_raw <- read_csv2("./data/input/Vespa-Watch_gbif.csv")
+
+# Provincies
+prov <- st_read("./data/output/UAT_processing/provinces.geojson")
+
+# Gemeentes
+gemeentes <- st_read("./data/output/UAT_processing/communes.geojson")
+
+# Duplicated nests from iasset
+dupli_nest_iasset_raw <- read_sheet("1dswABoQnpQhle5UO2xHts_ikzkd562sGugQxlyGpJWs",
+                                    sheet = "Checked",
+                                    col_types = "c")
+
+# iAsset corrected coordinates
+# indien NA -> provincie en gemeente onbekend, niet verwijderen uit dataset TODO
+iAsset_coordinaten_corrected <- read_delim("data/interim/Vv_corrected_coordinates.csv", 
+                                           delim = ";", escape_double = FALSE, trim_ws = TRUE,
+                                           col_types = cols(insp_order = col_character())) 
+#correct brandweer data 
+Managed_nests_fireman_in_database_raw <- read_delim("data/interim/Managed_nests_fireman_in_database.csv", 
+                                                    delim = ";", escape_double = FALSE, trim_ws = TRUE,
+                                                    col_types = cols(ID_IAsset = col_character()))
+```
+
+```{r OLD Vespawatch: data prep}
+#prepare raw data DB dump nests
+dataset_1 <- data_nest_gs_raw %>% 
+  mutate(result = case_when(result == "ST" ~ "succesvol",
+                            result == "UT" ~ "niet succesvol",
+                            result == "UN" ~ "niet behandeld",
+                            result == "un" ~ "niet behandeld",
+                            TRUE ~ "onbekend"),
+         year = year(as.Date(observation_time)),
+         site = case_when(is.na(site) ~ "onbekend",
+                          site == "I" ~ "binnen, in gebouw of constructie",
+                          site == "O_NC_B" ~ "buiten, onbedekt op gebouw",
+                          site == "O_NC_T" ~ "buiten, onbedekt op boom of struik",
+                          site == "O_C_C" ~ "buiten, overdekt door constructie",
+                          site == "O_N_C" ~ "buiten, natuurlijk overdekt",
+                          TRUE ~ "onbekend"))
+
+#alleen VV
+dataset_1_vv <- dataset_1 %>% filter(expert_vv_confirmed=="TRUE" |
+                                       expert_vv_confirmed=="True" |
+                                       inat_vv_confirmed=="TRUE"|
+                                       inat_vv_confirmed=="True"|
+                                       expert_vv_confirmed=="WAAR"|
+                                       expert_vv_confirmed=="waar")
+
+#geen duplicaten
+dataset_1_vv_u <- dataset_1_vv %>%filter(is.na(nest_reported_before)|
+                                           nest_reported_before=="NULL"|
+                                           nest_reported_before=="False"|
+                                           nest_reported_before=="FALSE")
+
+#remove rows with empty coordinates
+dataset_1_vv_u <- dataset_1_vv_u %>%
+  drop_na(all_of(c('longitude', 'latitude')))
+
+nesten <- st_as_sf(dataset_1_vv_u, coords=c('longitude', 'latitude'), crs=4326)
+
+data_nest_gs <- nesten %>% 
+  dplyr::select(-observer_phone,
+                -name,
+                -observer_name,
+                -observer_email,
+                -person_name,
+                -user_id) %>% 
+  mutate(observation_time = as.Date(observation_time))%>%
+  select(-c('municipality'))
+```
+
+In het geval van een dubbele melding van een bestreden nest in de brandweerdataset, 
+wordt de meest recente melding behouden. 
+
+```{r Brandweer: data prep}
+Managed_nests_fireman_in_database <- Managed_nests_fireman_in_database_raw %>%
+  mutate(Date_fireman = as.Date(Date_fireman, format = "%d/%m/20%y"))%>%
+  mutate(Date_fireman = case_when(is.na(Date_fireman) ~ as.Date("2023-12-01"),
+                   TRUE ~ Date_fireman))%>% #we zijn niet op de hoogte van datum dus wijzen voor zekerheid laatse mogelijke bestrijdingsdatum binnen seizoen aan
+  group_by(ID_IAsset) %>%
+  summarise(Date_fireman = min(Date_fireman, na.rm = TRUE))
+```
+
+Nesten met coordinaten NA : worden verwijderd uit de data
+
+```{r IASSET: data prep}
+#correct coordinates
+data_nest_iasset_coordfix <- data_nest_iasset_raw %>% 
+  left_join(iAsset_coordinaten_corrected, 
+            by = c("insp_order")) %>% 
+  mutate(coordinaten_van_het_nest = case_when(
+    insp_order %in% iAsset_coordinaten_corrected$insp_order ~ coordinates,
+    TRUE ~ coordinaten_van_het_nest))
+
+#correct bestrijdingsdatum
+data_nest_iasset_managementfix <- data_nest_iasset_coordfix %>% 
+  left_join(Managed_nests_fireman_in_database, 
+            by = c("insp_order" = "ID_IAsset")) %>% 
+  mutate(datum_bestrijding = as.Date(datum_en_tijd_bestrijding)) %>%
+  mutate(datum_bestrijding = case_when((insp_order%in%Managed_nests_fireman_in_database$ID_IAsset) & is.na(datum_en_tijd_bestrijding) ~ Date_fireman,
+                                       TRUE ~ datum_bestrijding))
+
+# Check duplicates
+duplis <- data_nest_iasset_managementfix %>% 
+  group_by(insp_order) %>% 
+  summarise(n = n()) %>%
+  filter(n > 1)
+
+data_nest_iasset_zndr_coords <- data_nest_iasset_managementfix %>% 
+  filter(is.na(coordinaten_van_het_nest)) 
+
+# Map data content to Vespa-Watch data structure
+data_nest_iasset <- data_nest_iasset_managementfix %>% 
+  rename(geometry = coordinaten_van_het_nest) %>% 
+  filter(gevalideerd == "ja",
+         !is.na(geometry),
+         grepl(x = nesttype, pattern = "AH"),
+         duplicaat == "nee",
+         nesttype != "AH - potentieel nest (meer info nodig)") %>% 
+  st_as_sf(wkt = "geometry",
+           crs = 4326) %>% 
+  mutate(result = case_when(insp_order %in% Managed_nests_fireman_in_database$insp_order ~ "succesvol",
+                            resultaat == "succesvol behandeld" ~ "succesvol",
+                            resultaat == "niet succesvol behandeld" ~ "niet succesvol",
+                            resultaat == "niet behandeld" ~ "niet behandeld",
+                            beheerd == "ja" ~ "succesvol",
+                            month(datum_observatie) == 12 ~ "niet behandeld",
+                            month(datum_observatie) <= 3 ~ "niet behandeld",
+                            (beheerd == "nee") & (bestrijding_gestart == "nee") ~ "onbekend",
+                            (beheerd == "onbekend") & (bestrijding_gestart == "nee") ~ "onbekend",
+                            resultaat == "onbekend" ~ "onbekend",
+                            TRUE ~ NA_character_),
+         nesttype_code = case_when(nesttype == "AH - actief embryonaal nest" ~ "AE",
+                                   nesttype == "AH - actief primair nest" ~ "AP",
+                                   nesttype == "AH - actief secundair nest" ~ "AS",
+                                   nesttype == "AH - inactief/leeg nest" ~ "IE",
+                                   nesttype == "AH - potentieel nest (meer info nodig)" ~ "UK",
+                                   TRUE ~ "UK"),
+         aftercare = nazorg,
+         year = year(datum_observatie))%>%
+  mutate_at(c('nestplaats'), ~replace_na(.,"onbekend"))
+
+
+#temp fix lacking id column 
+data_nest_iasset <- data_nest_iasset %>%
+  rename(id= insp_order)
+
+class(data_nest_iasset)
+
+#Select needed columns
+data_nest_iasset <- data_nest_iasset %>% 
+  mutate(originates_in_vespawatch = "iAsset",
+         inaturalist_link = NA_character_,
+         inaturalist_id = NA_character_,
+         inaturalist_species = NA_character_,
+         expert_vv_confirmed = "True",
+         vv_confirmed = "True",
+         taxon_id = NA_character_,
+         inat_vv_confirmed = NA_character_,
+         file_number_nest_removal = NA_character_,
+         comments_2 = NA_character_) %>% 
+  ungroup() %>% 
+  dplyr::select(id,
+                image_1 = foto_nest_1,
+                image_2 = foto_nest_2,
+                image_3 = foto_nest_3,
+                originates_in_vespawatch,
+                observation_time = datum_observatie,
+                comments = opmerkingen,
+                inaturalist_link,
+                inaturalist_id,
+                inaturalist_species,
+                size = nestgrootte,
+                height = nesthoogte,
+                duplicate_of_id = duplicaat,
+                taxon_id,
+                created_at = datum_tijd_registratie,
+                inat_vv_confirmed,
+                expert_vv_confirmed,
+                vv_confirmed,
+                action_time = datum_en_tijd_bestrijding,
+                duration = tijd_ter_plaatse,
+                comments_2= bestrijding_opmerking,
+                site = nestplaats,
+                nest_type = nesttype_code,
+                aftercare,
+                product = product,
+                method = methode,
+                result,
+                nest_reported_before = duplicaat,
+                year,
+                file_number_nest_removal,
+                geometry
+  )
+```
+
+```{r IASSET: test spatial, eval = FALSE}
+data_nest_iasset %>% 
+  leaflet::leaflet() %>% 
+  leaflet::addTiles() %>% 
+  leaflet::addCircles()
+```
+
+Sommige duplicaten in de lijst werden reeds in iasset als duplicaat geflagged 
+hierdoor komt 1 van de 2 meldingen van de duplicaten check niet langer voor 
+in de gekuiste dataset (zie `dupli_missing_ID1` & `dupli_missing_ID2`). 
+In uitzonderlijke gevallen missen beide meldingen (zie `dupli_missing_both`). 
+```{r IASSET: duplicaten prep}
+##selecteer duplicaten paren op basis van script Diego
+dupli_nest_iasset <- dupli_nest_iasset_raw %>% 
+  filter(is_duplicate == 1) 
+
+##checken of alle paren nog volledig in opgekuiste databank (zonder duplicaten) zitten
+##duplicaatparen waarvan ID1 reeds als duplicaat was aangeduid in iasset databank
+dupli_missing_ID1 <- dupli_nest_iasset %>% 
+  filter(!ID1 %in% data_nest_iasset$id)
+
+##duplicaatparen waarvan ID2 reeds als duplicaat was aangeduid in iasset databank
+dupli_missing_ID2 <- dupli_nest_iasset %>% 
+  filter(!ID2 %in% data_nest_iasset$id)
+
+##duplicaatparen waarvan ID1 en ID2 ontbreken in opgekuiste iasset databank
+dupli_missing_both <- dupli_nest_iasset %>% 
+  filter(!(ID2 %in% data_nest_iasset$id) & !(ID1 %in% data_nest_iasset$id)) %>% 
+  write_csv("./data/interim/Vespa_iAsset_dupli_missing_both.csv")
+
+##duplicaten waarvan beide ID's nog in opgekuiste dataset zitten
+dupli_nest_iasset <- dupli_nest_iasset %>% 
+  filter((ID2 %in% data_nest_iasset$id) & (ID1 %in% data_nest_iasset$id))
+
+# maken "missing_both" meldingen deel uit van een meerdere duplicaten sets ? 
+## duplicaten die in meerdere sets zitten en waarvan minstens 1 set behouden 
+# blijft
+test_mutiple_1 <- dupli_missing_both %>% 
+  filter(ID1 %in% dupli_nest_iasset$ID1 | ID2 %in% dupli_nest_iasset$ID1)
+
+## duplicaten waarvan 1 deel van de set reeds als duplicaat in iasset geflagged 
+# werd
+test_mutiple_2 <- dupli_missing_both %>% 
+  filter(!ID1 %in% dupli_nest_iasset$ID1 | !ID2 %in% dupli_nest_iasset$ID1) %>% 
+  filter(ID1 %in% data_nest_iasset$id | ID2 %in% data_nest_iasset$id)
+
+## duplicaten die enkel de ruwe ongefilterde data zitten
+test_mutiple_3 <- dupli_missing_both %>% 
+  filter(!ID1 %in% dupli_nest_iasset$ID1 | !ID2 %in% dupli_nest_iasset$ID1) %>% 
+  filter(!ID1 %in% data_nest_iasset$id | !ID2 %in% data_nest_iasset$id) %>% 
+  filter(ID1 %in% data_nest_iasset_raw$insp_order | ID2 %in% data_nest_iasset_raw$insp_order) %>% 
+  pivot_longer(cols = c("ID1", "ID2"), values_to = "id") %>% 
+  select(id) %>% 
+  left_join(data_nest_iasset_raw %>% 
+              mutate(insp_order = as.character(insp_order)) %>% 
+              select(insp_order,
+                     datum_observatie, 
+                     gevalideerd, 
+                     duplicaat, 
+                     nesttype,
+                     coordinaten_van_het_nest),
+            by = c("id" = "insp_order"))
+
+table(test_mutiple_3$duplicaat, useNA = "ifany") #=> alle ids in deze set werden 
+# als duplicaat geflagged 
+```
+
+```{r IASSET: remove duplicaten}
+#obtain list of all managed nests
+managed_nests <- data_nest_iasset %>%
+  filter(result == "succesvol") %>%
+  select(id)
+
+#decide which of both duplicates should be removed
+#only remove duplicates which do not contain information regarding management
+#default remove most recent duplicate (ID1)
+dupli_nest_iasset <- dupli_nest_iasset%>%
+  mutate(duplicate_to_remove = case_when(
+    (ID1 %in% managed_nests$id) & (!ID2 %in% managed_nests$id) ~ ID2,
+    TRUE ~ ID1))
+data_nest_iasset <- data_nest_iasset %>% 
+  filter(!id %in% dupli_nest_iasset$duplicate_to_remove) 
+```
+
+```{r IASSET: Export}
+if(file.exists("./data/interim/data_nest_iasset.geojson")){
+  file.remove("./data/interim/data_nest_iasset.geojson")
+}
+
+st_write(data_nest_iasset, "./data/interim/data_nest_iasset.geojson",
+         append = FALSE)
+```
+
+Nest AH verlaten. 2de nest is Duitse wesp. => IE ?
+
+```{r Waarnemingen: data prep}
+if(file.exists("./data/interim/data_nests_waarnemingen.geojson")){
+  file.remove("./data/interim/data_nests_waarnemingen.geojson")
+}
+
+data_nests_waarnemingen <- data_nests_waarnemingen_raw %>% 
+  mutate(nest_type = case_when(grepl(x = nesttype, 
+                                     pattern = "secundair", 
+                                     ignore.case = TRUE) ~ "AS",
+                               grepl(x = nesttype,
+                                     pattern = "secundary", 
+                                     ignore.case = TRUE) ~ "AS",
+                               grepl(x = nesttype, 
+                                     pattern = "primair", 
+                                     ignore.case = TRUE) ~ "AP",
+                               grepl(x = nesttype,
+                                     pattern = "primary",
+                                     ignore.case = TRUE) ~ "AP",
+                               grepl(x = nesttype,
+                                     pattern = "embryonaal",
+                                     ignore.case = TRUE) ~ "AE",
+                               grepl(x = nesttype,
+                                     pattern = "embryonic",
+                                     ignore.case = TRUE) ~ "AE",
+                               grepl(x = nesttype,
+                                     pattern = "leeg",
+                                     ignore.case = TRUE) ~ "IE",
+                               grepl(x = nesttype,
+                                     pattern = "empty",
+                                     ignore.case = TRUE) ~ "IE",
+                               TRUE ~ "UK"),
+         year = year(datum_observatie),
+         size = case_match(nestgrootte,
+                           "Groter dan 25 cm" ~ "meer dan 25 cm",
+                           "Larger than 25cm" ~ "meer dan 25 cm",
+                           "Kleiner dan 25 cm" ~ "minder dan 25 cm",
+                           "Smaller than 25cm" ~ "minder dan 25 cm",
+                           .default = NA),
+         height = case_match(nesthoogte,
+                             "Lager dan 4 meter" ~ "lager dan 4 meter",
+                             "Lower than 4 meters" ~ "lager dan 4 meter", 
+                             "Hoger dan 4 meter" ~ "hoger dan 4 meter",
+                             "Higher than 4 meters" ~ "hoger dan 4 meter",
+                             .default = NA),
+         site = case_match(nestplaats,
+                           "Inside, in a building or construction" ~ "binnen, in gebouw of constructie",
+                           "Outside, uncovered on a building" ~ "buiten, onbedekt op gebouw",
+                           "Outside, natural cover" ~ "buiten, natuurlijk overdekt",
+                           "Outside, covered by construction" ~ "buiten, maar overdekt door constructie",
+                           "Outside, uncovered on a tree or bush" ~ "buiten, onbedekt in boom of struik",
+                           "Buiten, maar overdekt door constructie" ~ "buiten, maar overdekt door constructie",
+                           "Buiten, natuurlijk overdekt" ~ "buiten, natuurlijk overdekt",
+                           "Buiten, onbedekt in boom of struik" ~ "buiten, onbedekt in boom of struik",
+                           "Binnen, in gebouw of constructie" ~ "binnen, in gebouw of constructie",                                     "Buiten, onbedekt op gebouw" ~ "buiten, onbedekt op gebouw",
+                           .default = "onbekend")) %>% 
+  mutate(datum_observatie = as.Date(datum_observatie))%>%
+  filter(datum_observatie >= as.Date("2024-06-13"))%>%
+  filter(!is.na(coordinaten_van_het_nest)) %>% 
+  filter(duplicaat!='ja')%>%
+  rename(geometry=coordinaten_van_het_nest)%>%
+  st_as_sf(wkt = "geometry",
+           crs = 4326) %>%
+  mutate(originates_in_vespawatch = "Waarnemingen.be",
+         inaturalist_link = NA_character_,
+         inaturalist_id = NA_character_,
+         inaturalist_species = NA_character_,
+         expert_vv_confirmed = "True",
+         vv_confirmed = "True",
+         taxon_id = NA_character_,
+         inat_vv_confirmed = NA_character_,
+         file_number_nest_removal = NA_character_,
+         comments_2 = NA_character_) %>% 
+  dplyr::select(id = insp_order,
+                image_1 = foto_nest_1,
+                image_2 = foto_nest_2,
+                image_3 = foto_nest_3,
+                originates_in_vespawatch,
+                observation_time = datum_observatie,
+                comments = opmerkingen,
+                inaturalist_link,
+                inaturalist_id,
+                inaturalist_species,
+                height,
+                size,
+                duplicate_of_id = duplicaat,
+                taxon_id,
+                created_at = datum_tijd_registratie,
+                inat_vv_confirmed,
+                expert_vv_confirmed,
+                vv_confirmed,
+                action_time = datum_en_tijd_bestrijding,
+                duration = tijd_ter_plaatse,
+                comments_2 = bestrijding_opmerking,
+                site,
+                nest_type,
+                aftercare = nazorg, #Niet aanwezig in waarnemingen.be data
+                product = product, #Niet aanwezig in waarnemingen.be data
+                method = methode, #Niet aanwezig in waarnemingen.be data
+                result = resultaat, #Niet aanwezig in waarnemingen.be data
+                nest_reported_before = duplicaat,
+                year,
+                file_number_nest_removal) 
+
+
+  st_write(data_nests_waarnemingen, "./data/interim/data_nests_waarnemingen.geojson",
+           append = FALSE)
+```
+
+```{r test data_nests_waarnemingen, eval=FALSE}
+data_nests_waarnemingen %>% 
+  leaflet::leaflet() %>% 
+  leaflet::addTiles() %>% 
+  leaflet::addCircles()
+
+fistools::col_content_compare(data_nests_waarnemingen, "size", data_nest_iasset, "size")
+fistools::col_content_compare(data_nests_waarnemingen, "nest_type", data_nest_iasset, "nest_type")
+fistools::col_content_compare(data_nests_waarnemingen, "result", data_nest_iasset, "result")
+fistools::col_content_compare(data_nests_waarnemingen, "height", data_nest_iasset, "height")
+fistools::col_content_compare(data_nests_waarnemingen, "site", data_nest_iasset, "site")
+
+fistools::colcompare(data_nests_waarnemingen, data_nest_iasset)
+```
+
+```{r combine nesten dfs}
+colnames_x <- data.frame(col = 1:ncol(data_nest_gs))
+colnames_x$col_x <- colnames(data_nest_gs)
+
+colnames_y <- data.frame(col = 1:ncol(data_nest_iasset))
+colnames_y$col_y <- colnames(data_nest_iasset)
+
+colnames_test <- colnames_x %>% 
+  full_join(colnames_y)
+
+data_nest_final <- rbind(data_nest_gs, data_nest_iasset, data_nests_waarnemingen) 
+```
+
+```{r}
+#add province and municipality per record based on coordinates
+data_nest_final <- data_nest_final%>% 
+  st_intersection(gemeentes)%>%
+  rename(gemeente = NAAM, NISCODE_gemeente = NISCODE)%>%
+  st_intersection(prov)%>%
+  rename(provincie = NAAM, NISCODE_provincie = NISCODE)
+```
+
+
+```{r add gemeente info to nesten}
+#Write Ouderghem as Oudergem to comply with the translations file of the exotenportaal
+gemeentes <- gemeentes %>%
+  mutate(NAAM = case_when(NAAM == "Ouderghem" ~ "Oudergem",
+                          TRUE ~ NAAM))
+
+data_nest_final$NISCODE <- apply(st_intersects(gemeentes,
+                                               data_nest_final,
+                                               sparse = FALSE),
+                                 2, function(col) {
+                                   gemeentes[which(col),]$NISCODE
+                                 }
+)
+
+pb <- utils::txtProgressBar(min = 0, 
+                            max = length(data_nest_final$NISCODE), 
+                            style = 3)
+
+for(i in 1:length(data_nest_final$NISCODE)){
+  utils::setTxtProgressBar(pb, i)
+  data_nest_final$NISCODE[i] <- as.character(data_nest_final$NISCODE[[i]][1])
+}
+
+gem_df <- as.data.frame(gemeentes) %>% 
+  dplyr::select(-geometry,
+                -GEWEST) %>% 
+  rename(Gemeente = NAAM)
+
+data_nest_final <- data_nest_final %>% 
+  mutate(NISCODE = as.character(NISCODE)) %>% 
+  left_join(gem_df, 
+            by = "NISCODE")%>%
+  mutate(Gemeente = case_when(provincie=="unknown" | is.na(Gemeente)  ~ "unknown",
+                              TRUE ~ Gemeente))
+```
+
+```{r data checks}
+test_that("Check for NA values in each column", {
+  expect_true(sum(is.na(data_nest_final$NISCODE)) <= nrow(data_nest_final)*0.01, "Column NISCODE contains NA values")
+  expect_true(sum(is.na(data_nest_final$GEWEST)) <= nrow(data_nest_final)*0.01, "Column GEWEST contains NA values")
+  expect_true(sum(is.na(data_nest_final$Gemeente)) <= nrow(data_nest_final)*0.01, "Column Gemeente contains NA values")
+  expect_true(sum(is.na(data_nest_final$NAAM)) <= nrow(data_nest_final)*0.01, "Column NAAM contains NA values")
+  expect_true(sum(is.na(data_nest_final$nest_type)) <= nrow(data_nest_final)*0.01, "Column nest_type contains NA values")
+  expect_true(sum(is.na(data_nest_final$year)) <= nrow(data_nest_final)*0.01, "Column nest_type contains NA values")
+})
+```
+
+```{r export paths}
+processing_exportpath <- "./data/output/UAT_processing/Vespa_velutina_shape/"
+```
+
+```{r export nesten}
+nesten_path <- paste0(processing_exportpath, "nesten.geojson")
+
+if(file.exists(nesten_path)){
+  file.remove(nesten_path)
+}
+
+st_write(data_nest_final %>% filter(year >= 2017),
+         nesten_path,
+         append = FALSE)
+
+test_jaar <- data_nest_final %>% 
+  filter(year < 2018)
+```
+
+```{r create seasonal datasets, dataset per month}
+aantal_nesten_per_maand_per_jaar_meta_path <- paste0(processing_exportpath, "aantal_nesten_per_maand_per_jaar_meta.csv")
+
+data_nest_final_Vlaanderen <- data_nest_final%>%
+  filter(provincie %in% c('Oost-Vlaanderen', 
+                     'West-Vlaanderen',
+                     'Limburg',
+                     'Vlaams-Brabant',
+                     'Antwerpen'))
+
+nests_per_month_per_year <- data_nest_final_Vlaanderen %>%
+  st_drop_geometry()%>%
+  mutate(observation_month = month(observation_time),
+         observation_year = year(observation_time))%>%
+  group_by(observation_year, observation_month)%>%
+  summarise(count=n())%>%
+  pivot_wider(names_from = observation_month,
+              values_from = count)%>%
+  select(observation_year, '1','2','3','4','5','6','7','8','9','10','11','12')%>%
+  rename('januari'= '1', 'februari'= '2', 'maart'= '3', 'april'= '4', 'mei'= '5', 'juni'='6', 'juli'='7', 'augustus'='8', 'september'='9', 'oktober'='10', 'november'='11', 'december'='12')%>%
+  replace(is.na(.), 0)%>%
+  mutate(totaal= januari+februari+maart+april+mei+juni+juli+augustus+september+oktober+november+december)%>%
+  filter(!observation_year == 0)%>%
+  rename(jaar = observation_year)
+
+ write.csv2(nests_per_month_per_year, 'nests_per_month_per_year.csv', row.names=FALSE)
+ 
+ nests_per_province_per_year <- as.data.frame(table(data_nest_final_Vlaanderen$year, data_nest_final_Vlaanderen$provincie))%>%
+  pivot_wider(names_from = Var2,
+              values_from = Freq)%>%
+   rename(jaar=Var1)%>%
+   mutate(totaal= `Oost-Vlaanderen` +  `West-Vlaanderen` + Antwerpen + `Vlaams-Brabant` + Limburg)
+ 
+  write.csv2(nests_per_province_per_year, 'nests_per_province_per_year.csv', row.names=FALSE)
+```
+
+```{r GBIF data prep}
+nesten <- data_nest_final %>% 
+  filter(!is.na(inaturalist_id))
+
+test <- n_distinct(nesten$inaturalist_id)
+
+interimdata <- data_gbif_raw %>% 
+  filter(grepl("approved", identificationVerificationStatus) | identificationVerificationStatus == "" & institutionCode == "iNaturalist") %>% 
+  mutate(type = case_when(grepl(pattern = "found as nest", occurrenceRemarks) & collectionCode == "waarnemingen.be" ~ "Nest", #gevalideerde nesten in Waarnemingen.be
+                          institutionCode == "iNaturalist" & 
+                            catalogNumber %in% nesten$inaturalist_id ~ "Nest", # gevalideerde nesten in iNaturlist door Vespa-Watch
+                          grepl(pattern = "nest", occurrenceRemarks) ~ "Unc.Nest", #mogelijke nesten in Waarnemingen.be
+                          TRUE ~ "Individu"),
+         institutionCode2 = case_when(rightsHolder == "Vespa-Watch" ~ 
+                                        paste0("Vespa-Watch via ", institutionCode),
+                                      TRUE ~ institutionCode))
+
+table(interimdata$institutionCode, interimdata$institutionCode2)
+table(interimdata$type, useNA = "ifany")
+
+file.remove("./data/interim/nesten_to_check.geojson")
+
+interimdata<- st_as_sf(interimdata, coords=c('decimalLongitude', 'decimalLatitude'), remove=FALSE, crs=4326)
+interimdata<- st_join(interimdata, gemeentes)
+
+#When municipality is known based on intersect with communes.geojson, overwrite level3Name with these municipality data (stored in column NAAM), if not, overwrite with municipalities from column municipality (from gbif)
+interimdata$level3Name <- ifelse(!is.na(interimdata$NAAM), interimdata$NAAM, interimdata$municipality)
+
+#Do the same for column level2Name (based on intersect with provinces.geojson). In this case, only replace level2Name with province from provinces when this is not NA, otherwise keep original 
+interimdata<- interimdata %>%
+  select(c(-NAAM,-NISCODE,-GEWEST))%>%
+  st_join(prov)%>%
+  mutate(level2Name=ifelse(!is.na(NAAM), NAAM, level2Name))%>%
+  mutate(level1Name=ifelse(!is.na(GEWEST),GEWEST,level1Name))%>%
+  mutate(level1Name= case_when(
+    level1Name == "Vlaanderen" ~ "flanders",
+    level1Name == "Wallonie" ~ "wallonia",
+    level1Name == "Bruxelles" ~ "brussels",
+    level3Name == "Wachtebeke" ~ "flanders",
+    TRUE ~ level1Name ))%>%
+  mutate(level2Name= case_when(
+    level3Name == "Wachtebeke" ~ "Oost-Vlaanderen",
+    TRUE ~ level2Name ))%>%
+  mutate(level3Name= case_when(
+    level3Name == "Halle" ~ "Hal",
+    level3Name == "Kapelle-op-den-Bos" ~ "Kapelle-Op-Den-Bos",
+    level3Name == "Heist-op-den-Berg" ~ "Heist-Op-Den-Berg",
+    level3Name == "Herk-de-Stad" ~ "Herk-De-Stad",
+    level3Name == "Brussel / Bruxelles" ~ "Brussel",
+    level3Name == "Elsene / Ixelles" ~ "Elsene",
+    TRUE ~ level3Name ))%>%
+  select(c(-NAAM,-NISCODE,-GEWEST))%>%
+  st_drop_geometry()
+
+interimdata %>% 
+  filter(type == "Unc.Nest") %>% 
+  st_as_sf(coords = c("decimalLatitude", "decimalLongitude")) %>% 
+  st_write("./data/interim/nesten_to_check.geojson",
+           append = FALSE)
+
+#ook handig om als csv te hebben om te laten checken
+interimdata %>% 
+  filter(type == "Unc.Nest") %>%
+  st_drop_geometry() %>% 
+  write_csv('./data/interim/onzekere_nesten_Waarnemingen.csv')
+
+interimdata %>%
+  filter(type == "Nest" & collectionCode == "waarnemingen.be") %>%
+  st_drop_geometry() %>% 
+  write_csv('./data/interim/zekere_nesten_Waarnemingen.csv')
+
+cleandata <- interimdata %>% 
+  mutate(type = case_when(type == "Unc.Nest" ~ "Individu",
+                          TRUE ~ type)) %>% # Een onzeker nest bestaat in de meeste gevallen uit minstens één individu!
+  group_by(eventDate, year, type, decimalLatitude, 
+           decimalLongitude, level1Name, level2Name, level3Name, institutionCode) %>% #reduce duplicates 
+  summarise(popup = paste0(paste("<a href=", references, ">", 
+                                 institutionCode2, "</a>", collapse = ",<br>")),
+            inaturalist_ids = case_when(institutionCode == "iNaturalist" ~ paste(catalogNumber, collapse = ","),
+                                        TRUE ~ NA),
+            gbif_ids = paste(gbifID, collapse = ",")) %>% 
+  select(eventDate, year, type, decimalLatitude, 
+         decimalLongitude, level1Name, level2Name, 
+         level3Name, popup, inaturalist_ids, gbif_ids, institutionCode) %>% 
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+```
+
+```{r GBIF export}
+points_path <- paste0(processing_exportpath, "points.geojson")
+file.remove(points_path)
+st_write(cleandata, points_path,
+         append = FALSE)
+```
+
+```{r calculate actieve haarden, eval = FALSE}
+source("./src/Vespa velutina management/bereken_actieve_haarden.r")
+
+nesten <- data_nest_final %>% 
+  dplyr::filter(year == year(Sys.Date())) %>% 
+  mutate(type = "Nest",
+         popup = paste0("Vespawatch rij ", id),
+         institutionCode = "Vespawatch")
+
+ah_list <- bereken_actieve_haarden(gbif_data = cleandata,
+                                   beheer_data = nesten)
+
+outputs <- c("actieve_haarden", "onbehandelde_nesten", "beheerde_nesten")
+
+for(o in outputs){
+  export_fn <- paste0(processing_exportpath, o, ".geojson")
+  
+  if(file.exists(export_fn)){
+    file.remove(export_fn)
+  }
+  st_write(ah_list[[o]],
+           export_fn,
+           append = FALSE)
+}
+```
+

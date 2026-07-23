@@ -1,0 +1,11 @@
+# install CRAN packages ####
+# load required packages (install them if needed)
+installed <- rownames(installed.packages())
+required <- c("remotes", "knitr", "dplyr", "magrittr", "rgbif", "tidylog", 
+              "progress", "here", "lubridate", "readr", "purrr",
+              "stringr", "tidyr", "aws.s3", "sf", "testthat", "pbapply", 
+              "tibble", "aws.ec2metadata")
+
+if (!all(required %in% installed)) {
+  install.packages(required[!required %in% installed], dependencies = TRUE)
+}

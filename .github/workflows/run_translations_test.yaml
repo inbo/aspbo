@@ -1,0 +1,58 @@
+on:
+  workflow_dispatch: 
+  pull_request:
+    branches:
+      - 'uat'
+    paths:
+      - 'data/output/UAT_processing/**'
+      - 'data/output/UAT_direct/**'
+
+concurrency:
+  group: translations-test-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+name: run_translations_test
+
+jobs:
+  test_translations:
+    runs-on: ${{ matrix.config.os }}
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+   
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Install linux libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libsodium-dev \
+            libcurl4-openssl-dev \
+            libgdal-dev \
+            libproj-dev \
+            libudunits2-dev \
+            libuv1-dev
+     
+      - name: Test translations
+        run: |
+          source("src/tests/test_regionIDs.R")
+        shell: Rscript {0}

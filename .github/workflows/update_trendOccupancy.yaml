@@ -1,0 +1,107 @@
+name: update trend occupancy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "uat"
+    paths:
+      - "data/output/UAT_processing/data_input_checklist_indicators.tsv"
+  schedule:
+   - cron: '30 23 1 5 *' # At 23:30 on day-of-month 1 in May.
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  update-trend-occupancy:
+    runs-on: ${{ matrix.config.os }}
+    environment: ${{ github.ref == 'refs/heads/main' && 'PROD' || 'UAT' }}
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release" }
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_TOKEN: ${{ secrets.AUTOMATISATION }}
+      USERNAME: ${{ secrets.USERNAME }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      amiabot: ${{ secrets.AMIABOT }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTOMATISATION }}
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2
+
+      - name: Install linux libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libsodium-dev \
+            libcurl4-openssl-dev \
+            libgdal-dev \
+            libproj-dev \
+            libudunits2-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfontconfig1-dev \
+            libuv1-dev
+
+      - name: install packages
+        run: |
+          source("src/install_packages_trendOccupancy.R")
+          source("src/install_alienSpecies.R")
+        shell: Rscript {0}
+
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@517a711dbcd0e402f90c77e7e2f81e849156e31d # v6
+        with:
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
+      - name: update trend occupancy
+        run: |
+          source("src/run_update_trendOccupancy.R")
+        shell: Rscript {0}
+        env:
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@fc0511fd56cf2eb2631a9601dbc45299de406564 # v0.11.1
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          commit_prefix: "[AUTO]"
+          commit_message: "update trend occupancy"
+          target_branch: automatic-update-trendOccupancy
+          add_timestamp: true
+
+      - name: Get branch name
+        run: |
+          git branch --show-current
+
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@3f1cdfa7c7976f6302e820e2b391e846d933693c # v0.4.2
+        with:
+          github_token: ${{ secrets.AUTOMATISATION }}
+          target_branch: uat
+          title: "[AUTO] update trend occupancy"
+          template: .github/PR_update_trendOccupancy.md
+          reviewer: SanderDevisscher
+          label: automated workflow
+          get_diff: false

@@ -27,26 +27,33 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
         with:
           fetch-depth: 0
           token: ${{ secrets.AUTOMATISATION }}
 
       - name: Setup R
-        uses: r-lib/actions/setup-r@v2
+        uses: r-lib/actions/setup-r@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
 
       - name: Setup pandoc
-        uses: r-lib/actions/setup-pandoc@v2
+        uses: r-lib/actions/setup-pandoc@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2
 
       - name: Install linux libraries
         run: |
-          sudo apt install libsodium-dev
-          sudo apt-get install libcurl4-openssl-dev
-          sudo apt-get install libgdal-dev libproj-dev
-          sudo apt install libudunits2-dev
+          sudo apt-get update
+          sudo apt-get install -y \
+            libsodium-dev \
+            libcurl4-openssl-dev \
+            libgdal-dev \
+            libproj-dev \
+            libudunits2-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfontconfig1-dev \
+            libuv1-dev
 
       - name: Install R packages
         run: |
@@ -59,22 +66,22 @@ jobs:
         shell: Rscript {0}
 
       - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
+        uses: devops-infra/action-commit-push@fc0511fd56cf2eb2631a9601dbc45299de406564 # v0.11.1
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
           commit_prefix: "[AUTO]"
           commit_message: "get muskrat data"
-          target_branch: automatic-management-prep
+          target_branch: automatic-muskrat-data
           
       - name: Get branch name
         run: |
           git branch --show-current
 
       - name: Create pull request
-        uses: devops-infra/action-pull-request@v0.4.2
+        uses: devops-infra/action-pull-request@3f1cdfa7c7976f6302e820e2b391e846d933693c # v0.4.2
         with:
           github_token: ${{ secrets.AUTOMATISATION }}
-          target_branch: main
+          target_branch: uat
           title: "[AUTO] get muskrat data"
           template: .github/PR_get_muskrat_data.md
           reviewer: SanderDevisscher
