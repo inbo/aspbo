@@ -157,6 +157,8 @@ Dour_title,NA
 Drogenbos_title,NA
 Duffel_title,NA
 Durbuy_title,NA
+Early_alert_dashboard_description,This interactive dashboard was developed as part of the European LIFE RIPARIAS project and aggregates open biodiversity data on 15 riparian invaders and all Union List species via GBIF. It helps local managers explore observations and set up early warning alerts for specific species and areas to support early detection and rapid response.
+Early_alert_dashboard_title,Early alert
 Eastern Africa_title,East Africa
 Eastern Asia_title,East Asia
 Eastern Europe_title,Eastern Europe
@@ -365,6 +367,8 @@ Lubbeek_title,NA
 Luik_title,Liège
 Lummen_title,NA
 Luxemburg_title,Luxembourg
+MICA_dashboard_description,"This interactive dashboard focuses on muskrats (<i>Ondatra zibethicus</i>) and coypus (<i>Myocastor coypus</i>). Created under the European LIFE MICA project, it maps field observations and trapping data across Belgium, the Netherlands, and Germany to support the management of these invasive species. Users can explore the data through interactive maps, graphs, and tables."
+MICA_dashboard_title,MICA dashboard
 Maarkedal_title,NA
 Maaseik_title,NA
 Maasmechelen_title,NA
@@ -473,6 +477,8 @@ Quevy_title,NA
 Quievrain_title,NA
 RINSE1_title,RINSE1
 RINSE2_title,RINSE2
+RadIUS_dashboard_description,"This interactive dashboard was developed as part of the RadIUS project and maps the occurrence of various invasive alien species in natural areas in Flanders. The analysis covers 79 invasive species and different types of natural areas, including Natura 2000 habitat types, areas managed by the Flemish Agency for Nature and Forest (ANB), and species protection programmes. The dashboard visualizes these results and provides stakeholders with a practical tool for determining management priorities."
+RadIUS_dashboard_title,RadIUS dashboard
 Raeren_title,NA
 Ramillies_title,NA
 Ranst_title,NA
@@ -749,8 +755,6 @@ disclaimerVespa_title,The species is currently not active. When you observe an i
 downloadData_title,Download data
 downloadGraph_title,Download graph
 downloadMap_title,Download map
-early_warning_description,"This interactive dashboard tracks invasive alien species, specifically aquatic and riparian plants and crayfish (such as <i>Crassula helmsii</i> or <i>Faxonius</i> crayfish). Created for the European LIFE RIPARIAS project, it helps local managers track observations and set up early warning alerts to facilitate a rapid response against invasions. Users can explore species occurrences using interactive maps, tables, and timelines."
-early_warning_title,Early alert
 endYear_title,End year
 escape_agriculture_title,Agriculture (including Biofuel feedstocks)
 escape_aquaculture_title,Aquaculture / mariculture
@@ -904,8 +908,6 @@ management3-countYearGroup_title,The number of {{species}} individuals managed
 management_title,Management
 map_title,Map
 marine_title,marine
-mica_db_description,"This interactive dashboard tracks muskrats (<i>Ondatra zibethicus</i>) and coypus (<i>Myocastor coypus</i>), two invasive species. Created under the European LIFE MICA project, it maps field observations and trapping data across Belgium, the Netherlands, and Germany to help coordinate population control efforts. Users can explore the data through interactive maps, graphs, and tables."
-mica_db_title,MICA dashboard
 min_1_obs_title,The species has been observed in Belgium since 1950 (data from GBIF)
 missingFilters_species_title,No species or region selected! => select a species and a region
 missing_title,missing
@@ -961,8 +963,6 @@ protectAreas_title,Protected areas
 provinces_title,provinces
 pulli_title,pulli
 quantiles_title,Quantiles
-radius_db_description,"This interactive dashboard maps the occurrence of 79 invasive alien species—such as Oriental bittersweet (<i>Celastrus orbiculatus</i>) and American skunk-cabbage (<i>Lysichiton americanus</i>)—across natural areas in Flanders. Created for the RadIUS project, it helps local site managers prioritize population control by categorizing these species as sporadic, limited-established, or widespread based on their abundance."
-radius_db_title,RadIUS dashboard
 radius_title,radius
 rcp26_title,model based on climate forecasts under RCP 2.6 for 2040-2070
 rcp45_title,model based on climate forecasts under RCP 4.5 for 2040-2070
