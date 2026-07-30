@@ -157,8 +157,6 @@ Dour_title,Dour
 Drogenbos_title,Drogenbos
 Duffel_title,Duffel
 Durbuy_title,Durbuy
-Early_alert_dashboard_description,"Dit interactieve dashboard volgt invasieve uitheemse soorten, in het bijzonder aquatische en oeverplanten en rivierkreeften (zoals de watercrassula, <i>Crassula helmsii</i>, of <i>Faxonius</i> rivierkreeften). Het is gecreëerd voor het Europese LIFE RIPARIAS-project en helpt lokale beheerders bij het volgen van waarnemingen en het instellen van vroegtijdige waarschuwingen om een snelle reactie tegen invasies te vergemakkelijken. Gebruikers kunnen het voorkomen van soorten verkennen via interactieve kaarten, tabellen en tijdlijnen."
-Early_alert_dashboard_title,Early alert
 Eastern Africa_title,Oost-Afrika
 Eastern Asia_title,Oost-Azië
 Eastern Europe_title,Oost-Europa
@@ -367,8 +365,6 @@ Lubbeek_title,Lubbeek
 Luik_title,Luik
 Lummen_title,Lummen
 Luxemburg_title,Luxemburg
-MICA_dashboard_description,"Dit interactieve dashboard volgt de muskusrat (<i>Ondatra zibethicus</i>) en de beverrat (<i>Myocastor coypus</i>), twee invasieve soorten. Het is gecreëerd in het kader van het Europese LIFE MICA-project en brengt waarnemingen in het veld en vangstgegevens in België, Nederland en Duitsland in kaart om de coördinatie van de populatiebeheersing te ondersteunen. Gebruikers kunnen de gegevens verkennen via interactieve kaarten, grafieken en tabellen."
-MICA_dashboard_title,MICA dashboard
 Maarkedal_title,Maarkedal
 Maaseik_title,Maaseik
 Maasmechelen_title,Maasmechelen
@@ -477,8 +473,6 @@ Quevy_title,Quevy
 Quievrain_title,Quievrain
 RINSE1_title,RINSE1
 RINSE2_title,RINSE2
-RadIUS_dashboard_description,"Dit interactieve dashboard brengt het voorkomen van 79 invasieve uitheemse soorten — zoals de Aziatische boomwurger (<i>Celastrus orbiculatus</i>) en de moerasaronskelk (<i>Lysichiton americanus</i>) — in Vlaamse natuurgebieden in kaart. Het is gecreëerd voor het RadIUS-project en helpt lokale terreinbeheerders bij het prioriteren van populatiebeheer door deze soorten op basis van hun talrijkheid te classificeren als sporadisch, beperkt gevestigd of wijdverspreid."
-RadIUS_dashboard_title,RadIUS dashboard
 Raeren_title,Raeren
 Ramillies_title,Ramillies
 Ranst_title,Ranst
@@ -751,6 +745,7 @@ disclaimerVespa_title,"De soort is momenteel niet actief. Wanneer u een individu
 downloadData_title,Download data
 downloadGraph_title,Download grafiek
 downloadMap_title,Download kaart
+early_warning_description,"Dit interactieve dashboard volgt invasieve uitheemse soorten, in het bijzonder aquatische en oeverplanten en rivierkreeften (zoals de watercrassula, <i>Crassula helmsii</i>, of <i>Faxonius</i> rivierkreeften). Het is gecreëerd voor het Europese LIFE RIPARIAS-project en helpt lokale beheerders bij het volgen van waarnemingen en het instellen van vroegtijdige waarschuwingen om een snelle reactie tegen invasies te vergemakkelijken. Gebruikers kunnen het voorkomen van soorten verkennen via interactieve kaarten, tabellen en tijdlijnen."
 early_warning_title,Early alert
 endYear_title,Eind jaar
 escape_agriculture_title,Landbouw (incl. biobrandstoffen)
@@ -921,6 +916,7 @@ management3-countYearGroup_title,Het aantal beheerde {{species}} individuen
 management_title,Beheer
 map_title,Kaart
 marine_title,marien
+mica_db_description,"Dit interactieve dashboard volgt de muskusrat (<i>Ondatra zibethicus</i>) en de beverrat (<i>Myocastor coypus</i>), twee invasieve soorten. Het is gecreëerd in het kader van het Europese LIFE MICA-project en brengt waarnemingen in het veld en vangstgegevens in België, Nederland en Duitsland in kaart om de coördinatie van de populatiebeheersing te ondersteunen. Gebruikers kunnen de gegevens verkennen via interactieve kaarten, grafieken en tabellen."
 mica_db_title,MICA dashboard
 min_1_obs_title,De soort werd waargenomen in België sinds 1950 (gegevens van GBIF)
 missingFilters_species_title,Geen soort of regio geselecteerd! => selecteer een soort en regio
@@ -975,6 +971,7 @@ protectAreas_title,Beschermde gebieden
 provinces_title,provincies
 pulli_title,pulli
 quantiles_title,Kwantielen
+radius_db_description,"Dit interactieve dashboard brengt het voorkomen van 79 invasieve uitheemse soorten — zoals de Aziatische boomwurger (<i>Celastrus orbiculatus</i>) en de moerasaronskelk (<i>Lysichiton americanus</i>) — in Vlaamse natuurgebieden in kaart. Het is gecreëerd voor het RadIUS-project en helpt lokale terreinbeheerders bij het prioriteren van populatiebeheer door deze soorten op basis van hun talrijkheid te classificeren als sporadisch, beperkt gevestigd of wijdverspreid."
 radius_db_title,RadIUS dashboard
 radius_title,radius
 rcp26_title,model gebaseerd op klimaatvoorspellingen onder RCP 2.6 voor 2040-2070

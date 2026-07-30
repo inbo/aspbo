@@ -157,8 +157,6 @@ Dour_title,NA
 Drogenbos_title,NA
 Duffel_title,NA
 Durbuy_title,NA
-Early_alert_dashboard_description,"Ce tableau de bord interactif suit les espèces exotiques envahissantes, en particulier les plantes aquatiques et ripicoles ainsi que les écrevisses (comme la Crassule de Helms, <i>Crassula helmsii</i>, ou les écrevisses <i>Faxonius</i>). Créé pour le projet européen LIFE RIPARIAS, il aide les gestionnaires locaux à suivre les observations et à configurer des alertes précoces pour faciliter une intervention rapide contre les invasions. Les utilisateurs peuvent explorer la présence de ces espèces à l'aide de cartes, de tableaux et de chronologies interactifs."
-Early_alert_dashboard_title,Early alert
 Eastern Africa_title,Afrique de l'Est
 Eastern Asia_title,Asie de l'Est
 Eastern Europe_title,Europe de l'Est
@@ -367,8 +365,6 @@ Lubbeek_title,NA
 Luik_title,Liège
 Lummen_title,NA
 Luxemburg_title,Luxembourg
-MICA_dashboard_description,"Ce tableau de bord interactif suit les rats musqués (<i>Ondatra zibethicus</i>) et les ragondins (<i>Myocastor coypus</i>), deux espèces envahissantes. Créé dans le cadre du projet européen LIFE MICA, il cartographie les observations de terrain et les données de piégeage en Belgique, aux Pays-Bas et en Allemagne afin d'aider à coordonner les efforts de régulation des populations. Les utilisateurs peuvent explorer ces données à l'aide de cartes, de graphiques et de tableaux interactifs."
-MICA_dashboard_title,MICA dashboard
 Maarkedal_title,NA
 Maaseik_title,NA
 Maasmechelen_title,NA
@@ -477,8 +473,6 @@ Quevy_title,NA
 Quievrain_title,NA
 RINSE1_title,RINSE1
 RINSE2_title,RINSE2
-RadIUS_dashboard_description,"Ce tableau de bord interactif cartographie la présence de 79 espèces exotiques envahissantes — comme le bourreau des arbres (<i>Celastrus orbiculatus</i>) et le faux arum (<i>Lysichiton americanus</i>) — dans les espaces naturels de Flandre. Créé pour le projet RadIUS, il aide les gestionnaires de sites locaux à prioriser la régulation des populations en classant ces espèces comme sporadiques, limitées-établies ou largement répandues en fonction de leur abondance."
-RadIUS_dashboard_title,RadIUS dashboard
 Raeren_title,NA
 Ramillies_title,NA
 Ranst_title,NA
@@ -747,6 +741,7 @@ disclaimerVespa_title,"L'espèce n'est actuellement pas active. Lorsque vous obs
 downloadData_title,Télécharger les données
 downloadGraph_title,Télécharger le graphique
 downloadMap_title,Télécharger la carte
+early_warning_description,"Ce tableau de bord interactif suit les espèces exotiques envahissantes, en particulier les plantes aquatiques et ripicoles ainsi que les écrevisses (comme la Crassule de Helms, <i>Crassula helmsii</i>, ou les écrevisses <i>Faxonius</i>). Créé pour le projet européen LIFE RIPARIAS, il aide les gestionnaires locaux à suivre les observations et à configurer des alertes précoces pour faciliter une intervention rapide contre les invasions. Les utilisateurs peuvent explorer la présence de ces espèces à l'aide de cartes, de tableaux et de chronologies interactifs."
 early_warning_title,Early alert
 endYear_title,Année de fin
 escape_agriculture_title,Agriculture (y compris les cultures énergétiques)
@@ -891,6 +886,7 @@ management3-countYearGroup_title,Le nombre d'individus de {{species}} gérés
 management_title,Gestion
 map_title,Carte
 marine_title,marine
+mica_db_description,"Ce tableau de bord interactif suit les rats musqués (<i>Ondatra zibethicus</i>) et les ragondins (<i>Myocastor coypus</i>), deux espèces envahissantes. Créé dans le cadre du projet européen LIFE MICA, il cartographie les observations de terrain et les données de piégeage en Belgique, aux Pays-Bas et en Allemagne afin d'aider à coordonner les efforts de régulation des populations. Les utilisateurs peuvent explorer ces données à l'aide de cartes, de graphiques et de tableaux interactifs."
 mica_db_title,MICA dashboard
 min_1_obs_title,L'espèce a été observée en Belgique depuis 1950 (données de GBIF)
 missingFilters_species_title,Aucune espèce ni région sélectionnée ! => Veuillez sélectionner une espèce et une région
@@ -947,6 +943,7 @@ protectAreas_title,Zones protégées
 provinces_title,provinces
 pulli_title,pulli
 quantiles_title,NA
+radius_db_description,"Ce tableau de bord interactif cartographie la présence de 79 espèces exotiques envahissantes — comme le bourreau des arbres (<i>Celastrus orbiculatus</i>) et le faux arum (<i>Lysichiton americanus</i>) — dans les espaces naturels de Flandre. Créé pour le projet RadIUS, il aide les gestionnaires de sites locaux à prioriser la régulation des populations en classant ces espèces comme sporadiques, limitées-établies ou largement répandues en fonction de leur abondance."
 radius_db_title,RadIUS dashboard
 radius_title,rayon
 rcp26_title,modèle basé sur les prévisions climatiques du RCP 2.6 pour 2040-2070
