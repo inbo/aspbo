@@ -63,7 +63,14 @@ ui <- fluidPage(
       selectInput("title_id", "Select Title ID:", choices = c("", unique(translations$title_id)), selected = ""),
       selectInput("language", "Select Language:", choices = c("en", "fr", "nl")),
       actionButton("save", "Save to Google Sheet"),
-      actionButton("save_csv", "Save to CSV")  # New button to save data to CSV
+      actionButton("save_csv", "Save to CSV"),
+      
+      # #### NEW CODE: UI elements for adding a new Title ID ####
+      hr(),
+      h4("Add New Record"),
+      textInput("new_title_id", "New Title ID:"),
+      actionButton("add_title", "Add Title ID", class = "btn-success")
+      # #### END NEW CODE ####
     ),
     
     mainPanel(
@@ -81,7 +88,7 @@ server <- function(input, output, session) {
   
   # Reactive value to store translations data ####
   translations_rv <- reactivePoll(
-    intervalMillis = 10000,  # Check for updates every 5 seconds
+    intervalMillis = 10000,  # Check for updates every 10 seconds
     session = session,
     checkFunc = function() {
       showNotification("Checking for updates...", type = "message", duration = 3)
@@ -154,6 +161,55 @@ server <- function(input, output, session) {
       showNotification("Data updated from Google Sheet", type = "message", duration = 3)
     }
   })
+  
+  # #### NEW CODE: Server logic to add a new Title ID ####
+  observeEvent(input$add_title, {
+    new_id <- trimws(input$new_title_id)
+    
+    # Validate input
+    if (new_id == "") {
+      showNotification("Please enter a valid Title ID.", type = "error", duration = 3)
+      return()
+    }
+    
+    current_data <- translations_rv()
+    
+    # Check for duplicates
+    if (new_id %in% current_data$title_id) {
+      showNotification("This Title ID already exists!", type = "error", duration = 3)
+      return()
+    }
+    
+    # Create a new empty row matching the dataframe's structure
+    new_row <- current_data[1, ]
+    new_row[1, ] <- NA
+    new_row$title_id <- new_id
+    
+    # Fill language columns with empty strings instead of NA so UI textareas render nicely
+    for (col in colnames(new_row)) {
+      if (col != "title_id") new_row[[col]] <- ""
+    }
+    
+    # Append to existing data
+    updated_translations <- bind_rows(current_data, new_row)
+    
+    # Save to Google Sheet
+    tryCatch({
+      sheet_write(updated_translations, sheet_id, sheet = "translations")
+      showNotification(paste("Successfully added new Title ID:", new_id), type = "message", duration = 3)
+      
+      # Clear the text input
+      updateTextInput(session, "new_title_id", value = "")
+      
+      # Force the dropdown to select the newly created ID 
+      # (The reactivePoll will soon update translations_rv and fetch this new row)
+      current_title_id(new_id)
+      
+    }, error = function(e) {
+      showNotification(paste("Failed to add Title ID:", e$message), type = "error", duration = 5)
+    })
+  })
+  # #### END NEW CODE ####
   
   
   # Reactive expression to filter translations data based on selected Title ID

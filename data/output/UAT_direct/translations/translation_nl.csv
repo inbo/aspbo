@@ -157,6 +157,8 @@ Dour_title,Dour
 Drogenbos_title,Drogenbos
 Duffel_title,Duffel
 Durbuy_title,Durbuy
+Early_alert_dashboard_description,"Dit interactieve dashboard werd ontwikkeld in het kader van het Europese LIFE RIPARIAS-project en bundelt GBIF-gegevens over 15 invasieve soorten in oever- en riviergebieden, evenals gegevens over alle soorten van de Unielijst. Het stelt lokale terreinbeheerders in staat om waarnemingen te raadplegen en e-mailwaarschuwingen in te stellen voor specifieke soorten en gebieden."
+Early_alert_dashboard_title,Early alert
 Eastern Africa_title,Oost-Afrika
 Eastern Asia_title,Oost-Azië
 Eastern Europe_title,Oost-Europa
@@ -365,6 +367,8 @@ Lubbeek_title,Lubbeek
 Luik_title,Luik
 Lummen_title,Lummen
 Luxemburg_title,Luxemburg
+MICA_dashboard_description,"Dit interactieve dashboard focust op de muskusrat (<i>Ondatra zibethicus</i>) en de beverrat (<i>Myocastor coypus</i>). Het werd ontwikkeld in het kader van het Europese LIFE MICA-project en brengt waarnemingen en vangstgegevens uit België, Nederland en Duitsland in kaart, ter ondersteuning van het beheer van deze invasieve soorten. Gebruikers kunnen de gegevens verkennen via interactieve kaarten, grafieken en tabellen."
+MICA_dashboard_title,MICA dashboard
 Maarkedal_title,Maarkedal
 Maaseik_title,Maaseik
 Maasmechelen_title,Maasmechelen
@@ -473,6 +477,8 @@ Quevy_title,Quevy
 Quievrain_title,Quievrain
 RINSE1_title,RINSE1
 RINSE2_title,RINSE2
+RadIUS_dashboard_description,"Dit interactieve dashboard werd ontwikkeld binnen het RadIUS-project en brengt de verspreiding van verschillende invasieve uitheemse soorten in Vlaamse natuurterreinen in kaart. Er worden gegevens getoond voor 79 invasieve soorten en verschillende types natuurterreinen, waaronder Natura 2000-habitattypes, het ANB-patrimonium en soortenbeschermingsprogramma’s. Het dashboard visualiseert de resultaten en biedt beheerders hiermee een praktische tool om prioriteiten te bepalen."
+RadIUS_dashboard_title,RadIUS dashboard
 Raeren_title,Raeren
 Ramillies_title,Ramillies
 Ranst_title,Ranst
@@ -745,7 +751,6 @@ disclaimerVespa_title,"De soort is momenteel niet actief. Wanneer u een individu
 downloadData_title,Download data
 downloadGraph_title,Download grafiek
 downloadMap_title,Download kaart
-early_warning_title,Early alert
 endYear_title,Eind jaar
 escape_agriculture_title,Landbouw (incl. biobrandstoffen)
 escape_aquaculture_title,Aquacultuur / maricultuur
@@ -915,7 +920,6 @@ management3-countYearGroup_title,Het aantal beheerde {{species}} individuen
 management_title,Beheer
 map_title,Kaart
 marine_title,marien
-mica_db_title,MICA dashboard
 min_1_obs_title,De soort werd waargenomen in België sinds 1950 (gegevens van GBIF)
 missingFilters_species_title,Geen soort of regio geselecteerd! => selecteer een soort en regio
 missing_title,ontbrekend
@@ -969,7 +973,6 @@ protectAreas_title,Beschermde gebieden
 provinces_title,provincies
 pulli_title,pulli
 quantiles_title,Kwantielen
-radius_db_title,RadIUS dashboard
 radius_title,radius
 rcp26_title,model gebaseerd op klimaatvoorspellingen onder RCP 2.6 voor 2040-2070
 rcp45_title,model gebaseerd op klimaatvoorspellingen onder RCP 4.5 voor 2040-2070
