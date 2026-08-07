@@ -1,5 +1,7 @@
 id,en
 'S Gravenbrakel_title,NA
+2041-2070_title,2041-2070
+2071-2100_title,2071-2100
 AE_title,Active embryonic nest
 AP_title,Active primary nest
 AS_title,Active secondary nest
@@ -48,6 +50,7 @@ Aywaille_title,NA
 Baarle-Hertog_title,NA
 Baelen_title,NA
 Balen_title,NA
+Baseline_title,Current climate (baseline)
 Bastenaken_title,NA
 Beaumont_title,NA
 Beauraing_title,NA
@@ -130,6 +133,7 @@ Courcelles_title,NA
 Court-Saint-Etienne_title,NA
 Couvin_title,NA
 Crisnee_title,NA
+Current_title,Current period
 Dalhem_title,NA
 Damme_title,NA
 Daverdisse_title,NA
@@ -462,6 +466,7 @@ Pecq_title,NA
 Peer_title,NA
 Pepingen_title,NA
 Pepinster_title,NA
+Period_title,Period
 Peruwelz_title,NA
 Perwijs_title,NA
 Philippeville_title,NA
@@ -499,6 +504,9 @@ Rouvroy_title,NA
 Ruiselede_title,NA
 Rumes_title,NA
 Rumst_title,NA
+SSP1-2.6_title,SSP1-2.6
+SSP3-7.0_title,SSP3-7.0
+SSP5-8.5_title,SSP5-8.5
 Saint-Georges-Sur-Meuse_title,NA
 Saint-Ghislain_title,NA
 Saint-Hubert_title,NA
@@ -507,6 +515,7 @@ Saint-Nicolas_title,NA
 Sainte-Ode_title,NA
 Sambreville_title,NA
 Sankt Vith_title,NA
+Scenario_title,Scenario
 Schaarbeek_title,NA
 Schelle_title,NA
 Scherpenheuvel-Zichem_title,NA
@@ -795,7 +804,6 @@ group_title,group
 habitat_title,habitat
 habitats_title,Habitats
 hideGlobe_title,Hide globe
-hist_title,model based on historical climate and landuse data
 icons_title,Icons
 images_title,Images
 includeMissing_title,include missing
@@ -911,7 +919,6 @@ marine_title,marine
 min_1_obs_title,The species has been observed in Belgium since 1950 (data from GBIF)
 missingFilters_species_title,No species or region selected! => select a species and a region
 missing_title,missing
-modelScenario_title,Model scenario
 modelType_title,Model type
 more_title,More
 multipleRegions_title,multiple regions
@@ -964,9 +971,6 @@ provinces_title,provinces
 pulli_title,pulli
 quantiles_title,Quantiles
 radius_title,radius
-rcp26_title,model based on climate forecasts under RCP 2.6 for 2040-2070
-rcp45_title,model based on climate forecasts under RCP 4.5 for 2040-2070
-rcp85_title,model based on climate forecasts under RCP 8.5 for 2040-2070
 regionLevel_title,Region level
 region_title,Region
 regions_title,Regions

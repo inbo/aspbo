@@ -1,5 +1,7 @@
 id,nl
 'S Gravenbrakel_title,'S Gravenbrakel
+2041-2070_title,2041-2070
+2071-2100_title,2071-2100
 AE_title,Actief embryonaal nest
 AP_title,Actief primair nest
 AS_title,Actief secundair nest
@@ -48,6 +50,7 @@ Aywaille_title,Aywaille
 Baarle-Hertog_title,Baarle-Hertog
 Baelen_title,Baelen
 Balen_title,Balen
+Baseline_title,Huidig klimaat (baseline)
 Bastenaken_title,Bastenaken
 Beaumont_title,Beaumont
 Beauraing_title,Beauraing
@@ -130,6 +133,7 @@ Courcelles_title,Courcelles
 Court-Saint-Etienne_title,Court-Saint-Etienne
 Couvin_title,Couvin
 Crisnee_title,Crisnee
+Current_title,Huidige periode
 Dalhem_title,Dalhem
 Damme_title,Damme
 Daverdisse_title,Daverdisse
@@ -462,6 +466,7 @@ Pecq_title,Pecq
 Peer_title,Peer
 Pepingen_title,Pepingen
 Pepinster_title,Pepinster
+Period_title,Periode
 Peruwelz_title,Peruwelz
 Perwijs_title,Perwijs
 Philippeville_title,Philippeville
@@ -499,6 +504,9 @@ Rouvroy_title,Rouvroy
 Ruiselede_title,Ruiselede
 Rumes_title,Rumes
 Rumst_title,Rumst
+SSP1-2.6_title,SSP1-2.6
+SSP3-7.0_title,SSP3-7.0
+SSP5-8.5_title,SSP5-8.5
 Saint-Georges-Sur-Meuse_title,Saint-Georges-Sur-Meuse
 Saint-Ghislain_title,Saint-Ghislain
 Saint-Hubert_title,Saint-Hubert
@@ -507,6 +515,7 @@ Saint-Nicolas_title,Saint-Nicolas
 Sainte-Ode_title,Sainte-Ode
 Sambreville_title,Sambreville
 Sankt Vith_title,Sankt Vith
+Scenario_title,Scenario
 Schaarbeek_title,Schaarbeek
 Schelle_title,Schelle
 Scherpenheuvel-Zichem_title,Scherpenheuvel-Zichem
@@ -791,7 +800,6 @@ group_title,groep
 habitat_title,habitat
 habitats_title,Habitats
 hideGlobe_title,Verberg landkaart
-hist_title,Model gebaseerd op historische klimaatdata
 icons_title,Iconen
 images_title,Beelden
 includeMissing_title,inclusief ontbrekend
@@ -923,7 +931,6 @@ marine_title,marien
 min_1_obs_title,De soort werd waargenomen in België sinds 1950 (gegevens van GBIF)
 missingFilters_species_title,Geen soort of regio geselecteerd! => selecteer een soort en regio
 missing_title,ontbrekend
-modelScenario_title,Model scenario
 modelType_title,Model type
 more_title,Meer
 multipleRegions_title,meer dan 1 gewest
@@ -974,9 +981,6 @@ provinces_title,provincies
 pulli_title,pulli
 quantiles_title,Kwantielen
 radius_title,radius
-rcp26_title,model gebaseerd op klimaatvoorspellingen onder RCP 2.6 voor 2040-2070
-rcp45_title,model gebaseerd op klimaatvoorspellingen onder RCP 4.5 voor 2040-2070
-rcp85_title,model gebaseerd op klimaatvoorspellingen onder RCP 8.5 voor 2040-2070
 regionLevel_title,Regio-schaal
 region_title,Gewest
 regions_title,Regio’s
