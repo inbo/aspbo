@@ -34,7 +34,9 @@ datasets<-datasets[!datasets %in% c("./data/output/UAT_direct/translations_simpl
                                     "./data/output/UAT_processing/communes.geojson",
                                     "./data/output/UAT_processing/provinces.geojson",
                                     "./data/output/UAT_direct/keys.csv",
-                                    "./data/output/UAT_direct/PRA_links.csv")
+                                    "./data/output/UAT_direct/PRA_links.csv",
+                                    "./data/output/UAT_direct/input_target6.csv"
+                                   )
 ]
 
 
