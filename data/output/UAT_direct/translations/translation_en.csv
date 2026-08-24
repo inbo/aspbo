@@ -1056,7 +1056,8 @@ tableLegend_title,Table Legend
 tableNesten_description,The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
 tableNesten_title,Number of nests per province (table)
 tableTitle_title,Table Overview
-target6Indicator_description,"Number of newly established invasive species per year in Belgium since 1970, calculated using the b3alien package to correct for detection lags. This indicator is based on the Belgian checklist of the Global Register of Introduced and Invasive Species (GRIIS) (Desmet et al., 2025) and includes only species classified as established, invasive, or widespread invasive."
+target6Indicator_description,"Number of newly established invasive species per year in Belgium since 1970, calculated using the <a href=""https://pypi.org/project/b3alien/"">
+b3alien</a> package to correct for detection lags. This indicator is based on the Belgian checklist of the Global Register of Introduced and Invasive Species (<a href=https://doi.org/10.15468/xoidmd"">GRIIS</a>) and includes only species classified as established, invasive, or widespread invasive."
 target6Indicator_title,Target 6 indicator: rate of invasive alien species establishment
 taxa_title,Taxa
 terrestrial_title,terrestrial
