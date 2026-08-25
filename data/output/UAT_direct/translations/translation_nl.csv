@@ -673,6 +673,7 @@ allYears_title,Alle jaartallen
 all_out_title,"Het portaal bevat gegevens over waarnemingen, indicatoren, beheer en (voor Unielijstsoorten) rapportage."
 all_title,Alle
 andMissing_title,en ontbrekend
+and_title,en
 apply_gamObservations_description,"<p>Gegeneraliseerd Additief Model (GAM) gebaseerd op het aantal waarnemingen van een soort.</p> 
 <p>Dit model is gebaseerd op de <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes voor niet-inheemse taxa in België en Europa.</a>
 <p>De zwarte punten geven het aantal waarnemingen van de soort weer per jaar. De trendlijn toont het verloop volgens een GAM, gebaseerd op deze waarnemingen. De kleuren geven de status van opkomst voor een bepaald jaar weer: <b style=""color: green;"">groene</b> bollen geven aan dat de soort niet opkomend is, <b style=""color: orange;"">oranje</b> dat de soort mogelijk opkomend is, <b style=""color: red;"">rode</b> dat de soort opkomend is en <b style=""color: grey;"">grijze</b> dat het model geen uitsluitsel kan geven.</p>
@@ -761,6 +762,7 @@ downloadData_title,Download data
 downloadGraph_title,Download grafiek
 downloadMap_title,Download kaart
 endYear_title,Eind jaar
+entireRegion_title,Het hele grondgebied
 escape_agriculture_title,Landbouw (incl. biobrandstoffen)
 escape_aquaculture_title,Aquacultuur / maricultuur
 escape_farm_title,Veehouderij / productiedieren (incl. dieren onder beperkt toezicht)
@@ -938,6 +940,7 @@ nBins_title,Aantal groepen
 name_title,Naam
 native_continent_title,continent van oorsprong
 native_range_title,natuurlijke verspreiding
+natura2000Only_title,Enkel Natura 2000 gebieden
 natural_dispersal_title,Natuurlijke verspreiding
 nest_title,Nest
 nest_type_title,Nest type
@@ -982,6 +985,7 @@ pulli_title,pulli
 quantiles_title,Kwantielen
 radius_title,radius
 regionLevel_title,Regio-schaal
+region_filter_title,Gebiedsfilter
 region_title,Gewest
 regions_title,Regio’s
 release_biological_control_title,Biologische bestrijding
@@ -1021,12 +1025,17 @@ risk_assessment_title,Risicoanalyse
 risk_maps_title,Risicokaarten
 row_title,rij
 samplingProtocol_title,Staalnameprotocol
+selectedAreas_title,Geselecteerde regio(s)
 selected_title,geselecteerd
 shareLink_title,Deel link
 showGlobe_title,Toon landkaart
 singlePathway_title,Gelieve 1 route (niveau 1) te selecteren voor deze figuur
 sourceLink_title,Bron
 source_title,Bron
+spatialLevel_cell_code10_title,Aantal besmette 10 × 10 km hokken
+spatialLevel_cell_code1_title,Aantal besmette 1 x 1 km hokken
+spatialLevel_n_title,Aantal observaties
+spatialLevel_title,Eenheid
 species-welcome_description,"<p style=""text-align: center;"">Op deze pagina vindt u interactieve figuren en trends voor individuele soorten, die u kan selecteren via het keuzemenu hieronder. Standaard worden de gegevens voor heel België weergegeven, maar u kan ook één of meerdere specifieke regio's selecteren voor een meer op maat gemaakte weergave. Onze belangrijkste gegevensbron is <a href=""https://www.gbif.org"" target=""_blank"">GBIF.org</a>, aangevuld met andere datasets waar relevant. </p>"
 species-welcome_title,Soortgegevens
 species_information_title,Soortgegevens

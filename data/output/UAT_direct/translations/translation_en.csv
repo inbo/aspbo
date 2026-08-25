@@ -673,6 +673,7 @@ allYears_title,All years
 all_out_title,"The portal contains data on observations, indicators, management, and (for Union list species) reporting."
 all_title,All
 andMissing_title,and missing
+and_title,and
 apply_gamObservations_description,"<p>Generalized Additive Model (GAM) based on the number of observations of a species.</p>
 
 <p>This model is based on the <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes for non-native taxa in Belgium and Europe.</a></p>
@@ -765,6 +766,7 @@ downloadData_title,Download data
 downloadGraph_title,Download graph
 downloadMap_title,Download map
 endYear_title,End year
+entireRegion_title,"The entire territory"""
 escape_agriculture_title,Agriculture (including Biofuel feedstocks)
 escape_aquaculture_title,Aquaculture / mariculture
 escape_farm_title,Farmed animals (including animals left under limited control)
@@ -926,6 +928,7 @@ nBins_title,Number of groups
 name_title,Name
 native_continent_title,native continent
 native_range_title,native range
+natura2000Only_title,Natura 2000 areas only
 natural_dispersal_title,Natural dispersal across borders of invasive alien species that have been introduced through pathways 1 to 5
 nest_title,Nest
 nest_type_title,NA
@@ -972,6 +975,7 @@ pulli_title,pulli
 quantiles_title,Quantiles
 radius_title,radius
 regionLevel_title,Region level
+region_filter_title,Area filter
 region_title,Region
 regions_title,Regions
 release_biological_control_title,Biological control
@@ -1009,12 +1013,17 @@ risk_assessment_title,Risk assessment
 risk_maps_title,Risk maps
 row_title,row
 samplingProtocol_title,Sampling protocol
+selectedAreas_title,Selected area(s)
 selected_title,selected
 shareLink_title,Share link
 showGlobe_title,Show globe
 singlePathway_title,Please select single pathway level 1 for this plot
 sourceLink_title,Source
 source_title,Source
+spatialLevel_cell_code10_title,Number of occupied 10 × 10 km grid cells
+spatialLevel_cell_code1_title,Number of occupied 1 × 1 km grid cells
+spatialLevel_n_title,Number of observations
+spatialLevel_title,Unit
 species-welcome_description,"<p style=""text-align: center;"">This page offers interactive figures and trends for individual species, which you can select using the dropdown menu below. By default, data is shown for all of Belgium, but you can choose any combination of specific regions for a more tailored view. Our primary data source is <a href=""https://www.gbif.org"" target=""_blank"">GBIF.org</a>, supplemented with additional datasets where relevant.</p>"
 species-welcome_title,Species information
 species_information_title,Species information

@@ -673,6 +673,7 @@ allYears_title,Toutes les années
 all_out_title,"Le portail contient des donnéés sur les observations, les indicateurs, la gestion, et (pour les espèces de la liste de l'Union) les rapports."
 all_title,Tout
 andMissing_title,et manquant
+and_title,et
 apply_gamObservations_description,"<p>Modèle Additif Généralisé (MAG) basé sur le nombre d'observations d'une espèce.</p> <p>Les points noirs représentent le nombre d'observations de l'espèce par année. La ligne de tendance montre le GAM basé sur les observations. Les couleurs indiquent le statut d'émergence pour une année donnée. Les pointes <b style=""color: green;"">verts</b> indiquent que l'espèce n'est pas émergente, <b style=""color: orange;"">orange</b> que l'espèce est potentiellement émergente, <b style=""color: red;"">rouge</b> que l'espèce est émergente, et <b style=""color: grey;"">gris</b> que le modèle est non concluant.</p> <p>Ce modèle peut être corrigé en fonction du biais d'observateur<sup>1</sup> et peut être spécifiquement appliqué aux zones protégées Natura2000<sup>2</sup>.</p> <p><i><sup>1</sup>Le nombre d'observations est corrigé par rapport au nombre d'observations de la classe de l'espèce (par exemple dans le cas de Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>), les observations d'autres Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) sont prises en compte).</i></br><i><sup>2</sup>Seules les observations dont la cellule de grille de 1x1km chevauche une zone Natura2000 sont prises en compte. Chaque observation se voit attribuer une cellule de grille aléatoire basée sur la précision de la localisation rapportée. Par conséquent, le résultat du GAM pour Natura2000 peut donner des résultats légèrement différents après une mise à jour.</i> </p>Pour plus d'informations concernant la méthode utilisée, veuillez consulter <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">la documentation des indicateurs TrIAS</a>."
 apply_gamObservations_title,Statut d'émergence (MAG) - Nombre d'observations modélisées
 apply_gamOccupancy_description,"<p>Modèle Additif Généralisé (MAG) basé sur la surface occupée par une espèce.</p> 
@@ -757,6 +758,7 @@ downloadData_title,Télécharger les données
 downloadGraph_title,Télécharger le graphique
 downloadMap_title,Télécharger la carte
 endYear_title,Année de fin
+entireRegion_title,L'ensemble du territoire
 escape_agriculture_title,Agriculture (y compris les cultures énergétiques)
 escape_aquaculture_title,Aquaculture/mariculture
 escape_farm_title,Animaux d’élevage (y compris les animaux soumis à un contrôle limité)
@@ -908,6 +910,7 @@ nBins_title,Nombre de groupes
 name_title,NA
 native_continent_title,continent d'origine
 native_range_title,aire d'origine
+natura2000Only_title,Zones Natura 2000 uniquement
 natural_dispersal_title,Dispersion naturelle à travers les frontières d’espèces exotiques envahissantes introduites par les voies 1 à 5
 nest_title,Nid
 nest_type_title,NA
@@ -954,6 +957,7 @@ pulli_title,pulli
 quantiles_title,NA
 radius_title,rayon
 regionLevel_title,Région niveau
+region_filter_title,Filtre de zone
 region_title,Région
 regions_title,Régions
 release_biological_control_title,Lutte biologique
@@ -993,12 +997,17 @@ risk_assessment_title,Analyse des risques
 risk_maps_title,Cartes des risques
 row_title,ligne
 samplingProtocol_title,Protocole d'échantillonnage
+selectedAreas_title,Zone(s) sélectionnée(s)
 selected_title,séléctionné
 shareLink_title,Partager le lien
 showGlobe_title,Afficher la carte
 singlePathway_title,Veuillez sélectionner 1 voie d'introduction (niveau 1) pour cette figure
 sourceLink_title,Source
 source_title,Source
+spatialLevel_cell_code10_title,Nombre de mailles de 10 × 10 km occupées
+spatialLevel_cell_code1_title,Nombre de mailles de 1 × 1 km occupées
+spatialLevel_n_title,Nombre d'observations
+spatialLevel_title,NA
 species-welcome_description,"<p style=""text-align: center;"">
 Sur cette page, vous trouverez des graphiques interactifs et des tendances pour des espèces individuelles, que vous pouvez sélectionner via le menu déroulant ci-dessous. Par défaut, les données sont affichées pour l'ensemble de la Belgique, mais vous pouvez également sélectionner une ou plusieurs régions spécifiques pour une vue plus personnalisée. Notre principale source de données est <a href=""https://www.gbif.org"" target=""_blank"">GBIF.org</a>, complétée par d'autres ensembles de données lorsque cela est pertinent.
 </p>"
