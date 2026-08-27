@@ -292,7 +292,7 @@
 "spatialLevel_cell_code1";"Aantal besmette 1 x 1 km hokken";"Nombre de mailles de 1 × 1 km occupées";"Number of occupied 1 × 1 km grid cells"
 "spatialLevel_cell_code10";"Aantal besmette 10 × 10 km hokken";"Nombre de mailles de 10 × 10 km occupées";"Number of occupied 10 × 10 km grid cells"
 "region_filter";"Gebiedsfilter";"Filtre de zone";"Area filter"
-"entireRegion";"Het hele grondgebied";"L'ensemble du territoire";The entire territory"
+"entireRegion";"Het hele grondgebied";"L'ensemble du territoire";"The entire territory"
 "natura2000Only";"Enkel Natura 2000 gebieden";"Zones Natura 2000 uniquement";"Natura 2000 areas only"
 "selectedAreas";"Geselecteerde regio(s)";"Zone(s) sélectionnée(s)";"Selected area(s)"
 "and";"en";"et";"and"
