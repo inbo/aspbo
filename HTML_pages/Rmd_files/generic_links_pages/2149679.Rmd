@@ -1,0 +1,85 @@
+---
+title: 2149679
+output: html_fragment
+params:
+  language: "en"
+---
+<style>
+h1.title {
+  display: none;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r sharedinfo, echo=FALSE}
+VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/2149679"
+VBP_link_en <- "https://natuurdata.inbo.be/bie-hub/species/2149679?lang=en"
+faunabeheer_link <- "https://faunabeheer.inbo.be/2149679"
+style_str<-"font-size: 1.5em; font-style: italic;"
+image_link<-"../Pictures/"
+copyright_font<-"font-size: 0.8em;"
+width="400"
+height="267"
+```
+
+
+```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
+cat(paste0("
+## Marmertrilspin
+
+<span style=\"", style_str, "\">Holocnemus pluchei</span>
+<br>
+
+
+<br>
+
+#### **Nuttige links** <br>
+<p>Meer informatie over de marmertrilspin kunt u vinden op het Vlaams Biodiversiteitsportaal.<br>
+**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteitportaal</a>**
+
+<p>
+<br>
+<br>
+"))
+```
+
+```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
+cat(paste0("
+## Marbled cellar spider
+
+<span style=\"", style_str, "\">Holocnemus pluchei</span>
+
+
+<br>
+
+#### **Useful links** <br>
+<p>You can find more information about the Marbled cellar spider on the Flemish Biodiversity Portal.<br>
+**More information: <a href=\"", VBP_link_en, "\"target=\"_blank\">Flemish Biodiversity Portal</a>**
+
+<p>
+<br>
+<br>
+"))
+```
+
+```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
+cat(paste0("
+## Pholque de pluche
+
+<span style=\"", style_str, "\">Holocnemus pluchei</span>
+
+
+<br>
+
+#### **Liens utiles** <br>
+<p>Vous pouvez trouver plus d'informations sur pholque de pluche sur le portal biodiversité flamande (notez que ces informations sont actuellement disponible uniquement en néerlandais).<br>
+**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">portal biodiversité flamande</a>**
+
+<p>
+<br>
+<br>
+"))
+```

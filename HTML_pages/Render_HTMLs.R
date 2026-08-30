@@ -43,11 +43,6 @@ render_rmd_files <- function(input_path,output_path) {
 #--3.Run function-------
 #------------------------------------------------------------------------------
 
-# Specify the folder containing the .Rmd files
-input_path <- "./HTML_pages/Rmd_files/"
-
-# Specify the output folder for the .HTML files, note that this is written from the point of view of the .Rmd file location
-output_path <- "../HTML/" 
-
 #Run
-render_rmd_files(input_path=input_path, output_path=output_path)
+render_rmd_files(input_path = "./HTML_pages/Rmd_files/", output_path = "../HTML/" )
+render_rmd_files(input_path = "./HTML_pages/Rmd_files/generic_links_pages/", "../../HTML/" )
