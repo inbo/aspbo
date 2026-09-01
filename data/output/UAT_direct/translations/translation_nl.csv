@@ -1077,8 +1077,8 @@ tableLegend_title,Legende Tabel
 tableNesten_description,Het aantal op vespawatch.be gemelde nesten per provincie.</br><em>Data beschikbaar tot {{maxDate}}<em>
 tableNesten_title,Aantal nesten per provincie (tabel)
 tableTitle_title,Overzicht Tabel
-target6Indicator_description,"Aantal nieuw gevestigde invasieve soorten per jaar in België sinds 1970, berekend met het <a href=""https://pypi.org/project/b3alien/"" target=""_blank"">b3alien</a>-package om te corrigeren voor detectievertragingen. Deze indicator is gebaseerd op de Belgische checklist van het Global Register of Introduced and Invasive Species (<a href=""https://doi.org/10.15468/xoidmd"" target=""_blank"">GRIIS</a>) en omvat enkel soorten die geclassificeerd zijn als gevestigd, invasief of wijdverspreid invasief."
-target6Indicator_title,Target 6: vestigingssnelheid van invasieve uitheemse soorten
+target6_description,"Aantal nieuw gevestigde invasieve soorten per jaar in België sinds 1970, berekend met het <a href=""https://pypi.org/project/b3alien/"" target=""_blank"">b3alien</a>-package om te corrigeren voor detectievertragingen. Deze indicator is gebaseerd op de Belgische checklist van het Global Register of Introduced and Invasive Species (<a href=""https://doi.org/10.15468/xoidmd"" target=""_blank"">GRIIS</a>) en omvat enkel soorten die geclassificeerd zijn als gevestigd, invasief of wijdverspreid invasief."
+target6_title,Target 6: vestigingssnelheid van invasieve uitheemse soorten
 taxa_title,Taxa
 terrestrial_title,terrestrisch
 top_title,bovenaan
