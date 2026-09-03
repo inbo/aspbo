@@ -23,8 +23,7 @@ griis_checklist <- read_delim("data/output/UAT_processing/data_input_checklist_i
 
 ```{r complete col_info}
 # Read old col_info
-col_info_old <- read_csv("./data/interim/gbif_col_translation.csv") |> 
-  filter(FALSE)
+col_info_old <- read_csv("./data/interim/gbif_col_translation.csv") 
 
 # Extract keys not yet on old col_info
 to_translate_keys <- griis_checklist |> 
