@@ -121,7 +121,7 @@ for(rank in ranks){
   # add nubkeys to query
   query <- gsub(
     pattern = "<--nubkeys-->", 
-    replacement = paste(sprintf('"%s"', nubKey_list), collapse = ", "), 
+    replacement = paste(sprintf("'%s'", nubKey_list), collapse = ", "), 
     x = query
   )
   # add quotes to year
@@ -153,7 +153,7 @@ class_query <- gsub(pattern = "  ", replacement = "", paste0(readLines("data/inp
 # add class keys to query
 class_query <- gsub(
   pattern = "<--nubkeys-->", 
-  replacement = paste(sprintf('"%s"', class_keys), collapse = ", "), 
+  replacement = paste(sprintf("'%s'", class_keys), collapse = ", "), 
   x = class_query
 )
 
