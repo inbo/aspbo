@@ -23,7 +23,8 @@ griis_checklist <- read_delim("data/output/UAT_processing/data_input_checklist_i
 
 ```{r complete col_info}
 # Read old col_info
-col_info_old <- read_csv("./data/interim/gbif_col_translation.csv")
+col_info_old <- read_csv("./data/interim/gbif_col_translation.csv") |> 
+  filter(FALSE)
 
 # Extract keys not yet on old col_info
 to_translate_keys <- griis_checklist |> 
@@ -32,13 +33,19 @@ to_translate_keys <- griis_checklist |>
 
 # If at least 1 key needs translating
 if(length(to_translate_keys) > 0){
+  
   col_info_new <- data.frame() |> 
     mutate(nubKey = NA_integer_,
+           classKey = NA_integer_,
            col_taxon_key = NA_character_,
            col_class_key = NA_character_)
   
   # Translate the key
   for(t in to_translate_keys){
+    classKey <- griis_checklist |> 
+      filter(nubKey == t) |> 
+      pull(classKey)
+    
     col_data <- rgbif::gbif_to_col(key = t)
     
     col_taxon_key <- col_data$usage$key
@@ -58,6 +65,7 @@ if(length(to_translate_keys) > 0){
     
     col_info_new <- col_info_new |> 
       add_row(nubKey = t,
+              classKey = classKey,
               col_taxon_key = col_taxon_key,
               col_class_key = col_class_key)
   }
