@@ -67,9 +67,19 @@ if(length(to_translate_keys) > 0){
   col_info_combined <- col_info_old
 }
 
-write_csv(col_info_combined, "./data/interim/gbif_col_translation.csv")
+col_info_missing <- col_info_combined |> 
+  filter(is.na(col_taxon_key)) |> 
+  write_csv("./data/interim/gbif_col_translation_missing.csv")
+
+col_info_combined <- col_info_combined |> 
+  filter(!is.na(col_taxon_key)) |> 
+  write_csv("./data/interim/gbif_col_translation.csv")
 ```
 
+```{r}
+griis_checklist <- griis_checklist |> 
+  left_join(col_info_combined, by = "nubKey") 
+```
 
 ```{r split griis_checklist}
 # Split into dataframes based on rank
@@ -92,11 +102,11 @@ for(rank in ranks){
   
   # get nubKeys for the rank
   if(rank == "SUBSPECIES_FORM_VARIETY"){
-    nubKey_list <- c(griis_checklist_split[["SUBSPECIES"]]$nubKey,
-                     griis_checklist_split[["FORM"]]$nubKey,
-                     griis_checklist_split[["VARIETY"]]$nubKey)
+    nubKey_list <- c(griis_checklist_split[["SUBSPECIES"]]$col_taxon_key,
+                     griis_checklist_split[["FORM"]]$col_taxon_key,
+                     griis_checklist_split[["VARIETY"]]$col_taxon_key)
   }else{
-    nubKey_list <- griis_checklist_split[[rank]]$nubKey
+    nubKey_list <- griis_checklist_split[[rank]]$col_taxon_key
   }
   
   # get query file
@@ -125,28 +135,14 @@ griis_class_keys <- griis_checklist %>%
   summarise(nubKey = first(nubKey))
 
 classless <- griis_checklist %>% 
-  filter(is.na(classKey)) %>% 
+  filter(is.na(col_class_key)) %>% 
   select(nubKey) %>% 
   message(paste(" There are", nrow(.), "species without class"))
 
-class_keys <- c()
-
-# get class keys
-## Initiate progress bar
-pb <- txtProgressBar(min = 0,
-                     max = length(griis_class_keys$nubKey),
-                     initial = 0,
-                     style = 3)
-
-for(i in 1:length(griis_class_keys$nubKey)){
-  setTxtProgressBar(pb, i)
-  class_key <- name_usage(griis_class_keys$nubKey[i], data = "parents")$data %>% 
-    filter(rank == "CLASS") %>%
-    pull(nubKey)
-  
-  class_keys <- sort(c(class_keys, class_key))
-}
-
+class_keys <- griis_checklist |> 
+  filter(!is.na(col_class_key)) |> 
+  distinct(col_class_key) |> 
+  pull()
 
 # get class base query
 class_query <- gsub(pattern = "  ", replacement = "", paste0(readLines("data/input/belgium_class_base.txt"), collapse = " "))
