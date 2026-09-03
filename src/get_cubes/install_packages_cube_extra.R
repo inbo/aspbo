@@ -9,7 +9,7 @@ if (!all(required %in% installed)) {
   install.packages(pkgs_to_install, repos = "https://cran.r-project.org/")
 }
 
-# install dev version of rgbif if version == 3.8.5
+# install dev version of rgbif if version <= 3.8.5
 if(packageVersion("rgbif") <= package_version("3.8.5")){
   install.packages("pak")
   pak::pak("ropensci/rgbif")
