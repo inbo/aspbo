@@ -40,6 +40,27 @@ class_cube <- class_cube %>%
 head(class_cube, 10)
 ```
 
+```{r translate classKey}
+col_info <- read_csv("./data/interim/gbif_col_translation.csv") |> 
+  distinct(col_class_key, classKey) |> 
+  rename(classKey_gbif = classKey) |> 
+  filter(!is.na(classKey_gbif)) |> 
+  group_by(col_class_key) |>
+  summarise(col_class_key = first(col_class_key),
+            classKey_gbif = first(classKey_gbif))
+
+n_distinct(col_info$col_class_key)
+
+class_cube <- class_cube |> 
+  rename(classKey_col = classKey) |> 
+  left_join(col_info, by = c("classKey_col" = "col_class_key")) |> 
+  select(year, 
+         eea_cell_code,
+         classKey = "classKey_gbif",
+         cobs,
+         min_coord_uncertainty)
+```
+
 ```{r write compiled cube}
 # Write the compiled cube to a csv file
 write_csv(class_cube, "./cube_data/be_classes_cube.csv")
