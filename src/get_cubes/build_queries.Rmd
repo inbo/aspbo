@@ -21,6 +21,56 @@ griis_checklist <- read_delim("data/output/UAT_processing/data_input_checklist_i
   distinct(nubKey, rank, classKey)
 ```
 
+```{r complete col_info}
+# Read old col_info
+col_info_old <- read_csv("./data/interim/gbif_col_translation.csv")
+
+# Extract keys not yet on old col_info
+to_translate_keys <- griis_checklist |> 
+  filter(!nubKey %in% col_info_old$nubKey) |> 
+  pull(nubKey)
+
+# If at least 1 key needs translating
+if(length(to_translate_keys) > 0){
+  col_info_new <- data.frame() |> 
+    mutate(nubKey = NA_integer_,
+           col_taxon_key = NA_character_,
+           col_class_key = NA_character_)
+  
+  # Translate the key
+  for(t in to_translate_keys){
+    col_data <- rgbif::gbif_to_col(key = t)
+    
+    col_taxon_key <- col_data$usage$key
+    
+    col_class_key <- col_data$classification |> 
+      as.data.frame() 
+    
+    if("key.7" %in% colnames(col_class_key)){
+      col_class_key <- col_class_key |> 
+        select(class_key = key.7) |> 
+        pull()
+    }else{
+      warning(paste0("No class info found for ", t))
+      col_class_key <- NA_character_
+    }
+    
+    
+    col_info <- col_info |> 
+      add_row(nubKey = t,
+              col_taxon_key = col_taxon_key,
+              col_class_key = col_class_key)
+  }
+  col_info_combined <- bind_cols(col_info_old, col_info_new)
+}else{
+  cat("All keys are translated")
+  col_info_combined <- col_info_old
+}
+
+write_csv(col_info_combined, "./data/interim/gbif_col_translation.csv")
+```
+
+
 ```{r split griis_checklist}
 # Split into dataframes based on rank
 griis_checklist_split <- split(griis_checklist, griis_checklist$rank)
@@ -91,8 +141,8 @@ pb <- txtProgressBar(min = 0,
 for(i in 1:length(griis_class_keys$nubKey)){
   setTxtProgressBar(pb, i)
   class_key <- name_usage(griis_class_keys$nubKey[i], data = "parents")$data %>% 
-  filter(rank == "CLASS") %>%
-  pull(nubKey)
+    filter(rank == "CLASS") %>%
+    pull(nubKey)
   
   class_keys <- sort(c(class_keys, class_key))
 }
