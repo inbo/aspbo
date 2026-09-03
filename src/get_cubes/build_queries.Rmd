@@ -56,12 +56,12 @@ if(length(to_translate_keys) > 0){
     }
     
     
-    col_info <- col_info |> 
+    col_info_new <- col_info_new |> 
       add_row(nubKey = t,
               col_taxon_key = col_taxon_key,
               col_class_key = col_class_key)
   }
-  col_info_combined <- bind_cols(col_info_old, col_info_new)
+  col_info_combined <- bind_rows(col_info_old, col_info_new)
 }else{
   cat("All keys are translated")
   col_info_combined <- col_info_old
@@ -119,8 +119,11 @@ for(rank in ranks){
   }
   
   # add nubkeys to query
-  query <- gsub(pattern = "<--nubkeys-->", replacement = paste0(nubKey_list, collapse = ", "), query)
-  
+  query <- gsub(
+    pattern = "<--nubkeys-->", 
+    replacement = paste(sprintf('"%s"', nubKey_list), collapse = ", "), 
+    x = query
+  )
   # add quotes to year
   query <- gsub(pattern = "year", replacement = "\"year\"", query)
   
