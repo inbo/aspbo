@@ -15,7 +15,10 @@ library(stringr)
 ```
 
 ```{r read in the data, message=NA}
-class_cube_raw <- read_csv("./cube_data/be_classes_cube_raw.csv")
+class_cube_raw <- read_csv("./cube_data/be_classes_cube_raw.csv",
+                           col_types = cols(
+                             cobs = col_double()
+                           ))
 ```
 
 ```{r map compiled cube to match occ cube format, message=NA}
