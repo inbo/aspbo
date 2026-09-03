@@ -31,7 +31,10 @@ compiled_cube <- data.frame()
 # Define the path to the folder containing the occurrence cubes
 for(r in cube_files){
   # Read in the cube
-  cube <- read_csv(r)
+  cube <- read_csv(r,
+                   col_types = cols(
+                     obs = col_double()
+                   ))
   
   # add rank info
   cube$rank <- str_extract(r, "be_alientaxa_cube_(.+?)\\.csv$") %>% 
