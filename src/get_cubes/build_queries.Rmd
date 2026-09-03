@@ -151,7 +151,11 @@ class_keys <- griis_checklist |>
 class_query <- gsub(pattern = "  ", replacement = "", paste0(readLines("data/input/belgium_class_base.txt"), collapse = " "))
 
 # add class keys to query
-class_query <- gsub(pattern = "<--nubkeys-->", replacement = paste0(class_keys, collapse = ", "), class_query)
+class_query <- gsub(
+  pattern = "<--nubkeys-->", 
+  replacement = paste(sprintf('"%s"', class_keys), collapse = ", "), 
+  x = query
+)
 
 # add quotes to year
 class_query <- gsub(pattern = "year", replacement = "\"year\"", class_query)
