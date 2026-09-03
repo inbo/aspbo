@@ -77,6 +77,10 @@ compiled_cube <- compiled_cube %>%
          min_coord_uncertainty = "mincoordinateuncertaintyinmeters")
 ```
 
+```{r}
+head(compiled_cube, 10)
+```
+
 ```{r write compiled cube}
 # Write the compiled cube to a csv file
 write_csv(compiled_cube, "./cube_data/be_alientaxa_cube.csv")

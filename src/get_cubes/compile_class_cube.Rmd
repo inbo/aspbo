@@ -36,6 +36,10 @@ class_cube <- class_cube %>%
             min_coord_uncertainty = min(min_coord_uncertainty, na.rm = TRUE))
 ```
 
+```{r}
+head(class_cube, 10)
+```
+
 ```{r write compiled cube}
 # Write the compiled cube to a csv file
 write_csv(class_cube, "./cube_data/be_classes_cube.csv")
