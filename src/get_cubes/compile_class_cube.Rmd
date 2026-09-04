@@ -36,7 +36,7 @@ class_cube <- class_cube %>%
             min_coord_uncertainty = min(min_coord_uncertainty, na.rm = TRUE))
 ```
 
-```{r}
+```{r before translate}
 head(class_cube, 10)
 ```
 
@@ -59,6 +59,10 @@ class_cube <- class_cube |>
          classKey = "classKey_gbif",
          cobs,
          min_coord_uncertainty)
+```
+
+```{r after translate}
+head(class_cube, 10)
 ```
 
 ```{r write compiled cube}
