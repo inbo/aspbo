@@ -33,7 +33,7 @@ for(r in cube_files){
   # Read in the cube
   cube <- read_csv(r,
                    col_types = cols(
-                     obs = col_double()
+                     occurrences = col_double()
                    ))
   
   # add rank info
@@ -55,7 +55,7 @@ compiled_cube <- compiled_cube %>%
     rank == "GENUS" ~ genuskey,
     rank == "FAMILY" ~ familykey,
     rank == "SUBSPECIES_FORM_VARIETY" ~ taxonkey,
-    TRUE ~ as.numeric(NA)
+    TRUE ~ NA_character_
   )) 
 
 missing_taxonKeys <- compiled_cube %>% 
@@ -77,7 +77,55 @@ compiled_cube <- compiled_cube %>%
          min_coord_uncertainty = "mincoordinateuncertaintyinmeters")
 ```
 
-```{r}
+```{r before translate}
+head(compiled_cube, 10)
+```
+
+```{r translate classKey}
+col_info_class <- read_csv("./data/interim/gbif_col_translation.csv") |> 
+  distinct(col_class_key, classKey) |> 
+  rename(classKey_gbif = classKey) |> 
+  filter(!is.na(classKey_gbif)) |> 
+  group_by(col_class_key) |>
+  summarise(col_class_key = first(col_class_key),
+            classKey_gbif = first(classKey_gbif))
+
+n_distinct(col_info_class$col_class_key)
+
+compiled_cube <- compiled_cube |> 
+  rename(classKey_col = classKey) |> 
+  left_join(col_info_class, by = c("classKey_col" = "col_class_key")) |> 
+  select(year, 
+         eea_cell_code,
+         taxonKey,
+         classKey = "classKey_gbif",
+         obs,
+         min_coord_uncertainty)
+```
+
+```{r translate taxonKey}
+col_info_taxon <- read_csv("./data/interim/gbif_col_translation.csv") |> 
+  distinct(col_taxon_key, nubKey) |> 
+  rename(taxonKey_gbif = nubKey) |> 
+  filter(!is.na(taxonKey_gbif)) |> 
+  group_by(col_taxon_key) |>
+  summarise(col_taxon_key = first(col_taxon_key),
+            taxonKey_gbif = first(taxonKey_gbif))
+
+n_distinct(col_info_taxon$col_taxon_key)
+
+compiled_cube <- compiled_cube |> 
+  rename(taxonKey_col = taxonKey) |> 
+  left_join(col_info_taxon, by = c("taxonKey_col" = "col_taxon_key")) |> 
+  select(year, 
+         eea_cell_code,
+         taxonKey = taxonKey_gbif,
+         classKey,
+         obs,
+         min_coord_uncertainty)
+```
+
+```{r after translate}
 head(compiled_cube, 10)
 ```
 
