@@ -85,7 +85,7 @@ col_info_combined <- col_info_combined |>
 
 ```{r}
 griis_checklist <- griis_checklist |> 
-  left_join(col_info_combined, by = "nubKey") 
+  left_join(col_info_combined |> select(-classKey), by = "nubKey") 
 ```
 
 ```{r split griis_checklist}
