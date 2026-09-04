@@ -101,7 +101,7 @@ if(decade_max > year(Sys.Date())){
   decade_max <- year(Sys.Date())
 }
 
-cat("Calculating", decade_min, "-", decade_max, "timeframe \n")
+message("Calculating ", decade_min, "-", decade_max, " timeframe \n")
 ```
 
 ```{r get_data_cube}
