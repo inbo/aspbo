@@ -41,9 +41,7 @@ if(length(to_translate_keys) > 0){
   
   # Translate the key
   for(t in to_translate_keys){
-    classKey <- griis_checklist |> 
-      filter(nubKey == t) |> 
-      pull(classKey)
+    classKey <- rgbif::name_usage(key = t)$data$classKey
     
     col_data <- rgbif::gbif_to_col(key = t)
     
@@ -60,7 +58,6 @@ if(length(to_translate_keys) > 0){
       warning(paste0("No class info found for ", t))
       col_class_key <- NA_character_
     }
-    
     
     col_info_new <- col_info_new |> 
       add_row(nubKey = t,
