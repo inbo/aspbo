@@ -95,11 +95,13 @@ if(Sys.getenv("amiabot") != "yes"){
 
 ```{r set decade}
 decade_min <- as.integer(params$decade_min)
-decade_max <- decade_min + 9
+decade_max_input <- decade_min + 9
 
 # Overwrite decade_max when larger than current year
 if(decade_max > year(Sys.Date())){
   decade_max <- year(Sys.Date())
+}else{
+  decade_max <- decade_max_input
 }
 
 message("Calculating ", decade_min, "-", decade_max, " timeframe \n")
@@ -697,5 +699,5 @@ df_ts <-
 ```
 
 ```{r export for artifact upload}
-write_csv(df_ts, paste0("./cube_data/timeseries_", decade_min, "_", decade_max,".csv"))
+write_csv(df_ts, paste0("./cube_data/timeseries_", decade_min, "_", decade_max_input,".csv"))
 ```
