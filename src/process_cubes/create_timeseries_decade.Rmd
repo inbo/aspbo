@@ -98,7 +98,7 @@ decade_min <- as.integer(params$decade_min)
 decade_max_input <- decade_min + 9
 
 # Overwrite decade_max when larger than current year
-if(decade_max > year(Sys.Date())){
+if(decade_max_input > year(Sys.Date())){
   decade_max <- year(Sys.Date())
 }else{
   decade_max <- decade_max_input
