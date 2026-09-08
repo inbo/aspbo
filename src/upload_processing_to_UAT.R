@@ -21,6 +21,9 @@ processingFilePath <- "./data/output/UAT_processing"
 #source("./src/connect_to_bucket.R")
 
 print("test S3_bucket")
+
+#Sys.getenv("UAT_bucket")
+
 if(Sys.getenv("S3_BUCKET") == ""){
   stop("S3_bucket is not provided")
 }
@@ -28,7 +31,9 @@ if(Sys.getenv("S3_BUCKET") == ""){
 bucket <-  paste0("s3://",Sys.getenv("S3_BUCKET"))
 #Sys.setenv("AWS_DEFAULT_REGION" = "eu-west-1")
 
-#connect_to_bucket(bucket) #=> run this before continuing locally
+#=> run this before continuing locally
+#fistools::connect_to_bucket(bucket) 
+#alienSpecies::setupS3(inboUserName = "voornaam_achternaam") 
 
 ###############################################################
 ## The following create* function will take input data, 
@@ -70,8 +75,8 @@ createOccupancyCube(file.path(processingFilePath, "trendOccupancy"), bucket = bu
 # input: data_input_checklist_indicators.tsv/eu_concern_species.tsv/be_alientaxa_cube.csv
 # output: "eu_concern_species_processed.RData"/"data_input_checklist_indicators_processed.RData"/ "be_alientaxa_cube_processed.RData" 
 print("tabular data")
-print("indicators")
-createTabularData(dataDir =  processingFilePath, type = "indicators", bucket = bucket)
+# print("indicators")
+# createTabularData(dataDir =  processingFilePath, type = "indicators", bucket = bucket)
 print("unionlist")
 createTabularData(dataDir =  processingFilePath, type = "unionlist", bucket = bucket)
 
@@ -127,7 +132,7 @@ test_that("Load full_timeseries", {
 test_that("Load cube data", {
   
   occupancy <- loadOccupancyData()
-  expect_true(exists("dfCube"))
+  expect_true(exists("occupancy"))
   expect_s3_class(occupancy, "data.table")
 })
 

@@ -17,7 +17,9 @@ This is an **automatically generated PR** created by the `cube preprocessing` Gi
 - [ ] The compiled outputs in the UAT S3 bucket have been verified. Go to [exoten-uat.inbo.be](https://exoten-uat.inbo.be/app/01_exotenportaal/) ?
 - [ ] The species information page of at least 3 species works without a flaw ?
 - [ ] The GAMs were generated for at least 1 of the test species ?
-- [ ] The Current year is not above 2029 ?
+- [ ] The Checklist indicators page loads without a flaw?
+- [ ] Filtering by common name works without a flaw?
+- [ ] The Current year is not above *2029* ?
 
 Every question is answered with `yes` => approve & merge
 

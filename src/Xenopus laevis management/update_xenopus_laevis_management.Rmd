@@ -204,7 +204,7 @@ catch_data <- catch_data_raw %>%
 
 events <- catch_data %>% 
   group_by(locationID, date_setup, date_retrieval) %>% 
-  summarise(period = as.integer(date_retrieval - date_setup),
+  summarise(period = as.integer(last(date_retrieval) - first(date_setup)),
             n_fykes = n_distinct(fyke_nr),
             effort = n_fykes * period) %>% 
   ungroup() %>% 

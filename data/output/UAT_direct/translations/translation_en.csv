@@ -1,5 +1,7 @@
 id,en
 'S Gravenbrakel_title,NA
+2041-2070_title,2041-2070
+2071-2100_title,2071-2100
 AE_title,Active embryonic nest
 AP_title,Active primary nest
 AS_title,Active secondary nest
@@ -48,6 +50,7 @@ Aywaille_title,NA
 Baarle-Hertog_title,NA
 Baelen_title,NA
 Balen_title,NA
+Baseline_title,Current climate (baseline)
 Bastenaken_title,NA
 Beaumont_title,NA
 Beauraing_title,NA
@@ -130,6 +133,7 @@ Courcelles_title,NA
 Court-Saint-Etienne_title,NA
 Couvin_title,NA
 Crisnee_title,NA
+Current_title,Current period
 Dalhem_title,NA
 Damme_title,NA
 Daverdisse_title,NA
@@ -157,6 +161,8 @@ Dour_title,NA
 Drogenbos_title,NA
 Duffel_title,NA
 Durbuy_title,NA
+Early_alert_dashboard_description,This interactive dashboard was developed as part of the European LIFE RIPARIAS project and aggregates open biodiversity data on 15 riparian invaders and all Union List species via GBIF. It helps local managers explore observations and set up early warning alerts for specific species and areas to support early detection and rapid response.
+Early_alert_dashboard_title,Early alert
 Eastern Africa_title,East Africa
 Eastern Asia_title,East Asia
 Eastern Europe_title,Eastern Europe
@@ -365,6 +371,8 @@ Lubbeek_title,NA
 Luik_title,Liège
 Lummen_title,NA
 Luxemburg_title,Luxembourg
+MICA_dashboard_description,"This interactive dashboard focuses on muskrats (<i>Ondatra zibethicus</i>) and coypus (<i>Myocastor coypus</i>). Created under the European LIFE MICA project, it maps field observations and trapping data across Belgium, the Netherlands, and Germany to support the management of these invasive species. Users can explore the data through interactive maps, graphs, and tables."
+MICA_dashboard_title,MICA dashboard
 Maarkedal_title,NA
 Maaseik_title,NA
 Maasmechelen_title,NA
@@ -458,6 +466,7 @@ Pecq_title,NA
 Peer_title,NA
 Pepingen_title,NA
 Pepinster_title,NA
+Period_title,Period
 Peruwelz_title,NA
 Perwijs_title,NA
 Philippeville_title,NA
@@ -473,6 +482,8 @@ Quevy_title,NA
 Quievrain_title,NA
 RINSE1_title,RINSE1
 RINSE2_title,RINSE2
+RadIUS_dashboard_description,"This interactive dashboard was developed as part of the RadIUS project and maps the occurrence of various invasive alien species in natural areas in Flanders. The analysis covers 79 invasive species and different types of natural areas, including Natura 2000 habitat types, areas managed by the Flemish Agency for Nature and Forest (ANB), and species protection programmes. The dashboard visualizes these results and provides stakeholders with a practical tool for determining management priorities."
+RadIUS_dashboard_title,RadIUS dashboard
 Raeren_title,NA
 Ramillies_title,NA
 Ranst_title,NA
@@ -493,6 +504,9 @@ Rouvroy_title,NA
 Ruiselede_title,NA
 Rumes_title,NA
 Rumst_title,NA
+SSP1-2.6_title,SSP1-2.6
+SSP3-7.0_title,SSP3-7.0
+SSP5-8.5_title,SSP5-8.5
 Saint-Georges-Sur-Meuse_title,NA
 Saint-Ghislain_title,NA
 Saint-Hubert_title,NA
@@ -501,6 +515,7 @@ Saint-Nicolas_title,NA
 Sainte-Ode_title,NA
 Sambreville_title,NA
 Sankt Vith_title,NA
+Scenario_title,Scenario
 Schaarbeek_title,NA
 Schelle_title,NA
 Scherpenheuvel-Zichem_title,NA
@@ -658,6 +673,7 @@ allYears_title,All years
 all_out_title,"The portal contains data on observations, indicators, management, and (for Union list species) reporting."
 all_title,All
 andMissing_title,and missing
+and_title,and
 apply_gamObservations_description,"<p>Generalized Additive Model (GAM) based on the number of observations of a species.</p>
 
 <p>This model is based on the <a href=""https://doi.org/10.5281/zenodo.3632749"" target=""_blank"">Occurrence cubes for non-native taxa in Belgium and Europe.</a></p>
@@ -749,8 +765,8 @@ disclaimerVespa_title,The species is currently not active. When you observe an i
 downloadData_title,Download data
 downloadGraph_title,Download graph
 downloadMap_title,Download map
-early_warning_title,Early alert
 endYear_title,End year
+entireRegion_title,The entire territory
 escape_agriculture_title,Agriculture (including Biofuel feedstocks)
 escape_aquaculture_title,Aquaculture / mariculture
 escape_farm_title,Farmed animals (including animals left under limited control)
@@ -790,7 +806,6 @@ group_title,group
 habitat_title,habitat
 habitats_title,Habitats
 hideGlobe_title,Hide globe
-hist_title,model based on historical climate and landuse data
 icons_title,Icons
 images_title,Images
 includeMissing_title,include missing
@@ -903,11 +918,9 @@ management3-countYearGroup_title,The number of {{species}} individuals managed
 management_title,Management
 map_title,Map
 marine_title,marine
-mica_db_title,MICA dashboard
 min_1_obs_title,The species has been observed in Belgium since 1950 (data from GBIF)
 missingFilters_species_title,No species or region selected! => select a species and a region
 missing_title,missing
-modelScenario_title,Model scenario
 modelType_title,Model type
 more_title,More
 multipleRegions_title,multiple regions
@@ -915,6 +928,7 @@ nBins_title,Number of groups
 name_title,Name
 native_continent_title,native continent
 native_range_title,native range
+natura2000Only_title,Natura 2000 areas only
 natural_dispersal_title,Natural dispersal across borders of invasive alien species that have been introduced through pathways 1 to 5
 nest_title,Nest
 nest_type_title,NA
@@ -927,6 +941,8 @@ none_title,<none>
 not selected_title,not selected
 numberTaxa_title,Number of introduced taxa
 number_title,Number
+obs_disclaimer_1311477_description,"Attention: The data shown under <b>Occupancy</b> include sightings of both nests and individuals of <i>Vespa velutina</i>.<br> For information on the number of reported nests, go to the <strong>Management</strong> section."
+obs_disclaimer_1311477_title,NA
 observations-mapOccurrence_description,"<p>Map showing occupancy in the selected region since 1950.</p>
 <ul>
 <li><p><b style=""color: #000000;"">Black</b> squares represent 10 x 10 km areas where the species has been recorded.<br>
@@ -957,12 +973,9 @@ protectAreas_title,Protected areas
 provinces_title,provinces
 pulli_title,pulli
 quantiles_title,Quantiles
-radius_db_title,RadIUS dashboard
 radius_title,radius
-rcp26_title,model based on climate forecasts under RCP 2.6 for 2040-2070
-rcp45_title,model based on climate forecasts under RCP 4.5 for 2040-2070
-rcp85_title,model based on climate forecasts under RCP 8.5 for 2040-2070
 regionLevel_title,Region level
+region_filter_title,Area filter
 region_title,Region
 regions_title,Regions
 release_biological_control_title,Biological control
@@ -1000,12 +1013,17 @@ risk_assessment_title,Risk assessment
 risk_maps_title,Risk maps
 row_title,row
 samplingProtocol_title,Sampling protocol
+selectedAreas_title,Selected area(s)
 selected_title,selected
 shareLink_title,Share link
 showGlobe_title,Show globe
 singlePathway_title,Please select single pathway level 1 for this plot
 sourceLink_title,Source
 source_title,Source
+spatialLevel_cell_code10_title,Number of occupied 10 × 10 km grid cells
+spatialLevel_cell_code1_title,Number of occupied 1 × 1 km grid cells
+spatialLevel_n_title,Number of observations
+spatialLevel_title,Unit
 species-welcome_description,"<p style=""text-align: center;"">This page offers interactive figures and trends for individual species, which you can select using the dropdown menu below. By default, data is shown for all of Belgium, but you can choose any combination of specific regions for a more tailored view. Our primary data source is <a href=""https://www.gbif.org"" target=""_blank"">GBIF.org</a>, supplemented with additional datasets where relevant.</p>"
 species-welcome_title,Species information
 species_information_title,Species information
@@ -1047,6 +1065,8 @@ tableLegend_title,Table Legend
 tableNesten_description,The number of nests reported on vespawatch.be per province.</br><em>Dates available until {{maxDate}}<em>
 tableNesten_title,Number of nests per province (table)
 tableTitle_title,Table Overview
+target6Indicator_description,"Number of newly established invasive species per year in Belgium since 1970, calculated using the <a href=""https://pypi.org/project/b3alien/"" target=""_blank"">b3alien</a> package to correct for detection lags. This indicator is based on the Belgian checklist of the Global Register of Introduced and Invasive Species (<a href=""https://doi.org/10.15468/xoidmd"" target=""_blank"">GRIIS</a>) and includes only species classified as established, invasive, or widespread invasive."
+target6Indicator_title,Target 6 indicator: rate of invasive alien species establishment
 taxa_title,Taxa
 terrestrial_title,terrestrial
 top_title,top

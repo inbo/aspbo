@@ -1,5 +1,7 @@
 id,fr
 'S Gravenbrakel_title,Braine-le-Comte
+2041-2070_title,2041-2070
+2071-2100_title,2071-2100
 AE_title,Nid embryonnaire actif
 AP_title,Nid primaire actif
 AS_title,Nid secondaire actif
@@ -48,6 +50,7 @@ Aywaille_title,NA
 Baarle-Hertog_title,Baerle-Duc
 Baelen_title,NA
 Balen_title,Baelen
+Baseline_title,Climat actuel (baseline)
 Bastenaken_title,Bastogne
 Beaumont_title,NA
 Beauraing_title,NA
@@ -130,6 +133,7 @@ Courcelles_title,NA
 Court-Saint-Etienne_title,NA
 Couvin_title,NA
 Crisnee_title,NA
+Current_title,Période actuelle
 Dalhem_title,NA
 Damme_title,NA
 Daverdisse_title,NA
@@ -157,6 +161,8 @@ Dour_title,NA
 Drogenbos_title,NA
 Duffel_title,NA
 Durbuy_title,NA
+Early_alert_dashboard_description,"Ce tableau de bord interactif a été développé dans le cadre du projet européen LIFE RIPARIAS et rassemble des données GBIF sur 15 espèces exotiques envahissantes des milieux riverains et des cours d’eau, ainsi que des données sur toutes les espèces de la liste de l’Union. Il permet aux gestionnaires locaux de consulter les observations et de configurer des alertes par e-mail pour des espèces et des zones spécifiques."
+Early_alert_dashboard_title,Early alert
 Eastern Africa_title,Afrique de l'Est
 Eastern Asia_title,Asie de l'Est
 Eastern Europe_title,Europe de l'Est
@@ -365,6 +371,8 @@ Lubbeek_title,NA
 Luik_title,Liège
 Lummen_title,NA
 Luxemburg_title,Luxembourg
+MICA_dashboard_description,"Ce tableau de bord interactif présente des données sur le rat musqué (<i>Ondatra zibethicus</i>) et le ragondin (<i>Myocastor coypus</i>). Développé dans le cadre du projet européen LIFE MICA, il cartographie les observations et les données de capture recueillies en Belgique, aux Pays-Bas et en Allemagne afin de soutenir la gestion de ces espèces invasives. Les utilisateurs peuvent explorer les données au moyen de cartes interactives, de graphiques et de tableaux."
+MICA_dashboard_title,MICA dashboard
 Maarkedal_title,NA
 Maaseik_title,NA
 Maasmechelen_title,NA
@@ -458,6 +466,7 @@ Pecq_title,NA
 Peer_title,NA
 Pepingen_title,NA
 Pepinster_title,NA
+Period_title,Période
 Peruwelz_title,NA
 Perwijs_title,Perwez
 Philippeville_title,NA
@@ -473,6 +482,8 @@ Quevy_title,NA
 Quievrain_title,NA
 RINSE1_title,RINSE1
 RINSE2_title,RINSE2
+RadIUS_dashboard_description,"Ce tableau de bord interactif a été développé dans le cadre du projet RadIUS et cartographie la présence de différentes espèces exotiques envahissantes dans les espaces naturels de Flandre. L’analyse porte sur 79 espèces envahissantes et différents types de territoires naturels, par exemple les habitats Natura 2000, le patrimoine de l’ANB et les programmes de protection des espèces. Le tableau de bord rassemble les résultats et offre aux acteurs un outil pratique pour définir les priorités de gestion."
+RadIUS_dashboard_title,RadIUS dashboard
 Raeren_title,NA
 Ramillies_title,NA
 Ranst_title,NA
@@ -493,6 +504,9 @@ Rouvroy_title,NA
 Ruiselede_title,NA
 Rumes_title,NA
 Rumst_title,NA
+SSP1-2.6_title,SSP1-2.6
+SSP3-7.0_title,SSP3-7.0
+SSP5-8.5_title,SSP5-8.5
 Saint-Georges-Sur-Meuse_title,NA
 Saint-Ghislain_title,NA
 Saint-Hubert_title,NA
@@ -501,6 +515,7 @@ Saint-Nicolas_title,NA
 Sainte-Ode_title,NA
 Sambreville_title,NA
 Sankt Vith_title,Saint-Vith
+Scenario_title,Scénario
 Schaarbeek_title,Schaerbeek
 Schelle_title,NA
 Scherpenheuvel-Zichem_title,Montaigu-Zichem
@@ -658,6 +673,7 @@ allYears_title,Toutes les années
 all_out_title,"Le portail contient des donnéés sur les observations, les indicateurs, la gestion, et (pour les espèces de la liste de l'Union) les rapports."
 all_title,Tout
 andMissing_title,et manquant
+and_title,et
 apply_gamObservations_description,"<p>Modèle Additif Généralisé (MAG) basé sur le nombre d'observations d'une espèce.</p> <p>Les points noirs représentent le nombre d'observations de l'espèce par année. La ligne de tendance montre le GAM basé sur les observations. Les couleurs indiquent le statut d'émergence pour une année donnée. Les pointes <b style=""color: green;"">verts</b> indiquent que l'espèce n'est pas émergente, <b style=""color: orange;"">orange</b> que l'espèce est potentiellement émergente, <b style=""color: red;"">rouge</b> que l'espèce est émergente, et <b style=""color: grey;"">gris</b> que le modèle est non concluant.</p> <p>Ce modèle peut être corrigé en fonction du biais d'observateur<sup>1</sup> et peut être spécifiquement appliqué aux zones protégées Natura2000<sup>2</sup>.</p> <p><i><sup>1</sup>Le nombre d'observations est corrigé par rapport au nombre d'observations de la classe de l'espèce (par exemple dans le cas de Cyperus eragrostis (<a href=""https://www.gbif.org/species/2715482"" target = ""_blank"">2715482</a>), les observations d'autres Liliopsida (<a href=""https://www.gbif.org/species/196"" target = ""_blank"">196</a>) sont prises en compte).</i></br><i><sup>2</sup>Seules les observations dont la cellule de grille de 1x1km chevauche une zone Natura2000 sont prises en compte. Chaque observation se voit attribuer une cellule de grille aléatoire basée sur la précision de la localisation rapportée. Par conséquent, le résultat du GAM pour Natura2000 peut donner des résultats légèrement différents après une mise à jour.</i> </p>Pour plus d'informations concernant la méthode utilisée, veuillez consulter <a href=""https://trias-project.github.io/indicators/07_occurrence_indicators_modelling.html"" target = ""_blank"">la documentation des indicateurs TrIAS</a>."
 apply_gamObservations_title,Statut d'émergence (MAG) - Nombre d'observations modélisées
 apply_gamOccupancy_description,"<p>Modèle Additif Généralisé (MAG) basé sur la surface occupée par une espèce.</p> 
@@ -741,8 +757,8 @@ disclaimerVespa_title,"L'espèce n'est actuellement pas active. Lorsque vous obs
 downloadData_title,Télécharger les données
 downloadGraph_title,Télécharger le graphique
 downloadMap_title,Télécharger la carte
-early_warning_title,Early alert
 endYear_title,Année de fin
+entireRegion_title,L'ensemble du territoire
 escape_agriculture_title,Agriculture (y compris les cultures énergétiques)
 escape_aquaculture_title,Aquaculture/mariculture
 escape_farm_title,Animaux d’élevage (y compris les animaux soumis à un contrôle limité)
@@ -781,7 +797,6 @@ group_title,groupe
 habitat_title,habitat
 habitats_title,Habitats
 hideGlobe_title,Masquer la carte
-hist_title,Modèle basé sur des données climatiques historiques
 icons_title,Icônes
 images_title,Images
 includeMissing_title,y compris manquant
@@ -885,11 +900,9 @@ management3-countYearGroup_title,Le nombre d'individus de {{species}} gérés
 management_title,Gestion
 map_title,Carte
 marine_title,marine
-mica_db_title,MICA dashboard
 min_1_obs_title,L'espèce a été observée en Belgique depuis 1950 (données de GBIF)
 missingFilters_species_title,Aucune espèce ni région sélectionnée ! => Veuillez sélectionner une espèce et une région
 missing_title,manquant
-modelScenario_title,Scénario modèle
 modelType_title,Type de modèle
 more_title,Plus
 multipleRegions_title,plusieurs régions
@@ -897,6 +910,7 @@ nBins_title,Nombre de groupes
 name_title,NA
 native_continent_title,continent d'origine
 native_range_title,aire d'origine
+natura2000Only_title,Zones Natura 2000 uniquement
 natural_dispersal_title,Dispersion naturelle à travers les frontières d’espèces exotiques envahissantes introduites par les voies 1 à 5
 nest_title,Nid
 nest_type_title,NA
@@ -909,6 +923,8 @@ none_title,<non>
 not selected_title,non séléctionné
 numberTaxa_title,Nombre de taxons introduits
 number_title,Nombre
+obs_disclaimer_1311477_description,"Attention: Les données affichées sous <b>Répartition</b> comprennent des observations à la fois de nids et d'individus de <i>Vespa velutina</i>.<br>Pour obtenir des informations sur le nombre de nids signalés, consultez la section <b>Gestion</b>."
+obs_disclaimer_1311477_title,NA
 observations-mapOccurrence_description,"<p>Carte de la répartition dans les régions sélectionnées depuis 1950.</p>
 <ul>
 <li><p>Les carrés <b style=""color: #000000;"">noirs</b> indiquent des zones de 10 x 10 km où l’espèce a été observée.<br>
@@ -939,12 +955,9 @@ protectAreas_title,Zones protégées
 provinces_title,provinces
 pulli_title,pulli
 quantiles_title,NA
-radius_db_title,RadIUS dashboard
 radius_title,rayon
-rcp26_title,modèle basé sur les prévisions climatiques du RCP 2.6 pour 2040-2070
-rcp45_title,modèle basé sur les prévisions climatiques du RCP 4.5 pour 2040-2070
-rcp85_title,modèle basé sur les prévisions climatiques du RCP 8.5 pour 2040-2070
 regionLevel_title,Région niveau
+region_filter_title,Filtre de zone
 region_title,Région
 regions_title,Régions
 release_biological_control_title,Lutte biologique
@@ -984,12 +997,17 @@ risk_assessment_title,Analyse des risques
 risk_maps_title,Cartes des risques
 row_title,ligne
 samplingProtocol_title,Protocole d'échantillonnage
+selectedAreas_title,Zone(s) sélectionnée(s)
 selected_title,séléctionné
 shareLink_title,Partager le lien
 showGlobe_title,Afficher la carte
 singlePathway_title,Veuillez sélectionner 1 voie d'introduction (niveau 1) pour cette figure
 sourceLink_title,Source
 source_title,Source
+spatialLevel_cell_code10_title,Nombre de mailles de 10 × 10 km occupées
+spatialLevel_cell_code1_title,Nombre de mailles de 1 × 1 km occupées
+spatialLevel_n_title,Nombre d'observations
+spatialLevel_title,NA
 species-welcome_description,"<p style=""text-align: center;"">
 Sur cette page, vous trouverez des graphiques interactifs et des tendances pour des espèces individuelles, que vous pouvez sélectionner via le menu déroulant ci-dessous. Par défaut, les données sont affichées pour l'ensemble de la Belgique, mais vous pouvez également sélectionner une ou plusieurs régions spécifiques pour une vue plus personnalisée. Notre principale source de données est <a href=""https://www.gbif.org"" target=""_blank"">GBIF.org</a>, complétée par d'autres ensembles de données lorsque cela est pertinent.
 </p>"
@@ -1033,6 +1051,8 @@ tableLegend_title,Légende du tableau
 tableNesten_description,Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>
 tableNesten_title,Nombre de nids par province (tableau)
 tableTitle_title,Aperçu du tableau
+target6Indicator_description,"Nombre de nouvelles espèces envahissantes établies par an en Belgique depuis 1970, calculé à l'aide du package <a href=""https://pypi.org/project/b3alien/"" target=""_blank"">b3alien</a> pour corriger les délais de détection. Cet indicateur est basé sur la liste de contrôle belge du Registre mondial des espèces introduites et envahissantes (<a href=""https://doi.org/10.15468/xoidmd"" target=""_blank"">GRIIS</a>) et n'inclut que les espèces classées comme établies, envahissantes ou largement envahissantes."
+target6Indicator_title,Target 6 : taux d'établissement des espèces exotiques envahissantes
 taxa_title,Taxa
 terrestrial_title,terrestre
 top_title,en haut
