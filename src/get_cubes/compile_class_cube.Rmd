@@ -15,7 +15,10 @@ library(stringr)
 ```
 
 ```{r read in the data, message=NA}
-class_cube_raw <- read_csv("./cube_data/be_classes_cube_raw.csv")
+class_cube_raw <- read_csv("./cube_data/be_classes_cube_raw.csv",
+                           col_types = cols(
+                             occurrences = col_double()
+                           ))
 ```
 
 ```{r map compiled cube to match occ cube format, message=NA}
@@ -31,6 +34,35 @@ class_cube <- class_cube %>%
   group_by(year, eea_cell_code, classKey) %>% 
   summarise(cobs = sum(cobs, na.rm = TRUE),
             min_coord_uncertainty = min(min_coord_uncertainty, na.rm = TRUE))
+```
+
+```{r before translate}
+head(class_cube, 10)
+```
+
+```{r translate classKey}
+col_info <- read_csv("./data/interim/gbif_col_translation.csv") |> 
+  distinct(col_class_key, classKey) |> 
+  rename(classKey_gbif = classKey) |> 
+  filter(!is.na(classKey_gbif)) |> 
+  group_by(col_class_key) |>
+  summarise(col_class_key = first(col_class_key),
+            classKey_gbif = first(classKey_gbif))
+
+n_distinct(col_info$col_class_key)
+
+class_cube <- class_cube |> 
+  rename(classKey_col = classKey) |> 
+  left_join(col_info, by = c("classKey_col" = "col_class_key")) |> 
+  select(year, 
+         eea_cell_code,
+         classKey = "classKey_gbif",
+         cobs,
+         min_coord_uncertainty)
+```
+
+```{r after translate}
+head(class_cube, 10)
 ```
 
 ```{r write compiled cube}

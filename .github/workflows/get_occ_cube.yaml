@@ -68,7 +68,11 @@ jobs:
       - name: upload queries
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          path: ./data/interim/cube_queries/*
+          name: query-data-artifacts
+          path: |
+           ./data/interim/cube_queries/*
+           ./data/interim/gbif_col_translation_missing.csv
+           ./data/interim/gbif_col_translation.csv
           
   download-cubes:
     runs-on: ${{ matrix.config.os }}
@@ -203,6 +207,12 @@ jobs:
           pattern: be_alientaxa_cube_*
           merge-multiple: true
           path: ./cube_data/
+          
+      - name: download gbif_col_translation artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with: 
+          name: query-data-artifacts
+          path: ./data/interim/
           
       - name: List cube_data directory
         run: ls -R ./cube_data/

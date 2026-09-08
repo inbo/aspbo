@@ -239,7 +239,7 @@ jobs:
 
       - name: create timeseries decade
         run: |
-          Rscript -e "rmarkdown::render('src/process_cubes/create_timeseries_decade.Rmd', params = list(decade_min = '${{ matrix.decade.start }}'), knit_root_dir = '../../')"
+          Rscript -e "rmarkdown::render('src/process_cubes/create_timeseries_decade.Rmd', params = list(decade_min = '${{ matrix.decade.start }}'), knit_root_dir = '../../', quiet = FALSE)"
         env:
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
 
