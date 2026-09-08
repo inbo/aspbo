@@ -808,7 +808,8 @@ includeMissing_title,inclusief ontbrekend
 incomplete_out_title,Onvolledige output
 indicator_introduction_year_description,"Deze grafiek geeft een tijdsreeks weer van het aantal nieuw geïntroduceerde uitheemse soorten in België. De punten geven het aantal geïntroduceerde soorten weer voor een specifiek jaar (indien gegevens beschikbaar zijn), gebaseerd op de datum van de eerste waarneming van de soort zoals aangeven in de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e\"" target=""_blank""> GRIIS-checklist </a>. De algemene trend, gefit met behulp van een LOESS-model, wordt weergegeven in <b style=""color:#356196ff;"">blauw</b>, terwijl het <b style=""color:#94a7baff;"">blauw gearceerde gebied</b> het 95% betrouwbaarheidsinterval aangeeft."
 indicator_introduction_year_title,Aantal nieuw geïntroduceerde soorten per jaar
-indicator_native_range_year_description,"p>Het aantal geïntroduceerde soorten per jaar van eerste waarneming in België en per continent van oorsprong (of natuurlijke verspreiding)</p> <p><i>Verdere onderverdeling van continenten in subregio's is mogelijk door de optie ""natuurlijke verspreiding"" te selecteren in het dropdown-menu voor regio-schaal.</i></p>"
+indicator_native_range_year_description,"<p>Het aantal geïntroduceerde soorten per jaar van eerste waarneming in België en per continent van oorsprong (of natuurlijke verspreiding)</p>
+<p><i>Verdere onderverdeling van continenten in subregio's is mogelijk door de optie ""natuurlijke verspreiding"" te selecteren in het dropdown-menu voor regio-schaal.</i></p>"
 indicator_native_range_year_title,Aantal geïntroduceerde soorten per jaar en per continent van oorsprong
 indicator_total_year_description,"Deze grafiek toont het cumulatieve aantal geïntroduceerde uitheemse soorten in België, gebaseerd op hun jaar van eerste observatie, zoals gedocumenteerd in de <a href=""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank"">GRIIS-checklist</a>."
 indicator_total_year_title,Cumulatief aantal geïntroduceerde soorten
@@ -1079,6 +1080,8 @@ tableNesten_title,Aantal nesten per provincie (tabel)
 tableTitle_title,Overzicht Tabel
 target6_description,"Aantal nieuw gevestigde invasieve soorten per jaar in België sinds 1970, berekend met het <a href=""https://pypi.org/project/b3alien/"" target=""_blank"">b3alien</a>-package om te corrigeren voor detectievertragingen. Deze indicator is gebaseerd op de Belgische checklist van het Global Register of Introduced and Invasive Species (<a href=""https://doi.org/10.15468/xoidmd"" target=""_blank"">GRIIS</a>) en omvat enkel soorten die geclassificeerd zijn als gevestigd, invasief of wijdverspreid invasief."
 target6_title,Target 6: vestigingssnelheid van invasieve uitheemse soorten
+target6_yLab_description,NA
+target6_yLab_title,Aantal nieuw gevestigde invasieve exoten
 taxa_title,Taxa
 terrestrial_title,terrestrisch
 top_title,bovenaan

@@ -1053,6 +1053,8 @@ tableNesten_title,Nombre de nids par province (tableau)
 tableTitle_title,Aperçu du tableau
 target6_description,"Nombre de nouvelles espèces envahissantes établies par an en Belgique depuis 1970, calculé à l'aide du package <a href=""https://pypi.org/project/b3alien/"" target=""_blank"">b3alien</a> pour corriger les délais de détection. Cet indicateur est basé sur la liste de contrôle belge du Registre mondial des espèces introduites et envahissantes (<a href=""https://doi.org/10.15468/xoidmd"" target=""_blank"">GRIIS</a>) et n'inclut que les espèces classées comme établies, envahissantes ou largement envahissantes."
 target6_title,Target 6 : taux d'établissement des espèces exotiques envahissantes
+target6_yLab_description,NA
+target6_yLab_title,Nombre d'espèces exotiques envahissantes nouvellement établies
 taxa_title,Taxa
 terrestrial_title,terrestre
 top_title,en haut
