@@ -1100,7 +1100,7 @@ visualize_pathways_year_level1_description,"<p>This graph shows the trends in th
 visualize_pathways_year_level1_title,Trend in the number of introduced taxa per introduction pathway category
 visualize_pathways_year_level2_description,"<p>This graph shows the trends in the number introduced taxa per introduction pathway subcategory <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, level2</a>)</i>
 <p>The taxa are grouped by decade based on their year of first observation as specified on the <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> GRIIS checklist of Belgium</a>. 
-<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> This graph can only display the subcategories of a single introduction pathway category. Please select a category using the filter at the top of this page</i>.
+<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> This graph can only display the subcategories of a single introduction pathway category. Please select a category using the filter above the graph</i>.
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> A single taxa can be introduced via multiple introduction pathway subcategories, a taxa can thus be included more than once on this graph. This means the sum of the 'number of introduced taxa per introduction pathway category' can be larger than the 'number of taxa'</i>."
 visualize_pathways_year_level2_title,Trend in the number of introduced taxa per introduction pathway subcategory
 wallonia_title,Wallonia
