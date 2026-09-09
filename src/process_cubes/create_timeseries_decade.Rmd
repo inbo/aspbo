@@ -69,10 +69,11 @@ if(Sys.getenv("S3_BUCKET") != ""){
 ## connect to bucket
 ```{r connect to bucket}
 if(Sys.getenv("amiabot") != "yes"){
-  print("Executor of the script is a human >> connecting to bucket")
+  message("Executor of the script is a human >> connecting to bucket")
   source("./src/connect_to_bucket.R")
   connect_to_bucket(bucket_name = UAT_bucket)
 }else{
+  message("Executor of the script is a bot >> testing credentials")
   test_that("AWS credentials are set in the environment", {
     # 1. Check Access Key
     expect_true(Sys.getenv("AWS_ACCESS_KEY_ID") != "", 
@@ -94,14 +95,16 @@ if(Sys.getenv("amiabot") != "yes"){
 
 ```{r set decade}
 decade_min <- as.integer(params$decade_min)
-decade_max <- decade_min + 9
+decade_max_input <- decade_min + 9
 
 # Overwrite decade_max when larger than current year
-if(decade_max > year(Sys.Date())){
+if(decade_max_input > year(Sys.Date())){
   decade_max <- year(Sys.Date())
+}else{
+  decade_max <- decade_max_input
 }
 
-cat("Calculating", decade_min, "-", decade_max, "timeframe \n")
+message("Calculating ", decade_min, "-", decade_max, " timeframe \n")
 ```
 
 ```{r get_data_cube}
@@ -110,6 +113,7 @@ df <- read_csv("./cube_data/be_alientaxa_cube_processed.csv") %>%
          year <= decade_max)
 
 table(df$year, useNA = "ifany")
+head(df, 10)
 ```
 
 We get occurrence data of non alien species grouped at class level, which will be used for correcting the research bias effort:
@@ -120,6 +124,7 @@ df_bl <- read_csv("./cube_data/be_classes_cube.csv") %>%
          year <= decade_max)
 
 table(df_bl$year, useNA = "ifany")
+head(df_bl, 10)
 ```
 
 We add gemeente and provincie to the baseline data cube:
@@ -694,5 +699,5 @@ df_ts <-
 ```
 
 ```{r export for artifact upload}
-write_csv(df_ts, paste0("./cube_data/timeseries_", decade_min, "_", decade_max,".csv"))
+write_csv(df_ts, paste0("./cube_data/timeseries_", decade_min, "_", decade_max_input,".csv"))
 ```
