@@ -855,7 +855,7 @@ management-mapInvasion_description,"<div>
     <li>Bevestig uw instellingen: klik op <strong>'Confirm groups'</strong> om de kaart met uw indeling te vernieuwen.</li>
   </ol>
 </div>"
-management-mapInvasion_title,Invasie geschiedenis van <i>{{species}}</i>
+management-mapInvasion_title,Invasie geschiedenis van {{species}}
 management-mapOccurrence_description,"<p>Kaart en bijbehorende grafieken van de ruimtelijke verdeling van het gerealiseerd beheer.
 <li>Op de kaart ziet u de ruimtelijke verdeling voor het gekozen jaar.
 <li>Op de grafiek linksonder de kaart vindt u de trend per gewest (Vlaanderen, Wallonië en/of Brussel).
