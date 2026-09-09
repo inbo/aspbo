@@ -1051,8 +1051,10 @@ tableLegend_title,Légende du tableau
 tableNesten_description,Le nombre de nids signalés sur vespawatch.be par province. </br><em>Dates disponibles jusqu'à {{maxDate}}<em>
 tableNesten_title,Nombre de nids par province (tableau)
 tableTitle_title,Aperçu du tableau
-target6Indicator_description,"Nombre de nouvelles espèces envahissantes établies par an en Belgique depuis 1970, calculé à l'aide du package <a href=""https://pypi.org/project/b3alien/"" target=""_blank"">b3alien</a> pour corriger les délais de détection. Cet indicateur est basé sur la liste de contrôle belge du Registre mondial des espèces introduites et envahissantes (<a href=""https://doi.org/10.15468/xoidmd"" target=""_blank"">GRIIS</a>) et n'inclut que les espèces classées comme établies, envahissantes ou largement envahissantes."
-target6Indicator_title,Target 6 : taux d'établissement des espèces exotiques envahissantes
+target6_description,"Nombre de nouvelles espèces envahissantes établies par an en Belgique depuis 1970, calculé à l'aide du package <a href=""https://pypi.org/project/b3alien/"" target=""_blank"">b3alien</a> pour corriger les délais de détection. Cet indicateur est basé sur la liste de contrôle belge du Registre mondial des espèces introduites et envahissantes (<a href=""https://doi.org/10.15468/xoidmd"" target=""_blank"">GRIIS</a>) et n'inclut que les espèces classées comme établies, envahissantes ou largement envahissantes."
+target6_title,Target 6 : taux d'établissement des espèces exotiques envahissantes
+target6_yLab_description,NA
+target6_yLab_title,Nombre d'espèces exotiques envahissantes nouvellement établies
 taxa_title,Taxa
 terrestrial_title,terrestre
 top_title,en haut
@@ -1087,7 +1089,7 @@ visualize_pathways_year_level1_description,"<p>Ce graphique montre les tendances
 visualize_pathways_year_level1_title,Tendances du nombre de taxons introduits par catégorie de voie d'introduction
 visualize_pathways_year_level2_description,"<p>Ce graphique montre les tendances du nombre de taxons introduits par sous-catégorie de voie d'introduction <i>(<a href=""https://www.cbd.int/doc/c/9d85/3bc5/d640f059d03acd717602cd76/sbstta-22-inf-09-en.pdf#page=8"" target = ""_blank"">CBD, niveau 2</a>)</i></p>
 <p>Les taxons sont regroupés par décennie en fonction de leur année de première observation, telle que spécifiée dans la <a href= ""https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e"" target=""_blank""> liste de contrôle GRIIS de Belgique</a>.</p>
-<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Ce graphique ne peut afficher que les sous-catégories d'une seule catégorie de voie d'introduction. Veuillez sélectionner une catégorie en utilisant le filtre en haut de cette page</i>.</p>
+<p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Ce graphique ne peut afficher que les sous-catégories d'une seule catégorie de voie d'introduction. Veuillez sélectionner une catégorie en utilisant le filtre en haut de ce graphique</i>.</p>
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Un même taxon peut être introduit par le biais de plusieurs sous-catégories de voies d'introduction, un taxon peut donc être inclus plus d'une fois dans ce graphique. Cela signifie que la somme du ""nombre de taxons introduits par catégorie de voie d'introduction"" peut être supérieure au ""nombre de taxons""</i>.</p>"
 visualize_pathways_year_level2_title,Tendances du nombre de taxons introduits par sous-catégorie de voie d'introduction
 wallonia_title,Wallonie
