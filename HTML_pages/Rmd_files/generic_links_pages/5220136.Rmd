@@ -1,0 +1,88 @@
+---
+title: 5220136
+output: html_fragment
+params:
+  language: "en"
+---
+<style>
+h1.title {
+  display: none;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r sharedinfo, echo=FALSE}
+VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/5220136"
+VBP_link_en <- "https://natuurdata.inbo.be/bie-hub/species/5220136?lang=en"
+faunabeheer_link <- "https://faunabeheer.inbo.be/5220136"
+style_str<-"font-size: 1.5em; font-style: italic;"
+image_link<-"../Pictures/5220136_luukieluuk.png"
+copyright_font<-"font-size: 0.8em;"
+width="400"
+height="267"
+```
+
+
+```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
+cat(paste0("
+## Damhert
+
+<span style=\"", style_str, "\">Dama dama</span>
+<br>
+
+<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
+<span style=\"", copyright_font, "\">© luukieluuk</span><br>
+<br>
+
+#### **Nuttige links** <br>
+<p>Meer informatie over het damhert kunt u vinden op het Vlaams Biodiversiteitsportaal.<br>
+**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteitportaal</a>**
+
+<p>het damhert is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\"https://faunabeheer.inbo.be/app/01_faunabeheer/#Damhert\"target=\"_blank\">faunabeheer pagina</a>.
+<br>
+<br>
+"))
+```
+
+```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
+cat(paste0("
+## Common fallow deer
+
+<span style=\"", style_str, "\">Dama dama</span>
+
+<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
+<span style=\"", copyright_font, "\">© luukieluuk</span><br>
+<br>
+
+#### **Useful links** <br>
+<p>You can find more information about the Common fallow deer on the Flemish Biodiversity Portal.<br>
+**More information: <a href=\"", VBP_link_en, "\"target=\"_blank\">Flemish Biodiversity Portal</a>**
+
+<p>Common fallow deer is classified as a game species in Flanders, more information concerning management and damages in Flanders can be found on the <a href=\"https://faunabeheer.inbo.be/app/01_faunabeheer/#Damhert\"target=\"_blank\">wildlife management page</a> (note that this information is currently only available in Dutch)
+<br>
+<br>
+"))
+```
+
+```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
+cat(paste0("
+## Daim
+
+<span style=\"", style_str, "\">Dama dama</span>
+
+<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
+<span style=\"", copyright_font, "\">© luukieluuk</span><br>
+<br>
+
+#### **Liens utiles** <br>
+<p>Vous pouvez trouver plus d'informations sur daim sur le portal biodiversité flamande (notez que ces informations sont actuellement disponible uniquement en néerlandais).<br>
+**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">portal biodiversité flamande</a>**
+
+<p>Daim est classé comme espèce gibier en Flandre. Vous trouverez plus d&apos;informations sur la gestion et les dommages en Flandre sur la page <a href=\"https://faunabeheer.inbo.be/app/01_faunabeheer/#Damhert\"target=\"_blank\">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu` en néerlandais)
+<br>
+<br>
+"))
+```

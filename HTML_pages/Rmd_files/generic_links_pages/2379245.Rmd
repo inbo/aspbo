@@ -1,0 +1,85 @@
+---
+title: 2379245
+output: html_fragment
+params:
+  language: "en"
+---
+<style>
+h1.title {
+  display: none;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r sharedinfo, echo=FALSE}
+VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/2379245"
+VBP_link_en <- "https://natuurdata.inbo.be/bie-hub/species/2379245?lang=en"
+faunabeheer_link <- "https://faunabeheer.inbo.be/2379245"
+style_str<-"font-size: 1.5em; font-style: italic;"
+image_link<-"../Pictures/"
+copyright_font<-"font-size: 0.8em;"
+width="400"
+height="267"
+```
+
+
+```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
+cat(paste0("
+## Marmergrondel
+
+<span style=\"", style_str, "\">Proterorhinus semilunaris</span>
+<br>
+
+
+<br>
+
+#### **Nuttige links** <br>
+<p>Meer informatie over de marmergrondel kunt u vinden op het Vlaams Biodiversiteitsportaal.<br>
+**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteitportaal</a>**
+
+<p>
+<br>
+<br>
+"))
+```
+
+```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
+cat(paste0("
+## Freshwater tubenose goby
+
+<span style=\"", style_str, "\">Proterorhinus semilunaris</span>
+
+
+<br>
+
+#### **Useful links** <br>
+<p>You can find more information about the Freshwater tubenose goby on the Flemish Biodiversity Portal.<br>
+**More information: <a href=\"", VBP_link_en, "\"target=\"_blank\">Flemish Biodiversity Portal</a>**
+
+<p>
+<br>
+<br>
+"))
+```
+
+```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
+cat(paste0("
+## Gobie demi-lune
+
+<span style=\"", style_str, "\">Proterorhinus semilunaris</span>
+
+
+<br>
+
+#### **Liens utiles** <br>
+<p>Vous pouvez trouver plus d'informations sur gobie demi-lune sur le portal biodiversité flamande (notez que ces informations sont actuellement disponible uniquement en néerlandais).<br>
+**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">portal biodiversité flamande</a>**
+
+<p>
+<br>
+<br>
+"))
+```
