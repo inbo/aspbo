@@ -35,6 +35,11 @@ occ_download_wait(down_rst,
 raw_ruddy_data <- occ_download_get(down_rst) %>%
   occ_download_import()
 
+#test that taxonKey is integer
+test_that("taxonKey is of class 'integer'", {
+  testthat::expect_type(raw_ruddy_data$taxonKey, "integer")
+})
+
 # Read verbatim data ####
 # Needed for lifestage information 
 ruddy_zipfile <- dir(path = "./",
