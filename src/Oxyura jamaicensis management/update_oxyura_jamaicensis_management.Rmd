@@ -20,7 +20,7 @@ library(sf)
 datasetKey <- c("7522721f-4d97-4984-8231-c9e061ef46df")
 
 down_rst <- occ_download(
-  pred("taxonKey", 2498305),
+  pred("taxonKey", "VN74D"),
   pred_in("datasetKey", datasetKey),
   format = "DWCA",
   user = Sys.getenv("gbif_user"), 
@@ -35,10 +35,11 @@ occ_download_wait(down_rst,
 raw_ruddy_data <- occ_download_get(down_rst) %>%
   occ_download_import()
 
-#test that taxonKey is integer
-test_that("taxonKey is of class 'integer'", {
-  testthat::expect_type(raw_ruddy_data$taxonKey, "integer")
+#test that taxonKey is character
+test_that("taxonKey is of class 'character'", {
+  testthat::expect_type(raw_ruddy_data$taxonKey, "character")
 })
+
 
 # Read verbatim data ####
 # Needed for lifestage information 
