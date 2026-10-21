@@ -230,22 +230,30 @@ description %>%
 We map them as follows:
 
 ```{r mapping_degree_of_establishment}
-description <-
-  description %>%
-  mutate(degree_of_establishment = recode(
-    degree_of_establishment,
-    "captive (blackburn_2011:B1)" = "captive",
-    "blackburn_et_al_2011:B2" = "cultivated",
-    "released (blackburn_2011:B3)" = "released",
-    "blackburn_et_al_2011:C0" = "failing",
-    "casual (blackburn_2011:C1)" = "casual",
-    "reproducing (blackburn_2011:C2)" = "reproducing",
-    "established (blackburn_2011:C3)" = "established",
-    "blackburn_et_al_2011:C3" = "established",
-    "colonizing (blackburn_2011:D1)" = "colonizing",
-    "blackburn_et_al_2011:D2" = "invasive",
-    "blackburn_et_al_2011:E" = "widespreadInvasive"
+distribution <-
+  distribution %>%
+  mutate(degree_of_establishment = case_match(
+    degreeOfEstablishment,
+    c("casual", 
+      "NA|casual", 
+      "casual|NA") ~ "casual",
+    "reproducing (blackburn_2011:C2)" ~ "reproducing",
+    c("established", 
+      "casual|established", 
+      "established|casual",
+      "established|casual|NA",
+      "established|NA",
+      "NA|established") ~ "established",
+    "colonising " ~ "colonizing",
+    c("casual|invasive",
+      "established|invasive",
+      "invasive") ~ "invasive",
+    "blackburn_et_al_2011:E" ~ "widespreadInvasive",
+    .default = degreeOfEstablishment
   ))
+
+table(distribution$degreeOfEstablishment, distribution$degree_of_establishment)
+table(distribution$degree_of_establishment)
 ```
 
 Mapping result:
