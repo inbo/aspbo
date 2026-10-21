@@ -128,14 +128,7 @@ taxa <-
 Extract distribution information
 
 ```{r retrieve_distribution_information, cache=TRUE}
-distribution <- 
-  taxa %>% 
-  pull(key) %>%
-  map_dfr(., function(x) {
-    distribution_details <-name_usage(x, data = "distribution")
-    return(distribution_details$data)
-    }
-  )
+distribution <- read_tsv(paste0(GRIIS_checklist_folder, "distribution.txt"))
 distribution <- distribution %>% select(-source)
 head(distribution)
 ```
@@ -145,14 +138,12 @@ head(distribution)
 Extract description information
 
 ```{r retrieve_description_information, cache=TRUE}
-description <- taxa %>%
-  pull(key) %>%
-  map_dfr(., function(x) {
-    description_details <-name_usage(x, data = "description")
-    return(description_details$data)
-    }
-  )
-description <- description %>% select(-c(key, language, source))
+description <- read_tsv(paste0(GRIIS_checklist_folder, "description.txt"))
+description <- description %>% 
+  mutate(taxonKey = as.integer(gsub(pattern = "https://www.gbif.org/species/",
+                                    replacement = "",
+                                    id))) |> 
+  select(-c(id, language, source))
 head(description, n = 10)
 ```
 
@@ -163,23 +154,11 @@ description %>% distinct(type)
 ```
 **Patch**: pathways `"introduction pathway"` and `"pathway of introduction"` should be renamed to  `pathways`. Bug documented in issue [#68](https://github.com/trias-project/unified-checklist/issues/68).
 
-```{r rename_no_standard_pathway_types} 
-description <- 
-  description %>%
-  mutate(type = if_else(type %in% c("introduction pathway",
-                                    "pathway of introduction"),
-                        "pathway",
-                        type)
-)
-```
-
 We are interested to the following types:
 
 ```{r define_types}
 types <- c(
-  "native range",
-  "degree of establishment",
-  "pathway"
+  "native range"
 )
 ```
 
@@ -202,9 +181,7 @@ description <-
     values_from = description,
     values_fn = list(name = list)
   ) %>%
-  unnest_longer(types[1]) %>%
-  unnest_longer(types[2]) %>%
-  unnest_longer(types[3])
+  unnest_longer(types[1])
 description %>% head(n = 20)
 ```
 
@@ -303,7 +280,7 @@ description <-
     str_starts(.data$pathway, "cbd_2014_pathway:"),
     pathway,
     paste0("cbd_2014_pathway:", pathway))
-)
+  )
 ```
 Pathway `cbd_2014_pathway:agriculture` should be replaced by `cbd_2014_pathway:escape_agriculture` (see [issue #38](https://github.com/trias-project/ad-hoc-checklist/issues/38)):
 
@@ -313,7 +290,7 @@ description <-
   mutate(pathway = if_else(pathway == "cbd_2014_pathway:agriculture",
                            "cbd_2014_pathway:escape_agriculture",
                            pathway)
-)
+  )
 ```
 Pathway `contaminant_plant` should be replaced by `contaminant_on_plants` (see [issue #9](https://github.com/trias-project/alien-scheldt-checklist/issues/9)) 
 
@@ -323,7 +300,7 @@ description <-
   mutate(pathway = if_else(pathway == "cbd_2014_pathway:contaminant_plant",
                            "cbd_2014_pathway:contaminant_on_plants",
                            pathway)
-)
+  )
 ```
 
 Remove pathway `unintentional` as it is not a valid pathway (see [issue #3](https://github.com/trias-project/alien-fishes-checklist/issues/3)):
@@ -342,7 +319,7 @@ description <-
   mutate(pathway = if_else(pathway == "cbd_2014_pathway:nursery",
                            "cbd_2014_pathway:contaminant_nursery",
                            pathway)
-)
+  )
 ```
 
 ## Species profile
@@ -355,7 +332,7 @@ speciesProfiles <- taxa %>%
   map_dfr(., function(x) {
     species_profiles_details <-name_usage(x, data = "speciesProfile")
     return(species_profiles_details$data)
-    }
+  }
   )
 head(speciesProfiles)
 ```
@@ -367,11 +344,11 @@ Merge distribution, description and species profile information:
 ```{r merge_extensions_information}
 merged_extensions <-
   full_join(distribution,
-    description,
-    by = "taxonKey"
+            description,
+            by = "taxonKey"
   ) %>%
   full_join(speciesProfiles,
-    by = "taxonKey"
+            by = "taxonKey"
   )
 ```
 
@@ -379,7 +356,7 @@ to merge them all with the taxonomic information:
 
 ```{r merge_extensions_with_taxa}
 merged_info <- left_join(taxa, merged_extensions,
-  by = c("key" = "taxonKey")
+                         by = c("key" = "taxonKey")
 )
 merged_info %>% head(n = 100)
 ```
@@ -414,8 +391,8 @@ merged_info <-
     remove = TRUE
   ) %>%
   mutate(last_observed = ifelse(is.na(last_observed),
-    first_observed,
-    last_observed
+                                first_observed,
+                                last_observed
   ))
 ```
 
@@ -487,7 +464,7 @@ merged_info <-
     pathway_level1 =
       str_split_fixed(
         str_split(pathway,
-          pattern = "pathway:"
+                  pattern = "pathway:"
         )[[1]][2],
         pattern = "_", n = 2
       )[[1]][1],
@@ -541,12 +518,12 @@ The data.frame `merged_info` is saved as output file:
 
 ```{r save_data_output}
 write_tsv(merged_info, 
-  file = here::here(
-    "data",
-    "interim",
-    "data_input_checklist_indicators.tsv"
-  ),
-  na = ""
+          file = here::here(
+            "data",
+            "interim",
+            "data_input_checklist_indicators.tsv"
+          ),
+          na = ""
 )
 ```
 
