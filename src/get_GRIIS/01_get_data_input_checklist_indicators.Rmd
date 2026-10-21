@@ -236,10 +236,9 @@ table(distribution$degree_of_establishment)
 Mapping result:
 
 ```{r mapping_degree_establ_result}
-description %>%
+distribution %>%
   distinct(degree_of_establishment)
 ```
-
 
 ### Add native continent based on native range
 
@@ -273,20 +272,38 @@ This section contains a series of patches to standardize pathway information.
 
 Add prefix `cbd_2014_pathway:` where missing (see [issue #69](https://github.com/trias-project/unified-checklist/issues/69)):
 
+pathway_lvl1: contaminant  corridor  escape     release    stowaway     unaided     unknown
+pathway_lvl2:agriculture  animal_parasite  aquaculture         ballast_water    biological_control          conservation     container                  farm               fishery                  food             food_bait              fur_farm habitat_material          horticulture          hull_fouling               hunting landscape_improvement     natural_dispersal nursery            on_animals             on_plants       organic_packing                 other        people_luggage pet              research                  seed                  ship                timber               unknown vehicles                 water                   zoo 
+
 ```{r add_cbd_2014_pathway_if_missing} 
-description <-
-  description %>%
-  mutate(pathway = if_else(
-    str_starts(.data$pathway, "cbd_2014_pathway:"),
-    pathway,
-    paste0("cbd_2014_pathway:", pathway))
-  )
+distribution <-
+  distribution %>%
+  mutate(pathway = trimws(pathway)) |> 
+  mutate(pathway_lvl1 = case_when(
+    pathway %in% c("agriculture") ~ "unknown",
+    pathway %in% c("agriculture|contaminantOnAnimals",
+                   "agriculture|seedContaminant") ~ "contaminant",
+    TRUE ~ NA_character_
+  ))
+
+missing_pathway_lvl1 <- distribution |> 
+  filter(is.na(distribution$pathway_lvl1))
+
+table(missing_pathway_lvl1$pathway)
+  
+  
+  separate(col = pathway, into = c("pathway_lvl1", "pathway_lvl2", "other_1", "other_2"), sep = "\\|", remove = FALSE)
+mutate(pathway = if_else(
+  str_starts(.data$pathway, "cbd_2014_pathway:"),
+  pathway,
+  paste0("cbd_2014_pathway:", pathway))
+)
 ```
 Pathway `cbd_2014_pathway:agriculture` should be replaced by `cbd_2014_pathway:escape_agriculture` (see [issue #38](https://github.com/trias-project/ad-hoc-checklist/issues/38)):
 
 ```{r improve_pathway_agriculture}
-description <- 
-  description %>%
+distribution <- 
+  distribution %>%
   mutate(pathway = if_else(pathway == "cbd_2014_pathway:agriculture",
                            "cbd_2014_pathway:escape_agriculture",
                            pathway)
@@ -295,8 +312,8 @@ description <-
 Pathway `contaminant_plant` should be replaced by `contaminant_on_plants` (see [issue #9](https://github.com/trias-project/alien-scheldt-checklist/issues/9)) 
 
 ```{r improve_pathway_on_plant}
-description <- 
-  description %>%
+distribution <- 
+  distribution %>%
   mutate(pathway = if_else(pathway == "cbd_2014_pathway:contaminant_plant",
                            "cbd_2014_pathway:contaminant_on_plants",
                            pathway)
@@ -306,16 +323,16 @@ description <-
 Remove pathway `unintentional` as it is not a valid pathway (see [issue #3](https://github.com/trias-project/alien-fishes-checklist/issues/3)):
 
 ```{r remove_unintentional}
-description <- 
-  description  %>%
+distribution <- 
+  distribution  %>%
   filter(!pathway %in% c("cbd_2014_pathway:unintentional"))
 ```
 
 Rename pathway `nursery` as `contaminant_nursery` (see [issue #40](https://github.com/trias-project/ad-hoc-checklist/issues/40)):
 
 ```{r rename_nursery}
-description <- 
-  description  %>%
+distribution <- 
+  distribution  %>%
   mutate(pathway = if_else(pathway == "cbd_2014_pathway:nursery",
                            "cbd_2014_pathway:contaminant_nursery",
                            pathway)
