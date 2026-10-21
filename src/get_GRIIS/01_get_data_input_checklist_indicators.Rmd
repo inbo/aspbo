@@ -37,14 +37,74 @@ library(trias) # To get indicator functionalities
 
 Get taxa from the published unified checklist, the [*Global Register of Introduced and Invasive Species - Belgium*](https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e):
 
+```{r}
+GRIIS_checklist_folder <- "./data/input/GRIIS_checklist/"
+
+download.file(url = "https://ipt.inbo.be/archive.do?r=unified-checklist",
+              destfile = "./data/input/GRIIS_checklist.zip",
+              mode = "wb")
+
+dir.create(GRIIS_checklist_folder, recursive = TRUE)
+
+unzip(zipfile = "./data/input/GRIIS_checklist.zip",
+      exdir = GRIIS_checklist_folder,
+      overwrite = TRUE)
+```
+
 ```{r get_data_unified_checklist}
-taxa <- name_usage(
-  datasetKey = "6d9e952f-948c-4483-9807-575348147c7e",
-  limit = 10000
-)
-taxa <- 
-  taxa$data %>% 
-  filter(origin == "SOURCE")
+taxa_raw <- read_tsv(paste0(GRIIS_checklist_folder, "taxon.txt"))
+
+taxa <- taxa_raw |> 
+  mutate(key = as.integer(gsub(pattern = "https://www.gbif.org/species/",
+                               replacement = "",
+                               id)),
+         nubKey = key,
+         canonicalName_raw = paste(genus, specificEpithet)) |> 
+  rename(datasetKey = datasetID,
+         rank = taxonRank)
+
+scientificNames <- taxa$nubKey |>
+  map_dfr(function(tk) {
+    # Direct lookup is practically instant
+    info <- name_usage(key = tk)$data
+    
+    # Safely check if the column exists and return a dataframe for map_dfr
+    if (!is.null(info) && "canonicalName" %in% names(info)) {
+      
+      return(data.frame(
+        nubKey = tk, 
+        species = if ("species" %in% names(info)) info$species else NA_character_,
+        canonicalName_gbif = if ("canonicalName" %in% names(info)) info$canonicalName else NA_character_,
+        kingdomKey = if ("kingdomKey" %in% names(info)) info$kingdomKey else NA_integer_,
+        phylumKey = if ("phylumKey" %in% names(info)) info$phylumKey else NA_integer_,
+        classKey = if ("classKey" %in% names(info)) info$classKey else NA_integer_,
+        orderKey = if ("orderKey" %in% names(info)) info$orderKey else NA_integer_,
+        familyKey = if ("familyKey" %in% names(info)) info$familyKey else NA_integer_,
+        genusKey = if ("genusKey" %in% names(info)) info$genusKey else NA_integer_,
+        taxonomicStatus = if ("taxonomicStatus" %in% names(info)) info$taxonomicStatus else NA_character_
+      ))
+    }
+    
+    # Return empty dataframe if missing to prevent map_dfr from crashing
+    return(data.frame(nubKey = tk, 
+                      canonicalName_gbif = NA_character_,
+                      species = NA_character_,
+                      kingdomKey = NA_integer_,
+                      phylumKey = NA_integer_,
+                      classKey = NA_integer_,
+                      orderKey = NA_integer_,
+                      familyKey = NA_integer_,
+                      genusKey = NA_integer_,
+                      taxonomicStatus = NA_character_)) 
+    
+  }, .progress = "Fetching names")
+
+taxa <- taxa |> 
+  left_join(scientificNames, by = "nubKey") |> 
+  mutate(canonicalName = coalesce(canonicalName_gbif, canonicalName_raw),
+         speciesKey = ifelse(!is.na(species), nubKey, NA_integer_),
+         acceptedKey = nubKey,
+         accepted = ifelse(taxonomicStatus == "ACCEPTED", TRUE, FALSE))
 ```
 
 Select columns we are interested to:
