@@ -1,0 +1,485 @@
+---
+title: "Get input data for checklist-based indicators"
+author:
+- Damiano Oldoni
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
+---
+
+This document describes how to get and manipulate data from [unified checklist](https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e) for checklist-based indicators.
+
+# Setup
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+Load libraries:
+
+```{r load_libraries}
+library(tidyverse) # To do data science
+library(tidylog) # To provide feedback on dplyr functions
+library(janitor) # To clean column names
+library(here) # To find files
+library(rgbif) # To get taxa from publisehd unified checklist
+library(rcol) # To get new functionality from gbif
+library(trias) # To get indicator functionalities
+```
+
+# Get data
+
+## Get taxonomic data
+
+Get taxa from the published unified checklist, the [*Global Register of Introduced and Invasive Species - Belgium*](https://www.gbif.org/dataset/6d9e952f-948c-4483-9807-575348147c7e):
+
+```{r get_data_unified_checklist}
+taxa <- name_usage(
+  datasetKey = "6d9e952f-948c-4483-9807-575348147c7e",
+  limit = 10000
+)
+taxa <- 
+  taxa$data %>% 
+  filter(origin == "SOURCE")
+```
+
+Select columns we are interested to:
+
+```{r select_cols_interest}
+checklist_info <- c(
+  "key", "nubKey", "scientificName", "datasetKey",
+  "canonicalName", "species", "genus", "family",
+  "order", "class", "phylum", "kingdom",
+  "rank", "speciesKey", "genusKey", "familyKey",
+  "orderKey", "classKey", "phylumKey", "kingdomKey", 
+  "taxonomicStatus", "acceptedKey", "accepted"
+)
+taxa <-
+  taxa %>%
+  select(one_of(checklist_info))
+```
+
+## Get distribution
+
+Extract distribution information
+
+```{r retrieve_distribution_information, cache=TRUE}
+distribution <- 
+  taxa %>% 
+  pull(key) %>%
+  map_dfr(., function(x) {
+    distribution_details <-name_usage(x, data = "distribution")
+    return(distribution_details$data)
+    }
+  )
+distribution <- distribution %>% select(-source)
+head(distribution)
+```
+
+## Get description
+
+Extract description information
+
+```{r retrieve_description_information, cache=TRUE}
+description <- taxa %>%
+  pull(key) %>%
+  map_dfr(., function(x) {
+    description_details <-name_usage(x, data = "description")
+    return(description_details$data)
+    }
+  )
+description <- description %>% select(-c(key, language, source))
+head(description, n = 10)
+```
+
+Description contains a column `type` with the following descriptors: 
+
+```{r descriptors}
+description %>% distinct(type)
+```
+**Patch**: pathways `"introduction pathway"` and `"pathway of introduction"` should be renamed to  `pathways`. Bug documented in issue [#68](https://github.com/trias-project/unified-checklist/issues/68).
+
+```{r rename_no_standard_pathway_types} 
+description <- 
+  description %>%
+  mutate(type = if_else(type %in% c("introduction pathway",
+                                    "pathway of introduction"),
+                        "pathway",
+                        type)
+)
+```
+
+We are interested to the following types:
+
+```{r define_types}
+types <- c(
+  "native range",
+  "degree of establishment",
+  "pathway"
+)
+```
+
+We filter out the other types:
+
+```{r select_types}
+description <-
+  description %>%
+  filter(type %in% types)
+```
+
+We *tidy* this data.frame, thus having different descriptors as different columns:
+
+```{r tidy_description}
+description <-
+  description %>%
+  as_tibble() %>%
+  pivot_wider(
+    names_from = type,
+    values_from = description,
+    values_fn = list(name = list)
+  ) %>%
+  unnest_longer(types[1]) %>%
+  unnest_longer(types[2]) %>%
+  unnest_longer(types[3])
+description %>% head(n = 20)
+```
+
+We also clean column names by standardizing column names (snake_case):
+
+```{r standardize_colnames}
+description <-
+  description %>%
+  janitor::clean_names(case = "snake") %>%
+  rename(taxonKey = taxon_key)
+names(description)
+```
+
+### Mapping `degree of establishment`
+
+Values in column `degree_of_establishment`:
+
+```{r degree_of_establishment}
+description %>%
+  distinct(degree_of_establishment)
+```
+
+We map them as follows:
+
+```{r mapping_degree_of_establishment}
+description <-
+  description %>%
+  mutate(degree_of_establishment = recode(
+    degree_of_establishment,
+    "captive (blackburn_2011:B1)" = "captive",
+    "blackburn_et_al_2011:B2" = "cultivated",
+    "released (blackburn_2011:B3)" = "released",
+    "blackburn_et_al_2011:C0" = "failing",
+    "casual (blackburn_2011:C1)" = "casual",
+    "reproducing (blackburn_2011:C2)" = "reproducing",
+    "established (blackburn_2011:C3)" = "established",
+    "blackburn_et_al_2011:C3" = "established",
+    "colonizing (blackburn_2011:D1)" = "colonizing",
+    "blackburn_et_al_2011:D2" = "invasive",
+    "blackburn_et_al_2011:E" = "widespreadInvasive"
+  ))
+```
+
+Mapping result:
+
+```{r mapping_degree_establ_result}
+description %>%
+  distinct(degree_of_establishment)
+```
+
+
+### Add native continent based on native range
+
+We use native range information to create a similar column containing native continent:
+
+```{r add_native_continent_column}
+description <-
+  description %>%
+  mutate(native_continent = case_when(
+    grepl(pattern = "Africa", native_range, ignore.case = TRUE) ~ "Africa",
+    grepl(pattern = "America", native_range, ignore.case = TRUE) ~ "America",
+    grepl(pattern = "Asia", native_range, ignore.case = TRUE) ~ "Asia",
+    grepl(pattern = "Australia", native_range, ignore.case = TRUE) ~ "Oceania",
+    grepl(pattern = "nesia", native_range, ignore.case = TRUE) ~ "Oceania",
+    grepl(pattern = "Europe", native_range, ignore.case = TRUE) ~ "Europe",
+    TRUE ~ as.character(NA))
+  )
+```
+
+Mapping result:
+
+```{r mapping_native_continent_result}
+description %>%
+  distinct(native_continent)
+```
+
+
+### Mapping `pathway`
+
+This section contains a series of patches to standardize pathway information.
+
+Add prefix `cbd_2014_pathway:` where missing (see [issue #69](https://github.com/trias-project/unified-checklist/issues/69)):
+
+```{r add_cbd_2014_pathway_if_missing} 
+description <-
+  description %>%
+  mutate(pathway = if_else(
+    str_starts(.data$pathway, "cbd_2014_pathway:"),
+    pathway,
+    paste0("cbd_2014_pathway:", pathway))
+)
+```
+Pathway `cbd_2014_pathway:agriculture` should be replaced by `cbd_2014_pathway:escape_agriculture` (see [issue #38](https://github.com/trias-project/ad-hoc-checklist/issues/38)):
+
+```{r improve_pathway_agriculture}
+description <- 
+  description %>%
+  mutate(pathway = if_else(pathway == "cbd_2014_pathway:agriculture",
+                           "cbd_2014_pathway:escape_agriculture",
+                           pathway)
+)
+```
+Pathway `contaminant_plant` should be replaced by `contaminant_on_plants` (see [issue #9](https://github.com/trias-project/alien-scheldt-checklist/issues/9)) 
+
+```{r improve_pathway_on_plant}
+description <- 
+  description %>%
+  mutate(pathway = if_else(pathway == "cbd_2014_pathway:contaminant_plant",
+                           "cbd_2014_pathway:contaminant_on_plants",
+                           pathway)
+)
+```
+
+Remove pathway `unintentional` as it is not a valid pathway (see [issue #3](https://github.com/trias-project/alien-fishes-checklist/issues/3)):
+
+```{r remove_unintentional}
+description <- 
+  description  %>%
+  filter(!pathway %in% c("cbd_2014_pathway:unintentional"))
+```
+
+Rename pathway `nursery` as `contaminant_nursery` (see [issue #40](https://github.com/trias-project/ad-hoc-checklist/issues/40)):
+
+```{r rename_nursery}
+description <- 
+  description  %>%
+  mutate(pathway = if_else(pathway == "cbd_2014_pathway:nursery",
+                           "cbd_2014_pathway:contaminant_nursery",
+                           pathway)
+)
+```
+
+## Species profile
+
+Extract species profile
+
+```{r retrieve_species_profile_information, cache=TRUE}
+speciesProfiles <- taxa %>%
+  pull(key) %>%
+  map_dfr(., function(x) {
+    species_profiles_details <-name_usage(x, data = "speciesProfile")
+    return(species_profiles_details$data)
+    }
+  )
+head(speciesProfiles)
+```
+
+# Merge data
+
+Merge distribution, description and species profile information:
+
+```{r merge_extensions_information}
+merged_extensions <-
+  full_join(distribution,
+    description,
+    by = "taxonKey"
+  ) %>%
+  full_join(speciesProfiles,
+    by = "taxonKey"
+  )
+```
+
+to merge them all with the taxonomic information:
+
+```{r merge_extensions_with_taxa}
+merged_info <- left_join(taxa, merged_extensions,
+  by = c("key" = "taxonKey")
+)
+merged_info %>% head(n = 100)
+```
+
+# Tidy data
+
+Some columns should be splitted in order to make the data.frame completely tidy: `temporal` and `pathway`.
+
+## Split column `temporal`
+
+The column `temporal` contains one or two datums:
+
+```{r example_temporal, echo = FALSE}
+merged_info %>%
+  select(key, temporal) %>%
+  distinct() %>%
+  filter(!is.na(temporal)) %>%
+  head()
+```
+
+In case there are two datums, we split them in `first_observed` and `last_observed`. If only a datum is present, then it is used for both  `first_observed`and `last_observed`.
+
+```{r split_temporal}
+merged_info <-
+  merged_info %>%
+  separate(
+    col = temporal,
+    sep = "/",
+    into = c("first_observed", "last_observed"),
+    convert = TRUE,
+    fill = "right",
+    remove = TRUE
+  ) %>%
+  mutate(last_observed = ifelse(is.na(last_observed),
+    first_observed,
+    last_observed
+  ))
+```
+
+An example:
+
+```{r example_split_temporal, echo = FALSE}
+merged_info %>%
+  filter(locality == "Belgium") %>%
+  select(key, first_observed, last_observed) %>%
+  distinct() %>%
+  filter(!is.na(first_observed) & !is.na(last_observed)) %>%
+  head(10)
+```
+
+Some `first_observed` are greater than `last_observed`, (see [issue #41](https://github.com/trias-project/ad-hoc-checklist/issues/41)):
+
+```{r exceptions_temporal}
+wrong_temporal <- 
+  merged_info %>%
+  filter(last_observed < first_observed)
+wrong_temporal %>%
+  distinct(key, first_observed, last_observed)
+```
+
+Correct them:
+
+```{r correct_temporal_info}
+# invert first/last_observed columns 
+wrong_temporal$aux <- wrong_temporal$first_observed
+wrong_temporal$first_observed <- wrong_temporal$last_observed
+wrong_temporal$last_observed <- wrong_temporal$aux
+wrong_temporal$aux <- NULL
+wrong_temporal %>%
+  distinct(key, first_observed, last_observed)
+# replace wrong rows with the corrected ones
+merged_info <- merged_info %>%
+  anti_join(wrong_temporal, 
+            by = c("key", "nubKey", "scientificName", "datasetKey",
+                   "canonicalName", "species", "genus", "family", "order", 
+                   "class", "phylum", "kingdom", "rank", "speciesKey", 
+                   "taxonomicStatus", "locationId", "locality", "country", 
+                   "status", "establishmentMeans", "pathway", 
+                   "degree_of_establishment", "native_range", 
+                   "native_continent", "habitat", "marine", "freshwater",
+                   "terrestrial", "source")) %>%
+  bind_rows(wrong_temporal) %>%
+  arrange(key)
+```
+
+
+## Split column `pathway`
+
+The column `pathway` contains a prefix, `cbd_2014_pathway:` and two different pathway levels divided by symbol `_` (Note: this is not valid for pathway `natural_dispersal`, which should not be divided in two levels as it is a level 2 pathway of level 1 `unaided`):
+
+```{r pathway_levels_example, echo = FALSE}
+merged_info %>%
+  distinct(pathway) %>%
+  filter(!is.na(pathway)) %>%
+  head(10)
+```
+
+We split `pathway` in `pathway_level1` and `pathway_level2` assigning value `unknown` if pathway is empty (`NA`) or a zero-length string (`""`). We also assign level 2 `natural_dispersal` to taxa with pathway level 1 `unaided`, as suggested by Tim Adriaens in [trias-project/indicators#61 (comment)](https://github.com/trias-project/indicators/issues/61#issuecomment-611704751):
+
+```{r split_pathway}
+merged_info <-
+  merged_info %>%
+  rowwise() %>%
+  mutate(
+    pathway_level1 =
+      str_split_fixed(
+        str_split(pathway,
+          pattern = "pathway:"
+        )[[1]][2],
+        pattern = "_", n = 2
+      )[[1]][1],
+    pathway_level2 =
+      str_split_fixed(
+        str_split(pathway, pattern = "pathway:")[[1]][2],
+        pattern = "_", n = 2
+      )[[2]][1]
+  ) %>%
+  ungroup() %>%
+  mutate(pathway_level2 = ifelse(pathway_level1 == "unaided" & 
+                                   (pathway_level2 == "" |
+                                      is.na(pathway_level2)),
+                                 "natural_dispersal",
+                                 pathway_level2)) %>%
+  mutate(pathway_level2 = ifelse(pathway_level1 == "unknown",
+                                 "unknown",
+                                 pathway_level2)) %>%
+  mutate(
+    pathway_level1 = ifelse(is.na(pathway_level1) | pathway_level1 == "",
+                            "unknown",
+                            pathway_level1),
+    pathway_level2 = ifelse(is.na(pathway_level2) | pathway_level2 == "",
+                            "unknown",
+                            pathway_level2)
+  ) %>%
+  mutate(
+    pathway_level1 = ifelse(
+      pathway_level1 == "natural",
+      "unaided",
+      pathway_level1
+    ),
+    pathway_level2 = ifelse(
+      pathway_level2 == "dispersal",
+      "natural_dispersal",
+      pathway_level2
+    )) %>%
+  select(-pathway)
+```
+
+Full mapping:
+
+```{r example_split_pathway, echo = FALSE}
+merged_info %>%
+  distinct(pathway_level1, pathway_level2) %>%
+  arrange(pathway_level1)
+```
+# Save data
+
+The data.frame `merged_info` is saved as output file:
+
+```{r save_data_output}
+write_tsv(merged_info, 
+  file = here::here(
+    "data",
+    "interim",
+    "data_input_checklist_indicators.tsv"
+  ),
+  na = ""
+)
+```
+
+This file is the start point for building checklist-based indicators.
