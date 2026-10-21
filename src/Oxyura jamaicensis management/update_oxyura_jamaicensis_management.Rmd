@@ -47,10 +47,7 @@ ruddy_zipfile <- dir(path = "./",
                pattern = ".zip")
 
 #Check if only one zipfile in root folder, if not, clean up
-if(length(ruddy_zipfile) == 1) {
-  unlink(ruddy_zipfile)
-  unlink(paste0(tempdir(), "/verbatim.txt"))
-}else{
+if(length(ruddy_zipfile) != 1) {
   stop("More than 1 zipfile detected in the root folder, please cleanup!!")
 }
 
@@ -59,6 +56,14 @@ unzip(zipfile = ruddy_zipfile,
       exdir = tempdir())
 
 ruddy_verbatim_raw <- read_tsv(paste0(tempdir(), "/verbatim.txt"))
+```
+
+
+```{r clean up}
+# clean up zipfile
+  unlink(ruddy_zipfile)
+  unlink(paste0(tempdir(), "/verbatim.txt"))
+
 ```
 
 ```{r read old data}
