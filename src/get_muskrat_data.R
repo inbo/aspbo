@@ -15,7 +15,7 @@ datasets <- c("ddd51fa5-97ce-48ff-9a58-a09d7e76b103",
 
 # Download data ####
 down_musk <- occ_download(
-  pred("taxonKey", 5219858),
+  pred("taxonKey", "49JSC"),
   pred_in("datasetKey", datasets),
   format = "DWCA",
   user = Sys.getenv("gbif_user"), 
