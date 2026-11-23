@@ -200,8 +200,8 @@ names(description)
 Values in column `degree_of_establishment`:
 
 ```{r degree_of_establishment}
-description %>%
-  distinct(degree_of_establishment)
+distribution %>%
+  distinct(degreeOfEstablishment)
 ```
 
 We map them as follows:
@@ -276,28 +276,91 @@ pathway_lvl1: contaminant  corridor  escape     release    stowaway     unaided 
 pathway_lvl2:agriculture  animal_parasite  aquaculture         ballast_water    biological_control          conservation     container                  farm               fishery                  food             food_bait              fur_farm habitat_material          horticulture          hull_fouling               hunting landscape_improvement     natural_dispersal nursery            on_animals             on_plants       organic_packing                 other        people_luggage pet              research                  seed                  ship                timber               unknown vehicles                 water                   zoo 
 
 ```{r add_cbd_2014_pathway_if_missing} 
-distribution <-
-  distribution %>%
-  mutate(pathway = trimws(pathway)) |> 
+distribution <- distribution %>%
+  mutate(pathway = trimws(pathway)) %>%
+  # Level 1 Mapping
   mutate(pathway_lvl1 = case_when(
-    pathway %in% c("agriculture") ~ "unknown",
-    pathway %in% c("agriculture|contaminantOnAnimals",
-                   "agriculture|seedContaminant") ~ "contaminant",
-    TRUE ~ NA_character_
+    # UNAIDED
+    str_detect(pathway, "naturalDispersal") ~ "unaided",
+    
+    # CORRIDOR
+    str_detect(pathway, "waterwaysBasinsSeas|corridor_water") ~ "corridor",
+    
+    # RELEASE (Intentional release into the wild)
+    str_detect(pathway, "biologicalControl|conservationOrWildlifeManagement|fisheryInTheWild|hunting|landscapeImprovement|otherIntentionalRelease") ~ "release",
+    
+    # ESCAPE (From confinement)
+    str_detect(pathway, "agriculture|aquacultureMariculture|farmedAnimals|horticulture|liveFoodLiveBait|pet|publicGardenZooAquaria|research") ~ "escape",
+    
+    # CONTAMINANT (Contaminant of plants/animals/products)
+    str_detect(pathway, "contaminant|parasitesOnAnimals|seedContaminant|timberTrade|transportationHabitatMaterial") ~ "contaminant",
+    
+    # STOWAWAY (On transport/vessels/containers)
+    str_detect(pathway, "ballastWater|containerBulk|hitchhikersShip|hullFouling|otherTransport|people|vehicles|stowaway|transportStowaway") ~ "stowaway",
+    
+    # UNKNOWN / NA
+    is.na(pathway) | pathway == "NA" ~ "unknown",
+    TRUE ~ "unknown"
+  )) %>%
+  
+  # Level 2 Mapping
+  mutate(pathway_lvl2 = case_when(
+    # --- UNAIDED ---
+    str_detect(pathway, "naturalDispersal") ~ "natural_dispersal",
+    
+    # --- CORRIDOR ---
+    str_detect(pathway, "waterwaysBasinsSeas|corridor_water") ~ "water",
+    
+    # --- RELEASE ---
+    str_detect(pathway, "biologicalControl") ~ "biological_control",
+    str_detect(pathway, "conservationOrWildlifeManagement") ~ "conservation",
+    str_detect(pathway, "fisheryInTheWild") ~ "fishery",
+    str_detect(pathway, "hunting") ~ "hunting",
+    str_detect(pathway, "landscapeImprovement") ~ "landscape_improvement",
+    str_detect(pathway, "otherIntentionalRelease") ~ "other",
+    
+    # --- ESCAPE ---
+    str_detect(pathway, "agriculture") ~ "agriculture",
+    str_detect(pathway, "aquacultureMariculture") ~ "aquaculture",
+    str_detect(pathway, "farmedAnimals") ~ "farm",
+    str_detect(pathway, "horticulture") ~ "horticulture",
+    str_detect(pathway, "liveFoodLiveBait") ~ "food_bait",
+    str_detect(pathway, "pet") ~ "pet",
+    str_detect(pathway, "publicGardenZooAquaria") ~ "zoo",
+    str_detect(pathway, "research") ~ "research",
+    
+    # --- CONTAMINANT ---
+    str_detect(pathway, "contaminantNursery") ~ "nursery",
+    str_detect(pathway, "contaminantOnAnimals") ~ "on_animals",
+    str_detect(pathway, "parasitesOnAnimals") ~ "animal_parasite",
+    str_detect(pathway, "contaminantOnPlants") ~ "on_plants",
+    str_detect(pathway, "seedContaminant") ~ "seed",
+    str_detect(pathway, "timberTrade") ~ "timber",
+    str_detect(pathway, "transportationHabitatMaterial") ~ "habitat_material",
+    
+    # --- STOWAWAY ---
+    str_detect(pathway, "ballastWater") ~ "ballast_water",
+    str_detect(pathway, "hullFouling") ~ "hull_fouling",
+    str_detect(pathway, "containerBulk") ~ "container",
+    str_detect(pathway, "hitchhikersShip|stowaway_ship") ~ "ship",
+    str_detect(pathway, "people") ~ "people_luggage",
+    str_detect(pathway, "vehicles") ~ "vehicles",
+    str_detect(pathway, "otherTransport|transportStowaway|stowaway") ~ "other",
+    
+    # --- UNKNOWN / CATCH-ALL ---
+    is.na(pathway) | pathway == "NA" ~ "unknown",
+    TRUE ~ "unknown"
   ))
 
 missing_pathway_lvl1 <- distribution |> 
   filter(is.na(distribution$pathway_lvl1))
 
 table(missing_pathway_lvl1$pathway)
-  
-  
-  separate(col = pathway, into = c("pathway_lvl1", "pathway_lvl2", "other_1", "other_2"), sep = "\\|", remove = FALSE)
-mutate(pathway = if_else(
-  str_starts(.data$pathway, "cbd_2014_pathway:"),
-  pathway,
-  paste0("cbd_2014_pathway:", pathway))
-)
+
+missing_pathway_lvl2 <- distribution |> 
+  filter(is.na(distribution$pathway_lvl2))
+
+table(missing_pathway_lvl2$pathway)
 ```
 Pathway `cbd_2014_pathway:agriculture` should be replaced by `cbd_2014_pathway:escape_agriculture` (see [issue #38](https://github.com/trias-project/ad-hoc-checklist/issues/38)):
 
