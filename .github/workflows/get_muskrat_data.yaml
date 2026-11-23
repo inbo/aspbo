@@ -84,6 +84,6 @@ jobs:
           target_branch: uat
           title: "[AUTO] get muskrat data"
           template: .github/PR_get_muskrat_data.md
-          reviewer: SanderDevisscher
+          reviewer: SanderDevisscher,soriadelva
           label: automated workflow
           get_diff: false
