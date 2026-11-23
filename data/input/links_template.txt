@@ -37,8 +37,7 @@ cat(paste0("
 <br>
 
 #### **Nuttige links** <br>
-<p>Meer informatie over <--VERNACULAR_NAME_NL2--> kunt u vinden op het Vlaams Biodiversiteitsportaal.<br>
-**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteitportaal</a>**
+<p>Meer informatie over <--VERNACULAR_NAME_NL2--> kunt u vinden op het **<a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteitportaal</a>**.<br>
 
 <p><--FAUNABEHEER_LINK_NL-->
 <br>
@@ -56,8 +55,7 @@ cat(paste0("
 <br>
 
 #### **Useful links** <br>
-<p>You can find more information about <--VERNACULAR_NAME_EN2--> on the Flemish Biodiversity Portal.<br>
-**More information: <a href=\"", VBP_link_en, "\"target=\"_blank\">Flemish Biodiversity Portal</a>**
+<p>You can find more information about <--VERNACULAR_NAME_EN2--> on the ** <a href=\"", VBP_link_en, "\"target=\"_blank\">Flemish Biodiversity Portal</a>**.<br>
 
 <p><--FAUNABEHEER_LINK_EN-->
 <br>
@@ -75,8 +73,8 @@ cat(paste0("
 <br>
 
 #### **Liens utiles** <br>
-<p>Vous pouvez trouver plus d'informations sur <--VERNACULAR_NAME_FR2--> sur le portal biodiversité flamande (notez que ces informations sont actuellement disponible uniquement en néerlandais).<br>
-**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">portal biodiversité flamande</a>**
+<p>Vous pouvez trouver plus d'informations sur <--VERNACULAR_NAME_FR2--> sur le **<a href=\"", VBP_link, "\"target=\"_blank\">portal biodiversité flamande</a>** (notez que ces informations sont actuellement disponible uniquement en néerlandais).<br>
+
 
 <p><--FAUNABEHEER_LINK_FR-->
 <br>
