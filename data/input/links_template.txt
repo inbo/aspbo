@@ -22,7 +22,7 @@ style_str<-"font-size: 1.5em; font-style: italic;"
 image_link<-"../Pictures/<--IMAGE-COPYRIGHT-->"
 copyright_font<-"font-size: 0.8em;"
 width="400"
-height="267"
+height=""
 ```
 
 
