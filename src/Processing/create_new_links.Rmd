@@ -40,7 +40,7 @@ if(!"gbifkey" %in% colnames(faunabeheer_species)){
 }
 
 faunabeheer_species <- faunabeheer_species %>% 
-  mutate(faunabeheer_link1 = paste0("https://faunabeheer.inbo.be/app/01_faunabeheer/#", gsub(" ", "%20", `species name`)),
+  mutate(faunabeheer_link1 = paste0("https://faunabeheer.inbo.be/app/01_faunabeheer/?specie=",species name,"&gbifkey=",gbifkey),
          faunabeheer_link2 = paste0("https://faunabeheer.inbo.be/app/01_faunabeheer/#", gbifkey))
 
 # test both urls and write the first that works into faunabeheer_link
