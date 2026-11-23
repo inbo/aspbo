@@ -5,17 +5,3 @@ required <- c("remotes", "knitr", "dplyr", "magrittr", "readr", "tidyr",
 if (!all(required %in% installed)) {
   install.packages(required[!required %in% installed])
 }
-
-# Test if minimum version of aws.s3 is installed
-if (packageVersion("aws.s3") < "0.3.22") {
-  cat("aws.s3 version:", paste(unlist(packageVersion("aws.s3")), collapse = "."), "\n
-      ==> installing v0.3.22 from https://rforge.net")
-  remotes::install_version("aws.s3", version = "0.3.22", repos = "https://rforge.net")
-}else{
-  cat("aws.s3 version:", paste(unlist(packageVersion("aws.s3")), collapse = "."), "\n")
-}
-
-#Install non-CRAN packages
-remotes::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)
-remotes::install_github("inbo/alien-species-portal@uat", 
-                         subdir = "alienSpecies", force = TRUE)

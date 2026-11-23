@@ -11,9 +11,3 @@ if (!all(required %in% installed)) {
   print(paste("Packages to install:", paste(pkgs_to_install, collapse = ", ")))
   install.packages(pkgs_to_install)
 }
-
-# install non-CRAN packages ####
-remotes::install_github("trafficonese/leaflet.extras", force = TRUE)
-remotes::install_github("inbo/INBOtheme@v0.5.9", force = TRUE)
-remotes::install_github("inbo/alien-species-portal@uat", 
-                         subdir = "alienSpecies", force = TRUE)
