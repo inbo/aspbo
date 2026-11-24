@@ -52,16 +52,28 @@ unzip(zipfile = "./data/input/GRIIS_checklist.zip",
 ```
 
 ```{r get_data_unified_checklist}
+taxa_keys <- name_usage(
+  datasetKey = "6d9e952f-948c-4483-9807-575348147c7e",
+  limit = 10000
+)
+taxa_keys <- 
+  taxa_keys$data %>% 
+  filter(origin == "SOURCE") |> 
+  select(nubKey, key) |> 
+  group_by(nubKey) |> 
+  summarise(key = first(key)) |> 
+  ungroup()
+
 taxa_raw <- read_tsv(paste0(GRIIS_checklist_folder, "taxon.txt"))
 
-taxa <- taxa_raw |> 
-  mutate(key = as.integer(gsub(pattern = "https://www.gbif.org/species/",
-                               replacement = "",
-                               id)),
-         nubKey = key,
+taxa <- taxa_raw |>
+  mutate(nubKey = as.integer(gsub(pattern = "https://www.gbif.org/species/",
+                                  replacement = "",
+                                  id)),
          canonicalName_raw = paste(genus, specificEpithet)) |> 
   rename(datasetKey = datasetID,
-         rank = taxonRank)
+         rank = taxonRank) |> 
+  left_join(taxa_keys, by = "nubKey")
 
 scientificNames <- taxa$nubKey |>
   map_dfr(function(tk) {
@@ -81,6 +93,7 @@ scientificNames <- taxa$nubKey |>
         orderKey = if ("orderKey" %in% names(info)) info$orderKey else NA_integer_,
         familyKey = if ("familyKey" %in% names(info)) info$familyKey else NA_integer_,
         genusKey = if ("genusKey" %in% names(info)) info$genusKey else NA_integer_,
+        speciesKey = if ("speciesKey" %in% names(info)) info$speciesKey else NA_integer_,
         taxonomicStatus = if ("taxonomicStatus" %in% names(info)) info$taxonomicStatus else NA_character_
       ))
     }
@@ -95,6 +108,7 @@ scientificNames <- taxa$nubKey |>
                       orderKey = NA_integer_,
                       familyKey = NA_integer_,
                       genusKey = NA_integer_,
+                      speciesKey = NA_integer_,
                       taxonomicStatus = NA_character_)) 
     
   }, .progress = "Fetching names")
@@ -102,7 +116,7 @@ scientificNames <- taxa$nubKey |>
 taxa <- taxa |> 
   left_join(scientificNames, by = "nubKey") |> 
   mutate(canonicalName = coalesce(canonicalName_gbif, canonicalName_raw),
-         speciesKey = ifelse(!is.na(species), nubKey, NA_integer_),
+         speciesKey = coalesce(speciesKey, nubKey),
          acceptedKey = nubKey,
          accepted = ifelse(taxonomicStatus == "ACCEPTED", TRUE, FALSE))
 ```
@@ -129,7 +143,11 @@ Extract distribution information
 
 ```{r retrieve_distribution_information, cache=TRUE}
 distribution <- read_tsv(paste0(GRIIS_checklist_folder, "distribution.txt"))
-distribution <- distribution %>% select(-source)
+distribution <- distribution %>% 
+  select(-source) |> 
+  mutate(taxonKey = as.integer(gsub(pattern = "https://www.gbif.org/species/",
+                                    replacement = "",
+                                    id)))
 head(distribution)
 ```
 
@@ -408,12 +426,13 @@ Extract species profile
 
 ```{r retrieve_species_profile_information, cache=TRUE}
 speciesProfiles <- taxa %>%
-  pull(key) %>%
-  map_dfr(., function(x) {
-    species_profiles_details <-name_usage(x, data = "speciesProfile")
+  filter(!is.na(key)) |> 
+  pull(key) |> 
+  map_dfr(function(x) {
+    species_profiles_details <- name_usage(x, data = "speciesProfile")
     return(species_profiles_details$data)
   }
-  )
+  ) 
 head(speciesProfiles)
 ```
 
@@ -426,18 +445,17 @@ merged_extensions <-
   full_join(distribution,
             description,
             by = "taxonKey"
-  ) %>%
-  full_join(speciesProfiles,
-            by = "taxonKey"
-  )
+  ) 
 ```
 
 to merge them all with the taxonomic information:
 
 ```{r merge_extensions_with_taxa}
 merged_info <- left_join(taxa, merged_extensions,
-                         by = c("key" = "taxonKey")
-)
+                         by = c("nubKey" = "taxonKey")) %>%
+  left_join(speciesProfiles,
+            by = c("key" = "taxonKey")
+  )
 merged_info %>% head(n = 100)
 ```
 
@@ -451,9 +469,9 @@ The column `temporal` contains one or two datums:
 
 ```{r example_temporal, echo = FALSE}
 merged_info %>%
-  select(key, temporal) %>%
+  select(key, eventDate) %>%
   distinct() %>%
-  filter(!is.na(temporal)) %>%
+  filter(!is.na(eventDate)) %>%
   head()
 ```
 
@@ -463,12 +481,12 @@ In case there are two datums, we split them in `first_observed` and `last_observ
 merged_info <-
   merged_info %>%
   separate(
-    col = temporal,
+    col = eventDate,
     sep = "/",
     into = c("first_observed", "last_observed"),
     convert = TRUE,
     fill = "right",
-    remove = TRUE
+    remove = FALSE
   ) %>%
   mutate(last_observed = ifelse(is.na(last_observed),
                                 first_observed,
@@ -513,8 +531,8 @@ merged_info <- merged_info %>%
             by = c("key", "nubKey", "scientificName", "datasetKey",
                    "canonicalName", "species", "genus", "family", "order", 
                    "class", "phylum", "kingdom", "rank", "speciesKey", 
-                   "taxonomicStatus", "locationId", "locality", "country", 
-                   "status", "establishmentMeans", "pathway", 
+                   "taxonomicStatus", "locationID", "locality", "countryCode", 
+                   "occurrenceStatus", "establishmentMeans", "pathway", 
                    "degree_of_establishment", "native_range", 
                    "native_continent", "habitat", "marine", "freshwater",
                    "terrestrial", "source")) %>%
@@ -529,74 +547,86 @@ The column `pathway` contains a prefix, `cbd_2014_pathway:` and two different pa
 
 ```{r pathway_levels_example, echo = FALSE}
 merged_info %>%
-  distinct(pathway) %>%
-  filter(!is.na(pathway)) %>%
+  distinct(pathway_lvl1, pathway_lvl2) %>%
+  filter(!is.na(pathway_lvl1)) %>%
   head(10)
 ```
 
 We split `pathway` in `pathway_level1` and `pathway_level2` assigning value `unknown` if pathway is empty (`NA`) or a zero-length string (`""`). We also assign level 2 `natural_dispersal` to taxa with pathway level 1 `unaided`, as suggested by Tim Adriaens in [trias-project/indicators#61 (comment)](https://github.com/trias-project/indicators/issues/61#issuecomment-611704751):
 
-```{r split_pathway}
-merged_info <-
-  merged_info %>%
-  rowwise() %>%
-  mutate(
-    pathway_level1 =
-      str_split_fixed(
-        str_split(pathway,
-                  pattern = "pathway:"
-        )[[1]][2],
-        pattern = "_", n = 2
-      )[[1]][1],
-    pathway_level2 =
-      str_split_fixed(
-        str_split(pathway, pattern = "pathway:")[[1]][2],
-        pattern = "_", n = 2
-      )[[2]][1]
-  ) %>%
-  ungroup() %>%
-  mutate(pathway_level2 = ifelse(pathway_level1 == "unaided" & 
-                                   (pathway_level2 == "" |
-                                      is.na(pathway_level2)),
-                                 "natural_dispersal",
-                                 pathway_level2)) %>%
-  mutate(pathway_level2 = ifelse(pathway_level1 == "unknown",
-                                 "unknown",
-                                 pathway_level2)) %>%
-  mutate(
-    pathway_level1 = ifelse(is.na(pathway_level1) | pathway_level1 == "",
-                            "unknown",
-                            pathway_level1),
-    pathway_level2 = ifelse(is.na(pathway_level2) | pathway_level2 == "",
-                            "unknown",
-                            pathway_level2)
-  ) %>%
-  mutate(
-    pathway_level1 = ifelse(
-      pathway_level1 == "natural",
-      "unaided",
-      pathway_level1
-    ),
-    pathway_level2 = ifelse(
-      pathway_level2 == "dispersal",
-      "natural_dispersal",
-      pathway_level2
-    )) %>%
-  select(-pathway)
+Full mapping:
+```{r read template}
+griis_checklist_template <- read_tsv(
+  file = here::here(
+    "data",
+    "output",
+    "UAT_processing",
+    "data_input_checklist_indicators.tsv"
+  ),
+  na = ""
+) |> 
+  select(-c(vernacular_name_en, 
+            vernacular_name_fr, 
+            vernacular_name_nl, 
+            vernacular_name_en_list, 
+            vernacular_name_fr_list, 
+            vernacular_name_nl_list))
+
+merged_info_mpd <- merged_info |> 
+  rename(locationId = locationID,
+         country = countryCode,
+         status = occurrenceStatus,
+         pathway_level1 = pathway_lvl1,
+         pathway_level2 = pathway_lvl2) |> 
+  select(all_of(names(griis_checklist_template)))
+
+fistools::colcompare(griis_checklist_template, merged_info_mpd)
+
+missing_in_x <- data.frame() |> 
+  mutate(column = NA_character_,
+         missing_data = NA_character_,
+         failure_rate = NA_integer_)
+missing_in_y <- data.frame() |> 
+  mutate(column = NA_character_,
+         missing_data = NA_character_,
+         failure_rate = NA_integer_)
+
+for(c in colnames(griis_checklist_template)){
+  test <- fistools::col_content_compare(griis_checklist_template, c, 
+                                        merged_info_mpd, c)
+  
+  n_distinct_x <- n_distinct(griis_checklist_template[[c]])
+  n_distinct_y <- n_distinct(merged_info_mpd[[c]])
+  
+  test_missing_in_x <- test$missing_from_col1
+  test_missing_in_y <- test$missing_from_col2
+  
+  if(!is_empty(test_missing_in_x)){
+    missing_in_x <- missing_in_x |> 
+      add_row(column = c,
+              missing_data = as.character(test_missing_in_x),
+              failure_rate = length(test_missing_in_x)/n_distinct_x)
+  }
+  if(!is_empty(test_missing_in_y)){
+    missing_in_y <- missing_in_y |> 
+      add_row(column = c,
+              missing_data = as.character(test_missing_in_y),
+              failure_rate = length(test_missing_in_y)/n_distinct_y)
+  }
+}
 ```
 
-Full mapping:
 
 ```{r example_split_pathway, echo = FALSE}
 merged_info %>%
-  distinct(pathway_level1, pathway_level2) %>%
-  arrange(pathway_level1)
+  distinct(pathway_lvl1, pathway_lvl2) %>%
+  arrange(pathway_lvl1)
 ```
 # Save data
 
 The data.frame `merged_info` is saved as output file:
 
-```{r save_data_output}
+```{r save_data_output, eval=FALSE}
 write_tsv(merged_info, 
           file = here::here(
             "data",
