@@ -33,7 +33,10 @@ cat(paste0("
 <span style=\"", style_str, "\"><--SCIENTIFICNAME--></span>
 <br>
 
+<div style=\"text-align: left; float: none; clear: both; margin-left: 0;\">
 <--IMAGE_LINK-->
+</div>
+
 <br>
 
 #### **Nuttige links** <br>
