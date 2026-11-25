@@ -4,11 +4,78 @@ output: html_fragment
 params:
   language: "en"
 ---
+
 <style>
 h1.title {
   display: none;
 }
+.species-card {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  width: 100%;
+  max-width: 680px;
+  color: #2c3e50;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+.species-card h2 {
+  margin: 0 0 2px 0;
+  font-size: 1.6em;
+  color: #1a252f;
+  border-bottom: none;
+}
+.species-scientific {
+  font-size: 1.15em;
+  font-style: italic;
+  color: #607d8b;
+  margin: 0 0 14px 0;
+}
+.species-figure {
+  margin: 0 0 18px 0;
+}
+.species-figure img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: block;
+}
+.species-copyright {
+  font-size: 0.78em;
+  color: #7f8c8d;
+  margin-top: 5px;
+  display: block;
+}
+.links-box {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f8fafc;
+  border-left: 6px solid #356196;
+  border-radius: 0 6px 6px 0;
+  padding: 16px 22px;
+}
+.links-box h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.05em;
+  color: #1a252f;
+}
+.links-box p {
+  margin: 0 0 10px 0;
+  font-size: 0.95em;
+}
+.links-box p:last-child {
+  margin-bottom: 0;
+}
+.species-card a, .species-card a:visited {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+}
+.species-card a:hover {
+  text-decoration: underline;
+}
 </style>
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -17,72 +84,51 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r sharedinfo, echo=FALSE}
 VBP_link <- "https://natuurdata.inbo.be/bie-hub/species/5220136"
 VBP_link_en <- "https://natuurdata.inbo.be/bie-hub/species/5220136?lang=en"
-faunabeheer_link <- "https://faunabeheer.inbo.be/5220136"
-style_str<-"font-size: 1.5em; font-style: italic;"
 image_link<-"../Pictures/5220136_luukieluuk.png"
-copyright_font<-"font-size: 0.8em;"
-width="400"
-height="267"
+
 ```
 
 
 ```{r nl_chunk, eval = params$language == "nl", results = "asis", echo=FALSE }
-cat(paste0("
-## Damhert
-
-<span style=\"", style_str, "\">Dama dama</span>
-<br>
-
-<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
-<span style=\"", copyright_font, "\">© luukieluuk</span><br>
-<br>
-
-#### **Nuttige links** <br>
-<p>Meer informatie over het damhert kunt u vinden op het Vlaams Biodiversiteitsportaal.<br>
-**Meer informatie: <a href=\"", VBP_link, "\"target=\"_blank\">Vlaams Biodiversiteitportaal</a>**
-
-<p>het damhert is in Vlaanderen geclassificeerd als jachtwildsoort, meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href=\"https://faunabeheer.inbo.be/app/01_faunabeheer/#Damhert\"target=\"_blank\">faunabeheer pagina</a>.
-<br>
-<br>
-"))
+cat(paste0('
+<div class="species-card">
+<h2>Damhert</h2>
+<p class="species-scientific">Dama dama</p>
+<div class="species-figure"><img role="img" src="../Pictures/5220136_luukieluuk.png" alt="Dama dama"><span class="species-copyright">© luukieluuk</span></div>
+<div class="links-box">
+<h4>Nuttige links</h4>
+<p>Meer informatie over het damhert kunt u vinden op het <a href="', VBP_link, '" target="_blank">Vlaams Biodiversiteitsportaal</a>.</p>
+<p>Het damhert is in Vlaanderen geclassificeerd als jachtwildsoort. Meer info met betrekking tot het beheer en schade in Vlaanderen vindt u terug op de <a href="https://faunabeheer.inbo.be/app/01_faunabeheer/?specie=Damhert&gbifkey=5220136" target="_blank">faunabeheer pagina</a>.</p>
+</div>
+</div>
+'))
 ```
 
 ```{r en_chunk, eval = params$language == "en", results = "asis", echo=FALSE }
-cat(paste0("
-## Common fallow deer
-
-<span style=\"", style_str, "\">Dama dama</span>
-
-<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
-<span style=\"", copyright_font, "\">© luukieluuk</span><br>
-<br>
-
-#### **Useful links** <br>
-<p>You can find more information about the Common fallow deer on the Flemish Biodiversity Portal.<br>
-**More information: <a href=\"", VBP_link_en, "\"target=\"_blank\">Flemish Biodiversity Portal</a>**
-
-<p>Common fallow deer is classified as a game species in Flanders, more information concerning management and damages in Flanders can be found on the <a href=\"https://faunabeheer.inbo.be/app/01_faunabeheer/#Damhert\"target=\"_blank\">wildlife management page</a> (note that this information is currently only available in Dutch)
-<br>
-<br>
-"))
+cat(paste0('
+<div class="species-card">
+<h2>Fallow deer</h2>
+<p class="species-scientific">Dama dama</p>
+<div class="species-figure"><img role="img" src="../Pictures/5220136_luukieluuk.png" alt="Dama dama"><span class="species-copyright">© luukieluuk</span></div>
+<div class="links-box">
+<h4>Useful links</h4>
+<p>You can find more information about the Fallow deer on the <a href="', VBP_link_en, '" target="_blank">Flemish Biodiversity Portal</a>.</p> <p>The fallow deer is classified as a game species in Flanders. More information concerning management and damages in Flanders can be found on the <a href="https://faunabeheer.inbo.be/app/01_faunabeheer/?specie=Damhert&gbifkey=5220136" target="_blank">wildlife management page</a> (note that this information is currently only available in Dutch).</p>
+</div>
+</div>
+'))
 ```
 
 ```{r fr_chunk, eval = params$language == "fr", results = "asis", echo=FALSE }
-cat(paste0("
-## Daim
-
-<span style=\"", style_str, "\">Dama dama</span>
-
-<img src=\"", image_link, "\" width=\"", width, "\" height=\"", height, "\"><br>
-<span style=\"", copyright_font, "\">© luukieluuk</span><br>
-<br>
-
-#### **Liens utiles** <br>
-<p>Vous pouvez trouver plus d'informations sur daim sur le portal biodiversité flamande (notez que ces informations sont actuellement disponible uniquement en néerlandais).<br>
-**Plus d'informations: <a href=\"", VBP_link, "\"target=\"_blank\">portal biodiversité flamande</a>**
-
-<p>Daim est classé comme espèce gibier en Flandre. Vous trouverez plus d&apos;informations sur la gestion et les dommages en Flandre sur la page <a href=\"https://faunabeheer.inbo.be/app/01_faunabeheer/#Damhert\"target=\"_blank\">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu` en néerlandais)
-<br>
-<br>
-"))
+cat(paste0('
+<div class="species-card">
+<h2>Daim européen</h2>
+<p class="species-scientific">Dama dama</p>
+<div class="species-figure"><img role="img" src="../Pictures/5220136_luukieluuk.png" alt="Dama dama"><span class="species-copyright">© luukieluuk</span></div>
+<div class="links-box">
+<h4>Liens utiles</h4>
+<p>Vous pouvez trouver plus d\'informations sur daim européen sur le <a href="', VBP_link, '" target="_blank">portal biodiversité flamande</a> (notez que ces informations sont actuellement disponible uniquement en néerlandais).</p>
+<p>Daim européen est classé comme espèce gibier en Flandre. Vous trouverez plus d&apos;informations sur la gestion et les dommages en Flandre sur la page <a href="https://faunabeheer.inbo.be/app/01_faunabeheer/?specie=Damhert&gbifkey=5220136" target="_blank">gestion de la faune sauvage</a> (à noter que ces informations ne sont actuellement disponibles qu&apos;en néerlandais).</p>
+</div>
+</div>
+'))
 ```
