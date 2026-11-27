@@ -1093,8 +1093,8 @@ visualize_pathways_year_level2_description,"<p>Ce graphique montre les tendances
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Un même taxon peut être introduit par le biais de plusieurs sous-catégories de voies d'introduction, un taxon peut donc être inclus plus d'une fois dans ce graphique. Cela signifie que la somme du ""nombre de taxons introduits par catégorie de voie d'introduction"" peut être supérieure au ""nombre de taxons""</i>.</p>"
 visualize_pathways_year_level2_title,Tendances du nombre de taxons introduits par sous-catégorie de voie d'introduction
 wallonia_title,Wallonie
-welcomeTitle_description,"Sur cette page, vous trouverez tous les chiffres et tendances concernant les espèces exotiques en Belgique."
-welcomeTitle_title,Bienvenue sur la page des espèces exotiques
+welcomeTitle_description,"Sur ce portail, vous trouverez tous les chiffres et tendances sur les espèces exotiques en Belgique."
+welcomeTitle_title,Bienvenue sur le portail des espèces exotiques de l'Institut de Recherche sur la Nature et les Forêts (INBO)
 widespreadInvasive_title,répandue et envahissante
 year_title,Année
 yes_title,oui

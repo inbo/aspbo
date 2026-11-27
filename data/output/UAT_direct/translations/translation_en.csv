@@ -1106,8 +1106,8 @@ visualize_pathways_year_level2_description,"<p>This graph shows the trends in th
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> A single taxa can be introduced via multiple introduction pathway subcategories, a taxa can thus be included more than once on this graph. This means the sum of the 'number of introduced taxa per introduction pathway category' can be larger than the 'number of taxa'</i>."
 visualize_pathways_year_level2_title,Trend in the number of introduced taxa per introduction pathway subcategory
 wallonia_title,Wallonia
-welcomeTitle_description,On this page you will find all figures and trends about alien species in Belgium.
-welcomeTitle_title,Welcome to the alien species dashboard
+welcomeTitle_description,"On this portal, you will find all figures and trends on alien species in Belgium."
+welcomeTitle_title,Welcome to the alien species portal of the Research Institute for Nature and Forest (INBO)
 widespreadInvasive_title,widespread and invasive
 year_title,Year
 yes_title,yes
