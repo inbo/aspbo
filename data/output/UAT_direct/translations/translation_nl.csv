@@ -1120,8 +1120,8 @@ visualize_pathways_year_level2_description,"<p>Deze grafiek toont de trends in h
 <p><i><span style=""color: red; font-size: 1.5em; font-weight: bold; animation: pulse 1s infinite;"">!</span> Een taxon kan via meerdere (subcategorieën van) introductieroutes worden geïntroduceerd. Een taxon kan dus meer dan eens op deze grafiek voorkomen. Dit betekent dat de som van 'het aantal geïntroduceerde taxa per subcategorie van introductieroute' groter kan zijn dan het 'totale aantal taxa'.</i></p>"
 visualize_pathways_year_level2_title,Trends in het aantal geïntroduceerde taxa per subcategorie van introductieroute
 wallonia_title,Wallonië
-welcomeTitle_description,Op deze pagina vind je alle cijfers en trends over uitheemse soorten in België.
-welcomeTitle_title,Welkom op het exotenportaal
+welcomeTitle_description,Op dit portaal vind je alle cijfers en trends over uitheemse soorten in België.
+welcomeTitle_title,Welkom op het exotenportaal van het Instituut voor Natuur- en Bosonderzoek (INBO)
 widespreadInvasive_title,wijdverspreid en invasief
 year_title,Jaar
 yes_title,ja
